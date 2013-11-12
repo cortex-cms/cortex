@@ -3,4 +3,4 @@ Neocortex
 
 Neocortex is [Cortex] written using Ruby on Rails.
 
-[Cortex]: https://bitbucket.org/talentsolutions/cortex
+[Cortex]: https://gitsum.careerbuilder.com/talent-solutions/cortex

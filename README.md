@@ -1,6 +1,6 @@
 Neocortex
 =========
 
-Neocortex is [cortex-framework] written using Ruby on Rails.
+Neocortex is [Cortex] written using Ruby on Rails.
 
-[cortex-framework]: https://bitbucket.org/talentsolutions/cortex-framework
+[Cortex]: https://bitbucket.org/talentsolutions/cortex

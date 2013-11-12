@@ -1,0 +1,12 @@
+defaults: &defaults
+    default_subdomain: acme
+
+development:
+    <<: *defaults
+
+test:
+    <<: *defaults
+
+production:
+    <<: *defaults
+

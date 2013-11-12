@@ -1,0 +1,29 @@
+<h1>Listing platform_admins</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Organization</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @platform_admins.each do |platform_admin| %>
+      <tr>
+        <td><%= platform_admin.user_id %></td>
+        <td><%= platform_admin.organization_id %></td>
+        <td><%= link_to 'Show', platform_admin %></td>
+        <td><%= link_to 'Edit', edit_platform_admin_path(platform_admin) %></td>
+        <td><%= link_to 'Destroy', platform_admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Platform admin', new_platform_admin_path %>

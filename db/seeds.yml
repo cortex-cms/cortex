@@ -1,0 +1,28 @@
+development:
+    organizations: [
+        {name: root, users: [
+            {name: 'surgeon', password: welcome1}
+        ]},
+        {name: acme, display_name: Acme Corporation, users: [
+            {name: 'George', password: welcome1},
+            {name: 'Bethanne', password: welcome1}
+        ]},
+        {name: ajax, display_name: Ajax Corporation, users: [
+            {name: 'George', password: welcome1},
+            {name: 'Bethanne', password: welcome1}
+        ]}
+    ]
+
+testing:
+    organizations: [
+        {name: root, users: [
+            {name: 'surgeon', password: welcome1}
+        ]}
+    ]
+
+production:
+    organizations: [
+        {name: root, users: [
+            {name: 'surgeon', password: welcome1}
+        ]}
+    ]

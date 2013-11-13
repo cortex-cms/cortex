@@ -25,4 +25,4 @@
 ._.DS_Store
 
 # Text-editor/IDE generated files
-sublime-project.sublime-workspace
+*.sublime-workspace

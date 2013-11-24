@@ -12,6 +12,16 @@ class TenantsController < ApplicationController
     @tenants = Tenant.roots
   end
 
+  def by_organization
+    @tenants = Organization.find(params[:org_id]).tenants
+    render :index
+  end
+
+  def hierarchy_by_organization
+    @tenants = Tenant.roots.where(organization_id: params[:org_id])
+    render :hierarchy
+  end
+
   # GET /tenants/1
   # GET /tenants/1.json
   def show
@@ -44,6 +54,6 @@ class TenantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tenant_params
-      params.require(:tenant).permit(:name, :parent_id, :lft, :rgt, :depth, :contact_name, :contact_email, :contact_phone, :active_at, :inactive_at, :contract, :did)
+      params.require(:tenant).permit(:name, :parent_id, :contact_name, :contact_email, :contact_phone, :active_at, :inactive_at, :contract, :did)
     end
 end

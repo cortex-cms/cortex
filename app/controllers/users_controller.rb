@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  respond_to :html, :json
+  respond_to :json
 
   def index
     @users = User.all
@@ -11,7 +11,8 @@ class UsersController < ApplicationController
   end
 
   def me
-    respond_with @current_user
+    @user = @current_user
+    render :show
   end
 
   def new
@@ -45,6 +46,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password)
+      params.require(:user).permit(:name, :password)
     end
 end

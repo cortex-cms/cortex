@@ -21,6 +21,7 @@ module Cortex
     # config.i18n.default_locale = :de
 
     config.middleware.use 'Apartment::Elevators::Generic', Proc.new { |request| determine_subdomain(request)  }
+    config.active_record.default_timezone = :utc
 
     private
       def determine_subdomain(request)

@@ -1,5 +1,6 @@
 class TenantsController < ApplicationController
   before_action :set_tenant, only: [:show, :edit, :update, :destroy]
+  respond_to :json
 
   # GET /tenants
   # GET /tenants.json
@@ -7,58 +8,32 @@ class TenantsController < ApplicationController
     @tenants = Tenant.all
   end
 
+  def hierarchy
+    tenants = Tenant.root.self_and_descendants
+  end
+
   # GET /tenants/1
   # GET /tenants/1.json
   def show
   end
 
-  # GET /tenants/new
-  def new
-    @tenant = Tenant.new
-  end
-
-  # GET /tenants/1/edit
-  def edit
-  end
-
   # POST /tenants
   # POST /tenants.json
   def create
-    @tenant = Tenant.new(tenant_params)
-
-    respond_to do |format|
-      if @tenant.save
-        format.html { redirect_to @tenant, notice: 'Tenant was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @tenant }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @tenant.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with Tenant.new(tenant_params)
   end
 
   # PATCH/PUT /tenants/1
   # PATCH/PUT /tenants/1.json
   def update
-    respond_to do |format|
-      if @tenant.update(tenant_params)
-        format.html { redirect_to @tenant, notice: 'Tenant was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @tenant.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with @tenant.update(tenant_params)
   end
 
   # DELETE /tenants/1
   # DELETE /tenants/1.json
   def destroy
     @tenant.destroy
-    respond_to do |format|
-      format.html { redirect_to tenants_url }
-      format.json { head :no_content }
-    end
+    respond_with head :no_content
   end
 
   private

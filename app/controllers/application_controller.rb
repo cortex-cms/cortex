@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate
 
-  private 
+  private
   	def authenticate
-  		if user = authenticate_with_http_basic { |u, p| User.find_by_username_and_password(u, p) }
+  		if user = authenticate_with_http_basic { |u, p| User.find_by_name_and_password(u, p) }
   			@current_user = user
       else
         request_http_basic_authentication

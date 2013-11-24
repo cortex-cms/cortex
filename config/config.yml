@@ -1,5 +1,5 @@
 defaults: &defaults
-    default_subdomain: acme
+    default_subdomain: development
 
 development:
     <<: *defaults

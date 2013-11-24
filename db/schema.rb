@@ -22,24 +22,17 @@ ActiveRecord::Schema.define(version: 20131111233053) do
 
   add_index "organizations", ["name"], name: "index_organizations_on_name", unique: true
 
-  create_table "platform_admins", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "organization_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "tenants", force: true do |t|
     t.string   "name"
     t.integer  "parent_id"
+    t.integer  "organization_id"
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth"
     t.string   "contact_name"
     t.string   "contact_email"
     t.string   "contact_phone"
-    t.datetime "active_at"
-    t.datetime "inactive_at"
+    t.datetime "deleted_at"
     t.string   "contract"
     t.string   "did"
     t.datetime "created_at"

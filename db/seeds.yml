@@ -122,19 +122,9 @@ development:
             children: []
         - name: rasmussen
           display_name: Rasmussen College
-          contact_name:
-          contact_phone:
-          contact_email:
-          contract:
-          did: B8412D97-85A2-4AF6-8F1B-E6D8E72C373C
           tenants: []
         - name: organizationr
           display_name: Organization R
-          contact_name:
-          contact_phone:
-          contact_email:
-          contract:
-          did: D2384586-4BEC-42EA-B66E-33DF36B47F47
           tenants: []
     rescare:
       users:

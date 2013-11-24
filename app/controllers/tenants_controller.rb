@@ -9,7 +9,7 @@ class TenantsController < ApplicationController
   end
 
   def hierarchy
-    tenants = Tenant.root.self_and_descendants
+    @tenants = Tenant.roots
   end
 
   # GET /tenants/1

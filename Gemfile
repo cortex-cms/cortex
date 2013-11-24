@@ -31,6 +31,10 @@ gem 'apartment'
 
 gem 'awesome_nested_set'
 
+gem "paperclip", "~> 3.0"
+
+gem 'acts-as-taggable-on'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

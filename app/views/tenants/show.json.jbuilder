@@ -1,1 +1,1 @@
-json.partial! tenant
+json.partial! @tenant

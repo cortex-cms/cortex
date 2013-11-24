@@ -1,5 +1,7 @@
 Cortex::Application.routes.draw do
 
+  resources :assets
+
   get 'tenants/hierarchy', to: 'tenants#hierarchy'
   resources :tenants
 

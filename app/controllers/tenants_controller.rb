@@ -1,46 +1,45 @@
 class TenantsController < ApplicationController
-  before_action :set_tenant, only: [:show, :edit, :update, :destroy]
+  before_action :set_tenant, only: [:show, :update, :destroy]
   respond_to :json
 
   # GET /tenants
-  # GET /tenants.json
   def index
     @tenants = Tenant.all
   end
 
+  # GET /tenants/hierarchy
   def hierarchy
     @tenants = Tenant.roots
   end
 
+  # GET /organizations/:org_id/tenants
   def by_organization
     @tenants = Organization.find(params[:org_id]).tenants
     render :index
   end
 
+  # GET /organizations/:org_id/tenants/hierarchy
   def hierarchy_by_organization
     @tenants = Tenant.roots.where(organization_id: params[:org_id])
     render :hierarchy
   end
 
   # GET /tenants/1
-  # GET /tenants/1.json
   def show
+    respond_with @tenant
   end
 
   # POST /tenants
-  # POST /tenants.json
   def create
     respond_with Tenant.new(tenant_params)
   end
 
   # PATCH/PUT /tenants/1
-  # PATCH/PUT /tenants/1.json
   def update
     respond_with @tenant.update(tenant_params)
   end
 
   # DELETE /tenants/1
-  # DELETE /tenants/1.json
   def destroy
     @tenant.destroy
     respond_with head :no_content

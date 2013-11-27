@@ -1,1 +1,1 @@
-json.extract! @organization, :name, :created_at, :updated_at, :display_name
+json.partial! @organization

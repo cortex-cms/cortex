@@ -4,8 +4,8 @@ development:
       users:
         - {name: surgeon, password: welcome1, email: surgeon@email.com}
       organizations:
-        - name: rescare
-          display_name: ResCare
+        - name: ResCare
+          subdomain: rescare
           tenants:
           - name: Funding Source TANF
             contact_name: John Anderson
@@ -119,11 +119,11 @@ development:
             contract:
             did: DDCE5053-917B-47E6-87DF-3BB70C78221E
             children: []
-        - name: rasmussen
-          display_name: Rasmussen College
+        - subdomain: rasmussen
+          name: Rasmussen College
           tenants: []
-        - name: organizationr
-          display_name: Organization R
+        - subdomain: organizationr
+          name: Organization R
           tenants: []
     rescare:
       users:

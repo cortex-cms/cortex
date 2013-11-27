@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :update, :destroy]
-  repond_to :json
+  respond_to :json
 
   # GET /organizations
   def index

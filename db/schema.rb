@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20131124225601) do
   add_index "assets", ["user_id"], name: "index_assets_on_user_id"
 
   create_table "organizations", force: true do |t|
-    t.string   "name",          limit: 20,  null: false
-    t.string   "display_name",  limit: 50
+    t.string   "subdomain",     limit: 20,  null: false
+    t.string   "name",          limit: 50,  null: false
     t.string   "contact_name",  limit: 50
     t.string   "contact_email", limit: 200
     t.string   "contact_phone", limit: 20

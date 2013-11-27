@@ -34,7 +34,7 @@ if data = SEED_DATA['databases'][Apartment::Database.current]
     if !organization
       puts "Creating organization #{o['display_name']}"
       organization = Organization.create(name: o['name'], 
-                                         display_name: o['display_name'])
+                                         subdomain: o['subdomain'])
     else
       puts "Skipping existing organization #{o['display_name']}"
     end

@@ -26,3 +26,4 @@
 
 # Text-editor/IDE generated files
 *.sublime-workspace
+/.idea

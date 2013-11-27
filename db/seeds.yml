@@ -2,8 +2,7 @@ development:
   databases:
     development:
       users:
-        - name: surgeon
-          password: welcome1
+        - {name: surgeon, password: welcome1, email: surgeon@email.com}
       organizations:
         - name: rescare
           display_name: ResCare
@@ -128,25 +127,25 @@ development:
           tenants: []
     rescare:
       users:
-        - {name: George, password: welcome1}
-        - {name: Bethanne, password: welcome1}
+        - {name: George, password: welcome1, email: george@email.com }
+        - {name: Bethanne, password: welcome1, email: bethanne@email.com }
       organizations: []
     rasmussen:
       users:
-        - {name: George, password: welcome1}
-        - {name: Bethanne, password: welcome1}
+        - {name: George, password: welcome1, email: george@email.com }
+        - {name: Bethanne, password: welcome1, email: bethanne@email.com}
       organizations: []
 
 testing:
   databases:
       testing:
         users:
-        - {name: surgeon, password: welcome1}
+        - {name: surgeon, password: welcome1, email: surgeon@email.com}
         organizations: []
 
 production:
   databases:
       testing:
         users:
-        - {name: surgeon, password: welcome1}
+        - {name: surgeon, password: welcome1, email: surgeon@email.com}
         organizations: []

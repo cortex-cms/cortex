@@ -24,7 +24,7 @@ if data = SEED_DATA['databases'][Apartment::Database.current]
   # seed users
   data['users'].each do |u|
     if !User.exists?(:name => u['name'])
-      User.create(name: u['name'], password: u['password'])
+      User.create(name: u['name'], password: u['password'], email: u['email'])
     end
   end
 
@@ -33,7 +33,8 @@ if data = SEED_DATA['databases'][Apartment::Database.current]
     organization = Organization.find_by_name o['name']
     if !organization
       puts "Creating organization #{o['display_name']}"
-      organization = Organization.create(name: o['name'], display_name: o['display_name'])
+      organization = Organization.create(name: o['name'], 
+                                         display_name: o['display_name'])
     else
       puts "Skipping existing organization #{o['display_name']}"
     end

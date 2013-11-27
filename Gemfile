@@ -35,6 +35,8 @@ gem "paperclip", "~> 3.0"
 
 gem 'acts-as-taggable-on'
 
+gem 'rack-cors', :require => 'rack/cors'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -1,5 +1,8 @@
 defaults: &defaults
     default_subdomain: development
+    allowed_origins:
+      - 'localhost:3000'
+      - 'localhost:63342'
 
 development:
     <<: *defaults
@@ -9,4 +12,3 @@ test:
 
 production:
     <<: *defaults
-

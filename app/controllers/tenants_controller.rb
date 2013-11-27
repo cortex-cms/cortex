@@ -1,5 +1,4 @@
 class TenantsController < ApplicationController
-  skip_before_action :authenticate
   before_action :set_tenant, only: [:show, :update, :destroy]
   respond_to :json
 

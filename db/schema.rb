@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20131124225601) do
     t.datetime "updated_at"
   end
 
-  add_index "organizations", ["name"], name: "index_organizations_on_name", unique: true
+  add_index "organizations", ["subdomain"], name: "index_organizations_on_subdomain", unique: true
 
   create_table "tenants", force: true do |t|
     t.string   "name",            limit: 50,  null: false

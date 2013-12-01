@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   private
     def set_organization
-      @organization = Organization.find_by(subdomain: request.subdomains.first)
+      #@organization = Organization.find_by(subdomain: request.subdomain.first)
     end
 
   	def authenticate

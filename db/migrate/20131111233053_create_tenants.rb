@@ -2,8 +2,8 @@ class CreateTenants < ActiveRecord::Migration
   def change
     create_table :tenants do |t|
       t.string :name, :null => false, :limit => 50
+      t.string :subdomain
       t.integer :parent_id
-      t.integer :organization_id, :null => false
       t.integer :lft
       t.integer :rgt
       t.integer :depth
@@ -13,10 +13,11 @@ class CreateTenants < ActiveRecord::Migration
       t.datetime :deleted_at
       t.string :contract
       t.string :did, :index => true
+      t.datetime :active_at
+      t.datetime :deactive_at
 
       t.timestamps
     end
-    add_index :tenants, :organization_id
     add_index :tenants, :parent_id
   end
 end

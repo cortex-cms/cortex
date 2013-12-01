@@ -1,1 +1,1 @@
-json.partial! @organization
+json.partial! @tenant

@@ -3,10 +3,15 @@ development:
     development:
       users:
         - {name: surgeon, password: welcome1, email: surgeon@email.com}
-      organizations:
+      tenants:
         - name: ResCare
           subdomain: rescare
-          tenants:
+          contact_name:
+          contact_phone:
+          contact_email:
+          contract:
+          did:
+          children:
           - name: Funding Source TANF
             contact_name: John Anderson
             contact_phone: 616.111.1234
@@ -121,10 +126,20 @@ development:
             children: []
         - subdomain: rasmussen
           name: Rasmussen College
-          tenants: []
+          contact_name:
+          contact_phone:
+          contact_email:
+          contract:
+          did:
+          children: []
         - subdomain: organizationr
           name: Organization R
-          tenants: []
+          contact_name:
+          contact_phone:
+          contact_email:
+          contract:
+          did:
+          children: []
     rescare:
       users:
         - {name: George, password: welcome1, email: george@email.com }

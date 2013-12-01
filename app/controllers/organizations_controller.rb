@@ -4,7 +4,7 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations
   def index
-    @organizations = Organization.all
+    @organizations = Tenant.roots
   end
 
   # GET /organizations/1
@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
 
   # POST /organizations
   def create
-    @organization = Organization.new(organization_params)
+    @organization = Tenant.new(organization_params)
     repond_with @organization
   end
 
@@ -31,11 +31,11 @@ class OrganizationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
-      @organization = Organization.find(params[:id])
+      @organization = Tenant.roots.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name)
+      params.require(:organization).permit(:name, :subdomain, :active_at, :deactive_at)
     end
 end

@@ -27,36 +27,25 @@ ActiveRecord::Schema.define(version: 20131124225601) do
 
   add_index "assets", ["user_id"], name: "index_assets_on_user_id"
 
-  create_table "organizations", force: true do |t|
-    t.string   "subdomain",     limit: 20,  null: false
-    t.string   "name",          limit: 50,  null: false
-    t.string   "contact_name",  limit: 50
-    t.string   "contact_email", limit: 200
-    t.string   "contact_phone", limit: 20
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "organizations", ["subdomain"], name: "index_organizations_on_subdomain", unique: true
-
   create_table "tenants", force: true do |t|
-    t.string   "name",            limit: 50,  null: false
+    t.string   "name",          limit: 50,  null: false
+    t.string   "subdomain"
     t.integer  "parent_id"
-    t.integer  "organization_id",             null: false
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth"
-    t.string   "contact_name",    limit: 50
-    t.string   "contact_email",   limit: 200
-    t.string   "contact_phone",   limit: 20
+    t.string   "contact_name",  limit: 50
+    t.string   "contact_email", limit: 200
+    t.string   "contact_phone", limit: 20
     t.datetime "deleted_at"
     t.string   "contract"
     t.string   "did"
+    t.datetime "active_at"
+    t.datetime "deactive_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "tenants", ["organization_id"], name: "index_tenants_on_organization_id"
   add_index "tenants", ["parent_id"], name: "index_tenants_on_parent_id"
 
   create_table "users", force: true do |t|

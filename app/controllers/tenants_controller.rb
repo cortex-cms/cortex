@@ -14,13 +14,13 @@ class TenantsController < ApplicationController
 
   # GET /organizations/:org_id/tenants
   def by_organization
-    @tenants = Organization.find(params[:org_id]).tenants
+    @tenants = Tenant.roots.where(id: params[:org_id]).children
     render :index
   end
 
   # GET /organizations/:org_id/tenants/hierarchy
   def hierarchy_by_organization
-    @tenants = Tenant.roots.where(organization_id: params[:org_id])
+    @tenants = Tenant.roots.where(id: params[:org_id]).children
     render :hierarchy
   end
 

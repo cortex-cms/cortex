@@ -25,7 +25,9 @@ if data = SEED_DATA['databases'][Apartment::Database.current]
   # seed users
   data['users'].each do |u|
     if !User.exists?(:name => u['name'])
-      User.create(name: u['name'], password: u['password'], email: u['email'])
+      user = User.new(name: u['name'], email: u['email'])
+      user.password = u['password']
+      user.save!
     end
   end
 

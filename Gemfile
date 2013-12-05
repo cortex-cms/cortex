@@ -18,11 +18,6 @@ gem 'sidekiq-failures'
 gem 'sinatra', require: nil
 gem 'slim' # For sidekiq-web
 
-group :assets do
-  gem 'sass-rails'
-  gem 'uglifier'
-end
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

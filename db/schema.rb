@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20131124225601) do
 
   create_table "tenants", force: true do |t|
     t.string   "name",          limit: 50,  null: false
-    t.string   "subdomain"
+    t.string   "subdomain",     limit: 20
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
@@ -49,9 +49,9 @@ ActiveRecord::Schema.define(version: 20131124225601) do
   add_index "tenants", ["parent_id"], name: "index_tenants_on_parent_id"
 
   create_table "users", force: true do |t|
-    t.string   "name",       limit: 50,  null: false
-    t.string   "password",   limit: 250, null: false
-    t.string   "email",      limit: 200, null: false
+    t.string   "name",          limit: 30, null: false
+    t.string   "password_hash",            null: false
+    t.string   "email",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

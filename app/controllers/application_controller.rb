@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   private
     def authenticate
-      if user = authenticate_with_http_basic { |u, p| User.authenticate(u, p) }
+      if user = authenticate_with_http_basic { |username, password| User.authenticate(username, password) }
         @current_user = user
       else
         request_http_basic_authentication

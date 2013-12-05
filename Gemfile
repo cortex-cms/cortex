@@ -8,9 +8,9 @@ gem 'apartment'
 gem 'awesome_nested_set'
 gem "paperclip", '~> 3.0'
 gem 'acts-as-taggable-on'
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby', require: 'bcrypt'
 
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', require: 'rack/cors'
 
 # Sidekiq
 gem 'sidekiq'

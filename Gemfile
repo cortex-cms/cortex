@@ -28,6 +28,11 @@ group :development do
   gem 'sqlite3'
 end
 
+group :production do
+	gem 'rails_12factor'
+	gem 'sqlite3'
+end
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -38,3 +43,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem "mocha", group: :test
+
+ruby "2.0.0"

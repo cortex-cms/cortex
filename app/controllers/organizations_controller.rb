@@ -14,6 +14,7 @@ class OrganizationsController < ApplicationController
   # POST /organizations
   def create
     @organization = Tenant.new(organization_params)
+    CreateOrganization.perform_async(@organization.id)
     repond_with @organization
   end
 
@@ -36,6 +37,6 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name, :subdomain, :active_at, :deactive_at)
+      params.require(:tenant).permit(:name, :parent_id, :contact_name, :contact_email, :contact_phone, :active_at, :deactive_at, :contract, :did, :subdomain)
     end
 end

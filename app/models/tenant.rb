@@ -1,5 +1,7 @@
 class Tenant < ActiveRecord::Base
     acts_as_nested_set
-    belongs_to :organization
-    #attr_protected :lft, :rgt, :depth
+
+    def database_name
+      subdomain || name.normalize(:kd).downcase.gsub(/[^a-z0-9]/, '')
+    end
 end

@@ -26,3 +26,7 @@
 # Text-editor/IDE generated files
 *.sublime-workspace
 /.idea
+
+# Ignore cortex-admin, if locally added for development
+/public/admin
+/ui

@@ -5,6 +5,7 @@ class CreateAssets < ActiveRecord::Migration
       t.integer :user_id, null: false
       t.datetime :deleted_at
       t.attachment :attachment
+      t.string :description
 
       t.timestamps
     end

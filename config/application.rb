@@ -20,6 +20,9 @@ module Cortex
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    ActsAsTaggableOn.remove_unused_tags = true
+    ActsAsTaggableOn.force_lowercase = true
+
     config.middleware.use 'Apartment::Elevators::Generic', Proc.new { |request| determine_subdomain(request)  }
     config.active_record.default_timezone = :utc
 

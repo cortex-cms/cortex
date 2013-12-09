@@ -5,7 +5,6 @@ class AssetsController < ApplicationController
   # GET /assets
   def index
     @assets = Asset.all
-    respond_with @assets
   end
 
   # GET /assets/1
@@ -20,8 +19,7 @@ class AssetsController < ApplicationController
 
   # PATCH/PUT /assets/1
   def update
-    @asset.update(asset_params)
-    respond_with @asset
+    respond_with @asset.update(asset_params)
   end
 
   # DELETE /assets/1
@@ -38,6 +36,6 @@ class AssetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def asset_params
-      params.require(:asset).permit(:name, :deleted_at, :file)
+      params.require(:asset).permit(:name, :filename, :active_at, :deactive_at, :file, :description, :published)
     end
 end

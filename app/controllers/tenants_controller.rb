@@ -31,7 +31,10 @@ class TenantsController < ApplicationController
 
   # POST /tenants
   def create
-    respond_with Tenant.create(tenant_params)
+    @tenant = Tenant.new(tenant_params)
+    @tenant.user = @current_user
+    @tenant.save!
+    respond_with @tenant
   end
 
   # PATCH/PUT /tenants/1

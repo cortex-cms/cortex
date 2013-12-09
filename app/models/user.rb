@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   acts_as_tagger
   has_many :assets
+  has_many :tenants
 
   validates :password, length: {minimum: 8}, allow_nil: true
 

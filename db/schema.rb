@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20131209163904) do
     t.string   "did"
     t.datetime "active_at"
     t.datetime "deactive_at"
+    t.integer  "user_id",                   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

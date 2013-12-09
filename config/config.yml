@@ -3,6 +3,7 @@ defaults: &defaults
     allowed_origins:
       - 'localhost:3000'
       - 'localhost:63342'
+      - 'whump.net'
 
 development:
     <<: *defaults
@@ -12,3 +13,4 @@ test:
 
 production:
     <<: *defaults
+    default_subdomain: public

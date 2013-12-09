@@ -35,7 +35,9 @@ module Cortex
 
     private
       def determine_subdomain(request)
-        return subdomain(request.host) || APP_CONFIG['default_subdomain']
+        #return subdomain(request.host) || APP_CONFIG['default_subdomain']
+        #Restore once we get a domain name and can assign subdomains! MAIMING THE CONFIG
+        return APP_CONFIG['default_subdomain']
       end
 
       def subdomain(host)

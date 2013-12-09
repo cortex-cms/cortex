@@ -1,3 +1,0 @@
-[submodule "ui/admin"]
-	path = ui/admin
-	url = git@gitsum.careerbuilder.com:talent-solutions/cortex-admin.git

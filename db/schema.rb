@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20131209200118) do
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.text     "description"
+    t.datetime "deactive_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

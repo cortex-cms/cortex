@@ -2,8 +2,22 @@
 
 one:
   name: MyString
-  creator_id: 
+  user_id: 
+  filename: MyString
+  archived_at: 2013-12-09 15:01:18
+  active_at: 2013-12-09 15:01:18
+  deactive_at: 2013-12-09 15:01:18
+  file: 
+  description: MyText
+  published: false
 
 two:
   name: MyString
-  creator_id: 
+  user_id: 
+  filename: MyString
+  archived_at: 2013-12-09 15:01:18
+  active_at: 2013-12-09 15:01:18
+  deactive_at: 2013-12-09 15:01:18
+  file: 
+  description: MyText
+  published: false

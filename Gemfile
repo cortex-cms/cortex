@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'jbuilder', '~> 1.2'
+gem 'fog'
+gem 'unf'
 
 # ActiveRecord
 gem 'apartment'
@@ -19,13 +21,13 @@ gem 'sinatra', require: nil
 gem 'slim' # For sidekiq-web
 
 group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+	# bundle exec rake doc:rails generates the API under doc/api.
+	gem 'sdoc', require: false
 end
 
 group :development do
-  gem 'better_errors'
-  gem 'sqlite3'
+	gem 'better_errors'
+	gem 'sqlite3'
 end
 
 group :production do

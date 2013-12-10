@@ -6,6 +6,9 @@
 
 # Ignore bundler config.
 /.bundle
+/vendor/bundle
+
+/public/assets/
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -15,10 +18,6 @@
 /log/*.log
 /tmp
 
-# Ignore RVM
-.ruby-gemset
-.ruby-version
-
 # OS Files
 .DS_Store
 ._.DS_Store
@@ -26,6 +25,25 @@
 # Text-editor/IDE generated files
 *.sublime-workspace
 /.idea
+
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/public/system
+/coverage/
+/spec/tmp
+**.orig
+rerun.txt
+pickle-email-*.html
+config/initializers/secret_token.rb
+
+# these should all be checked in to normalise the environment:
+# Gemfile.lock, .ruby-version, .ruby-gemset
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
 
 # Ignore cortex-admin, if locally added for development
 /public/admin

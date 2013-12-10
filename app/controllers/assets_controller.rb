@@ -1,6 +1,6 @@
 class AssetsController < ApplicationController
   before_action :set_asset, only: [:show, :update, :destroy]
-  respond_to :json
+  respond_to :json, :multipart_form
 
   # GET /assets
   def index
@@ -16,7 +16,8 @@ class AssetsController < ApplicationController
   # POST /assets
   def create
     @asset = Asset.new(asset_params)
-    @asset.save
+    @asset.user = @current_user
+    @asset.save!
     respond_with @asset
   end
 
@@ -40,6 +41,6 @@ class AssetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def asset_params
-      params.require(:asset).permit(:name, :attachment)
+      params.require(:asset).permit(:name, :file, :description, :deactive_at, :tag_list)
     end
 end

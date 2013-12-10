@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209163904) do
+ActiveRecord::Schema.define(version: 20131209200118) do
 
   create_table "assets", force: true do |t|
-    t.string   "name",                    limit: 150
-    t.integer  "user_id",                             null: false
-    t.datetime "deleted_at"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
-    t.string   "description"
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "filename"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.text     "description"
+    t.datetime "deactive_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

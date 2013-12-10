@@ -15,7 +15,10 @@ class AssetsController < ApplicationController
 
   # POST /assets
   def create
-    respond_with Asset.create(asset_params)
+    @asset = Asset.new(asset_params)
+    @asset.user = @current_user
+    @asset.save!
+    respond_with @asset
   end
 
   # PATCH/PUT /assets/1
@@ -38,6 +41,7 @@ class AssetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def asset_params
-      params.require(:asset).permit(:name, :deleted_at, :attachment)
+
+      params.require(:asset).permit(:name, :expire_at, :tags, :description, :attachment)
     end
 end

@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'jbuilder', '~> 1.2'
+gem 'fog'
+gem 'unf'
 
 # ActiveRecord
 gem 'apartment'

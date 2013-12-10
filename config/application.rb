@@ -26,7 +26,7 @@ module Cortex
     config.middleware.use 'Apartment::Elevators::Generic', Proc.new { |request| determine_subdomain(request)  }
     config.active_record.default_timezone = :utc
 
-    config.middleware.use Rack::Cors do
+    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
       allow do
         origins *APP_CONFIG['allowed_origins']
         resource '*', :headers => :any, :methods => [:get, :post, :options, :put, :patch, :delete]

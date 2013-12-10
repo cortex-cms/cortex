@@ -19,5 +19,5 @@ class Asset < ActiveRecord::Base
     	'video/quicktime',
     	'video/mp4']
 	  },
-    :size => { :in => 0..10.megabytes }
+    :size => { :in => 0..100.megabytes }
 end

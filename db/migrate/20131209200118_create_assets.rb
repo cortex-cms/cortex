@@ -1,7 +1,7 @@
 class CreateAssets < ActiveRecord::Migration
   def change
     create_table :assets do |t|
-      t.string :name
+      t.string :name, index: true
       t.belongs_to :user, index: true
       t.attachment :attachment
       t.text :description

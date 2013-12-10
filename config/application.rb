@@ -29,7 +29,7 @@ module Cortex
     config.middleware.use Rack::Cors do
       allow do
         origins *APP_CONFIG['allowed_origins']
-        resource '*', :headers => :any, :methods => [:get, :post, :options]
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :put, :patch, :delete]
       end
     end
 

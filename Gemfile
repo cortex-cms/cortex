@@ -4,6 +4,8 @@ gem 'rails'
 gem 'jbuilder', '~> 1.2'
 gem 'fog'
 gem 'unf'
+gem 'thin', require: false
+gem 'rack-cors', require: 'rack/cors'
 
 # ActiveRecord
 gem 'apartment'
@@ -11,8 +13,6 @@ gem 'awesome_nested_set'
 gem "paperclip", '~> 3.0'
 gem 'acts-as-taggable-on'
 gem 'bcrypt-ruby', require: 'bcrypt'
-
-gem 'rack-cors', require: 'rack/cors'
 
 # Sidekiq
 gem 'sidekiq'
@@ -28,6 +28,7 @@ end
 group :development do
 	gem 'better_errors'
 	gem 'sqlite3'
+  gem 'foreman', require: false
 end
 
 group :production do

@@ -47,4 +47,4 @@ config/initializers/secret_token.rb
 
 # Ignore cortex-admin, if locally added for development
 /public/admin
-/ui
+/ui.tddium*

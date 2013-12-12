@@ -1,5 +1,11 @@
 json.extract! asset, :name
 json.url asset_url(asset, format: :json)
+json.image_url asset.attachment.url
+
+# a conditional here if != image?
+json.thumb_url asset.attachment.url(:thumb)
+# end cond
+
 json.creator do
   json.user_id asset.user.id
   json.name asset.user.name

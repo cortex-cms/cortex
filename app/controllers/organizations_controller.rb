@@ -11,24 +11,6 @@ class OrganizationsController < ApplicationController
   def show
   end
 
-  # POST /organizations
-  def create
-    @organization = Tenant.new(organization_params)
-    CreateOrganization.perform_async(@organization.id)
-    repond_with @organization
-  end
-
-  # PATCH/PUT /organizations/1
-  def update
-    respond_with @organization.update(organization_params)
-  end
-
-  # DELETE /organizations/1
-  def destroy
-    @organization.destroy
-    respond_with head :no_content
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization

@@ -6,7 +6,12 @@ class Asset < ActiveRecord::Base
   validates_attachment :attachment, :presence => true,
   	:content_type => { :content_type => [
     	'image/jpeg',
+      'image/jpg',
+      'image/pjpeg',
     	'image/png',
+      'image/gif',
+      'image/bmp',
+      'image/x-png',
     	'application/pdf',
     	'application/vnd.ms-excel',
     	'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

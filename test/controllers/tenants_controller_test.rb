@@ -3,7 +3,7 @@ require 'test_helper'
 class TenantsControllerTest < ActionController::TestCase
 
   setup do
-    @tenant = tenants(:rescare)
+    @tenant = tenants(:tanf)
   end
 
   setup do
@@ -19,6 +19,21 @@ class TenantsControllerTest < ActionController::TestCase
   test 'should get tenant' do
     get :show, {:id => @tenant.id, :format => :json}
     assert_response :success
+  end
+
+  test 'should create tenant' do
+    assert_difference('Tenant.count') do
+      post :create, tenant: {name: @tenant.name,
+                            parent_id: @tenant.parent_id,
+                            contact_name: @tenant.contact_name,
+                            contact_email: @tenant.contact_email,
+                            contact_phone: @tenant.contact_phone,
+                            active_at: @tenant.active_at,
+                            deactive_at: @tenant.deactive_at,
+                            contract: @tenant.contract,
+                            did: @tenant.did,
+                            subdomain: @tenant.subdomain}
+    end
   end
 
 =begin

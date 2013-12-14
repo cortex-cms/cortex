@@ -14,9 +14,4 @@ namespace :dev do
     Rake::Task['apartment:migrate'].execute
     Rake::Task['apartment:seed'].execute
   end
-
-  desc 'Start foreman with the development environment'
-  task :foreman do
-    exec('foreman start -e development.env')
-  end
 end

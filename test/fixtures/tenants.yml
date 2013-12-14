@@ -1,29 +1,32 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: MyString
-  parent_id: 1
-  lft: 1
-  rgt: 1
-  depth: 1
-  contact_name: MyString
-  contact_email: MyString
-  contact_phone: MyString
+rescare:
+  name: ResCare
+  contact_name: Jessica Anderson
+  contact_email: j.anderson@gmail.com
+  contact_phone: 123.123.1234
   active_at: 2013-11-11 18:30:53
-  inactive_at: 2013-11-11 18:30:53
-  contract: MyString
-  did: MyString
+  contract: '20131111'
+  did: abcdef1234567890
+  user: surgeon
 
-two:
-  name: MyString
-  parent_id: 1
-  lft: 1
-  rgt: 1
-  depth: 1
-  contact_name: MyString
-  contact_email: MyString
-  contact_phone: MyString
-  active_at: 2013-11-11 18:30:53
-  inactive_at: 2013-11-11 18:30:53
-  contract: MyString
-  did: MyString
+tanf:
+  name: Funding Source TANF
+  active_at: 2013-12-12 18:30:53
+  deactive_at: 2014-11-11 18:30:53
+  contract: 20141212
+  user: surgeon
+  parent: rescare
+
+mecklenberg:
+  name: Project Mecklenberg
+  active_at: 2013-12-01 18:30:53
+  contract: 20131201
+  user: surgeon
+  parent: tanf
+
+rasmussen:
+  name: Rasmussen College
+  contact_name: Amelie Perry
+  contact_email: a.perry@gmail.com
+  contact_phone: 123.123.1234
+  active_at: 2012-08-08 14:00:00
+  user: surgeon

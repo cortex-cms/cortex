@@ -10,7 +10,7 @@ gem 'rack-cors', require: 'rack/cors'
 # ActiveRecord
 gem 'apartment'
 gem 'awesome_nested_set'
-gem "paperclip", '~> 3.0'
+gem 'paperclip', '~> 3.0'
 gem 'acts-as-taggable-on'
 gem 'bcrypt-ruby', require: 'bcrypt'
 
@@ -36,6 +36,10 @@ group :production do
 	gem 'pg'
 end
 
+group :test do
+  gem 'mocha'
+end
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -44,7 +48,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
-gem "mocha", group: :test
 
 ruby "2.0.0"

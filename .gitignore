@@ -25,6 +25,7 @@
 # Text-editor/IDE generated files
 *.sublime-workspace
 /.idea
+*.iml
 
 *.rbc
 *.sassc

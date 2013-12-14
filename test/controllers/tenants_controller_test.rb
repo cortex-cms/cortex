@@ -1,6 +1,34 @@
 require 'test_helper'
 
 class TenantsControllerTest < ActionController::TestCase
+
+  setup do
+    @tenant = tenants(:rescare)
+  end
+
+  setup do
+    @request.env['HTTP_AUTHORIZATION'] = 'Basic ' + Base64::encode64('surgeon:welcome1')
+  end
+
+  test 'should get index' do
+    get :index, {:format => :json}
+    assert_response :success
+    assert_not_nil assigns(:tenants)
+  end
+
+  test 'should get tenant' do
+    get :show, {:id => @tenant.id, :format => :json}
+    assert_response :success
+  end
+
+=begin
+  test 'should get tenant' do
+    get :show, {:id => @tenant.id, :format => :json}
+    assert_response :success
+  end
+=end
+
+=begin
   setup do
     @tenant = tenants(:one)
   end
@@ -46,4 +74,5 @@ class TenantsControllerTest < ActionController::TestCase
 
     assert_redirected_to tenants_path
   end
+=end
 end

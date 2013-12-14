@@ -154,12 +154,10 @@ development:
     development:
       <<: *test_data
 
-testing:
+test:
   databases:
-      testing:
-        <<: *test_data
+      test:
 
 production:
   databases:
       public:
-        <<: *test_data

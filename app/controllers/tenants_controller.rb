@@ -31,12 +31,9 @@ class TenantsController < ApplicationController
 
   # POST /tenants
   def create
-    @tenant = Tenant.new(tenant_params)
-    @tenant.user = @current_user
-    @tenant.save!
-    if @tenant.is_organization?
-      CreateOrganization.perform_async(@tenant.id)
-    end
+    params = tenant_params
+    params[:user_id] = @current_user.id
+    respond_with Tenant.create_organization!(params)
     respond_with @tenant
   end
 

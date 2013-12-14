@@ -4,6 +4,7 @@ class CreateAssets < ActiveRecord::Migration
       t.string :name, index: true
       t.belongs_to :user, index: true
       t.attachment :attachment
+      t.string :dimensions
       t.text :description
       t.datetime :deactive_at
 

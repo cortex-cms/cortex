@@ -2,6 +2,8 @@ class Asset < ActiveRecord::Base
   belongs_to :user
   acts_as_taggable
   has_attached_file :attachment, :styles => { :medium => '300x300>', :thumb => '100x100>' }
+  before_save :extract_dimensions
+  serialize :dimensions
 
   validates_attachment :attachment, :presence => true,
   	:content_type => { :content_type => [
@@ -25,4 +27,19 @@ class Asset < ActiveRecord::Base
     	'video/mp4']
 	  },
     :size => { :in => 0..100.megabytes }
+
+  def image?
+    attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
+  end
+
+  private
+
+  def extract_dimensions
+    return unless image?
+    tempfile = attachment.queued_for_write[:original]
+    unless tempfile.nil?
+      geometry = Paperclip::Geometry.from_file(tempfile)
+      self.dimensions = [geometry.width.to_i, geometry.height.to_i]
+    end
+  end
 end

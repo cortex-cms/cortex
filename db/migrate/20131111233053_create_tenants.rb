@@ -2,7 +2,7 @@ class CreateTenants < ActiveRecord::Migration
   def change
     create_table :tenants do |t|
       t.string :name, limit: 50, null: false
-      t.string :subdomain, limit: 20
+      t.string :subdomain, limit: 50
       t.integer :parent_id
       t.integer :lft
       t.integer :rgt

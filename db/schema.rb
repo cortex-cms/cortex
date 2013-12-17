@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20131209200118) do
 
   create_table "tenants", force: true do |t|
     t.string   "name",          limit: 50,  null: false
-    t.string   "subdomain",     limit: 20
+    t.string   "subdomain",     limit: 50
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"

@@ -29,9 +29,6 @@ Cortex::Application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
-  # Heroku requires this - see: http://guides.rubyonrails.org/asset_pipeline.html#precompiling-assets
-  config.assets.initialize_on_precompile = false
-
   # Generate digests for assets URLs.
   config.assets.digest = true
 

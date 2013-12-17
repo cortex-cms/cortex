@@ -187,7 +187,7 @@ DEPENDENCIES
   paperclip (~> 3.0)
   pg
   rack-cors
-  rails
+  rails (~> 4.0)
   rails_12factor
   sdoc
   sidekiq

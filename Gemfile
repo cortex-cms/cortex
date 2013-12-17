@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails'
+gem 'rails', '~> 4.0'
 gem 'jbuilder', '~> 1.2'
 gem 'fog'
 gem 'unf'

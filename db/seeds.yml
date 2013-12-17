@@ -156,8 +156,10 @@ development:
 
 test:
   databases:
-      test:
+    test:
+      <<: *test_data
 
 production:
   databases:
-      public:
+    public:
+      <<: *test_data

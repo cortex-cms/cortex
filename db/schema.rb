@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20131209200118) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.string   "dimensions"
     t.text     "description"
     t.datetime "deactive_at"
     t.datetime "created_at"

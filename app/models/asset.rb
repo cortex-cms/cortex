@@ -1,6 +1,8 @@
 class Asset < ActiveRecord::Base
-  belongs_to :user
   acts_as_taggable
+
+  belongs_to :user
+  has_and_belongs_to_many :posts
   has_attached_file :attachment, :styles => { :medium => '300x300>', :thumb => '100x100>' }
 
   validates_attachment :attachment, :presence => true,

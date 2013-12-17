@@ -1,7 +1,9 @@
 class Tenant < ActiveRecord::Base
     acts_as_nested_set
-    belongs_to :user
     after_initialize :init
+
+    belongs_to :user
+    has_and_belongs_to_many :posts
 
     def is_organization?
       parent_id == nil

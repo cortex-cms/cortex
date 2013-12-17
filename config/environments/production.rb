@@ -80,7 +80,4 @@ Cortex::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
-  # What the hell, Heroku
-  ENV["DATABASE_URL"] = "postgres://mzgsgejdtvnpjg:k5ly1puowiAqC6fP0i7S7Bio3m@ec2-54-225-101-4.compute-1.amazonaws.com:5432/det4n4k2dckbpj"
 end

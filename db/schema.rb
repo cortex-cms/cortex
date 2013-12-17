@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209200118) do
+ActiveRecord::Schema.define(version: 20131217192026) do
 
   create_table "assets", force: true do |t|
     t.string   "name"
@@ -28,6 +28,41 @@ ActiveRecord::Schema.define(version: 20131209200118) do
   end
 
   add_index "assets", ["user_id"], name: "index_assets_on_user_id"
+
+  create_table "assets_posts", id: false, force: true do |t|
+    t.integer "post_id",  null: false
+    t.integer "asset_id", null: false
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id",    null: false
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories_posts", id: false, force: true do |t|
+    t.integer "post_id",     null: false
+    t.integer "category_id", null: false
+  end
+
+  create_table "posts", force: true do |t|
+    t.integer  "user_id",                      null: false
+    t.string   "title"
+    t.string   "type"
+    t.datetime "published_at"
+    t.datetime "expired_at"
+    t.datetime "deleted_at"
+    t.boolean  "draft",         default: true, null: false
+    t.integer  "comment_count", default: 0,    null: false
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

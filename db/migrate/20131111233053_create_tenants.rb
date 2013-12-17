@@ -15,7 +15,7 @@ class CreateTenants < ActiveRecord::Migration
       t.string :did, index: true
       t.datetime :active_at
       t.datetime :deactive_at
-      t.belongs_to :user, null: false
+      t.integer :user_id, null: false, index: true
 
       t.timestamps
     end

@@ -1,10 +1,11 @@
-json.extract! asset, :name
+json.extract! asset, :name, :id
 json.url asset_url(asset, format: :json)
 json.attachment_url asset.attachment.url
 json.attachment_thumb_url asset.attachment.url(:thumb)
 json.creator do
-  json.user_id asset.user.id
+  json.id asset.user.id
   json.name asset.user.name
+  json.url user_url(asset.user, format: :json)
 end
 json.file_name asset.attachment_file_name
 json.file_size asset.attachment_file_size

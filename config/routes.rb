@@ -3,6 +3,8 @@ Cortex::Application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   resources :assets
+  resources :posts
+  resources :categories
 
   get 'tenants/hierarchy', to: 'tenants#hierarchy'
   resources :tenants

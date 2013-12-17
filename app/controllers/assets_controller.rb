@@ -16,7 +16,7 @@ class AssetsController < ApplicationController
   # POST /assets
   def create
     @asset = Asset.new(asset_params)
-    @asset.creator = @current_user
+    @asset.user = @current_user
     @asset.save!
     respond_with @asset
   end

@@ -1,0 +1,6 @@
+production:
+    after_rails:
+      - source: /.cloud66/scripts/bootstrap_db.sh
+        destination: <%= ENV['STACK_PATH'] %>/bootstrap_db.sh
+        target: rails
+        execute: true

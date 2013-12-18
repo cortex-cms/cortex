@@ -13,6 +13,7 @@ gem 'awesome_nested_set'
 gem 'paperclip', '~> 3.0'
 gem 'acts-as-taggable-on'
 gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'annotate'
 
 # Sidekiq
 gem 'sidekiq'
@@ -20,9 +21,12 @@ gem 'sidekiq-failures'
 gem 'sinatra', require: nil
 gem 'slim' # For sidekiq-web
 
-group :doc do
-	# bundle exec rake doc:rails generates the API under doc/api.
-	gem 'sdoc', require: false
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'mocha', require: false
+  gem 'rb-fsevent', require: RUBY_PLATFORM =~ /darwin/i ? 'rb-fsevent' : false
+  gem 'factory_girl_rails'
+  gem 'shoulda', require: false
 end
 
 group :development do
@@ -37,16 +41,7 @@ group :production do
 end
 
 group :test do
-  gem 'mocha'
+  gem 'guard-rspec'
 end
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-ruby "2.0.0"
+ruby '2.0.0'

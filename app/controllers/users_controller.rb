@@ -1,40 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :require_login
   respond_to :json
-
-  # GET /users
-  def index
-    @users = User.all
-    respond_with @users
-  end
-
-  # GET /users/1
-  def show
-  end
 
   # GET /users/me
   def me
     @user = @current_user
     render :show
-  end
-
-  # POST /users
-  def create
-    @user = User.new(user_params)
-    @user.save
-    respond_with @user
-  end
-
-  # PATCH/PUT /users
-  def update
-    @user.update(user_params)
-    respond_with @user
-  end
-  
-  # DELETE /users/1
-  def destroy
-    @user.destroy
-    respond_with @user
   end
 
   private

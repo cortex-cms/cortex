@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   has_many :assets
   has_many :tenants
+  has_many :posts
 
   validates :password, length: {minimum: 8}, allow_nil: true
 
@@ -12,3 +13,15 @@ class User < ActiveRecord::Base
     return user if user && user.authenticate(password)
   end
 end
+
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string(30)       not null
+#  email           :string(255)      not null
+#  password_digest :string(255)      not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#

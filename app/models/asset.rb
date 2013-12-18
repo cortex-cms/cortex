@@ -45,3 +45,21 @@ class Asset < ActiveRecord::Base
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: assets
+#
+#  id                      :integer          not null, primary key
+#  name                    :string(255)
+#  created_by              :integer
+#  attachment_file_name    :string(255)
+#  attachment_content_type :string(255)
+#  attachment_file_size    :integer
+#  attachment_updated_at   :datetime
+#  dimensions              :string(255)
+#  description             :text
+#  deactive_at             :datetime
+#  created_at              :datetime
+#  updated_at              :datetime
+#

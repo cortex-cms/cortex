@@ -4,12 +4,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   before_action :authenticate
 
+  def log_in(user)
+    @current_user = user
+  end
+
   private
     def authenticate
       if user = authenticate_with_http_basic { |username, password| User.authenticate(username, password) }
-        @current_user = user
-      else
-        request_http_basic_authentication
+        log_in(user)
+      end
+    end
+
+    def require_login
+      if !@current_user
+        # TODO: Replace with thrown exception + exception handling returning meaningful data
+        render :status => :unauthorized, :json => {}
       end
     end
 end

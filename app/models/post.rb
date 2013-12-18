@@ -4,3 +4,21 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :categories
   belongs_to :user
 end
+
+# == Schema Information
+#
+# Table name: posts
+#
+#  id            :integer          not null, primary key
+#  created_by    :integer          not null
+#  title         :string(255)
+#  type          :string(255)
+#  published_at  :datetime
+#  expired_at    :datetime
+#  deleted_at    :datetime
+#  draft         :boolean          default(TRUE), not null
+#  comment_count :integer          default(0), not null
+#  body          :text
+#  created_at    :datetime
+#  updated_at    :datetime
+#

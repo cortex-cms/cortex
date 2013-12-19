@@ -27,6 +27,7 @@ group :test, :development do
   gem 'rb-fsevent', require: RUBY_PLATFORM =~ /darwin/i ? 'rb-fsevent' : false
   gem 'factory_girl_rails'
   gem 'shoulda', require: false
+  gem 'database_cleaner'
 end
 
 group :development do

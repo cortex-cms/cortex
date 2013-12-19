@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131217192026) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "assets", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 20131217192026) do
     t.datetime "updated_at"
   end
 
-  add_index "assets", ["user_id"], name: "index_assets_on_user_id"
+  add_index "assets", ["user_id"], name: "index_assets_on_user_id", using: :btree
 
   create_table "assets_posts", id: false, force: true do |t|
     t.integer "post_id",  null: false
@@ -74,8 +77,8 @@ ActiveRecord::Schema.define(version: 20131217192026) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
 
   create_table "tags", force: true do |t|
     t.string "name"
@@ -101,7 +104,7 @@ ActiveRecord::Schema.define(version: 20131217192026) do
     t.datetime "updated_at"
   end
 
-  add_index "tenants", ["parent_id"], name: "index_tenants_on_parent_id"
+  add_index "tenants", ["parent_id"], name: "index_tenants_on_parent_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name",            limit: 30, null: false
@@ -111,6 +114,6 @@ ActiveRecord::Schema.define(version: 20131217192026) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["name"], name: "index_users_on_name", unique: true
+  add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
 
 end

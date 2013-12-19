@@ -5,6 +5,8 @@ class Tenant < ActiveRecord::Base
     belongs_to :user
     has_and_belongs_to_many :posts
 
+    validates_presence_of :name
+
     def is_organization?
       parent_id == nil
     end

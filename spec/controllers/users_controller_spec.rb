@@ -2,11 +2,13 @@ require 'spec_helper'
 
 describe UsersController do
 
-  describe '#me' do
+  before { request.env['HTTP_ACCEPT'] = 'application/json' }
+
+  describe 'GET #me' do
     context 'when authorized' do
 
       before { log_in }
-      before { get :me, format: :json }
+      before { get :me }
 
       it 'should return current user' do
         expect(response).to be_success
@@ -15,10 +17,10 @@ describe UsersController do
 
     context 'when unauthorized' do
 
-      before { get :me, format: :json }
+      before { get :me }
 
       it 'should not return current user' do
-        expect(response.status).to eq(401) 
+        expect(response.status).to eq(401)
       end
     end
   end

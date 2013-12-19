@@ -19,6 +19,19 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Helpers
 
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -34,4 +47,8 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+
+  # awesome_nested_set has an _extremely_ noisy depreciation warning issue
+  # https://github.com/collectiveidea/awesome_nested_set/issues/220
+  ActiveSupport::Deprecation.silenced = true
 end

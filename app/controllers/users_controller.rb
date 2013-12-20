@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :require_login
   respond_to :json
 
   # GET /users/me

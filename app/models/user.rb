@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :posts
 
   validates :password, length: {minimum: 8}, allow_nil: true
+  validates_presence_of :name
+  validates_presence_of :email
 
   def User.authenticate(username, password)
     user = User.find_by_name(username)

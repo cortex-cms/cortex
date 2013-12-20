@@ -82,25 +82,14 @@ describe TenantsController do
       end
     end
   end
-=begin
-  describe 'DELETE #destroy' do
-    let(:tenant) { create(:tenant) }
 
-    it 'should delete the tenant' do
-      expect{ delete :destroy, id: tenant }.to change(Tenant, :count).by(-1)
-    end
-  end
-=end
-end
-
-=begin These need to move to OrganizationsController
   describe 'GET #by_organization' do
     let(:user) { create(:user) }
     let(:organizations) {  [create(:organization, user: user), create(:organization, user: user)] }
     let(:selected_org) { organizations[0] }
 
     context 'when including root' do
-      before { get :by_organization, id: selected_org.id, include_root: true }
+      before { get :by_organization, org_id: selected_org.id, include_root: true }
 
       it 'should include organization' do
         assigns(:tenants).should include(selected_org)
@@ -108,7 +97,7 @@ end
     end
 
     context 'when not including root' do
-      before { get :by_organization, id: selected_org.id, include_root: false }
+      before { get :by_organization, org_id: selected_org.id, include_root: false }
 
       it 'should not include organization' do
         assigns(:tenants).should_not include(selected_org)
@@ -117,5 +106,31 @@ end
   end
 
   describe 'GET #hierarchy_by_organization' do
+    let(:user) { create(:user) }
+    let(:organizations) {  [create(:organization, user: user), create(:organization, user: user)] }
+    let(:selected_org) { organizations[0] }
+
+    context 'when including root' do
+      before { get :hierarchy_by_organization, org_id: selected_org.id, include_root: true }
+
+      it 'should include organization' do
+        assigns(:tenants).should eq([selected_org])
+      end
+    end
+
+    context 'when not including root' do
+      before { get :hierarchy_by_organization, org_id: selected_org.id, include_root: false }
+
+      it 'should not include organization' do
+        assigns(:tenants).should eq(selected_org.children)
+      end
+    end
   end
-=end
+
+  describe 'DELETE #destroy' do
+    it 'should delete the tenant' do
+      tenant = create(:tenant)
+      expect{ delete :destroy, id: tenant }.to change(Tenant, :count).by(-1)
+    end
+  end
+end

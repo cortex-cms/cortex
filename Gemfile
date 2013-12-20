@@ -32,14 +32,13 @@ group :test, :development do
 end
 
 group :development do
-	gem 'better_errors'
-	gem 'sqlite3'
+  gem 'better_errors'
   gem 'foreman', require: false
 end
 
 group :production do
-	gem 'rails_12factor'
-	gem 'pg'
+  gem 'rails_12factor'
+  gem 'pg'
 end
 
 group :test do

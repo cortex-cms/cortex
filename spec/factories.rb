@@ -16,6 +16,10 @@ FactoryGirl.define do
 
     initialize_with { new(name: name, subdomain: subdomain) }
 
+    factory :invalid_tenant do
+      name nil
+    end
+
     factory :organization do
       name 'tenant'
       subdomain 'organization'

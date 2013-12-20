@@ -6,6 +6,7 @@ gem 'fog'
 gem 'unf'
 gem 'thin', require: false
 gem 'rack-cors', require: 'rack/cors'
+gem 'pg'
 
 # ActiveRecord
 gem 'apartment'
@@ -38,7 +39,6 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'pg'
 end
 
 group :test do

@@ -6,6 +6,7 @@ Cortex::Application.routes.draw do
   resources :posts
   resources :categories
 
+  get 'organizations/:id', to: 'tenants#show'
   get 'tenants/hierarchy', to: 'tenants#hierarchy'
   resources :tenants
 

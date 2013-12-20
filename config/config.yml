@@ -1,5 +1,5 @@
 defaults: &defaults
-    default_subdomain: development
+    default_subdomain: public
     allowed_origins:
       - 'localhost:3000'
       - 'localhost:63342'

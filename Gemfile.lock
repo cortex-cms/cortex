@@ -170,6 +170,9 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    rspec-sidekiq (0.5.1)
+      rspec (~> 2.0)
+      sidekiq (>= 2.4.0)
     ruby-hmac (0.4.0)
     shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
@@ -245,6 +248,7 @@ DEPENDENCIES
   rails_12factor
   rb-fsevent
   rspec-rails
+  rspec-sidekiq
   shoulda
   sidekiq
   sidekiq-failures

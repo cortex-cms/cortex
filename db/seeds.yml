@@ -151,12 +151,12 @@ rasmussen:
 
 development:
   databases:
-    development:
+    public:
       <<: *test_data
 
 test:
   databases:
-    test:
+    public:
       <<: *test_data
 
 production:

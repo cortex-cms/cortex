@@ -24,6 +24,10 @@ class AssetsController < ApplicationController
   # PATCH/PUT /assets/1
   def update
     @asset.update(asset_params)
+    if params[:tag_list]
+      @asset.tag_list = params[:tag_list]
+      @asset.save!
+    end
     respond_with @asset
   end
 

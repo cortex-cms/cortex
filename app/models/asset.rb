@@ -8,25 +8,25 @@ class Asset < ActiveRecord::Base
   serialize :dimensions
 
   validates_attachment :attachment, :presence => true,
-  	:content_type => { :content_type => [
-    	'image/jpeg',
-      'image/jpg',
-      'image/pjpeg',
-    	'image/png',
-      'image/gif',
-      'image/bmp',
-      'image/x-png',
-    	'application/pdf',
-    	'application/vnd.ms-excel',
-    	'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    	'application/msword',
-    	'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    	'text/plain',
-    	'image/gif',
-    	'application/zip',
-    	'video/x-msvideo',
-    	'video/quicktime',
-    	'video/mp4']
+  	:content_type => { :content_type => %w(
+    	image/jpeg
+      image/jpg
+      image/pjpeg
+    	image/png
+      image/gif
+      image/bmp
+      image/x-png
+    	application/pdf
+    	application/vnd.ms-excel
+    	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    	application/msword
+    	application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    	text/plain
+    	image/gif
+    	application/zip
+    	video/x-msvideo
+    	video/quicktime
+    	video/mp4)
 	  },
     :size => { :in => 0..100.megabytes }
 

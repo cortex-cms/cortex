@@ -12,6 +12,7 @@ namespace :tddium do
 
     abort 'invalid current branch' unless current_branch
 
+    # Move branch/url config into yml in the future
     case
       when current_branch == 'master'
         redeployment_hook_url = 'https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/05486afef355596820dff6ec8263dbd9'

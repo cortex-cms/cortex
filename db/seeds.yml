@@ -1,6 +1,9 @@
 test_data: &test_data
   users:
     - {name: surgeon, password: welcome1, email: surgeon@email.com}
+  posts:
+    - {creator: surgeon, title: 'How to Succeed', body: 'In this age of...', tags: 'education', categories: ['education'], type: 'Article'}
+    - {creator: surgeon, title: 'Top Interview Questions', body: 'Imagine being in...', tags: 'guide', categories: ['tips'], type: 'Article'}
   tenants:
     - name: ResCare
       subdomain: rescare

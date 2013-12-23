@@ -7,6 +7,7 @@ class CreateAssets < ActiveRecord::Migration
       t.string :dimensions
       t.text :description
       t.string :alt
+      t.boolean :status
       t.datetime :deactive_at
 
       t.timestamps

@@ -92,6 +92,7 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     json (1.8.1)
+    le (2.2.2)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -239,6 +240,7 @@ DEPENDENCIES
   foreman
   guard-rspec
   jbuilder (~> 1.2)
+  le
   mocha
   paperclip (~> 3.0)
   pg

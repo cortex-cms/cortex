@@ -38,6 +38,7 @@ group :development do
 end
 
 group :production do
+  gem 'le'
   gem 'rails_12factor'
 end
 

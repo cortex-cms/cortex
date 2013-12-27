@@ -1,4 +1,6 @@
 class Asset < ActiveRecord::Base
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
   acts_as_taggable
 
   belongs_to :user
@@ -29,6 +31,15 @@ class Asset < ActiveRecord::Base
     	video/mp4)
 	  },
     :size => { :in => 0..100.megabytes }
+
+  mapping do
+    indexes :id,          :index => :not_analyzed
+    indexes :name,        :analyzer => :snowball
+    indexes :created_by,  :analyzer => :keyword, :as => 'user.name'
+    indexes :file_name,   :analyzer => :keyword
+    indexes :description, :analyzer => :snowball
+    indexes :created_at,  :type => :date, :include_in_all => false
+  end
 
   def image?
     attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}

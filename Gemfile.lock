@@ -27,7 +27,7 @@ GEM
       tzinfo (~> 0.3.37)
     acts-as-taggable-on (2.4.1)
       rails (>= 3, < 5)
-    annotate (2.6.0)
+    annotate (2.6.1)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     apartment (0.23.0)
@@ -38,7 +38,7 @@ GEM
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
     bcrypt-ruby (3.1.2)
-    better_errors (1.0.1)
+    better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
     builder (3.1.4)
@@ -92,7 +92,6 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     json (1.8.1)
-    le (2.2.2)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -139,11 +138,6 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.2)
       sprockets-rails (~> 2.0.0)
-    rails_12factor (0.0.2)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.1)
-    rails_stdout_logging (0.0.3)
     railties (4.0.2)
       actionpack (= 4.0.2)
       activesupport (= 4.0.2)
@@ -240,13 +234,11 @@ DEPENDENCIES
   foreman
   guard-rspec
   jbuilder (~> 1.2)
-  le
   mocha
   paperclip (~> 3.0)
   pg
   rack-cors
   rails (~> 4.0)
-  rails_12factor
   rb-fsevent
   rspec-rails
   rspec-sidekiq

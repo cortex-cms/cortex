@@ -37,11 +37,6 @@ group :development do
   gem 'foreman', require: false
 end
 
-group :production do
-  gem 'le'
-  gem 'rails_12factor'
-end
-
 group :test do
   gem 'guard-rspec'
 end

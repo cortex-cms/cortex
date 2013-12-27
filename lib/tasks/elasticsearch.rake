@@ -1,6 +1,6 @@
 namespace :elasticsearch do
   desc 'Deletes all ElasticSearch indexes'
-  task :drop do
-    Tire.index('assets').delete
+  task :drop => [:environment] do
+    Asset.tire.index.delete
   end
 end

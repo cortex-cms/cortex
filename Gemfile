@@ -15,6 +15,7 @@ gem 'paperclip', '~> 3.0'
 gem 'acts-as-taggable-on'
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'annotate'
+gem 'tire'
 
 # Sidekiq
 gem 'sidekiq'

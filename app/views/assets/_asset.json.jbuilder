@@ -8,7 +8,7 @@ json.creator do
   json.name asset.user.name
   json.url user_url(asset.user, format: :json)
 end
-json.extract! asset, :tags, :description, :alt
+json.extract! asset, :tags, :description, :alt, :active
 json.file_name asset.attachment_file_name
 json.file_size asset.attachment_file_size
 json.content_type asset.attachment_content_type

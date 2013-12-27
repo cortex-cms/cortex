@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20131217192026) do
     t.string   "dimensions"
     t.text     "description"
     t.string   "alt"
+    t.boolean  "active"
     t.datetime "deactive_at"
     t.datetime "created_at"
     t.datetime "updated_at"

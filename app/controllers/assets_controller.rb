@@ -13,6 +13,13 @@ class AssetsController < ApplicationController
     respond_with @asset
   end
 
+  # GET /assets/search
+  def search
+    params.require(:q)
+    @assets = Asset.search params[:q], load: true
+    render :index
+  end
+
   # POST /assets
   def create
     @asset = Asset.new(asset_params)

@@ -34,10 +34,11 @@ class Asset < ActiveRecord::Base
 
   mapping do
     indexes :id,          :index => :not_analyzed
-    indexes :name,        :analyzer => :snowball
+    indexes :name,        :analyzer => :snowball, :boost => 2.0
     indexes :created_by,  :analyzer => :keyword, :as => 'user.name'
     indexes :file_name,   :analyzer => :keyword
     indexes :description, :analyzer => :snowball
+    indexes :tags,        :analyzer => :keyword, :as => 'tag_list'
     indexes :created_at,  :type => :date, :include_in_all => false
   end
 

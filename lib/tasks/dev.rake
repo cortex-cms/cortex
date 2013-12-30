@@ -2,7 +2,6 @@ namespace :dev do
 
   desc 'Create, migrate and seed, including apartment'
   task :bootstrap => :environment do
-    Rake::Task['db:create'].execute
     Rake::Task['db:migrate'].execute
     Rake::Task['db:seed'].execute
     Rake::Task['apartment:create'].execute

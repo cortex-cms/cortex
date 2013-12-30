@@ -92,3 +92,7 @@ Cortex::Application.configure do
     config.redis = { :namespace => 'cortex' }
   end
 end
+
+Tire.configure do
+  url 'http://site:9d84bce49d97b603ae9b306068f27a83@api.searchbox.io/'
+end

@@ -16,6 +16,8 @@ gem 'acts-as-taggable-on'
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'annotate'
 gem 'tire'
+gem 'tire_async_index'
+gem 'composite_primary_keys'
 
 # Sidekiq
 gem 'sidekiq'
@@ -30,12 +32,12 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'shoulda', require: false
   gem 'database_cleaner'
-  gem 'rspec-sidekiq'
 end
 
 group :development do
   gem 'better_errors'
   gem 'foreman', require: false
+  gem 'rspec-sidekiq'
 end
 
 group :test do

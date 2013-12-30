@@ -83,4 +83,12 @@ Cortex::Application.configure do
   Paperclip::Attachment.default_options[:fog_credentials] = {:provider => "Local", :local_root => "#{Rails.root}/public"}
   Paperclip::Attachment.default_options[:fog_directory] = ""
   Paperclip::Attachment.default_options[:fog_host] = "http://whale.cb-cortex.c66.me"
+
+  Sidekiq.configure_server do |config|
+    config.redis = { :namespace => 'cortex' }
+  end
+
+  Sidekiq.configure_client do |config|
+    config.redis = { :namespace => 'cortex' }
+  end
 end

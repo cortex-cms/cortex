@@ -1,13 +1,16 @@
 class Asset < ActiveRecord::Base
   include Tire::Model::Search
-  include Tire::Model::Callbacks
+  include Tire::Model::AsyncCallbacks
   acts_as_taggable
 
   belongs_to :user
-  has_and_belongs_to_many :posts
+
+  has_many :assets_posts
+  has_many :posts, through: :assets_posts
   has_attached_file :attachment, :styles => { :medium => '300x300>', :thumb => '100x100>' }
-  before_save :extract_dimensions
   serialize :dimensions
+
+  before_save   :extract_dimensions
 
   validates_attachment :attachment, :presence => true,
   	:content_type => { :content_type => %w(

@@ -1,7 +1,9 @@
 class Post < ActiveRecord::Base
   acts_as_taggable
-  has_and_belongs_to_many :assets
-  has_and_belongs_to_many :categories
+  has_many :assets_posts
+  has_many :categories_posts
+  has_many :assets, through: :assets_posts
+  has_many :categories, through: :categories_posts
   belongs_to :user
 
   self.inheritance_column = nil

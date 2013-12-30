@@ -37,11 +37,11 @@ end
 group :development do
   gem 'better_errors'
   gem 'foreman', require: false
-  gem 'rspec-sidekiq'
 end
 
 group :test do
   gem 'guard-rspec'
+  gem 'rspec-sidekiq'
 end
 
 ruby '2.0.0'

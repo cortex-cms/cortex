@@ -42,6 +42,7 @@ end
 group :test do
   gem 'guard-rspec'
   gem 'rspec-sidekiq'
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 ruby '2.0.0'

@@ -7,11 +7,12 @@ gem 'unf'
 gem 'thin', require: false
 gem 'rack-cors', require: 'rack/cors'
 gem 'pg'
+gem 'hashr' # AppSettings
 
 # ActiveRecord
 gem 'apartment'
 gem 'awesome_nested_set'
-gem 'paperclip', '~> 3.0'
+gem 'paperclip'
 gem 'acts-as-taggable-on'
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'annotate'

@@ -1,39 +1,25 @@
 class Asset < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::AsyncCallbacks
+
   acts_as_taggable
-
   belongs_to :user
-
   has_many :assets_posts
   has_many :posts, through: :assets_posts
-  has_attached_file :attachment, :styles => { :medium => '300x300>', :thumb => '100x100>' }
-  serialize :dimensions
 
-  before_save   :extract_dimensions
+  serialize :dimensions
+  before_save :extract_dimensions
+
+  has_attached_file :attachment, :styles => {
+    :large => {geometry: '800x800>', format: :jpg},
+    :thumb => {geometry: '300x300>', format: :jpg},
+    :mini  => {geometry: '100x100>', format: :jpg},
+    :micro => {geometry: '50x50>', format: :jpg}
+  }
 
   validates_attachment :attachment, :presence => true,
-  	:content_type => { :content_type => %w(
-    	image/jpeg
-      image/jpg
-      image/pjpeg
-    	image/png
-      image/gif
-      image/bmp
-      image/x-png
-    	application/pdf
-    	application/vnd.ms-excel
-    	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-    	application/msword
-    	application/vnd.openxmlformats-officedocument.wordprocessingml.document
-    	text/plain
-    	image/gif
-    	application/zip
-    	video/x-msvideo
-    	video/quicktime
-    	video/mp4)
-	  },
-    :size => { :in => 0..100.megabytes }
+  	:content_type => { :content_type => AppSettings.assets.allowed_media_types },
+    :size => { :in => 0..AppSettings.assets.max_size_mb.megabytes }
 
   mapping do
     indexes :id,          :index => :not_analyzed

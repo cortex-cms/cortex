@@ -1,1 +1,1 @@
-APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
+::AppSettings = Hashr.new(YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env])

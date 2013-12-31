@@ -11,10 +11,10 @@ class Asset < ActiveRecord::Base
   before_save :extract_dimensions
 
   has_attached_file :attachment, :styles => {
-    :large => {geometry: '800x800>', format: :jpg},
-    :thumb => {geometry: '300x300>', format: :jpg},
-    :mini  => {geometry: '100x100>', format: :jpg},
-    :micro => {geometry: '50x50>', format: :jpg}
+    :large   => {geometry: '800x800>', format: :jpg},
+    :default => {geometry: '300x300>', format: :jpg},
+    :mini    => {geometry: '100x100>', format: :jpg},
+    :micro   => {geometry: '50x50>', format: :jpg}
   }
 
   validates_attachment :attachment, :presence => true,

@@ -9,7 +9,7 @@ json.creator do
 end
 json.thumbs do
   json.large asset.attachment.url(:large)
-  json.normal asset.attachment.url(:thumb)
+  json.default asset.attachment.url(:default)
   json.mini asset.attachment.url(:mini)
   json.micro asset.attachment.url(:micro)
 end

@@ -15,8 +15,14 @@ class AssetsController < ApplicationController
 
   # GET /assets/search
   def search
-    params.require(:q)
-    @assets = Asset.search params[:q], load: true
+
+    # How does one perform an empty query with ES? filter exists = true?
+    if params[:q] == ''
+      @assets = Asset.all
+    else
+      @assets = Asset.search params[:q], load: true
+    end
+
     render :index
   end
 

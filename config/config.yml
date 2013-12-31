@@ -4,14 +4,33 @@ defaults: &defaults
     - 'localhost:3000'
     - 'localhost:63342'
     - 'whump.net'
+  assets:
+    max_size_mb: 100
+    allowed_media_types:
+      - image/jpeg
+      - image/jpg
+      - image/pjpeg
+      - image/png
+      - image/gif
+      - image/bmp
+      - image/x-png
+      - application/pdf
+      - application/vnd.ms-excel
+      - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      - application/msword
+      - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+      - text/plain
+      - image/gif
+      - application/zip
+      - video/x-msvideo
+      - video/quicktime
+      - video/mp4
 
 development:
   <<: *defaults
 
 test:
-  default_subdomain: public
   <<: *defaults
 
 production:
   <<: *defaults
-  default_subdomain: public

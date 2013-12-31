@@ -29,7 +29,7 @@ module Cortex
 
     config.middleware.insert_after Rack::Sendfile, Rack::Cors do
       allow do
-        origins *APP_CONFIG['allowed_origins']
+        origins *AppSettings.allowed_origins
         resource '*', :headers => :any, :methods => [:get, :post, :options, :put, :patch, :delete]
       end
     end
@@ -43,7 +43,7 @@ module Cortex
       def determine_subdomain(request)
         #return subdomain(request.host) || APP_CONFIG['default_subdomain']
         #Restore once we get a domain name and can assign subdomains! MAIMING THE CONFIG
-        APP_CONFIG['default_subdomain']
+        AppSettings.default_subdomain
       end
 
       def subdomain(host)

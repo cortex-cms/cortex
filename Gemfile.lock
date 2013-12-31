@@ -251,9 +251,10 @@ DEPENDENCIES
   fog
   foreman
   guard-rspec
+  hashr
   jbuilder (~> 1.2)
   mocha
-  paperclip (~> 3.0)
+  paperclip
   pg
   rack-cors
   rails (~> 4.0)

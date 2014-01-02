@@ -47,7 +47,7 @@ class AssetsController < ApplicationController
   # DELETE /assets/1
   def destroy
     @asset.destroy
-    respond_with head :no_content
+    head :no_content
   end
 
   private

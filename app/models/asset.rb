@@ -31,6 +31,10 @@ class Asset < ActiveRecord::Base
     indexes :created_at,  :type => :date, :include_in_all => false
   end
 
+  class << self
+    remove_method :index
+  end
+
   def image?
     attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
   end

@@ -1,4 +1,4 @@
-class CreateOrganization
+class CreateOrganizationWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
 

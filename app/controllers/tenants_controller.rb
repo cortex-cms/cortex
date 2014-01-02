@@ -34,9 +34,6 @@ class TenantsController < ApplicationController
     @tenant = Tenant.new(tenant_params)
     @tenant.user = @current_user
     @tenant.save!
-    if @tenant.is_organization?
-      CreateOrganization.perform_async(@tenant.id)
-    end
     respond_with @tenant
   end
 

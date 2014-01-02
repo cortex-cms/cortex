@@ -1,4 +1,4 @@
-require 'spec_helper'
+include ActionDispatch::TestProcess
 
 FactoryGirl.define do
 

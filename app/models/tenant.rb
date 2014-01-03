@@ -1,6 +1,7 @@
 class Tenant < ActiveRecord::Base
   default_scope where(deleted_at: nil)
   acts_as_nested_set
+  acts_as_paranoid
   after_initialize :init
 
   belongs_to :user

@@ -47,7 +47,7 @@ class TenantsController < ApplicationController
 
   # DELETE /tenants/1
   def destroy
-    @tenant.update(deleted_at: Time.now.utc)
+    @tenant.destroy
     head :no_content
   end
 

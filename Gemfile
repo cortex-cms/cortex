@@ -8,6 +8,7 @@ gem 'thin', require: false
 gem 'rack-cors', require: 'rack/cors'
 gem 'pg'
 gem 'hashr' # AppSettings
+gem 'paranoia',  '~> 2.0'
 
 # ActiveRecord
 gem 'apartment'

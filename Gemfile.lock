@@ -122,6 +122,8 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paranoia (2.0.1)
+      activerecord (~> 4.0)
     pg (0.17.1)
     polyglot (0.3.3)
     pry (0.9.12.4)
@@ -255,6 +257,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   mocha
   paperclip
+  paranoia (~> 2.0)
   pg
   rack-cors
   rails (~> 4.0)

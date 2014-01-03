@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate
   before_action :require_login
   before_action :default_headers
+  rescue_from Exception, with: :handle_exception
 
   def log_in(user)
     @current_user = user
@@ -24,5 +25,13 @@ class ApplicationController < ActionController::Base
 
     def default_headers
       headers['X-UA-Compatible'] = 'IE=edge'
+    end
+
+    def handle_exception(exception)
+      if exception.kind_of? Exceptions::CortexAPIError
+        render json: {message: exception.message}, http_status: exception.http_status
+      elsif Rails.env != 'development'
+        render json: {message: 'Internal server error'}, http_status: :internal_server_error
+      end
     end
 end

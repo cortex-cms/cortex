@@ -1,16 +1,11 @@
 class TenantsController < ApplicationController
-  include CortexExceptions
+  include Exceptions
 
   before_action :set_tenant, only: [:show, :update, :destroy]
   before_action :set_tenants_by_org, only: [:by_organization, :hierarchy_by_organization]
   respond_to :json
 
-  rescue_from CortexExceptions::NotEmpty, :with => :not_empty
-
-  def not_empty(exception)
-    render :status => :conflict, :json => { :message => 'Tenant still has children which must be removed before deletion.' }
-    return false
-  end
+  rescue_from Exceptions::NotEmptyException, :with => :not_empty
 
   # GET /tenants
   def index
@@ -52,7 +47,7 @@ class TenantsController < ApplicationController
 
   # DELETE /tenants/1
   def destroy
-    raise CortexExceptions::NotEmpty if @tenant.has_children?
+    raise Exceptions::NotEmptyException('Tenant still has children which must be removed before deletion.') if @tenant.has_children?
 
     @tenant.destroy
     head :no_content
@@ -71,5 +66,9 @@ class TenantsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tenant_params
       params.require(:tenant).permit(:name, :parent_id, :contact_name, :contact_email, :contact_phone, :active_at, :deactive_at, :contract, :did, :subdomain)
+    end
+
+    def not_empty(exception)
+      render :status => :conflict, :json => { :message => exception.message }
     end
 end

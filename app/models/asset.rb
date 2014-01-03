@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class Asset < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::AsyncCallbacks
@@ -9,6 +11,7 @@ class Asset < ActiveRecord::Base
 
   serialize :dimensions
   before_save :extract_dimensions
+  before_save :generate_digest
 
   has_attached_file :attachment, :styles => {
     :large   => {geometry: '800x800>', format: :jpg},
@@ -41,14 +44,21 @@ class Asset < ActiveRecord::Base
 
   private
 
-  def extract_dimensions
-    return unless image?
-    tempfile = attachment.queued_for_write[:original]
-    unless tempfile.nil?
-      geometry = Paperclip::Geometry.from_file(tempfile)
-      self.dimensions = [geometry.width.to_i, geometry.height.to_i]
+    def extract_dimensions
+      return unless image?
+      tempfile = attachment.queued_for_write[:original]
+      unless tempfile.nil?
+        geometry = Paperclip::Geometry.from_file(tempfile)
+        self.dimensions = [geometry.width.to_i, geometry.height.to_i]
+      end
     end
-  end
+
+    def generate_digest
+      tempfile = attachment.queued_for_write[:original]
+      unless tempfile.nil?
+        self.digest = Digest::SHA1.file(tempfile.path).to_s
+      end
+    end
 end
 
 # == Schema Information

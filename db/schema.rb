@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20140103155949) do
     t.string   "digest",                  null: false
   end
 
-  add_index "assets", ["digest"], name: "index_assets_on_digest", using: :btree
   add_index "assets", ["user_id"], name: "index_assets_on_user_id", using: :btree
 
   create_table "assets_posts", id: false, force: true do |t|

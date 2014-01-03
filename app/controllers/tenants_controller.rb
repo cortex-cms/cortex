@@ -1,5 +1,6 @@
 class TenantsController < ApplicationController
   before_action :set_tenant, only: [:show, :update, :destroy]
+  before_action :set_tenants_by_org, only: [:by_organization, :hierarchy_by_organization]
   respond_to :json
 
   # GET /tenants
@@ -14,13 +15,11 @@ class TenantsController < ApplicationController
 
   # GET /organizations/:org_id/tenants
   def by_organization
-    @tenants = params[:include_root] ? [Tenant.find(params[:org_id])] : Tenant.find(params[:org_id]).children
     render :index
   end
 
   # GET /organizations/:org_id/tenants/hierarchy
   def hierarchy_by_organization
-    @tenants = params[:include_root] ? [Tenant.find(params[:org_id])] : Tenant.find(params[:org_id]).children
     render :hierarchy
   end
 
@@ -52,6 +51,10 @@ class TenantsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tenant
       @tenant = Tenant.find(params[:id])
+    end
+
+    def set_tenants_by_org
+      @tenants = params[:include_root] ? [Tenant.find(params[:org_id])] : Tenant.find(params[:org_id]).children
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

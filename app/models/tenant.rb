@@ -14,6 +14,10 @@ class Tenant < ActiveRecord::Base
     parent_id == nil
   end
 
+  def has_children?
+    !self.leaf?
+  end
+
   def init
     self.subdomain ||= name.mb_chars.normalize(:kd).downcase.gsub(/[^a-z0-9]/, '').to_s
   end

@@ -1,6 +1,7 @@
 class Tenant < ActiveRecord::Base
   default_scope where(deleted_at: nil)
   acts_as_nested_set
+  acts_as_paranoid
   after_initialize :init
 
   belongs_to :user
@@ -11,6 +12,10 @@ class Tenant < ActiveRecord::Base
 
   def is_organization?
     parent_id == nil
+  end
+
+  def has_children?
+    !self.leaf?
   end
 
   def init

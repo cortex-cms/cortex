@@ -1,7 +1,16 @@
 class TenantsController < ApplicationController
+  include CortexExceptions
+
   before_action :set_tenant, only: [:show, :update, :destroy]
   before_action :set_tenants_by_org, only: [:by_organization, :hierarchy_by_organization]
   respond_to :json
+
+  rescue_from CortexExceptions::NotEmpty, :with => :not_empty
+
+  def not_empty(exception)
+    render :status => :conflict, :json => { :message => 'Tenant still has children which must be removed before deletion.' }
+    return false
+  end
 
   # GET /tenants
   def index
@@ -43,7 +52,9 @@ class TenantsController < ApplicationController
 
   # DELETE /tenants/1
   def destroy
-    @tenant.update(deleted_at: Time.now.utc)
+    raise CortexExceptions::NotEmpty if @tenant.has_children?
+
+    @tenant.destroy
     head :no_content
   end
 

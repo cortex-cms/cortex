@@ -11,7 +11,7 @@ class Tenant < ActiveRecord::Base
   validates_associated :user
 
   def is_organization?
-    parent_id == nil
+    self.root?
   end
 
   def has_children?

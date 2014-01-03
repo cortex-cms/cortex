@@ -5,4 +5,12 @@ class TenantObserver < ActiveRecord::Observer
       CreateOrganizationWorker.perform_async(tenant.id)
     end
   end
+
+
+  def after_delete(tenant)
+    if tenant.is_organization?
+      DeleteOrganizationWorker.perform_async(tenant.id)
+    end
+  end
+
 end

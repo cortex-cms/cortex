@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate
   before_action :require_login
   before_action :default_headers
-  rescue_from Exception, with: :handle_exception
+  rescue_from :all, with: :handle_exception
 
   def log_in(user)
     @current_user = user

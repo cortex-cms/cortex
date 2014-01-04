@@ -6,16 +6,15 @@ module Exceptions
   class CortexAPIError < CortexError
     attr_accessor :http_status
 
-    def initialize(message = nil, http_status = nil)
-      self.http_status = http_status || :internal_server_error;
-      message = message || 'Internal server error'
+    def initialize(message = 'Internal server error', http_status = :internal_server_error)
+      @http_status = http_status
       super(message)
     end
   end
 
   class NotEmptyError < CortexAPIError
-    def initialize(message='Internal server error')
-      super(message: message, http_status: :conflict)
+    def initialize(message = nil)
+      super(message, :conflict)
     end
   end
 end

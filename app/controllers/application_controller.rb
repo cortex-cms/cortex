@@ -1,9 +1,11 @@
 class ApplicationController < ActionController::Base
+  include Exceptions
+
   protect_from_forgery with: :null_session
   before_action :authenticate
   before_action :require_login
   before_action :default_headers
-  rescue_from :all, with: :handle_exception
+  rescue_from StandardError, with: :handle_exception
 
   def log_in(user)
     @current_user = user
@@ -11,9 +13,8 @@ class ApplicationController < ActionController::Base
 
   private
     def authenticate
-      if user = authenticate_with_http_basic { |username, password| User.authenticate(username, password) }
-        log_in(user)
-      end
+      user = authenticate_with_http_basic { |username, password| User.authenticate(username, password) }
+      log_in(user) if user
     end
 
     def require_login
@@ -29,9 +30,9 @@ class ApplicationController < ActionController::Base
 
     def handle_exception(exception)
       if exception.kind_of? Exceptions::CortexAPIError
-        render json: {message: exception.message}, http_status: exception.http_status
+        render json: { message: exception.message }, status: exception.http_status
       elsif Rails.env != 'development'
-        render json: {message: 'Internal server error'}, http_status: :internal_server_error
+        render json: { message: 'Internal server error' }, status: :internal_server_error
       end
     end
 end

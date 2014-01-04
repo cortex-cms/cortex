@@ -46,7 +46,7 @@ class TenantsController < ApplicationController
   # DELETE /tenants/1
   def destroy
     if @tenant.has_children?
-      raise(Exceptions::NotEmptyError)
+      raise(Exceptions::NotEmptyError, 'Tenant still has children which must be removed before deletion.')
     end
 
     @tenant.destroy

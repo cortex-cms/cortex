@@ -166,3 +166,8 @@ production:
   databases:
     public:
       <<: *test_data
+
+staging:
+  databases:
+    public:
+      <<: *test_data

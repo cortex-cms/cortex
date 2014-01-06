@@ -17,7 +17,7 @@ Cortex::Application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger.
-  config.active_support.deprecation = :log
+  #config.active_support.deprecation = :log
 
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load

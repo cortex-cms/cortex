@@ -26,10 +26,13 @@ defaults: &defaults
       - video/quicktime
       - video/mp4
 
+test:
+  <<: *defaults
+
 development:
   <<: *defaults
 
-test:
+staging:
   <<: *defaults
 
 production:

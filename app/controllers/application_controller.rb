@@ -32,6 +32,8 @@ class ApplicationController < ActionController::Base
       if exception.kind_of? Exceptions::CortexAPIError
         render json: { message: exception.message }, status: exception.http_status
       elsif Rails.env != 'development'
+        logger.error exception.message
+        logger.error exception.backtrace.join("\n")
         render json: { message: 'Internal server error' }, status: :internal_server_error
       end
     end

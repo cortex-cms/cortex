@@ -31,10 +31,10 @@ class ApplicationController < ActionController::Base
     def handle_exception(exception)
       if exception.kind_of? Exceptions::CortexAPIError
         render json: { message: exception.message }, status: exception.http_status
-
-      # Let's not swallow the error in Prod quite yet when presenting it to the user
-      #elsif Rails.env != 'development'
-      #  render json: { message: 'Internal server error' }, status: :internal_server_error
+      elsif Rails.env != 'development'
+        logger.error exception.message
+        logger.error exception.backtrace.join("\n")
+        render json: { message: 'Internal server error' }, status: :internal_server_error
       end
     end
 end

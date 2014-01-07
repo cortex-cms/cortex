@@ -13,7 +13,7 @@ gem 'paranoia',  '~> 2.0'
 
 # ActiveRecord
 gem 'apartment'
-gem 'awesome_nested_set'
+gem 'awesome_nested_set', '~> 3.0.0.rc.3'
 gem 'paperclip'
 gem 'acts-as-taggable-on'
 gem 'bcrypt-ruby', require: 'bcrypt'
@@ -48,4 +48,4 @@ group :test do
   gem 'codeclimate-test-reporter', require: nil
 end
 
-ruby '2.0.0'
+ruby '2.1.0'

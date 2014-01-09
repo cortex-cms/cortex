@@ -12,7 +12,6 @@ class Asset < ActiveRecord::Base
   serialize :dimensions
   before_save :extract_dimensions
   before_save :generate_digest
-  before_post_process :can_thumb?
 
   has_attached_file :attachment, :styles => {
       :large => {geometry: '800x800>', format: :png},
@@ -20,6 +19,8 @@ class Asset < ActiveRecord::Base
       :mini => {geometry: '100x100>', format: :png},
       :micro => {geometry: '50x50>', format: :png}
   }
+
+  before_post_process :can_thumb?
 
   validates_attachment :attachment, :presence => true,
                        :content_type => {:content_type => AppSettings.assets.allowed_media_types},

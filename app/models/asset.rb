@@ -15,10 +15,10 @@ class Asset < ActiveRecord::Base
   before_post_process :can_thumb?
 
   has_attached_file :attachment, :styles => {
-      :large => {geometry: '800x800>', format: :jpg},
-      :default => {geometry: '300x300>', format: :jpg},
-      :mini => {geometry: '100x100>', format: :jpg},
-      :micro => {geometry: '50x50>', format: :jpg}
+      :large => {geometry: '800x800>', format: :png},
+      :default => {geometry: '300x300>', format: :png},
+      :mini => {geometry: '100x100>', format: :png},
+      :micro => {geometry: '50x50>', format: :png}
   }
 
   validates_attachment :attachment, :presence => true,

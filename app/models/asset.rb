@@ -43,7 +43,7 @@ class Asset < ActiveRecord::Base
   private
 
   def can_thumb?
-    AppSettings.assets.allowed_media_types.select{|t| t['thumb'] && t['type'] == attachment_content_type} != []
+    AppSettings.assets.allowed_media_types.select{|t| t[:thumb] && t[:type] == attachment_content_type} != []
   end
 
   def image?

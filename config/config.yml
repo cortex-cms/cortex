@@ -8,21 +8,21 @@ defaults: &defaults
     max_size_mb: 100
     allowed_media_types:
       - type: image/jpeg
-        thumbnail: True
+        thumb: True
       - type: image/jpg
-        thumbnail: True
+        thumb: True
       - type: image/pjpeg
-        thumbnail: True
+        thumb: True
       - type: image/png
-        thumbnail: True
+        thumb: True
       - type: image/gif
-        thumbnail: True
+        thumb: True
       - type: image/bmp
-        thumbnail: True
+        thumb: True
       - type: image/x-png
-        thumbnail: True
+        thumb: True
       - type: application/pdf
-        thumbnail: True
+        thumb: True
       - type: application/vnd.ms-excel
       - type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       - type: application/msword

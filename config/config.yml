@@ -7,24 +7,31 @@ defaults: &defaults
   assets:
     max_size_mb: 100
     allowed_media_types:
-      - image/jpeg
-      - image/jpg
-      - image/pjpeg
-      - image/png
-      - image/gif
-      - image/bmp
-      - image/x-png
-      - application/pdf
-      - application/vnd.ms-excel
-      - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-      - application/msword
-      - application/vnd.openxmlformats-officedocument.wordprocessingml.document
-      - text/plain
-      - image/gif
-      - application/zip
-      - video/x-msvideo
-      - video/quicktime
-      - video/mp4
+      - type: image/jpeg
+        thumbnail: True
+      - type: image/jpg
+        thumbnail: True
+      - type: image/pjpeg
+        thumbnail: True
+      - type: image/png
+        thumbnail: True
+      - type: image/gif
+        thumbnail: True
+      - type: image/bmp
+        thumbnail: True
+      - type: image/x-png
+        thumbnail: True
+      - type: application/pdf
+        thumbnail: True
+      - type: application/vnd.ms-excel
+      - type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      - type: application/msword
+      - type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+      - type: text/plain
+      - type: application/zip
+      - type: video/x-msvideo
+      - type: video/quicktime
+      - type: video/mp4
 
 test:
   <<: *defaults

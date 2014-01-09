@@ -16,8 +16,8 @@ namespace :tddium do
     # Move branch/url config into yml in the future
     case
       when current_branch == 'master'
-        redeployment_targets << {environment: 'staging', hook_url: 'https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/d755fd68319b22cb129483f0291cd497'}
-        redeployment_targets << {environment: 'production', hook_url: 'https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/05486afef355596820dff6ec8263dbd9'}
+        redeployment_targets << { :environment => 'staging', :hook_url => 'https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/d755fd68319b22cb129483f0291cd497' }
+        redeployment_targets << { :environment => 'production', :hook_url => 'https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/05486afef355596820dff6ec8263dbd9' }
       else
         abort "invalid current branch: #{current_branch}"
     end
@@ -25,8 +25,8 @@ namespace :tddium do
     puts "Triggering Cloud66 build(s) for branch: #{current_branch}..."
 
     redeployment_targets.each { |target|
-      puts "Triggering Cloud66 build for environment: #{target.environment}"
-      cmd "curl -X POST -d '' #{target.hook_url}" or abort "could not push deployment for Cloud66 on branch #{current_branch} for environment #{target.environment}"
+      puts "Triggering Cloud66 build for environment: #{target[:environment]}"
+      cmd "curl -X POST -d '' #{target[:hook_url]}" or abort "could not push deployment for Cloud66 on branch #{current_branch} for environment #{target[:environment]}"
     }
   end
 end

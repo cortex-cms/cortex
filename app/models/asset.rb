@@ -3,6 +3,7 @@ require 'digest/sha1'
 class Asset < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::AsyncCallbacks
+  include Taxon
 
   acts_as_taggable
   belongs_to :user
@@ -48,6 +49,10 @@ class Asset < ActiveRecord::Base
 
   def image?
     attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
+  end
+
+  def taxon_subtype
+    AppSettings.assets.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_subtype]
   end
 
   def extract_dimensions

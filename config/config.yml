@@ -9,29 +9,46 @@ defaults: &defaults
     allowed_media_types:
       - type: image/jpeg
         thumb: True
+        taxon_subtype: IMG
       - type: image/jpg
         thumb: True
+        taxon_subtype: IMG
       - type: image/pjpeg
         thumb: True
+        taxon_subtype: IMG
       - type: image/png
         thumb: True
+        taxon_subtype: IMG
       - type: image/gif
         thumb: True
+        taxon_subtype: IMG
       - type: image/bmp
         thumb: True
+        taxon_subtype: IMG
       - type: image/x-png
         thumb: True
+        taxon_subtype: IMG
       - type: application/pdf
         thumb: True
+        taxon_subtype: DOC
       - type: application/vnd.ms-excel
+        taxon_subtype: DOC
       - type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+        taxon_subtype: DOC 
       - type: application/msword
+        taxon_subtype: DOC
       - type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+        taxon_subtype: DOC
       - type: text/plain
+        taxon_subtype: DOC
       - type: application/zip
+        taxon_subtype: DOC
       - type: video/x-msvideo
+        taxon_subtype: VID
       - type: video/quicktime
+        taxon_subtype: VID
       - type: video/mp4
+        taxon_subtype: VID
 
 test:
   <<: *defaults

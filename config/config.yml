@@ -1,4 +1,5 @@
 defaults: &defaults
+  default_page_size: 25
   default_subdomain: public
   allowed_origins:
     - 'localhost:3000'

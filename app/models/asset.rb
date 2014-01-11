@@ -20,10 +20,10 @@ class Asset < ActiveRecord::Base
       :micro => {geometry: '50x50>', format: :png}
   }
 
-  before_post_process :can_thumb?
+  before_attachment_post_process :can_thumb?
 
   validates_attachment :attachment, :presence => true,
-                       :content_type => {:content_type => AppSettings.assets.allowed_media_types.select{|t| t['type']}},
+                       :content_type => {:content_type => AppSettings.assets.allowed_media_types.collect{|allowed| allowed[:type]}},
                        :size => {:in => 0..AppSettings.assets.max_size_mb.megabytes}
 
   mapping do
@@ -43,7 +43,7 @@ class Asset < ActiveRecord::Base
   private
 
   def can_thumb?
-    AppSettings.assets.allowed_media_types.select{|t| t[:thumb] && t[:type] == attachment_content_type} != []
+    AppSettings.assets.allowed_media_types.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
   end
 
   def image?

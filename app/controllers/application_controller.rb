@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate
   before_action :require_login
   before_action :default_headers
-  rescue_from StandardError, with: :handle_exception
+
+  rescue_from Exception, with: :handle_exception
 
   def log_in(user)
     @current_user = user
@@ -29,12 +30,24 @@ class ApplicationController < ActionController::Base
     end
 
     def handle_exception(exception)
-      if exception.kind_of? Exceptions::CortexAPIError
-        render json: { message: exception.message }, status: exception.http_status
-      elsif Rails.env != 'development'
-        logger.error exception.message
-        logger.error exception.backtrace.join("\n")
-        render json: { message: 'Internal server error' }, status: :internal_server_error
+      unless [ActiveRecord::RecordNotFound,
+              ActiveRecord::RecordInvalid,
+              ActionController::UnknownController,
+              AbstractController::ActionNotFound].include? exception.class
+        begin
+          if exception.kind_of? Exceptions::CortexAPIError
+            render json: { message: exception.message }, status: exception.http_status
+          elsif Rails.env != 'development'
+            logger.error exception.message
+            logger.error exception.backtrace.join("\n")
+            render json: { message: 'Internal server error' }, status: :internal_server_error
+          end
+        rescue
+          # all hell has broken loose, don't do anything
+        end
+      else
+        # raise exception again for modules/gems that handle their own errors
+        raise
       end
     end
 end

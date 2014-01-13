@@ -35,6 +35,11 @@ defaults: &defaults
       - type: video/quicktime
       - type: video/mp4
       - type: audio/mpeg
+      - type: audio/mp3
+      - type: audio/x-mp3
+      - type: audio/mpeg3
+      - type: audio/x-mpeg3
+      - type: audio/mpg
 
 test:
   <<: *defaults

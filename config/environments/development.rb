@@ -41,4 +41,11 @@ Cortex::Application.configure do
     config.redis = { :namespace => 'cortex_dev' }
   end
 
+  silence_warnings do
+    begin
+      require 'pry'
+      IRB = Pry
+    rescue LoadError
+    end
+  end
 end

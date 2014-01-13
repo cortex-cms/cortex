@@ -25,7 +25,18 @@ module Paginated
     page[:next] = current_page + 1 unless results.last_page?
     page[:prev] = current_page - 1 if (total_pages > 1 && current_page > 1)
 
+    request_params = request.query_parameters
+    url_without_params = request.original_url.slice(0..(request.original_url.index('?')-1)) unless request_params.empty?
+    url_without_params ||= request.original_url
+
+    pagination_links = []
+    page.each do |k,v|
+      new_request_hash= request_params.merge({:page => v})
+      pagination_links << "<#{url_without_params}?#{new_request_hash.to_param}>;rel=\"#{k}\">"
+    end
+
     resource_name = resource.name.downcase.pluralize
+    headers[:Links] = pagination_links.join(',')
     headers[:'Accept-Ranges'] = resource_name
     headers[:'Content-Range'] = "#{resource_name} #{page_start}-#{page_end}:#{per_page}/#{count}"
   end

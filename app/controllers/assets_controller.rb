@@ -18,7 +18,6 @@ class AssetsController < ApplicationController
 
   # GET /assets/search
   def search
-    total_items = nil
     if params[:q].to_s.strip.length == 0
       @assets = Asset.page(page).per(per_page).all
       set_pagination_results(Asset, @assets)

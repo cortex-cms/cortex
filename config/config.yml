@@ -29,9 +29,12 @@ defaults: &defaults
       - type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
       - type: text/plain
       - type: application/zip
+      - type: video/avi
+      - type: video/msvideo
       - type: video/x-msvideo
       - type: video/quicktime
       - type: video/mp4
+      - type: audio/mpeg
 
 test:
   <<: *defaults

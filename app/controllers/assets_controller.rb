@@ -6,8 +6,8 @@ class AssetsController < ApplicationController
 
   # GET /assets
   def index
-    @assets = Asset.all.page(page).per(per_page)
-    set_pagination_results(Asset, @assets, per_page)
+    @assets = Asset.page(page).per(per_page)
+    set_pagination_results(Asset, @assets)
     respond_with @assets
   end
 
@@ -18,14 +18,14 @@ class AssetsController < ApplicationController
 
   # GET /assets/search
   def search
-
+    total_items = nil
     if params[:q].to_s.strip.length == 0
-      @assets = Asset.all.page(page).per(per_page)
+      @assets = Asset.page(page).per(per_page).all
+      set_pagination_results(Asset, @assets)
     else
       @assets = Asset.search(params[:q], load: true, :page => page, :per => per_page)
+      set_pagination_results(Asset, @assets, @assets.total_count)
     end
-
-    set_pagination_results(Asset, @assets, per_page)
 
     render :index
   end

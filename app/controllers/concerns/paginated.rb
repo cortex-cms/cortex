@@ -2,27 +2,27 @@ module Paginated
   extend ActiveSupport::Concern
 
   def page
-    @page ||= params[:page] || 1
+    @page ||= params[:page].to_i || 1
   end
 
   def per_page
-    @per_page ||= params[:per] || AppSettings.default_page_size
+    @per_page ||= params[:per].to_i || AppSettings.default_page_size
   end
 
-  def set_pagination_results(resource, results, per_page)
+  def set_pagination_results(resource, results, total_count = nil)
     return unless results.count > 0
 
-    count = results.count
-    current_page = results.current_page
-    total_pages = results.total_pages
+    count = total_count || resource.count
+    current_page = page
+    total_pages = (count / (per_page).to_i).to_i + 1
 
     page_start = (current_page - 1) * per_page + 1
-    page_end = (current_page - 1) * per_page + count
+    page_end = (current_page - 1) * per_page + results.count
 
     page = {}
     page[:first] = 1 if total_pages > 1
-    page[:last] = results.num_pages if total_pages > 1
-    page[:next] = current_page + 1 unless results.last_page?
+    page[:last] = total_pages if total_pages > 1
+    page[:next] = current_page + 1 unless (current_page == total_pages)
     page[:prev] = current_page - 1 if (total_pages > 1 && current_page > 1)
 
     request_params = request.query_parameters

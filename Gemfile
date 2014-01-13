@@ -10,6 +10,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'pg'
 gem 'hashr' # AppSettings
 gem 'paranoia',  '~> 2.0'
+gem 'kaminari'
 
 # ActiveRecord
 gem 'apartment'

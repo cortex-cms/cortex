@@ -102,6 +102,9 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     json (1.8.1)
+    kaminari (0.15.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -270,6 +273,7 @@ DEPENDENCIES
   guard-rspec
   hashr
   jbuilder (~> 1.2)
+  kaminari
   mocha
   paperclip
   paranoia (~> 2.0)

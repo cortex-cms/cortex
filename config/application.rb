@@ -34,7 +34,10 @@ module Cortex
     config.middleware.insert_after Rack::Sendfile, Rack::Cors do
       allow do
         origins *AppSettings.allowed_origins
-        resource '*', :headers => :any, :methods => [:get, :post, :options, :put, :patch, :delete]
+        resource '*',
+                 :headers => :any,
+                 :expose  => %w(Content-Range Link),
+                 :methods => [:get, :post, :options, :put, :patch, :delete]
       end
     end
 

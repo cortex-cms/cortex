@@ -6,6 +6,8 @@ class Asset < ActiveRecord::Base
   include Taxon
 
   acts_as_taggable
+  acts_as_paranoid
+
   belongs_to :user
   has_many :assets_posts
   has_many :posts, through: :assets_posts
@@ -51,8 +53,8 @@ class Asset < ActiveRecord::Base
     attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
   end
 
-  def taxon_subtype
-    AppSettings.assets.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_subtype]
+  def taxon_type
+    AppSettings.assets.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_type]
   end
 
   def extract_dimensions
@@ -78,14 +80,20 @@ end
 #
 #  id                      :integer          not null, primary key
 #  name                    :string(255)
-#  created_by              :integer
+#  user_id                 :integer
 #  attachment_file_name    :string(255)
 #  attachment_content_type :string(255)
 #  attachment_file_size    :integer
 #  attachment_updated_at   :datetime
 #  dimensions              :string(255)
 #  description             :text
+#  alt                     :string
+#  active                  :boolean
 #  deactive_at             :datetime
 #  created_at              :datetime
 #  updated_at              :datetime
+#  digest                  :string
+#  deleted_at              :datetime
 #
+# == Not Present
+#  created_by              :integer

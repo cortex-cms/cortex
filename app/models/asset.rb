@@ -73,14 +73,20 @@ end
 #
 #  id                      :integer          not null, primary key
 #  name                    :string(255)
-#  created_by              :integer
+#  user_id                 :integer
 #  attachment_file_name    :string(255)
 #  attachment_content_type :string(255)
 #  attachment_file_size    :integer
 #  attachment_updated_at   :datetime
 #  dimensions              :string(255)
 #  description             :text
+#  alt                     :string
+#  active                  :boolean
 #  deactive_at             :datetime
 #  created_at              :datetime
 #  updated_at              :datetime
+#  digest                  :string
+#  deleted_at              :datetime
 #
+# == Not Present
+#  created_by              :integer

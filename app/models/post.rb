@@ -14,7 +14,7 @@ end
 # Table name: posts
 #
 #  id            :integer          not null, primary key
-#  created_by    :integer          not null
+#  user_id       :integer
 #  title         :string(255)
 #  type          :string(255)
 #  published_at  :datetime
@@ -26,3 +26,5 @@ end
 #  created_at    :datetime
 #  updated_at    :datetime
 #
+# == Not Present
+#  created_by    :integer          not null

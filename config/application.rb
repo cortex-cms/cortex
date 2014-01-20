@@ -21,6 +21,8 @@ module Cortex
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.i18n.enforce_available_locales = true
+
     config.autoload_paths += %W(#{config.root}/lib)
     
     ActsAsTaggableOn.remove_unused_tags = true
@@ -32,7 +34,10 @@ module Cortex
     config.middleware.insert_after Rack::Sendfile, Rack::Cors do
       allow do
         origins *AppSettings.allowed_origins
-        resource '*', :headers => :any, :methods => [:get, :post, :options, :put, :patch, :delete]
+        resource '*',
+                 :headers => :any,
+                 :expose  => %w(Content-Range Link),
+                 :methods => [:get, :post, :options, :put, :patch, :delete]
       end
     end
 

@@ -43,7 +43,8 @@ describe TenantsController do
 
     context 'with invalid attributes' do
       it 'should NOT create a new tenant' do
-        expect{ post :create, tenant: attributes_for(:invalid_tenant) }.to_not change(Tenant, :count).by(1)
+        expect{ post :create, tenant: attributes_for(:invalid_tenant) }.to raise_error(ActiveRecord::RecordInvalid)
+        # expect{ post :create, tenant: attributes_for(:invalid_tenant) }.to_not change(Tenant, :count).by(1)
       end
     end
   end

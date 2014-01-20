@@ -39,5 +39,12 @@ module Paginated
     headers[:Links] = pagination_links.join(',')
     headers[:'Accept-Ranges'] = resource_name
     headers[:'Content-Range'] = "#{resource_name} #{page_start}-#{page_end}:#{per_page}/#{count}"
+
+    # Chrome does not correctly lookup cached CORS preflight information for requests.
+    # Specifically, when given a not modified (304) response it will not respect
+    # headers previously exposed by Access-Control-Expose-Headers.
+    headers[:'Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
+    headers[:Pragma] = 'no-cache'
+    headers[:Expires] = 'Fri, 01 Jan 1990 00:00:00 GMT'
   end
 end

@@ -2,7 +2,8 @@ module Taxon
 	extend ActiveSupport::Concern
 
 	def taxon
-		main_type = self.class.name.first
+		main_type = self.class.name[0]
+
 		taxon_date = created_at.strftime("%y%m%d")
 
 		"#{main_type}#{taxon_subtype}#{taxon_date}#{taxon_created_at_index}"

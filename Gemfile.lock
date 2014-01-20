@@ -274,6 +274,7 @@ DEPENDENCIES
   hashr
   jbuilder (~> 1.2)
   kaminari
+  mime-types
   mocha
   paperclip
   paranoia (~> 2.0)

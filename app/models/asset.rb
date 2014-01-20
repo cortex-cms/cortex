@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'mime/types'
 
 class Asset < ActiveRecord::Base
   include Tire::Model::Search
@@ -20,10 +21,10 @@ class Asset < ActiveRecord::Base
       :micro => {geometry: '50x50>', format: :png}
   }
 
-  before_post_process :can_thumb?
+  before_attachment_post_process :can_thumb
 
   validates_attachment :attachment, :presence => true,
-                       :content_type => {:content_type => AppSettings.assets.allowed_media_types.select{|t| t['type']}},
+                       :content_type => {:content_type => AppSettings.assets.allowed_media_types.collect{|allowed| allowed[:type]}},
                        :size => {:in => 0..AppSettings.assets.max_size_mb.megabytes}
 
   mapping do
@@ -36,15 +37,28 @@ class Asset < ActiveRecord::Base
     indexes :created_at, :type => :date, :include_in_all => false
   end
 
+  # 'Human friendly' content type generalization
+  def general_type
+    if (attachment_content_type =~ /(^application\/vnd\.)|(^application\/msword)/) != nil
+      'doc'
+    elsif attachment_content_type =~ /pdf/
+      'pdf'
+    elsif attachment_content_type =~ /zip/
+      'archive'
+    else
+      MIME::Types[attachment_content_type].first.media_type
+    end
+  end
+
   class << self
     remove_method :index
   end
 
-  private
-
-  def can_thumb?
-    AppSettings.assets.allowed_media_types.select{|t| t[:thumb] && t[:type] == attachment_content_type} != []
+  def can_thumb
+    AppSettings.assets.allowed_media_types.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
   end
+
+  private
 
   def image?
     attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}

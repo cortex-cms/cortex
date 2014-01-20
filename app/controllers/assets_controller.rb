@@ -2,9 +2,12 @@ class AssetsController < ApplicationController
   before_action :set_asset, only: [:show, :update, :destroy]
   respond_to :json, :multipart_form
 
+  include Paginated
+
   # GET /assets
   def index
-    @assets = Asset.all
+    @assets = Asset.page(page).per(per_page)
+    set_pagination_results(Asset, @assets)
     respond_with @assets
   end
 
@@ -15,12 +18,12 @@ class AssetsController < ApplicationController
 
   # GET /assets/search
   def search
-
-    # How does one perform an empty query with ES? filter exists = true?
     if params[:q].to_s.strip.length == 0
-      @assets = Asset.all
+      @assets = Asset.page(page).per(per_page).all
+      set_pagination_results(Asset, @assets)
     else
-      @assets = Asset.search params[:q], load: true
+      @assets = Asset.search(params[:q], load: true, :page => page, :per => per_page)
+      set_pagination_results(Asset, @assets, @assets.total_count)
     end
 
     render :index

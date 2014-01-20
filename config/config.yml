@@ -1,4 +1,5 @@
 defaults: &defaults
+  default_page_size: 25
   default_subdomain: public
   allowed_origins:
     - 'localhost:3000'
@@ -29,9 +30,17 @@ defaults: &defaults
       - type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
       - type: text/plain
       - type: application/zip
+      - type: video/avi
+      - type: video/msvideo
       - type: video/x-msvideo
       - type: video/quicktime
       - type: video/mp4
+      - type: audio/mpeg
+      - type: audio/mp3
+      - type: audio/x-mp3
+      - type: audio/mpeg3
+      - type: audio/x-mpeg3
+      - type: audio/mpg
 
 test:
   <<: *defaults

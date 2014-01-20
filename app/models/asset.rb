@@ -10,6 +10,8 @@ class Asset < ActiveRecord::Base
   has_many :assets_posts
   has_many :posts, through: :assets_posts
 
+  default_scope { order('created_at DESC')  }
+
   serialize :dimensions
   before_save :extract_dimensions
   before_save :generate_digest

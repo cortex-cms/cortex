@@ -46,7 +46,8 @@ class Asset < ActiveRecord::Base
     elsif attachment_content_type =~ /zip/
       'archive'
     else
-      MIME::Types[attachment_content_type].first.media_type
+      var types = MIME::Types[attachment_content_type]
+      types ? types.first.media_type : 'Unknown'
     end
   end
 

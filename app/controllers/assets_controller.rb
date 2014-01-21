@@ -19,12 +19,15 @@ class AssetsController < ApplicationController
   # GET /assets/search
   def search
     if params[:q].to_s.strip.length == 0
-      @assets = Asset.page(page).per(per_page).all
-      set_pagination_results(Asset, @assets)
-    else
-      @assets = Asset.search(params[:q], load: true, :page => page, :per => per_page)
-      set_pagination_results(Asset, @assets, @assets.total_count)
+      params[:q] = '*'
     end
+
+    @assets = Asset.search(params[:q], load: {:include => %w(user tags)}, :page => page, :per => per_page)
+    @assets.each_with_hit do |result, hit|
+      result.taxon = hit['_source']['taxon']
+    end
+
+    set_pagination_results(Asset, @assets, @assets.count)
 
     render :index
   end

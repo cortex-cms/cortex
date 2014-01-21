@@ -50,6 +50,7 @@ group :test do
   gem 'guard-rspec'
   gem 'rspec-sidekiq'
   gem 'codeclimate-test-reporter', require: nil
+  gem 'timecop'
 end
 
 ruby '2.1.0'

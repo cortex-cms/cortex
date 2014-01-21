@@ -4,8 +4,11 @@ require 'mime/types'
 class Asset < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::AsyncCallbacks
+  include Taxon
 
   acts_as_taggable
+  acts_as_paranoid
+
   belongs_to :user
   has_many :assets_posts
   has_many :posts, through: :assets_posts
@@ -35,6 +38,7 @@ class Asset < ActiveRecord::Base
     indexes :description, :analyzer => :snowball
     indexes :tags, :analyzer => :keyword, :as => 'tag_list'
     indexes :created_at, :type => :date, :include_in_all => false
+    indexes :taxon, :type => :string, :as => 'create_taxon'
   end
 
   # 'Human friendly' content type generalization
@@ -62,6 +66,10 @@ class Asset < ActiveRecord::Base
 
   def image?
     attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
+  end
+
+  def taxon_type
+    AppSettings.assets.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_type]
   end
 
   def extract_dimensions

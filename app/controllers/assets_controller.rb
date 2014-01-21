@@ -23,11 +23,8 @@ class AssetsController < ApplicationController
     end
 
     @assets = Asset.search(params[:q], load: {:include => %w(user tags)}, :page => page, :per => per_page)
-    @assets.each_with_hit do |result, hit|
-      result.taxon = hit['_source']['taxon']
-    end
 
-    set_pagination_results(Asset, @assets, @assets.count)
+    set_pagination_results(Asset, @assets, @assets.total_count)
 
     render :index
   end

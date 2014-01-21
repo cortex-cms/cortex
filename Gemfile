@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0'
+gem 'rails', '4.1.0.beta1'
 gem 'rails-observers'
 gem 'jbuilder', '~> 1.2'
 gem 'fog'
@@ -13,8 +13,7 @@ gem 'paranoia',  '~> 2.0'
 gem 'kaminari'
 gem 'mime-types'
 
-# ActiveRecord
-gem 'apartment'
+# ActiveRecords
 gem 'awesome_nested_set', '~> 3.0.0.rc.3'
 gem 'paperclip'
 gem 'acts-as-taggable-on'
@@ -22,7 +21,6 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'annotate'
 gem 'tire'
 gem 'tire_async_index'
-gem 'composite_primary_keys'
 
 # Sidekiq
 gem 'sidekiq'

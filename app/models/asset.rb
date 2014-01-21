@@ -7,10 +7,9 @@ class Asset < ActiveRecord::Base
 
   acts_as_taggable
   belongs_to :user
-  has_many :assets_posts
-  has_many :posts, through: :assets_posts
+  has_and_belongs_to_many :posts
 
-  default_scope { order('created_at DESC')  }
+  default_scope { order('created_at DESC') }
 
   serialize :dimensions
   before_save :extract_dimensions
@@ -98,13 +97,11 @@ end
 #  attachment_updated_at   :datetime
 #  dimensions              :string(255)
 #  description             :text
-#  alt                     :string
+#  alt                     :string(255)
 #  active                  :boolean
 #  deactive_at             :datetime
 #  created_at              :datetime
 #  updated_at              :datetime
-#  digest                  :string
+#  digest                  :string(255)      not null
 #  deleted_at              :datetime
 #
-# == Not Present
-#  created_by              :integer

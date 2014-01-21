@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'apartment/elevators/subdomain'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -28,7 +27,6 @@ module Cortex
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true
 
-    config.middleware.use 'Apartment::Elevators::Generic', Proc.new { |request| determine_subdomain(request)  }
     config.active_record.default_timezone = :utc
 
     config.middleware.insert_after Rack::Sendfile, Rack::Cors do
@@ -45,25 +43,5 @@ module Cortex
       config.background_engine :sidekiq
       config.use_queue :default
     end
-
-    private
-      def determine_subdomain(request)
-        #return subdomain(request.host) || APP_CONFIG['default_subdomain']
-        #Restore once we get a domain name and can assign subdomains! MAIMING THE CONFIG
-        AppSettings.default_subdomain
-      end
-
-      def subdomain(host)
-        subdomains(host).first
-      end
-
-      def subdomains(host, tld_length = 1)
-        return [] unless named_host?(host)
-        host.split('.')[0..-(tld_length + 2)]
-      end
-
-      def named_host?(host)
-        !(host.nil? || /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.match(host))
-      end
   end
 end

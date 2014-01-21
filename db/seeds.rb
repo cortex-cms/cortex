@@ -31,26 +31,6 @@ if data = SEED_DATA['databases'][Apartment::Database.current]
     end
   end
 
-  # seed posts
-  if data['posts']
-    data['posts'].each do |p|
-      if !Post.find_by title: p['title']
-        puts "Creating post #{p['title']}"
-        creator = User.find_by_name(p['creator'])
-        post = Post.new(user_id: creator.id, title: p['title'], body: p['body'], type: p['type'])
-        post.tag_list = p['tags']
-        p['categories'].each do |c|
-          category = Category.find_by_name(c)
-          if !category
-            category = Category.create(name: c, user_id: creator.id)
-          end
-          post.categories << category
-        end
-        post.save!
-      end
-    end
-  end
-
   creator = User.find_by_name('surgeon')
   # seed tenants
   if data['tenants']

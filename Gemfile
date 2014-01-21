@@ -11,6 +11,7 @@ gem 'pg'
 gem 'hashr' # AppSettings
 gem 'paranoia',  '~> 2.0'
 gem 'kaminari'
+gem 'mime-types'
 
 # ActiveRecord
 gem 'apartment'
@@ -49,6 +50,7 @@ group :test do
   gem 'guard-rspec'
   gem 'rspec-sidekiq'
   gem 'codeclimate-test-reporter', require: nil
+  gem 'timecop'
 end
 
 ruby '2.1.0'

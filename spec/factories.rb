@@ -4,7 +4,7 @@ FactoryGirl.define do
 
   factory :asset do
     name 'asset'
-    attachment { fixture_file_upload(Rails.root.join('spec', 'support', 'test.jpg'), 'image/jpeg') }
+    attachment { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test.jpg'), 'image/jpeg') }
 
     factory :invalid_asset do
       name nil

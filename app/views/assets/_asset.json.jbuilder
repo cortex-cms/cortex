@@ -17,4 +17,4 @@ json.extract! asset, :tags, :description, :alt, :active
 json.file_name asset.attachment_file_name
 json.file_size asset.attachment_file_size
 json.content_type asset.attachment_content_type
-json.extract! asset, :created_at, :updated_at, :deactive_at, :deleted_at
+json.extract! asset, :created_at, :updated_at, :deactive_at, :deleted_at, :taxon

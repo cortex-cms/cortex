@@ -37,6 +37,7 @@ class Asset < ActiveRecord::Base
     indexes :description, :analyzer => :snowball
     indexes :tags, :analyzer => :keyword, :as => 'tag_list'
     indexes :created_at, :type => :date, :include_in_all => false
+    indexes :taxon, :type => :string, :as => 'create_taxon'
   end
 
   class << self

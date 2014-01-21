@@ -1,10 +1,19 @@
-module Taxon 
+module Taxon
 	extend ActiveSupport::Concern
 
-	def taxon
+  def taxon
+    @taxon ||= create_taxon
+  end
+
+  def taxon=(taxon)
+    @taxon = taxon
+  end
+
+  private
+
+	def create_taxon
 	  module_type = self.class.name.first
 		taxon_date = created_at.strftime("%y%m%d")
-
 		"#{module_type}#{taxon_type}#{taxon_date}#{taxon_created_at_index}"
   end
 

@@ -30,15 +30,26 @@ class Asset < ActiveRecord::Base
                        :content_type => {:content_type => AppSettings.assets.allowed_media_types.collect{|allowed| allowed[:type]}},
                        :size => {:in => 0..AppSettings.assets.max_size_mb.megabytes}
 
-  mapping do
-    indexes :id, :index => :not_analyzed
-    indexes :name, :analyzer => :snowball, :boost => 2.0
-    indexes :created_by, :analyzer => :keyword, :as => 'user.name'
-    indexes :file_name, :analyzer => :keyword
-    indexes :description, :analyzer => :snowball
-    indexes :tags, :analyzer => :keyword, :as => 'tag_list'
-    indexes :created_at, :type => :date, :include_in_all => false
-    indexes :taxon, :type => :string, :as => 'create_taxon'
+
+  settings :analysis => {
+      :analyzer => {
+          :taxon_analyzer => {
+              :type => 'custom',
+              :tokenizer => 'standard',
+              :filter => %w(standard lowercase ngram)
+          }
+      }
+  } do
+    mapping do
+      indexes :id, :index => :not_analyzed
+      indexes :name, :analyzer => :snowball, :boost => 2.0
+      indexes :created_by, :analyzer => :keyword, :as => 'user.name'
+      indexes :file_name, :analyzer => :keyword
+      indexes :description, :analyzer => :snowball
+      indexes :tags, :analyzer => :keyword, :as => 'tag_list'
+      indexes :created_at, :type => :date, :include_in_all => false
+      indexes :taxon, :analyzer => :taxon_analyzer, :as => 'create_taxon'
+    end
   end
 
   # 'Human friendly' content type generalization

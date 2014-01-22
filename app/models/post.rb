@@ -26,5 +26,3 @@ end
 #  created_at    :datetime
 #  updated_at    :datetime
 #
-# == Not Present
-#  created_by    :integer          not null

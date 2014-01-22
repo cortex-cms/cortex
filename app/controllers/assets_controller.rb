@@ -24,7 +24,7 @@ class AssetsController < ApplicationController
 
     q = params[:q]
     @assets = Asset.search :load => {:include => %w(user tags)}, :page => page, :per_page => per_page do
-      query { string "#{q} OR taxon:#{q}" }
+      query { string q }
       sort { by :created_at, :desc }
     end
 

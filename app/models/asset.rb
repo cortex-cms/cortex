@@ -10,6 +10,8 @@ class Asset < ActiveRecord::Base
   has_many :assets_posts
   has_many :posts, through: :assets_posts
 
+  default_scope { order('created_at DESC')  }
+
   serialize :dimensions
   before_save :extract_dimensions
   before_save :generate_digest
@@ -39,14 +41,16 @@ class Asset < ActiveRecord::Base
 
   # 'Human friendly' content type generalization
   def general_type
-    if (attachment_content_type =~ /(^application\/vnd\.)|(^application\/msword)/) != nil
+    if (attachment_content_type =~ /(excel)|(spreadsheet)/) != nil
+      'spreadsheet'
+    elsif (attachment_content_type =~ /(^application\/vnd\.)|(^application\/msword)/) != nil
       'doc'
     elsif attachment_content_type =~ /pdf/
       'pdf'
     elsif attachment_content_type =~ /zip/
       'archive'
     else
-      MIME::Types[attachment_content_type].first.media_type
+      attachment_content_type.match(/(\w+)\//)[1]
     end
   end
 

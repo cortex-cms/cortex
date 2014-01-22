@@ -42,7 +42,7 @@ class Asset < ActiveRecord::Base
   } do
     mapping do
       indexes :id, :index => :not_analyzed
-      indexes :name, :analyzer => :snowball, :boost => 2.0
+      indexes :name, :analyzer => :snowball, :boost => 100.0
       indexes :created_by, :analyzer => :keyword, :as => 'user.name'
       indexes :file_name, :analyzer => :keyword
       indexes :description, :analyzer => :snowball

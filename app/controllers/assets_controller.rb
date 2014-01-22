@@ -22,7 +22,8 @@ class AssetsController < ApplicationController
       params[:q] = '*'
     end
 
-    @assets = Asset.search(params[:q], load: {:include => %w(user tags)}, :page => page, :per => per_page)
+    q = params[:q]
+    @assets = Asset.search("#{q} OR taxon:#{q}", load: {:include => %w(user tags)}, :page => page, :per_page => per_page)
 
     set_pagination_results(Asset, @assets, @assets.total_count)
 

@@ -18,4 +18,5 @@ json.file_name asset.attachment_file_name
 json.file_size asset.attachment_file_size
 json.has_thumbs asset.can_thumb
 json.content_type asset.attachment_content_type
+json.extract! asset, :created_at, :updated_at, :deactive_at, :deleted_at, :taxon
 json.extract! asset, :created_at, :updated_at, :deactive_at, :deleted_at, :general_type

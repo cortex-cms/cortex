@@ -3,7 +3,7 @@ require 'mime/types'
 
 class Asset < ActiveRecord::Base
   include Tire::Model::Search
-  include Tire::Model::AsyncCallbacks
+  include Tire::Model::Callbacks
   include Taxon
 
   acts_as_taggable

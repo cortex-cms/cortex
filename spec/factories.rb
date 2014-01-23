@@ -4,10 +4,13 @@ FactoryGirl.define do
 
   factory :asset do
 
+    user
+
     trait :image do
       sequence(:name) { |n| "Sample Image#{n}" }
       description     'A very nice sample image'
       attachment { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test.jpg'), 'image/jpeg') }
+
     end
 
     trait :document do
@@ -29,8 +32,8 @@ FactoryGirl.define do
   end
 
   factory :user do
-    name     'user'
-    email    'user@email.com'
+    sequence(:name) { |n| "User #{n}" }
+    sequence(:email) { |n| "user#{n}.email@gmail.com" }
     password 'awesomepassword'
 
     initialize_with { new(password: password, password_confirmation: password) }

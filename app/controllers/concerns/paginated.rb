@@ -18,6 +18,8 @@ module Paginated
     total_pages  = (count / (per_page).to_i).to_i + 1
     page_start   = (current_page - 1) * per_page + 1
     page_end     = (current_page - 1) * per_page + results.count
+
+    # Link header
     page         = {}
     page[:first] = 1 if total_pages > 1
     page[:last]  = total_pages if total_pages > 1
@@ -28,7 +30,7 @@ module Paginated
     url_without_params   = request.original_url.slice(0..(request.original_url.index('?')-1)) unless request_params.empty?
     url_without_params ||= request.original_url
 
-    # Build links for Link header
+    # Create links for Link header
     pagination_links = []
     page.each do |k,v|
       new_request_hash= request_params.merge({:page => v})

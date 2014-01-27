@@ -1,5 +1,6 @@
 class AssetsController < ApplicationController
   before_action :set_asset, only: [:show, :update, :destroy]
+
   respond_to :json, :multipart_form
 
   include Paginated
@@ -36,7 +37,7 @@ class AssetsController < ApplicationController
   # POST /assets
   def create
     @asset = Asset.new(asset_params)
-    @asset.user = @current_user
+    @asset.user = current_user
     @asset.save!
     respond_with @asset
   end

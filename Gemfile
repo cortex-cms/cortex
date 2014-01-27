@@ -14,7 +14,6 @@ gem 'kaminari'
 gem 'mime-types'
 
 # ActiveRecord
-gem 'apartment'
 gem 'awesome_nested_set', '~> 3.0.0.rc.3'
 gem 'paperclip'
 gem 'acts-as-taggable-on'

@@ -1,10 +1,10 @@
 class AddDigestColumnToAssets < ActiveRecord::Migration
   def up
-    Asset.destroy_all
+    execute 'DELETE FROM assets'
     add_column :assets, :digest, :string, null: false
   end
 
   def down
-    remove_column :assets, :digest
+    raise ActiveRecord::IrreversibleMigration, "Can't recover deleted assets"
   end
 end

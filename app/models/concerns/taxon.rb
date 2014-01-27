@@ -21,5 +21,4 @@ module Taxon
     # Returns count of assets created that day as hex
     '%04x' % self.class.with_deleted.where(created_at: Time.new(created_at.year, created_at.month, created_at.day)..created_at).count
   end
-
 end

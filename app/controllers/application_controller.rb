@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   include Exceptions
-  include PaginationHelper
 
   protect_from_forgery with: :null_session
   before_action :authenticate!
@@ -53,7 +52,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate!
-    authenticate || unauthorized!
+    current_user || authenticate || unauthorized!
   end
 
   def default_headers

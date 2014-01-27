@@ -6,7 +6,7 @@ module Paginated
   end
 
   def per_page
-    @per_page ||= params[:per].to_i || AppSettings.default_page_size
+    @per_page ||= params[:per_page].to_i == 0 ? AppSettings.default_page_size : params[:per].to_i
   end
 
   def set_pagination_results(resource, results, total_count = nil)

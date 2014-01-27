@@ -11,7 +11,7 @@ end
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
-#  created_by :integer          not null
+#  user_id    :integer          not null
 #  parent_id  :integer
 #  lft        :integer
 #  rgt        :integer

@@ -44,7 +44,7 @@ end
 #  did           :string(255)
 #  active_at     :datetime
 #  deactive_at   :datetime
-#  created_by    :integer          not null
+#  user_id       :integer
 #  created_at    :datetime
 #  updated_at    :datetime
 #

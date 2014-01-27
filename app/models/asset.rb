@@ -53,14 +53,16 @@ class Asset < ActiveRecord::Base
 
   # 'Human friendly' content type generalization
   def general_type
-    if (attachment_content_type =~ /(^application\/vnd\.)|(^application\/msword)/) != nil
+    if (attachment_content_type =~ /(excel)|(spreadsheet)/) != nil
+      'spreadsheet'
+    elsif (attachment_content_type =~ /(^application\/vnd\.)|(^application\/msword)/) != nil
       'doc'
     elsif attachment_content_type =~ /pdf/
       'pdf'
     elsif attachment_content_type =~ /zip/
       'archive'
     else
-      MIME::Types[attachment_content_type].first.media_type
+      attachment_content_type.match(/(\w+)\//)[1]
     end
   end
 
@@ -112,13 +114,11 @@ end
 #  attachment_updated_at   :datetime
 #  dimensions              :string(255)
 #  description             :text
-#  alt                     :string
+#  alt                     :string(255)
 #  active                  :boolean
 #  deactive_at             :datetime
 #  created_at              :datetime
 #  updated_at              :datetime
-#  digest                  :string
+#  digest                  :string(255)      not null
 #  deleted_at              :datetime
 #
-# == Not Present
-#  created_by              :integer

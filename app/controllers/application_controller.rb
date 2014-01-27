@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   include Exceptions
-  include PaginationHelper
 
   protect_from_forgery with: :null_session
   before_action :authenticate!

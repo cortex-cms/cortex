@@ -14,6 +14,6 @@ cortex_user   = User.new(name: user_seed.name,
                          tenant_id: cortex_tenant.id)
 
 cortex_user.save!
-cortex_tenant.creator = cortex_user
+cortex_tenant.user = cortex_user
 cortex_tenant.save!
 

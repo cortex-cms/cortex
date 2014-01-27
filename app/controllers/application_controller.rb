@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate!
-    authenticate || unauthorized!
+    current_user || authenticate || unauthorized!
   end
 
   def default_headers

@@ -1,12 +1,13 @@
 class AssetsController < ApplicationController
   before_action :set_asset, only: [:show, :update, :destroy]
+
   respond_to :json, :multipart_form
 
   include Paginated
 
   # GET /assets
   def index
-    @assets = Asset.page(page).per(per_page)
+    @assets = Asset.order(created_at: :desc).page(page).per(per_page)
     set_pagination_results(Asset, @assets)
     respond_with @assets
   end
@@ -18,14 +19,22 @@ class AssetsController < ApplicationController
 
   # GET /assets/search
   def search
-    if params[:q].to_s.strip.length == 0
-      params[:q] = '*'
+
+    total_count = 0
+    q = params[:q]
+    if q.to_s != ''
+      # Search with ES if query provided
+      @assets = Asset.search :load => {:include => %w(user tags)}, :page => page, :per_page => per_page do
+        query { string q }
+        sort { by :created_at, :desc }
+      end
+      total_count = @assets.total_count
+    else
+      @assets = Asset.order(created_at: :desc).page(page).per(per_page)
+      total_count = Asset.count
     end
 
-    q = params[:q]
-    @assets = Asset.search("#{q} OR taxon:#{q}", load: {:include => %w(user tags)}, :page => page, :per_page => per_page)
-
-    set_pagination_results(Asset, @assets, @assets.total_count)
+    set_pagination_results(Asset, @assets, total_count)
 
     render :index
   end
@@ -33,7 +42,7 @@ class AssetsController < ApplicationController
   # POST /assets
   def create
     @asset = Asset.new(asset_params)
-    @asset.user = @current_user
+    @asset.user = current_user
     @asset.save!
     respond_with @asset
   end

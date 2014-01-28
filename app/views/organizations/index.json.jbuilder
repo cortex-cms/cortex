@@ -1,1 +1,0 @@
-json.array! @organizations, partial: 'tenants/tenant', as: :tenant

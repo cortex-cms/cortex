@@ -3,13 +3,16 @@ require 'mime/types'
 
 class Asset < ActiveRecord::Base
   include Tire::Model::Search
-  include Tire::Model::AsyncCallbacks
+  include Tire::Model::Callbacks
+  include Taxon
 
   acts_as_taggable
+  acts_as_paranoid
+
   belongs_to :user
   has_and_belongs_to_many :posts
 
-  default_scope { order('created_at DESC') }
+  default_scope { order('created_at DESC')  }
 
   serialize :dimensions
   before_save :extract_dimensions
@@ -28,14 +31,26 @@ class Asset < ActiveRecord::Base
                        :content_type => {:content_type => AppSettings.assets.allowed_media_types.collect{|allowed| allowed[:type]}},
                        :size => {:in => 0..AppSettings.assets.max_size_mb.megabytes}
 
-  mapping do
-    indexes :id, :index => :not_analyzed
-    indexes :name, :analyzer => :snowball, :boost => 2.0
-    indexes :created_by, :analyzer => :keyword, :as => 'user.name'
-    indexes :file_name, :analyzer => :keyword
-    indexes :description, :analyzer => :snowball
-    indexes :tags, :analyzer => :keyword, :as => 'tag_list'
-    indexes :created_at, :type => :date, :include_in_all => false
+
+  settings :analysis => {
+      :analyzer => {
+          :taxon_analyzer => {
+              :type => 'custom',
+              :tokenizer => 'standard',
+              :filter => %w(standard lowercase ngram)
+          }
+      }
+  } do
+    mapping do
+      indexes :id, :index => :not_analyzed
+      indexes :name, :analyzer => :snowball, :boost => 100.0
+      indexes :created_by, :analyzer => :keyword, :as => 'user.name'
+      indexes :file_name, :analyzer => :keyword
+      indexes :description, :analyzer => :snowball
+      indexes :tags, :analyzer => :keyword, :as => 'tag_list'
+      indexes :created_at, :type => :date, :include_in_all => false
+      indexes :taxon, :analyzer => :taxon_analyzer, :as => 'create_taxon'
+    end
   end
 
   # 'Human friendly' content type generalization
@@ -65,6 +80,10 @@ class Asset < ActiveRecord::Base
 
   def image?
     attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
+  end
+
+  def taxon_type
+    AppSettings.assets.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_type]
   end
 
   def extract_dimensions

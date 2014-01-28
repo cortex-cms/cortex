@@ -1,13 +1,12 @@
 class TenantsController < ApplicationController
-  include Exceptions
-
   before_action :set_tenant, only: [:show, :update, :destroy]
-  before_action :set_tenants_by_org, only: [:by_organization, :hierarchy_by_organization]
+  before_action :set_tenants, only: [:tenant_tenants, :tenant_hierarchy]
+
   respond_to :json
 
   # GET /tenants
   def index
-    @tenants = Tenant.all
+    @tenants = params[:roots_only] ? Tenant.roots : Tenant.all
   end
 
   # GET /tenants/hierarchy
@@ -15,13 +14,13 @@ class TenantsController < ApplicationController
     @tenants = Tenant.roots
   end
 
-  # GET /organizations/:org_id/tenants
-  def by_organization
+  # GET /tenants/:id/tenants
+  def tenant_tenants
     render :index
   end
 
-  # GET /organizations/:org_id/tenants/hierarchy
-  def hierarchy_by_organization
+  # GET /tenants/:id/hierarchy
+  def tenant_hierarchy
     render :hierarchy
   end
 
@@ -59,8 +58,8 @@ class TenantsController < ApplicationController
       @tenant = Tenant.find(params[:id])
     end
 
-    def set_tenants_by_org
-      @tenants = params[:include_root] ? [Tenant.find(params[:org_id])] : Tenant.find(params[:org_id]).children
+    def set_tenants
+      @tenants = params[:include_root] ? [Tenant.find(params[:id])] : Tenant.find(params[:id]).children
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

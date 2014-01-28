@@ -13,7 +13,7 @@ gem 'paranoia',  '~> 2.0'
 gem 'kaminari'
 gem 'mime-types'
 
-# ActiveRecords
+# ActiveRecord
 gem 'awesome_nested_set', '~> 3.0.0.rc.3'
 gem 'paperclip'
 gem 'acts-as-taggable-on'
@@ -48,6 +48,7 @@ group :test do
   gem 'guard-rspec'
   gem 'rspec-sidekiq'
   gem 'codeclimate-test-reporter', require: nil
+  gem 'timecop'
 end
 
 ruby '2.1.0'

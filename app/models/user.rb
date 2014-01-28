@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   acts_as_tagger
 
+  belongs_to :tenant
   has_many :assets
   has_many :tenants
   has_many :posts
@@ -10,7 +11,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :email
 
-  def User.authenticate(username, password)
+  def self.authenticate(username, password)
     user = User.find_by_name(username)
     return user if user && user.authenticate(password)
   end
@@ -26,4 +27,5 @@ end
 #  password_digest :string(255)      not null
 #  created_at      :datetime
 #  updated_at      :datetime
+#  tenant_id       :integer          not null
 #

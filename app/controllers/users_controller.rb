@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users/me
   def me
-    @user = @current_user
+    @user = current_user
     render :show
   end
 

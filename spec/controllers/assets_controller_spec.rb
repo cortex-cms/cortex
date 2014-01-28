@@ -5,8 +5,10 @@ describe AssetsController do
   before { log_in }
   before { request.env['HTTP_ACCEPT'] = 'application/json' }
 
+  let(:asset) { create(:asset, :image) }
+
   describe 'GET #index' do
-    let(:asset) { create(:asset) }
+
     before { get :index }
 
     it 'should return an array of assets' do
@@ -15,7 +17,7 @@ describe AssetsController do
   end
 
   describe 'GET #show' do
-    let(:asset) { create(:asset) }
+
     before { get :show, id: asset.id }
 
     it 'should find the correct asset' do
@@ -51,9 +53,10 @@ describe AssetsController do
     end
   end
 =end
+
   describe 'DELETE #destroy' do
     it 'should delete the asset' do
-      asset = create(:asset)
+      asset = create(:asset, :image)
       expect{ delete :destroy, id: asset }.to change(Asset, :count).by(-1)
     end
   end

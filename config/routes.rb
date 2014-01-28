@@ -9,16 +9,14 @@ Cortex::Application.routes.draw do
   resources :posts
   resources :categories
 
-  get 'organizations/:id', to: 'tenants#show'
   get 'tenants/hierarchy', to: 'tenants#hierarchy'
+  get 'tenants/:id/tenants', to: 'tenants#tenant_tenants'
+  get 'tenants/:id/hierarchy', to: 'tenants#tenant_hierarchy'
   resources :tenants
-
-  get 'organizations/:org_id/tenants', to: 'tenants#by_organization'
-  get 'organizations/:org_id/tenants/hierarchy', to: 'tenants#hierarchy_by_organization'
-  resources :organizations
 
   get 'users/me', to: 'users#me'
   resources :users
 
+ 
 
 end

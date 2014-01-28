@@ -42,7 +42,7 @@ end
 #  did           :string(255)
 #  active_at     :datetime
 #  deactive_at   :datetime
-#  user_id       :integer          not null
+#  user_id       :integer
 #  created_at    :datetime
 #  updated_at    :datetime
 #

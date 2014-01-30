@@ -37,4 +37,5 @@ end
 #  seo_description    :string(255)
 #  seo_preview        :string(255)
 #  type               :integer          not null
+#  author             :string
 #

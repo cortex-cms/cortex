@@ -5,6 +5,10 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :categories
   belongs_to :user
 
+  validates_presence_of :title
+  validates_presence_of :short_description
+  validates_presence_of :author
+
   enum type: [:article, :video, :infographic, :promo]
   enum job_phase: [:discovery, :find_the_job, :get_the_job, :on_the_job]
   enum display: [:large, :medium, :small]

@@ -12,6 +12,7 @@ gem 'hashr' # AppSettings
 gem 'paranoia',  '~> 2.0'
 gem 'kaminari'
 gem 'mime-types'
+gem 'devise'
 
 # ActiveRecord
 gem 'awesome_nested_set', '~> 3.0.0.rc.3'

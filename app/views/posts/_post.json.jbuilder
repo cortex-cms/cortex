@@ -6,7 +6,7 @@ json.categories post.categories do |c|
   json.id c.id
   json.url category_url(c, format: :json)
 end
-json.author do
+json.user do
   json.id post.user.id
   json.name post.user.name
   json.url user_url(post.user, format: :json)

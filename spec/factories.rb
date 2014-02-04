@@ -2,6 +2,15 @@ include ActionDispatch::TestProcess
 
 FactoryGirl.define do
 
+  factory :user, :aliases => [:author] do
+    sequence(:name) { |n| "User #{n}" }
+    sequence(:email) { |n| "user#{n}.email@gmail.com" }
+    password 'awesomepassword'
+    tenant
+
+    initialize_with { new(password: password, password_confirmation: password) }
+  end
+
   factory :asset do
 
     user
@@ -31,13 +40,31 @@ FactoryGirl.define do
 
   end
 
-  factory :user do
-    sequence(:name) { |n| "User #{n}" }
-    sequence(:email) { |n| "user#{n}.email@gmail.com" }
-    password 'awesomepassword'
-    tenant
+  factory :post do
 
-    initialize_with { new(password: password, password_confirmation: password) }
+    user
+    author
+
+    sequence(:title)             { |n| "Sample Post#{n}" }
+    sequence(:short_description) { |n| "Sample Post#{n} Description" }
+    sequence(:copyright_owner)   { |n| "Jane Doe#{n}" }
+
+    seo_title                    :title
+    seo_description              :short_description
+
+    type                         'article'
+    body                         'Sample Post Body'
+    tag_list                     'sample, post, body, jane, doe'
+    job_phase                    'get_the_job'
+    display                      'small'
+    notes                        'Sample Post Admin Notes'
+
+    published_at                 Date.today
+
+    trait :invalid do
+
+    end
+
   end
 
   factory :tenant do

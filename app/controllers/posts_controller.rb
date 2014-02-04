@@ -31,7 +31,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   def destroy
     @post.destroy
-    respond_with head :no_content
+    head :no_content
   end
 
   private
@@ -45,5 +45,5 @@ class PostsController < ApplicationController
   def post_params
       params.permit(:title, :type, :published_at, :expired_at, :deleted_at, :draft, :body, :short_description, :job_phase, :display, :featured_image_url, :notes, :copyright_owner, :seo_title, :seo_description, :seo_preview, :category_ids, :author)
   end
-  
+
 end

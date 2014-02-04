@@ -16,11 +16,6 @@ ActiveRecord::Schema.define(version: 20140204165827) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "assets_posts", id: false, force: true do |t|
-    t.integer "post_id",  null: false
-    t.integer "asset_id", null: false
-  end
-
   create_table "categories", force: true do |t|
     t.string   "name"
     t.integer  "user_id",    null: false
@@ -56,6 +51,11 @@ ActiveRecord::Schema.define(version: 20140204165827) do
   end
 
   add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
+
+  create_table "media_posts", id: false, force: true do |t|
+    t.integer "post_id",   null: false
+    t.integer "medium_id", null: false
+  end
 
   create_table "posts", force: true do |t|
     t.integer  "user_id",                           null: false

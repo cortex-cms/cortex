@@ -70,7 +70,7 @@ class MediaController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def asset_params
-      @media.require(:media).permit(:name, :attachment, :description, :alt, :active, :deactive_at, :tag_list)
+    def media_params
+      params.require(:media).permit(:name, :attachment, :description, :alt, :active, :deactive_at, :tag_list)
     end
 end

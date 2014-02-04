@@ -61,6 +61,10 @@ FactoryGirl.define do
 
     published_at                 Date.today
 
+    trait :invalid do
+
+    end
+
   end
 
   factory :tenant do

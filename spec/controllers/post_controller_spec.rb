@@ -24,22 +24,22 @@ describe PostsController do
       assigns(:post).should eq(post)
     end
   end
+
 =begin
   describe 'POST #create' do
 
     context 'with valid attributes' do
-      it 'should create a new asset' do
-        expect{ post :create, asset: attributes_for{:asset} }.to change(Asset, :count).by(1)
+      it 'should create a new post' do
+        expect{ post :create, post: attributes_for(:post) }.to change(Post,:count).by(1)
       end
     end
 
     context 'with invalid attributes' do
       it 'should NOT create a new asset' do
-        expect{ post :create, asset: attributes_for{:invalid_asset} }.to raise_error(ActiveRecord::RecordInvalid)
+        expect(create(:post, :invalid)).to raise_error(ActiveRecord::RecordInvalid)
       end
     end
   end
-
 
   describe 'PUT #update' do
     context 'with valid attributes' do
@@ -60,4 +60,5 @@ describe PostsController do
       expect{ delete :destroy, id: post }.to change(Post, :count).by(-1)
     end
   end
+
 end

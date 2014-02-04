@@ -25,6 +25,10 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     @post.update(post_params)
+    if params[:tag_list]
+      @post.tag_list = params[:tag_list]
+      @post.save!
+    end
     respond_with @post
   end
 
@@ -43,7 +47,7 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
 
   def post_params
-      params.permit(:title, :type, :published_at, :expired_at, :deleted_at, :draft, :body, :short_description, :job_phase, :display, :featured_image_url, :notes, :copyright_owner, :seo_title, :seo_description, :seo_preview, :category_ids, :author)
+      params.permit(:title, :type, :published_at, :expired_at, :deleted_at, :draft, :body, :short_description, :job_phase, :display, :featured_image_url, :notes, :copyright_owner, :seo_title, :seo_description, :seo_preview, :author, :tag_list, :category_ids => [])
   end
 
 end

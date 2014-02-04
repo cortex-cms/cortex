@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0'
+gem 'rails', '4.1.0.beta1'
 gem 'rails-observers'
 gem 'jbuilder', '~> 1.2'
 gem 'fog'
@@ -21,7 +21,6 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'annotate'
 gem 'tire'
 gem 'tire_async_index'
-gem 'composite_primary_keys'
 
 # Sidekiq
 gem 'sidekiq'

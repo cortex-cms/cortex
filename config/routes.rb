@@ -7,6 +7,8 @@ Cortex::Application.routes.draw do
   end
 
   resources :posts
+
+  get 'categories/hierarchy', to: 'categories#hierarchy'
   resources :categories
 
   get 'tenants/hierarchy', to: 'tenants#hierarchy'

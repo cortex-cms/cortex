@@ -9,6 +9,7 @@
 /vendor/bundle
 
 /public/assets/
+/public/media/
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

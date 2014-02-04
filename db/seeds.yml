@@ -2,6 +2,41 @@ defaults: &defaults
   cortex_tenant:
     name: 'cortex'
     creator: {name: 'surgeon', password: 'welcome1', email: 'surgeon@careeerbuilder.com'}
+  categories:
+    - name: Discovery
+      children:
+        - {name: Assessments}
+        - {name: Job Trends}
+        - {name: CareerBuilder Updates}
+        - {name: General}
+
+    - name: Find the Job
+      children:
+        - {name: How to Search}
+        - {name: Networking}
+        - {name: The Right Job}
+        - {name: Who's Hiring}
+        - {name: Personal Branding}
+        - {name: General}
+
+    - name: Get the Job
+      children:
+        - {name: Cover Letters}
+        - {name: Resumes}
+        - {name: Interviews}
+        - {name: Negotiation}
+        - {name: Following Up}
+        - {name: General}
+
+    - name: On the Job
+      children:
+        - {name: Workplace}
+        - {name: Benefits}
+        - {name: Bosses}
+        - {name: Coworkers}
+        - {name: Promotions & Wages}
+        - {name: Work/Life Balance}
+        - {name: General}
 
 test:
   <<: *defaults

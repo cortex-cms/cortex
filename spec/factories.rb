@@ -11,27 +11,27 @@ FactoryGirl.define do
     initialize_with { new(password: password, password_confirmation: password) }
   end
 
-  factory :asset do
+  factory :media do
 
     user
 
     trait :image do
       sequence(:name) { |n| "Sample Image#{n}" }
       description     'A very nice sample image'
-      attachment { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test.jpg'), 'image/jpeg') }
+      attachment { fixture_file_upload(Rails.root.join('spec', 'support', 'media', 'test.jpg'), 'image/jpeg') }
 
     end
 
     trait :document do
       sequence(:name) { |n| "Sample Document#{n}" }
       description     'A very nice sample document'
-      attachment      { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test.pdf'), 'application/pdf') }
+      attachment      { fixture_file_upload(Rails.root.join('spec', 'support', 'media', 'test.pdf'), 'application/pdf') }
     end
 
     trait :movie do
       sequence(:name) { |n| "Sample Video#{n}" }
       description     'A very nice sample video'
-      attachment      { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test.mp4'), 'video/mp4') }
+      attachment      { fixture_file_upload(Rails.root.join('spec', 'support', 'media', 'test.mp4'), 'video/mp4') }
     end
 
     factory :invalid_asset do

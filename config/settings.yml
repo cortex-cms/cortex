@@ -5,7 +5,7 @@ defaults: &defaults
     - 'localhost:3000'
     - 'localhost:63342'
     - 'whump.net'
-  assets:
+  media:
     max_size_mb: 100
     allowed_media_types:
       - type: image/jpeg

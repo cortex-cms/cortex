@@ -25,40 +25,4 @@ describe PostsController do
     end
   end
 
-=begin
-  describe 'POST #create' do
-
-    context 'with valid attributes' do
-      it 'should create a new post' do
-        expect{ post :create, post: attributes_for(:post) }.to change(Post,:count).by(1)
-      end
-    end
-
-    context 'with invalid attributes' do
-      it 'should NOT create a new asset' do
-        expect(create(:post, :invalid)).to raise_error(ActiveRecord::RecordInvalid)
-      end
-    end
-  end
-
-  describe 'PUT #update' do
-    context 'with valid attributes' do
-      it 'should find the correct tenant'
-      it 'should create a new asset'
-    end
-
-    context 'with invalid attributes' do
-      it 'should find the correct tenant'
-      it 'should NOT create a new asset'
-    end
-  end
-=end
-
-  describe 'DELETE #destroy' do
-    it 'should delete the post' do
-      post = create(:post)
-      expect{ delete :destroy, id: post }.to change(Post, :count).by(-1)
-    end
-  end
-
 end

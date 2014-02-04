@@ -2,7 +2,7 @@ Cortex::Application.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
-  resources :assets do
+  resources :media do
     get 'search', on: :collection
   end
 
@@ -16,7 +16,5 @@ Cortex::Application.routes.draw do
 
   get 'users/me', to: 'users#me'
   resources :users
-
- 
 
 end

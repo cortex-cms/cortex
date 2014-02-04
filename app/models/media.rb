@@ -1,7 +1,7 @@
 require 'digest/sha1'
 require 'mime/types'
 
-class Asset < ActiveRecord::Base
+class Media < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
   include Taxon
@@ -28,8 +28,8 @@ class Asset < ActiveRecord::Base
   before_attachment_post_process :can_thumb
 
   validates_attachment :attachment, :presence => true,
-                       :content_type => {:content_type => AppSettings.assets.allowed_media_types.collect{|allowed| allowed[:type]}},
-                       :size => {:in => 0..AppSettings.assets.max_size_mb.megabytes}
+                       :content_type => {:content_type => AppSettings.media.allowed_media_types.collect{|allowed| allowed[:type]}},
+                       :size => {:in => 0..AppSettings.media.max_size_mb.megabytes}
 
 
   settings :analysis => {
@@ -73,7 +73,7 @@ class Asset < ActiveRecord::Base
   end
 
   def can_thumb
-    AppSettings.assets.allowed_media_types.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
+    AppSettings.media.allowed_media_types.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
   end
 
   private
@@ -83,7 +83,7 @@ class Asset < ActiveRecord::Base
   end
 
   def taxon_type
-    AppSettings.assets.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_type]
+    AppSettings.media.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_type]
   end
 
   def extract_dimensions

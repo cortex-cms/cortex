@@ -11,30 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130220423) do
+ActiveRecord::Schema.define(version: 20140204165827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "assets", force: true do |t|
-    t.string   "name"
-    t.integer  "user_id"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
-    t.string   "dimensions"
-    t.text     "description"
-    t.string   "alt"
-    t.boolean  "active"
-    t.datetime "deactive_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "digest",                  null: false
-    t.datetime "deleted_at"
-  end
-
-  add_index "assets", ["user_id"], name: "index_assets_on_user_id", using: :btree
 
   create_table "assets_posts", id: false, force: true do |t|
     t.integer "post_id",  null: false
@@ -56,6 +36,26 @@ ActiveRecord::Schema.define(version: 20140130220423) do
     t.integer "post_id",     null: false
     t.integer "category_id", null: false
   end
+
+  create_table "media", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.string   "dimensions"
+    t.text     "description"
+    t.string   "alt"
+    t.boolean  "active"
+    t.datetime "deactive_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "digest",                  null: false
+    t.datetime "deleted_at"
+  end
+
+  add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.integer  "user_id",                           null: false

@@ -24,7 +24,7 @@ class MediaController < ApplicationController
     q = params[:q]
     if q.to_s != ''
       # Search with ES if query provided
-      @media = Media.search :load => {:include => %w(user tags)}, :page => page, :per_page => per_page do
+      @media = Media.search :load => true, :page => page, :per_page => per_page do
         query { string q }
         sort { by :created_at, :desc }
       end

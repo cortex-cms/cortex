@@ -53,6 +53,11 @@ class Media < ActiveRecord::Base
     end
   end
 
+  # This will indicate whether an asset is associated with another
+  def consumed?
+    return false
+  end
+
   # 'Human friendly' content type generalization
   def general_type
     if (attachment_content_type =~ /(excel)|(spreadsheet)/) != nil

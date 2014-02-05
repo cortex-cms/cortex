@@ -14,5 +14,6 @@ end
 json.file_name media.attachment_file_name
 json.file_size media.attachment_file_size
 json.has_thumbs media.can_thumb
+json.consumed media.consumed?
 json.content_type media.attachment_content_type
 json.extract! media, :name, :id, :created_at, :dimensions, :updated_at, :deactive_at, :deleted_at, :taxon, :general_type, :tags, :description, :alt, :active

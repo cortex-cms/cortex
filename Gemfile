@@ -1,52 +1,85 @@
 source 'https://rubygems.org'
 
+def darwin_only(require_as)
+  RUBY_PLATFORM.include?('darwin') && require_as
+end
+
+def linux_only(require_as)
+  RUBY_PLATFORM.include?('linux') && require_as
+end
+
+# Rails
 gem 'rails', '4.1.0.beta1'
-gem 'rails-observers'
+
+# Templating
 gem 'jbuilder', '~> 1.2'
-gem 'fog'
-gem 'unf'
-gem 'thin', require: false
-gem 'rack-cors', require: 'rack/cors'
-gem 'pg'
-gem 'hashr' # AppSettings
-gem 'paranoia',  '~> 2.0'
-gem 'kaminari'
-gem 'mime-types'
 
 # ActiveRecord
+gem 'rails-observers'
 gem 'awesome_nested_set', '~> 3.0.0.rc.3'
 gem 'paperclip'
 gem 'acts-as-taggable-on'
 gem 'bcrypt-ruby', require: 'bcrypt'
-gem 'annotate'
 gem 'tire'
 gem 'tire_async_index'
+gem 'kaminari'
+gem 'paranoia',  '~> 2.0'
+gem 'pg'
+
+# Utility
+gem 'fog'
+gem 'unf'
+gem 'hashr'
+gem 'mime-types'
+
+# Middleware
+gem 'rack-cors', require: 'rack/cors'
 
 # Sidekiq
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', require: nil
-gem 'slim' # For sidekiq-web
+gem 'slim' # Sidekiq-web
 
 group :test, :development do
+
+  # Rspec
+  gem 'rspec-sidekiq'
   gem 'rspec-rails'
+
+  # Guard
+  gem 'guard-rspec'
+
+  # Mocking/Faking
   gem 'mocha', require: false
-  gem 'rb-fsevent', require: RUBY_PLATFORM =~ /darwin/i ? 'rb-fsevent' : false
   gem 'factory_girl_rails'
-  gem 'shoulda', require: false
   gem 'database_cleaner'
+  gem 'shoulda-matchers'
+
+  # Notifications
+  gem 'rb-fsevent', require: darwin_only('rb-fsevent')
+  gem 'growl', require: darwin_only('growl')
+  gem 'rb-inotify', require: linux_only('rb-inotify')
+
+  # Pretty
+  gem 'pry'
+  gem 'awesome_print'
 end
 
 group :development do
-  gem 'pry'
+  # Pretty
   gem 'better_errors'
+  gem 'annotate'
   gem 'binding_of_caller'
-  gem 'foreman', require: false
+
+  # Coverage
+  gem 'rails_best_practices'
+
+  # Server
+  gem 'thin'
 end
 
 group :test do
-  gem 'guard-rspec'
-  gem 'rspec-sidekiq'
   gem 'codeclimate-test-reporter', require: nil
   gem 'timecop'
 end

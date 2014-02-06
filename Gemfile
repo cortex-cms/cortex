@@ -54,6 +54,7 @@ group :test, :development do
   gem 'mocha', require: false
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'shoulda'
   gem 'shoulda-matchers'
 
   # Notifications

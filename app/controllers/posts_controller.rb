@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class PostsController < ApiController
   before_action :set_post, only: [:show, :update, :destroy]
 
   respond_to :json

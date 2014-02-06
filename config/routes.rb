@@ -1,6 +1,8 @@
 Cortex::Application.routes.draw do
   root :to => 'users#me'
 
+  devise_for :users
+
   mount Sidekiq::Web => '/sidekiq'
 
   resources :assets do
@@ -17,6 +19,4 @@ Cortex::Application.routes.draw do
 
   get 'users/me', to: 'users#me'
   resources :users
-
-  devise_for :users
 end

@@ -8,10 +8,12 @@ describe User do
   context 'validity' do
     let(:user) { create(:user) }
 
+=begin
     it 'is invalid without a name' do
       user.name = nil
       user.should_not be_valid
     end
+=end
       
     it 'is invalid without an email' do
       user.email = nil

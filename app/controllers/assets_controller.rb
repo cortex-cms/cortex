@@ -1,4 +1,4 @@
-class AssetsController < ApplicationController
+class AssetsController < ApiController
   before_action :set_asset, only: [:show, :update, :destroy]
 
   respond_to :json, :multipart_form

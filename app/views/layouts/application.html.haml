@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %title= h(yield(:title) || 'User Authentication')
+    = csrf_meta_tag
+    = yield(:head)
+  %body
+    #container
+      %p.notice= notice
+      %p.alert= alert
+      %div{style: 'clear:both'}
+      = yield

@@ -8,10 +8,9 @@ unless Tenant.find_by_name(tenant_seed.name)
   cortex_tenant = Tenant.new(name: tenant_seed.name)
   cortex_tenant.save!
 
-  cortex_user   = User.new(name: user_seed.name,
+  cortex_user   = User.new(email: user_seed.email,
                            password: user_seed.password,
                            password_confirmation: user_seed.password,
-                           email: user_seed.email,
                            tenant_id: cortex_tenant.id)
 
   cortex_user.save!

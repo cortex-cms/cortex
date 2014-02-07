@@ -1,7 +1,7 @@
 defaults: &defaults
   cortex_tenant:
     name: 'cortex'
-    creator: {name: 'surgeon', password: 'welcome1', email: 'surgeon@careeerbuilder.com'}
+    creator: {email: 'surgeon@careeerbuilder.com', password: 'welcome1'}
   categories:
     - name: Discovery
       children:

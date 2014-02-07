@@ -3,7 +3,6 @@ include ActionDispatch::TestProcess
 FactoryGirl.define do
 
   factory :user, :aliases => [:author] do
-    sequence(:name) { |n| "User #{n}" }
     sequence(:email) { |n| "user#{n}.email@gmail.com" }
     password 'awesomepassword'
     tenant

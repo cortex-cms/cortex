@@ -19,11 +19,11 @@ describe User do
     let(:user) { create(:user) }
 
     it 'should return a valid user' do
-      User.authenticate(user.name, user.password).should eq(user)
+      User.authenticate(user.email, user.password).should eq(user)
     end
 
     it 'should NOT return an invalid user' do
-      User.authenticate(user.name, user.password + 'fake').should eq(nil)
+      User.authenticate(user.email, user.password + 'fake').should eq(nil)
     end
   end
 end

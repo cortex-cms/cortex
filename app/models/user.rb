@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email
 
   def self.authenticate(username, password)
-    user = User.find_by_name(username)
+    user = User.find_by_email(username)
     return user if user && user.authenticate(password)
   end
 end

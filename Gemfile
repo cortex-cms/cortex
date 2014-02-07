@@ -26,6 +26,10 @@ gem 'kaminari'
 gem 'paranoia',  '~> 2.0'
 gem 'pg'
 
+# Authorization
+
+gem 'devise'
+
 # Utility
 gem 'fog'
 gem 'unf'

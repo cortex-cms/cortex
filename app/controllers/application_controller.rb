@@ -1,59 +1,13 @@
 class ApplicationController < ActionController::Base
   include Exceptions
 
-  protect_from_forgery with: :null_session
-  before_action :authenticate!
+  protect_from_forgery with: :exception
   before_action :default_headers
+  before_filter :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from Exception, with: :handle_exception
 
-  def log_in(user)
-    @current_user = user
-  end
-
-  def current_user
-    @current_user
-  end
-
-  # Error Rendering
-  def not_found!
-    render_api_error!('(404) Not Found', 404)
-  end
-
-  def unauthorized!
-    render_api_error!('(401) Unauthorized', 401)
-  end
-
-  def forbidden!
-    render_api_error!('(403) Forbidden', 403)
-  end
-
-  def bad_request!
-    render_api_error!('(400) Bad Request', 400)
-  end
-
-  def not_allowed!
-    render_api_error!('(405) Method Not Allowed', 405)
-  end
-
-  def server_error!
-    render_api_error!('(500) Internal Server Error', 500)
-  end
-
-  def render_api_error!(message, status)
-    render json: {message: message}, status: status
-  end
-
   protected
-
-  def authenticate
-    user = authenticate_with_http_basic { |username, password| User.authenticate(username, password) }
-    log_in(user) if user
-  end
-
-  def authenticate!
-    current_user || authenticate || unauthorized!
-  end
 
   def default_headers
     headers['X-UA-Compatible'] = 'IE=edge'
@@ -61,6 +15,10 @@ class ApplicationController < ActionController::Base
 
   def log_exception(exception)
     logger.error "\n#{exception.class.name} (#{exception.message}):\n#{exception.backtrace.join}"
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :tenant_id) }
   end
 
   private

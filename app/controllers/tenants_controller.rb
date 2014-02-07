@@ -1,4 +1,4 @@
-class TenantsController < ApplicationController
+class TenantsController < ApiController
   before_action :set_tenant, only: [:show, :update, :destroy]
   before_action :set_tenants, only: [:tenant_tenants, :tenant_hierarchy]
 

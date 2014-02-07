@@ -31,6 +31,7 @@ gem 'pg'
 gem 'devise'
 
 # Utility
+gem 'foreman', require: false 
 gem 'fog'
 gem 'unf'
 gem 'hashr'

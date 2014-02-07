@@ -44,7 +44,7 @@ class Media < ActiveRecord::Base
     mapping do
       indexes :id, :index => :not_analyzed
       indexes :name, :analyzer => :snowball, :boost => 100.0
-      indexes :created_by, :analyzer => :keyword, :as => 'user.name'
+      indexes :created_by, :analyzer => :keyword, :as => 'user.email'
       indexes :file_name, :analyzer => :keyword
       indexes :description, :analyzer => :snowball
       indexes :tags, :analyzer => :keyword, :as => 'tag_list'

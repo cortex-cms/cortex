@@ -13,19 +13,6 @@ describe User do
       user.should_not be_valid
     end
   end
-
-  context 'authentication' do
-
-    let(:user) { create(:user) }
-
-    it 'should return a valid user' do
-      User.authenticate(user.email, user.password).should eq(user)
-    end
-
-    it 'should NOT return an invalid user' do
-      User.authenticate(user.email, user.password + 'fake').should eq(nil)
-    end
-  end
 end
 
 # == Schema Information

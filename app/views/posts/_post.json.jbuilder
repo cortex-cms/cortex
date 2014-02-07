@@ -8,6 +8,6 @@ json.categories post.categories do |c|
 end
 json.user do
   json.id post.user.id
-  json.name post.user.name
+  json.email post.user.email
   json.url user_url(post.user, format: :json)
 end

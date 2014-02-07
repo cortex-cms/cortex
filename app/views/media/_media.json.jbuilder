@@ -2,7 +2,7 @@ json.url media_url(media, format: :json)
 json.attachment_url media.attachment.url
 json.creator do
   json.id media.user.id
-  json.name media.user.name
+  json.email media.user.email
   json.url user_url(media.user, format: :json)
 end
 json.thumbs do

@@ -11,7 +11,7 @@ describe MediaController do
 
     before { get :index }
 
-    it 'should return an array of assets' do
+    it 'should return an array of media' do
       assigns(:media).should =~ [media]
     end
   end
@@ -19,13 +19,13 @@ describe MediaController do
   describe 'GET #show' do
     before { get :show, id: media.id }
 
-    it 'should find the correct asset' do
+    it 'should find the correct media' do
       assigns(:media).should eq(media)
     end
   end
 
   describe 'DELETE #destroy' do
-    it 'should delete the asset' do
+    it 'should delete the media' do
       media = create(:media, :image)
       expect{ delete :destroy, id: media }.to change(Media, :count).by(-1)
     end

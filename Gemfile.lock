@@ -301,6 +301,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   kaminari
   mime-types
+  minitest
   mocha
   paperclip
   paranoia (~> 2.0)

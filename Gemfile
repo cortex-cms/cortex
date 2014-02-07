@@ -27,7 +27,6 @@ gem 'paranoia',  '~> 2.0'
 gem 'pg'
 
 # Authorization
-
 gem 'devise'
 
 # Utility
@@ -45,6 +44,8 @@ gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', require: nil
 gem 'slim' # Sidekiq-web
+
+gem 'minitest'
 
 group :test, :development do
 

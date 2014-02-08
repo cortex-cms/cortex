@@ -10,12 +10,13 @@ require 'shoulda'
 require 'mocha/api'
 
 include ActionDispatch::TestProcess
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
 
   config.mock_with :mocha
+  config.include Warden::Test::Helpers
   config.include FactoryGirl::Syntax::Methods
   config.include Helpers
 
@@ -32,6 +33,7 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    Warden.test_reset!
   end
 
   config.use_transactional_fixtures = true

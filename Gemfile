@@ -58,6 +58,7 @@ group :test, :development do
   # Rspec
   gem 'rspec-sidekiq'
   gem 'rspec-rails'
+  gem 'json_spec'
 
   # Guard
   gem 'guard-rspec'

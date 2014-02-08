@@ -19,7 +19,7 @@ class Tenant < ActiveRecord::Base
   end
 
   def init
-    self.subdomain ||= name.mb_chars.normalize(:kd).downcase.gsub(/[^a-z0-9]/, '').to_s
+    self.subdomain ||= self.name.mb_chars.normalize(:kd).downcase.gsub(/[^a-z0-9]/, '').to_s
   end
 end
 

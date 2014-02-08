@@ -17,17 +17,17 @@ module API::V1
       end
 
       def current_user
-        @current_user ||= find_current_user
+        @current_user ||= warden_current_user || find_current_user
       end
 
       def current_user!
-        current_user || unauthorized!
+        current_user.anonymous? ? unauthorized! : current_user
       end
 
       # Gross, move to central authorization lib during OAuth implementation
       def find_current_user
         req = Rack::Auth::Basic::Request.new(env)
-        unless req.basic?
+        unless req.provided? and req.basic?
           return User.anonymous
         end
         login, password = req.credentials
@@ -61,6 +61,14 @@ module API::V1
       end
 
       private
+
+      def warden
+        @warden ||= env['warden']
+      end
+
+      def warden_current_user
+        warden ? warden.user : nil
+      end
 
       def abilities
         @abilities ||= begin

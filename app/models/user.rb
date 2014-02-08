@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :email
 
+  def anonymous?
+    self.id == nil
+  end
+
   class << self
     def authenticate(username, password)
       user = User.find_by_email(username)
@@ -19,7 +23,7 @@ class User < ActiveRecord::Base
     end
 
     def anonymous
-      User.build
+      User.new
     end
   end
 end

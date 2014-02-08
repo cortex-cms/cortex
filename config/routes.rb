@@ -1,3 +1,5 @@
+require "#{Rails.root}/app/api/v1/api"
+
 Cortex::Application.routes.draw do
   root :to => 'users#me'
 
@@ -5,20 +7,6 @@ Cortex::Application.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
-  resources :media do
-    get 'search', on: :collection
-  end
-
-  resources :posts
-
-  get 'categories/hierarchy', to: 'categories#hierarchy'
-  resources :categories
-
-  get 'tenants/hierarchy', to: 'tenants#hierarchy'
-  get 'tenants/:id/tenants', to: 'tenants#tenant_tenants'
-  get 'tenants/:id/hierarchy', to: 'tenants#tenant_hierarchy'
-  resources :tenants
-
-  get 'users/me', to: 'users#me'
-  resources :users
+  API::V1::API.logger Rails.logger
+  mount API::V1::API => '/api'
 end

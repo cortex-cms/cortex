@@ -11,6 +11,11 @@ end
 # Rails
 gem 'rails', '4.1.0.beta1'
 
+# API
+gem 'grape', git: 'https://github.com/intridea/grape.git'
+gem 'grape-entity'
+gem 'grape-swagger'
+
 # Templating
 gem 'jbuilder', '~> 1.2'
 
@@ -27,6 +32,7 @@ gem 'paranoia',  '~> 2.0'
 gem 'pg'
 
 # Authorization
+gem 'six'
 gem 'devise'
 
 # Utility

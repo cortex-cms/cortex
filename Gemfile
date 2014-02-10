@@ -84,6 +84,9 @@ group :development do
 
   # Server
   gem 'thin'
+
+  # IDE
+  gem 'ruby-debug-ide'
 end
 
 group :test do

@@ -208,8 +208,6 @@ GEM
     rspec-sidekiq (1.0.0)
       rspec (>= 2.0.0)
       sidekiq (>= 2.4.0)
-    ruby-debug-ide (0.4.22)
-      rake (>= 0.8.1)
     ruby-progressbar (1.4.1)
     sexp_processor (4.4.1)
     shoulda (3.5.0)
@@ -317,7 +315,6 @@ DEPENDENCIES
   rb-inotify
   rspec-rails
   rspec-sidekiq
-  ruby-debug-ide
   shoulda
   shoulda-matchers
   sidekiq

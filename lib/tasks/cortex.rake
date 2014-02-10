@@ -1,7 +1,7 @@
 namespace :cortex do
   desc 'Add categories from seeds.yml'
   task :create_categories => :environment do
-    user = User.find_by(name: AppSeeds.cortex_tenant.creator.name, email: AppSeeds.cortex_tenant.creator.email)
+    user = User.find_by_email(AppSeeds.cortex_tenant.creator.email)
     AppSeeds.categories.each do |parent_category_seed|
       parent = Category.find_by_name(parent_category_seed[:name])
       unless parent

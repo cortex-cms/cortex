@@ -11,6 +11,21 @@ class User < ActiveRecord::Base
   has_many :posts
 
   validates_presence_of :email
+
+  def anonymous?
+    self.id == nil
+  end
+
+  class << self
+    def authenticate(username, password)
+      user = User.find_by_email(username)
+      user && user.valid_password?(password) ? user : nil
+    end
+
+    def anonymous
+      User.new
+    end
+  end
 end
 
 # == Schema Information

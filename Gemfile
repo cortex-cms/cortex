@@ -42,7 +42,7 @@ gem 'rack-cors', require: 'rack/cors'
 # Sidekiq
 gem 'sidekiq'
 gem 'sidekiq-failures'
-gem 'sinatra', require: nil
+gem 'sinatra', require: false
 gem 'slim' # Sidekiq-web
 
 gem 'minitest'
@@ -73,7 +73,7 @@ group :test, :development do
   gem 'awesome_print'
 
   # IDE
-  gem 'ruby-debug-ide'
+  gem 'ruby-debug-ide', require: false
 end
 
 group :development do
@@ -90,7 +90,7 @@ group :development do
 end
 
 group :test do
-  gem 'codeclimate-test-reporter', require: nil
+  gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
 end
 

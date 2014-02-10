@@ -34,9 +34,9 @@ class ApiController < ApplicationController
 
   def authenticate
     authenticate_or_request_with_http_basic do |username, password|
-      user = User.find_by_email(username)
-      if user.valid_password?(password)
-        sign_in :user, user
+      user = User.authenticate(username, password)
+      if user
+        sign_in user
       end
     end
   end

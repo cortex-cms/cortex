@@ -71,6 +71,9 @@ group :test, :development do
   # Pretty
   gem 'pry'
   gem 'awesome_print'
+
+  # IDE
+  gem 'ruby-debug-ide'
 end
 
 group :development do
@@ -84,9 +87,6 @@ group :development do
 
   # Server
   gem 'thin'
-
-  # IDE
-  gem 'ruby-debug-ide'
 end
 
 group :test do

@@ -54,7 +54,7 @@ module API::V1
           use :tenant_params
         end
         post do
-          @tenant = ::Tenant.new(declared(params))
+          @tenant = ::Tenant.new(declared(params[:tenant]))
           tenant.user = current_user
           tenant.save!
           present tenant, with: Entities::Tenant
@@ -65,7 +65,7 @@ module API::V1
           use :tenant_params
         end
         put ':id' do
-          tenant.update(declared(params))
+          tenant.update!(declared(params[:tenant]))
           present tenant, with: Entities::Tenant
         end
 

@@ -10,7 +10,7 @@ describe API::Resources::Users do
     it 'should get the current user if authorized' do
       login_as user
       get '/api/v1/users/me'
-      response.status.should == 200
+      response.should be_success
       response.body.should represent(API::Entities::User, user)
     end
 

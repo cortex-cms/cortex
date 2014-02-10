@@ -9,6 +9,11 @@ module API
       version 'v1', using: :path
       format :json
 
+      rescue_from ActiveRecord::RecordInvalid do |ex|
+        errors = ex.record.errors.map{ |attr, error| "#{attr} #{error}" }
+        rack_response({message: 'Validation failed', errors: errors}, 422)
+      end
+
       helpers Helpers::APIHelper
       helpers PaginationHeaders
 

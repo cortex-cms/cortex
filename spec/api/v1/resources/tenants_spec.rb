@@ -1,0 +1,62 @@
+require 'spec_helper'
+require 'api_v1_helper'
+
+describe API::Resources::Tenants do
+
+  let(:user) { create(:user) }
+
+  before do
+    login_as user
+  end
+
+  describe 'GET /tenants/:id' do
+
+    let(:tenant) { create(:tenant) }
+
+    it 'should return the correct tenant' do
+      get "/api/v1/tenants/#{tenant.id}"
+      response.should be_success
+      response.body.should represent(API::Entities::Tenant, tenant)
+    end
+  end
+
+  describe 'POST /tenants' do
+
+    context 'with valid attributes' do
+      it 'should create a new tenant' do
+        expect{ post '/api/v1/tenants', tenant: attributes_for(:tenant) }.to change(Tenant, :count).by(1)
+        response.should be_success
+        response.body.should represent(API::Entities::Tenant, Tenant.last)
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'should NOT create a new tenant' do
+        expect{ post '/api/v1/tenants', tenant: attributes_for(:tenant, name: nil)}.to_not change(Tenant, :count).by(1)
+        response.should_not be_success
+      end
+    end
+  end
+
+  describe 'PUT /tenants/:id' do
+
+    let(:tenant) { create(:tenant) }
+
+    context 'with valid attributes' do
+      it 'should update the tenant' do
+        tenant.name += ' updated'
+        expect{ put "/api/v1/tenants/#{tenant.id}", tenant: tenant }.to_not change(Tenant, :count).by(1)
+        response.should be_success
+        response.body.should represent(API::Entities::Tenant, tenant)
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'should NOT update the tenant' do
+        expect{ put "/api/v1/tenants/#{tenant.id}", tenant: {name: nil} }.to_not change(Tenant, :count).by(1)
+        response.should_not be_success
+        response.body.should_not represent(API::Entities::Tenant, tenant)
+      end
+    end
+  end
+end

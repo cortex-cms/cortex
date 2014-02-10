@@ -1,5 +1,6 @@
 class ApiController < ApplicationController
   before_filter :authenticate!
+  protect_from_forgery with: :null_session
 
   # Error Rendering
   def not_found!

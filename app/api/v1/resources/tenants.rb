@@ -65,7 +65,7 @@ module API::V1
           use :tenant_params
         end
         put ':id' do
-          tenant.update!(declared(params[:tenant]))
+          tenant!.update!(declared(params[:tenant], include_missing: false))
           present tenant, with: Entities::Tenant
         end
 

@@ -32,7 +32,7 @@ describe API::Resources::Tenants do
 
     context 'with invalid attributes' do
       it 'should NOT create a new tenant' do
-        expect{ post '/api/v1/tenants', tenant: attributes_for(:tenant, name: nil)}.to_not change(Tenant, :count).by(1)
+        expect{ post '/api/v1/tenants', {tenant: attributes_for(:tenant, name: nil)} }.to_not change(Tenant, :count).by(1)
         response.should_not be_success
       end
     end
@@ -40,12 +40,11 @@ describe API::Resources::Tenants do
 
   describe 'PUT /tenants/:id' do
 
-    let(:tenant) { create(:tenant) }
-
     context 'with valid attributes' do
       it 'should update the tenant' do
+        tenant = create(:tenant)
         tenant.name += ' updated'
-        expect{ put "/api/v1/tenants/#{tenant.id}", tenant: tenant }.to_not change(Tenant, :count).by(1)
+        expect{ put "/api/v1/tenants/#{tenant.id}", {tenant: tenant}.to_json, application_json }.to_not change(Tenant, :count).by(1)
         response.should be_success
         response.body.should represent(API::Entities::Tenant, tenant)
       end
@@ -53,10 +52,26 @@ describe API::Resources::Tenants do
 
     context 'with invalid attributes' do
       it 'should NOT update the tenant' do
-        expect{ put "/api/v1/tenants/#{tenant.id}", tenant: {name: nil} }.to_not change(Tenant, :count).by(1)
+        tenant = create(:tenant)
+        expect{ put "/api/v1/tenants/#{tenant.id}", {tenant: {name: nil}}.to_json, application_json }.to_not change(Tenant, :count).by(1)
         response.should_not be_success
-        response.body.should_not represent(API::Entities::Tenant, tenant)
       end
     end
+  end
+
+  describe 'DELETE /tenants/:id' do
+
+    it 'should delete the tenant' do
+      tenant = create(:tenant)
+      expect{ delete "/api/v1/tenants/#{tenant.id}" }.to change(Tenant, :count).by(-1)
+      response.should be_success
+    end
+
+    it 'should NOT delete a non-existant tenant' do
+      tenant = create(:tenant)
+      expect{ delete "/api/v1/tenants/#{tenant.id+1}" }.to_not change(Tenant, :count).by(-1)
+      response.should_not be_success
+    end
+
   end
 end

@@ -6,8 +6,8 @@ module API::V1
              :notes, :seo_title, :seo_description, :seo_preview
 
       expose(:tags) { |post| post.tag_list.join(', ') }
-      expose :user, with: 'UserBasic'
-      expose :categories, with: 'Category'
+      expose :user, with: 'Entities::UserBasic'
+      expose :categories, with: 'Entities::Category'
     end
   end
 end

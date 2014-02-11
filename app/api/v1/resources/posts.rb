@@ -44,6 +44,11 @@ module API::V1
           present Post.page(page).per(per_page), with: Entities::Post
         end
 
+        desc 'Show a post'
+        get ':id' do
+          present Post.find(params[:id]), with: Entities::Post
+        end
+
         desc 'Create a post'
         params do
           use :post_params

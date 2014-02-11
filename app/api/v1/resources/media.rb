@@ -69,7 +69,7 @@ module API::V1
           use :media_params
         end
         put ':id' do
-          media!.update(declared(params[:media]))
+          media!.update!(declared(params[:media], include_missing: false))
           if params[:tag_list]
             media.tag_list = params[:tag_list]
             media.save!

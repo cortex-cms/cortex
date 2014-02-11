@@ -11,9 +11,8 @@ describe API::Resources::Posts do
 
   describe 'GET /posts/:id' do
 
-    let(:post) { create(:post) }
-
     it 'should return the correct post' do
+      post = create(:post)
       get "/api/v1/posts/#{post.id}"
       response.should be_success
       response.body.should represent(API::Entities::Post, post)

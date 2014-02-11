@@ -93,7 +93,7 @@ class Media < ActiveRecord::Base
 
   def extract_dimensions
     return unless image?
-    tempfile = attachment.queued_for_write[:original]
+    tempfile =AppSettings.media.allowed_media_types attachment.queued_for_write[:original]
     unless tempfile.nil?
       geometry = Paperclip::Geometry.from_file(tempfile)
       self.dimensions = [geometry.width.to_i, geometry.height.to_i]

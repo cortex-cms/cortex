@@ -72,6 +72,5 @@ describe API::Resources::Tenants do
       expect{ delete "/api/v1/tenants/#{tenant.id+1}" }.to_not change(Tenant, :count).by(-1)
       response.should_not be_success
     end
-
   end
 end

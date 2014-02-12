@@ -52,7 +52,7 @@ describe API::Resources::Media do
       response.should be_success
     end
 
-    it 'should NOT delete a non-existant media' do
+    it 'should NOT delete non-existent media' do
       media = create(:media)
       expect{ delete "/api/v1/media/#{media.id+1}" }.to_not change(Media, :count).by(-1)
       response.should_not be_success

@@ -54,7 +54,7 @@ module API::V1
           use :post_params
         end
         post do
-          @post = ::Post.new(declared(params[:post]))
+          @post = ::Post.new(declared(params))
           post.user = current_user
           post.save!
           present post, with: Entities::Post
@@ -65,7 +65,7 @@ module API::V1
           use :post_params
         end
         put ':id' do
-          post!.update!(declared(params[:post], include_missing: false))
+          post!.update!(declared(params, include_missing: false))
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!

@@ -32,7 +32,7 @@ module API::V1
         end
         login, password = req.credentials
 
-        User.authenticate(login, password)
+        User.authenticate(login, password) || User.anonymous
       end
 
       def can?(object, action, subject)

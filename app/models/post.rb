@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
 
   enum type: [:article, :video, :infographic, :promo]
   enum job_phase: [:discovery, :find_the_job, :get_the_job, :on_the_job]
-  enum display: [:large, :medium, :small]
+  enum display: [:small, :medium, :large]
 
   self.inheritance_column = nil
 end

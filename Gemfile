@@ -12,7 +12,7 @@ end
 gem 'rails', '4.1.0.beta1'
 
 # API
-gem 'grape', git: 'https://github.com/intridea/grape.git'
+gem 'grape', git: 'git://github.com/intridea/grape.git'
 gem 'grape-entity'
 gem 'grape-swagger'
 

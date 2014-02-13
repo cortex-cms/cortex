@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.0'
+
 def darwin_only(require_as)
   RUBY_PLATFORM.include?('darwin') && require_as
 end
@@ -36,7 +38,7 @@ gem 'six'
 gem 'devise'
 
 # Utility
-gem 'foreman', require: false 
+gem 'foreman', require: false
 gem 'fog'
 gem 'unf'
 gem 'hashr'
@@ -100,5 +102,3 @@ group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
 end
-
-ruby '2.1.0'

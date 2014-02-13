@@ -12,9 +12,11 @@ end
 gem 'rails', '4.1.0.beta1'
 
 # API
-gem 'grape', git: 'git://github.com/intridea/grape.git'
+gem 'grape', github: 'intridea/grape'
 gem 'grape-entity'
 gem 'grape-swagger'
+gem 'grape-doorkeeper', github: 'fuCtor/grape-doorkeeper'
+gem 'doorkeeper'
 
 # Templating
 gem 'jbuilder', '~> 1.2'

@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/fuCtor/grape-doorkeeper.git
+  revision: 837e444020dbb68eaf63fb1e78a58238417b3ccc
+  specs:
+    grape-doorkeeper (0.0.1)
+      doorkeeper
+      grape (>= 0.6.1)
+
+GIT
   remote: git://github.com/intridea/grape.git
   revision: bc0ad13ee2811a5d67a4c09c7c45dcc833a18429
   specs:
@@ -93,6 +101,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.3)
+    doorkeeper (1.0.0)
+      railties (>= 3.1)
     dotenv (0.9.0)
     equalizer (0.0.9)
     erubis (2.7.0)
@@ -345,10 +355,12 @@ DEPENDENCIES
   codeclimate-test-reporter
   database_cleaner
   devise
+  doorkeeper
   factory_girl_rails
   fog
   foreman
   grape!
+  grape-doorkeeper!
   grape-entity
   grape-swagger
   growl

@@ -5,13 +5,15 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :categories
   belongs_to :user
 
-  validates_presence_of :title
-  validates_presence_of :short_description
-  validates_presence_of :author
+  validates :title, :author, :copyright_owner, presence: true, length: { minimum: 1, maximum: 255 }
+  validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }
+  validates :tag_list, :seo_title, :seo_description, length: { maximum: 255 }
+  validates :type, :job_phase, :display, allow_nil: false
+  validates :type, presence: true
 
   enum type: [:article, :video, :infographic, :promo]
   enum job_phase: [:discovery, :find_the_job, :get_the_job, :on_the_job]
-  enum display: [:small, :medium, :large]
+  enum display: [:large, :medium, :small]
 
   self.inheritance_column = nil
 end

@@ -8,8 +8,7 @@ class Post < ActiveRecord::Base
   validates :title, :author, :copyright_owner, presence: true, length: { minimum: 1, maximum: 255 }
   validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }
   validates :tag_list, :seo_title, :seo_description, length: { maximum: 255 }
-  validates :type, :job_phase, :display, allow_nil: false
-  validates :type, presence: true
+  validates :type, :job_phase, :display, presence: true, allow_nil: false
 
   enum type: [:article, :video, :infographic, :promo]
   enum job_phase: [:discovery, :find_the_job, :get_the_job, :on_the_job]

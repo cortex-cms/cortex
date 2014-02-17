@@ -2,13 +2,13 @@ en:
   doorkeeper:
     scopes:
       'public': View your public information
-      'read:profile': View your profile information
-      'write:profile': Make changes to your profile information
-      'read:tenants': View tenants you control
-      'write:tenants': Make changes to, create and delete, tenants you control
-      'read:users': View users you control
-      'write:users': Make changes to, create and delete, users you control
-      'read:posts': View posts you control
-      'write:posts': Make changes to, create and delete, posts you control
-      'read:media': View media you control
-      'write:media': Make changes to, create and delete, media you control
+      'view:profile': View your profile information
+      'modify:profile': Make changes to your profile information
+      'view:tenants': View tenants you control
+      'modify:tenants': Make changes to, create and delete, tenants you control
+      'view:users': View users you control
+      'modify:users': Make changes to, create and delete, users you control
+      'view:posts': View posts you control
+      'modify:posts': Make changes to, create and delete, posts you control
+      'view:media': View media you control
+      'modify:media': Make changes to, create and delete, media you control

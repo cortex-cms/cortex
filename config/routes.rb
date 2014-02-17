@@ -2,7 +2,7 @@ require "#{Rails.root}/app/api/v1/api"
 
 Cortex::Application.routes.draw do
 
-  root :to => 'users#me'
+  root :to => '/api/v1/users/me'
 
   # Authentication
   use_doorkeeper

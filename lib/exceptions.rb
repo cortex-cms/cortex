@@ -1,7 +1,6 @@
 module Exceptions
 
-  class CortexError < StandardError
-  end
+  class CortexError < StandardError; end
 
   class CortexAPIError < CortexError
     attr_accessor :http_status

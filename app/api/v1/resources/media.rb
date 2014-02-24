@@ -59,7 +59,7 @@ module API::V1
         end
         post do
           @media = ::Media.new(declared(params[:media]))
-          media.user = current_user
+          media.user = current_user!
           media.save!
           present media, with: Entities::Media
         end

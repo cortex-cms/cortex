@@ -41,11 +41,17 @@ module API::V1
           use :pagination
         end
         get do
+          require_scope! :'view:posts'
+          authorize! :view, Post
+
           present Post.page(page).per(per_page), with: Entities::Post
         end
 
         desc 'Show a post'
         get ':id' do
+          require_scope! :'view:posts'
+          authorize! :view, Post
+
           present Post.find(params[:id]), with: Entities::Post
         end
 
@@ -54,6 +60,9 @@ module API::V1
           use :post_params
         end
         post do
+          require_scope! :'modify:posts'
+          authorize! :create, Post
+
           @post = ::Post.new(declared(params))
           post.user = current_user
           post.save!
@@ -65,7 +74,10 @@ module API::V1
           use :post_params
         end
         put ':id' do
-          post!.update!(declared(params, include_missing: false))
+          require_scope! :'modify:posts'
+          authorize! :update, post!
+
+          post.update!(declared(params, include_missing: false))
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!
@@ -75,7 +87,10 @@ module API::V1
 
         desc 'Delete a post'
         delete ':id' do
-          post!.destroy
+          require_scope! :'modify:posts'
+          authorize! :delete, post!
+
+          post.destroy
         end
       end
     end

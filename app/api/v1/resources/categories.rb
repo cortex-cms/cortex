@@ -8,11 +8,13 @@ module API::V1
 
         desc 'Show all categories'
         get do
+          authorize! :view, Category
           present Category.all, with: Entities::Category
         end
 
         desc 'Show category hierarchy'
         get :hierarchy do
+          authorize! :view, Category
           if params[:roots_only] == 'false'
             present Category.all, with: Entities::Category
           else

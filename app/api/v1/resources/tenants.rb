@@ -32,6 +32,9 @@ module API::V1
           use :pagination
         end
         get do
+          require_scope! :'view:tenants'
+          authorize! :view, Tenant
+
           present Tenant.page(page).per(per_page),
                   with: params[:include_children] ? Entities::TenantWithChildren : Entities::Tenant
         end
@@ -41,6 +44,9 @@ module API::V1
           use :pagination
         end
         get :hierarchy do
+          require_scope! :'view:tenants'
+          authorize! :view, Tenant
+
           present Tenant.roots, with: Entities::TenantWithChildren
         end
 
@@ -54,6 +60,9 @@ module API::V1
           use :tenant_params
         end
         post do
+          require_scope! :'modify:tenants'
+          authorize! :create, Tenant
+
           @tenant = ::Tenant.new(declared(params))
           tenant.user = current_user
           tenant.save!
@@ -65,13 +74,19 @@ module API::V1
           use :tenant_params
         end
         put ':id' do
-          tenant!.update!(declared(params, include_missing: false))
+          require_scope! :'modify:tenants'
+          authorize! :update, tenant!
+
+          tenant.update!(declared(params, include_missing: false))
           present tenant, with: Entities::Tenant
         end
 
         desc 'Delete a tenant'
         delete ':id' do
-          tenant!.destroy
+          require_scope! :'modify:tenants'
+          authorize! :delete, tenant!
+
+          tenant.destroy
         end
       end
     end

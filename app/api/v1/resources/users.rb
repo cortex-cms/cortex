@@ -6,7 +6,8 @@ module API::V1
 
         desc 'Get the current user'
         get :me do
-          present current_user!, with: Entities::User
+          authorize! :view, current_user!
+          present current_user, with: Entities::User
         end
       end
     end

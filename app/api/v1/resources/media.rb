@@ -26,6 +26,9 @@ module API::V1
 
         desc 'Show all media'
         get do
+          authorize! :view, ::Media
+          require_scope! :'view:media'
+
           present Media.order(created_at: :desc).page(page).per(per_page), with: Entities::Media
         end
 
@@ -34,6 +37,9 @@ module API::V1
           use :pagination
         end
         get :search do
+          require_scope! :'view:media'
+          authorize! :view, ::Media
+
           q = params[:q]
           if q.to_s != ''
             @media = ::Media.search :load => true, :page => page, :per_page => per_page do
@@ -50,7 +56,10 @@ module API::V1
 
         desc 'Get media'
         get ':id' do
-          present media!, with: Entities::Media
+          require_scope! :'view:media'
+          authorize! :view, media!
+
+          present media, with: Entities::Media
         end
 
         desc 'Create media'
@@ -58,6 +67,9 @@ module API::V1
           use :media_params
         end
         post do
+          require_scope! :'modify:media'
+          authorize! :create, ::Media
+
           @media = ::Media.new(declared(params[:media]))
           media.user = current_user!
           media.save!
@@ -69,7 +81,10 @@ module API::V1
           use :media_params
         end
         put ':id' do
-          media!.update!(declared(params[:media], include_missing: false))
+          require_scope! :'modify:media'
+          authorize! :update, media!
+
+          media.update!(declared(params[:media], include_missing: false))
           if params[:tag_list]
             media.tag_list = params[:tag_list]
             media.save!
@@ -79,7 +94,10 @@ module API::V1
 
         desc 'Delete media'
         delete ':id' do
-          media!.destroy
+          require_scope! :'modify:media'
+          authorize! :delete, media!
+
+          media.destroy
         end
       end
     end

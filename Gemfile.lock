@@ -355,6 +355,7 @@ DEPENDENCIES
   guard-rspec
   hashr
   jbuilder (~> 1.2)
+  json
   json_spec
   kaminari
   mime-types

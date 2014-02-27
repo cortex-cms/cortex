@@ -43,6 +43,7 @@ gem 'fog'
 gem 'unf'
 gem 'hashr'
 gem 'mime-types'
+gem 'json'
 
 # Middleware
 gem 'rack-cors', require: 'rack/cors'

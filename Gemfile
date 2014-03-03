@@ -47,6 +47,7 @@ gem 'pg'
 # Authorization
 gem 'six'
 gem 'devise'
+gem 'rack-oauth2'
 
 # Utility
 gem 'foreman', require: false

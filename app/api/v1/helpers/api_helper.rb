@@ -1,6 +1,7 @@
 module API::V1
   module Helpers
     module APIHelper
+
       def logger
         API.logger
       end
@@ -17,16 +18,16 @@ module API::V1
       end
 
       def require_scope!(scopes)
-        return unless current_token
+        return unless access_token
         scopes = [scopes] unless scopes.kind_of? Array
 
-        unless (current_token.application.scopes & scopes) == scopes
+        unless (access_token.scopes && scopes) == scopes
           forbidden!
         end
       end
 
-      def current_token
-        env['api.token']
+      def access_token
+        @token_string ||= request.env[Rack::OAuth2::Server::Resource::ACCESS_TOKEN]
       end
 
       def current_user
@@ -40,8 +41,8 @@ module API::V1
       # Gross, move to central authorization lib during OAuth implementation
       def find_current_user
         # OAuth
-        if current_token
-          User.find(current_token.resource_owner_id)
+        if access_token
+          User.find(access_token.resource_owner_id)
         # Basic Auth
         else
           req = Rack::Auth::Basic::Request.new(env)

@@ -1,16 +1,21 @@
-%h2 Sign in
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password
-  - if devise_mapping.rememberable?
-    %div
-      = f.check_box :remember_me
-      = f.label :remember_me
-  %div= f.submit "Sign in"
-= render "devise/shared/links"
+.col-md-4.col-md-offset-4
+  .text-center
+    %h2 Cortex
+  .row
+    .panel.panel-default
+      .panel-heading
+        Sign In
+      .panel-body
+        = form_for(resource, :as => resource_name, :url => session_path(resource_name),
+                   html: {role: 'login', novalidate: '', name: 'loginForm'}) do |f|
+          .form-group
+            = f.text_field :email, class: 'form-control', autofocus: true, placeholder: 'Email', required: '',
+                           'ng-model' => 'login.login', 'ng-init' => "login.login='#{resource.email}'"
+          .form-group
+            = f.password_field :password, class: 'form-control', placeholder: 'Password', required: '',
+                               'ng-model' => 'login.password'
+          - if devise_mapping.rememberable?
+            .checkbox
+              = f.check_box :remember_me
+              Remember me
+          = f.submit 'Sign In', class: 'btn btn-primary btn-block', disabled: '', 'ng-disabled' => 'loginForm.$invalid'

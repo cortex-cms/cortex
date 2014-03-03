@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::Base
   include Exceptions
 
-  protect_from_forgery with: :exception
+  protect_from_forgery
   before_action :default_headers
-  before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from Exception, with: :handle_exception
 

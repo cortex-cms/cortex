@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
     self.id == nil
   end
 
+  def client_skips_authorization?
+    # Yeah, replace with this something serious
+    self.email == 'surgeon@careerbuilder.com'
+  end
+
   class << self
     def authenticate(username, password)
       user = User.find_by_email(username)

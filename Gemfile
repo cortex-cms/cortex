@@ -17,9 +17,20 @@ gem 'rails', '4.1.0.beta1'
 gem 'grape', git: 'git://github.com/intridea/grape'
 gem 'grape-entity'
 gem 'grape-swagger'
+gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
 
 # Templating
 gem 'jbuilder', '~> 1.2'
+gem 'haml'
+
+# Style
+gem 'sass-rails'
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+
+# JS
+gem 'angularjs-rails'
+gem 'uglifier'
 
 # ActiveRecord
 gem 'rails-observers'
@@ -36,6 +47,7 @@ gem 'pg'
 # Authorization
 gem 'six'
 gem 'devise'
+gem 'rack-oauth2'
 
 # Utility
 gem 'foreman', require: false

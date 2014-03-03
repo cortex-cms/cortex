@@ -1,12 +1,6 @@
-!!!
-%html
-  %head
-    %title= h(yield(:title) || 'User Authentication')
-    = csrf_meta_tag
-    = yield(:head)
-  %body
-    #container
-      %p.notice= notice
-      %p.alert= alert
-      %div{style: 'clear:both'}
-      = yield
+!!! 5
+%html{lang: 'en', 'ng-app' => 'cortex'}
+  = render 'layouts/head'
+  %body.default{:'ng-controller' => 'CortexCtrl', 'ng-cloak' => ''}
+    = yield
+    = javascript_include_tag 'application'

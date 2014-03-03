@@ -24,6 +24,11 @@ module Cortex
       end
     end
 
+    require 'rack/oauth2'
+    config.middleware.use Rack::OAuth2::Server::Resource::Bearer, 'OAuth2' do |request|
+      Doorkeeper::AccessToken.authenticate(request.access_token) || request.invalid_token!
+    end
+
     TireAsyncIndex.configure do |config|
       config.background_engine :sidekiq
       config.use_queue :default

@@ -1,4 +1,4 @@
-#require_relative '../helpers/resource_helper'
+require_relative '../helpers/resource_helper'
 
 module API::V1
   module Resources

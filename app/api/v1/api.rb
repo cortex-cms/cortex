@@ -22,6 +22,8 @@ module API
       mount Resources::Posts
       mount Resources::Tenants
       mount Resources::Users
+
+      add_swagger_documentation
     end
   end
 end

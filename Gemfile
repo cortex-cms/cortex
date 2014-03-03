@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.0'
+
 def darwin_only(require_as)
   RUBY_PLATFORM.include?('darwin') && require_as
 end
@@ -12,7 +14,7 @@ end
 gem 'rails', '4.1.0.beta1'
 
 # API
-gem 'grape', github: 'intridea/grape'
+gem 'grape', git: 'git://github.com/intridea/grape'
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-doorkeeper', github: 'fuCtor/grape-doorkeeper'
@@ -20,6 +22,15 @@ gem 'doorkeeper'
 
 # Templating
 gem 'jbuilder', '~> 1.2'
+gem 'haml'
+
+# Style
+gem 'sass-rails'
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+
+# JS
+gem 'angularjs-rails'
 
 # ActiveRecord
 gem 'rails-observers'
@@ -38,7 +49,7 @@ gem 'six'
 gem 'devise'
 
 # Utility
-gem 'foreman', require: false 
+gem 'foreman', require: false
 gem 'fog'
 gem 'unf'
 gem 'hashr'
@@ -102,5 +113,3 @@ group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
 end
-
-ruby '2.1.0'

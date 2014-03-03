@@ -1,3 +1,5 @@
+require_relative '../helpers/resource_helper'
+
 module API::V1
   module Resources
     class Users < Grape::API

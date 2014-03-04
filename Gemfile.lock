@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/intridea/grape
-  revision: 4665792092763fc0f5c63da8c6cff87494a8bd2d
+  revision: 70db3f7f3e6c7f4ef2205211e84c0b4749bfba6d
   specs:
     grape (0.7.0)
       activesupport
@@ -19,6 +19,16 @@ GIT
       rack-accept
       rack-mount
       virtus (>= 1.0.0)
+
+GIT
+  remote: git://github.com/mongoid/mongoid
+  revision: bde8ac1b0f16aaad7e343073ce8c5b5b9c9ffc5b
+  specs:
+    mongoid (4.0.0.beta1)
+      activemodel (>= 4.0.0)
+      moped (~> 2.0.beta6)
+      origin (~> 2.1)
+      tzinfo (>= 0.3.37)
 
 GEM
   remote: https://rubygems.org/
@@ -51,7 +61,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.0.1)
       rails (>= 3, < 5)
-    angularjs-rails (1.2.13)
+    angularjs-rails (1.2.14)
     annotate (2.6.2)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -75,6 +85,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
+    bson (2.2.1)
+    bson_ext (1.5.1)
     builder (3.2.2)
     celluloid (0.15.2)
       timers (~> 1.1.0)
@@ -185,6 +197,10 @@ GEM
     minitest (5.3.0)
     mocha (1.0.0)
       metaclass (~> 0.0.1)
+    moped (2.0.0.beta6)
+      bson (~> 2.2)
+      connection_pool (~> 1.2)
+      optionable (~> 0.2.0)
     multi_json (1.8.4)
     multi_xml (0.5.5)
     net-scp (1.1.2)
@@ -193,6 +209,8 @@ GEM
     nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    optionable (0.2.0)
+    origin (2.1.0)
     orm_adapter (0.5.0)
     paperclip (4.1.1)
       activemodel (>= 3.0.0)
@@ -325,7 +343,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     temple (0.6.7)
-    thin (1.6.1)
+    thin (1.6.2)
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
@@ -377,6 +395,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  bson_ext
   codeclimate-test-reporter
   database_cleaner
   devise
@@ -399,6 +418,7 @@ DEPENDENCIES
   mime-types
   minitest
   mocha
+  mongoid (~> 4.0.0.beta1)!
   paperclip
   paranoia (~> 2.0)
   pg

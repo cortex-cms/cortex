@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     self.email == 'surgeon@careerbuilder.com'
   end
 
+  def profile
+    @profile ||= UserProfile.find_by(user_id: self.id) || create_user_profile
+  end
+
   class << self
     def authenticate(username, password)
       user = User.find_by_email(username)
@@ -30,6 +34,14 @@ class User < ActiveRecord::Base
     def anonymous
       User.new
     end
+  end
+
+  private
+
+  def create_user_profile
+    @profile = UserProfile.create(user_id: self.id)
+    logger.info "Created UserProfile for <User id=#{self.id}>"
+    @profile
   end
 end
 

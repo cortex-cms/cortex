@@ -1,0 +1,6 @@
+development:
+  sessions:
+    default:
+      database: cortex
+      hosts:
+        - localhost:27017

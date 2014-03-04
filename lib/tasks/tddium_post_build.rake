@@ -16,7 +16,7 @@ namespace :tddium do
     # Move branch/url config into yml in the future
     case
       when current_branch == 'master'
-        redeployment_targets << { :environment => 'staging', :hook_url => 'https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/d755fd68319b22cb129483f0291cd497' }
+        redeployment_targets << { :environment => 'staging', :hook_url => 'https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/b17b5ba29fa940431bfb3012b76edfa6' }
         redeployment_targets << { :environment => 'production', :hook_url => 'https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/05486afef355596820dff6ec8263dbd9' }
       else
         abort "invalid current branch: #{current_branch}"

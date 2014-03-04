@@ -51,7 +51,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.0.1)
       rails (>= 3, < 5)
-    angularjs-rails (1.2.13)
+    angularjs-rails (1.2.14)
     annotate (2.6.2)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -293,7 +293,7 @@ GEM
     shoulda-context (1.1.6)
     shoulda-matchers (2.5.0)
       activesupport (>= 3.0.0)
-      sidekiq (2.17.7)
+    sidekiq (2.17.7)
       celluloid (>= 0.15.2)
       connection_pool (>= 1.0.0)
       json

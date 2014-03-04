@@ -9,6 +9,7 @@ module Abilities
           if subject == Tenant; abilities << tenant_class_abilities(user) end
           if subject == Post;   abilities << post_class_abilities(user) end
           if subject == Media;  abilities << media_class_abilities(user) end
+          if subject == Category; abilities << category_class_abilities(user) end
         else
           if subject.kind_of? User;   abilities << user_abilities(user, subject) end
           if subject.kind_of? Tenant; abilities << tenant_abilities(user, subject) end
@@ -55,6 +56,10 @@ module Abilities
 
       def media_class_abilities(user)
         [:view, :create]
+      end
+
+      def category_class_abilities(user)
+        return [:view]
       end
     end
   end

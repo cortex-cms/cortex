@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     self.email == 'surgeon@careerbuilder.com'
   end
 
+  def fullname
+    lastname.to_s == '' ? firstname : "#{firstname} #{lastname}"
+  end
+
   class << self
     def authenticate(username, password)
       user = User.find_by_email(username)

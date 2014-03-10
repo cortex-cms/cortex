@@ -23,9 +23,3 @@ production:
   pool: 5
   password:
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: cb-cortex-db
-  pool: 5
-  password:

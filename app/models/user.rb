@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     @profile ||= UserProfile.find_by(user_id: self.id) || create_user_profile
   end
 
+  def fullname
+    lastname.to_s == '' ? firstname : "#{firstname} #{lastname}"
+  end
+
   class << self
     def authenticate(username, password)
       user = User.find_by_email(username)

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+ruby '2.1.1'
 
 def darwin_only(require_as)
   RUBY_PLATFORM.include?('darwin') && require_as

@@ -30,6 +30,7 @@ gem 'font-awesome-sass'
 
 # JS
 gem 'angularjs-rails'
+gem 'jquery-rails'
 gem 'uglifier'
 
 # ActiveRecord

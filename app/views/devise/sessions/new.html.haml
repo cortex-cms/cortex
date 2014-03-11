@@ -19,3 +19,4 @@
               = f.check_box :remember_me
               Remember me
           = f.submit 'Sign In', class: 'btn btn-primary btn-block', disabled: '', 'ng-disabled' => 'loginForm.$invalid'
+          = devise_error_messages!

@@ -2,5 +2,6 @@
 %html{lang: 'en', 'ng-app' => 'cortex'}
   = render 'layouts/head'
   %body.default{:'ng-controller' => 'CortexCtrl', 'ng-cloak' => ''}
+    = render 'layouts/messages'
     = yield
     = javascript_include_tag 'application'

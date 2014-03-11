@@ -11,6 +11,14 @@ module API::V1
           authorize! :view, current_user!
           present current_user, with: Entities::User
         end
+
+        desc 'Update the current user'
+        params do
+          # ??
+        end
+        put :me do
+          # ??
+        end
       end
     end
   end

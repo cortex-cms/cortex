@@ -48,6 +48,7 @@ gem 'pg'
 # Mongoid
 gem 'mongoid', '~> 4.0.0.beta1', git: 'git://github.com/mongoid/mongoid'
 gem 'bson_ext'
+gem 'mongoid-paranoia', github: 'simi/mongoid-paranoia'
 
 # Authorization
 gem 'six'

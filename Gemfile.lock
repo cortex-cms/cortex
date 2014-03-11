@@ -30,6 +30,13 @@ GIT
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
 
+GIT
+  remote: git://github.com/simi/mongoid-paranoia.git
+  revision: 4186ac0896d7bada81fe85bfc6446b8510aab163
+  specs:
+    mongoid-paranoia (0.1)
+      mongoid (> 3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -419,6 +426,7 @@ DEPENDENCIES
   minitest
   mocha
   mongoid (~> 4.0.0.beta1)!
+  mongoid-paranoia!
   paperclip
   paranoia (~> 2.0)
   pg

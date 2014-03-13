@@ -4,6 +4,10 @@ module Abilities
       def allowed(user, subject)
         abilities = []
 
+        unless user.is_admin?
+          return guest_abilities(user, subject)
+        end
+
         if subject.is_a? Class
           if subject == User;   abilities << user_class_abilities(user) end
           if subject == Tenant; abilities << tenant_class_abilities(user) end
@@ -28,6 +32,14 @@ module Abilities
         if subject_user.id == user.id
           abilities << [:view, :update]
         end
+      end
+
+      def guest_abilities(user, subject)
+        abilities = []
+
+        # Guest can view themselves
+        if subject.kind_of? User; abilities << user_abilities(user, subject) end
+        abilities
       end
 
       def user_class_abilities(user)
@@ -59,7 +71,7 @@ module Abilities
       end
 
       def category_class_abilities(user)
-        return [:view]
+        [:view]
       end
     end
   end

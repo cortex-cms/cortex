@@ -4,3 +4,10 @@ development:
       database: cortex
       hosts:
         - localhost:27017
+
+test:
+  sessions:
+    default:
+      database: cortex_test
+      hosts:
+        - localhost:27017

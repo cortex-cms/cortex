@@ -7,9 +7,6 @@ class UserProfile
 
   field :user_id, type: Integer
   field :career_status, type: String
-
-  # Could also use a custom mongoid field so this can be indexed and structure can be enforced
-  field :custom_fields, type: Hash
 end
 
 class UserLocation

@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     self.id == nil
   end
 
+  def is_admin?
+    self.admin
+  end
+
   def client_skips_authorization?
     # Yeah, replace with this something serious
     self.email == 'surgeon@careerbuilder.com'
@@ -59,4 +63,5 @@ end
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  admin                  :boolean          default(FALSE), not null
 #

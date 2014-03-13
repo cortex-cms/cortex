@@ -45,3 +45,7 @@ RSpec.configure do |config|
   # https://github.com/collectiveidea/awesome_nested_set/issues/220
   ActiveSupport::Deprecation.silenced = true
 end
+
+RSpec::Sidekiq.configure do |config|
+  config.warn_when_jobs_not_processed_by_sidekiq = false
+end

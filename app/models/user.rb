@@ -22,9 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def profile
-    @profile ||= UserProfile.find_or_create_by(:user_id => self.id) do |result|
-      logger.info "Created UserProfile for <User id=#{self.id}>"
-    end
+    @profile ||= UserProfile.find_or_create_by(:user_id => self.id)
   end
 
   def fullname

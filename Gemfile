@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+ruby '2.1.1'
 
 def darwin_only(require_as)
   RUBY_PLATFORM.include?('darwin') && require_as
@@ -44,6 +44,12 @@ gem 'tire_async_index'
 gem 'kaminari'
 gem 'paranoia',  '~> 2.0'
 gem 'pg'
+
+
+# Mongoid
+gem 'mongoid', '~> 4.0.0.beta1', git: 'git://github.com/mongoid/mongoid'
+gem 'bson_ext'
+gem 'mongoid-paranoia', github: 'simi/mongoid-paranoia'
 
 # Authorization
 gem 'six'

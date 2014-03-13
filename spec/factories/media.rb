@@ -5,7 +5,7 @@ FactoryGirl.define do
     attachment { fixture_file_upload("#{Rails.root}/spec/support/media/test.txt", 'text/plain') }
 
     trait :document do
-
+      attachment { fixture_file_upload("#{Rails.root}/spec/support/media/test.pdf", 'application/pdf') }
     end
 
     trait :movie do

@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     self.email == 'surgeon@careerbuilder.com'
   end
 
+  def profile
+    @profile ||= UserProfile.find_or_create_by(:user_id => self.id)
+  end
+
   def fullname
     lastname.to_s == '' ? firstname : "#{firstname} #{lastname}"
   end

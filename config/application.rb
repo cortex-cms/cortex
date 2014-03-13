@@ -33,5 +33,9 @@ module Cortex
       config.background_engine :sidekiq
       config.use_queue :default
     end
+
+    config.generators do |generator|
+      generator.orm :active_record
+    end
   end
 end

@@ -24,3 +24,10 @@ staging:
       run_on: all_servers
       apply_during: all
       sudo: true
+    - source: /.cloud66/scripts/replace_mongoid_yml.sh
+      destination: /tmp/replace_mongoid_yml.sh
+      target: rails
+      execute: true
+      run_on: all_servers
+      apply_during: all
+      sudo: true

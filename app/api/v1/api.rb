@@ -18,8 +18,8 @@ module API
       helpers PaginationHeaders
 
       mount Resources::Categories
-      mount Resources::Media
       mount Resources::Posts
+      mount Resources::Media
       mount Resources::Tenants
       mount Resources::Users
 

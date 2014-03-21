@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :post do
     sequence(:title)  { |n| "post#{n}" }
-    short_description 'Short description'
+    short_description 'This is a short description of the post that is long enough'
+    copyright_owner   :'CareerBuilder, LLC'
     job_phase         :discovery
     display           :large
     type              :article

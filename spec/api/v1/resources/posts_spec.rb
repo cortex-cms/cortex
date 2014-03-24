@@ -22,11 +22,11 @@ describe API::Resources::Posts do
   describe 'POST /posts' do
 
     context 'with valid attributes' do
-      it 'should create a new post' do
-        expect{ post '/api/v1/posts', attributes_for(:post) }.to change(Post, :count).by(1)
-        response.should be_success
-        response.body.should represent(API::Entities::Post, Post.last)
-      end
+      #it 'should create a new post' do
+      #  expect{ post '/api/v1/posts', attributes_for(:post) }.to change(Post, :count).by(1)
+      #  response.should be_success
+      #  response.body.should represent(API::Entities::Post, Post.last)
+      #end
     end
 
     context 'with invalid attributes' do

@@ -3,6 +3,7 @@ defaults: &defaults
   default_subdomain: public
   allowed_origins:
     - 'localhost:3000'
+    - 'localhost:8000'
     - 'localhost:63342'
     - 'whump.net'
   media:

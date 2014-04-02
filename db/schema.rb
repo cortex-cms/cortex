@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313142215) do
+ActiveRecord::Schema.define(version: 20140401042719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20140313142215) do
   add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
 
   create_table "media_posts", id: false, force: true do |t|
-    t.integer "post_id",   null: false
-    t.integer "medium_id", null: false
+    t.integer "post_id",  null: false
+    t.integer "media_id", null: false
   end
 
   create_table "oauth_access_grants", force: true do |t|

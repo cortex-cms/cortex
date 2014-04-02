@@ -1,5 +1,9 @@
+require 'nokogiri'
+
 class Post < ActiveRecord::Base
   acts_as_taggable
+
+  before_save :scan_media!
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
@@ -15,6 +19,15 @@ class Post < ActiveRecord::Base
   enum display: [:large, :medium, :small]
 
   self.inheritance_column = nil
+
+  private
+
+  def scan_media!
+    bodyDoc = Nokogiri::HTML::Document.parse(body)
+    media_ids = bodyDoc.xpath('//@data-media-id').map{|element| element.to_s }
+
+    self.media = Media.find(media_ids)
+  end
 end
 
 # == Schema Information

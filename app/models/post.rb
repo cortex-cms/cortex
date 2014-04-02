@@ -3,7 +3,7 @@ require 'nokogiri'
 class Post < ActiveRecord::Base
   acts_as_taggable
 
-  before_save :scan_media!
+  before_save :update_media_from_body!
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
@@ -22,7 +22,7 @@ class Post < ActiveRecord::Base
 
   private
 
-  def scan_media!
+  def update_media_from_body!
     bodyDoc = Nokogiri::HTML::Document.parse(body)
     media_ids = bodyDoc.xpath('//@data-media-id').map{|element| element.to_s }
 

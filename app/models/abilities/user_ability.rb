@@ -4,41 +4,46 @@ module Abilities
       def allowed(user, subject)
         abilities = []
 
-        unless user.is_admin?
-          return guest_abilities(user, subject)
-        end
-
-        if subject.is_a? Class
-          if subject == User;   abilities << user_class_abilities(user) end
-          if subject == Tenant; abilities << tenant_class_abilities(user) end
-          if subject == Post;   abilities << post_class_abilities(user) end
-          if subject == Media;  abilities << media_class_abilities(user) end
-          if subject == Category; abilities << category_class_abilities(user) end
+        if user.is_admin?
+          if subject.is_a? Class
+            if subject == User;   abilities += user_class_abilities(user)
+            elsif subject == Tenant; abilities += tenant_class_abilities(user)
+            elsif subject == Post;   abilities += post_class_abilities(user)
+            elsif subject == Media;  abilities += media_class_abilities(user)
+            elsif subject == Category; abilities += category_class_abilities(user)
+            end
+          else
+            if subject.kind_of? User;   abilities += user_abilities(user, subject)
+            elsif subject.kind_of? Tenant; abilities += tenant_abilities(user, subject)
+            elsif subject.kind_of? Post;   abilities += post_abilities(user, subject)
+            elsif subject.kind_of? Media;  abilities += media_abilities(user, subject)
+            end
+          end
         else
-          if subject.kind_of? User;   abilities << user_abilities(user, subject) end
-          if subject.kind_of? Tenant; abilities << tenant_abilities(user, subject) end
-          if subject.kind_of? Post;   abilities << post_abilities(user, subject) end
-          if subject.kind_of? Media;  abilities << media_abilities(user, subject) end
+          abilities += regular_abilities(user, subject)
         end
 
         abilities
       end
 
       private
-      def user_abilities(user, subject_user)
-        abilities = []
 
-        # Users can view and edit themselves
-        if subject_user.id == user.id
-          abilities << [:view, :update]
-        end
-      end
-
-      def guest_abilities(user, subject)
+      def regular_abilities(user, subject)
         abilities = []
 
         # Guest can view themselves
-        if subject.kind_of? User; abilities << user_abilities(user, subject) end
+        if subject.kind_of? User; abilities += user_abilities(user, subject) end
+        abilities
+      end
+
+      def user_abilities(user, user_subject)
+        abilities = []
+
+        # Users can view and edit themselves
+        if user_subject.id == user.id
+          abilities += [:view, :update]
+        end
+
         abilities
       end
 

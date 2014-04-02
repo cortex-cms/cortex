@@ -72,7 +72,7 @@ gem 'json'
 gem 'rack-cors', require: 'rack/cors'
 
 # Sidekiq
-gem 'sidekiq'
+gem 'sidekiq', '~> 2.17.6'
 gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim' # Sidekiq-web

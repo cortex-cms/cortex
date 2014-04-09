@@ -1,22 +1,18 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: cortex_dev
   user: cortex
   pool: 5
   timeout: 5000
+
+development:
+  <<: *default
+  database: cortex_dev
 
 test:
-  adapter: postgresql
+  <<: *default
   database: cortex_test
-  user: cortex
-  pool: 5
-  timeout: 5000
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: cb-cortex-db
-  pool: 5
-  password:
-
+  <<: *default
+  database: cortex

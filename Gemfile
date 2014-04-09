@@ -20,7 +20,6 @@ gem 'grape-swagger'
 gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
 
 # Templating
-gem 'jbuilder', '~> 1.2'
 gem 'haml'
 
 # Style
@@ -77,8 +76,6 @@ gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim' # Sidekiq-web
 
-gem 'minitest'
-
 group :test, :development do
 
   # Rspec
@@ -88,6 +85,9 @@ group :test, :development do
 
   # Guard
   gem 'guard-rspec'
+
+  # Shoulda needs minitest
+  gem 'minitest'
 
   # Mocking/Faking
   gem 'mocha', require: false

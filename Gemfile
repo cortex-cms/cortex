@@ -11,7 +11,7 @@ def linux_only(require_as)
 end
 
 # Rails
-gem 'rails', '4.1.0.beta1'
+gem 'rails', '4.1.0'
 
 # API
 gem 'grape', git: 'git://github.com/intridea/grape'
@@ -23,13 +23,13 @@ gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
 gem 'haml'
 
 # Style
-gem 'sass-rails'
+# Locked to 4.0.2 until the following issue is closed
+# https://github.com/rails/sass-rails/issues/191
+gem 'sass-rails', '4.0.2'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 
-# Locked to 2.11.0 until the following issue is closed
-# https://github.com/rails/sass-rails/issues/191
-gem 'sprockets', '2.11.0'
+gem 'sprockets'
 
 # JS
 gem 'angularjs-rails'

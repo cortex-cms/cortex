@@ -2,3 +2,11 @@ language: ruby
 rvm:
   - 2.1.1
 bundler_args: --without production staging development
+before_script:
+  - psql -c 'create database cortex_test;' -U postgres
+addons:
+  postgresql: "9.3"
+  code_climate:
+    repo_token: 6cedeabef4da2bf513d1b1a89e48b9ea36535f91b4fcd1420bbdcf7b765fdc49
+notifications:
+  hipchat: 31ca9ff739b018ecd38b1f133947e4@Developers

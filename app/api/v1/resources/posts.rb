@@ -47,7 +47,7 @@ module API::V1
           present Post.page(page).per(per_page), with: Entities::Post
         end
 
-        desc 'Show a post'
+        desc 'Show a test post'
         get ':id' do
           require_scope! :'view:posts'
           authorize! :view, Post

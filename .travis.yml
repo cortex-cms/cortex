@@ -3,6 +3,7 @@ rvm:
   - 2.1.1
 bundler_args: --without production staging development
 before_script:
+  - cp config/database.yml.travis config/database.yml
   - psql -c 'create database cortex_test;' -U postgres
 addons:
   postgresql: "9.3"

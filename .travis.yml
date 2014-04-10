@@ -5,9 +5,15 @@ bundler_args: --without production staging development
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database cortex_test;' -U postgres
+script:
+  - bundle exec rake db:migrate
+  - bundle exec rake db:seed
+  - bundle exec rake cortex:create_categories
+  - bundle exec rake spec
 addons:
   postgresql: "9.3"
   code_climate:
     repo_token: 6cedeabef4da2bf513d1b1a89e48b9ea36535f91b4fcd1420bbdcf7b765fdc49
 notifications:
   hipchat: 31ca9ff739b018ecd38b1f133947e4@Developers
+

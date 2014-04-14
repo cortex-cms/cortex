@@ -48,15 +48,16 @@ config/initializers/secret_token.rb
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
-# Ignore cortex-admin, if locally added for development
+# Ignore cortex-admin symlink
 /public/admin
-/ui.tddium*
-
-# Ignore project-x, if locally added for development
-/public/project-x
 
 # Alex symlinks cortex-admin project files as angular/
 /angular
 
+# Ignore project-x symlink
+/public/x
+/public/project-x
+
 # Ignore Tddium user-specific config
 .tddium*
+/ui.tddium*

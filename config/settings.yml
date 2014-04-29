@@ -3,8 +3,10 @@ defaults: &defaults
   default_subdomain: public
   allowed_origins:
     - 'localhost:3000'
+    - 'localhost:3001'
     - 'localhost:8000'
     - 'localhost:63342'
+    - 'http://kudu.cb-project-x-dev.development.c66.me'
     - 'whump.net'
   media:
     max_size_mb: 100

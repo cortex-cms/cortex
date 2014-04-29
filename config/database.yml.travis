@@ -1,0 +1,6 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  database: cortex_test

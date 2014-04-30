@@ -20,4 +20,8 @@ services:
   - redis-server
 notifications:
   hipchat: 31ca9ff739b018ecd38b1f133947e4@Developers
-
+deploy:
+  - provider: cloud66
+    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/b7cbba409a70314651a4da8e7551fbab
+    on: master
+    edge: true

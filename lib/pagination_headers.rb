@@ -5,9 +5,9 @@ module PaginationHeaders
     pages = create_pages(pagination)
     links = create_links(pages, pagination)
 
-    resolve_headers['Link'] = links.join(', ') unless links.empty?
-    resolve_headers['Content-Length'] = '%{name} %{page_start}-%{page_end}:%{per_page}/%{total_items}' % pagination
-    resolve_headers['X-Total-Items'] = pagination[:total_items].to_s
+    header 'Link', links.join(', ') unless links.empty?
+    header 'Content-Range', '%{name} %{page_start}-%{page_end}:%{per_page}/%{total_items}' % pagination
+    header 'X-Total-Items', pagination[:total_items].to_s
   end
 
   def create_pagination(scope, name)
@@ -35,14 +35,6 @@ module PaginationHeaders
   end
 
   private
-
-  def resolve_env
-    @env ||= defined?(env) ? env : request.env
-  end
-
-  def resolve_headers
-    @headers ||= defined?(headers) ? headers : response.headers
-  end
 
   def create_links(pages, pagination)
     if pages.empty?

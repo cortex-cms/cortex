@@ -1,8 +1,8 @@
 Cortex
 =========
 
-[![](https://api.tddium.com:443/Talent-Solutions/cortex/badges/50396.png?badge_token=5b8180a43a3384a040671280f0254c2296449d14)](https://api.tddium.com:443/Talent-Solutions/cortex/suites/50396)
+[![Build Status](https://magnum.travis-ci.com/cb-talent-development/cortex.svg?token=sAtZ4frpstZnGHoeyxTz&branch=master)](https://magnum.travis-ci.com/cb-talent-development/cortex)
 
-The Ruby on Rails multitenant beast.
+The Ruby on Rails multitenant beast. A blank readme?!!!
 
 [Cortex]: https://gitsum.careerbuilder.com/talent-solutions/cortex

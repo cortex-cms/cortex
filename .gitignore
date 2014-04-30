@@ -54,7 +54,3 @@ config/initializers/secret_token.rb
 # Ignore project-x symlink
 /public/x
 
-/ui.tddium*
-
-# Ignore Tddium user-specific config
-.tddium*

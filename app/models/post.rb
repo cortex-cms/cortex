@@ -1,6 +1,9 @@
 require 'nokogiri'
 
 class Post < ActiveRecord::Base
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
   acts_as_taggable
 
   before_save :update_media_from_body!
@@ -19,6 +22,20 @@ class Post < ActiveRecord::Base
   enum display: [:large, :medium, :small]
 
   self.inheritance_column = nil
+
+  mapping do
+    indexes :id,                :index => :not_analyzed
+    indexes :title,             :analyzer => 'snowball'
+    indexes :body,              :analyzer => 'snowball'
+    indexes :draft,             :type => 'boolean'
+    indexes :short_description, :analyzer => 'snowball'
+    indexes :copyright_owner,   :analyzer => 'keyword'
+    indexes :author,            :analyzer => 'keyword'
+    indexes :published_at,      :type => 'date', :include_in_all => false
+    indexes :tags,              :analyzer => :keyword, :as => 'tag_list'
+    indexes :categories,        :analyzer => :keyword, :as => 'categories.collect{ |c| c.name }'
+    indexes :job_phase,         :analyzer => :keyword
+  end
 
   private
 

@@ -4,6 +4,8 @@ class Post < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
+  scope :published, -> { where('published_at <= ?', DateTime.now) }
+
   acts_as_taggable
 
   before_save :update_media_from_body!
@@ -40,9 +42,8 @@ class Post < ActiveRecord::Base
   private
 
   def update_media_from_body!
-    bodyDoc = Nokogiri::HTML::Document.parse(body)
-    media_ids = bodyDoc.xpath('//@data-media-id').map{|element| element.to_s }
-
+    document = Nokogiri::HTML::Document.parse(body)
+    media_ids = document.xpath('//@data-media-id').map{|element| element.to_s }
     self.media = Media.find(media_ids)
   end
 end

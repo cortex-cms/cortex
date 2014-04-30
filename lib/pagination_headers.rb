@@ -58,4 +58,18 @@ module PaginationHeaders
     pages[:last] = pagination[:pages] if pagination[:pages] > 1 && pagination[:page] < pagination[:pages]
     pages
   end
+
+  def url_without_params
+    request.url.split('?').first
+  end
+
+  def query_params
+    @query_params ||= parse_query_params
+  end
+
+  def parse_query_params
+    params = {}
+    CGI::parse(env['QUERY_STRING']).each{|k, v| params[k] = v[0] }
+    params
+  end
 end

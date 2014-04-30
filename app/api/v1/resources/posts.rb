@@ -44,7 +44,9 @@ module API::V1
           require_scope! :'view:posts'
           authorize! :view, Post
 
-          present Post.page(page).per(per_page), with: Entities::Post
+          @posts = Post.page(page).per(per_page)
+          set_pagination_headers(@posts, 'posts')
+          present @posts, with: Entities::Post
         end
 
         desc 'Show a post'

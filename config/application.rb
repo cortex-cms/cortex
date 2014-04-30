@@ -7,7 +7,7 @@ module Cortex
     config.i18n.enforce_available_locales = true
 
     config.autoload_paths += %W(#{config.root}/lib)
-    
+
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true
 
@@ -16,7 +16,7 @@ module Cortex
     # Insert Rack::CORS as one of the first middleware
     config.middleware.insert_after Rack::Sendfile, Rack::Cors do
       allow do
-        origins *AppSettings.allowed_origins
+        origins *(AppSettings.allowed_origins + AppSettings.allowed_origins_regex.map{ |o| /#{o}/ })
         resource '*',
                  :headers => :any,
                  :expose  => %w(Content-Range Link),

@@ -8,8 +8,9 @@ defaults: &defaults
     - 'localhost:63342'
     - 'kudu.cb-project-x-dev.development.c66.me'
     - 'cbcortex.com'
-    - 'dev.project-x.cbcortex.com'
     - 'whump.net'
+  allowed_origins_regex:
+    - '.+\.cbcortex\.com'
   media:
     max_size_mb: 100
     allowed_media_types:

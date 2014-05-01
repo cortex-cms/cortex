@@ -53,12 +53,13 @@ module API::V1
         end
         get 'feed' do
           @posts = Post.
+              includes(:categories).
               published.
               order(published_at: :desc, created_at: :desc).
               page(page).per(per_page)
 
           set_pagination_headers(@posts, 'posts')
-          present @posts, with: Entities::Post
+          present @posts, with: Entities::PostBasic
         end
 
         desc 'Show a post'

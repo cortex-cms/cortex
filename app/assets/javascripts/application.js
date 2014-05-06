@@ -7,6 +7,7 @@
 
 // Maintained by bower-rails
 //= require angular
+//= require angular-rails-templates
 //= require angular-resource
 //= require angular-sanitize
 //= require angular-animate
@@ -19,7 +20,7 @@
 //= require angularjs-file-upload/angular-file-upload
 //= require ng-table
 
-//= require_tree ./templates
+//= require_tree ../templates
 
 //= require_tree ./controllers
 //= require_tree ./directives

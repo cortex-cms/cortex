@@ -3,6 +3,8 @@ require "#{Rails.root}/app/api/v1/api"
 Cortex::Application.routes.draw do
   root 'home#index'
 
+  get 'login', to: 'home#login'
+
   # Authentication
   use_doorkeeper
   devise_for :users

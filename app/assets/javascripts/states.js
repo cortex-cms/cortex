@@ -27,8 +27,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('login', {
       url: '/login',
-      controller: 'LoginCtrl',
-      templateUrl: 'users/login.html',
+      templateUrl: 'login',
       data: {pageTitle: 'Login'}
     })
 

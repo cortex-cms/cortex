@@ -18,8 +18,8 @@ module.config(function ($provide, $urlRouterProvider, $httpProvider, flashProvid
   $provide.constant('currentUser', copy(window.gon.current_user));
   $provide.constant('settings', copy(window.gon.settings));
 
-  $urlRouterProvider.when('/admin/media', '/admin/media/');
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.when('/media', '/media/');
+  $urlRouterProvider.otherwise('/organizations/');
 
   // Override the default Accept header value of 'application/json, text/plain, */*'
   // as "*/*" invalidates all specificity.
@@ -50,4 +50,8 @@ module.controller('CortexCtrl', function ($rootScope, $scope, $state, $statePara
       $scope.pageTitle = toState.data.pageTitle + " | Cortex";
     }
   });
+
+  if (!currentUser && !$state.includes('login')) {
+    $state.go('login');
+  }
 });

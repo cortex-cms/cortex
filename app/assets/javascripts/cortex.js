@@ -19,7 +19,17 @@ module.config(function ($provide, $urlRouterProvider, $httpProvider, flashProvid
   $provide.constant('settings', copy(window.gon.settings));
 
   $urlRouterProvider.when('/media', '/media/');
-  $urlRouterProvider.otherwise('/organizations/');
+
+  $urlRouterProvider.otherwise(function($injector) {
+    var $state = $injector.get('$state');
+
+    if ($injector.get('currentUser')) {
+      $state.go('cortex.organizations.manage')
+    }
+    else {
+      $state.go('login');
+    }
+  });
 
   // Override the default Accept header value of 'application/json, text/plain, */*'
   // as "*/*" invalidates all specificity.

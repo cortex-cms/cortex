@@ -34,7 +34,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
     .state('cortex', {
       abstract: true,
       url: '/',
-      templateUrl: 'cortex.html',
+      templateUrl: 'main.html',
       data: {
         ncyBreadcrumbLabel: 'Home'
       }

@@ -28,7 +28,7 @@ module.controller('EditTenantsCtrl', function($scope, $stateParams, $state, $tim
         $scope.data.tenant = cortex.tenants.get({id: $stateParams.tenantId});
     }
     else {
-        $scope.data.tenant = new Tenants();
+        $scope.data.tenant = new cortex.tenants();
     }
 
     $scope.data.tenant.inherit_from_parent = true;

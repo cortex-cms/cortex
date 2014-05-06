@@ -8,7 +8,7 @@ var module = angular.module('cortex.controllers.organizations.manage', [
 
 module.controller('OrganizationsManageCtrl', function($scope, $stateParams, $state, flash, events, cortex, TenantsTreeStatus) {
     // Open tenant hierarchy and details panels if an organization is selected
-    if ($stateParams.organizationId && !$state.includes('admin.organizations.manage.tenants')) {
+    if ($stateParams.organizationId && !$state.includes('cortex.organizations.manage.tenants')) {
         $state.go('.tenants');
     }
 
@@ -28,7 +28,7 @@ module.controller('OrganizationsManageCtrl', function($scope, $stateParams, $sta
                         message = '"' + tenant.name + '" organization was deleted successfully';
 
                         // Go to org manage if an org tenant was deleted
-                        $state.go('admin.organizations.manage');
+                        $state.go('cortex.organizations.manage');
                     }
                     flash.warn = message;
                 });

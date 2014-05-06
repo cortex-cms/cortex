@@ -5,7 +5,8 @@ var module = angular.module('cortex.controllers.tenants.manage', [
   'cortex.directives.tenantSettings',
   'angularBootstrapNavTree',
   'ngAnimate',
-  'cortex.settings'
+  'cortex.settings',
+  'cortex.util'
  ]);
 
 module.factory('TenantsTreeStatus', function () {

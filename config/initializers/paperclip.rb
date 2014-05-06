@@ -1,8 +1,3 @@
-# Set path to ImageMagick installation when using Tddium
-if ENV.member?('TDDIUM')
-  Paperclip.options[:command_path] = "/usr/bin"
-end
-
 module Paperclip
   class HashieMashUploadedFileAdapter < AbstractAdapter
     attr_accessor :original_filename

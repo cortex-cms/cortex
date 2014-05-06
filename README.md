@@ -1,8 +1,9 @@
 # Cortex
 
-[![Tddium Status](https://api.tddium.com:443/Talent-Solutions/cortex/badges/50396.png?badge_token=5b8180a43a3384a040671280f0254c2296449d14)][tddium]
+[![Build Status](https://magnum.travis-ci.com/cb-talent-development/cortex.svg?token=sAtZ4frpstZnGHoeyxTz&branch=master)](https://magnum.travis-ci.com/cb-talent-development/cortex)
 
-[tddium]: https://api.tddium.com:443/Talent-Solutions/cortex/suites/50396
+The Ruby on Rails multitenant beast. A blank readme?!!!
+>>>>>>> bf36e2f5e72c3c7f6f2a5d6b898440c97fc31eea
 
 Cortex is an identity, content and reporting platform built by [Talent Development](https://gitsum.careerbuilder.com/talent-solutions)'s technology team.
 Its goal is to concentrate universal data that is traditionally spread across multiple applications (user identity, media, et al.) 

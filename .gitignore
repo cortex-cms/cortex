@@ -51,13 +51,6 @@ config/initializers/secret_token.rb
 # Ignore cortex-admin symlink
 /public/admin
 
-# Alex symlinks cortex-admin project files as angular/
-/angular
-
 # Ignore project-x symlink
 /public/x
 /public/project-x
-
-# Ignore Tddium user-specific config
-.tddium*
-/ui.tddium*

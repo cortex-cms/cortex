@@ -1,4 +1,5 @@
 language: ruby
+cache: bundler
 rvm:
   - 2.1.1
 bundler_args: --without production staging development
@@ -20,4 +21,14 @@ services:
   - redis-server
 notifications:
   hipchat: 31ca9ff739b018ecd38b1f133947e4@Developers
-
+deploy:
+  - provider: cloud66
+    master:
+    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/4f1165ee36667aba67fdf1023e3706dc
+    on: develop
+    edge: true
+  - provider: cloud66
+    master:
+    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/91ac01fc4112f0492bc571cc72d16a5d
+    on: master
+    edge: true

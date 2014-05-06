@@ -47,6 +47,21 @@ module API::V1
           present Post.page(page).per(per_page), with: Entities::Post
         end
 
+        desc 'Show published posts'
+        params do
+          use :pagination
+        end
+        get 'feed' do
+          @posts = Post.
+              includes(:categories).
+              published.
+              order(published_at: :desc, created_at: :desc).
+              page(page).per(per_page)
+
+          set_pagination_headers(@posts, 'posts')
+          present @posts, with: Entities::PostBasic
+        end
+
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'

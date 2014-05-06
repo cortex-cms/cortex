@@ -5,9 +5,9 @@ module PaginationHeaders
     pages = create_pages(pagination)
     links = create_links(pages, pagination)
 
-    resolve_headers['Link'] = links.join(', ') unless links.empty?
-    resolve_headers['Content-Length'] = '%{name} %{page_start}-%{page_end}:%{per_page}/%{total_items}' % pagination
-    resolve_headers['X-Total-Items'] = pagination[:total_items].to_s
+    header 'Link', links.join(', ') unless links.empty?
+    header 'Content-Range', '%{name} %{page_start}-%{page_end}:%{per_page}/%{total_items}' % pagination
+    header 'X-Total-Items', pagination[:total_items].to_s
   end
 
   def create_pagination(scope, name)
@@ -36,14 +36,6 @@ module PaginationHeaders
 
   private
 
-  def resolve_env
-    @env ||= defined?(env) ? env : request.env
-  end
-
-  def resolve_headers
-    @headers ||= defined?(headers) ? headers : response.headers
-  end
-
   def create_links(pages, pagination)
     if pages.empty?
       return []
@@ -65,5 +57,19 @@ module PaginationHeaders
     pages[:next] = pagination[:page] + 1 if pagination[:page] < pagination[:pages]
     pages[:last] = pagination[:pages] if pagination[:pages] > 1 && pagination[:page] < pagination[:pages]
     pages
+  end
+
+  def url_without_params
+    request.url.split('?').first
+  end
+
+  def query_params
+    @query_params ||= parse_query_params
+  end
+
+  def parse_query_params
+    params = {}
+    CGI::parse(env['QUERY_STRING']).each{|k, v| params[k] = v[0] }
+    params
   end
 end

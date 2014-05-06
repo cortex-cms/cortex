@@ -22,7 +22,10 @@ class ApplicationController < ActionController::Base
     gon.push({
       :current_user => current_user,
       :settings => {
-        :cortex_base_url => "#{request.protocol}#{request.host_with_port}/api/v1"
+        :cortex_base_url => "#{request.protocol}#{request.host_with_port}/api/v1",
+        :paging => {
+          defaultPerPage: 10
+        }
       }
     })
   end

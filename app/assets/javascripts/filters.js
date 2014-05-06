@@ -37,3 +37,17 @@ module.filter('mediaToHtml', function() {
     return outputHtml;
   };
 });
+
+module.filter('tagList', function() {
+    return function(tags) {
+        return _.map(tags, function(t) { return t.name; }).join(', ');
+    };
+});
+
+module.filter('publishStatus', function() {
+    return function(dateStr) {
+        var date = Date.parse(dateStr);
+        return date < new Date() ? 'Scheduled' : 'Published';
+    };
+});
+

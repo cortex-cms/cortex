@@ -7,10 +7,12 @@ var module = angular.module('cortex.controllers.media.grid', [
     'cortex.services.cortex',
     'cortex.directives.delayedInput',
     'cortex.controllers.posts.edit',
-    'cortex.controllers.posts.popup'
+    'cortex.controllers.posts.popup',
+    'cortex.filters',
+    'cortex.services.cortex'
 ]);
 
-module.controller('MediaGridCtrl', function($scope, $stateParams, $state, cortex, settings, flash, PostBodyEditorService, PostsPopupService){
+module.controller('MediaGridCtrl', function($scope, $stateParams, $state, cortex, settings, flash, PostBodyEditorService, PostsPopupService, cortex){
 
     $scope.data = {};
 
@@ -40,7 +42,7 @@ module.controller('MediaGridCtrl', function($scope, $stateParams, $state, cortex
         updatePage();
     });
 
-    $scope.data.media = Media.searchPaged({q: $scope.page.query,
+    $scope.data.media = cortex.media.searchPaged({q: $scope.page.query,
             per_page: $scope.page.perPage,
             page: $scope.page.page},
         function(media, headers, paging) {

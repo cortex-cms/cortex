@@ -163,7 +163,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
       }
     })
 
-    .state('admin.posts.edit.media.edit', {
+    .state('cortex.posts.edit.media.edit', {
       url: '/:mediaId/edit',
       templateUrl: 'media/edit.html',
       controller: 'MediaEditCtrl',

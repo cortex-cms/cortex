@@ -1,7 +1,8 @@
 var module = angular.module('cortex.controllers.posts.grid', [
     'ngTable',
     'ui.bootstrap',
-    'cortex.services.cortex'
+    'cortex.services.cortex',
+    'cortex.filters'
 ]);
 
 module.controller('PostsGridCtrl', function($scope, cortex){

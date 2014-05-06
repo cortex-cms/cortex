@@ -1,0 +1,28 @@
+defaults: &defaults
+  extra: {}
+  default_page_size: 25
+  default_subdomain: public
+  allowed_origins:
+    - 'localhost:3000'
+    - 'localhost:3001'
+    - 'localhost:8000'
+    - 'localhost:63342'
+    - 'kudu.cb-project-x-dev.development.c66.me'
+    - 'cbcortex.com'
+    - 'whump.net'
+  allowed_origins_regex:
+    - '.+\.cbcortex\.com'
+  media:
+    max_size_mb: 100
+
+test:
+  <<: *defaults
+
+development:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

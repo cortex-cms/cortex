@@ -1,0 +1,59 @@
+allowed:
+  - type: image/jpeg
+    thumb: True
+    taxon_type: IMG
+  - type: image/jpg
+    thumb: True
+    taxon_type: IMG
+  - type: image/pjpeg
+    thumb: True
+    taxon_type: IMG
+  - type: image/png
+    thumb: True
+    taxon_type: IMG
+  - type: image/gif
+    thumb: True
+    taxon_type: IMG
+  - type: image/bmp
+    thumb: True
+    taxon_type: IMG
+  - type: image/x-png
+    thumb: True
+    taxon_type: IMG
+  - type: application/pdf
+    thumb: True
+    taxon_type: DOC
+  - type: application/vnd.ms-excel
+    taxon_type: DOC
+  - type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    taxon_type: DOC
+  - type: application/msword
+    taxon_type: DOC
+  - type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    taxon_type: DOC
+  - type: text/plain
+    taxon_type: DOC
+  - type: application/zip
+    taxon_type: DOC
+  - type: video/avi
+    taxon_type: VID
+  - type: video/msvideo
+    taxon_type: VID
+  - type: video/x-msvideo
+    taxon_type: VID
+  - type: video/quicktime
+    taxon_type: VID
+  - type: video/mp4
+    taxon_type: VID
+  - type: audio/mpeg
+    taxon_type: AUD
+  - type: audio/mp3
+    taxon_type: AUD
+  - type: audio/x-mp3
+    taxon_type: AUD
+  - type: audio/mpeg3
+    taxon_type: AUD
+  - type: audio/x-mpeg3
+    taxon_type: AUD
+  - type: audio/mpg
+    taxon_type: AUD

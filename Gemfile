@@ -32,9 +32,16 @@ gem 'font-awesome-sass'
 gem 'sprockets'
 
 # JS
-gem 'angularjs-rails'
+gem 'angular-rails-templates'
+gem 'bower-rails', '~> 0.7.1'
+gem 'gon'
 gem 'jquery-rails'
+gem 'momentjs-rails'
+gem 'ngmin-rails'
+gem 'therubyracer'
+gem 'turbolinks'
 gem 'uglifier'
+gem 'underscore-rails'
 
 # ActiveRecord
 gem 'rails-observers'

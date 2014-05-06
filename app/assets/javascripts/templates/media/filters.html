@@ -1,0 +1,43 @@
+<fieldset class="filter-group clearfix">
+    <legend>MEDIA TYPE</legend>
+
+    <div class="form-group">
+        <ul class="list-unstyled smaller">
+            <li ng-repeat="type in data.mediaTypes">
+                <input type="checkbox" /> {{ type.name }} ({{ type.extensions.join(', ') }})
+            </li>
+            <li>
+                <input type="checkbox" /> Other
+            </li>
+        </ul>
+
+        <button type="button" class="btn btn-default btn-sm pull-right">Clear</button>
+    </div>
+</fieldset>
+
+<fieldset class="filter-group clearfix">
+    <legend>DATE</legend>
+
+    <div class="form-group">
+        <div class="btn-toolbar clearfix">
+            <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-default" ng-model="data.filters.date.property" btn-radio="'create_date'">Created</button>
+                <button type="button" class="btn btn-default" ng-model="data.filters.date.property" btn-radio="'update_date'">Modified</button>
+            </div>
+        </div>
+
+        <label class="h6">From</label>
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control">
+            <span class="input-group-btn"><button class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+        </div>
+
+        <label class="h6">To</label>
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control">
+            <span class="input-group-btn"><button class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+        </div>
+
+        <button id="media-filter-date-clear-btn" type="button" class="pull-right btn btn-default btn-sm">Clear</button>
+    </div>
+</fieldset>

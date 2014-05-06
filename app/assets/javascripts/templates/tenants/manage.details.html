@@ -1,0 +1,44 @@
+<h4>
+    <ng-pluralize count="(data.tenants.selected.children|totalTenants)"
+                  when="{'one': '1 Child', 'other': '{} Children'}"></ng-pluralize>
+</h4>
+<table class="table small">
+    <tbody>
+    <tr>
+        <td>Name:</td>
+        <td>{{ data.tenants.selected.name }}</td>
+    </tr>
+    <tr>
+        <td>Contact Name</td>
+        <td>{{ data.tenants.selected.contact_name }}</td>
+    </tr>
+    <tr>
+        <td>Contact Phone</td>
+        <td>{{ data.tenants.selected.contact_phone }}</td>
+    </tr>
+    <tr>
+        <td>Contact Email</td>
+        <td>{{ data.tenants.selected.contact_email }}</td>
+    </tr>
+    <tr>
+        <td>Activate Date</td>
+        <td>{{ data.tenants.selected.active_at | date }}</td>
+    </tr>
+    <tr>
+        <td>Deactivate Date</td>
+        <td>{{ data.tenants.selected.deactive_at | date }}</td>
+    </tr>
+    <tr>
+        <td>Contract Number</td>
+        <td>{{ data.tenants.selected.contract }}</td>
+    </tr>
+    <tr>
+        <td>DID</td>
+        <td>{{ data.tenants.selected.did }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<h4>Settings</h4>
+
+<tenant-settings></tenant-settings>

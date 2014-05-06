@@ -1,0 +1,10 @@
+.file-details {
+  @include make-md-column(2, 0);
+  margin-top: $standard-margin * 2;
+  padding-right: $standard-margin;
+}
+
+.media-edit-form {
+  @include make-md-column(10, 0);
+  margin-bottom: $standard-margin * 2;
+}

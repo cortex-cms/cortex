@@ -1,31 +1,26 @@
+/**
+ * Main.scss
+ *
+ * This file imports all of Cortex's styles to construct
+ * the application's final stylesheet.
+ */
+
+@import 'variables';
+@import 'mixins';
+
+// abn-tree - SASS version of angular-bootstrap-nav-tree
+@import 'vendor/abn-tree';
+
+// Twitter Bootstrap and overridden styles
 @import 'bootstrap-cortex';
-@import 'font-awesome';
 
-/*flash*/
-.alert-error {
-  background-color: #f2dede;
-  border-color: #eed3d7;
-  color: #b94a48;
-  text-align: left;
-}
+// Application-wide styling
+@import 'cortex';
 
-.alert-alert {
-  background-color: #f2dede;
-  border-color: #eed3d7;
-  color: #b94a48;
-  text-align: left;
-}
-
-.alert-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: #468847;
-  text-align: left;
-}
-
-.alert-notice {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: #468847;
-  text-align: left;
-}
+// -- states --
+@import 'states/media.edit';
+@import 'states/media.manage';
+@import 'states/posts.edit';
+@import 'states/posts.manage';
+@import 'states/tenant.manage';
+// -- /states --

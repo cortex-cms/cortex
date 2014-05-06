@@ -1,0 +1,20 @@
+////////////////////////////////
+// Mixins
+
+// Placeholder content
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+}
+
+//Cortex navbar background positioning for image sprites
+@mixin navbar-bg-position($vertical-pos) {
+  background-position: center $vertical-pos;
+}
+
+@mixin navbar-bg-position-dual($vertical-pos) {
+  background-position: center $vertical-pos, center bottom;
+}

@@ -48,7 +48,7 @@ module.config(function ($provide, $urlRouterProvider, $httpProvider, flashProvid
 // CortexAdminCtrl
 // ---------------
 // Cortex's root-level application controller
-module.controller('CortexCtrl', function ($rootScope, $scope, $state, $stateParams, $http, currentUser, moment) {
+module.controller('CortexCtrl', function ($rootScope, $scope, $state, $stateParams, $http, $window, currentUser, moment) {
   var isDefined = angular.isDefined;
   // Add $state and $stateParams to root scope for universal access within views
   $rootScope.$state       = $state;
@@ -62,9 +62,16 @@ module.controller('CortexCtrl', function ($rootScope, $scope, $state, $statePara
     }
   });
 
+  // Push page views google analytics, if available
+  if ($window._gaq) {
+    $scope.$on('$viewContentLoaded', function(event) {
+      $window._gaq.push(['_trackPageview', $location.path()]);
+    });
+  }
+
   $rootScope.logOut = function() {
     $http.delete('/users/sign_out.json').success(function() {
-      window.location.href = "/";
+      $window.location.href = "/";
     });
   };
 });

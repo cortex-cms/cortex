@@ -19,6 +19,7 @@
 //= require angularjs-file-upload/angular-file-upload-shim
 //= require angularjs-file-upload/angular-file-upload
 //= require ng-table
+//= require ng-rails-csrf
 
 //= require_tree ../templates
 

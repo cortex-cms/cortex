@@ -5,6 +5,7 @@ var module = angular.module('cortex', [
   'angular-flash.service',
   'angular-flash.flash-alert-directive',
   'ncy-angular-breadcrumb',
+  'ng-rails-csrf',
 
   // Cortex
   'cortex.states',
@@ -47,7 +48,7 @@ module.config(function ($provide, $urlRouterProvider, $httpProvider, flashProvid
 // CortexAdminCtrl
 // ---------------
 // Cortex's root-level application controller
-module.controller('CortexCtrl', function ($rootScope, $scope, $state, $stateParams, currentUser, moment) {
+module.controller('CortexCtrl', function ($rootScope, $scope, $state, $stateParams, $http, currentUser, moment) {
   var isDefined = angular.isDefined;
   // Add $state and $stateParams to root scope for universal access within views
   $rootScope.$state       = $state;
@@ -61,7 +62,9 @@ module.controller('CortexCtrl', function ($rootScope, $scope, $state, $statePara
     }
   });
 
-  if (!currentUser && !$state.includes('login')) {
-    $state.go('login');
-  }
+  $rootScope.logOut = function() {
+    $http.delete('/users/sign_out.json').success(function() {
+      window.location.href = "/";
+    });
+  };
 });

@@ -32,6 +32,7 @@ gem 'font-awesome-sass'
 gem 'sprockets'
 
 # JS
+gem 'ng-rails-csrf'
 gem 'angular-rails-templates'
 gem 'bower-rails', '~> 0.7.1'
 gem 'gon'

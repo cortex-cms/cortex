@@ -1,7 +1,4 @@
 default: &default
-  first_thing:
-    - command: apt-get install nodejs
-      target: any
   before_rails:
     # Mongoid support - replace C66 provided mongoid with custom config
     - source: /.cloud66/mongoid.yml

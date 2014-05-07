@@ -9,9 +9,6 @@ default: &default
     - command: sudo chmod 0777 -R $STACK_PATH/public/*
       target: rails
       sudo: true
-    # Rebuild elasticsearch indexes
-    - command: /.cloud66/elastic-search.sh
-      target: rails
 
 production:
   <<: *default

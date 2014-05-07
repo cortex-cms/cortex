@@ -4,7 +4,7 @@
   .row
     .panel.panel-default
       .panel-heading
-        Sign In
+        %span.text-muted Sign In
       .panel-body
         = form_for(:user, :url => session_path(:user),
                    html: {role: 'login', novalidate: '', name: 'loginForm'}) do |f|
@@ -14,7 +14,7 @@
           .form-group
             = f.password_field :password, class: 'form-control', placeholder: 'Password', required: '',
                                'ng-model' => 'login.password'
-          .checkbox
+          %label
             = f.check_box :remember_me
             Remember me
           = f.submit 'Sign In', class: 'btn btn-primary btn-block', disabled: '', 'ng-disabled' => 'loginForm.$invalid'

@@ -4,19 +4,19 @@ Bundler.require(:default, Rails.env)
 
 module Cortex
   class Application < Rails::Application
-    config.i18n.enforce_available_locales = true
 
+    config.angular_templates.module_name = 'cortex.templates'
+    config.i18n.enforce_available_locales = true
     config.autoload_paths += %W(#{config.root}/lib)
+    config.active_record.default_timezone = :utc
 
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true
 
-    config.active_record.default_timezone = :utc
-
     # Insert Rack::CORS as one of the first middleware
     config.middleware.insert_after Rack::Sendfile, Rack::Cors do
       allow do
-        origins *(AppSettings.allowed_origins + AppSettings.allowed_origins_regex.map{ |o| /#{o}/ })
+        origins *(Cortex.config.allowed_origins + Cortex.config.allowed_origins_regex.map{ |o| /#{o}/ })
         resource '*',
                  :headers => :any,
                  :expose  => %w(Content-Range Link),

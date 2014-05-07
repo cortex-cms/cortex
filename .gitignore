@@ -7,9 +7,11 @@
 # Ignore bundler config.
 /.bundle
 /vendor/bundle
+/vendor/assets
 
 /public/assets/
 /public/media/
+!/public/assets/images/
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

@@ -2,6 +2,7 @@
 %html{lang: 'en', 'ng-app' => 'cortex'}
   = render 'layouts/head'
   %body.default{:'ng-controller' => 'CortexCtrl', 'ng-cloak' => ''}
-    = render 'layouts/messages'
     = yield
+    = include_gon
     = javascript_include_tag 'application'
+    = render 'layouts/google_analytics' if extra_config.has_key?('google_analytics_id')

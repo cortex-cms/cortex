@@ -1,15 +1,15 @@
 /**
- * Main.scss
+ * main.scss
  *
  * This file imports all of Cortex's styles to construct
  * the application's final stylesheet.
  */
- @import 'font-awesome';
+@import 'font-awesome';
 
 @import 'variables';
 @import 'mixins';
 
-// abn-tree - SASS version of angular-bootstrap-nav-tree
+// Vendor
 @import 'vendor/abn-tree';
 @import 'vendor/redactor/redactor';
 
@@ -19,10 +19,9 @@
 // Application-wide styling
 @import 'cortex';
 
-// -- states --
+// States
 @import 'states/media.edit';
 @import 'states/media.manage';
 @import 'states/posts.edit';
 @import 'states/posts.manage';
 @import 'states/tenant.manage';
-// -- /states --

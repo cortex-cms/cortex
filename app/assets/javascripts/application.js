@@ -3,7 +3,7 @@
 //= require moment
 //= require underscore
 //= require jquery
-//= require bootstrap
+//= require bootstrap-sass-official
 
 // Maintained by bower-rails
 //= require angular

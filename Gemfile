@@ -27,7 +27,6 @@ gem 'haml'
 # Locked to 4.0.2 until the following issue is closed
 # https://github.com/rails/sass-rails/issues/191
 gem 'sass-rails', '4.0.2'
-gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 
 gem 'sprockets'
@@ -56,6 +55,7 @@ gem 'rails-assets-angular-bootstrap-datetimepicker'
 gem 'rails-assets-angular-redactor'
 gem 'rails-assets-angularjs-file-upload'
 gem 'rails-assets-ng-table'
+gem 'rails-assets-bootstrap-sass-official'
 
 # ActiveRecord
 gem 'rails-observers'

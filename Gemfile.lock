@@ -94,8 +94,6 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.1.1.1)
-      sass (~> 3.2)
     bson (2.2.3)
     bson_ext (1.5.1)
     builder (3.2.2)
@@ -312,6 +310,7 @@ GEM
     rails-assets-angularjs-file-upload (1.3.2)
     rails-assets-bootstrap (3.1.0)
       rails-assets-jquery (>= 1.9.0)
+    rails-assets-bootstrap-sass-official (3.1.1.2)
     rails-assets-jquery (2.1.1)
     rails-assets-moment (2.5.1)
     rails-assets-ng-table (0.3.2)
@@ -466,7 +465,6 @@ DEPENDENCIES
   bcrypt-ruby
   better_errors
   binding_of_caller
-  bootstrap-sass
   bson_ext
   codeclimate-test-reporter
   coffee-rails
@@ -515,6 +513,7 @@ DEPENDENCIES
   rails-assets-angular-sanitize
   rails-assets-angular-ui-router
   rails-assets-angularjs-file-upload
+  rails-assets-bootstrap-sass-official
   rails-assets-ng-table
   rails-observers
   rails_best_practices

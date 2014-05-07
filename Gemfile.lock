@@ -469,6 +469,7 @@ DEPENDENCIES
   bootstrap-sass
   bson_ext
   codeclimate-test-reporter
+  coffee-rails
   database_cleaner
   devise
   doorkeeper!

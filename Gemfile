@@ -147,3 +147,8 @@ group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
 end
+
+group :assets do
+  gem 'coffee-rails'
+end
+

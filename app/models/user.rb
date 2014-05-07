@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
     lastname.to_s == '' ? firstname : "#{firstname} #{lastname}"
   end
 
+  def to_json(options={})
+    options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname fullname)
+    super(options)
+  end
+
   class << self
     def authenticate(username, password)
       user = User.find_by_email(username)

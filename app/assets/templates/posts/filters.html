@@ -1,0 +1,58 @@
+<fieldset class="filter-group clearfix">
+    <legend>POST TYPE</legend>
+
+    <div class="form-group">
+        <ul class="list-unstyled small">
+            <li ng-repeat="type in data.postTypes">
+                <input id="{{type.name}}" type="checkbox"> <label for="{{type.name}}">{{type.name}}</label>
+            </li>
+        </ul>
+
+        <button type="button" class="btn btn-default btn-sm pull-right">Clear</button>
+    </div>
+</fieldset>
+
+<fieldset class="filter-group clearfix">
+    <legend>CATEGORY</legend>
+
+    <div class="form-group">
+        <select class="form-control input-sm">
+            <option value="Cover Letters">Cover Letters</option>
+            <option value="Job Trends">Job Trends</option>
+            <option value="Networking">Networking</option>
+            <option value="On the Job">On the Job</option>
+            <option value="Who's Hiring">Who's Hiring</option>
+            <option value="Work/Life Balance">Work/Life Balance</option>
+        </select>
+
+        <button type="button" class="btn btn-default btn-sm pull-right">Clear</button>
+    </div>
+</fieldset>
+
+<fieldset class="filter-group clearfix">
+    <legend>DATE</legend>
+
+    <div class="form-group">
+        <div class="btn-toolbar clearfix">
+            <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-default" ng-model="data.filters.date.property" btn-radio="'create_date'">Created</button>
+                <button type="button" class="btn btn-default" ng-model="data.filters.date.property" btn-radio="'update_date'">Modified</button>
+            </div>
+        </div>
+
+        <label class="h6">From</label>
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control">
+            <span class="input-group-btn"><button class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+        </div>
+
+        <label class="h6">To</label>
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control">
+            <span class="input-group-btn"><button class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+        </div>
+
+        <button type="button" class="btn btn-default btn-sm pull-right">Clear</button>
+    </div>
+</fieldset>
+    

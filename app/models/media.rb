@@ -28,8 +28,8 @@ class Media < ActiveRecord::Base
   before_attachment_post_process :can_thumb
 
   validates_attachment :attachment, :presence => true,
-                       :content_type => {:content_type => AppSettings.media.allowed_media_types.collect{|allowed| allowed[:type]}},
-                       :size => {:in => 0..AppSettings.media.max_size_mb.megabytes}
+                       :content_type => {:content_type => Cortex.config.media.allowed_media_types.collect{|allowed| allowed[:type]}},
+                       :size => {:in => 0..Cortex.config.media.max_size_mb.megabytes}
 
 
   settings :analysis => {
@@ -78,7 +78,7 @@ class Media < ActiveRecord::Base
   end
 
   def can_thumb
-    AppSettings.media.allowed_media_types.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
+    Cortex.config.media.allowed_media_types.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
   end
 
   private
@@ -88,7 +88,7 @@ class Media < ActiveRecord::Base
   end
 
   def taxon_type
-    AppSettings.media.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_type]
+    Cortex.config.media.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_type]
   end
 
   def extract_dimensions

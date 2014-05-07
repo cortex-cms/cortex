@@ -1,9 +1,9 @@
 require "#{Rails.root}/app/api/v1/api"
 
 Cortex::Application.routes.draw do
+  root 'home#index'
 
-  # Hack to point root URL to API
-  root :controller => :static, :action => '/api/v1/users/me'
+  get 'login', to: 'home#login'
 
   # Authentication
   use_doorkeeper

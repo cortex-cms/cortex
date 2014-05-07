@@ -1,0 +1,127 @@
+<div id="batch-and-search" class="clearfix">
+  <div class="pull-left hmargin-right-small">
+    <button ui-sref="^.^.new" class="btn btn-sm btn-primary" type="button">Upload</button>
+  </div>
+
+  <div class="dropdown pull-left">
+    <button class="btn btn-sm dropdown-toggle" type="button">Bulk Actions <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a>Activate</a></li>
+      <li><a>Deactivate</a></li>
+    </ul>
+  </div>
+
+  <div id="media-search" class="pull-right">
+    <delayed-input
+             autofocus="true"
+             class="form-control input-sm"
+             ng-model='page.query'
+             placeholder="Search Media..."
+             delay="500"></delayed-input>
+  </div>
+</div>
+
+<div id="pagination-sorting">
+  <div class="hr-below clearfix">
+    <div class="pull-left">
+      <form class="form-inline" role="form">
+        <div class="form-group pull-left">
+          <label class="sr-only" for="page-size">Items per page</label>
+          <select class="form-control input-sm" id="page-size" ng-model="page.perPage">
+            <option>5</option>
+            <option>10</option>
+            <option>25</option>
+            <option>50</option>
+          </select>
+        </div>
+
+        <div class="small pull-left input-sm">
+          items per page &bull; Sort by
+        </div>
+
+        <div class="form-group pull-left">
+          <label class="sr-only" for="sort-order">Sort by</label>
+          <select class="form-control input-sm" id="sort-order">
+            <option>Last modified (recent first)</option>
+            <option>Last modified (oldest first)</option>
+            <option>Creation date (recent first)</option>
+            <option>Creation date (oldest first)</option>
+            <option>Display name (ascending)</option>
+            <option>Display name (descending)</option>
+            <option>Filename (ascending)</option>
+            <option>Filename (descending)</option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <div class="pull-right clearfix">
+      <ul class="pagination pagination-sm pull-right" ng-show="data.paging.pages > 1">
+        <li ng-if="data.paging.page > 1"><a ng-click="page.previous()">&laquo;</a></li>
+        <li ng-repeat="pageIndex in page.quickPages"><a ng-click="page.flip(pageIndex)">{{ pageIndex }}</a></li>
+        <li ng-if="data.paging.page < data.paging.pages"><a ng-click="page.next()">&raquo;</a></li>
+      </ul>
+
+      <div ng-if="data.paging.pages > 1" class="small input-sm pull-right">
+        <span ng-if="data.media.length == 1">Showing 1 item</span>
+        <span ng-if="data.media.length != 1">Showing {{ data.media.length }} items</span>
+        &bull; Page {{
+        data.paging.page }} of {{ data.paging.pages }}
+      </div>
+      <div ng-if="data.paging.pages == 1">
+        <span ng-if="data.media.length == 1">Showing 1 item</span>
+        <span ng-if="data.media.length != 1">Showing {{ data.paging.count }} items</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div ng-repeat="media in data.media">
+    <div class="media-data-row clearfix">
+      <div class="col-sm-3 col-xs-12">
+        <div class="row">
+          <div class="col-xs-2">
+            <input type="checkbox">
+          </div>
+
+          <div class="col-xs-10">
+            <a href="{{media.attachment_url}}" target="_blank">
+              <img ng-if="media.thumbs"
+                 ng-src="{{ media.thumbs.mini }}"
+                 alt="Thumbnail">
+              <img ng-if="!media.thumbs" ph-img="100x100" ph-text="{{ media.general_type | uppercase }}"
+                 alt="Thumbnail">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-5 col-xs-6 media-data-row-desc">
+        <strong>{{ media.name }}</strong><br>
+        {{ media.file_name }}<br>
+        <br>
+        <strong>Author: </strong>{{ media.creator.name }}<br>
+        <strong>Description: </strong>{{ media.description }}<br>
+        <strong>Tags: </strong>{{ media.tags|tagList }}
+      </div>
+
+      <div class="col-sm-4 col-xs-6 text-right media-data-row-action-status">
+        <strong>Created: </strong> {{ media.created_at|date:"y/M/d h:mm:ss a" }}<br>
+        <strong>Last Modified: </strong> {{ moment(media.updated_at).fromNow(); }}<br>
+        <br>
+        <strong>UID: </strong>{{ media.taxon }}<br>
+        <strong>Status: </strong>{{ media.deactive_at != null && (Date().new) >
+        moment(media.deactive_at).toDate() ? 'Deactive' : 'Active' }}<br>
+        <br>
+        <button class="btn btn-sm btn-danger" type="button" ng-click="deleteMedia(media)" ng-if="!media.consumed"><i class="fa fa-trash-o"></i> Delete
+        </button>
+        <button class="btn btn-sm btn-primary" type="button"
+            ui-sref="^.^.edit({mediaId: {{media.id}}})"><i class="fa fa-edit"></i> Edit
+        </button>
+        <button ng-if="$state.includes('cortex.posts')" class="btn btn-sm btn-primary" type="button" ng-click="insertMedia(media)">
+          <i class="fa fa-plus"></i> Insert Asset
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

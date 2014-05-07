@@ -1,33 +1,14 @@
+default: &default
+  after_rails:
+    - command: /.cloud66/bootstrap.sh
+      target: rails
+      sudo: true
+    - source: /.cloud66/mongoid.yml
+      destination: $STACK_PATH/config/mongoid.yml
+      target: rails
+
 production:
-  after_rails:
-    - source: /.cloud66/scripts/bootstrap_db.sh
-      destination: <%= ENV['STACK_PATH'] %>/bootstrap_db.sh
-      target: rails
-      execute: true
-    - source: /.cloud66/scripts/open_folder_permissions.sh
-      destination: /tmp/open_folder_permissions.sh
-      target: rails
-      execute: true
-      run_on: all_servers
-      apply_during: all
-      sudo: true
-staging:
-  after_rails:
-    - source: /.cloud66/scripts/bootstrap_db.sh
-      destination: <%= ENV['STACK_PATH'] %>/bootstrap_db.sh
-      target: rails
-      execute: true
-    - source: /.cloud66/scripts/open_folder_permissions.sh
-      destination: /tmp/open_folder_permissions.sh
-      target: rails
-      execute: true
-      run_on: all_servers
-      apply_during: all
-      sudo: true
-    - source: /.cloud66/scripts/replace_mongoid_yml.sh
-      destination: /tmp/replace_mongoid_yml.sh
-      target: rails
-      execute: true
-      run_on: all_servers
-      apply_during: all
-      sudo: true
+  <<: *default
+
+development:
+  <<: *default

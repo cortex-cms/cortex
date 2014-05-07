@@ -12,9 +12,21 @@ module.constant('defaultActions', {
   'delete': {method: 'DELETE'}
 });
 
-module.factory('cortexResource', function($resource, settings, currentUser, defaultActions) {
+module.constant('updateCreateActions', {
+  update: {method: 'PUT', inArray: false},
+  create: {method: 'POST'}
+});
+
+module.factory('cortexResource', function($resource, settings, currentUser, updateCreateActions) {
   return function (url, params, actions) {
-    return $resource(settings.cortex_base_url + url, params, actions);
+    actions = angular.extend(updateCreateActions, actions);
+
+    var resource = $resource(settings.cortex_base_url + url, params, actions);
+
+    resource.prototype.$save = function(params, success, error) {
+        return this.id ? this.$update(params, success, error) : this.$create(params, success, error);
+    };
+    return resource;
   };
 });
 

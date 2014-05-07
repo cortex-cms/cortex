@@ -20,7 +20,7 @@ services:
   - mongodb
   - redis-server
 notifications:
-  hipchat: 31ca9ff739b018ecd38b1f133947e4@Developers
+  hipchat: 31ca9ff739b018ecd38b1f133947e4@Cortex
 deploy:
   - provider: cloud66
     master:

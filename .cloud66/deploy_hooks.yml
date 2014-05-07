@@ -1,5 +1,5 @@
 default: &default
-  before_rails:
+  after_bundle:
     # Mongoid support - replace C66 provided mongoid with custom config
     - source: /.cloud66/mongoid.yml
       destination: $STACK_PATH/config/mongoid.yml

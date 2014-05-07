@@ -132,7 +132,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
         post: function(cortex, $stateParams) {
           return cortex.posts.get({id: $stateParams.postId}).$promise;
         },
-        categories: function(Categories) {
+        categories: function(cortex) {
           return cortex.categories.hierarchy().$promise;
         }
       },

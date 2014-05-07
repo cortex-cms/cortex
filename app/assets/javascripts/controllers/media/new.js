@@ -37,7 +37,7 @@ module.controller('MediaNewCtrl', function($scope, $timeout, $upload, $state, fl
         }
 
         var httpConfig = {
-            url: settings.apiBaseUrl + '/media',
+            url: settings.cortex_base_url + '/media',
             method: 'POST',
             data: {media: $scope.data.media},
             file: file,

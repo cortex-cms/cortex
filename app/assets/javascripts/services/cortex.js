@@ -14,7 +14,7 @@ module.factory('cortex', function($rootScope, cortexResource, paginatedResource,
   });
 
   var media = paginatedResource('/media/:id', {id: '@id'}, {
-    search: {mehtod: 'GET', url: settings.cortex_base_url + '/media/search', isArray: true, paginated: true}
+    search: {method: 'GET', url: settings.cortex_base_url + '/media/search', isArray: true, paginated: true}
   });
 
   var tenants = cortexResource('/tenants/:id', {id: '@id'});

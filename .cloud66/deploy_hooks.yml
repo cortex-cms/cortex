@@ -1,12 +1,11 @@
 default: &default
+  first_thing:
+    - command: apt-get install nodejs
+      target: any
   before_rails:
     # Mongoid support - replace C66 provided mongoid with custom config
     - source: /.cloud66/mongoid.yml
       destination: $STACK_PATH/config/mongoid.yml
-      target: rails
-  after_bundle:
-    - # Install bower-rails dependencies
-      command: cd $STACK_PATH && bundle exec rake bower:install
       target: rails
   after_rails:
     # Migrate and seed database
@@ -19,7 +18,6 @@ default: &default
     # Rebuild elasticsearch indexes
     - command: /.cloud66/elastic-search.sh
       target: rails
-
 
 production:
   <<: *default

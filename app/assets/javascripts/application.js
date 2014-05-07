@@ -16,8 +16,7 @@
 //= require angular-flash
 //= require angular-bootstrap-datetimepicker
 //= require angular-redactor
-//= require angularjs-file-upload/angular-file-upload-shim
-//= require angularjs-file-upload/angular-file-upload
+//= require angularjs-file-upload
 //= require ng-table
 //= require ng-rails-csrf
 

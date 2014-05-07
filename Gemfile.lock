@@ -39,6 +39,7 @@ GIT
 
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actionmailer (4.1.0)
       actionpack (= 4.1.0)
@@ -95,7 +96,6 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
-    bower-rails (0.7.2)
     bson (2.2.3)
     bson_ext (1.5.1)
     builder (3.2.2)
@@ -287,6 +287,35 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.0)
       sprockets-rails (~> 2.0)
+    rails-assets-angular (1.2.11)
+    rails-assets-angular-animate (1.2.11)
+      rails-assets-angular (= 1.2.11)
+    rails-assets-angular-bootstrap (0.10.0)
+      rails-assets-angular (>= 1)
+    rails-assets-angular-bootstrap-datetimepicker (0.2.2)
+      rails-assets-angular (= 1.2.11)
+      rails-assets-bootstrap (= 3.1.0)
+      rails-assets-moment (= 2.5.1)
+    rails-assets-angular-cookies (1.2.11)
+      rails-assets-angular (= 1.2.11)
+    rails-assets-angular-flash (0.1.13)
+      rails-assets-angular (>= 1.0, < 1.3)
+    rails-assets-angular-redactor (1.0.0)
+      rails-assets-angular (>= 1.2.0)
+      rails-assets-jquery (>= 2.0.0)
+    rails-assets-angular-resource (1.2.11)
+      rails-assets-angular (= 1.2.11)
+    rails-assets-angular-sanitize (1.2.11)
+      rails-assets-angular (= 1.2.11)
+    rails-assets-angular-ui-router (0.2.10)
+      rails-assets-angular (>= 1.0.8)
+    rails-assets-angularjs-file-upload (1.3.2)
+    rails-assets-bootstrap (3.1.0)
+      rails-assets-jquery (>= 1.9.0)
+    rails-assets-jquery (2.1.1)
+    rails-assets-moment (2.5.1)
+    rails-assets-ng-table (0.3.2)
+      rails-assets-angular (~> 1.2.9)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
     rails_best_practices (1.15.3)
@@ -438,7 +467,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
-  bower-rails (~> 0.7.1)
   bson_ext
   codeclimate-test-reporter
   database_cleaner
@@ -475,6 +503,18 @@ DEPENDENCIES
   rack-cors
   rack-oauth2
   rails (= 4.1.0)
+  rails-assets-angular
+  rails-assets-angular-animate
+  rails-assets-angular-bootstrap (~> 0.10.0)
+  rails-assets-angular-bootstrap-datetimepicker
+  rails-assets-angular-cookies
+  rails-assets-angular-flash
+  rails-assets-angular-redactor
+  rails-assets-angular-resource
+  rails-assets-angular-sanitize
+  rails-assets-angular-ui-router
+  rails-assets-angularjs-file-upload
+  rails-assets-ng-table
   rails-observers
   rails_best_practices
   rb-fsevent

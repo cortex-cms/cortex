@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
 ruby '2.1.1'
 
@@ -34,7 +35,6 @@ gem 'sprockets'
 # JS
 gem 'ng-rails-csrf'
 gem 'angular-rails-templates'
-gem 'bower-rails', '~> 0.7.1'
 gem 'gon'
 gem 'jquery-rails'
 gem 'momentjs-rails'
@@ -43,6 +43,19 @@ gem 'therubyracer'
 gem 'turbolinks'
 gem 'uglifier'
 gem 'underscore-rails'
+
+gem 'rails-assets-angular'
+gem 'rails-assets-angular-animate'
+gem 'rails-assets-angular-bootstrap', '~> 0.10.0'
+gem 'rails-assets-angular-flash'
+gem 'rails-assets-angular-sanitize'
+gem 'rails-assets-angular-resource'
+gem 'rails-assets-angular-cookies'
+gem 'rails-assets-angular-ui-router'
+gem 'rails-assets-angular-bootstrap-datetimepicker'
+gem 'rails-assets-angular-redactor'
+gem 'rails-assets-angularjs-file-upload'
+gem 'rails-assets-ng-table'
 
 # ActiveRecord
 gem 'rails-observers'

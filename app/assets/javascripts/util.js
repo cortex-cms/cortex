@@ -22,7 +22,13 @@ module.constant('util', {
 
     insert: function(str, idx, substr) {
         return str.substr(0, idx) + substr + str.substr(idx);
+    },
+
+    isEmpty: function(str) {
+        return (!str || 0 === str.length);
     }
+
+    // Eventually replace many of these util functions with Underscore-String
   }
 );
 

@@ -49,7 +49,7 @@
   <div class="col-md-5">
     <h4 class="vmargin-top-large" ng-show="creatingTenant && !creatingOrganization">2. Tenant Location in Organization Hierarchy</h4>
     <h4 class="vmargin-top-large" ng-hide="creatingTenant && !creatingOrganization">2. {{ levelName.charAt(0).toUpperCase() + levelName.slice(1) }} Settings</h4>
-    <abn-tree ng-show="creatingTenant" tree-data="data.tenants.hierarchy" icon-leaf="icon-file"
+    <abn-tree ng-show="creatingTenant" tree-data="data.tenants.hierarchy"
                                                  on-select="selectParent(branch)"
                                                  expand-level="2"></abn-tree>
 

@@ -5,9 +5,6 @@ default: &default
       destination: $STACK_PATH/config/mongoid.yml
       target: rails
   after_rails:
-    # Migrate and seed database
-    - command: cd $STACK_PATH && bundle exec rake db:migrate && bundle exec rake db:seed
-      target: rails
     # Correct permissions of assets for paperclip
     - command: sudo chmod 0777 -R $STACK_PATH/public/*
       target: rails

@@ -1,10 +1,14 @@
 default: &default
-  after_rails:
-    - command: /.cloud66/bootstrap.sh
+  after_bundle:
+    - command: /.cloud66/after_bundle.sh
       target: rails
       sudo: true
+  before_rails:
     - source: /.cloud66/mongoid.yml
       destination: $STACK_PATH/config/mongoid.yml
+      target: rails
+  after_rails:
+    - command: /.cloud66/after_rails.sh
       target: rails
 
 production:

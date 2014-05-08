@@ -92,7 +92,7 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :update, post!
 
-          post.update!(declared(params, include_missing: false))
+          post.update!(declared(params, {include_missing: false}))
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!

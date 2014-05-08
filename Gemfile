@@ -45,7 +45,7 @@ gem 'underscore-rails'
 
 gem 'rails-assets-angular'
 gem 'rails-assets-angular-animate'
-gem 'rails-assets-angular-bootstrap', '~> 0.10.0'
+gem 'rails-assets-angular-bootstrap', '~> 0.11.0'
 gem 'rails-assets-angular-flash'
 gem 'rails-assets-angular-sanitize'
 gem 'rails-assets-angular-resource'
@@ -56,6 +56,7 @@ gem 'rails-assets-angular-redactor'
 gem 'rails-assets-angularjs-file-upload'
 gem 'rails-assets-ng-table'
 gem 'rails-assets-bootstrap-sass-official'
+gem 'rails-assets-ng-tags-input'
 
 # ActiveRecord
 gem 'rails-observers'

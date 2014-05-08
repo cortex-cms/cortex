@@ -13,6 +13,10 @@ angular.module('cortex.services.cortex', [
     feed: {method: 'GET', params: {id: 'feed'}, isArray: true, paginated: true}
   });
 
+  var tags = paginatedResource('/tags/:id', {id: '@id'}, {
+    tags: {method: 'GET', params: {id: 'tags'}, isArray: true, paginated: true}
+  });
+
   var media = paginatedResource('/media/:id', {id: '@id'}, {
     search: {method: 'GET', url: settings.cortex_base_url + '/media/search', isArray: true, paginated: true}
   });
@@ -26,6 +30,7 @@ angular.module('cortex.services.cortex', [
   return {
     categories: categories,
     posts:      posts,
+    tags:       tags,
     media:      media,
     tenants:    tenants,
     users:      users

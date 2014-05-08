@@ -11,6 +11,7 @@ module Abilities
             elsif subject == Post;   abilities += post_class_abilities(user)
             elsif subject == Media;  abilities += media_class_abilities(user)
             elsif subject == Category; abilities += category_class_abilities(user)
+            elsif subject == Tag; abilities += tag_class_abilities(user)
             end
           else
             if subject.kind_of? User;   abilities += user_abilities(user, subject)
@@ -78,6 +79,11 @@ module Abilities
       def category_class_abilities(user)
         [:view]
       end
+
+      def tag_class_abilities(user)
+        [:view]
+      end
+
     end
   end
 end

@@ -46,6 +46,8 @@ class Post < ActiveRecord::Base
     media_ids = document.xpath('//@data-media-id').map{|element| element.to_s }
     self.media = Media.find(media_ids)
   end
+
+
 end
 
 # == Schema Information

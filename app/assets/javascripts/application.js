@@ -19,6 +19,7 @@
 //= require angularjs-file-upload
 //= require ng-table
 //= require ng-rails-csrf
+//= require ng-tags-input
 
 //= require_tree ../templates
 

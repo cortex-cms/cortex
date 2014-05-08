@@ -1,6 +1,6 @@
 angular.module('cortex.controllers.posts.edit', [
   'ui.router.state',
-  'ui.bootstrap.dropdownToggle',
+  'ui.bootstrap.dropdown',
   'ui.bootstrap.buttons',
   'ui.bootstrap.datepicker',
   'ui.bootstrap.datetimepicker',
@@ -9,7 +9,8 @@ angular.module('cortex.controllers.posts.edit', [
   'cortex.directives.modalShow',
   'cortex.services.cortex',
   'cortex.filters',
-  'cortex.util'
+  'cortex.util',
+  'ngTagsInput'
 ])
 
 .controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, cortex, post, categories, currentUser, PostBodyEditorService) {
@@ -19,6 +20,8 @@ angular.module('cortex.controllers.posts.edit', [
       // Find selected categories
       var selectedCategories = _.filter($scope.data.jobPhaseCategories, function(category) { return category.$selected; });
       $scope.data.post.category_ids = _.map(selectedCategories, function(category) { return category.id; });
+
+      $scope.data.post.tag_list = $scope.data.post.tag_list.map(function(tag) { return tag.name; });
 
       $scope.data.post.$save(function(post) {
         flash.success = 'Saved "' + post.title + '"';
@@ -81,8 +84,13 @@ angular.module('cortex.controllers.posts.edit', [
     $scope.data.post.author = currentUser.full_name;
     $scope.data.post.copyright_owner = $scope.data.post.copyright_owner || "CareerBuilder, LLC";
     $scope.data.categories = categories;
+    $scope.data.post.tag_list = '';
   }
   initializePost();
+
+  $scope.loadTags = function(query) {
+    return $http.get('/api/v1/tags?query=' + query);
+  };
 
   // angular-bootstrap datetimepicker settings
   $scope.datetimepicker = {

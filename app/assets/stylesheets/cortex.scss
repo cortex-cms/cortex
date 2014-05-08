@@ -248,7 +248,7 @@ input.form-control[required]:not(:focus) {
 }
 
 .menu-item-bg {
-  background: url(header-sprites.png) no-repeat, url(header-active.png) repeat-x;
+  background: asset-url('header-sprites.png') no-repeat, asset-url('header-active.png') repeat-x;
   padding-top: 5.35em;
   padding-bottom: 0.75em;
   @media (max-width: $screen-sm-max) {
@@ -311,7 +311,7 @@ input.form-control[required]:not(:focus) {
   }
 
   li.active{
-    background: url(header-active.png) center bottom repeat-x;
+    background: asset-url('header-active.png') center bottom repeat-x;
     @media (max-width: $screen-sm-max) {
       background: #eee;
       font-weight: bold;
@@ -365,6 +365,13 @@ input.form-control[required]:not(:focus) {
   a.navbar-item-apps:hover, a.navbar-item-apps:focus {
     @include navbar-bg-position-dual(-800px);
   }
+}
+
+.navbar-profile-avatar {
+  background-image: asset-url('navbar-profile.jpg');
+  background-size: contain;
+  height: 40px;
+  width: 40px;
 }
 
 ////////////////////////////////

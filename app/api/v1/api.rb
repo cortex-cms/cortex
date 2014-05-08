@@ -22,7 +22,6 @@ module API
       mount Resources::Media
       mount Resources::Tenants
       mount Resources::Users
-      mount Resources::Tags
 
       add_swagger_documentation
     end

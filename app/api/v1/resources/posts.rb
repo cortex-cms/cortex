@@ -62,6 +62,21 @@ module API::V1
           present @posts, with: Entities::PostBasic
         end
 
+        desc 'Show post tags'
+        params do
+          optional :s
+        end
+        get 'tags' do
+          require_scope! :'view:posts'
+          authorize! :view, Post
+
+          tags = params[:s] \
+            ? Post.tag_counts_on(:tags).where('name ILIKE ?', "%#{params[:s]}%") \
+            : Post.tag_counts_on(:tags)
+
+          present tags, with: Entities::Tag
+        end
+
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'

@@ -88,8 +88,8 @@ angular.module('cortex.controllers.posts.edit', [
   }
   initializePost();
 
-  $scope.loadTags = function(query) {
-    return $http.get('/api/v1/tags?query=' + query);
+  $scope.loadTags = function(search) {
+    return cortex.posts.tags({s: search});
   };
 
   // angular-bootstrap datetimepicker settings

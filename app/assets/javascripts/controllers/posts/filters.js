@@ -1,7 +1,7 @@
-var module = angular.module('cortex.controllers.posts.filters', [
-]);
+angular.module('cortex.controllers.posts.filters', [
+])
 
-module.controller('PostsFiltersCtrl', function($scope){
+.controller('PostsFiltersCtrl', function($scope){
 
     $scope.data = {
         postTypes: [

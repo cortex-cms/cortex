@@ -1,12 +1,12 @@
-var module = angular.module('cortex.controllers.tenants.edit', [
+angular.module('cortex.controllers.tenants.edit', [
     'ui.router.state',
     'ui.bootstrap.datepicker',
     'angular-flash.service',
     'cortex.directives.tenantSettings',
     'cortex.settings'
-]);
+])
 
-module.controller('EditTenantsCtrl', function($scope, $stateParams, $state, $timeout, events, cortex, hierarchyUtils, flash) {
+.controller('EditTenantsCtrl', function($scope, $stateParams, $state, $timeout, events, cortex, hierarchyUtils, flash) {
 
     // angular-bootstrap datepicker settings
     $scope.datepicker = {

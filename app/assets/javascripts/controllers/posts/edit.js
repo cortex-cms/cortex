@@ -1,4 +1,4 @@
-var module = angular.module('cortex.controllers.posts.edit', [
+angular.module('cortex.controllers.posts.edit', [
   'ui.router.state',
   'ui.bootstrap.dropdownToggle',
   'ui.bootstrap.buttons',
@@ -10,9 +10,9 @@ var module = angular.module('cortex.controllers.posts.edit', [
   'cortex.services.cortex',
   'cortex.filters',
   'cortex.util'
-]);
+])
 
-module.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, cortex, post, categories, currentUser, PostBodyEditorService) {
+.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, cortex, post, categories, currentUser, PostBodyEditorService) {
 
   $scope.data = {
     savePost: function() {
@@ -137,9 +137,9 @@ module.controller('PostsEditCtrl', function($scope, $state, $stateParams, $windo
     plugins: ['media'],
     minHeight: 400
   };
-});
+})
 
-module.factory('PostBodyEditorService', function($filter, util) {
+.factory('PostBodyEditorService', function($filter, util) {
   return {
     postCursorPosition: '',
     postBody: '',

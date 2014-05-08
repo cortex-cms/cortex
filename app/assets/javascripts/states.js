@@ -1,10 +1,9 @@
-var module = angular.module('cortex.states', [
+angular.module('cortex.states', [
   'ui.router.state',
 
   'cortex.services.cortex',
   'cortex.templates',
 
-  'cortex.controllers.login',
   'cortex.controllers.media.edit',
   'cortex.controllers.media.filters',
   'cortex.controllers.media.grid',
@@ -17,9 +16,9 @@ var module = angular.module('cortex.states', [
   'cortex.controllers.posts.popup',
   'cortex.controllers.tenants.edit',
   'cortex.controllers.tenants.manage'
-]);
+])
 
-module.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider) {
 
   // Catch /admin/media link from breadcrumb
   $urlRouterProvider.when('/media', '/media///');

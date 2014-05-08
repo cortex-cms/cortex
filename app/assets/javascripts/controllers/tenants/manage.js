@@ -1,4 +1,4 @@
-var module = angular.module('cortex.controllers.tenants.manage', [
+angular.module('cortex.controllers.tenants.manage', [
   'ui.router.state',
   'cortex.vendor.underscore',
   'cortex.services.cortex',
@@ -7,15 +7,15 @@ var module = angular.module('cortex.controllers.tenants.manage', [
   'ngAnimate',
   'cortex.settings',
   'cortex.util'
- ]);
+ ])
 
-module.factory('TenantsTreeStatus', function () {
+.factory('TenantsTreeStatus', function () {
   return {
     isLoaded: false
   };
-});
+})
 
-module.controller('TenantsTreeCtrl', function($scope, $stateParams, events, cortex, hierarchyUtils, TenantsTreeStatus, _) {
+.controller('TenantsTreeCtrl', function($scope, $stateParams, events, cortex, hierarchyUtils, TenantsTreeStatus, _) {
 
   var loadTenantHierarchy = function() {
     TenantsTreeStatus.isLoaded = false;

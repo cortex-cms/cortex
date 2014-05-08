@@ -1,9 +1,9 @@
-var module = angular.module('cortex.services.cortex', [
+angular.module('cortex.services.cortex', [
   'cortex.settings',
   'cortex.resources'
-]);
+])
 
-module.factory('cortex', function($rootScope, cortexResource, paginatedResource, settings) {
+.factory('cortex', function($rootScope, cortexResource, paginatedResource, settings) {
 
   var categories = cortexResource('/categories/:id', {id: '@id'}, {
     hierarchy: {method: 'GET', url: settings.cortex_base_url + '/categories/:id/hierarchy', isArray: true}

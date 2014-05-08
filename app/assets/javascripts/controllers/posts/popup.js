@@ -1,8 +1,8 @@
-var module = angular.module('cortex.controllers.posts.popup', [
+angular.module('cortex.controllers.posts.popup', [
     'ui.router.state'
-]);
+])
 
-module.controller('PostsPopupCtrl', function($scope, $timeout, $state, PostsPopupService){
+.controller('PostsPopupCtrl', function($scope, $timeout, $state, PostsPopupService){
     $scope.postsPopupService = PostsPopupService;
     $scope.postsPopupService.popupOpen = true;
 
@@ -18,9 +18,9 @@ module.controller('PostsPopupCtrl', function($scope, $timeout, $state, PostsPopu
             }
         }
     });
-});
+})
 
-module.factory('PostsPopupService', function() {
+.factory('PostsPopupService', function() {
     return {
         popupOpen: true
     };

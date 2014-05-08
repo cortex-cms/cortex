@@ -1,5 +1,5 @@
-var module = angular.module('cortex.vendor.underscore', []);
+angular.module('cortex.vendor.underscore', [])
 
-module.config(function($provide) {
+.config(function($provide) {
   $provide.constant('_', window._);
 });

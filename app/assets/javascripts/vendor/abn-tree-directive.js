@@ -1,8 +1,6 @@
-var module;
+angular.module('angularBootstrapNavTree', [])
 
-module = angular.module('angularBootstrapNavTree', []);
-
-module.directive('abnTree', function($timeout) {
+.directive('abnTree', function($timeout) {
   return {
     restrict: 'E',
     templateUrl: 'vendor/abn-tree.html',

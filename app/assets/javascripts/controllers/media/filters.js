@@ -1,7 +1,7 @@
-var module = angular.module('cortex.controllers.media.filters', [
-]);
+angular.module('cortex.controllers.media.filters', [
+])
 
-module.controller('MediaFiltersCtrl', function($scope){
+.controller('MediaFiltersCtrl', function($scope){
 
     $scope.data = {
         mediaTypes: [

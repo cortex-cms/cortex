@@ -1,9 +1,9 @@
-var module = angular.module('cortex.controllers.organizations', [
+angular.module('cortex.controllers.organizations', [
     'ui.router.state',
     'cortex.settings'
-]);
+])
 
-module.controller('OrganizationsCtrl', function ($scope, $stateParams, $state, events, organizations) {
+.controller('OrganizationsCtrl', function ($scope, $stateParams, $state, events, organizations) {
 
     $scope.data = {
         organizations: organizations

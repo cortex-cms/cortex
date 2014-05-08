@@ -1,4 +1,4 @@
-var module = angular.module('cortex.controllers.media.edit', [
+angular.module('cortex.controllers.media.edit', [
     'ui.router.state',
     'ui.bootstrap.datepicker',
     'angular-flash.service',
@@ -6,9 +6,9 @@ var module = angular.module('cortex.controllers.media.edit', [
     'unsavedChanges',
     'cortex.services.cortex',
     'cortex.filters'
-]);
+])
 
-module.controller('MediaEditCtrl', function($scope, $filter, $stateParams, $state, $timeout, flash, cortex, unsavedChanges) {
+.controller('MediaEditCtrl', function($scope, $filter, $stateParams, $state, $timeout, flash, cortex, unsavedChanges) {
     $scope.datepicker = {
         format: 'yyyy/MM/dd',
         expireAtOpen: false,

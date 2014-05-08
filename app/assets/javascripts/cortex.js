@@ -1,4 +1,4 @@
-var module = angular.module('cortex', [
+angular.module('cortex', [
   // Libraries/Vendor
   'ui.router',
   'ui.router.state',
@@ -11,9 +11,9 @@ var module = angular.module('cortex', [
   'cortex.states',
   'cortex.session',
   'cortex.vendor.moment'
-]);
+])
 
-module.config(function ($provide, $urlRouterProvider, $httpProvider, flashProvider) {
+.config(function ($provide, $urlRouterProvider, $httpProvider, flashProvider) {
   var copy = angular.copy;
 
   $provide.constant('currentUser', copy(window.gon.current_user));
@@ -43,12 +43,12 @@ module.config(function ($provide, $urlRouterProvider, $httpProvider, flashProvid
   flashProvider.infoClassnames.push('alert-info');
   flashProvider.successClassnames.push('alert-success');
   flashProvider.errorClassnames.push('alert-danger');
-});
+})
 
 // CortexAdminCtrl
 // ---------------
 // Cortex's root-level application controller
-module.controller('CortexCtrl', function ($rootScope, $scope, $state, $stateParams, $http, $window, currentUser, moment) {
+.controller('CortexCtrl', function ($rootScope, $scope, $state, $stateParams, $http, $window, currentUser, moment) {
   var isDefined = angular.isDefined;
   // Add $state and $stateParams to root scope for universal access within views
   $rootScope.$state       = $state;

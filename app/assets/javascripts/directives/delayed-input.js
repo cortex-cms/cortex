@@ -1,7 +1,6 @@
-var module = angular.module('cortex.directives.delayedInput', []);
+angular.module('cortex.directives.delayedInput', [])
 
-
-module.directive('delayedInput', function($timeout) {
+.directive('delayedInput', function($timeout) {
     return {
         restrict: 'E',
         require: 'ngModel',

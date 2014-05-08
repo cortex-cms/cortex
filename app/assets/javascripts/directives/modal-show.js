@@ -1,6 +1,6 @@
-var module = angular.module('cortex.directives.modalShow', []);
+angular.module('cortex.directives.modalShow', [])
 
-module.directive("modalShow", function () {
+.directive("modalShow", function () {
     return {
         restrict: "A",
         scope: {

@@ -1,12 +1,12 @@
-var module = angular.module('cortex.controllers.organizations.manage', [
+angular.module('cortex.controllers.organizations.manage', [
     'ui.router.state',
     'angular-flash.service',
     'angular-flash.flash-alert-directive',
     'cortex.services.cortex',
     'cortex.settings'
-]);
+])
 
-module.controller('OrganizationsManageCtrl', function($scope, $stateParams, $state, flash, events, cortex, TenantsTreeStatus) {
+.controller('OrganizationsManageCtrl', function($scope, $stateParams, $state, flash, events, cortex, TenantsTreeStatus) {
     // Open tenant hierarchy and details panels if an organization is selected
     if ($stateParams.organizationId && !$state.includes('cortex.organizations.manage.tenants')) {
         $state.go('.tenants');

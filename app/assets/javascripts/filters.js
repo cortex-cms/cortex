@@ -1,15 +1,15 @@
-var module = angular.module('cortex.filters', []);
+angular.module('cortex.filters', [])
 
 // Turns underscores into spaces, capitalizes first letter of string
-module.filter('humanize', function() {
+.filter('humanize', function() {
   return function(string) {
     string = string.split('_').join(' ').toLowerCase();
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-});
+})
 
 // Turns Media into its HTML representation
-module.filter('mediaToHtml', function() {
+.filter('mediaToHtml', function() {
   return function(media) {
     var outputHtml;
 
@@ -36,23 +36,23 @@ module.filter('mediaToHtml', function() {
 
     return outputHtml;
   };
-});
+})
 
-module.filter('tagList', function() {
+.filter('tagList', function() {
     return function(tags) {
         return _.map(tags, function(t) { return t.name; }).join(', ');
     };
-});
+})
 
-module.filter('publishStatus', function() {
+.filter('publishStatus', function() {
     return function(dateStr) {
         var date = Date.parse(dateStr);
         return date < new Date() ? 'Scheduled' : 'Published';
     };
-});
+})
 
 // https://gist.github.com/thomseddon/3511330
-module.filter('bytes', function(){
+.filter('bytes', function(){
     return function(bytes, precision) {
 
         if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) {

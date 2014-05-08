@@ -1,13 +1,13 @@
-var module = angular.module('cortex.controllers.media.new', [
+angular.module('cortex.controllers.media.new', [
     'ui.router.state',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.progressbar',
     'angularFileUpload',
     'angular-flash.service',
     'cortex.settings'
-]);
+])
 
-module.controller('MediaNewCtrl', function($scope, $timeout, $upload, $state, flash, settings) {
+.controller('MediaNewCtrl', function($scope, $timeout, $upload, $state, flash, settings) {
 
     // angular-bootstrap datepicker settings
     $scope.datepicker = {

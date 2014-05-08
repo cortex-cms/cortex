@@ -1,23 +1,23 @@
-var module = angular.module('cortex.resources', [
+angular.module('cortex.resources', [
   'ngResource',
   'cortex.settings',
   'cortex.session'
-]);
+])
 
-module.constant('defaultActions', {
+.constant('defaultActions', {
   'get':    {method: 'GET'},
   'save':   {method: 'POST'},
   'query':  {method: 'GET', isArray: true},
   'remove': {method: 'DELETE'},
   'delete': {method: 'DELETE'}
-});
+})
 
-module.constant('updateCreateActions', {
+.constant('updateCreateActions', {
   update: {method: 'PUT', inArray: false},
   create: {method: 'POST'}
-});
+})
 
-module.factory('cortexResource', function($resource, settings, currentUser, updateCreateActions) {
+.factory('cortexResource', function($resource, settings, currentUser, updateCreateActions) {
   return function (url, params, actions) {
     actions = angular.extend(updateCreateActions, actions);
 
@@ -28,9 +28,9 @@ module.factory('cortexResource', function($resource, settings, currentUser, upda
     };
     return resource;
   };
-});
+})
 
-module.factory('paginatedResource', function(cortexResource, defaultActions) {
+.factory('paginatedResource', function(cortexResource, defaultActions) {
   var forEach    = angular.forEach,
     extend     = angular.extend,
     isFunction = angular.isFunction;
@@ -92,5 +92,4 @@ module.factory('paginatedResource', function(cortexResource, defaultActions) {
 
     return resource;
   };
-});
-
+})

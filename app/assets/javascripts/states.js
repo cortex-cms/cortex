@@ -114,9 +114,9 @@ angular.module('cortex.states', [
         post: function() {
           return null;
         },
-        categories: function(cortex) {
+        categories: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
-        }
+        }]
       },
       data: {
         ncyBreadcrumbLabel: 'New Post'
@@ -128,12 +128,12 @@ angular.module('cortex.states', [
       templateUrl: 'posts/edit.html',
       controller: 'PostsEditCtrl',
       resolve: {
-        post: function(cortex, $stateParams) {
+        post: ['cortex', '$stateParams', function(cortex, $stateParams) {
           return cortex.posts.get({id: $stateParams.postId}).$promise;
-        },
-        categories: function(cortex) {
+        }],
+        categories: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
-        }
+        }]
       },
       data: {
         ncyBreadcrumbLabel: 'Edit Post'
@@ -287,9 +287,9 @@ angular.module('cortex.states', [
       abstract: true,
       controller: 'OrganizationsCtrl',
       resolve: {
-        organizations: function(cortex) {
+        organizations: ['cortex', function(cortex) {
           return cortex.tenants.query().$promise;
-        }
+        }]
       },
       data: {
         ncyBreadcrumbLabel: 'Tenants'
@@ -344,9 +344,9 @@ angular.module('cortex.states', [
         }
       },
       resolve: {
-        organization: function($stateParams, cortex) {
+        organization: ['$stateParams', 'cortex', function($stateParams, cortex) {
           return cortex.tenants.get({id: $stateParams.organizationId, include_children: true}).$promise;
-        }
+        }]
       },
       data: {
         ncyBreadcrumbLabel: false

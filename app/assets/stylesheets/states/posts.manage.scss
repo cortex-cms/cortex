@@ -1,0 +1,38 @@
+  #post-grid {
+    height: 400px;
+  }
+
+  #batch-and-search {
+    margin-bottom: 10px;
+  }
+
+  #post-search {
+    width: 250px;
+  }
+
+.posts-filters {
+  @include make-md-column(2, 0);
+  @media (min-width: $screen-md-min) {
+    padding-right: $standard-margin * 2;
+  }
+}
+
+.posts-grid {
+  @include make-md-column(10, 0);
+}
+
+////////////////////////////////
+// Posts Index Table
+
+.posts-table th{
+  cursor: default;
+  background: white;
+}
+
+.posts-table thead tr:hover {
+  color: black;
+}
+
+.posts-table tbody tr:hover {
+  @extend .btn:hover;
+}

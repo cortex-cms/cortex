@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
 ruby '2.1.1'
 
@@ -26,15 +27,35 @@ gem 'haml'
 # Locked to 4.0.2 until the following issue is closed
 # https://github.com/rails/sass-rails/issues/191
 gem 'sass-rails', '4.0.2'
-gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 
 gem 'sprockets'
 
 # JS
-gem 'angularjs-rails'
+gem 'ng-rails-csrf'
+gem 'angular-rails-templates'
+gem 'gon'
 gem 'jquery-rails'
+gem 'momentjs-rails'
+gem 'ngmin-rails'
+gem 'therubyracer'
+gem 'turbolinks'
 gem 'uglifier'
+gem 'underscore-rails'
+
+gem 'rails-assets-angular'
+gem 'rails-assets-angular-animate'
+gem 'rails-assets-angular-bootstrap', '~> 0.10.0'
+gem 'rails-assets-angular-flash'
+gem 'rails-assets-angular-sanitize'
+gem 'rails-assets-angular-resource'
+gem 'rails-assets-angular-cookies'
+gem 'rails-assets-angular-ui-router'
+gem 'rails-assets-angular-bootstrap-datetimepicker'
+gem 'rails-assets-angular-redactor'
+gem 'rails-assets-angularjs-file-upload'
+gem 'rails-assets-ng-table'
+gem 'rails-assets-bootstrap-sass-official'
 
 # ActiveRecord
 gem 'rails-observers'
@@ -126,3 +147,8 @@ group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
 end
+
+group :assets do
+  gem 'coffee-rails'
+end
+

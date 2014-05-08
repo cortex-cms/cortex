@@ -1,0 +1,61 @@
+<header class="navbar navbar-admin navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars nav-button"></i>
+      </button>
+
+      <a class="navbar-brand" href="#">{Cortex}</a>
+    </div>
+
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-items-admin small">
+        <li ng-class="{ active: $state.includes('cortex.organizations') }"><a class="navbar-item navbar-item-tenant" ui-sref="cortex.organizations.manage">Tenant Management</a></li>
+        <li ng-class="{ active: $state.includes('cortex.media') }"><a class="navbar-item navbar-item-media" ui-sref="cortex.media.manage.components">Media Library</a></li>
+        <li ng-class="{ active: $state.includes('cortex.permissions') }"><a class="navbar-item navbar-item-permissions" ui-sref="cortex.permissions">Roles/Permissions</a></li>
+        <li ng-class="{ active: $state.includes('cortex.posts') }"><a class="navbar-item navbar-item-posts" ui-sref="cortex.posts.manage.components">Posts</a></li>
+        <li ng-class="{ active: $state.includes('cortex.products') }"><a class="navbar-item navbar-item-apps" ui-sref="cortex.products">Apps/Products</a></li>
+        <li class="visible-sm visible-xs"><a class="navbar-item" href="#">My Profile</a></li>
+        <li class="visible-sm visible-xs"><a class="navbar-item" ng-click="logout()">Log Out</a></li>
+      </ul>
+
+      <div class="profile-search">
+        <div class="navbar-profile-box">
+          <div class="navbar-profile-avatar"></div>
+
+          <div class="navbar-profile-text">
+            <strong>{{ currentUser.firstname }}</strong><br>
+            <span class="smaller">
+              <a href="#">My Profile</a> &bull; <a href="#" ng-click="logOut()">Log Out</a>
+            </span>
+          </div>
+        </div>
+
+        <div class="navbar-form">
+          <div class="input-group input-group-sm">
+            <form role="search">
+              <input type="text" class="form-control input-sm form-search" placeholder="Search Cortex"><span class="input-group-btn"><button type="submit" class="btn btn-xs btn-search"><i class="fa fa-search"></i></button></span>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb-container">
+  <div class="container">
+      <div ncy-breadcrumb></div>
+  </div>
+</div>
+
+<main class="container content">
+  <div flash-alert active-class="in alert" class="alert-box fade-slow">
+    <span class="alert-message">{{flash.message}}</span>
+  </div>
+
+  <div class="view" ui-view></div>
+</main>
+
+<footer></footer>

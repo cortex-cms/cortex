@@ -20,15 +20,15 @@ services:
   - mongodb
   - redis-server
 notifications:
-  hipchat: 31ca9ff739b018ecd38b1f133947e4@Developers
+  hipchat: 31ca9ff739b018ecd38b1f133947e4@Cortex
 deploy:
   - provider: cloud66
     master:
-    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/4f1165ee36667aba67fdf1023e3706dc
+    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/b7cbba409a70314651a4da8e7551fbab
     on: develop
     edge: true
   - provider: cloud66
     master:
-    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/91ac01fc4112f0492bc571cc72d16a5d
+    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/fde5a72f14c83c41bc72fbad298a7e84
     on: master
     edge: true

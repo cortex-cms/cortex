@@ -10,10 +10,10 @@
                    html: {role: 'login', novalidate: '', name: 'loginForm'}) do |f|
           .form-group
             = f.text_field :email, class: 'form-control', autofocus: true, placeholder: 'Email', required: '',
-                           'ng-model' => 'login.login'
+                           type: :email, 'ng-model' => 'login.login'
           .form-group
             = f.password_field :password, class: 'form-control', placeholder: 'Password', required: '',
-                               'ng-model' => 'login.password'
+                           'ng-model' => 'login.password'
           %label
             = f.check_box :remember_me
             Remember me

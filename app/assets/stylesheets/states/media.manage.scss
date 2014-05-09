@@ -1,35 +1,15 @@
-.admin-media {
+.admin-media, .posts-media {
 
-  #media-filter-date-clear-btn {
-    margin-top: $standard-margin;
-  }
-
-  #media-grid {
-    height: 400px;
-  }
-
-  #batch-and-search {
-    margin-bottom: $standard-margin;
-  }
-
-  #media-search {
-    width: 250px;
+  .media-search {
+    @include make-md-column(4);
+    @extend .pull-right;
   }
 
   .media-filters {
-    @include make-md-column(2, 0);
-    @media (min-width: $screen-md-min) {
-      padding-right: $standard-margin * 2;
-    }
+    @include make-md-column(2);
   }
 
   .media-grid {
-    @include make-md-column(10, 0);
-
-    .media-data-row{
-      border-bottom: $standard-border;
-      margin-bottom: $standard-margin;
-      padding-bottom: $standard-margin;
-    }
+    @include make-md-column(10);
   }
 }

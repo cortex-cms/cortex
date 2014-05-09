@@ -11,7 +11,7 @@
     </ul>
   </div>
 
-  <div id="media-search" class="pull-right">
+  <div class="media-search">
     <delayed-input
              autofocus="true"
              class="form-control input-sm"
@@ -85,11 +85,13 @@
           </div>
 
           <div class="col-xs-10">
-            <a href="{{media.attachment_url}}" target="_blank">
+            <a class="thumbnail" href="{{media.attachment_url}}" target="_blank">
               <img ng-if="media.thumbs"
                  ng-src="{{ media.thumbs.mini }}"
                  alt="Thumbnail">
-              <img ng-if="!media.thumbs" ph-img="100x100" ph-text="{{ media.general_type | uppercase }}"
+              <img ng-if="!media.thumbs"
+                 ph-img="100x100"
+                 ph-text="{{ media.general_type | uppercase }}"
                  alt="Thumbnail">
             </a>
           </div>

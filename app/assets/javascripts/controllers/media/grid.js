@@ -1,4 +1,4 @@
-var module = angular.module('cortex.controllers.media.grid', [
+angular.module('cortex.controllers.media.grid', [
     'ui.router.state',
     'ui.bootstrap',
     'placeholders.img',
@@ -10,9 +10,9 @@ var module = angular.module('cortex.controllers.media.grid', [
     'cortex.controllers.posts.popup',
     'cortex.filters',
     'cortex.services.cortex'
-]);
+])
 
-module.controller('MediaGridCtrl', function($scope, $stateParams, $state, cortex, settings, flash, PostBodyEditorService, PostsPopupService){
+.controller('MediaGridCtrl', function($scope, $stateParams, $state, cortex, settings, flash, PostBodyEditorService, PostsPopupService){
 
     $scope.data = {};
 

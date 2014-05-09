@@ -39,6 +39,10 @@ class Post < ActiveRecord::Base
     indexes :job_phase,         :analyzer => :keyword
   end
 
+  def published?
+    published_at <= DateTime.now
+  end
+
   private
 
   def update_media_from_body!

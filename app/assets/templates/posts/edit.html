@@ -132,6 +132,7 @@
                        type="text"
                        class="form-control"
                        placeholder="enter an author for this post (required)"
+                       ng-init="data.post.author = data.post.author || currentUser.fullname"
                        ng-model="data.post.author"
                        ng-minlength="1"
                        ng-maxlength="255"

@@ -1,37 +1,43 @@
 angular.module('cortex.util', [])
 
 .constant('util', {
-  supplant: function(str, obj) {
+  supplant: function (str, obj) {
     return str.replace(
-    /\{([^{}]*)\}/g,
-    function (a, b) {
-      var r = obj[b];
-      return typeof r === 'string' || typeof r === 'number' ? r : a;
-    }
+      /\{([^{}]*)\}/g,
+      function (a, b) {
+        var r = obj[b];
+        return typeof r === 'string' || typeof r === 'number' ? r : a;
+      }
     );
   },
 
-  randomString: function(length) {
+  randomString: function (length) {
     var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var result = '';
     for (var i = 0; i < length; ++i) {
-    result += chars[Math.round(Math.random() * (chars.length - 1))];
+      result += chars[Math.round(Math.random() * (chars.length - 1))];
     }
     return result;
   },
 
-  insert: function(str, idx, substr) {
+  insert: function (str, idx, substr) {
     return str.substr(0, idx) + substr + str.substr(idx);
+  },
+
+  isEmpty: function (str) {
+    return (!str || 0 === str.length);
   }
+
+  // Eventually replace many of these util functions with Underscore-String
 })
 
-.factory('hierarchyUtils', function(){
+.factory('hierarchyUtils', function () {
   return {
-    flattenTenantHierarchy: function(tenants) {
-      var flatten = function(tenants, result){
-        _.each(tenants, function(tenant){
+    flattenTenantHierarchy: function (tenants) {
+      var flatten = function (tenants, result) {
+        _.each(tenants, function (tenant) {
           result.push(tenant);
-          if (tenant.children && tenant.children.length > 0){
+          if (tenant.children && tenant.children.length > 0) {
             flatten(tenant.children, result);
           }
         });
@@ -43,8 +49,8 @@ angular.module('cortex.util', [])
   };
 })
 
-.filter('totalTenants', function(hierarchyUtils){
-  return function(children) {
+.filter('totalTenants', function (hierarchyUtils) {
+  return function (children) {
     return hierarchyUtils.flattenTenantHierarchy(children).length;
   };
 });

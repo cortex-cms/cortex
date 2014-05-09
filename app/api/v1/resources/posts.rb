@@ -65,9 +65,9 @@ module API::V1
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'
-          authorize! :view, Post
+          authorize! :view, post!
 
-          present Post.find(params[:id]), with: Entities::Post
+          present post, with: Entities::Post
         end
 
         desc 'Create a post'

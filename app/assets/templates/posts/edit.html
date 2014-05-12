@@ -442,12 +442,10 @@
               </p>
               <div>
                   <span class="dropdown" on-toggle="toggled(open)">
-                      <a href class="dropdown-toggle">
-                          Choose from the most pospular tags
-                      </a>
+                      <a href class="dropdown-toggle">Popular Tags</a>
                       <ul class="dropdown-menu">
-                          <li ng-repeat="choice in tags">
-                              <a href>{{choice}}</a>
+                          <li ng-repeat="tag in data.popularTags">
+                              <a ng-click="addTag(tag)">{{ tag.name }} <span class="pull-right">{{ tag.count }}</span></a>
                           </li>
                       </ul>
                   </span>

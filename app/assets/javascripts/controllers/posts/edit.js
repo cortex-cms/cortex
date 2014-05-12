@@ -10,10 +10,11 @@ angular.module('cortex.controllers.posts.edit', [
   'cortex.services.cortex',
   'cortex.filters',
   'cortex.util',
+  'cortex.vendor.underscore',
   'ngTagsInput'
 ])
 
-.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, cortex, post, categories, currentUser, PostBodyEditorService) {
+.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, cortex, post, categories, currentUser, PostBodyEditorService, _) {
 
   $scope.data = {
     savePost: function() {
@@ -92,6 +93,8 @@ angular.module('cortex.controllers.posts.edit', [
     return cortex.posts.tags({s: search}).$promise;
   };
 
+  $scope.data.popularTags = cortex.posts.tags({popular: true});
+
   // angular-bootstrap datetimepicker settings
   $scope.datetimepicker = {
     format: 'MMMM Do YYYY, h:mm:ss a'
@@ -144,6 +147,14 @@ angular.module('cortex.controllers.posts.edit', [
   $scope.redactorOptions = {
     plugins: ['media'],
     minHeight: 400
+  };
+
+  // Adds a tag to tag_list if it doesn't already exist in array
+  $scope.addTag = function(tag) {
+    if (_.some($scope.data.post.tag_list, function(t) { return t.name == tag.name; })) {
+      return;
+    }
+    $scope.data.post.tag_list.push({name: tag.name, id: tag.id});
   };
 })
 

@@ -74,6 +74,10 @@ module API::V1
             ? Post.tag_counts_on(:tags).where('name ILIKE ?', "%#{params[:s]}%") \
             : Post.tag_counts_on(:tags)
 
+          if params[:popular]
+            tags = tags.order('count DESC').limit(20)
+          end
+
           present tags, with: Entities::Tag
         end
 

@@ -1,24 +1,33 @@
 ////////////////////////////////
 // Inputs
 
-.post-form-main {
-  @include make-md-column(8, 0);
+.admin-posts {
 
-  .input-group .post-datetimepicker {
-    min-width: 25em;
+  .post-form-main {
+    @include make-md-column(8, 0);
+
+    .input-group .post-datetimepicker {
+      min-width: 25em;
+    }
   }
-}
 
-.post-form-side {
-  @include make-md-column(4, 0);
-}
+  .post-form-side {
+    @include make-md-column(4, 0);
+  }
 
-.post-action-buttons {
-  @include make-md-column(8, 0);
-}
+  .post-action-buttons {
+    @include make-md-column(8, 0);
+  }
 
-.post-form-main, .post-action-buttons {
-  @media (min-width: $screen-md-min) {
-    padding-right: $standard-margin * 2;
+  .post-form-main, .post-action-buttons {
+    @media (min-width: $screen-md-min) {
+      padding-right: $standard-margin * 2;
+    }
+  }
+
+  // Emphasize border of editor
+  .redactor_editor {
+    border: 1px solid #cccccc;
+    border-top: none;
   }
 }

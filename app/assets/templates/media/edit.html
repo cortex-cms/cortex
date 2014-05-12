@@ -1,38 +1,44 @@
 <h3 class="heading-decorative">Media Details: {{media.name}}</h3>
 
-<div class="file-details">
-  <img src="{{media.thumbs.mini}}" alt="{{media.alt}}" />
+<div class="media-file-details">
+  <div class="panel panel-default">
+    <div class="panel-heading">File Info</div>
 
-  <dl class="smaller word-break-all">
-    <dt>Filename</dt>
-    <dd>{{media.file_name}}</dd>
+    <div class="panel-body">
+      <img src="{{media.thumbs.mini}}" alt="{{media.alt}}"/>
 
-    <dt>File Type</dt>
-    <dd>{{media.content_type}}</dd>
+      <dl class="smaller word-break-all">
+        <dt>Filename</dt>
+        <dd>{{media.file_name}}</dd>
 
-    <dt>File Size</dt>
-    <dd>{{media.file_size | bytes}}</dd>
+        <dt>File Type</dt>
+        <dd>{{media.content_type}}</dd>
 
-    <span ng-if="media.dimensions">
-      <dt>Dimensions</dt>
-      <dd>{{media.dimensions.0}} x {{media.dimensions.1}}</dd>
-    </span>
+        <dt>File Size</dt>
+        <dd>{{media.file_size | bytes}}</dd>
 
-    <dt>Author</dt>
-    <dd>{{media.creator.name}}</dd>
+        <span ng-if="media.dimensions">
+          <dt>Dimensions</dt>
+          <dd>{{media.dimensions.0}} x {{media.dimensions.1}}</dd>
+        </span>
 
-    <dt>Created</dt>
-    <dd>{{media.created_at | date:"y/M/d h:mm:ss a"}}</dd>
+        <dt>Author</dt>
+        <dd>{{media.creator.fullname}}</dd>
 
-    <dt>Last Modified</dt>
-    <dd>{{media.updated_at | date:"y/M/d h:mm:ss a"}}</dd>
+        <dt>Created</dt>
+        <dd>{{media.created_at | date:"y/M/d h:mm:ss a"}}</dd>
 
-    <dt>Last Published</dt>
-    <dd>Placeholder</dd>
+        <dt>Last Modified</dt>
+        <dd>{{media.updated_at | date:"y/M/d h:mm:ss a"}}</dd>
 
-    <dt>Direct URL</dt>
-    <dd><a href="{{media.attachment_url}}">{{media.attachment_url}}</a></dd>
-  </dl>
+        <dt>Last Published</dt>
+        <dd>Placeholder</dd>
+
+        <dt>Direct URL</dt>
+        <dd><a href="{{media.attachment_url}}">{{media.attachment_url}}</a></dd>
+      </dl>
+    </div>
+  </div>
 </div>
 
 <div class="media-edit-form">
@@ -107,5 +113,6 @@
               class="btn btn-sm btn-default"
               ng-click="cancel()">Cancel</button>
       </dd>
+    </dl>
   </form>
 </div>

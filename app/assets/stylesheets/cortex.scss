@@ -237,7 +237,7 @@ input.form-control[required]:not(:focus) {
 }
 
 .navbar-admin {
-  @include gradient-vertical-three-colors(#022745, #104070, 70%, #09335B);
+  background-color: #104070;
   padding: 0;
   font-family: 'PT Sans', Arial, sans-serif;
 }

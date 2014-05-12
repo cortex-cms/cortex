@@ -2,11 +2,13 @@ angular.module('cortex.controllers.tenants.edit', [
     'ui.router.state',
     'ui.bootstrap.datepicker',
     'angular-flash.service',
+    'angularBootstrapNavTree',
     'cortex.directives.tenantSettings',
-    'cortex.settings'
+    'cortex.settings',
+    'cortex.util'
 ])
 
-.controller('EditTenantsCtrl', function($scope, $stateParams, $state, $timeout, events, cortex, hierarchyUtils, flash) {
+.controller('EditTenantsCtrl', function($scope, $stateParams, $state, $timeout, flash, events, cortex, util) {
 
     // angular-bootstrap datepicker settings
     $scope.datepicker = {
@@ -21,7 +23,7 @@ angular.module('cortex.controllers.tenants.edit', [
     };
 
     $scope.levelName = $stateParams.organizationId ? 'tenant' : 'organization';
-    $scope.creatingOrganization = $stateParams.organizationId === '';
+    $scope.creatingOrganization = util.isEmpty($stateParams.organizationId);
 
     // Fetch the tenant or create a new resource
     if ($stateParams.tenantId) {
@@ -43,11 +45,12 @@ angular.module('cortex.controllers.tenants.edit', [
 
     // Fetch organization hierarchy
     if ($stateParams.organizationId) {
-        cortex.tenants.get({id: $stateParams.organizationId, include_children: true}, function(tenant) {
-            $scope.data.tenants.hierarchy = [tenant];
+        cortex.tenants.get({id: $stateParams.organizationId, include_children: true}, function(hierarchy) {
+            $scope.data.tenants.hierarchy = [hierarchy];
         });
     }
-    $scope.creatingTenant = $stateParams.tenantId === '';
+
+    $scope.creatingTenant = util.isEmpty($stateParams.tenantId);
 
     $scope.selectParent = function(tenant){
         $scope.data.tenants.selected = tenant;

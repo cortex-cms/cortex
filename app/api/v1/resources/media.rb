@@ -32,7 +32,7 @@ module API::V1
           authorize! :view, ::Media
           require_scope! :'view:media'
 
-          @media = Media.order(created_at: :desc).page(page).per(per_page)
+          @media = ::Media.order(created_at: :desc).page(page).per(per_page)
 
           set_pagination_headers(@media, 'media')
           present @media, with: Entities::Media

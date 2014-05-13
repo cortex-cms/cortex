@@ -9,6 +9,33 @@ describe API::Resources::Posts do
     login_as user
   end
 
+  describe 'GET /posts' do
+
+    it 'returns an empty array if there are no posts' do
+      get '/api/v1/posts'
+      response.should be_success
+      JSON.parse(response.body).should == []
+    end
+
+    it 'should return two posts' do
+      post_1 = create(:post)
+      post_2 = create(:post)
+      get '/api/v1/posts'
+      response.should be_success
+      JSON.parse(response.body).count.should == 2
+    end
+
+    it 'should return paginated results' do
+      5.times { create(:post) }
+      get '/api/v1/posts?per_page=2'
+      response.should be_success
+      JSON.parse(response.body).count.should == 2
+      response.headers['X-Total-Items'].should == '5'
+      response.headers['Content-Range'].should == 'posts 0-1:2/5'
+    end
+
+  end
+
   describe 'GET /posts/:id' do
 
     it 'should return the correct post' do

@@ -22,6 +22,8 @@ angular.module('cortex.controllers.posts.edit', [
 
       $scope.data.post.$save(function(post) {
         flash.success = 'Saved "' + post.title + '"';
+
+        $state.go('^.manage.components');
       });
     },
     phases: [

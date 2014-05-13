@@ -44,7 +44,32 @@ module API::V1
           require_scope! :'view:posts'
           authorize! :view, Post
 
-          present Post.page(page).per(per_page), with: Entities::Post
+          @posts = Post.order(created_at: :desc).page(page).per(per_page)
+
+          set_pagination_headers(@posts, 'posts')
+          present @posts, with: Entities::Post
+        end
+
+        desc 'Search for posts'
+        params do
+          use :pagination
+        end
+        get :search do
+          require_scope! :'view:posts'
+          authorize! :view, ::Media
+
+          q = params[:q]
+          if q.to_s != ''
+            @posts = Post.search :load => true, :page => page, :per_page => per_page do
+              query { string q }
+              sort { by :created_at, :desc }
+            end
+          else
+            @posts = Post.order(created_at: :desc).page(page).per(per_page)
+          end
+
+          set_pagination_headers(@media, 'media')
+          present @posts, with: Entities::Post
         end
 
         desc 'Show published posts'

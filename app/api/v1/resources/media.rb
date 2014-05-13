@@ -25,6 +25,9 @@ module API::V1
         helpers Helpers::MediaHelper
 
         desc 'Show all media'
+        params do
+          use :pagination
+        end
         get do
           authorize! :view, ::Media
           require_scope! :'view:media'

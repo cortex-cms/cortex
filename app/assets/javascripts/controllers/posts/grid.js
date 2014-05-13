@@ -5,9 +5,30 @@ angular.module('cortex.controllers.posts.grid', [
     'cortex.filters'
 ])
 
-.controller('PostsGridCtrl', function($scope, cortex){
+.controller('PostsGridCtrl', function($scope, ngTableParams, cortex){
     $scope.data = {
         totalServerItems: 0,
-        posts: cortex.posts.query()
+        posts: []
     };
+
+    $scope.postDataParams = new ngTableParams({
+      page: 1,
+      count: 10,
+      sorting: {
+        created_at: 'desc'
+      }
+    }, {
+      total: 0,
+      getData: function($defer, params) {
+        cortex.posts.searchPaged({page: params.page(), per_page: params.count()},
+          function(posts, headers, paging) {
+            params.total(paging.total);
+            $defer.resolve(posts);
+          },
+          function(data) {
+            $defer.reject(data);
+          }
+        );
+      }
+    });
 });

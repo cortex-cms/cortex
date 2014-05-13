@@ -65,16 +65,16 @@ angular.module('cortex.resources', [
               var start    = range[1];
               var end      = range[2];
               var per_page = range[3];
-              var count    = range[4];
+              var total    = range[4];
               var page     = params.page || 1;
 
               pagination = {
                 page: page,
-                pages: parseInt(count / per_page) + 1,
+                pages: parseInt(total / per_page) + 1,
                 start: start,
                 end: end,
                 per_page: per_page,
-                count: count
+                total: total
               };
             }
 

@@ -105,30 +105,16 @@ angular.module('cortex.controllers.posts.edit', [
   }
 
   $window.RedactorPlugins.media = {
-    init: function ()
-    {
+    init: function() {
       this.buttonAdd('media', 'Media', this.addMediaPopup);
       this.buttonAwesome('media', 'fa-picture-o');
 
       this.buttonRemove('image');
       this.buttonRemove('video');
+
+      $scope.postBodyEditorService.redactor = this;
     },
-    addMediaPopup: function()
-    {
-      // Note: This will get the wrong cursor position if there are multiple Redactor areas and the user selects a different one.
-      if (this.getCurrent()) {
-        $scope.postBodyEditorService.postCursorPosition = this.getCaretOffset(this.getCurrent());
-      }
-      else {
-        $scope.postBodyEditorService.postCursorPosition = 0;
-      }
-
-      $scope.postBodyEditorService.postBody = $scope.data.post.body;
-
-      $scope.$watch('postBodyEditorService.postBody', function(postBody) {
-        $scope.data.post.body = postBody;
-      });
-
+    addMediaPopup: function() {
       $state.go('.media.manage.components');
     }
   };
@@ -139,12 +125,11 @@ angular.module('cortex.controllers.posts.edit', [
   };
 })
 
-.factory('PostBodyEditorService', function($filter, util) {
+.factory('PostBodyEditorService', function($filter) {
   return {
-    postCursorPosition: '',
-    postBody: '',
+    redactor: {},
     addMedia: function(media) {
-      this.postBody = util.insert(this.postBody, this.postCursorPosition, $filter('mediaToHtml')(media));
+      this.redactor.insertHtml($filter('mediaToHtml')(media));
     }
   };
 });

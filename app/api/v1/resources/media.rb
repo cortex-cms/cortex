@@ -29,7 +29,10 @@ module API::V1
           authorize! :view, ::Media
           require_scope! :'view:media'
 
-          present Media.order(created_at: :desc).page(page).per(per_page), with: Entities::Media
+          @media = ::Media.order(created_at: :desc).page(page).per(per_page)
+
+          set_pagination_headers(@media, 'media')
+          present @media, with: Entities::Media
         end
 
         desc 'Search for media'

@@ -9,6 +9,31 @@ describe API::Resources::Media do
     login_as user
   end
 
+  describe 'GET /media' do
+
+    it 'returns an empty array if there is no media' do
+      get '/api/v1/media'
+      response.should be_success
+      JSON.parse(response.body).should == []
+    end
+
+    it 'should return two media items' do
+      2.times { create(:media) }
+      get '/api/v1/media'
+      response.should be_success
+      JSON.parse(response.body).count.should == 2
+    end
+
+    it 'should return paginated results' do
+      5.times { create(:media) }
+      get '/api/v1/media?per_page=2'
+      response.should be_success
+      JSON.parse(response.body).count.should == 2
+      response.headers['X-Total-Items'].should == '5'
+      response.headers['Content-Range'].should == 'media 0-1:2/5'
+    end
+  end
+
   describe 'GET /media/:id' do
 
     let(:media) { create(:media) }

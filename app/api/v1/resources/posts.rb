@@ -62,6 +62,25 @@ module API::V1
           present @posts, with: Entities::PostBasic
         end
 
+        desc 'Show post tags'
+        params do
+          optional :s
+        end
+        get 'tags' do
+          require_scope! :'view:posts'
+          authorize! :view, Post
+
+          tags = params[:s] \
+            ? Post.tag_counts_on(:tags).where('name ILIKE ?', "%#{params[:s]}%") \
+            : Post.tag_counts_on(:tags)
+
+          if params[:popular]
+            tags = tags.order('count DESC').limit(20)
+          end
+
+          present tags, with: Entities::Tag
+        end
+
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'
@@ -92,7 +111,7 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :update, post!
 
-          post.update!(declared(params, include_missing: false))
+          post.update!(declared(params, {include_missing: false}))
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!

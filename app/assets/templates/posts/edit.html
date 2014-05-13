@@ -423,21 +423,33 @@
       <fieldset>
           <legend>Post Tags</legend>
 
-          <div class="input-group-sm" name="job_phase">
-              <input id="postTags"
-                     name="tag_list"
-                     type="text"
-                     class="form-control"
-                     placeholder="enter the tags for this post separated by commas"
-                     ng-model="data.post.tag_list"
-                     ng-maxlength="255"
+          <div name="postTags">
+              <tags-input id="postTags"
+                          name="postTags"
+                          display-property="name"
+                          type="text"
+                          placeholder="enter the tags for this post"
+                          ng-model="data.post.tag_list"
+                          ng-maxlength="255"
                       >
+                  <auto-complete source="loadTags($query)"></auto-complete>
+              </tags-input>
 
               <p ng-show="postForm.tag_list.$error.maxlength"
                  class="has-error">
                   <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                   &nbsp;You've entered too many tags.
               </p>
+              <div>
+                  <span class="dropdown" on-toggle="toggled(open)">
+                      <a href class="dropdown-toggle">Popular Tags</a>
+                      <ul class="dropdown-menu">
+                          <li ng-repeat="tag in data.popularTags">
+                              <a ng-click="addTag(tag)">{{ tag.name }} <span class="pull-right">{{ tag.count }}</span></a>
+                          </li>
+                      </ul>
+                  </span>
+              </div>
           </div>
       </fieldset>
 

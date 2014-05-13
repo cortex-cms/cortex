@@ -9,7 +9,7 @@ module API::V1
         post.display
       end
 
-      expose(:tags) { |post| post.tag_list.join(', ') }
+      expose(:tag_list)
       expose :user, with: 'Entities::UserBasic'
     end
   end

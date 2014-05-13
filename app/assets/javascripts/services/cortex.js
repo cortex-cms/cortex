@@ -10,7 +10,8 @@ angular.module('cortex.services.cortex', [
   });
 
   var posts = paginatedResource('/posts/:id', {id: '@id'}, {
-    feed: {method: 'GET', params: {id: 'feed'}, isArray: true, paginated: true}
+    feed: {method: 'GET', params: {id: 'feed'}, isArray: true, paginated: true},
+    tags: {method: 'GET', params: {id: 'tags'}, isArray: true}
   });
 
   var media = paginatedResource('/media/:id', {id: '@id'}, {

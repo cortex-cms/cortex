@@ -56,7 +56,7 @@ module API::V1
         end
         get :search do
           require_scope! :'view:posts'
-          authorize! :view, ::Media
+          authorize! :view, ::Post
 
           q = params[:q]
           if q.to_s != ''

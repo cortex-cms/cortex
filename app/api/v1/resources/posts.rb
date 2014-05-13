@@ -68,7 +68,7 @@ module API::V1
             @posts = Post.order(created_at: :desc).page(page).per(per_page)
           end
 
-          set_pagination_headers(@media, 'media')
+          set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::Post
         end
 

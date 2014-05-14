@@ -191,8 +191,6 @@ angular.module('cortex.controllers.posts.edit', [
     }
     $scope.data.post.tag_list.push({name: tag.name, id: tag.id});
   };
-
-  $
 })
 
 .factory('PostBodyEditorService', function($filter, util) {

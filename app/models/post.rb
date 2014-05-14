@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
 
   acts_as_taggable
 
-  before_save :update_media_from_body!
+  before_save :update_media!
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
@@ -46,10 +46,18 @@ class Post < ActiveRecord::Base
 
   private
 
-  def update_media_from_body!
+  def update_media!
+    self.media = find_all_associated_media
+  end
+
+  def find_all_associated_media
+    find_media_from_body << self.featured_media
+  end
+
+  def find_media_from_body
     document = Nokogiri::HTML::Document.parse(body)
     media_ids = document.xpath('//@data-media-id').map{|element| element.to_s }
-    self.media = Media.find(media_ids)
+    Media.find(media_ids)
   end
 end
 

@@ -475,18 +475,30 @@
       </fieldset>
 
       <fieldset>
-          <legend>Featured Image</legend>
+          <legend>Featured Media</legend>
 
-          <div class="featured-image">
-            <img src="{{data.post.featured_media.thumbs.mini}}">
-          </div>
-          <div class="featured-image-select">
-            <button type="button"
-                    class="btn btn-primary btn-sm"
-                    ng-model="data.post.featured_media"
-                    ng-click="setFeaturedImage()">
-                Browse...
-            </button>
+          <div ng-show="data.featured_media_too_small" class="alert alert-warning">Warning! Your featured media might appear stretched, as it is smaller than our recommended size.</div>
+
+          <div class="row">
+            <div class="featured-media">
+              <img src="{{data.post.featured_media.thumbs.mini}}" alt="{{data.post.featured_media.}}">
+            </div>
+            <div class="featured-media-info">
+              <strong>{{data.post.featured_media.name}}</strong>
+              <strong>{{data.post.featured_media.taxon}}</strong>
+            </div>
+            <div class="featured-media-select">
+              <button type="button"
+                      class="btn btn-primary btn-sm"
+                      ng-click="setFeaturedImage()">
+                  <i class="fa fa-search-plus"></i> Browse...
+              </button>
+              <button type="button"
+                      class="btn btn-danger btn-sm"
+                      ng-click="removeFeaturedImage()">
+                <i class="fa fa-trash-o"></i> Remove
+              </button>
+            </div>
           </div>
       </fieldset>
 

@@ -127,18 +127,27 @@ angular.module('cortex.controllers.posts.edit', [
     minHeight: 400
   };
 
+  $scope.postBodyEditorService = PostBodyEditorService;
+  $scope.postBodyEditorService.featured = $scope.data.post.featured_media;
+
   $scope.setFeaturedImage = function() {
     PostsPopupService.title = 'Set Featured Image from Media Library';
     PostBodyEditorService.mediaSelectType = mediaSelectType.SET_FEATURED;
     $state.go('.media.manage.components');
-  }
+  };
 
-  $scope.postBodyEditorService = PostBodyEditorService;
-  $scope.postBodyEditorService.featured = $scope.data.post.featured_media;
+  $scope.removeFeaturedImage = function() {
+    $scope.data.post.featured_media = {};
+    $scope.data.post.featured_media_id = null;
+    $scope.data.featured_media_too_small = false;
+  };
 
   $scope.$watch('postBodyEditorService.featured', function(media) {
-    $scope.data.post.featured_media = media;
-    $scope.data.post.featured_media_id = media.id;
+    if (media) {
+      $scope.data.post.featured_media = media;
+      $scope.data.post.featured_media_id = media.id;
+      $scope.data.featured_media_too_small = media.dimensions[0] < 800
+    }
   });
 })
 

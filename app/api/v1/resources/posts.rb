@@ -25,6 +25,7 @@ module API::V1
         optional :author
         optional :tag_list
         optional :category_ids
+        optional :slug
       end
     end
 
@@ -106,35 +107,15 @@ module API::V1
           present tags, with: Entities::Tag
         end
 
-        desc 'Get all post slugs'
-        get :slugs do
-          require_scope! :'view:posts'
-          authorize! :view, Post
-
-          posts = params[:q] \
-            ? Post.where('slug ILIKE ?', "%#{params[:s]}%") \
-            : Post.page(page).per(per_page)
-
-          @slugs = posts.page(page).per(per_page).pluck(:slug)
-
-          set_pagination_headers(@slugs, 'slugs')
-          present @slugs.to_json
-        end
-
-        desc 'Check whether a slug exists'
-        get 'slugs/:slug' do
-          require_scope! :'view:posts'
-          authorize! :view, Post
-
-          Post.exists?(:slug => params[:slug]) ? 204 : 404
-        end
-
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'
-          authorize! :view, post!
 
-          present post, with: Entities::Post
+          @post = Post.where('id = ? OR slug = ?', params[:id].to_i, params[:id]).first || not_found!
+
+          authorize! :view, @post
+
+          present @post, with: Entities::Post
         end
 
         desc 'Create a post'

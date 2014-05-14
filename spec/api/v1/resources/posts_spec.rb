@@ -35,6 +35,20 @@ describe API::Resources::Posts do
         response.should_not be_success
       end
     end
+
+    context 'with featured image' do
+      it 'should create a new post' do
+        expect{ post '/api/v1/posts', attributes_for(:post, :with_featured_image) }.to change(Post, :count).by(1)
+        response.should be_success
+        response.body.should represent(API::Entities::Post, Post.last)
+      end
+
+      it 'should include the featured media in associated media' do
+        post = create(:post, :with_featured_image)
+        expect{ post '/api/v1/posts', post.to_json, application_json }.to change(Post, :count).by(1)
+        Post.last.media.should include(post.featured_media)
+      end
+    end
   end
 
   describe 'PUT /posts/:id' do
@@ -54,6 +68,23 @@ describe API::Resources::Posts do
         post = create(:post)
         expect{ put "/api/v1/posts/#{post.id}", {title: nil}.to_json, application_json }.to_not change(Post, :count).by(1)
         response.should_not be_success
+      end
+    end
+
+    context 'with featured image' do
+      it 'should update the post' do
+        post = create(:post, :with_featured_image)
+        post.title += ' updated'
+        expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count).by(1)
+        response.should be_success
+        response.body.should represent(API::Entities::Post, post)
+      end
+
+      it 'should include the featured media in associated media' do
+        post = create(:post, :with_featured_image)
+        post.title += ' updated'
+        expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count).by(1)
+        Post.find(post.id).media.should include(post.featured_media)
       end
     end
   end

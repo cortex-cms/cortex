@@ -1,6 +1,6 @@
 <h3>Add Post</h3>
 
-<form name="postForm" ng-submit="data.savePost()" novalidate>
+<form id="postForm" name="postForm" ng-submit="data.savePost()" novalidate>
   <div class="post-form-main">
     <fieldset>
         <legend>Post Details</legend>
@@ -40,8 +40,8 @@
                 </div>
                 <p ng-show="!data.post.type && postForm.title.$dirty"
                    class="has-error">
-                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                    &nbsp;A post type is required.
+                    <span class="glyphicon glyphicon-remove"></span>
+                    A post type is required.
                 </p>
             </dd>
         </dl>
@@ -65,20 +65,39 @@
                             (postForm.title.$dirty && !postForm.title.$error.minlength &&
                             !postForm.title.$error.maxlength && postForm.title.$invalid)"
                    class="has-error">
-                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                    &nbsp;A headline for this post is required.
+                    <span class="glyphicon glyphicon-remove"></span>
+                    A headline for this post is required.
                 </p>
 
                 <p ng-show="postForm.title.$error.minlength" class="has-error">
-                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                    &nbsp;Your headline is too short.
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Your headline is too short.
                 </p>
 
                 <p ng-show="postForm.title.$error.maxlength" class="has-error">
-                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                    &nbsp;Your headline is too long.
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Your headline is too long.
                 </p>
             </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt><label for="slug">Slug</label></dt>
+          <dd class="input-group-sm">
+            <input name="slug"
+                   ng-init="data.post.slug = data.post.slug || (data.post.title | slugify)"
+                   placeholder="Unique slug to use in URLs (required)"
+                   type="text"
+                   class="form-control"
+                   ng-model="data.post.slug"
+                   ng-maxlength="255"
+                   required>
+
+            <p ng-show="postForm.slug.$error.unavailable" class="has-error">
+               <span class="glyphicon glyphicon-remove"></span>
+              This slug is already used by <a ui-sref="cortex.posts.edit({postId: data.postWithDuplicateSlug.id})">{{ data.postWithDuplicateSlug.title }}</a>
+            </p>
+          </dd>
         </dl>
 
         <dl class="dl-horizontal">

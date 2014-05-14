@@ -125,6 +125,8 @@ ActiveRecord::Schema.define(version: 20140514042944) do
     t.string   "slug",                              null: false
   end
 
+  add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"

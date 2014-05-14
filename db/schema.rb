@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401042719) do
+ActiveRecord::Schema.define(version: 20140514042944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,27 +100,27 @@ ActiveRecord::Schema.define(version: 20140401042719) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "posts", force: true do |t|
-    t.integer  "user_id",                           null: false
+    t.integer  "user_id",                          null: false
     t.string   "title"
     t.datetime "published_at"
     t.datetime "expired_at"
     t.datetime "deleted_at"
-    t.boolean  "draft",              default: true, null: false
-    t.integer  "comment_count",      default: 0,    null: false
+    t.boolean  "draft",             default: true, null: false
+    t.integer  "comment_count",     default: 0,    null: false
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "short_description"
-    t.integer  "job_phase",                         null: false
-    t.integer  "display",                           null: false
-    t.string   "featured_image_url"
+    t.integer  "job_phase",                        null: false
+    t.integer  "display",                          null: false
     t.text     "notes"
     t.string   "copyright_owner"
     t.string   "seo_title"
     t.string   "seo_description"
     t.string   "seo_preview"
-    t.integer  "type",                              null: false
+    t.integer  "type",                             null: false
     t.string   "author"
+    t.integer  "featured_media_id"
   end
 
   create_table "taggings", force: true do |t|

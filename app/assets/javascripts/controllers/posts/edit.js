@@ -9,10 +9,11 @@ angular.module('cortex.controllers.posts.edit', [
   'cortex.directives.modalShow',
   'cortex.services.cortex',
   'cortex.filters',
-  'cortex.util'
+  'cortex.util',
+  'cortex.settings'
 ])
 
-.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, cortex, post, categories, currentUser, PostBodyEditorService) {
+.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, cortex, mediaSelectType, post, categories, currentUser, PostBodyEditorService, PostsPopupService) {
 
   $scope.data = {
     savePost: function() {
@@ -100,8 +101,6 @@ angular.module('cortex.controllers.posts.edit', [
     }
   };
 
-  $scope.postBodyEditorService = PostBodyEditorService;
-
   if (!$window.RedactorPlugins) {
     $window.RedactorPlugins = {};
   }
@@ -114,9 +113,11 @@ angular.module('cortex.controllers.posts.edit', [
       this.buttonRemove('image');
       this.buttonRemove('video');
 
-      $scope.postBodyEditorService.redactor = this;
+      PostBodyEditorService.redactor = this;
     },
     addMediaPopup: function() {
+      PostsPopupService.title = 'Insert Media from Media Library';
+      PostBodyEditorService.mediaSelectType = mediaSelectType.ADD_MEDIA;
       $state.go('.media.manage.components');
     }
   };
@@ -125,12 +126,27 @@ angular.module('cortex.controllers.posts.edit', [
     plugins: ['media'],
     minHeight: 400
   };
+
+  $scope.setFeaturedImage = function() {
+    PostsPopupService.title = 'Set Featured Image from Media Library';
+    PostBodyEditorService.mediaSelectType = mediaSelectType.SET_FEATURED;
+    $state.go('.media.manage.components');
+  }
+
+  $scope.postBodyEditorService = PostBodyEditorService;
+  $scope.postBodyEditorService.featured = $scope.data.post.featured_media;
+
+  $scope.$watch('postBodyEditorService.featured', function(media) {
+    $scope.data.post.featured_media = media;
+    $scope.data.post.featured_media_id = media.id;
+  });
 })
 
 .factory('PostBodyEditorService', function($filter) {
   return {
     redactor: {},
-    addMedia: function(media) {
+    featured: {},
+    addMediaToPost: function(media) {
       this.redactor.insertHtml($filter('mediaToHtml')(media));
     }
   };

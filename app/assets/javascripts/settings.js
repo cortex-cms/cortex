@@ -8,4 +8,9 @@ angular.module('cortex.settings', [])
   // Events that should be replaced with refactored states
   TENANT_HIERARCHY_CHANGE: '$tenantHierarchyChange',
   ORGANIZATIONS_CHANGE:    '$organizationsChange'
+})
+
+.constant('mediaSelectType', {
+  ADD_MEDIA: 'addMedia',
+  SET_FEATURED: 'setFeatured'
 });

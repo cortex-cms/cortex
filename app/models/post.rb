@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
   belongs_to :user
+  belongs_to :featured_media, class_name: 'Media'
 
   validates :title, :author, :copyright_owner, presence: true, length: { minimum: 1, maximum: 255 }
   validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }

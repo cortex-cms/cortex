@@ -477,16 +477,17 @@
       <fieldset>
           <legend>Featured Image</legend>
 
-          <button type="button"
-                  class="btn btn-primary btn-sm"
-                  ng-model="data.post.featured_image_url">
-              Browse...
-          </button>
-
-          <!-- here is a button that allows you to pick media from the media library,
-          I suppose it would work similarly to the file upload control,
-          but it's pulling from the library rather than your computer
-          -->
+          <div class="featured-image">
+            <img src="{{data.post.featured_media.thumbs.mini}}">
+          </div>
+          <div class="featured-image-select">
+            <button type="button"
+                    class="btn btn-primary btn-sm"
+                    ng-model="data.post.featured_media"
+                    ng-click="setFeaturedImage()">
+                Browse...
+            </button>
+          </div>
       </fieldset>
 
       <fieldset>

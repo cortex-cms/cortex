@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401042719) do
+ActiveRecord::Schema.define(version: 20140514042944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(version: 20140401042719) do
     t.string   "seo_preview"
     t.integer  "type",                              null: false
     t.string   "author"
+    t.integer  "featured_media_id",
+    t.string   "slug",                              null: false
   end
 
   create_table "taggings", force: true do |t|

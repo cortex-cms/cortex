@@ -68,4 +68,14 @@ angular.module('cortex.filters', [])
 
         return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
     };
+})
+
+.filter('slugify', function() {
+  return function(value) {
+    if (!value) {
+      return '';
+    }
+    return value.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+  };
 });
+

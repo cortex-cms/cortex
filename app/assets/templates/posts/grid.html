@@ -1,34 +1,34 @@
 
 <div id="batch-and-search" class="clearfix">
-    <div class="pull-left hmargin-right-small">
-        <button ui-sref="cortex.posts.new" class="btn btn-sm btn-primary" type="button">Create Post</button>
-    </div>
+  <div class="pull-left hmargin-right-small">
+    <button ui-sref="cortex.posts.new" class="btn btn-sm btn-primary" type="button">Create Post</button>
+  </div>
 
-    <div class="dropdown pull-left">
-        <button class="btn btn-sm dropdown-toggle" type="button">Bulk Actions <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li><a>Activate</a></li>
-            <li><a>Deactivate</a></li>
-        </ul>
-    </div>
+  <div class="dropdown pull-left">
+    <button class="btn btn-sm dropdown-toggle" type="button">Bulk Actions <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a>Activate</a></li>
+      <li><a>Deactivate</a></li>
+    </ul>
+  </div>
 
-    <div id="post-search" class="pull-right">
-        <input type="text" class="form-control input-sm" placeholder="Search Posts...">
-    </div>
+  <div id="post-search" class="pull-right">
+    <input type="text" class="form-control input-sm" placeholder="Search Posts...">
+  </div>
 </div>
 
 <div id="post-grid" class="smaller">
-    <table ng-table class="table posts-table">
-        <tr ng-repeat="post in data.posts" ui-sref="cortex.posts.edit({postId: post.id})">
-            <td data-title="'Title'">{{ post.title }}</td>
-            <td data-title="'Type'">{{ post.type }}</td>
-            <td data-title="'Status'">{{ post.published_at|publishStatus }}</td>
-            <td data-title="'Author'">{{ post.author }}</td>
-            <td data-title="'Categories'">{{ post.categories|tagList }}</td>
-            <td data-title="'Created'">{{ post.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
-            <td data-title="'Modified'">{{ post.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
-            <td data-title="'Active'" class="text-center">{{ post.deleted_at == null ? "\u2713" : "" }}</td>
-            <td data-title="'Tags'">{{ post.tags.join(', ') }}</td>
-        </tr>
-    </table>
+  <table ng-table="postDataParams" class="table posts-table">
+    <tr ng-repeat="post in $data" ui-sref="cortex.posts.edit({postId: post.id})">
+      <td data-title="'Title'">{{ post.title }}</td>
+      <td data-title="'Type'">{{ post.type }}</td>
+      <td data-title="'Status'">{{ post.published_at|publishStatus }}</td>
+      <td data-title="'Author'">{{ post.author }}</td>
+      <td data-title="'Categories'">{{ post.categories|tagList }}</td>
+      <td data-title="'Created'">{{ post.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td data-title="'Modified'">{{ post.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td data-title="'Active'" class="text-center">{{ post.deleted_at == null ? "\u2713" : "" }}</td>
+      <td data-title="'Tags'">{{ post.tags.join(', ') }}</td>
+    </tr>
+  </table>
 </div>

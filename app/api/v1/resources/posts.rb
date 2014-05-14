@@ -16,7 +16,7 @@ module API::V1
         optional :short_description
         optional :job_phase
         optional :display
-        optional :featured_image_url
+        optional :featured_media_id
         optional :notes
         optional :copyright_owner
         optional :seo_title
@@ -25,6 +25,7 @@ module API::V1
         optional :author
         optional :tag_list
         optional :category_ids
+        optional :slug
       end
     end
 
@@ -44,7 +45,32 @@ module API::V1
           require_scope! :'view:posts'
           authorize! :view, Post
 
-          present Post.page(page).per(per_page), with: Entities::Post
+          @posts = Post.order(created_at: :desc).page(page).per(per_page)
+
+          set_pagination_headers(@posts, 'posts')
+          present @posts, with: Entities::Post
+        end
+
+        desc 'Search for posts'
+        params do
+          use :pagination
+        end
+        get :search do
+          require_scope! :'view:posts'
+          authorize! :view, ::Post
+
+          q = params[:q]
+          if q.to_s != ''
+            @posts = Post.search :load => true, :page => page, :per_page => per_page do
+              query { string q }
+              sort { by :created_at, :desc }
+            end
+          else
+            @posts = Post.order(created_at: :desc).page(page).per(per_page)
+          end
+
+          set_pagination_headers(@posts, 'posts')
+          present @posts, with: Entities::Post
         end
 
         desc 'Show published posts'
@@ -62,12 +88,34 @@ module API::V1
           present @posts, with: Entities::PostBasic
         end
 
+        desc 'Show post tags'
+        params do
+          optional :s
+        end
+        get 'tags' do
+          require_scope! :'view:posts'
+          authorize! :view, Post
+
+          tags = params[:s] \
+            ? Post.tag_counts_on(:tags).where('name ILIKE ?', "%#{params[:s]}%") \
+            : Post.tag_counts_on(:tags)
+
+          if params[:popular]
+            tags = tags.order('count DESC').limit(20)
+          end
+
+          present tags, with: Entities::Tag
+        end
+
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'
-          authorize! :view, post!
 
-          present post, with: Entities::Post
+          @post = Post.where('id = ? OR slug = ?', params[:id].to_i, params[:id]).first || not_found!
+
+          authorize! :view, @post
+
+          present @post, with: Entities::Post
         end
 
         desc 'Create a post'
@@ -92,7 +140,7 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :update, post!
 
-          post.update!(declared(params, include_missing: false))
+          post.update!(declared(params, {include_missing: false}))
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!

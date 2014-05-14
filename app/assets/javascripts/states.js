@@ -44,7 +44,7 @@ angular.module('cortex.states', [
     .state('cortex.media', {
       url: '/media',
       abstract: true,
-      template: '<div class="admin-media" ui-view></div>',
+      template: '<div class="media" ui-view></div>',
       data: {
         ncyBreadcrumbLabel: 'Media',
         ncyBreadcrumbLink: '/media///'

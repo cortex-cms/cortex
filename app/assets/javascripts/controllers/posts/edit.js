@@ -9,10 +9,13 @@ angular.module('cortex.controllers.posts.edit', [
   'cortex.directives.modalShow',
   'cortex.services.cortex',
   'cortex.filters',
-  'cortex.util'
+  'cortex.util',
+  'cortex.settings',
+  'cortex.vendor.underscore',
+  'ngTagsInput'
 ])
 
-.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, cortex, post, categories, currentUser, PostBodyEditorService) {
+.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, _, cortex, mediaSelectType, post, categories, currentUser, PostBodyEditorService, PostsPopupService) {
 
   $scope.data = {
     savePost: function() {

@@ -10,7 +10,6 @@ angular.module('cortex.controllers.posts.edit', [
   'cortex.services.cortex',
   'cortex.filters',
   'cortex.util',
-  'cortex.directives.delayedInput',
   'cortex.vendor.underscore',
   'ngTagsInput'
 ])

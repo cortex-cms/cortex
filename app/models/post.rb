@@ -51,7 +51,7 @@ class Post < ActiveRecord::Base
   end
 
   def find_all_associated_media
-    find_media_from_body << self.featured_media
+    find_media_from_body.push(self.featured_media).compact.uniq
   end
 
   def find_media_from_body

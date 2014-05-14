@@ -25,6 +25,7 @@ module API::V1
         optional :author
         optional :tag_list
         optional :category_ids
+        optional :slug
       end
     end
 
@@ -109,9 +110,12 @@ module API::V1
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'
-          authorize! :view, post!
 
-          present post, with: Entities::Post
+          @post = Post.where('id = ? OR slug = ?', params[:id].to_i, params[:id]).first || not_found!
+
+          authorize! :view, @post
+
+          present @post, with: Entities::Post
         end
 
         desc 'Create a post'

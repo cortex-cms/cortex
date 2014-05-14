@@ -69,5 +69,9 @@ end
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  firstname              :string(255)      not null
+#  lastname               :string(255)
+#  locale                 :string(30)       default("en_US"), not null
+#  timezone               :string(30)       default("EST"), not null
 #  admin                  :boolean          default(FALSE), not null
 #

@@ -16,7 +16,7 @@ module API::V1
         optional :short_description
         optional :job_phase
         optional :display
-        optional :featured_image_url
+        optional :featured_media_id
         optional :notes
         optional :copyright_owner
         optional :seo_title

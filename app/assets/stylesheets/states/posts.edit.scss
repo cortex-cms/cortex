@@ -25,6 +25,23 @@
     }
   }
 
+  .featured-media {
+    @include make-md-column(4);
+  }
+
+  .featured-media-info {
+    @include make-md-column(4.5);
+  }
+
+  .featured-media-select {
+    @include make-md-column(3.5);
+
+    button {
+      width: 100%;
+      @extend .pull-right;
+    }
+  }
+
   // Emphasize border of editor
   .redactor_editor {
     border: 1px solid #cccccc;

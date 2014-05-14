@@ -110,7 +110,7 @@ end
 
 # == Schema Information
 #
-# Table name: assets
+# Table name: media
 #
 #  id                      :integer          not null, primary key
 #  name                    :string(255)

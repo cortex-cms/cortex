@@ -127,7 +127,7 @@ angular.module('cortex.controllers.posts.edit', [
       // Slug already used
       function(post) {
         // A post may have its own slug
-        if (post.id == $scope.data.post.id) {
+        if (post.id === $scope.data.post.id) {
           $scope.postForm.slug.$error.unavailable = false;
           $scope.data.postWithDuplicateSlug = null;
         }

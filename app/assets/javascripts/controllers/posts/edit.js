@@ -9,7 +9,6 @@ angular.module('cortex.controllers.posts.edit', [
   'cortex.directives.modalShow',
   'cortex.services.cortex',
   'cortex.filters',
-  'cortex.util',
   'cortex.settings',
   'cortex.vendor.underscore',
   'ngTagsInput'
@@ -27,6 +26,7 @@ angular.module('cortex.controllers.posts.edit', [
 
       $scope.data.post.$save(function(post) {
         flash.success = 'Saved "' + post.title + '"';
+        $state.go('^.manage.components');
       });
     },
     phases: [
@@ -152,29 +152,20 @@ angular.module('cortex.controllers.posts.edit', [
   }
 
   $window.RedactorPlugins.media = {
-    init: function ()
+    init: function()
     {
       this.buttonAdd('media', 'Media', this.addMediaPopup);
       this.buttonAwesome('media', 'fa-picture-o');
 
       this.buttonRemove('image');
       this.buttonRemove('video');
+
+      PostBodyEditorService.redactor = this;
     },
     addMediaPopup: function()
     {
-      // Note: This will get the wrong cursor position if there are multiple Redactor areas and the user selects a different one.
-      if (this.getCurrent()) {
-        $scope.postBodyEditorService.postCursorPosition = this.getCaretOffset(this.getCurrent());
-      }
-      else {
-        $scope.postBodyEditorService.postCursorPosition = 0;
-      }
-
-      $scope.postBodyEditorService.postBody = $scope.data.post.body;
-
-      $scope.$watch('postBodyEditorService.postBody', function(postBody) {
-        $scope.data.post.body = postBody;
-      });
+      PostsPopupService.title = 'Insert Media from Media Library';
+      PostBodyEditorService.mediaSelectType = mediaSelectType.ADD_MEDIA;
 
       $state.go('.media.manage.components');
     }
@@ -185,6 +176,29 @@ angular.module('cortex.controllers.posts.edit', [
     minHeight: 400
   };
 
+  $scope.postBodyEditorService = PostBodyEditorService;
+  $scope.postBodyEditorService.featured = $scope.data.post.featured_media;
+
+  $scope.setFeaturedImage = function () {
+    PostsPopupService.title = 'Set Featured Image from Media Library';
+    PostBodyEditorService.mediaSelectType = mediaSelectType.SET_FEATURED;
+    $state.go('.media.manage.components');
+  };
+
+  $scope.removeFeaturedImage = function () {
+    $scope.data.post.featured_media = {};
+    $scope.data.post.featured_media_id = null;
+    $scope.data.featured_media_too_small = false;
+  };
+
+  $scope.$watch('postBodyEditorService.featured', function (media) {
+    if (media) {
+      $scope.data.post.featured_media = media;
+      $scope.data.post.featured_media_id = media.id;
+      $scope.data.featured_media_too_small = media.dimensions[0] < 800
+    }
+  });
+
   // Adds a tag to tag_list if it doesn't already exist in array
   $scope.addTag = function(tag) {
     if (_.some($scope.data.post.tag_list, function(t) { return t.name == tag.name; })) {
@@ -194,12 +208,12 @@ angular.module('cortex.controllers.posts.edit', [
   };
 })
 
-.factory('PostBodyEditorService', function($filter, util) {
+.factory('PostBodyEditorService', function($filter) {
   return {
-    postCursorPosition: '',
-    postBody: '',
-    addMedia: function(media) {
-      this.postBody = util.insert(this.postBody, this.postCursorPosition, $filter('mediaToHtml')(media));
+    redactor: {},
+    featured: {},
+    addMediaToPost: function (media) {
+      this.redactor.insertHtml($filter('mediaToHtml')(media));
     }
   };
 });

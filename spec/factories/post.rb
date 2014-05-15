@@ -11,8 +11,8 @@ FactoryGirl.define do
     draft             true
     user
 
-    trait :with_featured_image do
-      association :featured_media, factory: :media
+    trait :with_featured_media do
+      association :featured_media, factory: [:media, :image]
     end
   end
 end

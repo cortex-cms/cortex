@@ -79,6 +79,16 @@ Cortex::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    s3_credentials => {
+      :bucket            => ENV['S3_BUCKET_NAME'],
+      :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
+
   Paperclip::Attachment.default_options[:storage] = :fog
   Paperclip::Attachment.default_options[:fog_credentials] = {:provider => "Local", :local_root => "#{Rails.root}/public"}
   Paperclip::Attachment.default_options[:fog_directory] = ""

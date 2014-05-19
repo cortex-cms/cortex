@@ -12,7 +12,7 @@ angular.module('cortex.controllers.media.grid', [
     'cortex.services.cortex'
 ])
 
-.controller('MediaGridCtrl', function($scope, $stateParams, $state, cortex, settings, flash, PostBodyEditorService, PostsPopupService){
+.controller('MediaGridCtrl', function($scope, $state, $stateParams, cortex, settings, mediaSelectType, flash, PostBodyEditorService, PostsPopupService){
 
     $scope.data = {};
 
@@ -58,8 +58,14 @@ angular.module('cortex.controllers.media.grid', [
         }
     };
 
-    $scope.insertMedia = function(media) {
-        PostBodyEditorService.addMedia(media);
+    $scope.selectMedia = function(media) {
+        if (PostBodyEditorService.mediaSelectType === mediaSelectType.ADD_MEDIA) {
+            PostBodyEditorService.addMediaToPost(media);
+        }
+        else {
+            PostBodyEditorService.featured = media;
+        }
+
         PostsPopupService.popupOpen = false;
     };
 });

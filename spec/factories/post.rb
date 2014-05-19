@@ -10,5 +10,9 @@ FactoryGirl.define do
     author            :Author
     draft             true
     user
+
+    trait :with_featured_media do
+      association :featured_media, factory: [:media, :image]
+    end
   end
 end

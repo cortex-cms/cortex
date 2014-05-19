@@ -22,6 +22,7 @@ angular.module('cortex.controllers.posts.popup', [
 
 .factory('PostsPopupService', function() {
     return {
-        popupOpen: true
+        popupOpen: true,
+        title: ''
     };
 });

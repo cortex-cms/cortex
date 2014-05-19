@@ -82,6 +82,9 @@ GEM
     awesome_nested_set (3.0.0.rc.4)
       activerecord (>= 4.0.0, < 5)
     awesome_print (1.2.0)
+    aws-sdk (1.40.3)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -464,6 +467,7 @@ DEPENDENCIES
   annotate
   awesome_nested_set (~> 3.0.0.rc.3)
   awesome_print
+  aws-sdk
   bcrypt-ruby
   better_errors
   binding_of_caller

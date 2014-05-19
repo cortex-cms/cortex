@@ -70,7 +70,6 @@ gem 'kaminari'
 gem 'paranoia',  '~> 2.0'
 gem 'pg'
 
-
 # Mongoid
 gem 'mongoid', '~> 4.0.0.beta1', git: 'git://github.com/mongoid/mongoid'
 gem 'bson_ext'
@@ -153,3 +152,6 @@ group :assets do
   gem 'coffee-rails'
 end
 
+group :production do
+  gem 'aws-sdk'
+end

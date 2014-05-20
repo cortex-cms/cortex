@@ -34,10 +34,12 @@ class Post < ActiveRecord::Base
     indexes :short_description, :analyzer => 'snowball'
     indexes :copyright_owner,   :analyzer => 'keyword'
     indexes :author,            :analyzer => 'keyword'
+    indexes :created_at,        :type => 'date', :include_in_all => false
     indexes :published_at,      :type => 'date', :include_in_all => false
     indexes :tags,              :analyzer => :keyword, :as => 'tag_list'
     indexes :categories,        :analyzer => :keyword, :as => 'categories.collect{ |c| c.name }'
     indexes :job_phase,         :analyzer => :keyword
+    indexes :type,              :analyzer => :keyword, :as => 'type'
   end
 
   def published?

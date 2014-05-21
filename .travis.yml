@@ -21,6 +21,11 @@ services:
   - redis-server
 notifications:
   hipchat: 31ca9ff739b018ecd38b1f133947e4@Cortex
+  urls:
+    - 'https://webhooks.gitter.im/e/13594b3ce2e4db11a414'
+  on_success: change
+  on_failure: always
+  on_start: false
 deploy:
   - provider: cloud66
     master:

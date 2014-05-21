@@ -4,6 +4,7 @@ defaults: &defaults
   default_subdomain: public
   allowed_origins:
     - 'localhost:3000'
+    - 'localhost:4000'
     - 'localhost:3001'
     - 'localhost:8000'
     - 'localhost:63342'
@@ -14,6 +15,8 @@ defaults: &defaults
     - '.+\.cbcortex\.com'
   media:
     max_size_mb: 100
+  onet:
+    version: '18.1'
 
 test:
   <<: *defaults

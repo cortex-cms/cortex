@@ -8,7 +8,8 @@ class Post < ActiveRecord::Base
 
   acts_as_taggable
 
-  before_save :update_media!
+  before_save :update_media!, :sanitize_body!
+
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
@@ -48,6 +49,11 @@ class Post < ActiveRecord::Base
 
   def update_media!
     self.media = find_all_associated_media
+  end
+
+  def sanitize_body!
+    puts Cortex.config.sanitize_whitelist.post
+    Sanitize.clean!(self.body, Cortex.config.sanitize_whitelist.post)
   end
 
   def find_all_associated_media

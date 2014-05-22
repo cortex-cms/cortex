@@ -52,7 +52,6 @@ class Post < ActiveRecord::Base
   end
 
   def sanitize_body!
-    puts Cortex.config.sanitize_whitelist.post
     Sanitize.clean!(self.body, Cortex.config.sanitize_whitelist.post)
   end
 

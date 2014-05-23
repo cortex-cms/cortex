@@ -78,12 +78,7 @@ module API::V1
           use :pagination
         end
         get 'feed' do
-          @posts = Post.
-              includes(:categories).
-              published.
-              order(published_at: :desc, created_at: :desc).
-              page(page).per(per_page)
-
+          @posts = PostSearch.with_params(params, true, {page: page, per_page: per_page})
           set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::PostBasic
         end

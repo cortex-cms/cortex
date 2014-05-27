@@ -55,7 +55,7 @@ class Media < ActiveRecord::Base
 
   # This will indicate whether an asset is associated with another
   def consumed?
-    return false
+    false
   end
 
   # 'Human friendly' content type generalization

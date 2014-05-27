@@ -26,6 +26,7 @@ module API::V1
         optional :tag_list
         optional :category_ids
         optional :slug
+        optional :industry_id
       end
     end
 

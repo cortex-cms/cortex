@@ -1,14 +1,20 @@
-class Onet::Occupation < ActiveRecord::Base
-  include Tire::Model::Search
+module Onet
+  class Occupation < ActiveRecord::Base
+    include Tire::Model::Search
+    include Tire::Model::Callbacks
 
-  mapping do
-    indexes :id,                :index => :not_analyzed
-    indexes :soc,               :analyzer => 'keyword'
-    indexes :title,             :analyzer => 'snowball'
-    indexes :description,       :analyzer => 'snowball'
+    has_one :post
+
+    mapping do
+      indexes :id,                :index => :not_analyzed
+      indexes :soc,               :analyzer => 'keyword'
+      indexes :title,             :analyzer => 'snowball'
+      indexes :description,       :analyzer => 'snowball'
+    end
+
+    scope :industries, -> {
+      where('soc like ?', '%0000%')
+    }
   end
-
-  scope :industries, -> {
-    # Search occupations for job families. Broken...
-  }
 end
+

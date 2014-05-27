@@ -8,13 +8,12 @@ module API::V1
 
         desc 'Show all occupations'
         get do
-          authorize! :view, Category
-          present Onet::Occupation.all, with: Entities::Occupation
+          present ::Onet::Occupation.all, with: Entities::Occupation
         end
 
         desc 'Show all industries'
         get :industries do
-          present Onet::Occupation.industries, with: Entities::Occupation
+          present ::Onet::Occupation.industries, with: Entities::Occupation
         end
       end
     end

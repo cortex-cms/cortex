@@ -46,7 +46,7 @@ end
 private
 
 def fetch_onet_db
-  puts 'Downloading..'
+  puts "Downloading ONET db: #{onet_package_name}.."
 
   Net::HTTP.start('www.onetcenter.org') do |http|
     resp = http.get("/dl_files/#{onet_package_name}.zip")
@@ -57,11 +57,33 @@ def fetch_onet_db
 end
 
 def provision_onet_db
-  puts 'Provisioning..'
+  seed_industries
+  provision_onet_occupations
+end
 
-  CSV.foreach(Rails.root.join('tmp', onet_package_name, 'Occupation Data.txt'), :headers => %w(soc title description), :col_sep => "\t") do |row, i|
-    next if i == 0
+def provision_onet_occupations
+  puts 'Provisioning ONET Occupations..'
+
+  first = true
+  CSV.foreach(Rails.root.join('tmp', onet_package_name, 'Occupation Data.txt'), :headers => %w(soc title description), :col_sep => "\t") do |row|
+    if first
+      # Absolutely gross, CSV's foreach doesn't give us a counter, and no way to skip the first row when defining your own headers, so...
+      first = false
+      next
+    end
+
     Onet::Occupation.create!(row.to_hash)
+  end
+end
+
+def seed_industries
+  puts 'Seeding Industries (Job Families)..'
+  industries_seed = SeedData.onet_industries
+
+  industries_seed.each do |industry|
+    unless Onet::Occupation.find_by soc: industry[:soc]
+      Onet::Occupation.create!(industry)
+    end
   end
 end
 

@@ -52,7 +52,7 @@ def fetch_onet_db
     resp = http.get("/dl_files/#{onet_package_name}.zip")
     open(Rails.root.join('tmp', "#{onet_package_name}.zip"), 'wb') { |file| file.write(resp.body) }
 
-    sh "unzip #{Rails.root.join('tmp', "#{onet_package_name}.zip")} -d #{Rails.root.join('tmp')}"
+    sh "unzip -o #{Rails.root.join('tmp', "#{onet_package_name}.zip")} -d #{Rails.root.join('tmp')}"
   end
 end
 

@@ -52,7 +52,9 @@ class Post < ActiveRecord::Base
   end
 
   def sanitize_body!
-    Sanitize.clean!(self.body, Cortex.config.sanitize_whitelist.post)
+    if self.body
+      Sanitize.clean!(self.body, Cortex.config.sanitize_whitelist.post)
+    end
   end
 
   def find_all_associated_media

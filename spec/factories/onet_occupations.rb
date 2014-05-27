@@ -14,8 +14,8 @@
 
 FactoryGirl.define do
   factory :onet_occupation, :class => 'Onet::Occupation' do
-    soc "MyString"
-    title "MyString"
-    description "MyText"
+    soc '11-1011.00'
+    title 'Chief Executives'
+    description 'Determine and formulate policies and provide overall direction of companies or private and public sector organizations within guidelines set up by a board of directors or similar governing body. Plan, direct, or coordinate operational activities at the highest level of management with the help of subordinate executives and staff managers.'
   end
 end

@@ -35,6 +35,7 @@ angular.module('cortex.controllers.posts.edit', [
       'get_the_job',
       'on_the_job'
     ],
+    industries: cortex.occupations.industries(),
     scheduled: [
       true,
       false
@@ -60,6 +61,7 @@ angular.module('cortex.controllers.posts.edit', [
 
   if (post) {
     $scope.data.post = post;
+    $scope.data.post.industry_id = $scope.data.post.industry.id;
 
     var selectedCategoryIds = _.map(post.categories, function(c) { return c.id; });
     _.each(categories, function(category){

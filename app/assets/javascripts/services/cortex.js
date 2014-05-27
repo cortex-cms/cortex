@@ -25,11 +25,16 @@ angular.module('cortex.services.cortex', [
     me: {method: 'GET', params: {id: 'me'}}
   });
 
+  var occupations = cortexResource('/occupations/:id', {id: '@id', isArray: true}, {
+    industries: {method: 'GET', url: settings.cortex_base_url + '/occupations/industries', isArray: true}
+  });
+
   return {
-    categories: categories,
-    posts:      posts,
-    media:      media,
-    tenants:    tenants,
-    users:      users
+    categories:  categories,
+    posts:       posts,
+    media:       media,
+    tenants:     tenants,
+    users:       users,
+    occupations: occupations
   };
 });

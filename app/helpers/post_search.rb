@@ -1,7 +1,18 @@
 module PostSearch
   class << self
-    def with_params(params, published = nil, paging = {})
-      Post.search :load => true, **paging do
+    def with_params(params, published = nil)
+      query = {}
+
+      post_query = params[:q]
+      categories = params[:categories]
+      job_phase  = params[:job_phase]
+      post_type  = params[:post_type]
+
+      if post_query; query[:query_string] = {query: post_query}
+
+      Post.search query: query
+=begin
+      Post.search do
 
         categories = params[:categories]
         job_phase  = params[:job_phase]
@@ -21,6 +32,10 @@ module PostSearch
           by :created_at, :desc
         end
       end
+=end
+    end
+
+    def related(id, published = nil)
     end
   end
 end

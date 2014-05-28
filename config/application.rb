@@ -1,5 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 require 'rails/all'
+require 'elasticsearch/rails/instrumentation'
 Bundler.require(:default, Rails.env)
 
 module Cortex
@@ -27,11 +28,6 @@ module Cortex
     require 'rack/oauth2'
     config.middleware.use Rack::OAuth2::Server::Resource::Bearer, 'OAuth2' do |request|
       Doorkeeper::AccessToken.authenticate(request.access_token) || request.invalid_token!
-    end
-
-    TireAsyncIndex.configure do |config|
-      config.background_engine :sidekiq
-      config.use_queue :default
     end
 
     config.generators do |generator|

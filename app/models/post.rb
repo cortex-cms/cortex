@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
     indexes :categories,        :analyzer => :keyword, :as => 'categories.collect{ |c| c.name }'
     indexes :job_phase,         :analyzer => :keyword
     indexes :type,              :analyzer => :keyword, :as => 'type'
-    indexes :industry,          :analyzer => :keyword, :as => 'industry.title'
+    indexes :industries,        :analyzer => :keyword, :as => 'industry'
   end
 
   def published?

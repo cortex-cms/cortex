@@ -1,7 +1,5 @@
-seed = Hashr.new(YAML.load_file("#{Rails.root}/db/seeds.yml")[Rails.env])
-
 # Create root tenant and user
-tenant_seed   = seed.cortex_tenant
+tenant_seed   = SeedData.cortex_tenant
 user_seed     = tenant_seed.creator
 
 unless Tenant.find_by_name(tenant_seed.name)
@@ -20,4 +18,3 @@ unless Tenant.find_by_name(tenant_seed.name)
   cortex_tenant.user = cortex_user
   cortex_tenant.save!
 end
-

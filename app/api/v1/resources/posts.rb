@@ -26,6 +26,7 @@ module API::V1
         optional :tag_list
         optional :category_ids
         optional :slug
+        optional :industry_id
       end
     end
 
@@ -100,6 +101,12 @@ module API::V1
           end
 
           present tags, with: Entities::Tag
+        end
+
+        desc 'Show all filters/facets for posts'
+        get 'filters' do
+          present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
+          present :categories, ::Category.all, with: Entities::Category
         end
 
         desc 'Show a post'

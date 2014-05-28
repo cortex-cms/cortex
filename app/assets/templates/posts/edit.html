@@ -413,9 +413,8 @@
                       class="form-control"
                       ng-model="data.post.job_phase"
                       ng-options="(phase | humanize) for phase in data.phases"
-                      value="{{ phase }}"
                       required>
-                  <option value="" selected> select a career phase for this post</option>
+                  <option value="" selected>Select a career phase for this post</option>
               </select>
 
               <p ng-show="!data.post.job_phase && postForm.$valid"
@@ -440,6 +439,18 @@
       </fieldset>
 
       <fieldset>
+        <legend>Industry</legend>
+
+        <div class="input-group-sm">
+          <select class="form-control"
+                  ng-model="data.post.industry_id"
+                  ng-options="industry.id as industry.title for industry in data.industries">
+            <option value="" selected>Select an associated industry for this post</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
           <legend>Post Tags</legend>
 
           <div name="postTags">
@@ -449,8 +460,7 @@
                           type="text"
                           placeholder="enter the tags for this post"
                           ng-model="data.post.tag_list"
-                          ng-maxlength="255"
-                      >
+                          ng-maxlength="255">
                   <auto-complete source="loadTags($query)"></auto-complete>
               </tags-input>
 

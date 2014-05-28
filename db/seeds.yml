@@ -37,6 +37,75 @@ defaults: &defaults
         - {name: Promotions & Wages}
         - {name: Work/Life Balance}
         - {name: General}
+  onet_industries:
+    - soc: '11-0000'
+      title: 'Management Occupations'
+
+    - soc: '13-0000'
+      title: 'Business and Financial Operations Occupations'
+
+    - soc: '15-0000'
+      title: 'Computer and Mathematical Occupations'
+
+    - soc: '17-0000'
+      title: 'Architecture and Engineering Occupations'
+
+    - soc: '19-0000'
+      title: 'Life, Physical, and Social Science Occupations'
+
+    - soc: '21-0000'
+      title: 'Community and Social Service Occupations'
+
+    - soc: '23-0000'
+      title: 'Legal Occupations'
+
+    - soc: '25-0000'
+      title: 'Education, Training, and Library Occupations'
+
+    - soc: '27-0000'
+      title: 'Arts, Design, Entertainment, Sports, and Media Occupations'
+
+    - soc: '29-0000'
+      title: 'Healthcare Practitioners and Technical Occupations'
+
+    - soc: '31-0000'
+      title: 'Healthcare Support Occupations'
+
+    - soc: '33-0000'
+      title: 'Protective Service Occupations'
+
+    - soc: '35-0000'
+      title: 'Food Preparation and Serving Related Occupations'
+
+    - soc: '37-0000'
+      title: 'Building and Grounds Cleaning and Maintenance Occupations'
+
+    - soc: '39-0000'
+      title: 'Personal Care and Service Occupations'
+
+    - soc: '41-0000'
+      title: 'Sales and Related Occupations'
+
+    - soc: '43-0000'
+      title: 'Office and Administrative Support Occupations'
+
+    - soc: '45-0000'
+      title: 'Farming, Fishing, and Forestry Occupations'
+
+    - soc: '47-0000'
+      title: 'Construction and Extraction Occupations'
+
+    - soc: '49-0000'
+      title: 'Installation, Maintenance, and Repair Occupations'
+
+    - soc: '51-0000'
+      title: 'Production Occupations'
+
+    - soc: '53-0000'
+      title: 'Transportation and Material Moving Occupations'
+
+    - soc: '55-0000'
+      title: 'Military Specific Occupations'
 
 test:
   <<: *defaults

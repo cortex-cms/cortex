@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514042944) do
+ActiveRecord::Schema.define(version: 20140527164025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,14 @@ ActiveRecord::Schema.define(version: 20140514042944) do
   add_index "oauth_applications", ["owner_id", "owner_type"], name: "index_oauth_applications_on_owner_id_and_owner_type", using: :btree
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
+  create_table "onet_occupations", force: true do |t|
+    t.string   "soc"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", force: true do |t|
     t.integer  "user_id",                          null: false
     t.string   "title"
@@ -120,8 +128,9 @@ ActiveRecord::Schema.define(version: 20140514042944) do
     t.string   "seo_preview"
     t.integer  "type",                             null: false
     t.string   "author"
-    t.integer  "featured_media_id"
     t.string   "slug",                             null: false
+    t.integer  "featured_media_id"
+    t.integer  "industry_id"
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
@@ -139,8 +148,7 @@ ActiveRecord::Schema.define(version: 20140514042944) do
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
 
   create_table "tags", force: true do |t|
-    t.string  "name"
-    t.integer "taggings_count", default: 0
+    t.string "name"
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree

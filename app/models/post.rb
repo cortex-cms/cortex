@@ -8,12 +8,13 @@ class Post < ActiveRecord::Base
 
   acts_as_taggable
 
-  before_save :update_media!
+  before_save :update_media!, :sanitize_body!
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
   belongs_to :user
   belongs_to :featured_media, class_name: 'Media'
+  belongs_to :industry, class_name: '::Onet::Occupation'
 
   validates :title, :author, :copyright_owner, presence: true, length: { minimum: 1, maximum: 255 }
   validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }
@@ -50,6 +51,12 @@ class Post < ActiveRecord::Base
 
   def update_media!
     self.media = find_all_associated_media
+  end
+
+  def sanitize_body!
+    if self.body
+      Sanitize.clean!(self.body, Cortex.config.sanitize_whitelist.post)
+    end
   end
 
   def find_all_associated_media

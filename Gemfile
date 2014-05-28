@@ -67,6 +67,7 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'tire'
 gem 'tire_async_index'
 gem 'kaminari'
+gem 'sanitize'
 gem 'paranoia',  '~> 2.0'
 gem 'pg'
 

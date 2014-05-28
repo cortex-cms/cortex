@@ -10,13 +10,14 @@ angular.module('cortex.services.cortex', [
   });
 
   var posts = paginatedResource('/posts/:id', {id: '@id'}, {
-    feed:   {method: 'GET', params: {id: 'feed'}, isArray: true, paginated: true},
-    tags:   {method: 'GET', params: {id: 'tags'}, isArray: true},
-    search: {method: 'GET', url: settings.cortex_base_url + '/posts/search', isArray: true, paginated: true}
+    feed:    {method: 'GET', params: {id: 'feed'}, isArray: true, paginated: true},
+    tags:    {method: 'GET', params: {id: 'tags'}, isArray: true},
+    search:  {method: 'GET', params: {id: 'search'}, isArray: true, paginated: true},
+    filters: {method: 'GET', params: {id: 'filters'} }
   });
 
   var media = paginatedResource('/media/:id', {id: '@id'}, {
-    search: {method: 'GET', url: settings.cortex_base_url + '/media/search', isArray: true, paginated: true}
+    search: {method: 'GET', params: {id: 'search'}, isArray: true, paginated: true}
   });
 
   var tenants = cortexResource('/tenants/:id', {id: '@id'});
@@ -26,7 +27,7 @@ angular.module('cortex.services.cortex', [
   });
 
   var occupations = cortexResource('/occupations/:id', {id: '@id', isArray: true}, {
-    industries: {method: 'GET', url: settings.cortex_base_url + '/occupations/industries', isArray: true}
+    industries: {method: 'GET', params: {id: 'industries'}, isArray: true}
   });
 
   return {

@@ -14,7 +14,7 @@ angular.module('cortex.controllers.posts.edit', [
   'ngTagsInput'
 ])
 
-.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, _, cortex, mediaSelectType, post, categories, currentUser, PostBodyEditorService, PostsPopupService) {
+.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, _, cortex, mediaSelectType, post, industries, categories, currentUser, PostBodyEditorService, PostsPopupService) {
 
   $scope.data = {
     savePost: function() {
@@ -35,7 +35,7 @@ angular.module('cortex.controllers.posts.edit', [
       'get_the_job',
       'on_the_job'
     ],
-    industries: cortex.occupations.industries(),
+    industries: industries,
     scheduled: [
       true,
       false

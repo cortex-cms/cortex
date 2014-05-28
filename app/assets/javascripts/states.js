@@ -116,6 +116,9 @@ angular.module('cortex.states', [
         },
         categories: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
+        }],
+        filters: ['cortex', function(cortex) {
+          return cortex.posts.filters().$promise;
         }]
       },
       data: {
@@ -133,6 +136,9 @@ angular.module('cortex.states', [
         }],
         categories: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
+        }],
+        filters: ['cortex', function(cortex) {
+          return cortex.posts.filters().$promise;
         }]
       },
       data: {

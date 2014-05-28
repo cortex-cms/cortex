@@ -61,7 +61,10 @@ angular.module('cortex.controllers.posts.edit', [
 
   if (post) {
     $scope.data.post = post;
-    $scope.data.post.industry_id = $scope.data.post.industry.id;
+    
+    if ($scope.data.post.industry) {
+      $scope.data.post.industry_id = $scope.data.post.industry.id;
+    }
 
     var selectedCategoryIds = _.map(post.categories, function(c) { return c.id; });
     _.each(categoriesHierarchy, function(category){

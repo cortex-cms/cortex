@@ -108,6 +108,12 @@ module API::V1
           present tags, with: Entities::Tag
         end
 
+        desc 'Show all filters/facets for posts'
+        get 'filters' do
+          present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
+          present :categories, ::Category.all, with: Entities::Category
+        end
+
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'

@@ -31,6 +31,12 @@ class Post < ActiveRecord::Base
     published_at <= DateTime.now
   end
 
+  class << self
+    def find_by_id_or_slug(id_or_slug)
+      Post.where('id = ? OR slug = ?', id_or_slug.to_i, id_or_slug).first
+    end
+  end
+
   private
 
   def update_media!

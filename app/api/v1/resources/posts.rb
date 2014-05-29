@@ -115,17 +115,14 @@ module API::V1
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'
+          authorize! :view, post!
 
-          @post = Post.where('id = ? OR slug = ?', params[:id].to_i, params[:id]).first || not_found!
-
-          authorize! :view, @post
-
-          present @post, with: Entities::Post
+          present post, with: Entities::Post
         end
 
         desc 'Show related published posts'
         get 'feed/:id/related' do
-          @posts = post!.related(params[:id], true).page(page).per(per_page).records
+          @posts = published_post!.related(true).page(page).per(per_page).records
           set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::PostBasic
         end

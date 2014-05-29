@@ -39,6 +39,7 @@ module SearchablePost
     def search_with_params(params, published = nil)
       query  = { query_string: { query: params[:q] || '*' } }
       filter = { and: { filters: [] } }
+      sort = sort { by :created_at, :desc }
 
       categories = params[:categories]
       job_phase  = params[:job_phase]
@@ -57,7 +58,7 @@ module SearchablePost
 
       if published; filter[:and][:filters] << { range: { published_at: { lte: DateTime.now } } } end
 
-      self.search query: query, filter: filter
+      self.search query: query, filter: filter, sort: sort
     end
   end
 end

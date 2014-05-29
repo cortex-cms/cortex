@@ -62,13 +62,16 @@ module API::V1
 
           q = params[:q]
           if q.to_s != ''
-            @posts = Post.search :load => true, :page => page, :per_page => per_page do
+            @posts = Post.search do
               query { string q }
               sort { by :created_at, :desc }
             end
+            @posts = @posts.page(page).per(per_page).records
           else
             @posts = Post.order(created_at: :desc).page(page).per(per_page)
           end
+
+          @posts = @posts.page(page).per(per_page)
 
           set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::Post
@@ -79,7 +82,7 @@ module API::V1
           use :pagination
         end
         get 'feed' do
-          @posts = PostSearch.with_params(params, true, {page: page, per_page: per_page})
+          @posts = Post.search_with_params(params, true).page(page).per(per_page).records
           set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::PostBasic
         end
@@ -118,6 +121,13 @@ module API::V1
           authorize! :view, @post
 
           present @post, with: Entities::Post
+        end
+
+        desc 'Show related published posts'
+        get 'feed/:id/related' do
+          @posts = post!.related(params[:id], true).page(page).per(per_page).records
+          set_pagination_headers(@posts, 'posts')
+          present @posts, with: Entities::PostBasic
         end
 
         desc 'Create a post'

@@ -2,8 +2,7 @@ require 'digest/sha1'
 require 'mime/types'
 
 class Media < ActiveRecord::Base
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  include SearchableMedia
   include Taxon
 
   acts_as_taggable
@@ -31,28 +30,6 @@ class Media < ActiveRecord::Base
                        :content_type => {:content_type => Cortex.config.media.allowed_media_types.collect{|allowed| allowed[:type]}},
                        :size => {:in => 0..Cortex.config.media.max_size_mb.megabytes}
 
-
-  settings :analysis => {
-      :analyzer => {
-          :taxon_analyzer => {
-              :type => 'custom',
-              :tokenizer => 'standard',
-              :filter => %w(standard lowercase ngram)
-          }
-      }
-  } do
-    mapping do
-      indexes :id, :index => :not_analyzed
-      indexes :name, :analyzer => :snowball, :boost => 100.0
-      indexes :created_by, :analyzer => :keyword, :as => 'user.email'
-      indexes :file_name, :analyzer => :keyword
-      indexes :description, :analyzer => :snowball
-      indexes :tags, :analyzer => :keyword, :as => 'tag_list'
-      indexes :created_at, :type => :date, :include_in_all => false
-      indexes :taxon, :analyzer => :taxon_analyzer, :as => 'create_taxon'
-    end
-  end
-
   # This will indicate whether an asset is associated with another
   def consumed?
     false
@@ -71,10 +48,6 @@ class Media < ActiveRecord::Base
     else
       attachment_content_type.match(/(\w+)\//)[1]
     end
-  end
-
-  class << self
-    remove_method :index
   end
 
   def can_thumb

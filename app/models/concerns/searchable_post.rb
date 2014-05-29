@@ -23,9 +23,14 @@ module SearchablePost
     end
 
     def related(published = nil)
-      Post.search more_like_this: {
-        fields: %w(job_phase categories tags),
-        ids: [id]
+      Post.search query: {
+        mlt: {
+          fields: %w(job_phase categories tags),
+          like_text: "#{job_phase} #{categories.pluck(:name).join(' ')} #{tag_list.join(' ')}",
+          # ids: [id], // Requires ES 1.2
+          min_doc_freq: 1,
+          min_term_freq: 1
+        }
       }
     end
   end

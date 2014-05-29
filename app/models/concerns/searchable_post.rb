@@ -23,15 +23,17 @@ module SearchablePost
     end
 
     def related(published = nil)
-      Post.search query: {
+      filter = published ? filter = { range: { published_at: { lte: DateTime.now } } } : {}
+      query  = {
         mlt: {
           fields: %w(job_phase categories tags),
           like_text: "#{job_phase} #{categories.pluck(:name).join(' ')} #{tag_list.join(' ')}",
-          # ids: [id], // Requires ES 1.2
+          # ids: [id], // Requires ES 1.2, replaces like_text
           min_doc_freq: 1,
           min_term_freq: 1
         }
       }
+      Post.search query: query, filter: filter
     end
   end
 

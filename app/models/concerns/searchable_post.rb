@@ -19,7 +19,7 @@ module SearchablePost
       indexes :categories,        :analyzer => :keyword, :as => 'categories.collect{ |c| c.name }'
       indexes :job_phase,         :analyzer => :keyword
       indexes :type,              :analyzer => :keyword, :as => 'type'
-      indexes :industries,        :analyzer => :keyword, :as => 'industry.title'
+      indexes :industries,        :analyzer => :keyword, :as => 'industry.soc'
     end
 
     def related(published = nil)

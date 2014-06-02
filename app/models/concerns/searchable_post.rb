@@ -15,17 +15,17 @@ module SearchablePost
       indexes :author,            :analyzer => 'keyword'
       indexes :created_at,        :type => 'date', :include_in_all => false
       indexes :published_at,      :type => 'date', :include_in_all => false
-      indexes :tags,              :analyzer => :keyword, :as => 'tag_list'
-      indexes :categories,        :analyzer => :keyword, :as => 'categories.collect{ |c| c.name }'
+      indexes :tags,              :analyzer => :keyword
+      indexes :categories,        :analyzer => :keyword
       indexes :job_phase,         :analyzer => :keyword
-      indexes :type,              :analyzer => :keyword, :as => 'type'
-      indexes :industries,        :analyzer => :keyword, :as => 'industry.soc'
+      indexes :type,              :analyzer => :keyword
+      indexes :industries,        :analyzer => :keyword
     end
 
     def related(published = nil)
       filter = published ? filter = { range: { published_at: { lte: DateTime.now } } } : {}
       query  = {
-        mlt: {
+        more_like_this: {
           fields: %w(job_phase categories tags),
           like_text: "#{job_phase} #{categories.pluck(:name).join(' ')} #{tag_list.join(' ')}",
           # ids: [id], // Requires ES 1.2, replaces like_text
@@ -34,6 +34,14 @@ module SearchablePost
         }
       }
       Post.search query: query, filter: filter
+    end
+
+    def as_indexed_json(options = {})
+      json = as_json(options)
+      json[:categories] = categories.collect{ |c| c.name }
+      json[:tags]       = tag_list
+      json[:industries] = industry ? industry.soc : nil
+      json
     end
   end
 

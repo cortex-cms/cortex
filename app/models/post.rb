@@ -28,7 +28,7 @@ class Post < ActiveRecord::Base
   self.inheritance_column = nil
 
   def published?
-    published_at <= DateTime.now
+    published_at ? published_at <= DateTime.now : false
   end
 
   class << self

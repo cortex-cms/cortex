@@ -48,10 +48,7 @@ module API::V1
 
           q = params[:q]
           if q.to_s != ''
-            @media = ::Media.search :load => true, :page => page, :per_page => per_page do
-              query { string q }
-              sort { by :created_at, :desc }
-            end
+            @media = ::Media.search_with_params(params).page(page).per(per_page).records
           else
             @media = ::Media.order(created_at: :desc).page(page).per(per_page)
           end

@@ -114,8 +114,11 @@ angular.module('cortex.states', [
         post: function() {
           return null;
         },
-        categories: ['cortex', function(cortex) {
+        categoriesHierarchy: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
+        }],
+        filters: ['cortex', function(cortex) {
+          return cortex.posts.filters().$promise;
         }]
       },
       data: {
@@ -131,8 +134,11 @@ angular.module('cortex.states', [
         post: ['cortex', '$stateParams', function(cortex, $stateParams) {
           return cortex.posts.get({id: $stateParams.postId}).$promise;
         }],
-        categories: ['cortex', function(cortex) {
+        categoriesHierarchy: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
+        }],
+        filters: ['cortex', function(cortex) {
+          return cortex.posts.filters().$promise;
         }]
       },
       data: {

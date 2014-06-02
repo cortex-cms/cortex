@@ -11,6 +11,7 @@ module API::V1
 
       expose :categories, with: 'Entities::Category'
       expose :featured_media, with: 'Entities::MediaFeatured'
+      expose :industry, with: 'Entities::Occupation'
     end
   end
 end

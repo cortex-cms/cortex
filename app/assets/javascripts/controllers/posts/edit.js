@@ -14,7 +14,7 @@ angular.module('cortex.controllers.posts.edit', [
   'ngTagsInput'
 ])
 
-.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, _, cortex, mediaSelectType, post, categories, currentUser, PostBodyEditorService, PostsPopupService) {
+.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, _, cortex, mediaSelectType, post, filters, categoriesHierarchy, currentUser, PostBodyEditorService, PostsPopupService) {
 
   $scope.data = {
     savePost: function() {
@@ -35,6 +35,7 @@ angular.module('cortex.controllers.posts.edit', [
       'get_the_job',
       'on_the_job'
     ],
+    industries: filters.industries,
     scheduled: [
       true,
       false
@@ -60,9 +61,13 @@ angular.module('cortex.controllers.posts.edit', [
 
   if (post) {
     $scope.data.post = post;
+    
+    if ($scope.data.post.industry) {
+      $scope.data.post.industry_id = $scope.data.post.industry.id;
+    }
 
     var selectedCategoryIds = _.map(post.categories, function(c) { return c.id; });
-    _.each(categories, function(category){
+    _.each(categoriesHierarchy, function(category){
       _.each(category.children, function(child){
         if (_.contains(selectedCategoryIds, child.id)) {
           child.$selected = true;
@@ -70,7 +75,7 @@ angular.module('cortex.controllers.posts.edit', [
       });
     });
 
-    $scope.data.categories = categories;
+    $scope.data.categories = categoriesHierarchy;
 
     var todayDate = moment(new Date());
     var postDate = moment($scope.data.post.published_at);
@@ -85,7 +90,7 @@ angular.module('cortex.controllers.posts.edit', [
     $scope.data.post.draft = true;
     $scope.data.post.author = currentUser.full_name;
     $scope.data.post.copyright_owner = $scope.data.post.copyright_owner || "CareerBuilder, LLC";
-    $scope.data.categories = categories;
+    $scope.data.categories = categoriesHierarchy;
     $scope.data.post.tag_list = '';
   }
   initializePost();

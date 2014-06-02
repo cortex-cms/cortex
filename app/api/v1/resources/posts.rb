@@ -26,6 +26,7 @@ module API::V1
         optional :tag_list
         optional :category_ids
         optional :slug
+        optional :industry_id
       end
     end
 
@@ -61,13 +62,16 @@ module API::V1
 
           q = params[:q]
           if q.to_s != ''
-            @posts = Post.search :load => true, :page => page, :per_page => per_page do
+            @posts = Post.search do
               query { string q }
               sort { by :created_at, :desc }
             end
+            @posts = @posts.page(page).per(per_page).records
           else
             @posts = Post.order(created_at: :desc).page(page).per(per_page)
           end
+
+          @posts = @posts.page(page).per(per_page)
 
           set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::Post
@@ -78,7 +82,7 @@ module API::V1
           use :pagination
         end
         get 'feed' do
-          @posts = PostSearch.with_params(params, true, {page: page, per_page: per_page})
+          @posts = Post.search_with_params(params, true).page(page).per(per_page).records
           set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::PostBasic
         end
@@ -102,15 +106,25 @@ module API::V1
           present tags, with: Entities::Tag
         end
 
+        desc 'Show all filters/facets for posts'
+        get 'filters' do
+          present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
+          present :categories, ::Category.all, with: Entities::Category
+        end
+
         desc 'Show a post'
         get ':id' do
           require_scope! :'view:posts'
+          authorize! :view, post!
 
-          @post = Post.where('id = ? OR slug = ?', params[:id].to_i, params[:id]).first || not_found!
+          present post, with: Entities::Post
+        end
 
-          authorize! :view, @post
-
-          present @post, with: Entities::Post
+        desc 'Show related published posts'
+        get 'feed/:id/related' do
+          @posts = published_post!.related(true).page(page).per(per_page).records
+          set_pagination_headers(@posts, 'posts')
+          present @posts, with: Entities::PostBasic
         end
 
         desc 'Create a post'

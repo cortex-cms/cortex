@@ -1,19 +1,20 @@
 require 'nokogiri'
 
 class Post < ActiveRecord::Base
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  include SearchablePost
 
+  default_scope { includes(:categories, :media) }
   scope :published, -> { where('published_at <= ?', DateTime.now) }
 
   acts_as_taggable
 
-  before_save :update_media!
+  before_save :update_media!, :sanitize_body!
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
   belongs_to :user
   belongs_to :featured_media, class_name: 'Media'
+  belongs_to :industry, class_name: '::Onet::Occupation'
 
   validates :title, :author, :copyright_owner, presence: true, length: { minimum: 1, maximum: 255 }
   validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }
@@ -26,30 +27,26 @@ class Post < ActiveRecord::Base
 
   self.inheritance_column = nil
 
-  mapping do
-    indexes :id,                :index => :not_analyzed
-    indexes :title,             :analyzer => 'snowball'
-    indexes :body,              :analyzer => 'snowball'
-    indexes :draft,             :type => 'boolean'
-    indexes :short_description, :analyzer => 'snowball'
-    indexes :copyright_owner,   :analyzer => 'keyword'
-    indexes :author,            :analyzer => 'keyword'
-    indexes :created_at,        :type => 'date', :include_in_all => false
-    indexes :published_at,      :type => 'date', :include_in_all => false
-    indexes :tags,              :analyzer => :keyword, :as => 'tag_list'
-    indexes :categories,        :analyzer => :keyword, :as => 'categories.collect{ |c| c.name }'
-    indexes :job_phase,         :analyzer => :keyword
-    indexes :type,              :analyzer => :keyword, :as => 'type'
-  end
-
   def published?
     published_at <= DateTime.now
+  end
+
+  class << self
+    def find_by_id_or_slug(id_or_slug)
+      Post.where('id = ? OR slug = ?', id_or_slug.to_i, id_or_slug).first
+    end
   end
 
   private
 
   def update_media!
     self.media = find_all_associated_media
+  end
+
+  def sanitize_body!
+    if self.body
+      Sanitize.clean!(self.body, Cortex.config.sanitize_whitelist.post)
+    end
   end
 
   def find_all_associated_media

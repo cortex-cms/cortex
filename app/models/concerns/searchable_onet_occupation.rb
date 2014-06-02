@@ -2,7 +2,8 @@ module SearchableOnetOccupation
   extend ActiveSupport::Concern
 
   included do
-    include Searchable
+    include Elasticsearch::Model
+    include Elasticsearch::Model::Callbacks
 
     mapping do
       indexes :id,          :index => :not_analyzed

@@ -2,7 +2,8 @@ module SearchablePost
   extend ActiveSupport::Concern
 
   included do
-    include Searchable
+    include Elasticsearch::Model
+    include Elasticsearch::Model::Callbacks
 
     mapping do
       indexes :id,                :index => :not_analyzed
@@ -23,27 +24,50 @@ module SearchablePost
 
     def related(published = nil)
       # Filter the current post from results, this is not necessary with ES 1.2
-      bool = {must_not: { ids: { values: [id] } } }
+      filter_bool = {must_not: { ids: { values: [id] } } }
 
       if published
-        bool[:must] = { range: { published_at: { lte: DateTime.now } } }
+        filter_bool[:must] = { range: { published_at: { lte: DateTime.now } } }
       end
 
+      mlt_fields = [
+        {
+          job_phase: {
+            like_text: job_phase,
+            min_doc_freq: 1,
+            min_term_freq: 1
+          }
+        },
+        {
+          categories: {
+            like_text: categories.pluck(:name).join(' '),
+            min_doc_freq: 1,
+            min_term_freq: 1
+          }
+        },
+        {
+          tags: {
+            like_text: tag_list.join(' '),
+            min_doc_freq: 1,
+            min_term_freq: 1
+          }
+        }
+      ]
+
+      query_should = mlt_fields.map{ |f| {more_like_this_field: f} }
+
       query  = {
-        more_like_this: {
-          fields: %w(job_phase categories tags),
-          like_text: "#{job_phase} #{categories.pluck(:name).join(' ')} #{tag_list.join(' ')}",
-          # ids: [id], // Requires ES 1.2, replaces like_text
-          min_doc_freq: 1,
-          min_term_freq: 1
+        bool: {
+          should: query_should
         }
       }
 
-      Post.search query: {filtered: { query: query, filter: {bool: bool} } }
+      Post.search query: {filtered: { query: query, filter: {bool: filter_bool} } }
     end
 
     def as_indexed_json(options = {})
-      json = as_json(options)
+      json = as_json(only: [:id, :title, :body, :draft, :short_description, :copyright_owner,
+                            :author, :created_at, :published_at, :job_phase, :type])
       json[:categories] = categories.collect{ |c| c.name }
       json[:tags]       = tag_list
       json[:industries] = industry ? industry.soc : nil

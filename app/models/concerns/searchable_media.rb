@@ -2,7 +2,8 @@ module SearchableMedia
   extend ActiveSupport::Concern
 
   included do
-    include Searchable
+    include Elasticsearch::Model
+    include Elasticsearch::Model::Callbacks
 
     settings :analysis => {
         :analyzer => {

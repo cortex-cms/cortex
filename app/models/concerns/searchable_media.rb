@@ -28,7 +28,7 @@ module SearchableMedia
 
     def as_indexed_json(options = {})
       json = as_json(options)
-      json[:created_by] = user.name
+      json[:created_by] = user.fullname
       json[:tags]       = tag_list
       json[:taxon]      = create_taxon
       json

@@ -24,6 +24,14 @@ namespace :cortex do
     end
   end
 
+  desc 'Force re-creation of all elasticsearch mappings'
+  task :rebuild_indexes => :environment do
+    [Post, Media, Onet::Occupation].each do |klass|
+      klass.__elasticsearch__.create_index! force: true
+      klass.import
+    end
+  end
+
   namespace :onet do
     desc 'Download ONET database'
     task :fetch => :environment do

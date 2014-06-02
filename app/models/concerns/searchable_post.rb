@@ -2,8 +2,7 @@ module SearchablePost
   extend ActiveSupport::Concern
 
   included do
-    include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
+    include Searchable
 
     mapping do
       indexes :id,                :index => :not_analyzed
@@ -23,7 +22,13 @@ module SearchablePost
     end
 
     def related(published = nil)
-      filter = published ? filter = { range: { published_at: { lte: DateTime.now } } } : {}
+      # Filter the current post from results, this is not necessary with ES 1.2
+      bool = {must_not: { ids: { values: [id] } } }
+
+      if published
+        bool[:must] = { range: { published_at: { lte: DateTime.now } } }
+      end
+
       query  = {
         more_like_this: {
           fields: %w(job_phase categories tags),
@@ -33,7 +38,8 @@ module SearchablePost
           min_term_freq: 1
         }
       }
-      Post.search query: query, filter: filter
+
+      Post.search query: {filtered: { query: query, filter: {bool: bool} } }
     end
 
     def as_indexed_json(options = {})

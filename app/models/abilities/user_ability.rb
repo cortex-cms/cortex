@@ -64,6 +64,8 @@ module Abilities
           [:view, :update, :delete]
         elsif post.published?
           [:view]
+        else
+          []
         end
       end
 

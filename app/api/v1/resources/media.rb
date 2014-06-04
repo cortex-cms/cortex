@@ -87,7 +87,7 @@ module API::V1
           require_scope! :'modify:media'
           authorize! :update, media!
 
-          media.update!(declared(params[:media], include_missing: false))
+          media.update!(declared(params, include_missing: false))
           if params[:tag_list]
             media.tag_list = params[:tag_list]
             media.save!

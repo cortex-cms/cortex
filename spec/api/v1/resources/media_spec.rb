@@ -62,7 +62,7 @@ describe API::Resources::Media do
       it 'should update media' do
         media = create(:media)
         media.name += ' updated'
-        expect{ put "/api/v1/media/#{media.id}", {media: media}.to_json, application_json }.to_not change(Media, :count).by(1)
+        expect{ put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count).by(1)
         response.should be_success
         response.body.should represent(API::Entities::Media, media)
       end

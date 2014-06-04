@@ -84,14 +84,16 @@ module SearchablePost
       categories = params[:categories]
       job_phase  = params[:job_phase]
       post_type  = params[:post_type]
+      industries = params[:industries]
 
       # terms filter
-      if categories || job_phase || post_type
+      if categories || job_phase || post_type || industries
         terms = {}
 
         if categories; terms[:categories] = categories.split(',') end
-        if job_phase; terms[:job_phase] = job_phase.downcase().split(',') end
-        if post_type; terms[:type] = post_type.downcase().split(',') end
+        if job_phase; terms[:job_phase]   = job_phase.downcase().split(',') end
+        if post_type; terms[:type]        = post_type.downcase().split(',') end
+        if industries; terms[:industries] = industries.split(',') end
 
         filter[:and][:filters] << {terms: terms}
       end

@@ -1,4 +1,6 @@
-angular.module('cortex.filters', [])
+angular.module('cortex.filters', [
+  'cortex.vendor.moment'
+])
 
 // Turns underscores into spaces, capitalizes first letter of string
 .filter('humanize', function() {
@@ -44,10 +46,14 @@ angular.module('cortex.filters', [])
     };
 })
 
-.filter('publishStatus', function() {
+.filter('publishStatus', function(moment) {
     return function(dateStr) {
-        var date = Date.parse(dateStr);
-        return date < new Date() ? 'Scheduled' : 'Published';
+        if (!dateStr) {
+          return 'Draft';
+        }
+        var publishedAt = moment(dateStr);
+        var now = moment();
+        return publishedAt.diff(now) <= 0 ? 'Published' : 'Scheduled';
     };
 })
 

@@ -4,7 +4,7 @@ class AddPrimaryIndustryAndCategoryToPost < ActiveRecord::Migration
     add_column :posts, :primary_category_id, :integer, index: true
     execute 'UPDATE posts p SET primary_category_id=cp.category_id ' +
             'FROM categories_posts cp WHERE p.id=cp.post_id'
-    change_column :posts, :primary_category_id, :integer, index: true, null: false
+    change_column :posts, :primary_category_id, :integer, index: true
 
     create_join_table :posts, :onet_occupations do |t|
       # t.index [:post_id, :onet_occupation_id]

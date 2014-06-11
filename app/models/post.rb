@@ -25,7 +25,6 @@ class Post < ActiveRecord::Base
   validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }
   validates :tag_list, :seo_title, :seo_description, length: { maximum: 255 }
   validates :type, :job_phase, :display, presence: true, allow_nil: false
-  validates :primary_industry_id, :primary_category_id, presence: true
 
   enum type: [:article, :video, :infographic, :promo]
   enum job_phase: [:discovery, :find_the_job, :get_the_job, :on_the_job]
@@ -66,13 +65,13 @@ class Post < ActiveRecord::Base
   end
 
   def primary_category_must_be_in_categories
-    unless categories.collect{ |c| c.id}.include? primary_category_id
+    unless categories.to_a.empty? || categories.collect{ |c| c.id}.include?(primary_category_id)
       errors.add(:primary_category_id, 'must be in categories')
     end
   end
 
   def primary_industry_must_be_in_industries
-    unless industries.collect{ |i| i.id}.include? primary_industry_id
+    unless industries.to_a.empty? || industries.collect{ |i| i.id}.include?(primary_industry_id)
       errors.add(:primary_industry_id, 'must be in industries')
     end
   end

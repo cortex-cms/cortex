@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 20140611152327) do
     t.string   "slug",                               null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
-    t.integer  "primary_category_id",                null: false
+    t.integer  "primary_category_id"
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree

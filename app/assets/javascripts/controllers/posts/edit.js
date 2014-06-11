@@ -21,7 +21,8 @@ angular.module('cortex.controllers.posts.edit', [
       // Find selected categories
       var selectedCategories = _.filter($scope.data.jobPhaseCategories, function(category) { return category.$selected; });
       $scope.data.post.category_ids = _.map(selectedCategories, function(category) { return category.id; });
-
+      $scope.data.post.primary_category_id = $scope.data.post.category_ids[0];
+      $scope.data.post.industry_ids = [$scope.data.post.primary_industry_id];
       $scope.data.post.tag_list = $scope.data.post.tag_list.map(function(tag) { return tag.name; });
 
       $scope.data.post.$save(function(post) {
@@ -61,7 +62,7 @@ angular.module('cortex.controllers.posts.edit', [
 
   if (post) {
     $scope.data.post = post;
-    
+
     if ($scope.data.post.industry) {
       $scope.data.post.industry_id = $scope.data.post.industry.id;
     }

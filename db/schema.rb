@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527164025) do
+ActiveRecord::Schema.define(version: 20140611152327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,30 +107,36 @@ ActiveRecord::Schema.define(version: 20140527164025) do
     t.datetime "updated_at"
   end
 
+  create_table "onet_occupations_posts", id: false, force: true do |t|
+    t.integer "post_id",            null: false
+    t.integer "onet_occupation_id", null: false
+  end
+
   create_table "posts", force: true do |t|
-    t.integer  "user_id",                          null: false
+    t.integer  "user_id",                            null: false
     t.string   "title"
     t.datetime "published_at"
     t.datetime "expired_at"
     t.datetime "deleted_at"
-    t.boolean  "draft",             default: true, null: false
-    t.integer  "comment_count",     default: 0,    null: false
+    t.boolean  "draft",               default: true, null: false
+    t.integer  "comment_count",       default: 0,    null: false
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "short_description"
-    t.integer  "job_phase",                        null: false
-    t.integer  "display",                          null: false
+    t.integer  "job_phase",                          null: false
+    t.integer  "display",                            null: false
     t.text     "notes"
     t.string   "copyright_owner"
     t.string   "seo_title"
     t.string   "seo_description"
     t.string   "seo_preview"
-    t.integer  "type",                             null: false
+    t.integer  "type",                               null: false
     t.string   "author"
-    t.string   "slug",                             null: false
+    t.string   "slug",                               null: false
     t.integer  "featured_media_id"
-    t.integer  "industry_id"
+    t.integer  "primary_industry_id"
+    t.integer  "primary_category_id"
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree

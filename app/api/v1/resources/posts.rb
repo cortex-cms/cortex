@@ -24,9 +24,11 @@ module API::V1
         optional :seo_preview
         optional :author
         optional :tag_list
+        optional :primary_category_id
         optional :category_ids
         optional :slug
-        optional :industry_id
+        optional :primary_industry_id
+        optional :industry_ids
       end
     end
 
@@ -150,6 +152,7 @@ module API::V1
           authorize! :update, post!
 
           post.update!(declared(params, {include_missing: false}))
+
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!

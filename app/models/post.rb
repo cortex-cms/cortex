@@ -12,10 +12,15 @@ class Post < ActiveRecord::Base
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
+  has_and_belongs_to_many :industries, class_name: '::Onet::Occupation',
+                                       association_foreign_key: 'onet_occupation_id'
+
   belongs_to :user
   belongs_to :featured_media, class_name: 'Media'
-  belongs_to :industry, class_name: '::Onet::Occupation'
+  belongs_to :primary_category, class_name: 'Category'
+  belongs_to :primary_industry, class_name: '::Onet::Occupation'
 
+  validate :primary_category_must_be_in_categories, :primary_industry_must_be_in_industries
   validates :title, :author, :copyright_owner, presence: true, length: { minimum: 1, maximum: 255 }
   validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }
   validates :tag_list, :seo_title, :seo_description, length: { maximum: 255 }
@@ -57,6 +62,18 @@ class Post < ActiveRecord::Base
     document = Nokogiri::HTML::Document.parse(body)
     media_ids = document.xpath('//@data-media-id').map{|element| element.to_s }
     Media.find(media_ids)
+  end
+
+  def primary_category_must_be_in_categories
+    unless categories.to_a.empty? || categories.collect{ |c| c.id}.include?(primary_category_id)
+      errors.add(:primary_category_id, 'must be in categories')
+    end
+  end
+
+  def primary_industry_must_be_in_industries
+    unless industries.to_a.empty? || industries.collect{ |i| i.id}.include?(primary_industry_id)
+      errors.add(:primary_industry_id, 'must be in industries')
+    end
   end
 end
 

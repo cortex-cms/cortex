@@ -69,8 +69,8 @@ module SearchablePost
       json = as_json(only: [:id, :title, :body, :draft, :short_description, :copyright_owner,
                             :author, :created_at, :published_at, :job_phase, :type])
       json[:categories] = categories.collect{ |c| c.name }
+      json[:industries] = industries.collect{ |i| i.soc }
       json[:tags]       = tag_list
-      json[:industries] = industry ? industry.soc : nil
       json
     end
   end

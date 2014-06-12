@@ -63,7 +63,7 @@ relaxed: &relaxed
     - ul
     - var
     - wbr
-  :attributes:
+  :attributes: &relaxed_attributes
     :all:
     - dir
     - lang
@@ -154,6 +154,7 @@ relaxed: &relaxed
 post:
   <<: *relaxed
   :attributes:
+    <<: *relaxed_attributes
     :all:
     - dir
     - lang

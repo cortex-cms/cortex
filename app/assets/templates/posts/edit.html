@@ -271,140 +271,134 @@
         </dl>
     </fieldset>
 
-    <fieldset>
-        <legend>Publishing</legend>
-
-        <dl class="dl-horizontal">
-            <dt><label for="postPublishStatus">Status</label></dt>
-            <dd class="input-group input-group-sm">
-                <div id="postPublishStatus" name="draft" class="btn-group btn-group-sm">
-                    <button name="draft"
-                            type="button"
-                            class="btn btn-default"
-                            ng-model="data.post.draft"
-                            btn-radio="true">
-                        Draft
-                    </button>
-                    <button name="draft"
-                            type="button"
-                            class="btn btn-default"
-                            ng-model="data.post.draft"
-                            btn-radio="false">
-                        Publish
-                    </button>
-                </div>
-            </dd>
-        </dl>
-    </fieldset>
-
-    <fieldset ng-if="!data.post.draft">
-        <dl class="dl-horizontal">
-            <dt><label for="postPublishScheduling">Publish Scheduling</label></dt>
-            <dd class="input-group input-group-sm">
-                <div id="postPublishScheduling" name="post_scheduling" class="btn-group btn-group-sm">
-                    <button name="post_scheduling"
-                            type="button"
-                            class="btn btn-default"
-                            ng-model="data.scheduled"
-                            btn-radio="false"
-                            ng-click="postScheduling.now()">
-                        Now
-                    </button>
-                    <button name="post_scheduling"
-                            type="button"
-                            class="btn btn-default"
-                            ng-model="data.scheduled"
-                            btn-radio="true"
-                            ng-click="postScheduling.scheduled()">
-                        Schedule
-                    </button>
-                </div>
-            </dd>
-        </dl>
-
-        <fieldset ng-if="data.scheduled">
-            <dl class="dl-horizontal">
-                <dt><label for="postPublishDate">Publish Date</label></dt>
-                <dd class="input-group input-group-sm">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" id="postPublishDate" role="button" data-toggle="dropdown">
-                            <div class="input-group input-group-sm">
-                                <input name="published_at"
-                                       type="text"
-                                       class="form-control post-datetimepicker"
-                                       ng-model="data.post.published_at"
-                                       date-time-input="{{datetimepicker.format}}"
-                                       placeholder="select an publish date and time"
-                                        />
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default">
-                                                    <span class="fa fa-calendar"></span>
-                                                </button>
-                                            </span>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <datetimepicker ng-model="data.post.published_at"
-                                            datetimepicker-config="{ dropdownSelector: '#postPublishDate' }">
-
-                            </datetimepicker>
-                        </ul>
-                    </div>
-                </dd>
-            </dl>
-        </fieldset>
-
-        <fieldset ng-if="data.scheduled || !data.scheduled">
-            <dl class="dl-horizontal">
-                <dt><label for="postExpireDate">Expiration Date</label></dt>
-                <dd class="input-group input-group-sm">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" id="postExpireDate" role="button" data-toggle="dropdown">
-                            <div class="input-group input-group-sm">
-                                <input name="expired_at"
-                                       type="text"
-                                       class="form-control post-datetimepicker"
-                                       ng-model="data.post.expired_at"
-                                       date-time-input="{{datetimepicker.format}}"
-                                       placeholder="select an expiration date and time, or will not expire"
-                                        />
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default">
-                                                    <span class="fa fa-calendar"></span>
-                                                </button>
-                                            </span>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <datetimepicker ng-model="data.post.expired_at"
-                                            datetimepicker-config="{ dropdownSelector: '#postExpireDate' }">
-
-                            </datetimepicker>
-                        </ul>
-                    </div>
-                </dd>
-            </dl>
-        </fieldset>
-
-        <dl class="dl-horizontal" ng-if="!data.post.draft">
-            <dt></dt>
-            <dd>
-                <em>This post will be published to <strong>Advice &amp; Resources</strong>
-                    <span ng-if="!data.scheduled"><strong> immediately</strong></span>
-                                <span ng-if="data.scheduled && data.post.published_at"> on
-                                    <strong> {{ data.post.published_at | date:'yyyy/MM/dd' }}</strong>
-                                </span>
-                    <span ng-if="!data.post.expired_at"> and will not expire.</span>
-                                <span ng-if="data.post.expired_at">and will expire on
-                                    <strong>{{ data.post.expired_at | date:'yyyy/MM/dd' }}.</strong>
-                                </span>
-                </em>
-            </dd>
-        </dl>
-    </fieldset>
   </div>
 
   <div class="post-form-side input-group-sm">
+
+    <fieldset>
+        <legend>Save/Publish</legend>
+
+        <div class="form-group">
+          <div id="postPublishStatus" name="draft" class="btn-group btn-group-sm">
+            <button name="draft"
+                    type="button"
+                    class="btn btn-default"
+                    ng-model="data.post.draft"
+                    btn-radio="true">
+                Draft
+            </button>
+            <button name="draft"
+                    type="button"
+                    class="btn btn-default"
+                    ng-model="data.post.draft"
+                    btn-radio="false">
+                Publish
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="!data.post.draft">
+          <div id="postPublishScheduling" name="post_scheduling" class="btn-group btn-group-sm">
+            <button name="post_scheduling"
+                    type="button"
+                    class="btn btn-default"
+                    ng-model="data.scheduled"
+                    btn-radio="false"
+                    ng-click="postScheduling.now()">
+                Now
+            </button>
+            <button name="post_scheduling"
+                    type="button"
+                    class="btn btn-default"
+                    ng-model="data.scheduled"
+                    btn-radio="true"
+                    ng-click="postScheduling.scheduled()">
+                Schedule
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit"
+                  class="btn btn-primary btn-sm"
+                  ng-disabled="postForm.$invalid || !data.post.type || !data.post.job_phase || !data.post.display">
+              <span class="fa fa-cloud-upload"></span>
+              <span ng-if="data.post.draft && !data.post.scheduled">Save Draft</span>
+              <span ng-if="!data.scheduled && !data.post.draft">Save and Publish Now</span>
+              <span ng-if="data.scheduled && !data.post.draft">Save and Schedule</span>
+          </button>
+        </div>
+
+    </fieldset>
+
+    <fieldset ng-if="!data.post.draft">
+        <div class="form-group" ng-if="data.scheduled">
+          <label for="postPublishDate">Publish Date</label>
+          <div class="dropdown">
+              <a class="dropdown-toggle" id="postPublishDate" role="button" data-toggle="dropdown">
+                <div class="input-group input-group-sm">
+                    <input name="published_at"
+                           type="text"
+                           class="form-control post-datetimepicker"
+                           ng-model="data.post.published_at"
+                           date-time-input="{{datetimepicker.format}}"
+                           placeholder="Select a publish date and time"
+                            />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">
+                            <span class="fa fa-calendar"></span>
+                        </button>
+                    </span>
+                </div>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <datetimepicker ng-model="data.post.published_at"
+                                datetimepicker-config="{ dropdownSelector: '#postPublishDate' }">
+                </datetimepicker>
+              </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="postExpireDate">Expiration Date</label>
+          <div class="dropdown">
+            <a class="dropdown-toggle" id="postExpireDate" role="button" data-toggle="dropdown">
+              <div class="input-group input-group-sm">
+                <input name="expired_at"
+                       type="text"
+                       class="form-control post-datetimepicker"
+                       ng-model="data.post.expired_at"
+                       date-time-input="{{datetimepicker.format}}"
+                       placeholder="Select an expiration date and time (Optional)"
+                        />
+                <span class="input-group-btn">
+                  <button class="btn btn-default">
+                      <span class="fa fa-calendar"></span>
+                  </button>
+                </span>
+              </div>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <datetimepicker ng-model="data.post.expired_at"
+                                datetimepicker-config="{ dropdownSelector: '#postExpireDate' }">
+
+                </datetimepicker>
+            </ul>
+          </div>
+        </div>
+    </fieldset>
+
+    <em>This post will be published to <strong>Advice &amp; Resources</strong>
+        <span ng-if="!data.scheduled"><strong> immediately</strong></span>
+        <span ng-if="data.scheduled && data.post.published_at"> on
+            <strong> {{ data.post.published_at | date:'yyyy/MM/dd' }}</strong>
+        </span>
+        <span ng-if="!data.post.expired_at"> and will not expire.</span>
+        <span ng-if="data.post.expired_at">and will expire on
+            <strong>{{ data.post.expired_at | date:'yyyy/MM/dd' }}.</strong>
+        </span>
+    </em>
+
       <fieldset>
           <legend>Career Phase</legend>
 
@@ -573,29 +567,6 @@
           </textarea>
 
           <!--<legend>Statistics and Tracking</legend>-->
-      </fieldset>
-  </div>
-
-  <div class="post-action-buttons">
-      <fieldset>
-          <legend></legend>
-          <dl class="dl-horizontal">
-              <dd class="input-group-sm">
-                  <button type="submit"
-                          class="btn btn-primary btn-sm"
-                          ng-disabled="postForm.$invalid || !data.post.type || !data.post.job_phase || !data.post.display">
-                      <span class="fa fa-cloud-upload"></span>
-                      <span ng-if="data.post.draft && !data.post.scheduled">Save as Draft</span>
-                      <span ng-if="!data.scheduled && !data.post.draft">Save and Publish Now</span>
-                      <span ng-if="data.scheduled && !data.post.draft">Save and Schedule</span>
-                  </button>
-
-                  <button class="btn btn-sm">
-                      <span class="fa fa-search"></span>
-                      Preview
-                  </button>
-              </dd>
-          </dl>
       </fieldset>
   </div>
 </form>

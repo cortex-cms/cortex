@@ -12,7 +12,7 @@ class AddPrimaryIndustryAndCategoryToPost < ActiveRecord::Migration
     end
 
     execute 'INSERT INTO onet_occupations_posts (post_id, onet_occupation_id) ' +
-            'SELECT id, primary_industry_id FROM posts'
+            'SELECT id, primary_industry_id FROM posts WHERE primary_industry_id IS NOT NULL'
   end
 
   def down

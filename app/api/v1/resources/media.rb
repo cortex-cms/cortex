@@ -13,6 +13,8 @@ module API::V1
         optional :active
         optional :deactive_at
         optional :tag_list
+        optional :type
+        optional :video_id # youtube
       end
     end
 

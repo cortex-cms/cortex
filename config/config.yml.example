@@ -12,8 +12,6 @@ defaults: &defaults
     max_size_mb: 100
   onet:
     version: '18.1'
-  google:
-    public_api_key: AIzaSyBVqfF5e2RN-Umf8B7FU7ctvZofD0ddr-k
 
 test:
   <<: *defaults

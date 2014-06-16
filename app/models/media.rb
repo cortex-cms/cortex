@@ -27,16 +27,19 @@ class Media < ActiveRecord::Base
   before_attachment_post_process :can_thumb
 
   validates_attachment :attachment, :presence => true,
+                       :unless => :skip_attachment_validation,
                        :content_type => {:content_type => Cortex.config.media.allowed_media_types.collect{|allowed| allowed[:type]}},
                        :size => {:in => 0..Cortex.config.media.max_size_mb.megabytes}
+
+  validates :type, inclusion: { in: %w(Media Youtube) }
 
   # This will indicate whether an asset is associated with another
   def consumed?
     false
   end
 
-  # 'Human friendly' content type generalization
-  def general_type
+  # Human friendly content type generalization
+  def content_type
     if (attachment_content_type =~ /(excel)|(spreadsheet)/) != nil
       'spreadsheet'
     elsif (attachment_content_type =~ /(^application\/vnd\.)|(^application\/msword)/) != nil
@@ -50,8 +53,16 @@ class Media < ActiveRecord::Base
     end
   end
 
+  def url
+    attachment.url
+  end
+
   def can_thumb
     Cortex.config.media.allowed_media_types.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
+  end
+
+  def skip_attachment_validation
+    false
   end
 
   private

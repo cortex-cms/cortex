@@ -8,9 +8,11 @@
         <tabset class="content-selector-tabs">
             <tab>
               <tab-heading><i class="fa fa-upload"></i> Select File</tab-heading>
+              <file-selector ng-model="data.media.$file"></file-selector>
             </tab>
             <tab>
               <tab-heading><i class="fa fa-youtube"></i> YouTube</tab-heading>
+              <youtube-selector ng-model="data.media.$youtube"></youtube-selector>
             </tab>
         </tabset>
 

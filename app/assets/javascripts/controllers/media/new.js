@@ -5,7 +5,9 @@ angular.module('cortex.controllers.media.new', [
     'ui.bootstrap.tabs',
     'angularFileUpload',
     'angular-flash.service',
-    'cortex.settings'
+    'cortex.settings',
+    'cortex.directives.fileSelector',
+    'cortex.directives.youtubeSelector'
 ])
 
 .controller('MediaNewCtrl', function($scope, $timeout, $upload, $state, flash, settings) {

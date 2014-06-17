@@ -17,7 +17,7 @@ module API::V1
     end
 
     class YoutubeMeta < Grape::Entity
-      expose :video_id, :duration, :height, :width
+      expose :video_id, :duration, :duration, :video_id, :title, :author, :video_description
     end
   end
 end

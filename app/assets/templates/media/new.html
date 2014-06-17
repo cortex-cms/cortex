@@ -1,4 +1,61 @@
-<h3>Add Media</h3>
+<div class="media-new">
+  <h3>Add Media</h3>
+
+  <form name="mediaForm" novalidate>
+    <div class="row">
+      <div class="col-lg-12">
+
+        <tabset class="content-selector-tabs">
+            <tab>
+              <tab-heading><i class="fa fa-upload"></i> Select File</tab-heading>
+            </tab>
+            <tab>
+              <tab-heading><i class="fa fa-youtube"></i> YouTube</tab-heading>
+            </tab>
+        </tabset>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-pencil-square-o"></i> Provide Details
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea name="description" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="tags">Tags</label>
+              <input name="tags" type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="expiresAt">Expiration</label>
+              <input name="expiresAt" type="text" class="form-control">
+            </div>
+
+            <div class="actions row">
+              <div class="col-lg-6">
+                <button type="button" class="btn btn-default btn-block"><i class="fa fa-reply"></i> Cancel</button>
+              </div>
+
+              <div class="col-lg-6">
+                <button type="button" class="btn btn-primary btn-block"><i class="fa fa-cloud-upload"></i> Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--h3>Add Media</h3>
 
 <form novalidate name="mediaForm">
   <fieldset ng-file-drop="onFileSelect($files)"
@@ -87,4 +144,4 @@
       <span class="fa fa-reply"></span> Return to Media Library
     </button>
   </dd>
-</dl>
+</dl-->

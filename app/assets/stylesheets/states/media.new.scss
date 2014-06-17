@@ -1,0 +1,13 @@
+.media-new {
+  .content-selector-tabs {
+    .tab-content {
+      @extend .panel;
+      @extend .panel-default;
+      @extend .panel-body;
+
+      border-top: none;
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+}

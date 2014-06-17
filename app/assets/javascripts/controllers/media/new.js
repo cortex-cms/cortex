@@ -2,6 +2,7 @@ angular.module('cortex.controllers.media.new', [
     'ui.router.state',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.progressbar',
+    'ui.bootstrap.tabs',
     'angularFileUpload',
     'angular-flash.service',
     'cortex.settings'

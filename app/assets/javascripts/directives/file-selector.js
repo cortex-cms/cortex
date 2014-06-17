@@ -1,4 +1,5 @@
 angular.module('cortex.directives.fileSelector', [
+  'angularFileUpload'
 ])
 
 .directive('fileSelector', function() {

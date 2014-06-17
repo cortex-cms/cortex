@@ -12,8 +12,12 @@ module API::V1
       expose :consumed?, as: :consumed
 
       expose :user, with: 'Entities::UserBasic', as: :creator
-      expose :attachment, with: 'Entities::MediaThumbnails', as: :thumbs, if: lambda { |media| media.can_thumb }
-      expose :meta, if: { content_type: 'youtube' }, with: 'YoutubeMeta'
+      expose :attachment, with: 'Entities::MediaThumbnails', as: :thumbs, if: lambda { |media, _| media.can_thumb }
+
+      expose :meta do
+        #expose :video_id, :duration, :duration, :video_id, :title, :author, :video_description,
+        #       if: lambda { |m| m.content_type == 'youtube' }
+      end
     end
 
     class YoutubeMeta < Grape::Entity

@@ -85,13 +85,13 @@
           </div>
 
           <div class="col-xs-10">
-            <a class="thumbnail" href="{{media.attachment_url}}" target="_blank">
+            <a class="thumbnail" href="{{media.url}}" target="_blank">
               <img ng-if="media.thumbs"
                  ng-src="{{ media.thumbs.mini }}"
                  alt="Thumbnail">
               <img ng-if="!media.thumbs"
                  ph-img="100x100"
-                 ph-text="{{ media.general_type | uppercase }}"
+                 ph-text="{{ media.type | uppercase }}"
                  alt="Thumbnail">
             </a>
           </div>
@@ -102,7 +102,7 @@
         <strong>{{ media.name }}</strong><br>
         {{ media.file_name }}<br>
         <br>
-        <strong>Author: </strong>{{ media.creator.name }}<br>
+        <strong>Author: </strong>{{ media.creator.fullname }}<br>
         <strong>Description: </strong>{{ media.description }}<br>
         <strong>Tags: </strong>{{ media.tags|tagList }}
       </div>

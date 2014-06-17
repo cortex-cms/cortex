@@ -1,4 +1,8 @@
 class Youtube < Media
+  index_name       'media'
+  document_type    'media'
+  taxon_class_name 'media'
+
   after_create :fetch_youtube
   store_accessor :meta, :url, :duration, :video_id, :title, :authors, :source_published_at,
                  :source_updated_at, :video_description
@@ -7,10 +11,6 @@ class Youtube < Media
 
   def content_type
     'youtube'
-  end
-
-  def url
-    meta.url
   end
 
   def skip_attachment_validation

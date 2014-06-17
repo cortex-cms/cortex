@@ -31,9 +31,19 @@ class YoutubeMediaWorker
     media.source_updated_at   = youtube_updated
     media.video_description   = youtube_description
 
-    media.save!
+    # Fetch thumbnail
+    r = Excon.get(youtube_thumbnail)
 
-    # Download thumbnail
+    if r.status >= 300; raise "Error while requesting Youtube thumbnail (#{r.status}) r.body" end
+
+    tmp = Tempfile.new([media.video_id, '.jpg'], Dir.tmpdir, 'wb+')
+    tmp.binmode
+    tmp.write(r.body)
+    tmp.rewind
+    media.attachment = tmp
+    tmp.close
+
+    media.save!
 
     true
   end

@@ -170,10 +170,7 @@ angular.module('cortex.controllers.posts.edit', [
     },
     addMediaPopup: function()
     {
-      PostsPopupService.title = 'Insert Media from Media Library';
-      PostBodyEditorService.mediaSelectType = mediaSelectType.ADD_MEDIA;
-
-      $state.go('.media.manage.components');
+      setMedia(mediaSelectType.ADD_MEDIA, 'Insert Media from Media Library');
     }
   };
 
@@ -183,25 +180,48 @@ angular.module('cortex.controllers.posts.edit', [
   };
 
   $scope.postBodyEditorService = PostBodyEditorService;
-  $scope.postBodyEditorService.featured = $scope.data.post.featured_media;
+  $scope.postBodyEditorService.media.featured = $scope.data.post.featured_media;
+  $scope.postBodyEditorService.media.tile = $scope.data.post.tile_media;
 
-  $scope.setFeaturedImage = function () {
-    PostsPopupService.title = 'Set Featured Image from Media Library';
-    PostBodyEditorService.mediaSelectType = mediaSelectType.SET_FEATURED;
+  var setMedia = function(type, title) {
+    $scope.postBodyEditorService.mediaSelectType = type;
+    PostsPopupService.title = title;
     $state.go('.media.manage.components');
   };
 
-  $scope.removeFeaturedImage = function () {
+  $scope.setFeaturedMedia = function () {
+    setMedia(mediaSelectType.SET_FEATURED, 'Set Featured Media from Media Library');
+  };
+
+  $scope.removeFeaturedMedia = function () {
     $scope.data.post.featured_media = {};
     $scope.data.post.featured_media_id = null;
     $scope.data.featured_media_too_small = false;
   };
 
-  $scope.$watch('postBodyEditorService.featured', function (media) {
+  $scope.setTileMedia = function () {
+    setMedia(mediaSelectType.SET_TILE, 'Set Tile Media from Media Library');
+  };
+
+  $scope.removeTileMedia = function () {
+    $scope.data.post.tile_media = {};
+    $scope.data.post.tile_media_id = null;
+    $scope.data.tile_media_too_small = false;
+  };
+
+  $scope.$watch('postBodyEditorService.media.featured', function (media) {
     if (media) {
       $scope.data.post.featured_media = media;
       $scope.data.post.featured_media_id = media.id;
-      $scope.data.featured_media_too_small = media.dimensions[0] < 800
+      $scope.data.featured_media_too_small = media.dimensions[0] < 800;
+    }
+  });
+
+  $scope.$watch('postBodyEditorService.media.tile', function (media) {
+    if (media) {
+      $scope.data.post.tile_media = media;
+      $scope.data.post.tile_media_id = media.id;
+      $scope.data.tile_media_too_small = media.dimensions[0] < 800;
     }
   });
 
@@ -217,7 +237,11 @@ angular.module('cortex.controllers.posts.edit', [
 .factory('PostBodyEditorService', function($filter) {
   return {
     redactor: {},
-    featured: {},
+    mediaSelectType: '',
+    media: {
+      featured: {},
+      tile: {}
+    },
     addMediaToPost: function (media) {
       this.redactor.insertHtml($filter('mediaToHtml')(media));
     }

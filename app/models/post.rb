@@ -17,6 +17,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :featured_media, class_name: 'Media'
+  belongs_to :tile_media, class_name: 'Media'
   belongs_to :primary_category, class_name: 'Category'
   belongs_to :primary_industry, class_name: '::Onet::Occupation'
 
@@ -55,7 +56,7 @@ class Post < ActiveRecord::Base
   end
 
   def find_all_associated_media
-    find_media_from_body.push(self.featured_media).compact.uniq
+    find_media_from_body.push(self.featured_media, self.tile_media).compact.uniq
   end
 
   def find_media_from_body

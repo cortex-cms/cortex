@@ -17,6 +17,7 @@ module API::V1
         optional :job_phase
         optional :display
         optional :featured_media_id
+        optional :tile_media_id
         optional :notes
         optional :copyright_owner
         optional :seo_title

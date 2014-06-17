@@ -92,4 +92,4 @@ angular.module('cortex.resources', [
 
     return resource;
   };
-})
+});

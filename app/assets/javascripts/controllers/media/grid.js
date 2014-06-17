@@ -59,11 +59,18 @@ angular.module('cortex.controllers.media.grid', [
     };
 
     $scope.selectMedia = function(media) {
+      console.log(PostBodyEditorService);
         if (PostBodyEditorService.mediaSelectType === mediaSelectType.ADD_MEDIA) {
-            PostBodyEditorService.addMediaToPost(media);
+          PostBodyEditorService.addMediaToPost(media);
+        }
+        else if(PostBodyEditorService.mediaSelectType === mediaSelectType.SET_TILE) {
+          PostBodyEditorService.media.tile = media;
+        }
+        else if(PostBodyEditorService.mediaSelectType === mediaSelectType.SET_FEATURED) {
+          PostBodyEditorService.media.featured = media;
         }
         else {
-            PostBodyEditorService.featured = media;
+          throw 'No mediaSelectType set!';
         }
 
         PostsPopupService.popupOpen = false;

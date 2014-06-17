@@ -4,7 +4,6 @@ defaults: &defaults
   default_subdomain: public
   allowed_origins:
     - 'localhost:3000'
-    - 'localhost:4000'
     - 'localhost:3001'
     - 'localhost:8000'
     - 'localhost:63342'

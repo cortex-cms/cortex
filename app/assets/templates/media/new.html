@@ -8,11 +8,15 @@
         <tabset class="content-selector-tabs">
             <tab select="selectTab('file')">
               <tab-heading><i class="fa fa-file-o"></i> Select File</tab-heading>
-              <file-selector ng-model="data.media.$file;"></file-selector>
+              <file-selector ng-model="data.media.$file;"
+                             ng-required="currentTab == 'file'">
+              </file-selector>
             </tab>
             <tab select="selectTab('youtube')">
               <tab-heading><i class="fa fa-youtube"></i> YouTube</tab-heading>
-              <youtube-selector ng-model="data.media.$youtube"></youtube-selector>
+              <youtube-selector ng-model="data.media.$youtube"
+                                ng-required="currentTab == 'youtube'">
+              </youtube-selector>
             </tab>
         </tabset>
 
@@ -26,28 +30,47 @@
             <i class="fa fa-pencil-square-o"></i> Provide Details
           </div>
           <div class="panel-body">
-            <div class="form-group">
-              <label for="display-name">Display Name</label>
-              <input id="display-name" name="display-name" type="text" class="form-control"
-                     ng-model="data.media.name" required>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="display-name">Display Name</label>
+                  <input id="display-name" name="display-name" type="text" class="form-control"
+                         ng-model="data.media.name" placeholder="Friendly media name" required>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="expiration-date">Expiration</label>
+                  <div class="input-group">
+                    <input id="expiration-date" name="expiration-date" type="text" class="form-control"
+                           ng-model="data.media.deactive_at" placeholder="Expiration time (optional)"
+                           datepicker-popup="{{datepicker.format}}" is-open="datepicker.expireAtOpen"
+                           show-weeks="false">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button"
+                              ng-click="datepicker.open('expireAtOpen')">
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
               <label for="description">Description</label>
               <textarea id="description" name="description" class="form-control"
-                        ng-model="data.media.description"></textarea>
+                        ng-model="data.media.description"
+                        placeholder="Additional details (optional)">
+              </textarea>
             </div>
 
             <div class="form-group">
               <label for="tags">Tags</label>
               <input id="tags" name="tags" type="text" class="form-control"
-                     ng-model="data.media.tag_list">
-            </div>
-
-            <div class="form-group">
-              <label for="expiration-date">Expiration</label>
-              <input id="expiration-date" name="expiration-date" type="text" class="form-control"
-                     ng-model="data.media.deactive_at">
+                     ng-model="data.media.tag_list" placeholder="Comma separated tags">
             </div>
 
             <div class="actions row">

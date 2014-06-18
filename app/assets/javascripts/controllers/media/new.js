@@ -12,15 +12,26 @@ angular.module('cortex.controllers.media.new', [
 
 .controller('MediaNewCtrl', function($scope, $timeout, $upload, $state, flash, cortex, settings) {
 
-  var selectedTab = 'file';
-
-  $scope.data        = $scope.data || {};
-  $scope.data.media  = new cortex.media();
-  $scope.data.upload = {
+  $scope.data            = $scope.data || {};
+  $scope.data.currentTab = 'file;'
+  $scope.data.media      = new cortex.media();
+  $scope.data.upload     = {
     progress: 0
   };
 
+  // angular-bootstrap datepicker settings
+  $scope.datepicker = {
+    format: 'yyyy/MM/dd',
+    expireAtOpen: false,
+    open: function(datepicker) {
+      $timeout(function(){
+        $scope.datepicker[datepicker] = true;
+      });
+    }
+  };
+
   function saveFile() {
+    $scope.data.media.type = 'Media';
     var file = $scope.data.media.$file;
 
     if (!file) { return; }
@@ -66,15 +77,17 @@ angular.module('cortex.controllers.media.new', [
   // </saveFile()>
 
   function saveYoutube() {
+    $scope.data.media.type     = 'Youtube';
     $scope.data.media.video_id = $scope.data.media.$youtube.id;
     $scope.data.media.$save();
   };
 
   $scope.saveMedia = function() {
-    if (selectedTab === 'file') {
+    var tab = $scope.currentTab;
+    if (tab === 'file') {
       saveFile();
     }
-    else if (selectedTab === 'youtube') {
+    else if (tab === 'youtube') {
       saveYoutube();
     }
     else {
@@ -83,6 +96,6 @@ angular.module('cortex.controllers.media.new', [
   }
 
   $scope.selectTab = function(tab) {
-    selectedTab = tab;
+    $scope.currentTab = tab;
   };
 });

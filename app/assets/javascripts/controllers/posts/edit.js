@@ -11,10 +11,11 @@ angular.module('cortex.controllers.posts.edit', [
   'cortex.filters',
   'cortex.settings',
   'cortex.vendor.underscore',
-  'ngTagsInput'
+  'ngTagsInput',
+  'cortex.services.mediaConstraints'
 ])
 
-.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, _, cortex, mediaSelectType, post, filters, categoriesHierarchy, currentUser, PostBodyEditorService, PostsPopupService) {
+.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, _, cortex, mediaSelectType, post, filters, categoriesHierarchy, currentUser, PostBodyEditorService, PostsPopupService, featuredMediaConstraintsService, tileMediaConstraintsService) {
 
   $scope.data = {
     savePost: function() {
@@ -183,6 +184,10 @@ angular.module('cortex.controllers.posts.edit', [
   $scope.postBodyEditorService.media.featured = $scope.data.post.featured_media;
   $scope.postBodyEditorService.media.tile = $scope.data.post.tile_media;
 
+  $scope.featuredMediaConstraintsService = featuredMediaConstraintsService;
+  $scope.tileMediaConstraintsService = tileMediaConstraintsService;
+
+
   var setMedia = function(type, title) {
     $scope.postBodyEditorService.mediaSelectType = type;
     PostsPopupService.title = title;
@@ -213,7 +218,18 @@ angular.module('cortex.controllers.posts.edit', [
     if (media) {
       $scope.data.post.featured_media = media;
       $scope.data.post.featured_media_id = media.id;
-      $scope.data.featured_media_too_small = media.dimensions[0] < 800;
+      $scope.data.post.featured_media_warnings = [];
+      if (!$scope.featuredMediaConstraintsService.width(media)) {
+        if ($scope.featuredMediaConstraintsService.totalSize(media)) {
+          $scope.data.post.featured_media_warnings.push("Warning! Your featured media might appear stretched, as it is smaller than the featured image slot. Try an image at least 1100x600 ")
+        }
+        else {
+          $scope.data.post.featured_media_warnings.push("Warning! Your featured media might appear stretched, as it is smaller than our recommended width of 1100px.")
+        }
+      }
+      if (!$scope.featuredMediaConstraintsService.aspectratio(media)) {
+        $scope.data.post.featured_media_warnings.push("Warning! Your featured media might appear, as it does not match our recommended aspect ratio. Try 16:9");
+      }
     }
   });
 
@@ -221,7 +237,13 @@ angular.module('cortex.controllers.posts.edit', [
     if (media) {
       $scope.data.post.tile_media = media;
       $scope.data.post.tile_media_id = media.id;
-      $scope.data.tile_media_too_small = media.dimensions[0] < 800;
+      $scope.data.post.tile_media_warnings = [];
+      if (!$scope.tileMediaConstraintsService.width(media)) {
+        $scope.data.post.tile_media_warnings.push("Warning! Your tile media might appear stretched, as it is smaller than our recommended width of 375.");
+      }
+      if (!$scope.tileMediaConstraintsService.aspectratio(media)) {
+        $scope.data.post.tile_media_warnings.push("Warning! Your tile media might not display properly, as it does not match our recommended aspect ratio. Try 1:1 or 4:3.");
+      }
     }
   });
 

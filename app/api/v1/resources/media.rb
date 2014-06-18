@@ -75,7 +75,9 @@ module API::V1
           require_scope! :'modify:media'
           authorize! :create, ::Media
 
-          @media = ::Media.new(declared(params[:media], include_missing: false))
+          media_params = params[:media] || params
+
+          @media = ::Media.new(declared(media_params, include_missing: false))
           media.user = current_user!
           media.save!
           present media, with: Entities::Media
@@ -89,7 +91,9 @@ module API::V1
           require_scope! :'modify:media'
           authorize! :update, media!
 
-          media.update!(declared(params, include_missing: false))
+          media_params = params[:media] || params
+
+          media.update!(declared(media_params, include_missing: false))
           if params[:tag_list]
             media.tag_list = params[:tag_list]
             media.save!

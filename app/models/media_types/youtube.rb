@@ -17,6 +17,10 @@ class Youtube < Media
     true
   end
 
+  def taxon_type
+    'VID'
+  end
+
   private
 
   def fetch_youtube

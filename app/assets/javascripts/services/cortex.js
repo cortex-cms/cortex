@@ -3,7 +3,7 @@ angular.module('cortex.services.cortex', [
   'cortex.resources'
 ])
 
-.factory('cortex', function($rootScope, cortexResource, paginatedResource, settings) {
+.factory('cortex', function($rootScope, $http, cortexResource, paginatedResource, settings) {
 
   var categories = cortexResource('/categories/:id', {id: '@id'}, {
     hierarchy: {method: 'GET', url: settings.cortex_base_url + '/categories/:id/hierarchy', isArray: true}
@@ -30,12 +30,19 @@ angular.module('cortex.services.cortex', [
     industries: {method: 'GET', params: {id: 'industries'}, isArray: true}
   });
 
+  var adHoc = {
+    getYoutubeInfo: function(video_id) {
+      return $http.get(settings.cortex_base_url + '/adhoc/youtube/' + video_id, {cache: true});
+    }
+  };
+
   return {
     categories:  categories,
     posts:       posts,
     media:       media,
     tenants:     tenants,
     users:       users,
-    occupations: occupations
+    occupations: occupations,
+    adHoc:       adHoc
   };
 });

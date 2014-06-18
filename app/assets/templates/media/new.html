@@ -1,16 +1,16 @@
 <div class="media-new">
   <h3>Add Media</h3>
 
-  <form name="mediaForm" novalidate>
+  <form novalidate name="mediaForm">
     <div class="row">
       <div class="col-lg-12">
 
         <tabset class="content-selector-tabs">
-            <tab>
+            <tab select="selectTab('file')">
               <tab-heading><i class="fa fa-file-o"></i> Select File</tab-heading>
-              <file-selector ng-model="data.media.$file"></file-selector>
+              <file-selector ng-model="data.media.$file;"></file-selector>
             </tab>
-            <tab>
+            <tab select="selectTab('youtube')">
               <tab-heading><i class="fa fa-youtube"></i> YouTube</tab-heading>
               <youtube-selector ng-model="data.media.$youtube"></youtube-selector>
             </tab>
@@ -27,32 +27,41 @@
           </div>
           <div class="panel-body">
             <div class="form-group">
-              <label for="description">Display Name</label>
-              <input name="name" type="text" class="form-control">
+              <label for="display-name">Display Name</label>
+              <input id="display-name" name="display-name" type="text" class="form-control"
+                     ng-model="data.media.name" required>
             </div>
 
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea name="description" class="form-control"></textarea>
+              <textarea id="description" name="description" class="form-control"
+                        ng-model="data.media.description"></textarea>
             </div>
 
             <div class="form-group">
               <label for="tags">Tags</label>
-              <input name="tags" type="text" class="form-control">
+              <input id="tags" name="tags" type="text" class="form-control"
+                     ng-model="data.media.tag_list">
             </div>
 
             <div class="form-group">
-              <label for="expiresAt">Expiration</label>
-              <input name="expiresAt" type="text" class="form-control">
+              <label for="expiration-date">Expiration</label>
+              <input id="expiration-date" name="expiration-date" type="text" class="form-control"
+                     ng-model="data.media.deactive_at">
             </div>
 
             <div class="actions row">
               <div class="col-lg-6">
-                <button type="button" class="btn btn-default btn-block"><i class="fa fa-reply"></i> Cancel</button>
+                <button type="button" class="btn btn-default btn-block" ng-click="cancel()">
+                  <i class="fa fa-reply"></i> Cancel
+                </button>
               </div>
 
               <div class="col-lg-6">
-                <button type="button" class="btn btn-primary btn-block"><i class="fa fa-cloud-upload"></i> Submit</button>
+                <button type="button" class="btn btn-primary btn-block"
+                        ng-disabled="mediaForm.$invalid" ng-click="saveMedia()">
+                  <i class="fa fa-cloud-upload"></i> Submit
+                </button>
               </div>
             </div>
           </div>

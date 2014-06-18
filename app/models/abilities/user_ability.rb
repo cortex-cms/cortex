@@ -5,14 +5,14 @@ module Abilities
         abilities = []
 
         if subject.is_a? Class
-          if subject == User;   abilities += user_class_abilities(user)
-          elsif subject == Tenant; abilities += tenant_class_abilities(user)
-          elsif subject == Post;   abilities += post_class_abilities(user)
-          elsif subject == Media;  abilities += media_class_abilities(user)
+          if subject == User;        abilities += user_class_abilities(user)
+          elsif subject == Tenant;   abilities += tenant_class_abilities(user)
+          elsif subject == Post;     abilities += post_class_abilities(user)
+          elsif subject == Media;    abilities += media_class_abilities(user)
           elsif subject == Category; abilities += category_class_abilities(user)
           end
         else
-          if subject.kind_of? User;   abilities += user_abilities(user, subject)
+          if subject.kind_of? User;      abilities += user_abilities(user, subject)
           elsif subject.kind_of? Tenant; abilities += tenant_abilities(user, subject)
           elsif subject.kind_of? Post;   abilities += post_abilities(user, subject)
           elsif subject.kind_of? Media;  abilities += media_abilities(user, subject)

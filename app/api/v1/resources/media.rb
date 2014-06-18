@@ -75,7 +75,7 @@ module API::V1
           require_scope! :'modify:media'
           authorize! :create, ::Media
 
-          @media = ::Media.new(declared(params[:media]))
+          @media = ::Media.new(declared(params[:media], include_missing: false))
           media.user = current_user!
           media.save!
           present media, with: Entities::Media

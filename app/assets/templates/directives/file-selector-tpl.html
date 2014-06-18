@@ -1,8 +1,15 @@
-<div class="file-selector">
-  <div class="drop-zone"
-       ng-file-drop="selectFile($files);"
-       ng-click="browseForFile()"
-       >
-    <strong>Click</strong> or <i class="fa fa-arrow-circle-down"></i> <strong>drop</strong> file here
-  </div>
+<input type="file" ng-file-select="selectFiles($files)">
+<div class="dropzone"
+     ng-file-drop="selectFiles($files);"
+     ng-click="browseForFiles()">
+  <strong>Click</strong> or <i class="fa fa-arrow-circle-down"></i> <strong>drop</strong> file here
 </div>
+<ul class="files">
+  <li ng-repeat="file in files" ng-click="remove(file)">
+    <i class="fa fa-file-o present"></i>
+    <i class="fa fa-times-circle remove"></i>
+    <span class="info">
+      {{file.name}}
+    </span>
+  </li>
+</ul>

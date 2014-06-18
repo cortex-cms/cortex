@@ -9,11 +9,13 @@
 }
 
 file-selector {
-  .drop-zone {
+  input[type="file"] {
+    display: none;
+  }
+  .dropzone {
     @extend .text-center;
     @extend h3;
     padding: 20px;
-    border-radius: 10px;
     border: 2px dashed $gray-light;
     @include striped-background-45($gray-lighter, #fff);
 
@@ -21,6 +23,28 @@ file-selector {
       color: darken($brand-primary, 10%);
       border: 2px dashed lighten($brand-primary, 10%);
       @include striped-background-45(lighten($brand-primary, 30%), #fff);
+    }
+  }
+  ul.files {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      margin-top: 10px;
+      padding: 10px;
+      @extend .bg-success;
+      .remove {
+        display: none;
+      }
+      &:hover {
+        @extend .bg-danger;
+        .remove {
+          display: inline;
+        }
+        .present {
+          display: none;
+        }
+      }
     }
   }
 }

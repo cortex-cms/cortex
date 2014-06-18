@@ -48,14 +48,14 @@ angular.module('cortex.services.mediaConstraints', [])
 	var child = angular.copy(parent);
 	child.width = function(media) {
 		return parent.width(media, 1100, -1);
-	}
+	};
 	child.totalSize = function(media) {
 		return parent.totalSize(media, 660000, .9);
-	}
+	};
 
 	child.aspectratio = function(media) {
 		return parent.aspectratio(media, [1.6, 1.7, 1.8]);
-	}
+	};
 
 	return child;
 
@@ -67,7 +67,7 @@ angular.module('cortex.services.mediaConstraints', [])
 
 	child.width = function(media) {
 		return parent.width(media, 375, -1);
-	}
+	};
 
 	child.aspectratio = function(media) {
 		return parent.aspectratio(media, [1.0, 1.1, 1.2, 1.333]);

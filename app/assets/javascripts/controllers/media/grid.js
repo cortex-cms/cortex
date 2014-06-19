@@ -59,7 +59,6 @@ angular.module('cortex.controllers.media.grid', [
     };
 
     $scope.selectMedia = function(media) {
-      console.log(PostBodyEditorService);
         if (PostBodyEditorService.mediaSelectType === mediaSelectType.ADD_MEDIA) {
           PostBodyEditorService.addMediaToPost(media);
         }

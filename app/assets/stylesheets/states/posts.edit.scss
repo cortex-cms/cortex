@@ -25,20 +25,20 @@
     }
   }
 
-  .featured-media {
-    @include make-md-column(4);
-  }
+  .media-selector {
+    @extend .row;
 
-  .featured-media-info {
-    @include make-md-column(4.5);
-  }
+    .thumb {
+      @include make-md-column(4);
+    }
 
-  .featured-media-select {
-    @include make-md-column(3.5);
+    .info {
+      @include make-md-column(4.5);
+    }
 
-    button {
-      width: 100%;
-      @extend .pull-right;
+    .actions {
+      @include make-md-column(3.5);
+      @extend .btn-group-vertical;
     }
   }
 

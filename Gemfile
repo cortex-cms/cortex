@@ -15,7 +15,7 @@ end
 gem 'rails', '4.1.0'
 
 # API
-gem 'grape', git: 'git://github.com/intridea/grape'
+gem 'grape', '~> 0.7'
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
@@ -60,7 +60,7 @@ gem 'rails-assets-ng-tags-input'
 
 # ActiveRecord
 gem 'rails-observers'
-gem 'awesome_nested_set', '~> 3.0.0.rc.3'
+gem 'awesome_nested_set', '~> 3.0.0.rc.5'
 gem 'paperclip'
 gem 'acts-as-taggable-on', '~> 3.0.2'
 gem 'bcrypt-ruby', require: 'bcrypt'
@@ -72,7 +72,7 @@ gem 'paranoia',  '~> 2.0'
 gem 'pg'
 
 # Mongoid
-gem 'mongoid', '~> 4.0.0.beta1', git: 'git://github.com/mongoid/mongoid'
+gem 'mongoid', '~> 4.0.0.rc2', git: 'git://github.com/mongoid/mongoid'
 gem 'bson_ext'
 gem 'mongoid-paranoia', github: 'simi/mongoid-paranoia'
 
@@ -93,7 +93,7 @@ gem 'json'
 gem 'rack-cors', require: 'rack/cors'
 
 # Sidekiq
-gem 'sidekiq', '~> 2.17.6'
+gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim' # Sidekiq-web

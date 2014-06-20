@@ -3,7 +3,7 @@
 
   <form novalidate name="mediaForm">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="media-types">
 
         <tabset class="content-selector-tabs">
             <tab select="selectTab('file')">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-12">
+      <div class="media-details">
         <div class="panel panel-default">
           <div class="panel-heading">
             <i class="fa fa-pencil-square-o"></i> Provide Details
@@ -32,7 +32,7 @@
           <div class="panel-body">
 
             <div class="row">
-              <div class="col-lg-6">
+              <div class="display-name-container">
                 <div class="form-group">
                   <label for="display-name">Display Name</label>
                   <input id="display-name" name="display-name" type="text" class="form-control"
@@ -40,7 +40,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              <div class="expiration-name-container">
                 <div class="form-group">
                   <label for="expiration-date">Expiration</label>
                   <div class="input-group">
@@ -74,13 +74,13 @@
             </div>
 
             <div class="actions row">
-              <div class="col-lg-6">
+              <div>
                 <button type="button" class="btn btn-default btn-block" ng-click="cancel()">
                   <i class="fa fa-reply"></i> Cancel
                 </button>
               </div>
 
-              <div class="col-lg-6">
+              <div>
                 <button type="button" class="btn btn-primary btn-block"
                         ng-disabled="mediaForm.$invalid" ng-click="saveMedia()">
                   <i class="fa fa-cloud-upload"></i> Submit

@@ -24,6 +24,7 @@ class Youtube < Media
   private
 
   def fetch_youtube
-    YoutubeMediaWorker.perform_async(id)
+    # Switch to async when Sidekiq is working
+    YoutubeMediaWorker.new.perform(id)
   end
 end

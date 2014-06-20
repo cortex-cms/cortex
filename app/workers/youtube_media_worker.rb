@@ -1,5 +1,3 @@
-require 'json'
-
 class YoutubeMediaWorker
   include Sidekiq::Worker
 

@@ -1,3 +1,5 @@
+require 'json'
+
 module YoutubeHelper
   def self.fetch_info(video_id)
     video = {}
@@ -10,7 +12,7 @@ module YoutubeHelper
 
     data                        = JSON.parse(r.body)
     video[:url]                 = "https://www.youtube.com/v/#{video_id}"
-    video[:thumbnail]           = "https://i1.ytimg.com/vi/#{video_id}/maxresdefault.jpg"
+    video[:thumbnail]           = "https://i1.ytimg.com/vi/#{video_id}/hqdefault.jpg"
     video[:title]               = data['entry']['title']['$t']
     video[:authors]             = data['entry']['author'].collect{ |a| a['name']['$t'] }
     video[:duration]            = data['entry']['media$group']['yt$duration']['seconds']

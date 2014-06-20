@@ -33,6 +33,7 @@ Cortex::Application.configure do
   Paperclip::Attachment.default_options[:fog_directory] = ""
   Paperclip::Attachment.default_options[:fog_host] = ENV['FOG_HOST'] || "http://localhost:3000"
 
+
   Sidekiq.configure_server do |config|
     config.redis = { :namespace => 'cortex_dev' }
   end

@@ -14,7 +14,7 @@ module API::V1
 
       expose :user, with: 'Entities::UserBasic', as: :creator
 
-      expose :duration, :video_id, :title, :authors, :video_description,
+      expose :duration, :title, :authors, :video_description,
              if: lambda { |media, _| media.content_type == 'youtube' }
     end
   end

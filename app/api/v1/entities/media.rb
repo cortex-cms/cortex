@@ -1,8 +1,9 @@
+require_relative 'media_basic'
+
 module API::V1
   module Entities
-    class Media < Grape::Entity
-      expose :id, :name, :created_at, :dimensions, :updated_at, :deactive_at, :deleted_at, :taxon,
-             :tags, :description, :alt, :active, :url
+    class Media < MediaBasic
+      expose :created_at, :updated_at, :deactive_at, :deleted_at, :tags, :description, :active
 
       # Aliases
       expose :attachment_file_size, as: :attachment_size
@@ -12,16 +13,9 @@ module API::V1
       expose :consumed?, as: :consumed
 
       expose :user, with: 'Entities::UserBasic', as: :creator
-      expose :attachment, with: 'Entities::MediaThumbnails', as: :thumbs, if: lambda { |media, _| media.can_thumb }
 
-      expose :meta do
-        #expose :video_id, :duration, :duration, :video_id, :title, :author, :video_description,
-        #       if: lambda { |m| m.content_type == 'youtube' }
-      end
-    end
-
-    class YoutubeMeta < Grape::Entity
-      expose :video_id, :duration, :duration, :video_id, :title, :author, :video_description
+      expose :duration, :video_id, :title, :authors, :video_description,
+             if: lambda { |media, _| media.content_type == 'youtube' }
     end
   end
 end

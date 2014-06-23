@@ -540,7 +540,7 @@ DEPENDENCIES
   rspec-rails
   rspec-sidekiq
   ruby-debug-ide
-  sanitize
+  sanitize (~> 3.0)
   sass-rails (= 4.0.2)
   shoulda
   shoulda-matchers

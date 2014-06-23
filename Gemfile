@@ -67,7 +67,7 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'kaminari'
-gem 'sanitize'
+gem 'sanitize', '~> 3.0'
 gem 'paranoia',  '~> 2.0'
 gem 'pg'
 

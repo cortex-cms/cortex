@@ -50,8 +50,8 @@ class Post < ActiveRecord::Base
   end
 
   def sanitize_body!
-    if self.body
-      Sanitize.clean!(self.body, Cortex.config.sanitize_whitelist.post)
+    if body
+      body = Sanitize.fragment(body, Cortex.config.sanitize_whitelist.post)
     end
   end
 

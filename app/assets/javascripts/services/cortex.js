@@ -30,19 +30,12 @@ angular.module('cortex.services.cortex', [
     industries: {method: 'GET', params: {id: 'industries'}, isArray: true}
   });
 
-  var adHoc = {
-    getYoutubeInfo: function(video_id) {
-      return $http.get(settings.cortex_base_url + '/adhoc/youtube/' + video_id, {cache: true});
-    }
-  };
-
   return {
     categories:  categories,
     posts:       posts,
     media:       media,
     tenants:     tenants,
     users:       users,
-    occupations: occupations,
-    adHoc:       adHoc
+    occupations: occupations
   };
 });

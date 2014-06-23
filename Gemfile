@@ -101,7 +101,6 @@ gem 'slim' # Sidekiq-web
 group :test, :development do
 
   # Rspec
-  gem 'rspec-sidekiq'
   gem 'rspec-rails'
   gem 'json_spec'
 
@@ -147,6 +146,7 @@ end
 group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
+  gem 'rspec-sidekiq'
 end
 
 group :assets do

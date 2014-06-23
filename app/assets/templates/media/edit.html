@@ -12,10 +12,10 @@
         <dd>{{media.file_name}}</dd>
 
         <dt>File Type</dt>
-        <dd>{{media.content_type}}</dd>
+        <dd>{{media.attachment_content_type}}</dd>
 
         <dt>File Size</dt>
-        <dd>{{media.file_size | bytes}}</dd>
+        <dd>{{media.attachment_size | bytes}}</dd>
 
         <span ng-if="media.dimensions">
           <dt>Dimensions</dt>
@@ -35,7 +35,7 @@
         <dd>Placeholder</dd>
 
         <dt>Direct URL</dt>
-        <dd><a href="{{media.attachment_url}}">{{media.attachment_url}}</a></dd>
+        <dd><a href="{{media.attachment_url}}">{{media.url}}</a></dd>
       </dl>
     </div>
   </div>

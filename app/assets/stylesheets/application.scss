@@ -19,9 +19,14 @@
 // Application-wide styling
 @import 'cortex';
 
+// Directives
+@import 'directives/file-selector';
+@import 'directives/youtube-selector';
+
 // States
 @import 'states/media.edit';
 @import 'states/media.manage';
+@import 'states/media.new';
 @import 'states/posts.edit';
 @import 'states/posts.manage';
 @import 'states/tenant.manage';

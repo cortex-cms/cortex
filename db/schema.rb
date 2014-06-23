@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20140617200632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -46,8 +47,10 @@ ActiveRecord::Schema.define(version: 20140617200632) do
     t.datetime "deactive_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "digest",                  null: false
+    t.string   "digest"
     t.datetime "deleted_at"
+    t.hstore   "meta"
+    t.string   "type",                    default: "Media", null: false
   end
 
   add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree

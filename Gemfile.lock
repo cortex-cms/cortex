@@ -1,38 +1,23 @@
 GIT
   remote: git://github.com/applicake/doorkeeper
-  revision: 1a15349d746813bf4f3d08734822e26ea6ac4bd0
+  revision: 92f2acd1b5292ebc6645615dcd88c6c5987adba7
   specs:
-    doorkeeper (1.2.0)
+    doorkeeper (1.3.0)
       railties (>= 3.1)
 
 GIT
-  remote: git://github.com/intridea/grape
-  revision: 7b55a53cbfdc67e73fb05230aa589c2a8cf8bce8
-  specs:
-    grape (0.7.1)
-      activesupport
-      builder
-      hashie (>= 2.1.0)
-      multi_json (>= 1.3.2)
-      multi_xml (>= 0.5.2)
-      rack (>= 1.3.0)
-      rack-accept
-      rack-mount
-      virtus (>= 1.0.0)
-
-GIT
   remote: git://github.com/mongoid/mongoid
-  revision: e93a4837b0266db46c24aae172e184f57c847b04
+  revision: 50b633c8baf2fa467e8c36b18a013a2cd50e0454
   specs:
-    mongoid (4.0.0.beta1)
-      activemodel (>= 4.0.0)
-      moped (~> 2.0.beta6)
+    mongoid (4.0.0)
+      activemodel (~> 4.0)
+      moped (~> 2.0.0)
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
 
 GIT
   remote: git://github.com/simi/mongoid-paranoia.git
-  revision: 4d9faf35b336e25619629b9e6514ff61bee169d6
+  revision: bf0ee2f3bf10770298a24a6a5a86edec8bdcfdd1
   specs:
     mongoid-paranoia (0.1)
       mongoid (> 3)
@@ -69,19 +54,19 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.0.2)
       rails (>= 3, < 5)
-    angular-rails-templates (0.1.1)
+    angular-rails-templates (0.1.2)
       railties (>= 3.1)
       sprockets
       tilt
-    annotate (2.6.3)
+    annotate (2.6.5)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (5.0.1.20140414130214)
     attr_required (1.0.0)
-    awesome_nested_set (3.0.0.rc.4)
+    awesome_nested_set (3.0.0.rc.5)
       activerecord (>= 4.0.0, < 5)
     awesome_print (1.2.0)
-    aws-sdk (1.40.3)
+    aws-sdk (1.44.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     axiom-types (0.1.1)
@@ -96,14 +81,11 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bson (2.2.3)
+    bson (2.3.0)
     bson_ext (1.5.1)
     builder (3.2.2)
     celluloid (0.15.2)
       timers (~> 1.1.0)
-    celluloid-io (0.15.0)
-      celluloid (>= 0.15.0)
-      nio4r (>= 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -124,8 +106,9 @@ GEM
     coffee-script-source (1.7.0)
     colored (1.2)
     connection_pool (2.0.0)
+    crass (0.2.0)
     daemons (1.1.9)
-    database_cleaner (1.2.0)
+    database_cleaner (1.3.0)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -136,26 +119,28 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    docile (1.1.3)
-    dotenv (0.7.0)
+    docile (1.1.5)
+    dotenv (0.11.1)
+      dotenv-deployment (~> 0.0.2)
+    dotenv-deployment (0.0.2)
     elasticsearch (1.0.2)
       elasticsearch-api (= 1.0.2)
       elasticsearch-transport (= 1.0.2)
     elasticsearch-api (1.0.2)
       multi_json
-    elasticsearch-model (0.1.2)
+    elasticsearch-model (0.1.4)
       activesupport (> 3)
       elasticsearch (> 0.4)
       hashie
-    elasticsearch-rails (0.1.2)
+    elasticsearch-rails (0.1.4)
     elasticsearch-transport (1.0.2)
       faraday
       multi_json
     equalizer (0.0.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    excon (0.33.0)
-    execjs (2.0.2)
+    excon (0.37.0)
+    execjs (2.2.0)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.4.1)
@@ -164,10 +149,11 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
-    fog (1.22.0)
+    fog (1.22.1)
       fog-brightbox
-      fog-core (~> 1.21, >= 1.21.1)
+      fog-core (~> 1.22)
       fog-json
+      ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
     fog-brightbox (0.0.2)
       fog-core
@@ -181,16 +167,26 @@ GEM
       net-ssh (>= 2.1.3)
     fog-json (1.0.0)
       multi_json (~> 1.0)
-    font-awesome-sass (4.0.3.1)
+    font-awesome-sass (4.1.0)
       sass (~> 3.2)
-    foreman (0.66.0)
-      dotenv (~> 0.7.0)
+    foreman (0.74.0)
+      dotenv (~> 0.11.1)
       thor (~> 0.19.1)
-    formatador (0.2.4)
+    formatador (0.2.5)
     gon (5.0.4)
       actionpack (>= 2.3.0)
       json
-    grape-entity (0.4.2)
+    grape (0.7.0)
+      activesupport
+      builder
+      hashie (>= 1.2.0)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      rack (>= 1.3.0)
+      rack-accept
+      rack-mount
+      virtus (>= 1.0.0)
+    grape-entity (0.4.3)
       activesupport
       multi_json (>= 1.3.2)
     grape-swagger (0.7.2)
@@ -198,69 +194,70 @@ GEM
       grape-entity (>= 0.3.0)
       kramdown (>= 1.3.1)
     growl (1.0.3)
-    guard (2.6.0)
+    guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
       pry (>= 0.9.12)
       thor (>= 0.18.1)
-    guard-rspec (4.2.8)
+    guard-rspec (4.2.10)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
     haml (4.0.5)
       tilt
-    hashie (2.1.1)
+    hashie (3.0.0)
     hashr (0.0.22)
     hike (1.2.3)
-    httpclient (2.3.4.1)
+    httpclient (2.4.0)
     i18n (0.6.9)
     ice_nine (0.11.0)
-    jquery-rails (3.1.0)
+    ipaddress (0.8.0)
+    jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
-    json_spec (1.1.1)
+    json_spec (1.1.2)
       multi_json (~> 1.0)
-      rspec (~> 2.0)
-    kaminari (0.15.1)
+      rspec (>= 2.0, < 4.0)
+    kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kramdown (1.3.3)
+    kramdown (1.4.0)
     libv8 (3.16.14.3)
-    listen (2.7.4)
+    listen (2.7.9)
       celluloid (>= 0.15.2)
-      celluloid-io (>= 0.15.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    lumberjack (1.0.5)
+    lumberjack (1.0.7)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (1.25.1)
-    mini_portile (0.5.3)
-    minitest (5.3.3)
-    mocha (1.0.0)
+    mini_portile (0.6.0)
+    minitest (5.3.5)
+    mocha (1.1.0)
       metaclass (~> 0.0.1)
-    momentjs-rails (2.6.0)
+    momentjs-rails (2.7.0)
       railties (>= 3.1)
-    moped (2.0.0.rc1)
+    moped (2.0.0)
       bson (~> 2.2)
       connection_pool (~> 2.0)
       optionable (~> 0.2.0)
-    multi_json (1.10.0)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.0)
+    net-ssh (2.9.1)
     ng-rails-csrf (0.1.0)
     ngmin-rails (0.4.0)
       rails (>= 3.1)
-    nio4r (1.0.0)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.6.2.1)
+      mini_portile (= 0.6.0)
+    nokogumbo (1.1.9)
+      nokogiri
     optionable (0.2.0)
     origin (2.1.1)
     orm_adapter (0.5.0)
@@ -272,10 +269,10 @@ GEM
     paranoia (2.0.2)
       activerecord (~> 4.0)
     pg (0.17.1)
-    polyglot (0.3.4)
-    pry (0.9.12.6)
-      coderay (~> 1.0)
-      method_source (~> 0.8)
+    polyglot (0.3.5)
+    pry (0.10.0)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.5.2)
     rack-accept (0.4.5)
@@ -303,47 +300,48 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.0)
       sprockets-rails (~> 2.0)
-    rails-assets-angular (1.2.11)
-    rails-assets-angular-animate (1.2.11)
-      rails-assets-angular (= 1.2.11)
+    rails-assets-angular (1.2.18)
+    rails-assets-angular-animate (1.2.18)
+      rails-assets-angular (= 1.2.18)
     rails-assets-angular-bootstrap (0.11.0)
       rails-assets-angular (>= 1)
-    rails-assets-angular-bootstrap-datetimepicker (0.2.2)
-      rails-assets-angular (= 1.2.11)
-      rails-assets-bootstrap (= 3.1.0)
-      rails-assets-moment (= 2.5.1)
-    rails-assets-angular-cookies (1.2.11)
-      rails-assets-angular (= 1.2.11)
+    rails-assets-angular-bootstrap-datetimepicker (0.2.4)
+      rails-assets-angular (>= 1.2.16, < 2)
+      rails-assets-bootstrap (>= 3.1.1, < 4)
+      rails-assets-moment (>= 2.6.0, < 3)
+    rails-assets-angular-cookies (1.2.18)
+      rails-assets-angular (= 1.2.18)
     rails-assets-angular-flash (0.1.13)
       rails-assets-angular (>= 1.0, < 1.3)
     rails-assets-angular-redactor-patched (1.0.1)
       rails-assets-angular (>= 1.2.0)
       rails-assets-jquery (>= 2.0.0)
-    rails-assets-angular-resource (1.2.11)
-      rails-assets-angular (= 1.2.11)
-    rails-assets-angular-sanitize (1.2.11)
-      rails-assets-angular (= 1.2.11)
+    rails-assets-angular-resource (1.2.18)
+      rails-assets-angular (= 1.2.18)
+    rails-assets-angular-sanitize (1.2.18)
+      rails-assets-angular (= 1.2.18)
     rails-assets-angular-ui-router (0.2.10)
       rails-assets-angular (>= 1.0.8)
-    rails-assets-angularjs-file-upload (1.3.2)
-    rails-assets-bootstrap (3.1.0)
+    rails-assets-angularjs-file-upload (1.4.0)
+    rails-assets-bootstrap (3.1.1)
       rails-assets-jquery (>= 1.9.0)
     rails-assets-bootstrap-sass-official (3.1.1.2)
     rails-assets-jquery (2.1.1)
-    rails-assets-moment (2.5.1)
-    rails-assets-ng-table (0.3.2)
-      rails-assets-angular (~> 1.2.9)
+    rails-assets-moment (2.7.0)
+    rails-assets-ng-table (0.3.3)
+      rails-assets-angular (~> 1)
     rails-assets-ng-tags-input (2.0.1)
       rails-assets-angular (~> 1.2.1)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
-    rails_best_practices (1.15.3)
+    rails_best_practices (1.15.4)
       activesupport
       awesome_print
       code_analyzer (>= 0.4.3)
       colored
       erubis
       i18n
+      json
       require_all
       ruby-progressbar
     railties (4.1.0)
@@ -351,39 +349,44 @@ GEM
       activesupport (= 4.1.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.3.1)
+    rake (10.3.2)
     rb-fsevent (0.9.4)
-    rb-inotify (0.9.4)
+    rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
     ref (1.0.5)
     require_all (1.3.2)
-    rspec (2.14.1)
-      rspec-core (~> 2.14.0)
-      rspec-expectations (~> 2.14.0)
-      rspec-mocks (~> 2.14.0)
-    rspec-core (2.14.8)
-    rspec-expectations (2.14.5)
+    rspec (2.99.0)
+      rspec-core (~> 2.99.0)
+      rspec-expectations (~> 2.99.0)
+      rspec-mocks (~> 2.99.0)
+    rspec-collection_matchers (1.0.0)
+      rspec-expectations (>= 2.99.0.beta1)
+    rspec-core (2.99.1)
+    rspec-expectations (2.99.1)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.14.6)
-    rspec-rails (2.14.2)
+    rspec-mocks (2.99.1)
+    rspec-rails (2.99.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec-core (~> 2.14.0)
-      rspec-expectations (~> 2.14.0)
-      rspec-mocks (~> 2.14.0)
+      rspec-collection_matchers
+      rspec-core (~> 2.99.0)
+      rspec-expectations (~> 2.99.0)
+      rspec-mocks (~> 2.99.0)
     rspec-sidekiq (1.0.0)
       rspec (>= 2.0.0)
       sidekiq (>= 2.4.0)
     ruby-debug-ide (0.4.22)
       rake (>= 0.8.1)
-    ruby-progressbar (1.4.2)
-    sanitize (2.1.0)
+    ruby-progressbar (1.5.1)
+    sanitize (3.0.0)
+      crass (~> 0.2.0)
       nokogiri (>= 1.4.4)
+      nokogumbo (= 1.1.9)
     sass (3.2.19)
     sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
@@ -397,13 +400,13 @@ GEM
     shoulda-context (1.2.1)
     shoulda-matchers (2.6.1)
       activesupport (>= 3.0.0)
-    sidekiq (2.17.7)
+    sidekiq (3.1.4)
       celluloid (>= 0.15.2)
-      connection_pool (>= 1.0.0)
+      connection_pool (>= 2.0.0)
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
-    sidekiq-failures (0.4.1)
+    sidekiq-failures (0.4.2)
       sidekiq (>= 2.16.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
@@ -437,7 +440,7 @@ GEM
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
     thor (0.19.1)
-    thread_safe (0.3.3)
+    thread_safe (0.3.4)
     tilt (1.4.1)
     timecop (0.7.1)
     timers (1.1.0)
@@ -446,9 +449,9 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.2)
       coffee-rails
-    tzinfo (1.1.0)
+    tzinfo (1.2.1)
       thread_safe (~> 0.1)
-    uglifier (2.5.0)
+    uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     underscore-rails (1.6.0)
@@ -470,7 +473,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 3.0.2)
   angular-rails-templates
   annotate
-  awesome_nested_set (~> 3.0.0.rc.3)
+  awesome_nested_set (~> 3.0.0.rc.5)
   awesome_print
   aws-sdk
   bcrypt-ruby
@@ -489,7 +492,7 @@ DEPENDENCIES
   font-awesome-sass
   foreman
   gon
-  grape!
+  grape (~> 0.7)
   grape-entity
   grape-swagger
   growl
@@ -504,7 +507,7 @@ DEPENDENCIES
   minitest
   mocha
   momentjs-rails
-  mongoid (~> 4.0.0.beta1)!
+  mongoid (~> 4.0.0.rc2)!
   mongoid-paranoia!
   ng-rails-csrf
   ngmin-rails
@@ -533,14 +536,15 @@ DEPENDENCIES
   rails_best_practices
   rb-fsevent
   rb-inotify
+  rspec (~> 2.99)
   rspec-rails
   rspec-sidekiq
   ruby-debug-ide
-  sanitize
+  sanitize (~> 3.0)
   sass-rails (= 4.0.2)
   shoulda
   shoulda-matchers
-  sidekiq (~> 2.17.6)
+  sidekiq
   sidekiq-failures
   sinatra
   six

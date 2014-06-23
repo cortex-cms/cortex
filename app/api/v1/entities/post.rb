@@ -3,7 +3,7 @@ require_relative 'post_basic'
 module API::V1
   module Entities
     class Post < PostBasic
-      expose :media
+      expose :media, with: 'Entities::MediaBasic'
 
       expose(:display) do |post|
         post.display

@@ -1,7 +1,7 @@
-// Update sources
+# Update sources
 update
 
-// Install software required for cortex
+# Install software required for cortex
 install postgresql
 install redis
 install mongodb

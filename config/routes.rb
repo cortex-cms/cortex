@@ -10,7 +10,9 @@ Cortex::Application.routes.draw do
   devise_for :users
 
   # Sidekiq Admin
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, lambda { |u| u.is_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # API
   API::V1::API.logger Rails.logger

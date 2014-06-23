@@ -8,7 +8,7 @@ module Cortex
 
     config.angular_templates.module_name = 'cortex.templates'
     config.i18n.enforce_available_locales = true
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/models/media_types)
     config.active_record.default_timezone = :utc
 
     ActsAsTaggableOn.remove_unused_tags = true

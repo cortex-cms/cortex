@@ -2,88 +2,119 @@ angular.module('cortex.controllers.media.new', [
     'ui.router.state',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.progressbar',
-    'angularFileUpload',
+    'ui.bootstrap.tabs',
     'angular-flash.service',
-    'cortex.settings'
+    'cortex.settings',
+    'cortex.services.cortex',
+    'cortex.directives.fileSelector',
+    'cortex.directives.youtubeSelector'
 ])
 
-.controller('MediaNewCtrl', function($scope, $timeout, $upload, $state, flash, settings) {
+.controller('MediaNewCtrl', function($scope, $timeout, $upload, $state, $q, flash, cortex, settings) {
 
-    // angular-bootstrap datepicker settings
-    $scope.datepicker = {
-        format: 'yyyy/MM/dd',
-        expireAtOpen: false,
-        open: function(datepicker) {
-            $timeout(function(){
-                $scope.datepicker[datepicker] = true;
+  $scope.data            = $scope.data || {};
+  $scope.data.currentTab = 'file;'
+  $scope.data.media      = new cortex.media();
+  $scope.data.upload     = {
+    progress: 0
+  };
+
+  // angular-bootstrap datepicker settings
+  $scope.datepicker = {
+    format: 'yyyy/MM/dd',
+    expireAtOpen: false,
+    open: function(datepicker) {
+      $timeout(function(){
+        $scope.datepicker[datepicker] = true;
+      });
+    }
+  };
+
+  function saveFile() {
+    var d = $q.defer();
+
+    $scope.data.media.type = 'Media';
+    var file = $scope.data.media.$file;
+
+    if (!file) {
+      d.reject('No file present.');
+    }
+    else {
+      var uploadError = false;
+      var httpConfig  = {
+        url: settings.cortex_base_url + '/media',
+        method: 'POST',
+        data: {media: $scope.data.media},
+        file: file,
+        fileFormDataName: 'media[attachment]',
+        formDataAppender: function(formData, key, value) {
+          if (key === 'media') {
+            angular.forEach(value, function(v, k) {
+              formData.append('media[' + k + ']', v);
             });
+          }
         }
-    };
+      };
 
-    $scope.data = {
-        upload: {
-            progress: 0,
-            file: null
-        },
-        media: {}
-    };
+      $scope.data.upload = $upload.upload(httpConfig)
+        .progress(function(e) {
+          if (uploadError) { return; }
+          $scope.data.upload.progress = parseInt(100.0 * e.loaded / e.total);
+        })
+        .success(function(media) {
+          flash.success = media.name + ' created ';
+          $state.go('^.manage.components');
+        })
+        .error(function(error, status) {
+          uploadError                 = true;
+          $scope.data.upload.progress = 0;
+          $scope.data.upload.file     = null;
 
-    $scope.startUpload = function() {
+          if (status === 422) {
+            d.reject('Selected file type is not supported. Please choose a different file.');
+          }
+          else {
+            d.reject('Unhandled error');
+          }
+        });
+    }
 
-        var file = $scope.data.upload.file;
+    return d.promise;
+  };
+  // </saveFile()>
 
-        if (!file) {
-            return;
-        }
+  function saveYoutube() {
+    $scope.data.media.type     = 'Youtube';
+    $scope.data.media.video_id = $scope.data.media.$youtube;
+    return $scope.data.media.$save();
+  };
 
-        var httpConfig = {
-            url: settings.cortex_base_url + '/media',
-            method: 'POST',
-            data: {media: $scope.data.media},
-            file: file,
-            fileFormDataName: 'media[attachment]',
-            formDataAppender: function(formData, key, value) {
-                if (key === 'media') {
-                    angular.forEach(value, function(v, k) {
-                        formData.append('media[' + k + ']', v);
-                    });
-                }
-            }
-        };
+  $scope.saveMedia = function() {
+    var tab = $scope.currentTab;
+    var save;
 
-        var uploadError = false;
+    if (tab === 'file') {
+      save = saveFile;
+    }
+    else if (tab === 'youtube') {
+      save = saveYoutube;
+    }
+    else {
+      flash.error = 'Unknown media-type tab "' + selectedTab + '"';
+      return;
+    }
 
-        $scope.upload = $upload.upload(httpConfig)
-            .progress(function(e) {
-                if (uploadError) {
-                    return;
-                }
-                $scope.data.upload.progress = parseInt(100.0 * e.loaded / e.total);
-            })
-            .success(function(media) {
-                flash.success = media.name + " created";
-                $state.go('^.manage.components');
-            })
-            .error(function(error, status) {
-                uploadError = true;
-                $scope.data.upload.progress = 0;
-                $scope.data.upload.file = null;
+    save().then(
+      function() {
+        flash.success = $scope.data.media.name + ' created ';
+        $state.go('^.manage.components');
+      },
+      function(error) {
+        flash.error = error;
+      });
+  }
 
-                if (status === 422) {
-                    flash.error = "Selected file type is not supported. Please choose a different file.";
-                }
-                else {
-                    flash.error = "Unhandled error";
-                }
-            });
-    };
-
-    $scope.onFileSelect = function(files) {
-        var file = files[0];
-        $scope.data.upload.file = file;
-    };
-
-    $scope.remove = function() {
-        $scope.data.upload.file = null;
-    };
+  $scope.selectTab = function(tab) {
+    $scope.currentTab = tab;
+  };
 });

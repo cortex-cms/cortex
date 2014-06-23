@@ -11,6 +11,7 @@
 
 /public/assets/
 /public/media/
+/public/youtubes/
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

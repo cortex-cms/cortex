@@ -23,6 +23,7 @@ module SearchableMedia
         indexes :tags, :analyzer => :keyword
         indexes :created_at, :type => :date, :include_in_all => false
         indexes :taxon, :analyzer => :taxon_analyzer
+        indexes :meta
       end
     end
 

@@ -12,5 +12,6 @@ angular.module('cortex.settings', [])
 
 .constant('mediaSelectType', {
   ADD_MEDIA: 'addMedia',
-  SET_FEATURED: 'setFeatured'
+  SET_FEATURED: 'setFeatured',
+  SET_TILE: 'setTile'
 });

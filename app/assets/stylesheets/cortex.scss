@@ -67,22 +67,6 @@ header div.container {
 }
 
 .container {
-  .btn{
-    border: $standard-border;
-    background: white;
-    color: black;
-  }
-
-  .btn:hover {
-    background: #FFA178;
-    color: white;
-  }
-
-  button.active, .btn-primary {
-    @include gradient-vertical(#FFA178, #E9743A, 0%, 100%);
-    color: white;
-  }
-
   .navbar-collapse {
     @media (max-width: $screen-md-min) {
       box-shadow: none;

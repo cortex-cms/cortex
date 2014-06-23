@@ -4,13 +4,8 @@ defaults: &defaults
   default_subdomain: public
   allowed_origins:
     - 'localhost:3000'
-    - 'localhost:4000'
     - 'localhost:3001'
-    - 'localhost:8000'
-    - 'localhost:63342'
-    - 'kudu.cb-project-x-dev.development.c66.me'
     - 'cbcortex.com'
-    - 'whump.net'
   allowed_origins_regex:
     - '.+\.cbcortex\.com'
   media:

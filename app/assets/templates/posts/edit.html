@@ -512,29 +512,57 @@
       <fieldset>
           <legend>Featured Media</legend>
 
-          <div ng-show="data.featured_media_too_small" class="alert alert-warning">Warning! Your featured media might appear stretched, as it is smaller than our recommended size.</div>
+          <div class="alert alert-warning" ng-show="data.post.featured_media_warnings"><ul ng-repeat="warning in data.post.featured_media_warnings"><li>{{warning}}</li></ul></div>
 
-          <div class="row">
-            <div class="featured-media">
-              <img src="{{data.post.featured_media.thumbs.mini}}" alt="{{data.post.featured_media.}}">
+          <div class="media-selector">
+            <div class="thumb">
+              <img src="{{data.post.featured_media.thumbs.mini}}" alt="{{data.post.featured_media.alt}}">
             </div>
-            <div class="featured-media-info">
+            <div class="info">
               <strong>{{data.post.featured_media.name}}</strong>
               <strong>{{data.post.featured_media.taxon}}</strong>
             </div>
-            <div class="featured-media-select">
+            <div class="actions">
               <button type="button"
                       class="btn btn-primary btn-sm"
-                      ng-click="setFeaturedImage()">
+                      ng-click="setFeaturedMedia()">
                   <i class="fa fa-search-plus"></i> Browse...
               </button>
               <button type="button"
                       class="btn btn-danger btn-sm"
-                      ng-click="removeFeaturedImage()">
+                      ng-click="removeFeaturedMedia()">
                 <i class="fa fa-trash-o"></i> Remove
               </button>
             </div>
           </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Tile Media</legend>
+
+       <div class="alert alert-warning" ng-show="data.post.tile_media_warnings"><ul ng-repeat="warning in data.post.tile_media_warnings"><li>{{warning}}</li></ul></div>
+
+        <div class="media-selector">
+          <div class="thumb">
+            <img src="{{data.post.tile_media.thumbs.mini}}" alt="{{data.post.tile_media.alt}}">
+          </div>
+          <div class="info">
+            <strong>{{data.post.tile_media.name}}</strong>
+            <strong>{{data.post.tile_media.taxon}}</strong>
+          </div>
+          <div class="actions">
+            <button type="button"
+                    class="btn btn-primary btn-sm"
+                    ng-click="setTileMedia()">
+              <i class="fa fa-search-plus"></i> Browse...
+            </button>
+            <button type="button"
+                    class="btn btn-danger btn-sm"
+                    ng-click="removeTileMedia()">
+              <i class="fa fa-trash-o"></i> Remove
+            </button>
+          </div>
+        </div>
       </fieldset>
 
       <fieldset>

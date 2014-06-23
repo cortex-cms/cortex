@@ -3,7 +3,7 @@ angular.module('cortex.services.cortex', [
   'cortex.resources'
 ])
 
-.factory('cortex', function($rootScope, cortexResource, paginatedResource, settings) {
+.factory('cortex', function($rootScope, $http, cortexResource, paginatedResource, settings) {
 
   var categories = cortexResource('/categories/:id', {id: '@id'}, {
     hierarchy: {method: 'GET', url: settings.cortex_base_url + '/categories/:id/hierarchy', isArray: true}

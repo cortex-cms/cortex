@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611152327) do
+ActiveRecord::Schema.define(version: 20140617200632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -46,8 +47,10 @@ ActiveRecord::Schema.define(version: 20140611152327) do
     t.datetime "deactive_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "digest",                  null: false
+    t.string   "digest"
     t.datetime "deleted_at"
+    t.hstore   "meta"
+    t.string   "type",                    default: "Media", null: false
   end
 
   add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
@@ -137,6 +140,7 @@ ActiveRecord::Schema.define(version: 20140611152327) do
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
+    t.integer  "tile_media_id"
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree

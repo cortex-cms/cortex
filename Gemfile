@@ -102,7 +102,6 @@ group :test, :development do
 
   # Rspec
   gem 'rspec', '~> 2.99'
-  gem 'rspec-sidekiq'
   gem 'rspec-rails'
   gem 'json_spec'
 

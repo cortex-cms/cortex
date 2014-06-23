@@ -148,6 +148,7 @@ end
 group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
+  gem 'rspec-sidekiq'
 end
 
 group :assets do

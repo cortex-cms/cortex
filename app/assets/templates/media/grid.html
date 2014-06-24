@@ -77,37 +77,35 @@
   </div>
 
   <div ng-repeat="media in data.media">
-    <div class="media-data-row clearfix">
+    <div class="media-data-row">
       <div class="col-sm-3 col-xs-12">
-        <div class="row">
-          <div class="col-xs-2">
-            <input type="checkbox">
-          </div>
+        <div class="col-xs-2">
+          <input type="checkbox">
+        </div>
 
-          <div class="col-xs-10">
-            <a class="thumbnail" href="{{media.url}}" target="_blank">
-              <img ng-if="media.thumbs"
-                 ng-src="{{ media.thumbs.mini }}"
-                 alt="Thumbnail">
-              <img ng-if="!media.thumbs"
-                 ph-img="100x100"
-                 ph-text="{{ media.type | uppercase }}"
-                 alt="Thumbnail">
-            </a>
-          </div>
+        <div class="col-xs-10">
+          <a class="thumbnail" href="{{media.url}}" target="_blank">
+            <img ng-if="media.thumbs"
+               ng-src="{{ media.thumbs.mini }}"
+               alt="Thumbnail">
+            <img ng-if="!media.thumbs"
+               ph-img="100x100"
+               ph-text="{{ media.type | uppercase }}"
+               alt="Thumbnail">
+          </a>
         </div>
       </div>
 
       <div class="col-sm-5 col-xs-6 media-data-row-desc">
         <strong>{{ media.name }}</strong><br>
-        {{ media.file_name }}<br>
+        {{ media.attachment_name }}<br>
         <br>
         <strong>Author: </strong>{{ media.creator.fullname }}<br>
         <strong>Description: </strong>{{ media.description }}<br>
         <strong>Tags: </strong>{{ media.tags|tagList }}
       </div>
 
-      <div class="col-sm-4 col-xs-6 text-right media-data-row-action-status">
+      <div class="media-data-row-action-status">
         <strong>Created: </strong> {{ media.created_at|date:"y/M/d h:mm:ss a" }}<br>
         <strong>Last Modified: </strong> {{ moment(media.updated_at).fromNow(); }}<br>
         <br>
@@ -115,14 +113,16 @@
         <strong>Status: </strong>{{ media.deactive_at != null && (Date().new) >
         moment(media.deactive_at).toDate() ? 'Deactive' : 'Active' }}<br>
         <br>
-        <button class="btn btn-sm btn-danger" type="button" ng-click="deleteMedia(media)" ng-if="!media.consumed"><i class="fa fa-trash-o"></i> Delete
-        </button>
-        <button class="btn btn-sm btn-primary" type="button"
-            ui-sref="^.^.edit({mediaId: {{media.id}}})"><i class="fa fa-edit"></i> Edit
-        </button>
-        <button ng-if="$state.includes('cortex.posts')" class="btn btn-sm btn-primary" type="button" ng-click="selectMedia(media)">
-          <i class="fa fa-share"></i> Select
-        </button>
+        <div class="media-grid-actions">
+          <button class="btn btn-sm btn-danger" type="button" ng-click="deleteMedia(media)" ng-if="!media.consumed"><i class="fa fa-trash-o"></i> Delete
+          </button>
+          <button class="btn btn-sm btn-primary" type="button"
+              ui-sref="^.^.edit({mediaId: {{media.id}}})"><i class="fa fa-edit"></i> Edit
+          </button>
+          <button ng-if="$state.includes('cortex.posts')" class="btn btn-sm btn-primary" type="button" ng-click="selectMedia(media)">
+            <i class="fa fa-share"></i> Select
+          </button>
+        </div>
       </div>
     </div>
   </div>

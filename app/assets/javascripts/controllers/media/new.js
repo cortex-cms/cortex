@@ -117,4 +117,8 @@ angular.module('cortex.controllers.media.new', [
   $scope.selectTab = function(tab) {
     $scope.currentTab = tab;
   };
+
+  $scope.cancel = function() {
+    $state.go('^.manage.components');
+  };
 });

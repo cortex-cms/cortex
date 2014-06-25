@@ -24,7 +24,10 @@ mock = (function() {
   var basicGon = {
     current_user: null,
     settings: {
-      cortex_base_url: ''
+      cortex_base_url: '',
+      paging: {
+        defaultPerPage: 10
+      }
     }
   };
 

@@ -23,6 +23,7 @@ notifications:
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/13594b3ce2e4db11a414
+      - https://webhooks.gitter.im/e/d2e5a208e6376294ce51
     on_success: change
     on_failure: always
     on_start: false

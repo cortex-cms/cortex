@@ -15,7 +15,7 @@ angular.module('cortex.services.mediaConstraints', [])
 
 	var aspectratio = function(media, valid) {
 		var aspectRatio = media.dimensions[0] / media.dimensions[1];
-		if (angular.isString(valid)) {
+		if (angular.isNumber(valid)) {
 			return aspectRatio.toFixed(1) === valid.toFixed(1);
 		}
 		else if (angular.isArray(valid)) {
@@ -30,7 +30,7 @@ angular.module('cortex.services.mediaConstraints', [])
 	}
 
 	var totalSize = function(media, valid, decimal) {
-		return decimal * valid >= media.dimensions[0] * media.dimensions[1];
+		return decimal * valid <= media.dimensions[0] * media.dimensions[1];
 	};
 
 	return {

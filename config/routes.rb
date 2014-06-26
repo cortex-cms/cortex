@@ -1,6 +1,7 @@
 require "#{Rails.root}/app/api/v1/api"
 
 Cortex::Application.routes.draw do
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root 'home#index'
 
   get 'login', to: 'home#login'

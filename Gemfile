@@ -129,6 +129,11 @@ group :test, :development do
 
   # IDE
   gem 'ruby-debug-ide', require: false
+
+  gem 'jasmine-rails'
+  gem 'guard-jasmine'
+  gem 'jasmine-core', '~> 1.3'
+  gem 'rails-assets-angular-mocks'
 end
 
 group :development do

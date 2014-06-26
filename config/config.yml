@@ -19,6 +19,9 @@ test:
 development:
   <<: *defaults
 
+local:
+  <<: *defaults
+
 staging:
   <<: *defaults
 

@@ -5,6 +5,13 @@ development:
       hosts:
         - localhost:27017
 
+local:
+  sessions:
+    default:
+      database: cortex
+      hosts:
+        - localhost:27017
+
 test:
   sessions:
     default:

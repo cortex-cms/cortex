@@ -5,6 +5,10 @@ default: &default
   pool: 5
   timeout: 5000
 
+local:
+  <<: *default
+  database: cortex_dev
+
 development:
   <<: *default
   database: cortex_dev

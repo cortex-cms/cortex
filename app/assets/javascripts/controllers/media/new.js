@@ -56,8 +56,6 @@ angular.module('cortex.controllers.media.new', [
         }
       };
 
-      console.log('hi');
-
       $scope.data.upload = $upload.upload(httpConfig)
         .progress(function(e) {
           if (uploadError) { return; }

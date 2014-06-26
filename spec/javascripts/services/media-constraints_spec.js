@@ -28,7 +28,7 @@
 
     it("should check aspect ratio constraints", function() {
       expect(service.aspectratio(media, 1.3)).toBeTruthy();
-      expect(service.aspectratio(media, [1.3])).toBeTruthy();
+      expect(service.aspectratio(media, [1.2, 1.3])).toBeTruthy();
       expect(service.aspectratio(media, 1.7)).toBeFalsy();
       expect(service.aspectratio(media, [1.7])).toBeFalsy();
     });
@@ -38,11 +38,56 @@
       expect(service.totalSize(media, 48000000,.9)).toBeFalsy();
     });
 
-    xdescribe("featuredMediaConstraintsService", function() {
+    describe("featuredMediaConstraintsService", function() {
+      var failMedia;
+      beforeEach(inject(function($injector) {
+        failMedia = {
+          dimensions: [1, 1]
+        };
+        media = {
+          dimensions: [1920, 1080]
+        };
+        service = $injector.get("featuredMediaConstraintsService");
+      }));
 
+      it("should check width constraints", function() {
+        expect(service.width(media)).toBeTruthy();
+        expect(service.width(failMedia)).toBeFalsy();
+      });
+
+      it("should check aspect ratio constraints", function() {
+        expect(service.aspectratio(media)).toBeTruthy();
+        expect(service.aspectratio(failMedia)).toBeFalsy();
+      });
+
+      it("should check total size", function() {
+        expect(service.totalSize(media)).toBeTruthy();
+        expect(service.totalSize(failMedia)).toBeFalsy();
+      });
     });
 
-    xdescribe("tileMediaConstraintsService", function() {
+    describe("tileMediaConstraintsService", function() {
+      var failMedia;
+      beforeEach(inject(function($injector) {
+        failMedia = {
+          dimensions: [1, 5]
+        };
+        media = {
+          dimensions: [400, 400]
+        };
+        service = $injector.get("tileMediaConstraintsService");
+      }));
+
+      it("should check width constraints", function() {
+        expect(service.width(media)).toBeTruthy();
+        expect(service.width(failMedia)).toBeFalsy();
+      });
+
+      it("should check aspect ratio constraints", function() {
+        expect(service.aspectratio(media)).toBeTruthy();
+        expect(service.aspectratio(failMedia)).toBeFalsy();
+      });
+
 
     });
   });

@@ -6,14 +6,13 @@
   describe('Media New Module', function() {
 
     beforeEach(function() {
-      angular.mock.module('cortex.states');
       angular.mock.module('cortex.controllers.media.new');
     });
 
     describe('MediaGridCtrl', function($rootScope) {
       var createController, $scope, $state, $q, $upload, $httpBackend, flash;
 
-      beforeEach(inject(function($controller, _$rootScope_, $timeout, _$upload_, _$state_, _flash_, 
+      beforeEach(inject(function($controller, _$rootScope_, $timeout, _$upload_, _$state_, _flash_,
                                  cortex, settings, _$q_, _$httpBackend_) {
         $rootScope   = _$rootScope_;
         $scope       = $rootScope.$new();

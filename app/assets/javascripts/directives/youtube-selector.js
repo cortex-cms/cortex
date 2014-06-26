@@ -23,7 +23,7 @@ angular.module('cortex.directives.youtubeSelector', [
   };
 })
 
-.controller('YoutubeSelectorCtrl', function($scope, cortex) {
+.controller('YoutubeSelectorCtrl', function($scope) {
   $scope.$watch('youtubeLink', function() {
 
     if (!$scope.youtubeLink) {

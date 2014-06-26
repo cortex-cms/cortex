@@ -9,11 +9,11 @@ angular.module('cortex.directives.fileSelector', [
     templateUrl: 'directives/file-selector-tpl.html',
     scope: {
       'ngModel':  '=',
-      'multiple': '@'
+      'multiple': '='
     },
     link: function(scope, element) {
       // The file input is required to trigger an open file dialog (OFD)
-      var fileInput = element.find('input[type="file"]')[0];
+      var fileInput = element.find('input[type="file"]');
       var multiple  = scope.multiple;
 
       // Allow multiple file selection

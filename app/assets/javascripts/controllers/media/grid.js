@@ -12,7 +12,9 @@ angular.module('cortex.controllers.media.grid', [
     'cortex.services.cortex'
 ])
 
-.controller('MediaGridCtrl', function($scope, $state, $stateParams, cortex, settings, mediaSelectType, flash, PostBodyEditorService, PostsPopupService){
+.controller('MediaGridCtrl', function($scope, $state, $stateParams, $window, cortex, settings,
+                                      mediaSelectType, flash, PostBodyEditorService,
+                                      PostsPopupService){
 
     $scope.data = {};
 
@@ -50,7 +52,7 @@ angular.module('cortex.controllers.media.grid', [
         });
 
     $scope.deleteMedia = function(media) {
-        if (confirm('Are you sure you want to delete "' +  media.name + '?"')) {
+        if ($window.confirm('Are you sure you want to delete "' +  media.name + '?"')) {
             cortex.media.delete({id: media.id}, function() {
                 $scope.data.media = _.reject($scope.data.media, function(m) { return m.id == media.id; });
                 flash.info = media.name + " deleted.";

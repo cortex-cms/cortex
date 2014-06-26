@@ -56,14 +56,15 @@ angular.module('cortex.controllers.media.new', [
         }
       };
 
+      console.log('hi');
+
       $scope.data.upload = $upload.upload(httpConfig)
         .progress(function(e) {
           if (uploadError) { return; }
           $scope.data.upload.progress = parseInt(100.0 * e.loaded / e.total);
         })
         .success(function(media) {
-          flash.success = media.name + ' created ';
-          $state.go('^.manage.components');
+          d.resolve();
         })
         .error(function(error, status) {
           uploadError                 = true;
@@ -106,7 +107,7 @@ angular.module('cortex.controllers.media.new', [
 
     save().then(
       function() {
-        flash.success = $scope.data.media.name + ' created ';
+        flash.success = $scope.data.media.name + ' created';
         $state.go('^.manage.components');
       },
       function(error) {

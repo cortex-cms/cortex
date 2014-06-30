@@ -153,6 +153,7 @@ group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
   gem 'rspec-sidekiq'
+  gem 'elasticsearch-extensions'
 end
 
 group :assets do

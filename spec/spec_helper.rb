@@ -8,6 +8,7 @@ CodeClimate::TestReporter.start
 require 'rspec/rails'
 require 'shoulda'
 require 'mocha/api'
+require 'elasticsearch/extensions/test/cluster'
 
 include ActionDispatch::TestProcess
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -43,8 +44,18 @@ RSpec.configure do |config|
   # awesome_nested_set has an _extremely_ noisy depreciation warning issue
   # https://github.com/collectiveidea/awesome_nested_set/issues/220
   ActiveSupport::Deprecation.silenced = true
+
+  # TODO: Configure or test for running ElasticSearch to prevent test failures
+  # config.before :each, elasticsearch: true do
+  #   Elasticsearch::Extensions::Test::Cluster.start(port: 9200) unless Elasticsearch::Extensions::Test::Cluster.running? on: 9200
+  # end
+  #
+  # config.after :suite do
+  #   Elasticsearch::Extensions::Test::Cluster.stop(port: 9200) if Elasticsearch::Extensions::Test::Cluster.running? on: 9200
+  # end
 end
 
 RSpec::Sidekiq.configure do |config|
   config.warn_when_jobs_not_processed_by_sidekiq = false
 end
+

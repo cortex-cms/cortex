@@ -94,6 +94,7 @@ module SearchablePost
         if job_phase; terms[:job_phase]   = job_phase.downcase().split(',') end
         if post_type; terms[:type]        = post_type.downcase().split(',') end
         if industries; terms[:industries] = industries.split(',') end
+        if published; terms[:draft]       = [false] end
 
         filter[:and][:filters] << {terms: terms}
       end

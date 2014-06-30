@@ -4,6 +4,8 @@ module SearchableOnetOccupation
   included do
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
+    index_name [Rails.env, model_name.collection.gsub(/\//, '-')].join('_')
+
 
     mapping do
       indexes :id,          :index => :not_analyzed

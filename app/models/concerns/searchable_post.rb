@@ -87,7 +87,7 @@ module SearchablePost
       industries = params[:industries]
 
       # terms filter
-      if categories || job_phase || post_type || industries
+      if published || categories || job_phase || post_type || industries
         terms = {}
 
         if categories; terms[:categories] = categories.split(',') end

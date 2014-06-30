@@ -363,7 +363,7 @@ angular.module('cortex.states', [
 
     .state('cortex.products', {
       url: '/products',
-      template: '<div class="container">Here ly thy beast, Products</div>',
+      template: 'Applications placeholder',
       data: {
         ncyBreadcrumbLabel: 'Apps/Products'
       }
@@ -373,7 +373,7 @@ angular.module('cortex.states', [
 
     .state('cortex.permissions', {
       url: '/permissions',
-      template: '<div class="container">Here ly thy beast, Permissions</div>',
+      template: 'Permissions placeholder',
       data: {
         ncyBreadcrumbLabel: 'Roles/Permissions'
       }

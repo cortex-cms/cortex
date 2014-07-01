@@ -15,7 +15,8 @@ module SearchableOnetOccupation
 
   module ClassMethods
     def search_with_params(params)
-      self.search params[:q], sort: [ { created_at: { order: :desc } }]
+      query = self.query_massage(params[:q])
+      self.search query, sort: [ { created_at: { order: :desc } }]
     end
   end
 end

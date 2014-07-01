@@ -76,7 +76,7 @@ module SearchablePost
 
   module ClassMethods
     def search_with_params(params, published = nil)
-      query  = { query_string: { query: params[:q] || '*' } }
+      query = { query_string: { query: self.query_massage(params[:q]) } }
       filter = { and: { filters: [] } }
       sort = { created_at: :desc }
 

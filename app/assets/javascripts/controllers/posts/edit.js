@@ -178,7 +178,7 @@ angular.module('cortex.controllers.posts.edit', [
   $scope.redactorOptions = {
     plugins: ['media'],
     toolbarFixedBox: true,
-    minHeight: 400
+    minHeight: 800
   };
 
   $scope.postBodyEditorService = PostBodyEditorService;

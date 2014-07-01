@@ -1,48 +1,62 @@
-////////////////////////////////
-// Inputs
-
 .admin-posts {
+  .editor-column {
+    @include make-md-column(8);
 
-  .post-form-main {
-    @include make-md-column(8, 0);
+    .editor-row {
+      @extend .row;
+      margin-right: $standard-margin / 2; // Scree!
 
-    .input-group .post-datetimepicker {
-      min-width: 25em;
+      .editor-control {
+        @extend .form-control;
+      }
     }
   }
 
-  .post-form-side {
-    @include make-md-column(4, 0);
-  }
+  .details-column {
+    @include make-md-column(4);
 
-  .post-action-buttons {
-    @include make-md-column(8, 0);
-  }
+    .distribute-row {
+      @extend .row;
 
-  .post-form-main, .post-action-buttons {
-    @media (min-width: $screen-md-min) {
-      padding-right: $standard-margin * 2;
-    }
-  }
+      .distribute-panel {
+        @extend .panel, .panel-default;
 
-  .media-selector {
-    @extend .row;
+        .heading {
+          @extend .panel-heading;
+        }
 
-    .thumb {
-      @include make-md-column(4);
+        .content {
+          @extend .panel-body;
+        }
+      }
     }
 
-    .info {
-      @include make-md-column(4.5);
-    }
+    .details-row {
+      @extend .row;
 
-    .actions {
-      @include make-md-column(3.5);
-      @extend .btn-group-vertical;
-    }
-  }
+      .tabs {
+        .tab-content {
+          @extend .panel;
+          @extend .panel-default;
+          @extend .panel-body;
 
-  .has-error span.glyphicon-remove {
-    color: $brand-danger;
+          border-top: none;
+          border-top-right-radius: 0;
+          border-top-left-radius: 0;
+        }
+
+        .info {
+          tab-heading {
+            i.icon {
+              @extend .fa, .fa-info-circle;
+            }
+          }
+
+          .post-type {
+            @extend .btn-group;
+          }
+        }
+      }
+    }
   }
 }

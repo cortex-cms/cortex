@@ -1,10 +1,6 @@
 ////////////////////////////////
 // Container
 
-.view {
-  @include make-md-column(12, 0);
-}
-
 main {
   @extend .container-fluid;
 }
@@ -165,8 +161,9 @@ main {
 // Cortex Breadcrumb Bar
 
 div.breadcrumb-container {
-  background: #f5f5f5;
   @extend .container-fluid;
+  margin-bottom: $standard-margin;
+  background: $breadcrumb-bg;
 
   .breadcrumb {
     font: 13px $humanist;

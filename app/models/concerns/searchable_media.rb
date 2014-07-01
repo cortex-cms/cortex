@@ -4,7 +4,6 @@ module SearchableMedia
   included do
     include Searchable
 
-
     settings :analysis => {
         :analyzer => {
             :taxon_analyzer => {
@@ -23,7 +22,7 @@ module SearchableMedia
         indexes :tags, :analyzer => :keyword
         indexes :created_at, :type => :date, :include_in_all => false
         indexes :taxon, :analyzer => :taxon_analyzer
-        indexes :meta
+        indexes :meta, :type => :object
       end
     end
 

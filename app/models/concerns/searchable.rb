@@ -8,8 +8,9 @@ module Searchable
 
     class << self
       def query_massage q
+        return '*' if q.nil? or q.empty?
         result = q.chomp.strip
-        if result.empty?; return '*' end
+        return '*' if result.nil? or result.empty?
         result.index(/\s/).nil? ? "#{result}*" : result
       end
     end

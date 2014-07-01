@@ -13,7 +13,14 @@
   </div>
 
   <div id="post-search" class="pull-right">
-    <input type="text" class="form-control input-sm" placeholder="Search Posts...">
+    <!--<input type="text" class="form-control input-sm" placeholder="Search Posts...">-->
+    <delayed-input
+            autofocus="true"
+            class="form-control input-sm"
+            ng-model='data.query'
+            placeholder="Search Posts..."
+            delay="500"></delayed-input>
+  </div>
   </div>
 </div>
 

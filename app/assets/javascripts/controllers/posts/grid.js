@@ -8,7 +8,8 @@ angular.module('cortex.controllers.posts.grid', [
 .controller('PostsGridCtrl', function($scope, ngTableParams, cortex){
     $scope.data = {
         totalServerItems: 0,
-        posts: []
+        posts: [],
+        query: ''
     };
 
     $scope.postDataParams = new ngTableParams({
@@ -20,7 +21,7 @@ angular.module('cortex.controllers.posts.grid', [
     }, {
       total: 0,
       getData: function($defer, params) {
-        cortex.posts.searchPaged({page: params.page(), per_page: params.count()},
+        cortex.posts.searchPaged({page: params.page(), per_page: params.count(), q: $scope.data.query},
           function(posts, headers, paging) {
             params.total(paging.total);
             $defer.resolve(posts);
@@ -30,5 +31,9 @@ angular.module('cortex.controllers.posts.grid', [
           }
         );
       }
+    });
+
+    $scope.$watch('data.query', function() {
+      $scope.postDataParams.reload();
     });
 });

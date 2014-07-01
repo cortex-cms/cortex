@@ -1,12 +1,14 @@
 require 'spec_helper'
 require 'api_v1_helper'
 
-describe API::Resources::Media do
+describe API::Resources::Media, elasticsearch: true do
 
   let(:user) { create(:user, :admin) }
 
   before do
     login_as user
+    Media.__elasticsearch__.create_index! index: Media.index_name
+
   end
 
   describe 'GET /media' do
@@ -31,6 +33,18 @@ describe API::Resources::Media do
       JSON.parse(response.body).count.should == 2
       response.headers['X-Total-Items'].should == '5'
       response.headers['Content-Range'].should == 'media 0-1:2/5'
+    end
+
+    # TODO: Enable when Ben's media resource is merged in.
+    it 'should allow search on q' do
+      pending("Waiting on Ben's reworked media resource")
+      media_1 = create(:media)
+      media_2 = create(:media, name: "RANDOM")
+      Media.import({refresh: true})
+      get '/api/v1/media?q=RANDOM'
+      response.should be_success
+      pp JSON.parse(response.body)
+      JSON.parse(response.body).count.should == 1
     end
   end
 
@@ -82,5 +96,8 @@ describe API::Resources::Media do
       expect{ delete "/api/v1/media/#{media.id+1}" }.to_not change(Media, :count).by(-1)
       response.should_not be_success
     end
+  end
+  after do
+    Media.__elasticsearch__.client.indices.delete index: Media.index_name
   end
 end

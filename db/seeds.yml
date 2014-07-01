@@ -34,8 +34,9 @@ defaults: &defaults
         - {name: Benefits}
         - {name: Bosses}
         - {name: Coworkers}
-        - {name: Promotions & Wages}
+        - {name: Promotions & Raises}
         - {name: Work/Life Balance}
+        - {name: Salary}
         - {name: General}
   onet_industries:
     - soc: '11-0000'

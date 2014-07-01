@@ -47,11 +47,11 @@ angular.module('cortex.filters', [
 })
 
 .filter('publishStatus', function(moment) {
-    return function(dateStr) {
-        if (!dateStr) {
+    return function(value, draft) {
+        if (!value || draft) {
           return 'Draft';
         }
-        var publishedAt = moment(dateStr);
+        var publishedAt = moment(value);
         var now = moment();
         return publishedAt.diff(now) <= 0 ? 'Published' : 'Scheduled';
     };

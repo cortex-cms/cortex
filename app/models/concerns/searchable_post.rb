@@ -2,8 +2,7 @@ module SearchablePost
   extend ActiveSupport::Concern
 
   included do
-    include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
+    include Searchable
 
     mapping do
       indexes :id,                :index => :not_analyzed
@@ -77,7 +76,7 @@ module SearchablePost
 
   module ClassMethods
     def search_with_params(params, published = nil)
-      query  = { query_string: { query: params[:q] || '*' } }
+      query = { query_string: { query: self.query_massage(params[:q]) } }
       filter = { and: { filters: [] } }
       sort = { created_at: :desc }
 
@@ -87,13 +86,14 @@ module SearchablePost
       industries = params[:industries]
 
       # terms filter
-      if categories || job_phase || post_type || industries
+      if published || categories || job_phase || post_type || industries
         terms = {}
 
         if categories; terms[:categories] = categories.split(',') end
         if job_phase; terms[:job_phase]   = job_phase.downcase().split(',') end
         if post_type; terms[:type]        = post_type.downcase().split(',') end
         if industries; terms[:industries] = industries.split(',') end
+        if published; terms[:draft]       = [false] end
 
         filter[:and][:filters] << {terms: terms}
       end

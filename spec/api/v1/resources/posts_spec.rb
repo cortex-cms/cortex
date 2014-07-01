@@ -1,12 +1,13 @@
 require 'spec_helper'
 require 'api_v1_helper'
 
-describe API::Resources::Posts do
+describe API::Resources::Posts, elasticsearch: true do
 
   let(:user) { create(:user, :admin) }
 
   before do
     login_as user
+    Post.__elasticsearch__.create_index! index: Post.index_name
   end
 
   describe 'GET /posts' do
@@ -32,6 +33,15 @@ describe API::Resources::Posts do
       JSON.parse(response.body).count.should == 2
       response.headers['X-Total-Items'].should == '5'
       response.headers['Content-Range'].should == 'posts 0-1:2/5'
+    end
+
+    it 'should allow search on q' do
+      post_1 = create(:post)
+      post_2 = create(:post, title: "Test Post for testing queries.")
+      Post.import({refresh: true})
+      get '/api/v1/posts?q=Test'
+      response.should be_success
+      JSON.parse(response.body).count.should == 1
     end
 
   end
@@ -129,5 +139,9 @@ describe API::Resources::Posts do
       expect{ delete "/api/v1/posts/#{post.id+1}" }.to_not change(Post, :count).by(-1)
       response.should_not be_success
     end
+  end
+
+  after do
+    Post.__elasticsearch__.client.indices.delete index: Post.index_name
   end
 end

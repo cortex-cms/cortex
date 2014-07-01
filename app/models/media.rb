@@ -18,7 +18,8 @@ class Media < ActiveRecord::Base
   before_save :generate_digest
 
   has_attached_file :attachment, :styles => {
-      :large   => {geometry: '800x800>', format: :png},
+      :large   => {geometry: '1800x1800>', format: :png},
+      :medium  => {geometry: '800x800>', format: :png},
       :default => {geometry: '300x300>', format: :png},
       :mini    => {geometry: '100x100>', format: :png},
       :micro   => {geometry: '50x50>', format: :png}

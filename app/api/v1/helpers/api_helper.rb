@@ -42,7 +42,11 @@ module API::V1
       def find_current_user
         # OAuth
         if access_token
-          User.find(access_token.resource_owner_id)
+          if access_token.application.owner_type == 'User'
+            User.find(access_token.resource_owner_id)
+          elsif access_token.application.owner_type == 'Application'
+            access_token.application.owner
+          end
         # Basic Auth
         else
           req = Rack::Auth::Basic::Request.new(env)

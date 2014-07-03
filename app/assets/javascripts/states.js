@@ -128,6 +128,7 @@ angular.module('cortex.states', [
 
     .state('cortex.posts.edit', {
       url: '/:postId/edit',
+      abstract: true,
       templateUrl: 'posts/edit.html',
       controller: 'PostsEditCtrl',
       resolve: {
@@ -143,6 +144,24 @@ angular.module('cortex.states', [
       },
       data: {
         ncyBreadcrumbLabel: 'Edit Post'
+      }
+    })
+
+    .state('cortex.posts.edit.article', {
+      url: '/article',
+      views: {
+        'info': {
+          templateUrl: 'posts/article/info.html'
+        },
+        'classify': {
+          templateUrl: 'posts/article/classify.html'
+        },
+        'display': {
+          templateUrl: 'posts/article/display.html'
+        },
+        'seo': {
+          templateUrl: 'posts/article/seo.html'
+        }
       }
     })
 

@@ -14,7 +14,7 @@ angular.module('cortex.controllers.posts.popup', [
                 $timeout(function () { $state.go('cortex.posts.new'); }, 500);
             }
             else {
-                $timeout(function () { $state.go('cortex.posts.edit'); }, 500);
+                $timeout(function () { $state.go('cortex.posts.edit.article'); }, 500);
             }
         }
     });

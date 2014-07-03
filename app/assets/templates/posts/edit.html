@@ -1,42 +1,284 @@
-<div class="editor-column">
-  <div class="editor-row">
+<div class="composer-column">
+  <div class="composer">
     <textarea ng-model="data.post.body"
-              redactor="redactorOptions">
+              redactor="redactorOptions"
+              class="editor">
     </textarea>
   </div>
 </div>
 
 <div class="details-column">
-  <div class="distribute-row">
-    <div class="distribute-panel">
+  <div class="publish-row">
+    <div class="publish-panel">
       <div class="heading">
-        Publish/Distribute
+        <i class="fa fa-sitemap"></i> Publish/Distribute
       </div>
       <div class="content">
-
+        <div class="actions">
+          <button type="button" class="btn btn-default" ng-click="cancel()">
+            <i class="fa fa-reply"></i> Cancel
+          </button>
+          <button type="button" class="btn btn-primary"
+                  ng-click="save()">
+            <i class="fa fa-cloud-upload"></i> Submit
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="details-row">
-    <tabset class="tabs">
+    <tabset class="tabs" justified="true">
       <tab class="info">
         <tab-heading><i class="icon"></i> Info</tab-heading>
-        <div class="post-type">
-          <button type="button" class="btn btn-default"><i class="fa fa-quote-right"></i> Article</button>
-          <button type="button" class="btn btn-default"><i class="fa fa-video-camera"></i> Video</button>
-          <button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Infographic</button>
-          <button type="button" class="btn btn-default"><i class="fa fa-bullhorn"></i> Promo</button>
+
+        <div class="form-group">
+          <label>Post Type</label>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-default"><i class="fa fa-quote-right"></i> Article</button>
+            <button type="button" class="btn btn-default"><i class="fa fa-video-camera"></i> Video</button>
+            <button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Infographic</button>
+            <button type="button" class="btn btn-default"><i class="fa fa-bullhorn"></i> Promo</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Headline</label>
+
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-header"></i></div>
+            <input type="text" class="form-control" ng-model="data.post.title">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Slug</label>
+
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-anchor"></i></div>
+            <input ng-init="data.post.slug = data.post.slug || (data.post.title | slugify)"
+                   placeholder="Unique slug to use in URLs (required)"
+                   type="text"
+                   class="form-control"
+                   ng-model="data.post.slug"
+                   ng-maxlength="255"
+                   required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-ellipsis-h"></i></div>
+            <textarea class="form-control"
+                      ng-model="data.post.short_description"
+                      placeholder="Enter a short description for the post (required)">
+            </textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Author</label>
+
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Enter an author for this post (required)"
+                   ng-init="data.post.author = data.post.author || currentUser.fullname"
+                   ng-model="data.post.author"
+                   ng-minlength="1"
+                   ng-maxlength="255"
+                   required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Copyright Owner</label>
+
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Enter a copyright owner for this post (required)"
+                   ng-model="data.post.copyright_owner"
+                   ng-minlength="1"
+                   ng-maxlength="255"
+                   required>
+          </div>
         </div>
       </tab>
       <tab>
         <tab-heading><i class="fa fa-tag"></i> Classify</tab-heading>
+
+        <div class="form-group">
+          <label>Career Phase</label>
+
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-compass"></i></div>
+            <select class="form-control"
+                    ng-model="data.post.job_phase"
+                    ng-options="(phase | humanize) for phase in data.phases"
+                    required>
+              <option value="" selected>Select a career phase for this post</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="data.jobPhaseCategories.length">
+          <label>Categories</label>
+
+          <div class="checkbox" ng-repeat="category in data.jobPhaseCategories">
+            <label>
+              <input type="checkbox" ng-model="category.$selected">
+              {{ category.name }}
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Industry</label>
+
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
+            <select class="form-control"
+                    ng-model="data.post.primary_industry_id"
+                    ng-options="industry.id as industry.title for industry in data.industries">
+              <option value="" selected>Select an associated industry for this post</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Post Tags</label>
+
+          <div>Tags placeholder - refactor?</div>
+        </div>
       </tab>
       <tab>
         <tab-heading><i class="fa fa-eye"></i> Display</tab-heading>
+
+        <div class="form-group">
+          <label>Home Page Display</label>
+
+          <div class="btn-group">
+            <button type="button"
+                    class="btn btn-default"
+                    ng-model="data.post.display"
+                    btn-radio="'small'">
+              Small
+            </button>
+            <button type="button"
+                    class="btn btn-default"
+                    ng-model="data.post.display"
+                    btn-radio="'medium'">
+              Medium
+            </button>
+            <button type="button"
+                    class="btn btn-default"
+                    ng-model="data.post.display"
+                    btn-radio="'large'">
+              Large
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Featured Media</label>
+
+          <div class="alert alert-warning" ng-show="data.post.featured_media_warnings"><ul ng-repeat="warning in data.post.featured_media_warnings"><li>{{warning}}</li></ul></div>
+
+          <div class="media-selector">
+            <div class="thumb">
+              <img src="{{data.post.featured_media.thumbs.mini}}" alt="{{data.post.featured_media.alt}}">
+            </div>
+            <div class="info">
+              <strong>{{data.post.featured_media.name}}</strong>
+              <strong>{{data.post.featured_media.taxon}}</strong>
+            </div>
+            <div class="actions">
+              <button type="button"
+                      class="btn btn-primary btn-sm"
+                      ng-click="setFeaturedMedia()">
+                <i class="fa fa-search-plus"></i> Browse...
+              </button>
+              <button type="button"
+                      class="btn btn-danger btn-sm"
+                      ng-click="removeFeaturedMedia()">
+                <i class="fa fa-trash-o"></i> Remove
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Tile Media</label>
+
+          <div class="alert alert-warning" ng-show="data.post.tile_media_warnings"><ul ng-repeat="warning in data.post.tile_media_warnings"><li>{{warning}}</li></ul></div>
+
+          <div class="media-selector">
+            <div class="thumb">
+              <img src="{{data.post.tile_media.thumbs.mini}}" alt="{{data.post.tile_media.alt}}">
+            </div>
+            <div class="info">
+              <strong>{{data.post.tile_media.name}}</strong>
+              <strong>{{data.post.tile_media.taxon}}</strong>
+            </div>
+            <div class="actions">
+              <button type="button"
+                      class="btn btn-primary btn-sm"
+                      ng-click="setTileMedia()">
+                <i class="fa fa-search-plus"></i> Browse...
+              </button>
+              <button type="button"
+                      class="btn btn-danger btn-sm"
+                      ng-click="removeTileMedia()">
+                <i class="fa fa-trash-o"></i> Remove
+              </button>
+            </div>
+          </div>
+        </div>
       </tab>
       <tab>
         <tab-heading><i class="fa fa-search"></i> SEO</tab-heading>
+
+        <div class="form-group">
+          <label>Title</label>
+
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-header"></i></div>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Enter an HTML meta title for this post"
+                   ng-model="data.post.seo_title"
+                   ng-maxlength="255">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-ellipsis-h"></i></div>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Enter an HTML meta description for this post"
+                   ng-model="data.post.seo_description"
+                   ng-maxlength="255">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Search Display Preview</label>
+
+          <textarea class="form-control"
+                    rows="5"
+                    disabled="disabled"
+                    ng-model="data.post.seo_preview">
+          </textarea>
+        </div>
       </tab>
     </tabset>
   </div>

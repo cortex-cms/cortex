@@ -1,12 +1,13 @@
 .admin-posts {
-  .editor-column {
+  .composer-column {
     @include make-md-column(8);
 
-    .editor-row {
+    .composer {
       @extend .row;
+      @extend .form-group;
       margin-right: $standard-margin / 2; // Scree!
 
-      .editor-control {
+      .editor {
         @extend .form-control;
       }
     }
@@ -15,10 +16,10 @@
   .details-column {
     @include make-md-column(4);
 
-    .distribute-row {
+    .publish-row {
       @extend .row;
 
-      .distribute-panel {
+      .publish-panel {
         @extend .panel, .panel-default;
 
         .heading {
@@ -27,6 +28,11 @@
 
         .content {
           @extend .panel-body;
+
+          .actions {
+            @extend .form-group;
+            @extend .btn-group;
+          }
         }
       }
     }

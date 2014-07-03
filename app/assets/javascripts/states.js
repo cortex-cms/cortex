@@ -108,6 +108,7 @@ angular.module('cortex.states', [
 
     .state('cortex.posts.new', {
       url: '/new',
+      abstract: true,
       templateUrl: 'posts/edit.html',
       controller: 'PostsEditCtrl',
       resolve: {
@@ -120,6 +121,27 @@ angular.module('cortex.states', [
         filters: ['cortex', function(cortex) {
           return cortex.posts.filters().$promise;
         }]
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.article', {
+      url: '/article',
+      views: {
+        'info': {
+          templateUrl: 'posts/article/info.html'
+        },
+        'classify': {
+          templateUrl: 'posts/article/classify.html'
+        },
+        'display': {
+          templateUrl: 'posts/article/display.html'
+        },
+        'seo': {
+          templateUrl: 'posts/article/seo.html'
+        }
       },
       data: {
         ncyBreadcrumbLabel: 'New Post'
@@ -143,7 +165,7 @@ angular.module('cortex.states', [
         }]
       },
       data: {
-        ncyBreadcrumbLabel: 'Edit Post'
+        ncyBreadcrumbLabel: false
       }
     })
 
@@ -162,6 +184,9 @@ angular.module('cortex.states', [
         'seo': {
           templateUrl: 'posts/article/seo.html'
         }
+      },
+      data: {
+        ncyBreadcrumbLabel: 'Edit Post'
       }
     })
 

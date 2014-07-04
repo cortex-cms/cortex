@@ -69,7 +69,7 @@ module SearchablePost
                             :author, :created_at, :published_at, :job_phase, :type])
       json[:categories] = categories.collect{ |c| c.name }
       json[:industries] = industries.collect{ |i| i.soc }
-      json[:tags]       = tag_list
+      json[:tags]       = tag_list.empty? ? [] : tag_list
       json
     end
   end

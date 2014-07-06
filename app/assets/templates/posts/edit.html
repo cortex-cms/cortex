@@ -35,11 +35,19 @@
         <div class="form-group">
           <label>Post Type</label>
 
-          <div class="btn-group">
-            <button type="button" class="btn btn-default"><i class="fa fa-quote-right"></i> Article</button>
-            <button type="button" class="btn btn-default"><i class="fa fa-video-camera"></i> Video</button>
-            <button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Infographic</button>
-            <button type="button" class="btn btn-default"><i class="fa fa-bullhorn"></i> Promo</button>
+          <div class="btn-group btn-group-justified" data-toggle="buttons">
+            <label class="btn btn-default" for="article" ui-sref=".article" ui-sref-active="active">
+              <input type="radio" name="article" id="article"/><i class="fa fa-quote-right"></i> Article
+            </label>
+            <label class="btn btn-default" for="Video" ui-sref=".video" ui-sref-active="active">
+              <input type="radio" name="Video" id="Video"/><i class="fa fa-video-camera"></i> Video
+            </label>
+            <label class="btn btn-default" for="infographic" ui-sref=".infographic" ui-sref-active="active">
+              <input type="radio" name="infographic" id="infographic"/><i class="fa fa-picture-o"></i> Infographic
+            </label>
+            <label class="btn btn-default" for="promo" ui-sref=".promo" ui-sref-active="active">
+              <input type="radio" name="promo" id="promo"/><i class="fa fa-bullhorn"></i> Promo
+            </label>
           </div>
         </div>
 

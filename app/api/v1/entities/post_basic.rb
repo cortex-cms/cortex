@@ -16,8 +16,8 @@ module API::V1
       expose :tile_media, with: 'Entities::MediaBasic'
       expose :industries, with: 'Entities::Occupation'
 
-      expose :destination_url, if: lambda { |post, _| post.type == 'promo' }
-      expose :call_to_action, if: lambda { |post, _| post.type == 'promo' }
+      expose :destination_url, if: lambda { |post, _| post.post_type == 'Promo' }
+      expose :call_to_action, if: lambda { |post, _| post.post_type == 'Promo' }
 
     end
   end

@@ -28,7 +28,7 @@
   </div>
 
   <div class="details-row">
-    <tabset class="tabs" justified="true">
+    <tabset class="tabs  hidden-xs hidden-sm" justified="true">
       <tab>
         <tab-heading><i class="fa fa-info-circle"></i> Info</tab-heading>
 
@@ -77,5 +77,43 @@
         </div>
       </tab>
     </tabset>
+
+    <accordion class="hidden-mg hidden-lg" close-others=true>
+      <accordion-group>
+        <accordion-heading><i class="fa fa-info-circle"></i> Info</accordion-heading>
+        <div class="post-type-group">
+          <label>Post Type</label>
+
+          <div class="post-type-actions" data-toggle="buttons">
+            <label class="btn btn-default" for="post-type" ui-sref=".article" ui-sref-active="active">
+              <input type="radio" name="post-type" id="article"/><i class="fa fa-quote-right"></i> Article
+            </label>
+            <label class="btn btn-default" for="post-type" ui-sref=".video" ui-sref-active="active">
+              <input type="radio" name="post-type" id="Video"/><i class="fa fa-video-camera"></i> Video
+            </label>
+            <label class="btn btn-default" for="post-type" ui-sref=".infographic" ui-sref-active="active">
+              <input type="radio" name="post-type" id="infographic"/><i class="fa fa-picture-o"></i> Infographic
+            </label>
+            <label class="btn btn-default" for="post-type" ui-sref=".promo" ui-sref-active="active">
+              <input type="radio" name="post-type" id="promo"/><i class="fa fa-bullhorn"></i> Promo
+            </label>
+          </div>
+        </div>
+        <div ui-view="info"></div>
+      </accordion-group>
+      <accordion-group>
+        <accordion-heading><i class="fa fa-tag"></i> Classify</accordion-heading>
+        <div ui-view="classify"></div>
+      </accordion-group>
+      <accordion-group>
+        <accordion-heading><i class="fa fa-eye"></i> Display</accordion-heading>
+        <div ui-view="display"></div>
+      </accordion-group>
+      <accordion-group>
+        <accordion-heading><i class="fa fa-search"></i> SEO</accordion-heading>
+        <div ui-view="seo"></div>
+      </accordion-group>
+    </accordion>
+
   </div>
 </div>

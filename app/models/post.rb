@@ -31,7 +31,8 @@ class Post < ActiveRecord::Base
   enum job_phase: [:discovery, :find_the_job, :get_the_job, :on_the_job]
   enum display: [:large, :medium, :small]
 
-  self.inheritance_column = nil
+  self.inheritance_column = :post_type
+  validates :post_type, inclusion: { in: %w(Post Promo) }
 
   def published?
     published_at ? published_at <= DateTime.now : false

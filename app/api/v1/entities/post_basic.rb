@@ -15,6 +15,10 @@ module API::V1
       expose :featured_media, with: 'Entities::MediaBasic'
       expose :tile_media, with: 'Entities::MediaBasic'
       expose :industries, with: 'Entities::Occupation'
+
+      expose :destination_url, if: lambda { |post, _| post.type == 'promo' }
+      expose :call_to_action, if: lambda { |post, _| post.type == 'promo' }
+
     end
   end
 end

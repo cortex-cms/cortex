@@ -15,10 +15,10 @@
       </div>
       <div class="content">
         <div class="actions">
-          <button type="button" class="btn btn-default" ng-click="cancel()">
+          <button type="button" class="cancel" ng-click="cancel()">
             <i class="fa fa-reply"></i> Cancel
           </button>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="submit"
                   ng-click="save()">
             <i class="fa fa-cloud-upload"></i> Submit
           </button>
@@ -29,44 +29,52 @@
 
   <div class="details-row">
     <tabset class="tabs" justified="true">
-      <tab class="info">
-        <tab-heading><i class="icon"></i> Info</tab-heading>
+      <tab>
+        <tab-heading><i class="fa fa-info-circle"></i> Info</tab-heading>
 
-        <div class="form-group">
-          <label>Post Type</label>
+        <div class="info">
+          <div class="post-type-group">
+            <label>Post Type</label>
 
-          <div class="btn-group btn-group-justified" data-toggle="buttons">
-            <label class="btn btn-default" for="article" ui-sref=".article" ui-sref-active="active">
-              <input type="radio" name="article" id="article"/><i class="fa fa-quote-right"></i> Article
-            </label>
-            <label class="btn btn-default" for="Video" ui-sref=".video" ui-sref-active="active">
-              <input type="radio" name="Video" id="Video"/><i class="fa fa-video-camera"></i> Video
-            </label>
-            <label class="btn btn-default" for="infographic" ui-sref=".infographic" ui-sref-active="active">
-              <input type="radio" name="infographic" id="infographic"/><i class="fa fa-picture-o"></i> Infographic
-            </label>
-            <label class="btn btn-default" for="promo" ui-sref=".promo" ui-sref-active="active">
-              <input type="radio" name="promo" id="promo"/><i class="fa fa-bullhorn"></i> Promo
-            </label>
+            <div class="post-type-actions" data-toggle="buttons">
+              <label class="btn btn-default" for="article" ui-sref=".article" ui-sref-active="active">
+                <input type="radio" name="article" id="article"/><i class="fa fa-quote-right"></i> Article
+              </label>
+              <label class="btn btn-default" for="Video" ui-sref=".video" ui-sref-active="active">
+                <input type="radio" name="Video" id="Video"/><i class="fa fa-video-camera"></i> Video
+              </label>
+              <label class="btn btn-default" for="infographic" ui-sref=".infographic" ui-sref-active="active">
+                <input type="radio" name="infographic" id="infographic"/><i class="fa fa-picture-o"></i> Infographic
+              </label>
+              <label class="btn btn-default" for="promo" ui-sref=".promo" ui-sref-active="active">
+                <input type="radio" name="promo" id="promo"/><i class="fa fa-bullhorn"></i> Promo
+              </label>
+            </div>
           </div>
-        </div>
 
-        <div ui-view="info"></div>
+          <div ui-view="info"></div>
+        </div>
       </tab>
       <tab>
         <tab-heading><i class="fa fa-tag"></i> Classify</tab-heading>
 
-        <div ui-view="classify"></div>
+        <div class="classify">
+          <div ui-view="classify"></div>
+        </div>
       </tab>
       <tab>
         <tab-heading><i class="fa fa-eye"></i> Display</tab-heading>
 
-        <div ui-view="display"></div>
+        <div class="display">
+          <div ui-view="display"></div>
+        </div>
       </tab>
       <tab>
         <tab-heading><i class="fa fa-search"></i> SEO</tab-heading>
 
-        <div ui-view="seo"></div>
+        <div class="seo">
+          <div ui-view="seo"></div>
+        </div>
       </tab>
     </tabset>
   </div>

@@ -253,6 +253,69 @@ angular.module('cortex.states', [
       }
     })
 
+      .state('cortex.posts.edit.video', {
+        url: '/video',
+        views: {
+          'info': {
+            templateUrl: 'posts/video/info.html'
+          },
+          'classify': {
+            templateUrl: 'posts/video/classify.html'
+          },
+          'display': {
+            templateUrl: 'posts/video/display.html'
+          },
+          'seo': {
+            templateUrl: 'posts/video/seo.html'
+          }
+        },
+        data: {
+          ncyBreadcrumbLabel: 'Edit Post'
+        }
+      })
+
+      .state('cortex.posts.edit.infographic', {
+        url: '/infographic',
+        views: {
+          'info': {
+            templateUrl: 'posts/infographic/info.html'
+          },
+          'classify': {
+            templateUrl: 'posts/infographic/classify.html'
+          },
+          'display': {
+            templateUrl: 'posts/infographic/display.html'
+          },
+          'seo': {
+            templateUrl: 'posts/infographic/seo.html'
+          }
+        },
+        data: {
+          ncyBreadcrumbLabel: 'Edit Post'
+        }
+      })
+
+      .state('cortex.posts.edit.promo', {
+        url: '/promo',
+        views: {
+          'info': {
+            templateUrl: 'posts/promo/info.html'
+          },
+          'classify': {
+            templateUrl: 'posts/promo/classify.html'
+          },
+          'display': {
+            templateUrl: 'posts/promo/display.html'
+          },
+          'seo': {
+            templateUrl: 'posts/promo/seo.html'
+          }
+        },
+        data: {
+          ncyBreadcrumbLabel: 'Edit Post'
+        }
+      })
+
     // Posts Edit + Media Popup
     // **********************
 

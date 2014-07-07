@@ -3,33 +3,28 @@
 
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-header"></i></div>
-    <input type="text" class="form-control" ng-model="data.post.title">
+    <input type="text" class="form-control" ng-model="data.post.title" placeholder="Post Title (required)">
   </div>
 </div>
 
 <div class="form-group">
-  <label>Slug</label>
+  <label>Destination URL</label>
 
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-anchor"></i></div>
-    <input ng-init="data.post.slug = data.post.slug || (data.post.title | slugify)"
-           placeholder="Unique slug to use in URLs (required)"
-           type="text"
-           class="form-control"
-           ng-model="data.post.slug"
-           ng-maxlength="255"
-           required>
+    <input type="text" class="form-control" ng-model="data.post.destination_url" placeholder="Destination URL for this promo (required)">
   </div>
 </div>
 
+
 <div class="form-group">
-  <label>Description</label>
+  <label>Call to Action</label>
 
   <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-ellipsis-h"></i></div>
-    <textarea class="form-control"
-              ng-model="data.post.short_description"
-              placeholder="Enter a short description for the post (required)">
+    <div class="input-group-addon"><i class="fa fa-rocket"></i></div>
+    <input type="text" class="form-control"
+              ng-model="data.post.call_to_action"
+              placeholder="Call to Action text (required)">
     </textarea>
   </div>
 </div>
@@ -44,21 +39,6 @@
            placeholder="Enter an author for this post (required)"
            ng-init="data.post.author = data.post.author || currentUser.fullname"
            ng-model="data.post.author"
-           ng-minlength="1"
-           ng-maxlength="255"
-           required>
-  </div>
-</div>
-
-<div class="form-group">
-  <label>Copyright Owner</label>
-
-  <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
-    <input type="text"
-           class="form-control"
-           placeholder="Enter a copyright owner for this post (required)"
-           ng-model="data.post.copyright_owner"
            ng-minlength="1"
            ng-maxlength="255"
            required>

@@ -89,12 +89,12 @@ describe API::Resources::Posts, elasticsearch: true do
 
     context 'for a promo post' do
       it 'should create a new promo' do
-        expect{ post '/api/v1/posts', attributes_for(:post, type: 'promo', destination_url: "Not null", call_to_action: "Defined") }.to change(Post, :count).by(1)
+        expect{ post '/api/v1/posts', attributes_for(:post, type: 'PromoPost', destination_url: "Not null", call_to_action: "Defined") }.to change(Post, :count).by(1)
         response.should be_success
         response.body.should represent(API::Entities::Post, Post.last)
       end
       it 'should require featured_url and call_to_action' do
-        expect{ post '/api/v1/posts', attributes_for(:post, type: 'promo') }.to_not change(Post, :count).by(1)
+        expect{ post '/api/v1/posts', attributes_for(:post, type: 'PromoPost') }.to_not change(Post, :count).by(1)
         response.should_not be_success
       end
     end
@@ -137,7 +137,7 @@ describe API::Resources::Posts, elasticsearch: true do
 
       it 'should support updating from article to promo' do
         post = create(:post)
-        expect{ put "/api/v1/posts/#{post.id}", {type: 'promo', destination_url: "Example.com", call_to_action: "Click here"}.to_json, application_json}.to_not change(Post, :count).by(1)
+        expect{ put "/api/v1/posts/#{post.id}", {type: 'PromoPost', destination_url: "Example.com", call_to_action: "Click here"}.to_json, application_json}.to_not change(Post, :count).by(1)
         response.should be_success
       end
     end

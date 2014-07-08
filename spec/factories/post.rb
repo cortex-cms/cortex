@@ -6,7 +6,7 @@ FactoryGirl.define do
     copyright_owner   :'CareerBuilder, LLC'
     job_phase         :discovery
     display           :large
-    type              :article
+    type              'ArticlePost'
     author            :Author
     draft             true
     user
@@ -16,14 +16,14 @@ FactoryGirl.define do
     end
   end
 
-  factory :promo do
+  factory :promo, class: 'PromoPost' do
     sequence(:title)  { |n| "post#{n}" }
     sequence(:slug)   { |n| "post-#{n}" }
     short_description 'This is a short description of the post that is long enough'
     copyright_owner   :'CareerBuilder, LLC'
     job_phase         :discovery
     display           :large
-    type              :promo
+    type              'PromoPost'
     author            :Author
     draft             true
     destination_url   'Example.com'

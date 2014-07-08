@@ -27,12 +27,10 @@ class Post < ActiveRecord::Base
   validates :tag_list, :seo_title, :seo_description, length: { maximum: 255 }
   validates :type, :job_phase, :display, presence: true, allow_nil: false
 
-  enum type: [:article, :video, :infographic, :promo]
   enum job_phase: [:discovery, :find_the_job, :get_the_job, :on_the_job]
   enum display: [:large, :medium, :small]
 
-  self.inheritance_column = :post_type
-  validates :post_type, inclusion: { in: %w(Post Promo) }
+  validates :type, inclusion: { in: %w(Post ArticlePost InfographicPost PromoPost VideoPost) }
 
   def published?
     published_at ? published_at <= DateTime.now : false

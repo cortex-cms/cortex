@@ -32,7 +32,6 @@ module API::V1
         optional :industry_ids
         optional :destination_url
         optional :call_to_action
-        optional :post_type
       end
     end
 
@@ -136,19 +135,17 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :update, post!
 
-          if params[:type] == 'promo' || params[:post_type] == 'Promo'
-            post.post_type = "Promo"
-            post.save!
+          if params[:type]
+            post.update!({type: params[:type]}) if params[:type]
             reload_post
-            post.update!(declared(params, {include_missing: false}))
-          else
-            post.update!(declared(params, {include_missing: false}))
           end
+          post.update!(declared(params, {include_missing: false}))
 
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!
           end
+
           present post, with: Entities::Post
         end
 

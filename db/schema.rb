@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707205234) do
+ActiveRecord::Schema.define(version: 20140708174329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,7 +140,6 @@ ActiveRecord::Schema.define(version: 20140707205234) do
     t.string   "seo_title"
     t.string   "seo_description"
     t.string   "seo_preview"
-    t.integer  "type",                                 null: false
     t.string   "author"
     t.string   "slug",                                 null: false
     t.integer  "featured_media_id"
@@ -148,10 +147,11 @@ ActiveRecord::Schema.define(version: 20140707205234) do
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "post_type",           default: "Post", null: false
+    t.string   "type",                default: "Post", null: false
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+  add_index "posts", ["type"], name: "index_posts_on_type", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

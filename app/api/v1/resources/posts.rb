@@ -137,12 +137,13 @@ module API::V1
           authorize! :update, post!
 
           if params[:type] == 'promo' || params[:post_type] == 'Promo'
-            post.becomes!(Promo)
+            post.post_type = "Promo"
             post.save!
             reload_post
+            post.update!(declared(params, {include_missing: false}))
+          else
+            post.update!(declared(params, {include_missing: false}))
           end
-
-          post.update!(declared(params, {include_missing: false}))
 
           if params[:tag_list]
             post.tag_list = params[:tag_list]

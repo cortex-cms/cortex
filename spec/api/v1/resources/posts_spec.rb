@@ -134,6 +134,12 @@ describe API::Resources::Posts, elasticsearch: true do
         expect{ put "/api/v1/posts/#{post.id}", {destination_url: nil}.to_json, application_json }.to_not change(Post, :count).by(1)
         response.should_not be_success
       end
+
+      it 'should support updating from article to promo' do
+        post = create(:post)
+        expect{ put "/api/v1/posts/#{post.id}", {type: 'promo', destination_url: "Example.com", call_to_action: "Click here"}.to_json, application_json}.to_not change(Post, :count).by(1)
+        response.should be_success
+      end
     end
 
     context 'with featured media' do

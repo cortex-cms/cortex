@@ -86,6 +86,18 @@ describe API::Resources::Posts, elasticsearch: true do
         Post.last.media.should include(post.featured_media)
       end
     end
+
+    context 'for a promo post' do
+      it 'should create a new promo' do
+        expect{ post '/api/v1/posts', attributes_for(:post, type: 'promo', destination_url: "Not null", call_to_action: "Defined") }.to change(Post, :count).by(1)
+        response.should be_success
+        response.body.should represent(API::Entities::Post, Post.last)
+      end
+      it 'should require featured_url and call_to_action' do
+        expect{ post '/api/v1/posts', attributes_for(:post, type: 'promo') }.to_not change(Post, :count).by(1)
+        response.should_not be_success
+      end
+    end
   end
 
   describe 'PUT /posts/:id' do
@@ -104,6 +116,22 @@ describe API::Resources::Posts, elasticsearch: true do
       it 'should NOT update the post' do
         post = create(:post)
         expect{ put "/api/v1/posts/#{post.id}", {title: nil}.to_json, application_json }.to_not change(Post, :count).by(1)
+        response.should_not be_success
+      end
+    end
+
+    context 'for a promo post' do
+      it 'should update the post with valid attributes' do
+        post = create(:promo)
+        post.destination_url = "http://www.example.com"
+        expect{ put "/api/v1/posts/#{post.id}", {destination_url: "http://www.example.com"}.to_json, application_json }.to_not change(Post, :count).by(1)
+        response.should be_success
+        response.body.should represent(API::Entities::Post, post)
+      end
+
+      it 'should not update the post with invalid attributes' do
+        post = create(:promo)
+        expect{ put "/api/v1/posts/#{post.id}", {destination_url: nil}.to_json, application_json }.to_not change(Post, :count).by(1)
         response.should_not be_success
       end
     end

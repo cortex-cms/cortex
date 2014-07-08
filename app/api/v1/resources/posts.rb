@@ -30,6 +30,8 @@ module API::V1
         optional :slug
         optional :primary_industry_id
         optional :industry_ids
+        optional :destination_url
+        optional :call_to_action
       end
     end
 
@@ -118,7 +120,8 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :create, Post
 
-          @post = ::Post.new(declared(params))
+          params[:post_type] = "Promo" if params[:type] == 'promo'
+          @post = ::Post.new(declared(params, {include_missing: false}))
           post.user = current_user
           post.save!
           present post, with: Entities::Post
@@ -132,12 +135,17 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :update, post!
 
+          if params[:type]
+            post.update!({type: params[:type]}) if params[:type]
+            reload_post
+          end
           post.update!(declared(params, {include_missing: false}))
 
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!
           end
+
           present post, with: Entities::Post
         end
 

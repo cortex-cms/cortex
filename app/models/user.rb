@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include HasGravatar
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -8,7 +9,7 @@ class User < ActiveRecord::Base
   belongs_to :tenant
   has_many :media
   has_many :tenants
-  has_many :posts
+  has_many :posts, through: :authors
 
   validates_presence_of :email
 

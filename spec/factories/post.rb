@@ -7,8 +7,8 @@ FactoryGirl.define do
     job_phase         :discovery
     display           :large
     type              'ArticlePost'
-    author            :Author
     draft             true
+    author
     user
 
     trait :with_featured_media do
@@ -24,10 +24,10 @@ FactoryGirl.define do
     job_phase         :discovery
     display           :large
     type              'PromoPost'
-    author            :Author
     draft             true
     destination_url   'Example.com'
     call_to_action    'Click me'
+    author
     user
   end
 end

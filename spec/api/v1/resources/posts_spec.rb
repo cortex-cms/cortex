@@ -4,6 +4,7 @@ require 'api_v1_helper'
 describe API::Resources::Posts, elasticsearch: true do
 
   let(:user) { create(:user, :admin) }
+  let(:author) { create(:author) }
 
   before do
     login_as user
@@ -60,7 +61,8 @@ describe API::Resources::Posts, elasticsearch: true do
 
     context 'with valid attributes' do
       it 'should create a new post' do
-        expect{ post '/api/v1/posts', attributes_for(:post) }.to change(Post, :count).by(1)
+        valid_post = attributes_for(:post, author_id: author.id)
+        expect{ post '/api/v1/posts', valid_post }.to change(Post, :count).by(1)
         response.should be_success
         response.body.should represent(API::Entities::Post, Post.last)
       end
@@ -75,13 +77,14 @@ describe API::Resources::Posts, elasticsearch: true do
 
     context 'with featured media' do
       it 'should create a new post' do
-        expect{ post '/api/v1/posts', build(:post, :with_featured_media).to_json, application_json }.to change(Post, :count).by(1)
+        with_media_post = build(:post, :with_featured_media, author_id: author.id).to_json
+        expect{ post '/api/v1/posts', with_media_post, application_json }.to change(Post, :count).by(1)
         response.should be_success
         response.body.should represent(API::Entities::Post, Post.last)
       end
 
       it 'should include the featured media in associated media' do
-        post = build(:post, :with_featured_media)
+        post = build(:post, :with_featured_media, author_id: author.id)
         post '/api/v1/posts', post.to_json, application_json
         Post.last.media.should include(post.featured_media)
       end
@@ -89,12 +92,16 @@ describe API::Resources::Posts, elasticsearch: true do
 
     context 'for a promo post' do
       it 'should create a new promo' do
-        expect{ post '/api/v1/posts', attributes_for(:post, type: 'PromoPost', destination_url: "Not null", call_to_action: "Defined") }.to change(Post, :count).by(1)
+        promo_post = attributes_for(:post, type: 'PromoPost', destination_url: "Not null",
+                                    call_to_action: "Defined", author_id: author.id)
+
+        expect{ post '/api/v1/posts',  promo_post }.to change(Post, :count).by(1)
         response.should be_success
         response.body.should represent(API::Entities::Post, Post.last)
       end
       it 'should require featured_url and call_to_action' do
-        expect{ post '/api/v1/posts', attributes_for(:post, type: 'PromoPost') }.to_not change(Post, :count).by(1)
+        promo_post = attributes_for(:post, type: 'PromoPost', author_id: author.id)
+        expect{ post '/api/v1/posts', promo_post }.to_not change(Post, :count).by(1)
         response.should_not be_success
       end
     end

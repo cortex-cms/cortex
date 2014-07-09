@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708174329) do
+ActiveRecord::Schema.define(version: 20140709175355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20140708174329) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "authors", force: true do |t|
+    t.string  "name"
+    t.string  "email"
+    t.hstore  "sites"
+    t.string  "title"
+    t.text    "bio"
+    t.integer "user_id"
+  end
+
+  add_index "authors", ["user_id"], name: "index_authors_on_user_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -140,7 +151,6 @@ ActiveRecord::Schema.define(version: 20140708174329) do
     t.string   "seo_title"
     t.string   "seo_description"
     t.string   "seo_preview"
-    t.string   "author"
     t.string   "slug",                                 null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
@@ -148,8 +158,10 @@ ActiveRecord::Schema.define(version: 20140708174329) do
     t.integer  "tile_media_id"
     t.hstore   "meta"
     t.string   "type",                default: "Post", null: false
+    t.integer  "author_id"
   end
 
+  add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
   add_index "posts", ["type"], name: "index_posts_on_type", using: :btree
 

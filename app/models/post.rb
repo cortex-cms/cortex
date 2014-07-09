@@ -15,7 +15,8 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :industries, class_name: '::Onet::Occupation',
                                        association_foreign_key: 'onet_occupation_id'
 
-  belongs_to :user
+  belongs_to :author
+  belongs_to :user # TODO: rename creator
   belongs_to :featured_media, class_name: 'Media'
   belongs_to :tile_media, class_name: 'Media'
   belongs_to :primary_category, class_name: 'Category'

@@ -23,7 +23,7 @@ module API::V1
         optional :seo_title
         optional :seo_description
         optional :seo_preview
-        optional :author
+        optional :author_id
         optional :tag_list
         optional :primary_category_id
         optional :category_ids

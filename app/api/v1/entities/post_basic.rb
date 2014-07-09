@@ -11,10 +11,11 @@ module API::V1
         post.display
       end
 
-      expose :categories, with: 'Entities::Category'
+      expose :author,         with: 'Entities::Author'
+      expose :categories,     with: 'Entities::Category'
       expose :featured_media, with: 'Entities::MediaBasic'
-      expose :tile_media, with: 'Entities::MediaBasic'
-      expose :industries, with: 'Entities::Occupation'
+      expose :tile_media,     with: 'Entities::MediaBasic'
+      expose :industries,     with: 'Entities::Occupation'
 
       expose :destination_url, :call_to_action,
              if: lambda { |post, _| post.type == 'PromoPost' }

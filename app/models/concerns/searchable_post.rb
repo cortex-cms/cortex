@@ -88,11 +88,11 @@ module SearchablePost
       # terms filter
       if published || categories || job_phase || post_type || industries
 
-        if categories; bool[:bool][:must] << self.terms('categories', categories.split(',')) end
-        if job_phase; bool[:bool][:must] << self.terms('job_phase', job_phase.downcase().split(',')) end
-        if post_type; bool[:bool][:must] << self.terms('type', post_type.split(',')) end
+        if categories; bool[:bool][:must] << self.term_search('categories', categories.split(',')) end
+        if job_phase; bool[:bool][:must] << self.term_search('job_phase', job_phase.downcase().split(',')) end
+        if post_type; bool[:bool][:must] << self.term_search('type', post_type.split(',')) end
         if industries; bool[:bool][:must] << self.or_null('industries', industries.split(',')) end
-        if published; bool[:bool][:must] << self.terms('draft', [false]) end
+        if published; bool[:bool][:must] << self.term_search('draft', [false]) end
 
       end
 

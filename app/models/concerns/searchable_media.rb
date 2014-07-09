@@ -2,8 +2,7 @@ module SearchableMedia
   extend ActiveSupport::Concern
 
   included do
-    include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
+    include Searchable
 
     settings :analysis => {
         :analyzer => {
@@ -23,22 +22,24 @@ module SearchableMedia
         indexes :tags, :analyzer => :keyword
         indexes :created_at, :type => :date, :include_in_all => false
         indexes :taxon, :analyzer => :taxon_analyzer
-        indexes :meta
+        indexes :meta, :type => :object
       end
     end
 
     def as_indexed_json(options = {})
       json = as_json(options)
       json[:created_by] = user.fullname
-      json[:tags]       = tag_list
+      json[:tags]       = tag_list.to_a
       json[:taxon]      = create_taxon
       json
     end
   end
 
   module ClassMethods
+    # TODO: Rewrite to handle filters
     def search_with_params(params)
-      self.search params[:q], sort: [ { created_at: { order: :desc } }]
+      query = self.query_massage(params[:q])
+      self.search query, sort: [ { created_at: { order: :desc } }]
     end
   end
 end

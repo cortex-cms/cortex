@@ -1,5 +1,5 @@
 <div class="media-new">
-  <form novalidate name="mediaForm">
+  <form novalidate name="mediaForm" ng-disabled="data.upload.progress">
     <div class="row">
       <div class="media-types">
 
@@ -80,7 +80,7 @@
 
               <div>
                 <button type="button" class="btn btn-primary btn-block"
-                        ng-disabled="mediaForm.$invalid" ng-click="saveMedia()">
+                        ng-disabled="mediaForm.$invalid || data.upload.progress" ng-click="saveMedia()">
                   <i class="fa fa-cloud-upload"></i> Submit
                 </button>
               </div>

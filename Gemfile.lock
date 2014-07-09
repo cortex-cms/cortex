@@ -26,34 +26,34 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
-    actionmailer (4.1.0)
-      actionpack (= 4.1.0)
-      actionview (= 4.1.0)
+    actionmailer (4.1.4)
+      actionpack (= 4.1.4)
+      actionview (= 4.1.4)
       mail (~> 2.5.4)
-    actionpack (4.1.0)
-      actionview (= 4.1.0)
-      activesupport (= 4.1.0)
+    actionpack (4.1.4)
+      actionview (= 4.1.4)
+      activesupport (= 4.1.4)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionview (4.1.0)
-      activesupport (= 4.1.0)
+    actionview (4.1.4)
+      activesupport (= 4.1.4)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    activemodel (4.1.0)
-      activesupport (= 4.1.0)
+    activemodel (4.1.4)
+      activesupport (= 4.1.4)
       builder (~> 3.1)
-    activerecord (4.1.0)
-      activemodel (= 4.1.0)
-      activesupport (= 4.1.0)
+    activerecord (4.1.4)
+      activemodel (= 4.1.4)
+      activesupport (= 4.1.4)
       arel (~> 5.0.0)
-    activesupport (4.1.0)
+    activesupport (4.1.4)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    acts-as-taggable-on (3.0.2)
-      rails (>= 3, < 5)
+    acts-as-taggable-on (3.2.6)
+      activerecord (>= 3, < 5)
     angular-rails-templates (0.1.3)
       railties (>= 3.1)
       sprockets
@@ -61,6 +61,7 @@ GEM
     annotate (2.6.5)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
+    ansi (1.4.3)
     arel (5.0.1.20140414130214)
     attr_required (1.0.0)
     awesome_nested_set (3.0.0.rc.6)
@@ -130,6 +131,9 @@ GEM
       elasticsearch-transport (= 1.0.4)
     elasticsearch-api (1.0.4)
       multi_json
+    elasticsearch-extensions (0.0.15)
+      ansi
+      ruby-prof
     elasticsearch-model (0.1.4)
       activesupport (> 3)
       elasticsearch (> 0.4)
@@ -310,15 +314,15 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (4.1.0)
-      actionmailer (= 4.1.0)
-      actionpack (= 4.1.0)
-      actionview (= 4.1.0)
-      activemodel (= 4.1.0)
-      activerecord (= 4.1.0)
-      activesupport (= 4.1.0)
+    rails (4.1.4)
+      actionmailer (= 4.1.4)
+      actionpack (= 4.1.4)
+      actionview (= 4.1.4)
+      activemodel (= 4.1.4)
+      activerecord (= 4.1.4)
+      activesupport (= 4.1.4)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.1.0)
+      railties (= 4.1.4)
       sprockets-rails (~> 2.0)
     rails-assets-angular (1.2.19)
     rails-assets-angular-animate (1.2.19)
@@ -367,9 +371,9 @@ GEM
       json
       require_all
       ruby-progressbar
-    railties (4.1.0)
-      actionpack (= 4.1.0)
-      activesupport (= 4.1.0)
+    railties (4.1.4)
+      actionpack (= 4.1.4)
+      activesupport (= 4.1.4)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
@@ -406,17 +410,18 @@ GEM
       sidekiq (>= 2.4.0)
     ruby-debug-ide (0.4.22)
       rake (>= 0.8.1)
+    ruby-prof (0.15.1)
     ruby-progressbar (1.5.1)
     sanitize (3.0.0)
       crass (~> 0.2.0)
       nokogiri (>= 1.4.4)
       nokogumbo (= 1.1.9)
     sass (3.2.19)
-    sass-rails (4.0.2)
+    sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
-      sprockets-rails (~> 2.0.0)
+      sprockets-rails (~> 2.0)
     sexp_processor (4.4.3)
     shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
@@ -451,7 +456,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.0.1)
+    sprockets-rails (2.1.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
@@ -494,7 +499,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts-as-taggable-on (~> 3.0.2)
+  acts-as-taggable-on (~> 3.2)
   angular-rails-templates
   annotate
   awesome_nested_set (~> 3.0.0.rc.5)
@@ -509,8 +514,9 @@ DEPENDENCIES
   database_cleaner
   devise
   doorkeeper!
-  elasticsearch-model
-  elasticsearch-rails
+  elasticsearch-extensions
+  elasticsearch-model (~> 0.1)
+  elasticsearch-rails (~> 0.1)
   factory_girl_rails
   fog
   font-awesome-sass
@@ -538,16 +544,16 @@ DEPENDENCIES
   mongoid-paranoia!
   ng-rails-csrf
   ngmin-rails
-  paperclip
+  paperclip (~> 4.1)
   paranoia (~> 2.0)
   pg
   pry
   rack-cors
   rack-oauth2
-  rails (= 4.1.0)
-  rails-assets-angular
+  rails (~> 4)
+  rails-assets-angular (~> 1.2)
   rails-assets-angular-animate
-  rails-assets-angular-bootstrap (~> 0.11.0)
+  rails-assets-angular-bootstrap (~> 0.11)
   rails-assets-angular-bootstrap-datetimepicker
   rails-assets-angular-cookies
   rails-assets-angular-flash
@@ -555,7 +561,7 @@ DEPENDENCIES
   rails-assets-angular-redactor-patched
   rails-assets-angular-resource
   rails-assets-angular-sanitize
-  rails-assets-angular-ui-router
+  rails-assets-angular-ui-router (~> 0.2)
   rails-assets-angularjs-file-upload
   rails-assets-bootstrap-sass-official
   rails-assets-ng-table
@@ -569,7 +575,7 @@ DEPENDENCIES
   rspec-sidekiq
   ruby-debug-ide
   sanitize (~> 3.0)
-  sass-rails (= 4.0.2)
+  sass-rails (~> 4)
   shoulda
   shoulda-matchers
   sidekiq

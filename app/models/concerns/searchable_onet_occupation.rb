@@ -2,8 +2,8 @@ module SearchableOnetOccupation
   extend ActiveSupport::Concern
 
   included do
-    include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
+    include Searchable
+
 
     mapping do
       indexes :id,          :index => :not_analyzed
@@ -15,7 +15,8 @@ module SearchableOnetOccupation
 
   module ClassMethods
     def search_with_params(params)
-      self.search params[:q], sort: [ { created_at: { order: :desc } }]
+      query = self.query_massage(params[:q])
+      self.search query, sort: [ { created_at: { order: :desc } }]
     end
   end
 end

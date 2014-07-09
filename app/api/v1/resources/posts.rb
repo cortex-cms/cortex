@@ -30,6 +30,8 @@ module API::V1
         optional :slug
         optional :primary_industry_id
         optional :industry_ids
+        optional :destination_url
+        optional :call_to_action
       end
     end
 
@@ -47,34 +49,14 @@ module API::V1
         end
         get do
           require_scope! :'view:posts'
-          authorize! :view, Post
-
-          @posts = Post.order(created_at: :desc).page(page).per(per_page)
-
-          set_pagination_headers(@posts, 'posts')
-          present @posts, with: Entities::Post
-        end
-
-        desc 'Search for posts'
-        params do
-          use :pagination
-        end
-        get :search do
-          require_scope! :'view:posts'
           authorize! :view, ::Post
 
           q = params[:q]
           if q.to_s != ''
-            @posts = Post.search do
-              query { string q }
-              sort { by :created_at, :desc }
-            end
-            @posts = @posts.page(page).per(per_page).records
+            @posts = ::Post.search_with_params(params).page(page).per(per_page).records
           else
             @posts = Post.order(created_at: :desc).page(page).per(per_page)
           end
-
-          @posts = @posts.page(page).per(per_page)
 
           set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::Post
@@ -138,7 +120,8 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :create, Post
 
-          @post = ::Post.new(declared(params))
+          params[:post_type] = "Promo" if params[:type] == 'promo'
+          @post = ::Post.new(declared(params, {include_missing: false}))
           post.user = current_user
           post.save!
           present post, with: Entities::Post
@@ -152,12 +135,17 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :update, post!
 
+          if params[:type]
+            post.update!({type: params[:type]}) if params[:type]
+            reload_post
+          end
           post.update!(declared(params, {include_missing: false}))
 
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!
           end
+
           present post, with: Entities::Post
         end
 

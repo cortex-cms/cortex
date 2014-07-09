@@ -1,12 +1,13 @@
 require 'spec_helper'
 require 'api_v1_helper'
 
-describe API::Resources::Posts do
+describe API::Resources::Posts, elasticsearch: true do
 
   let(:user) { create(:user, :admin) }
 
   before do
     login_as user
+    Post.__elasticsearch__.create_index! index: Post.index_name
   end
 
   describe 'GET /posts' do
@@ -32,6 +33,15 @@ describe API::Resources::Posts do
       JSON.parse(response.body).count.should == 2
       response.headers['X-Total-Items'].should == '5'
       response.headers['Content-Range'].should == 'posts 0-1:2/5'
+    end
+
+    it 'should allow search on q' do
+      post_1 = create(:post)
+      post_2 = create(:post, title: "Test Post for testing queries.")
+      Post.import({refresh: true})
+      get '/api/v1/posts?q=Test'
+      response.should be_success
+      JSON.parse(response.body).count.should == 1
     end
 
   end
@@ -76,6 +86,18 @@ describe API::Resources::Posts do
         Post.last.media.should include(post.featured_media)
       end
     end
+
+    context 'for a promo post' do
+      it 'should create a new promo' do
+        expect{ post '/api/v1/posts', attributes_for(:post, type: 'PromoPost', destination_url: "Not null", call_to_action: "Defined") }.to change(Post, :count).by(1)
+        response.should be_success
+        response.body.should represent(API::Entities::Post, Post.last)
+      end
+      it 'should require featured_url and call_to_action' do
+        expect{ post '/api/v1/posts', attributes_for(:post, type: 'PromoPost') }.to_not change(Post, :count).by(1)
+        response.should_not be_success
+      end
+    end
   end
 
   describe 'PUT /posts/:id' do
@@ -95,6 +117,28 @@ describe API::Resources::Posts do
         post = create(:post)
         expect{ put "/api/v1/posts/#{post.id}", {title: nil}.to_json, application_json }.to_not change(Post, :count).by(1)
         response.should_not be_success
+      end
+    end
+
+    context 'for a promo post' do
+      it 'should update the post with valid attributes' do
+        post = create(:promo)
+        post.destination_url = "http://www.example.com"
+        expect{ put "/api/v1/posts/#{post.id}", {destination_url: "http://www.example.com"}.to_json, application_json }.to_not change(Post, :count).by(1)
+        response.should be_success
+        response.body.should represent(API::Entities::Post, post)
+      end
+
+      it 'should not update the post with invalid attributes' do
+        post = create(:promo)
+        expect{ put "/api/v1/posts/#{post.id}", {destination_url: nil}.to_json, application_json }.to_not change(Post, :count).by(1)
+        response.should_not be_success
+      end
+
+      it 'should support updating from article to promo' do
+        post = create(:post)
+        expect{ put "/api/v1/posts/#{post.id}", {type: 'PromoPost', destination_url: "Example.com", call_to_action: "Click here"}.to_json, application_json}.to_not change(Post, :count).by(1)
+        response.should be_success
       end
     end
 
@@ -129,5 +173,9 @@ describe API::Resources::Posts do
       expect{ delete "/api/v1/posts/#{post.id+1}" }.to_not change(Post, :count).by(-1)
       response.should_not be_success
     end
+  end
+
+  after do
+    Post.__elasticsearch__.client.indices.delete index: Post.index_name
   end
 end

@@ -1,5 +1,6 @@
 class Youtube < Media
-  index_name       'media'
+  # index_name       'media'
+  index_name [Rails.env, 'media'].join('_')
   document_type    'media'
   taxon_class_name 'media'
 

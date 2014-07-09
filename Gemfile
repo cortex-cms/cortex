@@ -12,7 +12,7 @@ def linux_only(require_as)
 end
 
 # Rails
-gem 'rails', '4.1.0'
+gem 'rails', '~> 4'
 
 # API
 gem 'grape', '~> 0.7'
@@ -24,9 +24,7 @@ gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
 gem 'haml'
 
 # Style
-# Locked to 4.0.2 until the following issue is closed
-# https://github.com/rails/sass-rails/issues/191
-gem 'sass-rails', '4.0.2'
+gem 'sass-rails', '~> 4'
 gem 'font-awesome-sass'
 
 gem 'sprockets'
@@ -43,14 +41,15 @@ gem 'turbolinks'
 gem 'uglifier'
 gem 'underscore-rails'
 
-gem 'rails-assets-angular'
+gem 'rails-assets-angular', '~> 1.2'
 gem 'rails-assets-angular-animate'
-gem 'rails-assets-angular-bootstrap', '~> 0.11.0'
-gem 'rails-assets-angular-flash'
 gem 'rails-assets-angular-sanitize'
 gem 'rails-assets-angular-resource'
 gem 'rails-assets-angular-cookies'
-gem 'rails-assets-angular-ui-router'
+
+gem 'rails-assets-angular-ui-router', '~> 0.2'
+gem 'rails-assets-angular-bootstrap', '~> 0.11'
+gem 'rails-assets-angular-flash'
 gem 'rails-assets-angular-bootstrap-datetimepicker'
 gem 'rails-assets-angular-redactor-patched'
 gem 'rails-assets-angularjs-file-upload'
@@ -61,14 +60,14 @@ gem 'rails-assets-ng-tags-input'
 # ActiveRecord
 gem 'rails-observers'
 gem 'awesome_nested_set', '~> 3.0.0.rc.5'
-gem 'paperclip'
-gem 'acts-as-taggable-on', '~> 3.0.2'
+gem 'paperclip', '~> 4.1'
+gem 'acts-as-taggable-on', '~> 3.2'
 gem 'bcrypt-ruby', require: 'bcrypt'
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+gem 'elasticsearch-model', '~> 0.1'
+gem 'elasticsearch-rails', '~> 0.1'
 gem 'kaminari'
 gem 'sanitize', '~> 3.0'
-gem 'paranoia',  '~> 2.0'
+gem 'paranoia', '~> 2.0'
 gem 'pg'
 
 # Mongoid
@@ -153,6 +152,7 @@ group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
   gem 'rspec-sidekiq'
+  gem 'elasticsearch-extensions'
 end
 
 group :assets do

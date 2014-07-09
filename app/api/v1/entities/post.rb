@@ -9,7 +9,10 @@ module API::V1
         post.display
       end
 
-      expose(:tag_list)
+      expose :tag_list do |post|
+        post.tag_list.to_a
+      end
+
       expose :user, with: 'Entities::UserBasic'
     end
   end

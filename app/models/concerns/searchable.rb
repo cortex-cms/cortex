@@ -35,7 +35,7 @@ module Searchable
         } }
       end
 
-      def build_search(field, q)
+      def terms_search(field, q)
         result = { bool: {
             must: [ { terms: { field => q } } ],
             must_not: [],

@@ -117,12 +117,20 @@ angular.module('cortex.controllers.posts.edit', [
     }
   };
 
-  // Auto-generate slug when title changed and field isn't dirty
+  // Auto-generate slug & SEO when title changed and field isn't dirty
   $scope.$watch('data.post.title', function(title) {
-    if ($scope.postForm.slug.$dirty && $scope.postForm.slug) {
-      return;
+    if ($scope.postForm.slug.$pristine && $scope.postForm.slug) {
+      $scope.data.post.slug = $filter('slugify')($scope.data.post.title);
     }
-    $scope.data.post.slug = $filter('slugify')($scope.data.post.title);
+    if ($scope.postForm.seo_title.$pristine && $scope.postForm.seo_title) {
+      $scope.data.post.seo_title = $scope.data.post.title;
+    }
+  });
+
+  $scope.$watch('data.post.short_description', function(desc) {
+    if ($scope.postForm.seo_description.$pristine && $scope.postForm.seo_description) {
+      $scope.data.post.seo_description = $scope.data.post.short_description;
+    }
   });
 
   $scope.$watch('data.post.slug', function(slug) {

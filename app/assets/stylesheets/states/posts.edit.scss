@@ -49,6 +49,8 @@
       @extend .row;
 
       .tabs {
+        @extend .hidden-xs, .hidden-sm;
+
         .tab-content {
           @extend .panel;
           @extend .panel-default;

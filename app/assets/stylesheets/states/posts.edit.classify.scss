@@ -1,0 +1,25 @@
+.tags {
+  @extend .form-group;
+
+  .tags-group {
+    @extend .row;
+
+    .tagger {
+      @include make-md-column(9);
+    }
+
+    .popular-tags {
+      @include make-md-column(3);
+      @extend .dropdown;
+
+      .toggle {
+        @extend .btn, .btn-default, .dropdown-toggle, .dropdown-toggle;
+        width: 100%;
+      }
+
+      .menu {
+        @extend .dropdown-menu;
+      }
+    }
+  }
+}

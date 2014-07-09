@@ -36,8 +36,28 @@
   </div>
 </div>
 
-<div class="form-group">
+<div class="tags">
   <label>Post Tags</label>
 
-  <div>Tags placeholder - refactor?</div>
+  <div class="tags-group">
+    <div class="tagger">
+      <tags-input display-property="name"
+                  type="text"
+                  placeholder="Enter relevant tags for this post"
+                  ng-model="data.post.tag_list"
+                  ng-maxlength="255">
+        <auto-complete source="loadTags($query)"></auto-complete>
+      </tags-input>
+    </div>
+    <div class="popular-tags" on-toggle="toggled(open)">
+      <button class="toggle" type="button">
+        Popular <span class="caret"></span>
+      </button>
+      <ul class="menu">
+        <li ng-repeat="tag in data.popularTags">
+          <a ng-click="addTag(tag)">{{ tag.name }} <span class="pull-right">{{ tag.count }}</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

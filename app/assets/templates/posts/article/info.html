@@ -12,13 +12,18 @@
 
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-anchor"></i></div>
-    <input ng-init="data.post.slug = data.post.slug || (data.post.title | slugify)"
+    <input name="slug"
+           ng-init="data.post.slug = data.post.slug || (data.post.title | slugify)"
            placeholder="Unique slug to use in URLs (required)"
            type="text"
            class="form-control"
            ng-model="data.post.slug"
            ng-maxlength="255"
            required>
+    <p ng-show="postForm.slug.$error.unavailable" class="has-error">
+      <span class="glyphicon glyphicon-remove"></span>
+      This slug is already used by <a ui-sref="cortex.posts.edit({postId: data.postWithDuplicateSlug.id})">{{ data.postWithDuplicateSlug.title }}</a>
+    </p>
   </div>
 </div>
 

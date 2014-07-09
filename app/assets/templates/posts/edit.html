@@ -1,81 +1,83 @@
-<div class="composer-column">
-  <div class="composer">
-    <textarea ng-model="data.post.body"
-              redactor="redactorOptions"
-              class="editor">
-    </textarea>
-  </div>
-</div>
-
-<div class="details-column">
-  <div class="publish-row">
-    <div class="publish-panel">
-      <div class="heading">
-        <i class="fa fa-sitemap"></i> Publish/Distribute
-      </div>
-      <div class="content">
-        <div class="actions">
-          <button type="button" class="cancel" ng-click="cancel()">
-            <i class="fa fa-reply"></i> Cancel
-          </button>
-          <button type="button" class="submit"
-                  ng-click="save()">
-            <i class="fa fa-cloud-upload"></i> Submit
-          </button>
-        </div>
-      </div>
+<form id="postForm" name="postForm" ng-submit="data.savePost()" novalidate>
+  <div class="composer-column">
+    <div class="composer">
+      <textarea ng-model="data.post.body"
+                redactor="redactorOptions"
+                class="editor">
+      </textarea>
     </div>
   </div>
 
-  <div class="details-row">
-    <tabset class="tabs" justified="true">
-      <tab>
-        <tab-heading><i class="fa fa-info-circle"></i> Info</tab-heading>
-
-        <div class="info">
-          <div class="post-type-group">
-            <label>Post Type</label>
-
-            <div class="post-type-actions" data-toggle="buttons">
-              <label class="btn btn-default" for="post-type" ui-sref=".article" ui-sref-active="active">
-                <input type="radio" name="post-type" id="article"/><i class="fa fa-quote-right"></i> Article
-              </label>
-              <label class="btn btn-default" for="post-type" ui-sref=".video" ui-sref-active="active">
-                <input type="radio" name="post-type" id="Video"/><i class="fa fa-video-camera"></i> Video
-              </label>
-              <label class="btn btn-default" for="post-type" ui-sref=".infographic" ui-sref-active="active">
-                <input type="radio" name="post-type" id="infographic"/><i class="fa fa-picture-o"></i> Infographic
-              </label>
-              <label class="btn btn-default" for="post-type" ui-sref=".promo" ui-sref-active="active">
-                <input type="radio" name="post-type" id="promo"/><i class="fa fa-bullhorn"></i> Promo
-              </label>
-            </div>
+  <div class="details-column">
+    <div class="publish-row">
+      <div class="publish-panel">
+        <div class="heading">
+          <i class="fa fa-sitemap"></i> Publish/Distribute
+        </div>
+        <div class="content">
+          <div class="actions">
+            <button type="button" class="cancel" ng-click="cancel()">
+              <i class="fa fa-reply"></i> Cancel
+            </button>
+            <button type="button" class="submit"
+                    ng-click="save()">
+              <i class="fa fa-cloud-upload"></i> Submit
+            </button>
           </div>
-
-          <div ui-view="info"></div>
         </div>
-      </tab>
-      <tab>
-        <tab-heading><i class="fa fa-tag"></i> Classify</tab-heading>
+      </div>
+    </div>
 
-        <div class="classify">
-          <div ui-view="classify"></div>
-        </div>
-      </tab>
-      <tab>
-        <tab-heading><i class="fa fa-eye"></i> Display</tab-heading>
+    <div class="details-row">
+      <tabset class="tabs" justified="true">
+        <tab>
+          <tab-heading><i class="fa fa-info-circle"></i> Info</tab-heading>
 
-        <div class="display">
-          <div ui-view="display"></div>
-        </div>
-      </tab>
-      <tab>
-        <tab-heading><i class="fa fa-search"></i> SEO</tab-heading>
+          <div class="info">
+            <div class="post-type-group">
+              <label>Post Type</label>
 
-        <div class="seo">
-          <div ui-view="seo"></div>
-        </div>
-      </tab>
-    </tabset>
+              <div class="post-type-actions" data-toggle="buttons">
+                <label class="btn btn-default" for="post-type" ui-sref=".article" ui-sref-active="active">
+                  <input type="radio" name="post-type" id="article"/><i class="fa fa-quote-right"></i> Article
+                </label>
+                <label class="btn btn-default" for="post-type" ui-sref=".video" ui-sref-active="active">
+                  <input type="radio" name="post-type" id="Video"/><i class="fa fa-video-camera"></i> Video
+                </label>
+                <label class="btn btn-default" for="post-type" ui-sref=".infographic" ui-sref-active="active">
+                  <input type="radio" name="post-type" id="infographic"/><i class="fa fa-picture-o"></i> Infographic
+                </label>
+                <label class="btn btn-default" for="post-type" ui-sref=".promo" ui-sref-active="active">
+                  <input type="radio" name="post-type" id="promo"/><i class="fa fa-bullhorn"></i> Promo
+                </label>
+              </div>
+            </div>
+
+            <div ui-view="info"></div>
+          </div>
+        </tab>
+        <tab>
+          <tab-heading><i class="fa fa-tag"></i> Classify</tab-heading>
+
+          <div class="classify">
+            <div ui-view="classify"></div>
+          </div>
+        </tab>
+        <tab>
+          <tab-heading><i class="fa fa-eye"></i> Display</tab-heading>
+
+          <div class="display">
+            <div ui-view="display"></div>
+          </div>
+        </tab>
+        <tab>
+          <tab-heading><i class="fa fa-search"></i> SEO</tab-heading>
+
+          <div class="seo">
+            <div ui-view="seo"></div>
+          </div>
+        </tab>
+      </tabset>
+    </div>
   </div>
-</div>
+</form>

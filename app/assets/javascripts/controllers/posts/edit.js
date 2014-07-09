@@ -134,6 +134,7 @@ angular.module('cortex.controllers.posts.edit', [
     cortex.posts.get({id: slug},
       // Slug already used
       function(post) {
+
         // A post may have its own slug
         if (post.id === $scope.data.post.id) {
           $scope.postForm.slug.$error.unavailable = false;

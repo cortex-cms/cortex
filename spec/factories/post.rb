@@ -1,14 +1,19 @@
 FactoryGirl.define do
   factory :post do
-    sequence(:title)  { |n| "post#{n}" }
-    sequence(:slug)   { |n| "post-#{n}" }
-    short_description 'This is a short description of the post that is long enough'
-    copyright_owner   :'CareerBuilder, LLC'
-    job_phase         :discovery
-    display           :large
-    type              'ArticlePost'
-    author            :Author
-    draft             true
+    sequence(:title)    { |n| "post#{n}" }
+    sequence(:slug)     { |n| "post-#{n}" }
+    short_description   'This is a short description of the post that is long enough'
+    copyright_owner     :'CareerBuilder, LLC'
+    job_phase           :discovery
+    display             :large
+    type                'ArticlePost'
+    author              :Author
+    draft               false
+    published_at        DateTime.now
+    industries          []
+    primary_industry_id 1
+    categories          []
+    primary_category_id 1
     user
 
     trait :with_featured_media do

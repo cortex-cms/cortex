@@ -1,11 +1,11 @@
 .admin-posts {
+  @extend .row;
+
   .composer-column {
     @include make-md-column(8);
 
     .composer {
-      @extend .row;
       @extend .form-group;
-      margin-right: $standard-margin / 2; // Scree!
 
       .editor {
         @extend .form-control;
@@ -19,56 +19,68 @@
     .publish-row {
       @extend .row;
 
-      .publish-panel {
-        @extend .panel, .panel-default;
+      .publish-column {
+        @include make-md-column(12);
 
-        .heading {
-          @extend .panel-heading;
-        }
+        .publish-panel {
+          @extend .panel, .panel-default;
 
-        .content {
-          @extend .panel-body;
+          .heading {
+            @extend .panel-heading;
+          }
 
-          .actions {
-            @extend .form-group;
-            @extend .btn-group;
+          .content {
+            @extend .panel-body;
 
-            button.cancel {
-              @extend .btn, .btn-default;
-            }
+            .actions {
+              @extend .form-group;
+              @extend .btn-group;
 
-            button.submit {
-              @extend .btn, .btn-primary;
+              button.cancel {
+                @extend .btn, .btn-default;
+              }
+
+              button.submit {
+                @extend .btn, .btn-primary;
+              }
             }
           }
         }
       }
     }
 
-    .details-row {
+    .metadata-row {
       @extend .row;
 
-      .tabs {
-        @extend .hidden-xs, .hidden-sm;
+      .metadata-column {
+        @include make-md-column(12);
 
-        .tab-content {
-          @extend .panel;
-          @extend .panel-default;
-          @extend .panel-body;
+        .panel-tabs {
+          @extend .hidden-xs, .hidden-sm;
 
-          border-top: none;
-          border-top-right-radius: 0;
-          border-top-left-radius: 0;
-        }
+          .tab-content {
+            @extend .panel;
+            @extend .panel-default;
+            @extend .panel-body;
 
-        .info {
-          .post-type-group {
-            @extend .form-group;
+            border-top: none;
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+          }
 
-            .post-type-actions {
-              @extend .btn-group, .btn-group-justified;
+          .info {
+            .post-type-group {
+              @extend .form-group;
+
+              .post-type-actions {
+                @extend .btn-group, .btn-group-justified;
+              }
             }
           }
+        }
+
+        .panel-accordion {
+          @extend .hidden-md, .hidden-lg;
         }
       }
     }

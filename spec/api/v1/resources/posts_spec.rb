@@ -43,6 +43,80 @@ describe API::Resources::Posts, elasticsearch: true do
       response.should be_success
       JSON.parse(response.body).count.should == 1
     end
+  end
+
+  describe 'GET /posts/feed' do
+
+    it 'should filter on industry and include results for All Industries' do
+      industry_1 = create(:onet_occupation, soc: '12-0000')
+      industry_2 = create(:onet_occupation, soc: '13-0000')
+      industry_3 = create(:onet_occupation)
+      post_1 = create(:post)
+      post_1.industries << industry_1
+      post_2 = create(:post)
+      post_2.industries << industry_2
+      post_3 = create(:post)
+      post_3.industries << industry_3
+      post_4 = create(:post)
+      Post.import({refresh: true})
+      get '/api/v1/posts/feed?industries=13-0000,12-0000'
+      response.should be_success
+      JSON.parse(response.body).count.should == 3
+    end
+
+    it 'should filter on category' do
+      category_1 = create(:category)
+      category_2 = create(:category)
+      post_1 = create(:post)
+      post_1.categories << category_1
+      post_2 = create(:post)
+      post_2.categories << category_2
+      post_3 = create(:post)
+      Post.import({refresh: true})
+      get "/api/v1/posts/feed?categories=#{category_1.name},#{category_2.name}"
+      response.should be_success
+      JSON.parse(response.body).count.should == 2
+    end
+
+    it 'should filter on post types' do
+      post_1 = create(:post, type: "VideoPost")
+      post_2 = create(:post, type: "PromoPost")
+      post_3 = create(:post)
+      Post.import({refresh: true})
+      get "/api/v1/posts/feed?post_type=VideoPost,PromoPost"
+      response.should be_success
+      JSON.parse(response.body).count.should == 2
+    end
+
+    it 'should filter on job phase' do
+      post_1 = create(:post, job_phase: "get_the_job")
+      post_2 = create(:post, job_phase: "on_the_job")
+      post_3 = create(:post)
+      Post.import({refresh: true})
+      get "/api/v1/posts/feed?job_phase=get_the_job,on_the_job"
+      response.should be_success
+      JSON.parse(response.body).count.should == 2
+    end
+
+    it 'should filter on multiple criteria' do
+      industry_1 = create(:onet_occupation, soc: '12-0000')
+      industry_2 = create(:onet_occupation, soc: '13-0000')
+      category_1 = create(:category)
+      category_2 = create(:category)
+      post_1 = create(:post, type: "VideoPost", job_phase: "get_the_job")
+      post_1.industries << industry_1
+      post_1.categories << category_1
+      post_2 = create(:post, job_phase: "on_the_job")
+      post_2.industries << industry_2
+      post_2.categories << category_2
+      post_3 = create(:post, type: "PromoPost")
+      post_3.industries << industry_1
+      post_4 = create(:post, type: "VideoPost", job_phase: "get_the_job")
+      Post.import({refresh: true})
+      get "/api/v1/posts/feed?industries=13-0000,12-0000&post_type=VideoPost&job_phase=get_the_job&categories=#{category_1.name},#{category_2.name}"
+      response.should be_success
+      JSON.parse(response.body).count.should == 1
+    end
 
   end
 

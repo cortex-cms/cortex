@@ -13,6 +13,43 @@ module Searchable
         return '*' if result.nil? or result.empty?
         result.index(/\s/).nil? ? "#{result}*" : result
       end
+
+      def or_null(field, q)
+        result = { bool: {
+            must: [],
+            must_not: [],
+            should: [
+                {
+                  terms: {
+                    field => q
+                  }
+                },
+                {
+                  constant_score: {
+                    filter: {
+                      missing: { field: field }
+                    }
+                  }
+                }
+            ]
+        } }
+      end
+
+      def build_search(field, q)
+        result = { bool: {
+            must: [ { terms: { field => q } } ],
+            must_not: [],
+            should: []
+        } }
+      end
+
+      def range_search(field, type, q)
+        result = { bool: {
+          must: [ { range: { field => { type => q } } } ],
+          must_not: [],
+          should: []
+        } }
+      end
     end
 
   end

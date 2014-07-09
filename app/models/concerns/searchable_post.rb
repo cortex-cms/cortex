@@ -76,31 +76,29 @@ module SearchablePost
 
   module ClassMethods
     def search_with_params(params, published = nil)
-      query = { query_string: { query: self.query_massage(params[:q]) } }
-      filter = { and: { filters: [] } }
+      query = { query_string: { default_field: "_all", query: self.query_massage(params[:q]) } }
       sort = { created_at: :desc }
 
       categories = params[:categories]
       job_phase  = params[:job_phase]
       post_type  = params[:post_type]
       industries = params[:industries]
+      bool = { bool: { must: [ query ], must_not: [], should: [] } }
 
       # terms filter
       if published || categories || job_phase || post_type || industries
-        terms = {}
 
-        if categories; terms[:categories] = categories.split(',') end
-        if job_phase; terms[:job_phase]   = job_phase.downcase().split(',') end
-        if post_type; terms[:type]        = post_type.downcase().split(',') end
-        if industries; terms[:industries] = industries.split(',') end
-        if published; terms[:draft]       = [false] end
+        if categories; bool[:bool][:must] << self.build_search('categories', categories.split(',')) end
+        if job_phase; bool[:bool][:must] << self.build_search('job_phase', job_phase.downcase().split(',')) end
+        if post_type; bool[:bool][:must] << self.build_search('type', post_type.split(',')) end
+        if industries; bool[:bool][:must] << self.or_null('industries', industries.split(',')) end
+        if published; bool[:bool][:must] << self.build_search('draft', [false]) end
 
-        filter[:and][:filters] << {terms: terms}
       end
 
-      if published; filter[:and][:filters] << { range: { published_at: { lte: DateTime.now } } } end
+      if published; bool[:bool][:must] << self.range_search('published_at', 'lte', DateTime.now) end
 
-      self.search query: query, filter: filter, sort: sort
+      self.search query: bool, sort: sort
     end
   end
 end

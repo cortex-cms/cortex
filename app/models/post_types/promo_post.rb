@@ -1,6 +1,6 @@
 class PromoPost < Post
   index_name     [Rails.env, 'posts'].join('_')
-  document_type  'posts'
+  document_type  'post'
   store_accessor :meta, :destination_url, :call_to_action
 
   # TODO: Figure out a way to get this properly abstracted

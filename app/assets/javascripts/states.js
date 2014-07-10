@@ -115,6 +115,8 @@ angular.module('cortex.states', [
     .state('cortex.posts.new', {
       url: '/new',
       abstract: true,
+      templateUrl: 'posts/edit.html',
+      controller: 'PostsEditCtrl',
       resolve: {
         post: function() {
           return null;
@@ -126,11 +128,15 @@ angular.module('cortex.states', [
           return cortex.posts.filters().$promise;
         }]
       },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections', {
+      url: '',
+      abstract: true,
       views: {
-        '': {
-          templateUrl: 'posts/edit.html',
-          controller: 'PostsEditCtrl'
-        },
         'info': {
           templateUrl: 'posts/article/info.html',
           controller: 'PostsEditInfoCtrl'
@@ -147,46 +153,43 @@ angular.module('cortex.states', [
           templateUrl: 'posts/article/seo.html',
           controller: 'PostsEditSeoCtrl'
         }
-      },
-      data: {
-        ncyBreadcrumbLabel: false
       }
     })
 
-    .state('cortex.posts.new.article', {
+    .state('cortex.posts.new.sections.article', {
       url: '/article',
       data: {
         ncyBreadcrumbLabel: 'New Post'
       }
     })
 
-    .state('cortex.posts.new.video', {
+    .state('cortex.posts.new.sections.video', {
       url: '/video',
       data: {
         ncyBreadcrumbLabel: 'New Post'
       }
     })
 
-    .state('cortex.posts.new.infographic', {
+    .state('cortex.posts.new.sections.infographic', {
       url: '/infographic',
       data: {
         ncyBreadcrumbLabel: 'New Post'
       }
     })
 
-    .state('cortex.posts.new.promo', {
+    .state('cortex.posts.new.sections.promo', {
       url: '/promo',
       views: {
-        'info@cortex.posts.edit': {
+        'info@cortex.posts.edit.sections': {
           templateUrl: 'posts/promo/info.html'
         },
-        'classify@cortex.posts.edit': {
+        'classify@cortex.posts.edit.sections': {
           templateUrl: 'posts/promo/classify.html'
         },
-        'display@cortex.posts.edit': {
+        'display@cortex.posts.edit.sections': {
           templateUrl: 'posts/promo/display.html'
         },
-        'seo@cortex.posts.edit': {
+        'seo@cortex.posts.edit.sections': {
           templateUrl: 'posts/promo/seo.html'
         }
       },
@@ -198,6 +201,8 @@ angular.module('cortex.states', [
     .state('cortex.posts.edit', {
       url: '/:postId/edit',
       abstract: true,
+      templateUrl: 'posts/edit.html',
+      controller: 'PostsEditCtrl',
       resolve: {
         post: ['cortex', '$stateParams', function(cortex, $stateParams) {
           return cortex.posts.get({id: $stateParams.postId}).$promise;
@@ -209,11 +214,15 @@ angular.module('cortex.states', [
           return cortex.posts.filters().$promise;
         }]
       },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections', {
+      url: '',
+      abstract: true,
       views: {
-        '': {
-          templateUrl: 'posts/edit.html',
-          controller: 'PostsEditCtrl'
-        },
         'info': {
           templateUrl: 'posts/article/info.html',
           controller: 'PostsEditInfoCtrl'
@@ -230,53 +239,50 @@ angular.module('cortex.states', [
           templateUrl: 'posts/article/seo.html',
           controller: 'PostsEditSeoCtrl'
         }
-      },
-      data: {
-        ncyBreadcrumbLabel: false
       }
     })
 
-    .state('cortex.posts.edit.article', {
+    .state('cortex.posts.edit.sections.article', {
       url: '/article',
       data: {
         ncyBreadcrumbLabel: 'Edit Post'
       }
     })
 
-      .state('cortex.posts.edit.video', {
-        url: '/video',
-        data: {
-          ncyBreadcrumbLabel: 'Edit Post'
-        }
-      })
+    .state('cortex.posts.edit.sections.video', {
+      url: '/video',
+      data: {
+        ncyBreadcrumbLabel: 'Edit Post'
+      }
+    })
 
-      .state('cortex.posts.edit.infographic', {
-        url: '/infographic',
-        data: {
-          ncyBreadcrumbLabel: 'Edit Post'
-        }
-      })
+    .state('cortex.posts.edit.sections.infographic', {
+      url: '/infographic',
+      data: {
+        ncyBreadcrumbLabel: 'Edit Post'
+      }
+    })
 
-      .state('cortex.posts.edit.promo', {
-        url: '/promo',
-        views: {
-          'info@cortex.posts.edit': {
-            templateUrl: 'posts/promo/info.html'
-          },
-          'classify@cortex.posts.edit': {
-            templateUrl: 'posts/promo/classify.html'
-          },
-          'display@cortex.posts.edit': {
-            templateUrl: 'posts/promo/display.html'
-          },
-          'seo@cortex.posts.edit': {
-            templateUrl: 'posts/promo/seo.html'
-          }
+    .state('cortex.posts.edit.sections.promo', {
+      url: '/promo',
+      views: {
+        'info@cortex.posts.edit.sections': {
+          template: 'fuck you'
         },
-        data: {
-          ncyBreadcrumbLabel: 'Edit Post'
+        'classify@cortex.posts.edit.sections': {
+          templateUrl: 'posts/promo/classify.html'
+        },
+        'display@cortex.posts.edit.sections': {
+          templateUrl: 'posts/promo/display.html'
+        },
+        'seo@cortex.posts.edit.sections': {
+          templateUrl: 'posts/promo/seo.html'
         }
-      })
+      },
+      data: {
+        ncyBreadcrumbLabel: 'Edit Post'
+      }
+    })
 
     // Posts Edit + Media Popup
     // **********************

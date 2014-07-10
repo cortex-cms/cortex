@@ -1,51 +1,47 @@
-<div class="form-group">
+<div class="headline-group">
   <label>Headline</label>
 
-  <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-header"></i></div>
-    <input type="text" class="form-control" ng-model="data.post.title">
+  <div class="headline-input-group">
+    <div class="addon"><i class="fa fa-header"></i></div>
+    <input type="text" class="control" ng-model="data.post.title">
   </div>
 </div>
 
-<div class="form-group">
+<div class="slug-group">
   <label>Slug</label>
 
-  <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-anchor"></i></div>
+  <div class="slug-input-group">
+    <div class="addon"><i class="fa fa-anchor"></i></div>
     <input name="slug"
            ng-init="data.post.slug = data.post.slug || (data.post.title | slugify)"
            placeholder="Unique slug to use in URLs (required)"
            type="text"
-           class="form-control"
+           class="control"
            ng-model="data.post.slug"
            ng-maxlength="255"
            required>
-    <p ng-show="postForm.slug.$error.unavailable" class="has-error">
-      <span class="glyphicon glyphicon-remove"></span>
-      This slug is already used by <a ui-sref="cortex.posts.edit({postId: data.postWithDuplicateSlug.id})">{{ data.postWithDuplicateSlug.title }}</a>
-    </p>
   </div>
 </div>
 
-<div class="form-group">
+<div class="description-group">
   <label>Description</label>
 
-  <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-ellipsis-h"></i></div>
-    <textarea class="form-control"
+  <div class="description-input-group">
+    <div class="addon"><i class="fa fa-ellipsis-h"></i></div>
+    <textarea class="control"
               ng-model="data.post.short_description"
               placeholder="Enter a short description for the post (required)">
     </textarea>
   </div>
 </div>
 
-<div class="form-group">
+<div class="author-group">
   <label>Author</label>
 
-  <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+  <div class="author-input-group">
+    <div class="addon"><i class="fa fa-user"></i></div>
     <input type="text"
-           class="form-control"
+           class="control"
            placeholder="Enter an author for this post (required)"
            ng-init="data.post.author = data.post.author || currentUser.fullname"
            ng-model="data.post.author"
@@ -55,13 +51,13 @@
   </div>
 </div>
 
-<div class="form-group">
+<div class="copyright-owner-group">
   <label>Copyright Owner</label>
 
-  <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
+  <div class="copyright-owner-input-group">
+    <div class="addon"><i class="fa fa-building-o"></i></div>
     <input type="text"
-           class="form-control"
+           class="control"
            placeholder="Enter a copyright owner for this post (required)"
            ng-model="data.post.copyright_owner"
            ng-minlength="1"

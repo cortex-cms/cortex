@@ -1,0 +1,81 @@
+.info {
+  .headline-group {
+    @extend .form-group;
+
+    .headline-input-group {
+      @extend .input-group;
+
+      .addon {
+        @extend .input-group-addon;
+      }
+
+      .control {
+        @extend .form-control;
+      }
+    }
+  }
+
+  .slug-group {
+    @extend .form-group;
+
+    .slug-input-group {
+      @extend .input-group;
+
+      .addon {
+        @extend .input-group-addon;
+      }
+
+      .control {
+        @extend .form-control;
+      }
+    }
+  }
+
+  .description-group {
+    @extend .form-group;
+
+    .description-input-group {
+      @extend .input-group;
+
+      .addon {
+        @extend .input-group-addon;
+      }
+
+      .control {
+        @extend .form-control;
+      }
+    }
+  }
+
+  .author-group {
+    @extend .form-group;
+
+    .author-input-group {
+      @extend .input-group;
+
+      .addon {
+        @extend .input-group-addon;
+      }
+
+      .control {
+        @extend .form-control;
+      }
+    }
+  }
+
+  .copyright-owner-group {
+    @extend .form-group;
+
+    .copyright-owner-input-group {
+      @extend .input-group;
+
+      .addon {
+        @extend .input-group-addon;
+      }
+
+      .control {
+        @extend .form-control;
+      }
+    }
+  }
+}

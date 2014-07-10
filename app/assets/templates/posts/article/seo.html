@@ -1,33 +1,33 @@
-<div class="form-group">
+<div class="title-group">
   <label>Title</label>
 
-  <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-header"></i></div>
+  <div class="title-input-group">
+    <div class="addon"><i class="fa fa-header"></i></div>
     <input type="text"
-           class="form-control"
+           class="control"
            placeholder="Enter an HTML meta title for this post"
            ng-model="data.post.seo_title"
            ng-maxlength="255">
   </div>
 </div>
 
-<div class="form-group">
+<div class="description-group">
   <label>Description</label>
 
-  <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-ellipsis-h"></i></div>
+  <div class="description-input-group">
+    <div class="addon"><i class="fa fa-ellipsis-h"></i></div>
     <input type="text"
-           class="form-control"
+           class="control"
            placeholder="Enter an HTML meta description for this post"
            ng-model="data.post.seo_description"
            ng-maxlength="255">
   </div>
 </div>
 
-<div class="form-group">
+<div class="preview-group">
   <label>Search Display Preview</label>
 
-  <textarea class="form-control"
+  <textarea class="control"
             rows="5"
             disabled="disabled"
             ng-model="data.post.seo_preview">

@@ -180,16 +180,16 @@ angular.module('cortex.states', [
     .state('cortex.posts.new.sections.promo', {
       url: '/promo',
       views: {
-        'info@cortex.posts.edit.sections': {
+        'info@cortex.posts.edit': {
           templateUrl: 'posts/promo/info.html'
         },
-        'classify@cortex.posts.edit.sections': {
+        'classify@cortex.posts.edit': {
           templateUrl: 'posts/promo/classify.html'
         },
-        'display@cortex.posts.edit.sections': {
+        'display@cortex.posts.edit': {
           templateUrl: 'posts/promo/display.html'
         },
-        'seo@cortex.posts.edit.sections': {
+        'seo@cortex.posts.edit': {
           templateUrl: 'posts/promo/seo.html'
         }
       },
@@ -266,16 +266,16 @@ angular.module('cortex.states', [
     .state('cortex.posts.edit.sections.promo', {
       url: '/promo',
       views: {
-        'info@cortex.posts.edit.sections': {
-          template: 'fuck you'
+        'info@cortex.posts.edit': {
+          templateUrl: 'posts/promo/info.html'
         },
-        'classify@cortex.posts.edit.sections': {
+        'classify@cortex.posts.edit': {
           templateUrl: 'posts/promo/classify.html'
         },
-        'display@cortex.posts.edit.sections': {
+        'display@cortex.posts.edit': {
           templateUrl: 'posts/promo/display.html'
         },
-        'seo@cortex.posts.edit.sections': {
+        'seo@cortex.posts.edit': {
           templateUrl: 'posts/promo/seo.html'
         }
       },

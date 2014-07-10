@@ -271,6 +271,43 @@
         </dl>
     </fieldset>
 
+  <fieldset ng-show="data.post.type == 'PromoPost'">
+    <legend>Promo Info</legend>
+
+    <dl class="dl-horizontal">
+      <dt><label for="destination_url">Destination URL</label></dt>
+      <dd class="input-group-sm">
+        <input id="destinationUrl"
+               class="form-control"
+               name="destination_url"
+               type="text"
+               placeholder="enter the url for this to link to (required)"
+               ng-model="data.post.destination_url"
+                ng-maxlength="255">
+        <p class="has-error" ng-show="postForm.destination_url.$error.maxlength">
+          <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+          &nbsp;Your destination url is too long.
+        </p>
+      </dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt><label for="call_to_action">Call To Action</label></dt>
+      <dd class="input-group-sm">
+        <input id="callToAction"
+               class="form-control"
+               name="call_to_action"
+               type="text"
+               placeholder="enter the call to action for this post (required)"
+               ng-model="data.post.call_to_action"
+               ng-maxlength="50">
+        <p class="has-error" ng-show="postForm.call_to_action.$error.maxlength">
+          <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+          &nbsp;Your call to action is too long.
+        </p>
+      </dd>
+    </dl>
+  </fieldset>
+
   </div>
 
   <div class="post-form-side input-group-sm">
@@ -439,7 +476,7 @@
           <select class="form-control"
                   ng-model="data.post.primary_industry_id"
                   ng-options="industry.id as industry.title for industry in data.industries">
-            <option value="" selected>Select an associated industry for this post</option>
+            <option value="" selected>All Industries</option>
           </select>
         </div>
       </fieldset>

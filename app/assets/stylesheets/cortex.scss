@@ -63,9 +63,11 @@ main {
   @include make-xs-column(12);
   @include make-md-column-offset(3);
   @include make-md-column(6);
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
+  bottom: 0;
+  z-index: 2;
 }
 
 // Fix message flash transition

@@ -249,6 +249,30 @@ describe API::Resources::Posts, elasticsearch: true do
     end
   end
 
+  describe 'GET /posts/filter' do
+
+    before do
+      category_1 = create(:category)
+      category_2 = create(:category, parent: category_1)
+    end
+
+    it 'should default to only categories with a depth of 1 or higher' do
+      categories = Array(Category.where('depth >= 1'))
+      get '/api/v1/posts/filters'
+      response.should be_success
+      json = JSON.parse(response.body)
+      Array(json['categories']).count.should == categories.count
+    end
+
+    it 'should allow depth selection' do
+      categories = Category.all
+      get '/api/v1/posts/filters?depth=0'
+      response.should be_success
+      json = JSON.parse(response.body)
+      Array(json['categories']).count.should == categories.count
+    end
+  end
+
   after do
     Post.__elasticsearch__.client.indices.delete index: Post.index_name
   end

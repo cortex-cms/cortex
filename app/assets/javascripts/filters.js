@@ -83,5 +83,12 @@ angular.module('cortex.filters', [
     }
     return value.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
   };
+})
+
+.filter('editState', function() {
+  return function(post) {
+    var stateName = post.type.replace('Post', '').toLowerCase();
+    return "cortex.posts.edit.sections." + stateName + "({postId: " + post.id + "})";
+  };
 });
 

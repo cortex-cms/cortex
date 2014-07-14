@@ -30,13 +30,13 @@
 
   <div class="media-selector">
     <div class="thumb">
-      <img src="{{data.post.featured_media.thumbs.mini}}" alt="{{data.post.featured_media.alt}}">
+      <img src="{{data.post.featured_media.thumbs.mini}}" alt="{{data.post.featured_media.alt}}" ng-if="{{data.post.featured_media}}">
     </div>
     <div class="info">
       <strong>{{data.post.featured_media.name}}</strong>
       <strong>{{data.post.featured_media.taxon}}</strong>
     </div>
-    <div class="actions">
+    <div class="actions btn-group">
       <button type="button"
               class="btn btn-primary btn-sm"
               ng-click="setFeaturedMedia()">
@@ -64,7 +64,7 @@
       <strong>{{data.post.tile_media.name}}</strong>
       <strong>{{data.post.tile_media.taxon}}</strong>
     </div>
-    <div class="actions">
+    <div class="actions btn-group">
       <button type="button"
               class="btn btn-primary btn-sm"
               ng-click="setTileMedia()">

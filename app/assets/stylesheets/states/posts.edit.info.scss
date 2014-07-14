@@ -78,4 +78,35 @@
       }
     }
   }
+
+  .destination-url-group {
+    @extend .form-group;
+
+    .destination-url-input-group {
+      @extend .input-group;
+
+      .addon {
+        @extend .input-group-addon;
+      }
+
+      .control {
+        @extend .form-control;
+      }
+    }
+  }
+  .call-to-action-group {
+    @extend .form-group;
+
+    .call-to-action-input-group {
+      @extend .input-group;
+
+      .addon {
+        @extend .input-group-addon;
+      }
+
+      .control {
+        @extend .form-control;
+      }
+    }
+  }
 }

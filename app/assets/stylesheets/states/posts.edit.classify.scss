@@ -13,7 +13,8 @@
       @extend .dropdown;
 
       .toggle {
-        @extend .btn, .btn-default, .dropdown-toggle, .dropdown-toggle;
+        @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+        @extend .dropdown-toggle, .dropdown-toggle;
         width: 100%;
       }
 

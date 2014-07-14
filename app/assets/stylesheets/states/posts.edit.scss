@@ -34,14 +34,13 @@
 
             .actions {
               @extend .form-group;
-              @extend .btn-group;
 
               button.cancel {
-                @extend .btn, .btn-default;
+                @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
               }
 
               button.submit {
-                @extend .btn, .btn-primary;
+                @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
               }
             }
           }
@@ -71,10 +70,6 @@
           .info {
             .post-type-group {
               @extend .form-group;
-
-              .post-type-actions {
-                @extend .btn-group, .btn-group-justified;
-              }
             }
           }
         }

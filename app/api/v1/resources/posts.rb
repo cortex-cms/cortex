@@ -92,9 +92,12 @@ module API::V1
         end
 
         desc 'Show all filters/facets for posts'
+        params do
+          optional :depth, default: 1
+        end
         get 'filters' do
           present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
-          present :categories, ::Category.all, with: Entities::Category
+          present :categories, ::Category.where('depth >= ?', params[:depth]), with: Entities::Category
         end
 
         desc 'Show a post'

@@ -15,10 +15,9 @@
 <div class="form-group" ng-if="data.jobPhaseCategories.length">
   <label>Categories</label>
 
-  <div class="checkbox" ng-repeat="category in data.jobPhaseCategories">
-    <label>
-      <input type="checkbox" ng-model="category.$selected">
-      {{ category.name }}
+  <div class="checkbox">
+    <label for="category">
+      <input type="checkbox" name="category" checked disabled/> All Categories
     </label>
   </div>
 </div>
@@ -29,9 +28,8 @@
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
     <select class="form-control"
-            ng-model="data.post.primary_industry_id"
-            ng-options="industry.id as industry.title for industry in data.industries">
-      <option value="" selected>Select an associated industry for this post</option>
+            ng-model="data.post.primary_industry_id">
+      <option value="" selected>All Industries</option>
     </select>
   </div>
 </div>

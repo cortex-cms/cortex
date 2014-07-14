@@ -72,6 +72,18 @@ module API::V1
           present @posts, with: Entities::PostBasic
         end
 
+        desc 'Show published post authors'
+        get 'feed/authors' do
+          present Author.published.distinct, with: Entities::Author
+        end
+
+        desc 'Show related published posts'
+        get 'feed/:id/related' do
+          @posts = published_post!.related(true).page(page).per(per_page).records
+          set_pagination_headers(@posts, 'posts')
+          present @posts, with: Entities::PostBasic
+        end
+
         desc 'Show post tags'
         params do
           optional :s
@@ -103,13 +115,6 @@ module API::V1
           authorize! :view, post!
 
           present post, with: Entities::Post
-        end
-
-        desc 'Show related published posts'
-        get 'feed/:id/related' do
-          @posts = published_post!.related(true).page(page).per(per_page).records
-          set_pagination_headers(@posts, 'posts')
-          present @posts, with: Entities::PostBasic
         end
 
         desc 'Create a post'

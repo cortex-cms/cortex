@@ -1,13 +1,18 @@
 FactoryGirl.define do
   factory :post do
-    sequence(:title)  { |n| "post#{n}" }
-    sequence(:slug)   { |n| "post-#{n}" }
-    short_description 'This is a short description of the post that is long enough'
-    copyright_owner   :'CareerBuilder, LLC'
-    job_phase         :discovery
-    display           :large
-    type              'ArticlePost'
-    draft             true
+    sequence(:title)    { |n| "post#{n}" }
+    sequence(:slug)     { |n| "post-#{n}" }
+    short_description   'This is a short description of the post that is long enough'
+    copyright_owner     :'CareerBuilder, LLC'
+    job_phase           :discovery
+    display             :large
+    type                'ArticlePost'
+    draft               true
+    published_at        DateTime.now
+    industries          []
+    primary_industry_id 1
+    categories          []
+    primary_category_id 1
     author
     user
 
@@ -17,16 +22,21 @@ FactoryGirl.define do
   end
 
   factory :promo, class: 'PromoPost' do
-    sequence(:title)  { |n| "post#{n}" }
-    sequence(:slug)   { |n| "post-#{n}" }
-    short_description 'This is a short description of the post that is long enough'
-    copyright_owner   :'CareerBuilder, LLC'
-    job_phase         :discovery
-    display           :large
-    type              'PromoPost'
-    draft             true
-    destination_url   'Example.com'
-    call_to_action    'Click me'
+    sequence(:title)    { |n| "post#{n}" }
+    sequence(:slug)     { |n| "post-#{n}" }
+    short_description   'This is a short description of the post that is long enough'
+    copyright_owner     :'CareerBuilder, LLC'
+    job_phase           :discovery
+    display             :large
+    type                'PromoPost'
+    draft               true
+    published_at        DateTime.now
+    industries          []
+    primary_industry_id 1
+    categories          []
+    primary_category_id 1
+    destination_url     'Example.com'
+    call_to_action      'Click me'
     author
     user
   end

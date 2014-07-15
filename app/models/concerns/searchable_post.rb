@@ -77,7 +77,7 @@ module SearchablePost
   module ClassMethods
     def search_with_params(params, published = nil)
       query = { query_string: { default_field: "_all", query: self.query_massage(params[:q]) } }
-      sort = { created_at: :desc }
+      sort = { published_at: :desc }
 
       categories = params[:categories]
       job_phase  = params[:job_phase]

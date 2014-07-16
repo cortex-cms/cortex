@@ -16,11 +16,52 @@
             <i class="fa fa-sitemap"></i> Publish/Distribute
           </div>
           <div class="content">
-            <div class="actions btn-group">
-              <button type="button" class="cancel" ng-click="cancel()">
+            <div class="form-group">
+              <label for="draft">Publishing State</label>
+              <div class="btn-group draft row" data-toggle="buttons">
+                  <label class="btn btn-default" ng-model="data.post.draft" btn-radio="true"><i class="fa fa-paperclip"></i> Draft
+                  </label>
+                  <label class="btn btn-default" ng-model="data.post.draft" btn-radio="false"><i class="fa fa-file-text"></i> Publish
+                  </label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="publish-date">
+                <label for="publish-date">Publish At</label>
+                <div class="input-group">
+                  <input id="publish-date" name="publish-date" type="text" class="form-control"
+                         ng-model="data.post.published_at" placeholder="Publish time (optional)"
+                         datepicker-popup="{{datepicker.format}}" is-open="datepicker.publishAtOpen"
+                         show-weeks="false" ng-disabled="data.post.draft">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button"
+                          ng-click="datepicker.open('publishAtOpen')" ng-disabled="data.post.draft">
+                    <i class="fa fa-calendar"></i>
+                  </button>
+                </span>
+                </div>
+              </div>
+              <div class="expiration-date">
+                <label for="expiration-date">Expire Post At (optional)</label>
+                <div class="input-group">
+                  <input id="expiration-date" name="expiration-date" type="text" class="form-control"
+                         ng-model="data.post.expired_at" placeholder="Expiration time (optional)"
+                         datepicker-popup="{{datepicker.format}}" is-open="datepicker.expireAtOpen"
+                         show-weeks="false" ng-disabled="data.post.draft">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"
+                            ng-click="datepicker.open('expireAtOpen')" ng-disabled="data.post.draft">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="actions btn-group row">
+              <button type="button" class="btn cancel" ng-click="cancel()">
                 <i class="fa fa-reply"></i> Cancel
               </button>
-              <button type="submit" class="submit">
+              <button type="submit" class="btn submit">
                 <i class="fa fa-cloud-upload"></i> Submit
               </button>
             </div>

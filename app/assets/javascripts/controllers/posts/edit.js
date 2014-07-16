@@ -12,6 +12,10 @@ angular.module('cortex.controllers.posts.edit', [
 
 .controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, flash, _, cortex, post, filters, categoriesHierarchy, currentUser, PostBodyEditorService) {
 
+  $scope.$watch('data.post.draft', function(val) {
+    console.log(val);
+  });
+
   $scope.data = {
     savePost: function() {
       // Find selected categories
@@ -93,9 +97,16 @@ angular.module('cortex.controllers.posts.edit', [
   initializePost();
 
   // angular-bootstrap datetimepicker settings
-  $scope.datetimepicker = {
-    format: 'MMMM Do YYYY, h:mm:ss a'
-  };
+      $scope.datepicker = {
+        format: 'MMMM dd yyyy, h:mm:ss a',
+        expireAtOpen: false,
+        publishAtOpen: false,
+        open: function(datepicker) {
+          $timeout(function(){
+            $scope.datepicker[datepicker] = true;
+          });
+        }
+      };
 
   $scope.postScheduling = {
     now: function() {

@@ -42,6 +42,5 @@ angular.module('cortex.controllers.posts.edit.info', [
           }
       );
     }
-      
     delayedBind($scope, 'data.post.slug', 1000, slugCheck);
 });

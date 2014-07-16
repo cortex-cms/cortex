@@ -324,7 +324,7 @@ angular.module('cortex.states', [
       }
     })
 
-    .state('cortex.posts.edit.media.manage.components', {
+    .state('cortex.posts.edit.sections.article.media.manage.components', {
       url: '/:page/:perPage/:query',
       views: {
         'media-grid': {

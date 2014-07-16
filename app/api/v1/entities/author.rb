@@ -1,7 +1,8 @@
 module API::V1
   module Entities
     class Author < Grape::Entity
-      expose :name, :email, :title, :bio, :personal, :twitter, :facebook, :google, :avatars
+      expose :firstname, :lastname, :email, :title, :bio, :personal, :twitter, :facebook, :google,
+             :avatars, :fullname
     end
   end
 end

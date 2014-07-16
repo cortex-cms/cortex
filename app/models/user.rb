@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include HasGravatar
+  include HasFirstnameLastname
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -28,10 +29,6 @@ class User < ActiveRecord::Base
 
   def profile
     @profile ||= UserProfile.find_or_create_by(:user_id => self.id)
-  end
-
-  def fullname
-    lastname.to_s == '' ? firstname : "#{firstname} #{lastname}"
   end
 
   def to_json(options={})

@@ -1,46 +1,65 @@
-<div class="headline-group">
-  <label>Headline</label>
+<div class="headline form-group has-feedback" show-errors>
+  <label class="control-label">Headline</label>
 
-  <div class="headline-input-group">
-    <div class="addon"><i class="fa fa-header"></i></div>
-    <input type="text" class="control" ng-model="data.post.title">
-  </div>
-</div>
-
-
-<div class="destination-url-group">
-  <label>Destination URL</label>
-
-  <div class="destination-url-input-group">
-    <div class="addon"><i class="fa fa-link"></i></div>
-    <input type="text" class="control" ng-model="data.post.destination_url" placeholder="Destination URL for this promo (required)">
-  </div>
-</div>
-
-
-<div class="call-to-action-group">
-  <label>Call to Action</label>
-
-  <div class="call-to-action-input-group">
-    <div class="addon"><i class="fa fa-magic"></i></div>
-    <input type="text" class="control"
-              ng-model="data.post.call_to_action"
-              placeholder="Call to Action text (required)">
-  </div>
-</div>
-
-<div class="author-group">
-  <label>Author</label>
-
-  <div class="author-input-group">
-    <div class="addon"><i class="fa fa-user"></i></div>
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-header"></i></div>
     <input type="text"
-           class="control"
+           class="form-control"
+           ng-model="data.post.title"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+    <span class="fa fa-asterisk form-control-feedback"></span>
+  </div>
+</div>
+
+
+<div class="form-group has-feedback">
+  <label class="control-label">Destination URL</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-link"></i></div>
+    <input type="text"
+           class="form-control"
+           ng-model="data.post.destination_url"
+           placeholder="Destination URL for this promo (required)"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+    <span class="fa fa-asterisk form-control-feedback"></span>
+  </div>
+</div>
+
+
+<div class="form-group has-feedback" show-errors>
+  <label class="control-label">Call to Action</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-magic"></i></div>
+    <input type="text"
+           class="form-control"
+           ng-model="data.post.call_to_action"
+           placeholder="Call to Action text (required)"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+    <span class="fa fa-asterisk form-control-feedback"></span>
+  </div>
+</div>
+
+<div class="form-group has-feedback" show-errors>
+  <label class="control-label">Author</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+    <input type="text"
+           class="form-control"
            placeholder="Enter an author for this post (required)"
            ng-init="data.post.author = data.post.author || currentUser.fullname"
            ng-model="data.post.author"
            ng-minlength="1"
            ng-maxlength="255"
            required>
+    <span class="fa fa-asterisk form-control-feedback"></span>
   </div>
 </div>

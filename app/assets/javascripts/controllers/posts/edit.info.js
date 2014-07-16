@@ -1,7 +1,8 @@
 angular.module('cortex.controllers.posts.edit.info', [
   'cortex.services.cortex',
   'cortex.filters',
-  'cortex.util'
+  'cortex.util',
+  'cortex.directives.showErrors'
 ])
 
 .controller('PostsEditInfoCtrl', function($scope, $filter, cortex, delayedBind) {

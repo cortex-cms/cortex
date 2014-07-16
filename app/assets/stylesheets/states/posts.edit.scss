@@ -98,3 +98,23 @@
     }
   }
 }
+
+.form-group.has-feedback {
+  .input-group {
+    .form-control-feedback {
+      top: 0px;
+    }
+  }
+}
+
+span.has-error {
+  color: red;
+}
+span.has-error i::before {
+  font-family: FontAwesome;
+  content: ' \f071';
+}
+
+tags-input input {
+  width: 100%;
+}

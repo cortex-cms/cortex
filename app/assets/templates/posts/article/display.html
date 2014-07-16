@@ -1,23 +1,23 @@
-<div class="form-group">
+<div class="form-group" show-errors>
   <label>Home Page Display</label>
 
   <div class="btn-group">
     <button type="button"
             class="btn btn-default"
             ng-model="data.post.display"
-            btn-radio="'small'">
+            btn-radio="'small'" required>
       Small
     </button>
     <button type="button"
             class="btn btn-default"
             ng-model="data.post.display"
-            btn-radio="'medium'">
+            btn-radio="'medium'" required>
       Medium
     </button>
     <button type="button"
             class="btn btn-default"
             ng-model="data.post.display"
-            btn-radio="'large'">
+            btn-radio="'large'" required>
       Large
     </button>
   </div>

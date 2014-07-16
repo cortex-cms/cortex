@@ -1,13 +1,21 @@
-<div class="headline form-group">
-  <label>Headline</label>
+<div class="headline form-group has-feedback" show-errors parent-selector=".info-tab">
+  <label class="control-label">Headline</label>
 
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-header"></i></div>
-    <input type="text" class="form-control" ng-model="data.post.title">
+    <input type="text"
+           class="form-control"
+           name="headline"
+           placeholder="Headline for the post"
+           ng-model="data.post.title"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+    <span class="fa fa-asterisk form-control-feedback"></span>
   </div>
 </div>
 
-<div class="slug form-group">
+<div class="slug form-group has-feedback" show-errors>
   <label>Slug</label>
 
   <div class="input-group">
@@ -16,26 +24,35 @@
            ng-init="data.post.slug = data.post.slug || (data.post.title | slugify)"
            placeholder="Unique slug to use in URLs (required)"
            type="text"
+           name="slug"
            class="form-control"
            ng-model="data.post.slug"
+           ng-minlength="1"
            ng-maxlength="255"
            required>
+    <span class="fa fa-asterisk form-control-feedback"></span>
+
   </div>
 </div>
 
-<div class="description form-group">
+<div class="description form-group has-feedback" show-errors>
   <label>Description</label>
 
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-ellipsis-h"></i></div>
     <textarea class="form-control"
+              name="description"
               ng-model="data.post.short_description"
-              placeholder="Enter a short description for the post (required)">
+              ng-minlength="1"
+              ng-maxlength="255"
+              placeholder="Enter a short description for the post (required)" required>
     </textarea>
+    <span class="fa fa-asterisk form-control-feedback"></span>
+
   </div>
 </div>
 
-<div class="author form-group">
+<div class="author form-group has-feedback" show-errors>
   <label>Author</label>
 
   <div class="input-group">
@@ -44,24 +61,30 @@
            class="form-control"
            placeholder="Enter an author for this post (required)"
            ng-init="data.post.author = data.post.author || currentUser.fullname"
+           name="author"
            ng-model="data.post.author"
            ng-minlength="1"
            ng-maxlength="255"
            required>
+    <span class="fa fa-asterisk form-control-feedback"></span>
+
   </div>
 </div>
 
-<div class="copyright-owner form-group">
+<div class="copyright-owner form-group has-feedback" show-errors>
   <label>Copyright Owner</label>
 
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
     <input type="text"
            class="form-control"
+           name="Copyright Owner"
            placeholder="Enter a copyright owner for this post (required)"
            ng-model="data.post.copyright_owner"
            ng-minlength="1"
            ng-maxlength="255"
            required>
+    <span class="fa fa-asterisk form-control-feedback"></span>
+
   </div>
 </div>

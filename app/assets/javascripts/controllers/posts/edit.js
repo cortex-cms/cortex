@@ -12,10 +12,6 @@ angular.module('cortex.controllers.posts.edit', [
 
 .controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, flash, _, cortex, post, filters, categoriesHierarchy, currentUser, PostBodyEditorService) {
 
-  $scope.$watch('data.post.draft', function(val) {
-    console.log(val);
-  });
-
   $scope.data = {
     savePost: function() {
       // Find selected categories

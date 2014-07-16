@@ -61,7 +61,7 @@
               <button type="button" class="btn cancel" ng-click="cancel()">
                 <i class="fa fa-reply"></i> Cancel
               </button>
-              <button type="submit" class="btn submit">
+              <button type="submit" class="btn submit" ng-disabled="postForm.$invalid">
                 <i class="fa fa-cloud-upload"></i> Submit
               </button>
             </div>
@@ -74,7 +74,7 @@
       <div class="metadata-column">
         <tabset class="panel-tabs" justified="true">
           <tab>
-            <tab-heading><i class="fa fa-info-circle"></i> Info</tab-heading>
+            <tab-heading><span class="info-tab"><i class="fa fa-info-circle"></i> Info</span></tab-heading>
 
             <div class="info">
               <div class="post-type-group">
@@ -100,21 +100,21 @@
             </div>
           </tab>
           <tab>
-            <tab-heading><i class="fa fa-tag"></i> Classify</tab-heading>
+            <tab-heading><span class="classify-tab"><i class="fa fa-tag"></i> Classify</span></tab-heading>
 
             <div class="classify">
               <div ui-view="classify"></div>
             </div>
           </tab>
           <tab>
-            <tab-heading><i class="fa fa-eye"></i> Display</tab-heading>
+            <tab-heading><span class="display-tab"><i class="fa fa-eye"></i> Display</span></tab-heading>
 
             <div class="display">
               <div ui-view="display"></div>
             </div>
           </tab>
           <tab>
-            <tab-heading><i class="fa fa-search"></i> SEO</tab-heading>
+            <tab-heading><span class="seo-tab"><i class="fa fa-search"></i> SEO</span></tab-heading>
 
             <div class="seo">
               <div ui-view="seo"></div>

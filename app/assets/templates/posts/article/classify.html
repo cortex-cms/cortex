@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group has-feedback" show-errors>
   <label>Career Phase</label>
 
   <div class="input-group">
@@ -36,10 +36,10 @@
   </div>
 </div>
 
-<div class="tags">
+<div class="tags form-group">
   <label>Post Tags</label>
 
-  <div class="tags-group">
+  <div class="input-group">
     <div class="tagger">
       <tags-input display-property="name"
                   type="text"
@@ -49,11 +49,11 @@
         <auto-complete source="loadTags($query)"></auto-complete>
       </tags-input>
     </div>
-    <div class="popular-tags" on-toggle="toggled(open)">
-      <button class="toggle" type="button">
+    <span class="input-group-btn" dropdown>
+      <button class="btn btn-default dropdown-toggle" type="button">
         Popular <span class="caret"></span>
       </button>
-      <ul class="menu">
+      <ul class="dropdown-menu">
         <li ng-repeat="tag in data.popularTags">
           <a ng-click="addTag(tag)">{{ tag.name }} <span class="pull-right">{{ tag.count }}</span></a>
         </li>

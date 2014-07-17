@@ -1,39 +1,52 @@
 angular.module('cortex.directives.showErrors', [])
 
-.directive('showErrors', function ($filter) {
+.factory('errorCounter', function() {
+  return {}
+})
+
+.directive('showErrors', function (errorCounter, $rootScope) {
   return {
     restrict: 'A',
     require: '^form',
     link: function (scope, el, attrs, formCtrl) {
-      // find the text box element, which has the 'name' attribute
       var inputEl = el[0].querySelector("[name]");
-      // convert the native text box element to an angular element
       var inputNgEl = angular.element(inputEl);
-      // get the name on the text box
       var inputName = inputNgEl.attr('name');
 
       var toggleErrors = function() {
         var invalid = formCtrl[inputName].$invalid;
-        var origStateIsInvalid = el.hasClass('has-error');
         el.toggleClass('has-error', invalid);
         var parentSelector = attrs['parentSelector'];
         if (parentSelector) {
-          var pe = angular.element(parentSelector);
-          var errors = parseInt(pe.attr('data-validation-errors'));
-          if (origStateIsInvalid && !invalid) {
-            errors -= 1;
-            pe.attr('data-validation-errors', errors);
+          var errors = errorCounter[parentSelector] || {};
+          if (invalid) {
+            errors[inputName] = true;
           }
-          else if (!origStateIsInvalid && invalid) {
-            errors += 1;
-            pe.attr('data-validation-errors', errors);
+          else if (!invalid) {
+            delete errors[inputName];
           }
+          errorCounter[parentSelector] = errors;
         }
+        $rootScope.$broadcast('errorCountChange');
       };
 
-      // only apply the has-error class after the user leaves the text box
-      inputNgEl.bind('blur select change', toggleErrors);
+      inputNgEl.on('blur select change', toggleErrors);
       scope.$on('validate', toggleErrors);
+    }
+  }
+})
+.directive('tabErrors', function(errorCounter) {
+  return {
+    restrict: 'A',
+    link: function(scope, el, attrs) {
+     scope.$on('errorCountChange', function() {
+       var name = attrs.selectorName;
+       var obj = errorCounter[name];
+       if (typeof obj === 'object') {
+         var count = Object.keys(obj).length;
+         el.toggleClass('has-error', count > 0);
+       }
+     });
     }
   }
 });

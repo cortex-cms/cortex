@@ -33,16 +33,16 @@
 </div>
 
 <div class="description form-group" show-errors data-parent-selector=".info-tab">
-  <label>Description*</label>
+  <label>Description* <small class="help-block" ng-show="!postForm.description.$pristine && postForm.description.$error.minlength">Please enter a description of at least 25 characters</small></label>
 
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-ellipsis-h"></i></div>
     <textarea class="form-control"
               name="description"
               ng-model="data.post.short_description"
-              ng-minlength="1"
+              ng-minlength="25"
               ng-maxlength="255"
-              placeholder="Enter a short description for the post (required)" required>
+              placeholder="Enter a short description for the post of at least 25 characters (required)" required>
     </textarea>
   </div>
 </div>

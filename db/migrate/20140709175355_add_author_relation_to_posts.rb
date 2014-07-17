@@ -10,8 +10,7 @@ class AddAuthorRelationToPosts < ActiveRecord::Migration
 
   def down
     add_column :posts, :author, :string
-    execute 'UPDATE posts SET author=authors.name FROM posts p, authors a WHERE p.author_id=a.id'
+    execute 'UPDATE posts SET author=a.name FROM posts p, authors a WHERE p.author_id=a.id'
     remove_column :posts, :author_id
-    remove_index :posts, :author_id
   end
 end

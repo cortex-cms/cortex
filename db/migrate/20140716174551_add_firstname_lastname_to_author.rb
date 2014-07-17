@@ -8,7 +8,7 @@ class AddFirstnameLastnameToAuthor < ActiveRecord::Migration
 
   def down
     add_column :authors, :name, :string
-    execute "UPDATE authors SET name=firstname + ' ' + lastname"
+    execute "UPDATE authors SET name=firstname || ' ' || lastname"
     remove_column :authors, :firstname, :string
     remove_column :authors, :lastname, :string
   end

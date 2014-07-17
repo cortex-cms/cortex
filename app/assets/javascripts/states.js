@@ -15,7 +15,8 @@ angular.module('cortex.states', [
   'cortex.controllers.posts.grid',
   'cortex.controllers.posts.popup',
   'cortex.controllers.tenants.edit',
-  'cortex.controllers.tenants.manage'
+  'cortex.controllers.tenants.manage',
+  'cortex.controllers.users.edit'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -376,6 +377,44 @@ angular.module('cortex.states', [
       template: '<div class="container">Here ly thy beast, Permissions</div>',
       data: {
         ncyBreadcrumbLabel: 'Roles/Permissions'
+      }
+    })
+
+    .state('cortex.users', {
+      url: '/users',
+      abstract: true,
+      template: '<ui-view/>'
+    })
+
+    .state('cortex.users.edit', {
+      url: '/:userId',
+      templateUrl: 'users/edit.html',
+      controller: 'UsersEditCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Users/Edit'
+      },
+      resolve: {
+        user: ['$stateParams', 'cortex', function($stateParams, cortex) {
+          return cortex.users.get({id: $stateParams.userId});
+        }],
+        author: ['$stateParams', '$q', 'cortex', function($stateParams, $q, cortex) {
+          var defer = $q.defer();
+
+          // Resolve the user's author information or create a new userAuthor resource
+          cortex.userAuthor.get({user_id: $stateParams.userId}).$promise
+            .then(function(author) {
+              author.user_id = $stateParams.userId;
+              defer.resolve(author);
+            }, function(response) {
+              if (response.status === 404) {
+                defer.resolve(new cortex.userAuthor({user_id: $stateParams.userId}));
+              } else {
+                defer.reject(response);
+              }
+            });
+
+          return defer.promise;
+        }]
       }
     });
 });

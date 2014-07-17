@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 20140716174551) do
     t.integer  "tile_media_id"
     t.hstore   "meta"
     t.string   "type",                default: "Post", null: false
-    t.integer  "author_id",                            null: false
+    t.integer  "author_id"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree

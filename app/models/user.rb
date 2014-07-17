@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
   belongs_to :tenant
+  has_one :author
   has_many :media
   has_many :tenants
   has_many :posts, through: :authors

@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :tenants
   has_many :posts, through: :authors
 
+  after_create :add_author
+
   validates_presence_of :email
 
   def anonymous?
@@ -47,6 +49,12 @@ class User < ActiveRecord::Base
     def anonymous
       User.new
     end
+  end
+
+  private
+
+  def add_author
+    author = Author.create(user_id: id, firstname: firstname, lastname: lastname, email: email)
   end
 end
 

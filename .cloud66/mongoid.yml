@@ -9,3 +9,6 @@ development:
 
 production:
   <<: *default
+
+staging:
+  <<: *default

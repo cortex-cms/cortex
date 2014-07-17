@@ -4,21 +4,16 @@ angular.module('cortex.controllers.posts.edit.display', [
   'cortex.services.mediaConstraints'
 ])
 
-.controller('PostsEditDisplayCtrl', function($scope, $state, PostBodyEditorService, PostsPopupService, mediaSelectType, featuredMediaConstraintsService, tileMediaConstraintsService) {
+.controller('PostsEditDisplayCtrl', function($scope, $state,
+                                             AddMediaService, mediaSelectType, PostBodyEditorService, PostsPopupService,
+                                             featuredMediaConstraintsService, tileMediaConstraintsService) {
 
     $scope.postBodyEditorService = PostBodyEditorService;
     $scope.postBodyEditorService.media.featured = $scope.data.post.featured_media;
     $scope.postBodyEditorService.media.tile = $scope.data.post.tile_media;
 
-
-    var setMedia = function(type, title) {
-      $scope.postBodyEditorService.mediaSelectType = type;
-      PostsPopupService.title = title;
-      $state.go('.media.manage.components');
-    };
-
     $scope.setFeaturedMedia = function () {
-      setMedia(mediaSelectType.SET_FEATURED, 'Set Featured Media from Media Library');
+      AddMediaService.setMedia(mediaSelectType.SET_FEATURED, 'Set Featured Media from Media Library');
     };
 
     $scope.removeFeaturedMedia = function () {
@@ -28,7 +23,7 @@ angular.module('cortex.controllers.posts.edit.display', [
     };
 
     $scope.setTileMedia = function () {
-      setMedia(mediaSelectType.SET_TILE, 'Set Tile Media from Media Library');
+      AddMediaService.setMedia(mediaSelectType.SET_TILE, 'Set Tile Media from Media Library');
     };
 
     $scope.removeTileMedia = function () {

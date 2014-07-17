@@ -7,10 +7,12 @@ angular.module('cortex.controllers.posts.edit', [
   'angular-flash.service',
   'angular-redactor',
   'cortex.services.cortex',
+  'cortex.services.addMedia',
   'cortex.vendor.underscore'
 ])
 
-.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, flash, _, cortex, post, filters, categoriesHierarchy, currentUser, PostBodyEditorService) {
+.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, flash, _,
+                                      cortex, post, filters, categoriesHierarchy, currentUser, AddMediaService) {
 
   $scope.$watch('data.post.draft', function(val) {
     console.log(val);
@@ -43,22 +45,7 @@ angular.module('cortex.controllers.posts.edit', [
     ]
   };
 
-  var initializePost  = function() {
-    $scope.$watch('data.post.job_phase', function(phase) {
-
-      if (phase === undefined) {
-        $scope.data.jobPhaseCategories = [];
-        return;
-      }
-
-      var jobPhaseCategory = _.find($scope.data.categories, function(category) {
-        var normalizedPhaseName = category.name.split(' ').join('_').toLowerCase();
-        return normalizedPhaseName == phase;
-      });
-
-      $scope.data.jobPhaseCategories = jobPhaseCategory.children;
-    });
-  };
+  AddMediaService.initRedactorWithMedia();
 
   if (post) {
     $scope.data.post = post;
@@ -94,19 +81,38 @@ angular.module('cortex.controllers.posts.edit', [
     $scope.data.categories = categoriesHierarchy;
     $scope.data.post.tag_list = '';
   }
-  initializePost();
+
+  $scope.$watch('data.post.job_phase', function(phase) {
+    if (phase === undefined) {
+      $scope.data.jobPhaseCategories = [];
+      return;
+    }
+
+    var jobPhaseCategory = _.find($scope.data.categories, function(category) {
+      var normalizedPhaseName = category.name.split(' ').join('_').toLowerCase();
+      return normalizedPhaseName == phase;
+    });
+
+    $scope.data.jobPhaseCategories = jobPhaseCategory.children;
+  });
+
+  $scope.redactorOptions = {
+    plugins: ['media'],
+    toolbarFixedBox: true,
+    minHeight: 800
+  };
 
   // angular-bootstrap datetimepicker settings
-      $scope.datepicker = {
-        format: 'MMMM dd yyyy, h:mm:ss a',
-        expireAtOpen: false,
-        publishAtOpen: false,
-        open: function(datepicker) {
-          $timeout(function(){
-            $scope.datepicker[datepicker] = true;
-          });
-        }
-      };
+  $scope.datepicker = {
+    format: 'MMMM dd yyyy, h:mm:ss a',
+    expireAtOpen: false,
+    publishAtOpen: false,
+    open: function(datepicker) {
+      $timeout(function(){
+        $scope.datepicker[datepicker] = true;
+      });
+    }
+  };
 
   $scope.postScheduling = {
     now: function() {
@@ -115,34 +121,5 @@ angular.module('cortex.controllers.posts.edit', [
     scheduled: function() {
       $scope.data.post.published_at = null || $scope.data.post.published_at;
     }
-  };
-
-  $scope.postBodyEditorService = PostBodyEditorService;
-
-  if (!$window.RedactorPlugins) {
-    $window.RedactorPlugins = {};
-  }
-
-  $window.RedactorPlugins.media = {
-    init: function()
-    {
-      this.buttonAdd('media', 'Media', this.addMediaPopup);
-      this.buttonAwesome('media', 'fa-picture-o');
-
-      this.buttonRemove('image');
-      this.buttonRemove('video');
-
-      PostBodyEditorService.redactor = this;
-    },
-    addMediaPopup: function()
-    {
-      setMedia(mediaSelectType.ADD_MEDIA, 'Insert Media from Media Library');
-    }
-  };
-
-  $scope.redactorOptions = {
-    plugins: ['media'],
-    toolbarFixedBox: true,
-    minHeight: 800
   };
 });

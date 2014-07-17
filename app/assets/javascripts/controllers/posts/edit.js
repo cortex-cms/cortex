@@ -11,15 +11,16 @@ angular.module('cortex.controllers.posts.edit', [
   'cortex.vendor.underscore'
 ])
 
-.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, flash, _,
+.controller('PostsEditCtrl', function($scope, $rootScope, $state, $stateParams, $window, $timeout, $q, flash, _,
                                       cortex, post, filters, categoriesHierarchy, currentUser, AddMediaService) {
-
-  $scope.$watch('data.post.draft', function(val) {
-    console.log(val);
-  });
 
   $scope.data = {
     savePost: function() {
+      $scope.$broadcast('validate');
+      if ($scope.postForm.$invalid) {
+        angular.element('.form-status').toggleClass('hidden', !$scope.postForm.$invalid);
+        return;
+      }
       // Find selected categories
       var selectedCategories = _.filter($scope.data.jobPhaseCategories, function(category) { return category.$selected; });
       $scope.data.post.category_ids = _.map(selectedCategories, function(category) { return category.id; });
@@ -44,6 +45,10 @@ angular.module('cortex.controllers.posts.edit', [
       false
     ]
   };
+
+  $scope.$watch('data.post.draft', function(draft) {
+    $scope.submitButton = draft ? "Save" : "Post";
+  });
 
   AddMediaService.initRedactorWithMedia();
 

@@ -37,7 +37,7 @@
             }
 
             .actions {
-              @include make-md-column(12);
+              @include make-md-column(6);
 
               button.cancel {
                 @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
@@ -45,6 +45,14 @@
 
               button.submit {
                 @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+              }
+            }
+
+            .form-status {
+              @include make-md-column(6);
+              color: $brand-danger;
+              &.hidden {
+                display: none;
               }
             }
 
@@ -98,3 +106,28 @@
     }
   }
 }
+
+.form-group.has-feedback {
+  .input-group {
+    .form-control-feedback {
+      top: 0px;
+    }
+  }
+}
+
+span.has-error {
+  color: red;
+}
+span.has-error i::before {
+  font-family: FontAwesome;
+  content: ' \f071';
+}
+
+tags-input input {
+  width: 100%;
+}
+
+.form-control-feedback.select-feedback {
+   pointer-events: none;
+   right: 15px;
+ }

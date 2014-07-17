@@ -19,9 +19,9 @@
             <div class="form-group">
               <label for="draft">Publishing State</label>
               <div class="btn-group draft row" data-toggle="buttons">
-                  <label class="btn btn-default" ng-model="data.post.draft" btn-radio="true"><i class="fa fa-paperclip"></i> Draft
+                  <label class="btn btn-default" ng-model="data.post.draft" btn-radio="true" ng-class="{'active': data.post.draft}"><i class="fa fa-paperclip"></i> Draft
                   </label>
-                  <label class="btn btn-default" ng-model="data.post.draft" btn-radio="false"><i class="fa fa-file-text"></i> Publish
+                  <label class="btn btn-default" ng-model="data.post.draft" btn-radio="false" ng-class="{'active': !data.post.draft}"><i class="fa fa-file-text"></i> Publish
                   </label>
               </div>
             </div>
@@ -57,13 +57,16 @@
                 </div>
               </div>
             </div>
-            <div class="actions btn-group row">
-              <button type="button" class="btn cancel" ng-click="cancel()">
-                <i class="fa fa-reply"></i> Cancel
-              </button>
-              <button type="submit" class="btn submit" ng-disabled="postForm.$invalid">
-                <i class="fa fa-cloud-upload"></i> Submit
-              </button>
+            <div class="row">
+              <div class="actions btn-group">
+                <button type="button" class="btn cancel" ng-click="cancel()">
+                  <i class="fa fa-reply"></i> Cancel
+                </button>
+                <button type="submit" class="btn submit" >
+                  <i class="fa fa-cloud-upload"></i> {{submitButton}}
+                </button>
+              </div>
+              <div class="form-status hidden">Please fill out the required fields, marked with a *</div>
             </div>
           </div>
         </div>
@@ -74,7 +77,7 @@
       <div class="metadata-column">
         <tabset class="panel-tabs" justified="true">
           <tab>
-            <tab-heading><span class="info-tab"><i class="fa fa-info-circle"></i> Info</span></tab-heading>
+            <tab-heading><span class="info-tab" data-validation-errors="0" ng-class="{ 'has-error': angular.element(self).attr('data-validation-errors')}"><i class="fa fa-info-circle"></i> Info</span></tab-heading>
 
             <div class="info">
               <div class="post-type-group">
@@ -82,16 +85,16 @@
 
                 <div class="btn-group btn-group-justified" data-toggle="buttons">
                   <label class="btn btn-default" for="post-type" ui-sref=".sections.article" ui-sref-active="active">
-                    <input type="radio" name="post-type" id="ArticlePost"/><i class="fa fa-quote-right"></i> Article
+                    <input type="radio" name="post-type" id="ArticlePost"/><i class="fa fa-quote-right hidden-md hidden-sm hidden-xs"></i> Article
                   </label>
                   <label class="btn btn-default" for="post-type" ui-sref=".sections.video" ui-sref-active="active">
-                    <input type="radio" name="post-type" id="VideoPost"/><i class="fa fa-video-camera"></i> Video
+                    <input type="radio" name="post-type" id="VideoPost"/><i class="fa fa-video-camera hidden-md hidden-sm hidden-xs"></i> Video
                   </label>
                   <label class="btn btn-default" for="post-type" ui-sref=".sections.infographic" ui-sref-active="active">
-                    <input type="radio" name="post-type" id="InfographicPost"/><i class="fa fa-picture-o"></i> Infographic
+                    <input type="radio" name="post-type" id="InfographicPost"/><i class="fa fa-picture-o hidden-md hidden-sm hidden-xs"></i> Infographic
                   </label>
                   <label class="btn btn-default" for="post-type" ui-sref=".sections.promo" ui-sref-active="active">
-                    <input type="radio" name="post-type" id="PromoPost"/><i class="fa fa-bullhorn"></i> Promo
+                    <input type="radio" name="post-type" id="PromoPost"/><i class="fa fa-bullhorn hidden-md hidden-sm hidden-xs"></i> Promo
                   </label>
                 </div>
               </div>
@@ -114,7 +117,7 @@
             </div>
           </tab>
           <tab>
-            <tab-heading><span class="seo-tab"><i class="fa fa-search"></i> SEO</span></tab-heading>
+            <tab-heading data-content-class="seo"><span class="seo-tab"><i class="fa fa-search"></i> SEO</span></tab-heading>
 
             <div class="seo">
               <div ui-view="seo"></div>
@@ -130,16 +133,16 @@
 
               <div class="btn-group btn-group-justified" data-toggle="buttons">
                 <label class="btn btn-default" ui-sref=".sections.article" ui-sref-active="active">
-                  <input type="radio" id="article"/><i class="fa fa-quote-right"></i> Article
+                  <input type="radio" id="article"/><i class="fa fa-quote-right hidden-md hidden-sm hidden-xs"></i> Article
                 </label>
                 <label class="btn btn-default" ui-sref=".sections.video" ui-sref-active="active">
-                  <input type="radio" id="Video"/><i class="fa fa-video-camera"></i> Video
+                  <input type="radio" id="Video"/><i class="fa fa-video-camera hidden-md hidden-sm hidden-xs"></i> Video
                 </label>
                 <label class="btn btn-default" ui-sref=".sections.infographic" ui-sref-active="active">
-                  <input type="radio" id="infographic"/><i class="fa fa-picture-o"></i> Infographic
+                  <input type="radio" id="infographic"/><i class="fa fa-picture-o hidden-md hidden-sm hidden-xs"></i> Infographic
                 </label>
                 <label class="btn btn-default" ui-sref=".sections.promo" ui-sref-active="active">
-                  <input type="radio" id="promo"/><i class="fa fa-bullhorn"></i> Promo
+                  <input type="radio" id="promo"/><i class="fa fa-bullhorn hidden-md hidden-sm hidden-xs"></i> Promo
                 </label>
               </div>
             </div>

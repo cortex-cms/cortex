@@ -1,9 +1,10 @@
-<div class="form-group has-feedback" show-errors>
-  <label>Career Phase</label>
+<div class="form-group" show-errors data-parent-selector=".classify-tab">
+  <label>Career Phase*</label>
 
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-compass"></i></div>
     <select class="form-control"
+            name="job_phase"
             ng-model="data.post.job_phase"
             ng-options="(phase | humanize) for phase in data.phases"
             required>

@@ -1,25 +1,29 @@
-<div class="form-group" show-errors>
-  <label>Home Page Display</label>
-
-  <div class="btn-group">
-    <button type="button"
-            class="btn btn-default"
-            ng-model="data.post.display"
-            btn-radio="'small'" required>
-      Small
-    </button>
-    <button type="button"
-            class="btn btn-default"
-            ng-model="data.post.display"
-            btn-radio="'medium'" required>
-      Medium
-    </button>
-    <button type="button"
-            class="btn btn-default"
-            ng-model="data.post.display"
-            btn-radio="'large'" required>
-      Large
-    </button>
+<div class="form-group" show-errors data-parent-selector=".display-tab">
+  <label>Home Page Display*</label>
+  <div class="input-group">
+    <div class="btn-group">
+      <button type="button"
+              name="display"
+              class="btn btn-default"
+              ng-model="data.post.display"
+              btn-radio="'small'" required>
+        Small
+      </button>
+      <button type="button"
+              name="display"
+              class="btn btn-default"
+              ng-model="data.post.display"
+              btn-radio="'medium'" required>
+        Medium
+      </button>
+      <button type="button"
+              name="display"
+              class="btn btn-default"
+              ng-model="data.post.display"
+              btn-radio="'large'" required>
+        Large
+      </button>
+    </div>
   </div>
 </div>
 

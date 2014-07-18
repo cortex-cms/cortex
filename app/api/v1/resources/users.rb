@@ -21,14 +21,6 @@ module API::V1
           present user.author || not_found!, with: Entities::Author
         end
 
-        desc 'Show a user'
-        get ':user_id' do
-          require_scope! :'view:users'
-          authorize! :view, user!
-
-          present user, with: Entities::User
-        end
-
         desc "Save a user's author info"
         params do
           optional :email
@@ -40,7 +32,7 @@ module API::V1
           optional :google
           optional :bio
         end
-        post ':user_id/author' do
+        put ':user_id/author' do
           require_scope! :'modify:users'
           authorize! :update, user!
 
@@ -49,6 +41,14 @@ module API::V1
           author.save!
 
           present author, with: Entities::Author
+        end
+
+        desc 'Show a user'
+        get ':user_id' do
+          require_scope! :'view:users'
+          authorize! :view, user!
+
+          present user, with: Entities::User
         end
       end
     end

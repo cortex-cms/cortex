@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140709174247) do
+ActiveRecord::Schema.define(version: 20140718145229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,8 +160,10 @@ ActiveRecord::Schema.define(version: 20140709174247) do
     t.integer  "tile_media_id"
     t.hstore   "meta"
     t.string   "type",                default: "Post", null: false
+    t.integer  "author_id"
   end
 
+  add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
   add_index "posts", ["type"], name: "index_posts_on_type", using: :btree
 

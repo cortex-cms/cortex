@@ -120,6 +120,9 @@ angular.module('cortex.states', [
         }],
         filters: ['cortex', function(cortex) {
           return cortex.posts.filters().$promise;
+        }],
+        currentUserAuthor: ['cortex', 'currentUser', function(cortex, currentUser) {
+          return cortex.userAuthor.get({user_id: currentUser.id}).$promise;
         }]
       },
       data: {
@@ -140,6 +143,9 @@ angular.module('cortex.states', [
         }],
         filters: ['cortex', function(cortex) {
           return cortex.posts.filters().$promise;
+        }],
+        currentUserAuthor: ['cortex', 'currentUser', function(cortex, currentUser) {
+          return cortex.userAuthor.get({user_id: currentUser.id}).$promise;
         }]
       },
       data: {

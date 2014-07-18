@@ -24,6 +24,7 @@ module API::V1
         optional :seo_description
         optional :seo_preview
         optional :author_id
+        optional :custom_author
         optional :tag_list
         optional :primary_category_id
         optional :category_ids

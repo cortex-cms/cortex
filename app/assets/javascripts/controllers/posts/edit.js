@@ -15,7 +15,10 @@ angular.module('cortex.controllers.posts.edit', [
   'cortex.services.mediaConstraints'
 ])
 
-.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter, flash, _, cortex, mediaSelectType, post, filters, categoriesHierarchy, currentUser, PostBodyEditorService, PostsPopupService, featuredMediaConstraintsService, tileMediaConstraintsService) {
+.controller('PostsEditCtrl', function($scope, $state, $stateParams, $window, $timeout, $q, $filter,
+  flash, _, cortex, mediaSelectType, post, filters, categoriesHierarchy, currentUser,
+  PostBodyEditorService, PostsPopupService, featuredMediaConstraintsService, currentUserAuthor,
+  tileMediaConstraintsService) {
 
   $scope.data = {
     savePost: function() {
@@ -25,6 +28,13 @@ angular.module('cortex.controllers.posts.edit', [
       $scope.data.post.primary_category_id = $scope.data.post.category_ids[0];
       $scope.data.post.industry_ids = [$scope.data.post.primary_industry_id];
       $scope.data.post.tag_list = $scope.data.post.tag_list.map(function(tag) { return tag.name; });
+
+      if ($scope.data.authorIsUser) {
+        $scope.data.post.custom_author = null;
+        $scope.data.post.author_id = currentUserAuthor.id;
+      } else {
+        $scope.data.post.author_id = null;
+      }
 
       $scope.data.post.$save(function(post) {
         flash.success = 'Saved "' + post.title + '"';
@@ -64,6 +74,10 @@ angular.module('cortex.controllers.posts.edit', [
   if (post) {
     $scope.data.post = post;
 
+    if ($scope.data.post.author) {
+      $scope.data.authorIsUser = true;
+    }
+
     if ($scope.data.post.industry) {
       $scope.data.post.industry_id = $scope.data.post.industry.id;
     }
@@ -94,6 +108,7 @@ angular.module('cortex.controllers.posts.edit', [
     $scope.data.post.copyright_owner = $scope.data.post.copyright_owner || "CareerBuilder, LLC";
     $scope.data.categories = categoriesHierarchy;
     $scope.data.post.tag_list = '';
+    $scope.data.authorIsUser = true;
   }
   initializePost();
 
@@ -249,6 +264,12 @@ angular.module('cortex.controllers.posts.edit', [
       if (!tileMediaConstraintsService.aspectratio(media)) {
         $scope.data.post.tile_media_warnings.push("Warning! Your tile media might not display properly, as it does not match our recommended aspect ratio. Try 1:1 or 4:3.");
       }
+    }
+  });
+
+  $scope.$watch('data.authorIsUser', function(authorIsUser) {
+    if (authorIsUser) {
+      $scope.data.post.custom_author = currentUser.firstname + ' ' + currentUser.lastname;
     }
   });
 

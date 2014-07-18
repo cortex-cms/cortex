@@ -15,19 +15,19 @@ angular.module('cortex.filters', [
   return function(media) {
     var outputHtml;
 
-    if (media.general_type ==='image') {
+    if (media.type === 'image') {
       outputHtml = '<p><a href="' +
-        media.attachment_url +
+        media.url +
         '"><img alt="' +
         (media.alt || '') +
         '" src="' +
-        media.attachment_url +
+        media.url +
         '" data-media-id="' +
         media.id +
         '"></a></p>';
     }
     else {
-      outputHtml = '<a href=""' +
+      outputHtml = '<a href="' +
         media.attachment_url +
         '" data-media-id="' +
         media.id +

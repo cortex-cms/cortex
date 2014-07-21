@@ -20,13 +20,13 @@ module API::V1
 
     class Media < Grape::API
       helpers Helpers::SharedParams
-      helpers MediaParams
+      # helpers MediaParams
 
       resource :media do
         helpers Helpers::PaginationHelper
         helpers Helpers::MediaHelper
 
-        desc 'Show all media'
+        desc 'Show all media', { entity: Entities::Media, nickname: "showAllMedia" }
         params do
           use :pagination
         end
@@ -40,9 +40,10 @@ module API::V1
           present @media, with: Entities::Media
         end
 
-        desc 'Search for media'
+        desc 'Search for media', { entity: Entities::Media, nickname: "searchMedia" }
         params do
           use :pagination
+          use :search
         end
         get :search do
           require_scope! :'view:media'
@@ -59,7 +60,7 @@ module API::V1
           present @media, with: Entities::Media
         end
 
-        desc 'Get media'
+        desc 'Get media', { entity: Entities::Media, nickname: "getMedia" }
         get ':id' do
           require_scope! :'view:media'
           authorize! :view, media!
@@ -67,10 +68,7 @@ module API::V1
           present media, with: Entities::Media
         end
 
-        desc 'Create media'
-        params do
-          use :media_params
-        end
+        desc 'Create media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "createMedia" }
         post do
           require_scope! :'modify:media'
           authorize! :create, ::Media
@@ -83,10 +81,7 @@ module API::V1
           present media, with: Entities::Media
         end
 
-        desc 'Update media'
-        params do
-          use :media_params
-        end
+        desc 'Update media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "updateMedia" }
         put ':id' do
           require_scope! :'modify:media'
           authorize! :update, media!
@@ -101,7 +96,7 @@ module API::V1
           present media, with: Entities::Media
         end
 
-        desc 'Delete media'
+        desc 'Delete media', { nickname: "deleteMedia" }
         delete ':id' do
           require_scope! :'modify:media'
           authorize! :delete, media!

@@ -39,16 +39,8 @@ angular.module('cortex.controllers.posts.edit', [
       'get_the_job',
       'on_the_job'
     ],
-    industries: filters.industries,
-    scheduled: [
-      true,
-      false
-    ]
+    industries: filters.industries
   };
-
-  $scope.$watch('data.post.draft', function(draft) {
-    $scope.submitButton = draft ? "Save" : "Post";
-  });
 
   AddMediaService.initRedactorWithMedia();
 
@@ -75,13 +67,6 @@ angular.module('cortex.controllers.posts.edit', [
     });
 
     $scope.data.categories = categoriesHierarchy;
-
-    var todayDate = moment(new Date());
-    var postDate = moment($scope.data.post.published_at);
-
-    if ($scope.data.post.draft === false && postDate.diff(todayDate, 'days') < 1 ) {
-      $scope.data.scheduled = false;
-    }
   }
   else {
     $scope.data.post = new cortex.posts();

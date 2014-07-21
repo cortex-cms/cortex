@@ -63,7 +63,7 @@
                   <i class="fa fa-reply"></i> Cancel
                 </button>
                 <button type="submit" class="btn submit" >
-                  <i class="fa fa-cloud-upload"></i> {{submitButton}}
+                  <i class="fa fa-cloud-upload"></i> {{ data.post.draft ? "Save" : "Post" }}
                 </button>
               </div>
               <div class="form-status" ng-show="postForm.$invalid">Please fill out the required fields, marked with a *</div>

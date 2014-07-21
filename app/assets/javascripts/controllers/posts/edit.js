@@ -8,7 +8,8 @@ angular.module('cortex.controllers.posts.edit', [
   'angular-redactor',
   'cortex.services.cortex',
   'cortex.services.addMedia',
-  'cortex.vendor.underscore'
+  'cortex.vendor.underscore',
+  'frapontillo.bootstrap-switch'
 ])
 
 .controller('PostsEditCtrl', function($scope, $rootScope, $state, $stateParams, $window, $timeout, $q, flash, _,

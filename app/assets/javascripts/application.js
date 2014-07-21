@@ -20,6 +20,8 @@
 //= require ng-table
 //= require ng-rails-csrf
 //= require ng-tags-input
+//= require bootstrap-switch
+//= require angular-bootstrap-switch
 
 //= require_tree ../templates
 

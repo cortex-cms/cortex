@@ -336,6 +336,11 @@ GEM
       rails-assets-angular (>= 1.2.16, < 2)
       rails-assets-bootstrap (>= 3.1.1, < 4)
       rails-assets-moment (>= 2.6.0, < 3)
+    rails-assets-angular-bootstrap-switch (0.3.0)
+      rails-assets-angular (~> 1.2.18)
+      rails-assets-bootstrap (>= 2.3.2)
+      rails-assets-bootstrap-switch (~> 3.0.2)
+      rails-assets-jquery (>= 1.9.0)
     rails-assets-angular-cookies (1.2.20)
       rails-assets-angular (= 1.2.20)
     rails-assets-angular-flash (0.1.13)
@@ -355,6 +360,8 @@ GEM
     rails-assets-bootstrap (3.2.0)
       rails-assets-jquery (>= 1.9.0)
     rails-assets-bootstrap-sass-official (3.2.0)
+      rails-assets-jquery (>= 1.9.0)
+    rails-assets-bootstrap-switch (3.0.2)
       rails-assets-jquery (>= 1.9.0)
     rails-assets-jquery (2.1.1)
     rails-assets-moment (2.7.0)
@@ -558,6 +565,7 @@ DEPENDENCIES
   rails-assets-angular-animate
   rails-assets-angular-bootstrap (~> 0.11)
   rails-assets-angular-bootstrap-datetimepicker
+  rails-assets-angular-bootstrap-switch
   rails-assets-angular-cookies
   rails-assets-angular-flash
   rails-assets-angular-mocks

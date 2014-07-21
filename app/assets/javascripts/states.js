@@ -118,9 +118,19 @@ angular.module('cortex.states', [
       templateUrl: 'posts/edit.html',
       controller: 'PostsEditCtrl',
       resolve: {
-        post: function() {
-          return null;
-        },
+        post: ['$q', 'cortex', 'currentUser', function($q, cortex, currentUser) {
+          var defer = $q.defer();
+
+          var post = new cortex.posts();
+          post.body = '';
+          post.draft = true;
+          post.author = currentUser.full_name;
+          post.copyright_owner = post.copyright_owner || "CareerBuilder, LLC";
+          post.tag_list = '';
+
+          defer.resolve(post);
+          return defer.promise;
+        }],
         categoriesHierarchy: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
         }],
@@ -183,9 +193,6 @@ angular.module('cortex.states', [
         'info@cortex.posts.edit': {
           templateUrl: 'posts/promo/info.html'
         },
-        'classify@cortex.posts.edit': {
-          templateUrl: 'posts/promo/classify.html'
-        },
         'display@cortex.posts.edit': {
           templateUrl: 'posts/promo/display.html'
         },
@@ -204,14 +211,39 @@ angular.module('cortex.states', [
       templateUrl: 'posts/edit.html',
       controller: 'PostsEditCtrl',
       resolve: {
-        post: ['cortex', '$stateParams', function(cortex, $stateParams) {
-          return cortex.posts.get({id: $stateParams.postId}).$promise;
-        }],
         categoriesHierarchy: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
         }],
         filters: ['cortex', function(cortex) {
           return cortex.posts.filters().$promise;
+        }],
+        post: ['$stateParams', '$q', 'cortex', function($stateParams, $q, cortex, categoriesHierarchy) {
+          var defer = $q.defer();
+
+          cortex.posts.get({id: $stateParams.postId}).$promise
+            .then(function(post) {
+              if (post.industry) {
+                post.industry_id = post.industry.id;
+              }
+
+              var selectedCategoryIds = _.map(post.categories, function (c) {
+                return c.id;
+              });
+
+              _.each(categoriesHierarchy, function (category) {
+                _.each(category.children, function (child) {
+                  if (_.contains(selectedCategoryIds, child.id)) {
+                    child.$selected = true;
+                  }
+                });
+              });
+
+              defer.resolve(post);
+            }, function(response) {
+              defer.reject(response);
+            });
+
+          return defer.promise;
         }]
       },
       data: {
@@ -268,9 +300,6 @@ angular.module('cortex.states', [
       views: {
         'info@cortex.posts.edit': {
           templateUrl: 'posts/promo/info.html'
-        },
-        'classify@cortex.posts.edit': {
-          templateUrl: 'posts/promo/classify.html'
         },
         'display@cortex.posts.edit': {
           templateUrl: 'posts/promo/display.html'

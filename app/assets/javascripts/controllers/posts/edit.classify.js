@@ -1,11 +1,10 @@
 angular.module('cortex.controllers.posts.edit.classify', [
   'ngTagsInput',
-  'cortex.filters',
   'cortex.directives.modalShow',
   'cortex.services.cortex'
 ])
 
-.controller('PostsEditClassifyCtrl', function($scope, $filter, _, cortex) {
+.controller('PostsEditClassifyCtrl', function($scope, _, cortex) {
     $scope.loadTags = function (search) {
       return cortex.posts.tags({s: search}).$promise;
     };
@@ -26,7 +25,7 @@ angular.module('cortex.controllers.posts.edit.classify', [
         return;
       }
 
-      var jobPhaseCategory = _.find($scope.data.categories, function(category) {
+      var jobPhaseCategory = _.find($scope.data.categoriesHierarchy, function(category) {
         return category.name == phase;
       });
 

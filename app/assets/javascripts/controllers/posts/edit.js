@@ -6,14 +6,14 @@ angular.module('cortex.controllers.posts.edit', [
   'ui.bootstrap.datetimepicker',
   'angular-flash.service',
   'angular-redactor',
-  'cortex.services.cortex',
-  'cortex.services.addMedia',
+  'frapontillo.bootstrap-switch',
+
   'cortex.vendor.underscore',
-  'frapontillo.bootstrap-switch'
+  'cortex.services.addMedia'
 ])
 
-.controller('PostsEditCtrl', function($scope, $rootScope, $state, $stateParams, $window, $timeout, $q, flash, _,
-                                      cortex, post, filters, categoriesHierarchy, currentUser, AddMediaService) {
+.controller('PostsEditCtrl', function($scope, $state, $timeout, flash, _,
+                                      post, filters, categoriesHierarchy, AddMediaService) {
 
   $scope.data = {
     savePost: function() {
@@ -48,33 +48,8 @@ angular.module('cortex.controllers.posts.edit', [
     minHeight: 800
   };
 
-  if (post) {
-    $scope.data.post = post;
-
-    if ($scope.data.post.industry) {
-      $scope.data.post.industry_id = $scope.data.post.industry.id;
-    }
-
-    var selectedCategoryIds = _.map(post.categories, function(c) { return c.id; });
-    _.each(categoriesHierarchy, function(category){
-      _.each(category.children, function(child){
-        if (_.contains(selectedCategoryIds, child.id)) {
-          child.$selected = true;
-        }
-      });
-    });
-
-    $scope.data.categories = categoriesHierarchy;
-  }
-  else {
-    $scope.data.post = new cortex.posts();
-    $scope.data.post.body = '';
-    $scope.data.post.draft = true;
-    $scope.data.post.author = currentUser.full_name;
-    $scope.data.post.copyright_owner = $scope.data.post.copyright_owner || "CareerBuilder, LLC";
-    $scope.data.categories = categoriesHierarchy;
-    $scope.data.post.tag_list = '';
-  }
+  $scope.data.post = post;
+  $scope.data.categoriesHierarchy = categoriesHierarchy;
 
   $scope.datepicker = {
     format: 'MMMM dd yyyy, h:mm:ss a',

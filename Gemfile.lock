@@ -15,13 +15,6 @@ GIT
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
 
-GIT
-  remote: git://github.com/simi/mongoid-paranoia.git
-  revision: 47fc64675ad5ce0ac36ecdd4f89f061054817015
-  specs:
-    mongoid-paranoia (0.1.2)
-      mongoid (> 3)
-
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -267,6 +260,8 @@ GEM
       metaclass (~> 0.0.1)
     momentjs-rails (2.7.0)
       railties (>= 3.1)
+    mongoid_paranoia (0.1.2)
+      mongoid (> 3)
     moped (2.0.0)
       bson (~> 2.2)
       connection_pool (~> 2.0)
@@ -280,7 +275,7 @@ GEM
     ng-rails-csrf (0.1.0)
     ngmin-rails (0.4.0)
       rails (>= 3.1)
-    nokogiri (1.6.2.1)
+    nokogiri (1.6.3)
       mini_portile (= 0.6.0)
     nokogumbo (1.1.9)
       nokogiri
@@ -356,7 +351,7 @@ GEM
       rails-assets-angular (= 1.2.20)
     rails-assets-angular-ui-router (0.2.10)
       rails-assets-angular (>= 1.0.8)
-    rails-assets-angularjs-file-upload (1.5.1)
+    rails-assets-angularjs-file-upload (1.6.0)
     rails-assets-bootstrap (3.2.0)
       rails-assets-jquery (>= 1.9.0)
     rails-assets-bootstrap-sass-official (3.2.0)
@@ -437,7 +432,7 @@ GEM
       shoulda-context (~> 1.0, >= 1.0.1)
       shoulda-matchers (>= 1.4.1, < 3.0)
     shoulda-context (1.2.1)
-    shoulda-matchers (2.6.1)
+    shoulda-matchers (2.6.2)
       activesupport (>= 3.0.0)
     sidekiq (3.2.1)
       celluloid (>= 0.15.2)
@@ -460,7 +455,7 @@ GEM
     slim (2.0.3)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
-    slop (3.5.0)
+    slop (3.6.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -490,7 +485,7 @@ GEM
       coffee-rails
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
-    uglifier (2.5.1)
+    uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     underscore-rails (1.6.0)
@@ -551,7 +546,7 @@ DEPENDENCIES
   mocha
   momentjs-rails
   mongoid (~> 4.0.0.rc2)!
-  mongoid-paranoia!
+  mongoid_paranoia
   ng-rails-csrf
   ngmin-rails
   paperclip (~> 4.1)

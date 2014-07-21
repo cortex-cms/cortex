@@ -6,11 +6,12 @@
   describe('Post Editor Module', function() {
     beforeEach(function() {
       angular.mock.module('cortex.controllers.posts.edit');
+      angular.mock.module('cortex.controllers.posts.edit.display');
     });
 
     describe('PostsEditCtrl', function($rootScope) {
       var $scope, $state, $stateParams, $q, $httpBackend, flash, cortex, post, filters, categoriesHierarchy, currentUser, AddMediaService, createController;
-      beforeEach(inject(function($controller, _$rootScope_, _$state_, _$stateParams_, _$q_, _$httpBackend_, _flash_, _cortex_, _post_, _filters_, _categoriesHierarchy_, _currentUser_, _AddMediaService_) {
+      beforeEach(inject(function($controller, _$rootScope_, _$state_, _$stateParams_, _$q_, _$httpBackend_, _flash_, _cortex_, _currentUser_, _AddMediaService_) {
         $rootScope = _$rootScope_;
         $scope = $rootScope.$new();
         $state = _$state_;
@@ -19,10 +20,9 @@
         $httpBackend = _$httpBackend_;
         flash        = _flash_;
         cortex = _cortex_;
-        post = _post_;
-        filters = _filters_;
-        categoriesHierarchy = _categoriesHierarchy_;
-        currentUser = _currentUser_;
+        filters = { industries: '' };
+        categoriesHierarchy = cortex.categories.hierarchy();
+        currentUser = { full_name: "Test User" };
         AddMediaService = _AddMediaService_;
 
         createController = function() {
@@ -49,4 +49,4 @@
 
     });
   });
-});
+})();

@@ -39,18 +39,16 @@ angular.module('cortex.controllers.posts.edit', [
       'get_the_job',
       'on_the_job'
     ],
-    industries: filters.industries,
-    scheduled: [
-      true,
-      false
-    ]
+    industries: filters.industries
   };
 
-  $scope.$watch('data.post.draft', function(draft) {
-    $scope.submitButton = draft ? "Save" : "Post";
-  });
-
   AddMediaService.initRedactorWithMedia();
+
+  $scope.redactorOptions = {
+    plugins: ['media'],
+    toolbarFixedBox: true,
+    minHeight: 800
+  };
 
   if (post) {
     $scope.data.post = post;
@@ -69,13 +67,6 @@ angular.module('cortex.controllers.posts.edit', [
     });
 
     $scope.data.categories = categoriesHierarchy;
-
-    var todayDate = moment(new Date());
-    var postDate = moment($scope.data.post.published_at);
-
-    if ($scope.data.post.draft === false && postDate.diff(todayDate, 'days') < 1 ) {
-      $scope.data.scheduled = false;
-    }
   }
   else {
     $scope.data.post = new cortex.posts();
@@ -87,27 +78,6 @@ angular.module('cortex.controllers.posts.edit', [
     $scope.data.post.tag_list = '';
   }
 
-  $scope.$watch('data.post.job_phase', function(phase) {
-    if (phase === undefined) {
-      $scope.data.jobPhaseCategories = [];
-      return;
-    }
-
-    var jobPhaseCategory = _.find($scope.data.categories, function(category) {
-      var normalizedPhaseName = category.name.split(' ').join('_').toLowerCase();
-      return normalizedPhaseName == phase;
-    });
-
-    $scope.data.jobPhaseCategories = jobPhaseCategory.children;
-  });
-
-  $scope.redactorOptions = {
-    plugins: ['media'],
-    toolbarFixedBox: true,
-    minHeight: 800
-  };
-
-  // angular-bootstrap datetimepicker settings
   $scope.datepicker = {
     format: 'MMMM dd yyyy, h:mm:ss a',
     expireAtOpen: false,
@@ -116,15 +86,6 @@ angular.module('cortex.controllers.posts.edit', [
       $timeout(function(){
         $scope.datepicker[datepicker] = true;
       });
-    }
-  };
-
-  $scope.postScheduling = {
-    now: function() {
-      $scope.data.post.published_at = new Date();
-    },
-    scheduled: function() {
-      $scope.data.post.published_at = null || $scope.data.post.published_at;
     }
   };
 });

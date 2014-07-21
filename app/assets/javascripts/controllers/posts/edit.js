@@ -52,6 +52,12 @@ angular.module('cortex.controllers.posts.edit', [
 
   AddMediaService.initRedactorWithMedia();
 
+  $scope.redactorOptions = {
+    plugins: ['media'],
+    toolbarFixedBox: true,
+    minHeight: 800
+  };
+
   if (post) {
     $scope.data.post = post;
 
@@ -87,27 +93,6 @@ angular.module('cortex.controllers.posts.edit', [
     $scope.data.post.tag_list = '';
   }
 
-  $scope.$watch('data.post.job_phase', function(phase) {
-    if (phase === undefined) {
-      $scope.data.jobPhaseCategories = [];
-      return;
-    }
-
-    var jobPhaseCategory = _.find($scope.data.categories, function(category) {
-      var normalizedPhaseName = category.name.split(' ').join('_').toLowerCase();
-      return normalizedPhaseName == phase;
-    });
-
-    $scope.data.jobPhaseCategories = jobPhaseCategory.children;
-  });
-
-  $scope.redactorOptions = {
-    plugins: ['media'],
-    toolbarFixedBox: true,
-    minHeight: 800
-  };
-
-  // angular-bootstrap datetimepicker settings
   $scope.datepicker = {
     format: 'MMMM dd yyyy, h:mm:ss a',
     expireAtOpen: false,
@@ -116,15 +101,6 @@ angular.module('cortex.controllers.posts.edit', [
       $timeout(function(){
         $scope.datepicker[datepicker] = true;
       });
-    }
-  };
-
-  $scope.postScheduling = {
-    now: function() {
-      $scope.data.post.published_at = new Date();
-    },
-    scheduled: function() {
-      $scope.data.post.published_at = null || $scope.data.post.published_at;
     }
   };
 });

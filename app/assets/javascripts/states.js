@@ -533,7 +533,7 @@ angular.module('cortex.states', [
       url: '/media',
       abstract: true,
       views: {
-        'popup@cortex.posts.edit': {
+        'popup@cortex.posts.new': {
           templateUrl: 'posts/popup.html',
           controller: 'PostsPopupCtrl'
         }

@@ -4,6 +4,7 @@ module API::V1
   module Resources
     class Posts < Grape::API
       helpers Helpers::SharedParams
+      helpers Helpers::PostsHelper
 
       resource :posts do
         helpers Helpers::PaginationHelper

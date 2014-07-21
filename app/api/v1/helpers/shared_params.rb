@@ -13,10 +13,10 @@ module API::V1
       end
 
       params :post_metadata do
-        optional :categories, type: "String", desc: "Categories"
-        optional :industries, type: "String", desc: "Industries"
-        optional :job_phase, type: "String", desc: "Job Phase"
-        optional :type, type: "String", desc: "Post Type"
+        optional :categories, type: String, desc: "Categories"
+        optional :industries, type: String, desc: "Industries"
+        optional :job_phase, type: String, desc: "Job Phase"
+        optional :type, type: String, desc: "Post Type"
       end
     end
   end

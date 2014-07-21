@@ -14,6 +14,11 @@ module API
         rack_response({message: 'Validation failed', errors: errors}.to_json, 422)
       end
 
+      before do
+        header['Access-Control-Allow-Origin'] = '*'
+        header['Access-Control-Request-Method'] = '*'
+      end
+
       helpers Helpers::APIHelper
       helpers PaginationHeaders
 
@@ -24,7 +29,7 @@ module API
       mount Resources::Users
       mount Resources::Occupations
 
-      add_swagger_documentation(base_path: '/api/', hide_format: true, models: [Entities::Post, Entities::Category, Entities::Media])
+      add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1', models: [Entities::Post, Entities::Category, Entities::Media])
     end
   end
 end

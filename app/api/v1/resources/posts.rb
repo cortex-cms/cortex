@@ -2,51 +2,17 @@ require_relative '../helpers/resource_helper'
 
 module API::V1
   module Resources
-    module PostParams
-      extend Grape::API::Helpers
-
-      params :post_params do
-      #   optional :title, documentation: { example: "Title for your post" }
-      #   optional :type, documentation: { example: "ArticlePost" }
-      #   optional :published_at
-      #   optional :expired_at
-      #   optional :deleted_at
-      #   optional :draft
-      #   optional :body
-      #   optional :short_description
-      #   optional :job_phase
-      #   optional :display
-      #   optional :featured_media_id
-      #   optional :tile_media_id
-      #   optional :notes
-      #   optional :copyright_owner
-      #   optional :seo_title
-      #   optional :seo_description
-      #   optional :seo_preview
-      #   optional :author
-      #   optional :tag_list
-      #   optional :primary_category_id
-      #   optional :category_ids
-      #   optional :slug
-      #   optional :primary_industry_id
-      #   optional :industry_ids
-      #   optional :destination_url
-      #   optional :call_to_action
-      end
-      # params: API::V1::Entities::Post
-    end
-
     class Posts < Grape::API
-      helpers PostParams
       helpers Helpers::SharedParams
 
       resource :posts do
         helpers Helpers::PaginationHelper
-        # helpers Helpers::PostsHelper
 
         desc 'Show all posts', { entity: Entities::Post, nickname: "showAllPosts" }
         params do
           use :pagination
+          use :search
+          use :post_metadata
         end
         get do
           require_scope! :'view:posts'
@@ -63,9 +29,11 @@ module API::V1
           present @posts, with: Entities::Post
         end
 
-        desc 'Show published posts'
+        desc 'Show published posts', { entity: Entities::PostBasic, nickname: "postFeed" }
         params do
           use :pagination
+          use :search
+          use :post_metadata
         end
         get 'feed' do
           @posts = Post.search_with_params(params, true).page(page).per(per_page).records
@@ -94,14 +62,14 @@ module API::V1
 
         desc 'Show all filters/facets for posts'
         params do
-          optional :depth, default: 1
+          optional :depth, default: 1, desc: "Minimum depth of filters"
         end
         get 'filters' do
           present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
           present :categories, ::Category.where('depth >= ?', params[:depth]), with: Entities::Category
         end
 
-        desc 'Show a post'
+        desc 'Show a post', { entity: Entities::Post, nickname: "showPost" }
         get ':id' do
           require_scope! :'view:posts'
           authorize! :view, post!
@@ -109,7 +77,7 @@ module API::V1
           present post, with: Entities::Post
         end
 
-        desc 'Show related published posts'
+        desc 'Show related published posts', { entity: Entities::PostBasic, nickname: "relatedPosts" }
         get 'feed/:id/related' do
           @posts = published_post!.related(true).page(page).per(per_page).records
           set_pagination_headers(@posts, 'posts')
@@ -128,10 +96,7 @@ module API::V1
           present post, with: Entities::Post
         end
 
-        desc 'Update a post'
-        params do
-          use :post_params
-        end
+        desc 'Update a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "updateAPost" }
         put ':id' do
           require_scope! :'modify:posts'
           authorize! :update, post!
@@ -150,7 +115,7 @@ module API::V1
           present post, with: Entities::Post
         end
 
-        desc 'Delete a post'
+        desc 'Delete a post', { nickname: "deleteAPost" }
         delete ':id' do
           require_scope! :'modify:posts'
           authorize! :delete, post!

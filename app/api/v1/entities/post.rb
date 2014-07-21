@@ -5,7 +5,7 @@ module API::V1
     class Post < PostBasic
       expose :media, with: 'Entities::MediaBasic', documentation: {type: "Media", is_array: true, desc: "All Media for this post"}
 
-      expose(:display) do |post|
+      expose(:display, {documentation: { type: "String", desc: "Post display type" } }) do |post|
         post.display
       end
 
@@ -13,7 +13,7 @@ module API::V1
       #   post.tag_list.to_a
       # end
 
-      expose :tag_list
+      expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
 
       expose :user, with: 'Entities::UserBasic'
     end

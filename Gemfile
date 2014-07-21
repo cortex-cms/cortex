@@ -97,7 +97,7 @@ gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim' # Sidekiq-web
 
-group :test, :development do
+group :test, :development, :local do
 
   # Rspec
   gem 'rspec', '~> 2.99'

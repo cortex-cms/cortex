@@ -24,7 +24,7 @@ module API
       mount Resources::Users
       mount Resources::Occupations
 
-      add_swagger_documentation
+      add_swagger_documentation(base_path: '/api/', hide_format: true, models: [Entities::Post, Entities::Category, Entities::Media])
     end
   end
 end

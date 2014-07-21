@@ -6,33 +6,34 @@ module API::V1
       extend Grape::API::Helpers
 
       params :post_params do
-        optional :title
-        optional :type
-        optional :published_at
-        optional :expired_at
-        optional :deleted_at
-        optional :draft
-        optional :body
-        optional :short_description
-        optional :job_phase
-        optional :display
-        optional :featured_media_id
-        optional :tile_media_id
-        optional :notes
-        optional :copyright_owner
-        optional :seo_title
-        optional :seo_description
-        optional :seo_preview
-        optional :author
-        optional :tag_list
-        optional :primary_category_id
-        optional :category_ids
-        optional :slug
-        optional :primary_industry_id
-        optional :industry_ids
-        optional :destination_url
-        optional :call_to_action
+      #   optional :title, documentation: { example: "Title for your post" }
+      #   optional :type, documentation: { example: "ArticlePost" }
+      #   optional :published_at
+      #   optional :expired_at
+      #   optional :deleted_at
+      #   optional :draft
+      #   optional :body
+      #   optional :short_description
+      #   optional :job_phase
+      #   optional :display
+      #   optional :featured_media_id
+      #   optional :tile_media_id
+      #   optional :notes
+      #   optional :copyright_owner
+      #   optional :seo_title
+      #   optional :seo_description
+      #   optional :seo_preview
+      #   optional :author
+      #   optional :tag_list
+      #   optional :primary_category_id
+      #   optional :category_ids
+      #   optional :slug
+      #   optional :primary_industry_id
+      #   optional :industry_ids
+      #   optional :destination_url
+      #   optional :call_to_action
       end
+      # params: API::V1::Entities::Post
     end
 
     class Posts < Grape::API
@@ -41,9 +42,9 @@ module API::V1
 
       resource :posts do
         helpers Helpers::PaginationHelper
-        helpers Helpers::PostsHelper
+        # helpers Helpers::PostsHelper
 
-        desc 'Show all posts'
+        desc 'Show all posts', { entity: Entities::Post, nickname: "showAllPosts" }
         params do
           use :pagination
         end
@@ -115,10 +116,7 @@ module API::V1
           present @posts, with: Entities::PostBasic
         end
 
-        desc 'Create a post'
-        params do
-          use :post_params
-        end
+        desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createAPost" }
         post do
           require_scope! :'modify:posts'
           authorize! :create, Post

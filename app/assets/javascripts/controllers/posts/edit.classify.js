@@ -1,13 +1,11 @@
 angular.module('cortex.controllers.posts.edit.classify', [
+  'ngTagsInput',
+  'cortex.filters',
   'cortex.directives.modalShow',
-  'cortex.services.cortex',
-  'ngTagsInput'
+  'cortex.services.cortex'
 ])
 
-.controller('PostsEditClassifyCtrl', function($scope, _, cortex) {
-
-    // Tags
-
+.controller('PostsEditClassifyCtrl', function($scope, $filter, _, cortex) {
     $scope.loadTags = function (search) {
       return cortex.posts.tags({s: search}).$promise;
     };
@@ -22,8 +20,6 @@ angular.module('cortex.controllers.posts.edit.classify', [
       $scope.data.post.tag_list.push({name: tag.name, id: tag.id});
     };
 
-    // Job Phase
-
     $scope.$watch('data.post.job_phase', function(phase) {
       if (phase === undefined) {
         $scope.data.jobPhaseCategories = [];
@@ -31,8 +27,7 @@ angular.module('cortex.controllers.posts.edit.classify', [
       }
 
       var jobPhaseCategory = _.find($scope.data.categories, function(category) {
-        var normalizedPhaseName = category.name.split(' ').join('_').toLowerCase();
-        return normalizedPhaseName == phase;
+        return category.name == phase;
       });
 
       $scope.data.jobPhaseCategories = jobPhaseCategory.children;

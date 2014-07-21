@@ -33,12 +33,9 @@ angular.module('cortex.controllers.posts.edit', [
         $state.go('^.^.^.manage.components');
       });
     },
-    phases: [
-      'discovery',
-      'find_the_job',
-      'get_the_job',
-      'on_the_job'
-    ],
+    phases: _.map(filters.job_phases, function(job_phase) {
+      return job_phase.name;
+    }),
     industries: filters.industries
   };
 

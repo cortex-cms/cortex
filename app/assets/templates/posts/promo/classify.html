@@ -5,7 +5,7 @@
     <div class="input-group-addon"><i class="fa fa-compass"></i></div>
     <select class="form-control"
             ng-model="data.post.job_phase"
-            ng-options="(phase | humanize) for phase in data.phases"
+            ng-options="phase for phase in data.phases"
             required>
       <option value="" selected>Select a career phase for this post</option>
     </select>

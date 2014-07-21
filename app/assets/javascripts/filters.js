@@ -58,7 +58,7 @@ angular.module('cortex.filters', [
 })
 
 // https://gist.github.com/thomseddon/3511330
-.filter('bytes', function(){
+.filter('bytes', function() {
     return function(bytes, precision) {
 
         if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) {
@@ -77,11 +77,12 @@ angular.module('cortex.filters', [
 })
 
 .filter('slugify', function() {
-  return function(value) {
+  return function(value, delim) {
     if (!value) {
       return '';
     }
-    return value.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+    delim = delim || "-";
+    return value.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, delim);
   };
 })
 

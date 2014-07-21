@@ -27,7 +27,7 @@ class Post < ActiveRecord::Base
   validates :tag_list, :seo_title, :seo_description, length: { maximum: 255 }
   validates :type, :job_phase, :display, presence: true, allow_nil: false
 
-  enum job_phase: [:discovery, :find_the_job, :get_the_job, :on_the_job]
+  enum job_phase: ['Discovery', 'Find the Job', 'Get the Job', 'On the Job']
   enum display: [:large, :medium, :small]
 
   validates :type, inclusion: { in: %w(Post ArticlePost InfographicPost PromoPost VideoPost) }

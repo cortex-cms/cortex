@@ -6,7 +6,7 @@
     <select class="form-control"
             name="job_phase"
             ng-model="data.post.job_phase"
-            ng-options="(phase | humanize) for phase in data.phases"
+            ng-options="phase for phase in data.phases"
             required>
       <option value="" selected>Select a career phase for this post</option>
     </select>

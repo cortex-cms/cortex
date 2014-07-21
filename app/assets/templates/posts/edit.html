@@ -144,18 +144,28 @@
 
         <dl class="dl-horizontal">
             <dt><label for="postAuthor">Author</label></dt>
-            <dd class="input-group-sm"
+
+            <dd class="input-group">
+              <span class="input-group-addon">
+                Self <input type="checkbox" ng-model="data.authorIsUser" name="authorIsUser">
+              </span>
+              <input type="text" class="form-control" ng-model="data.post.custom_author" ng-disabled="data.authorIsUser">
+            </dd>
+
+            <!--dd class="input-group-sm"
                 ng-class="{ 'has-error' : postForm.author.$invalid && !postForm.author.$pristine }">
                 <input id="postAuthor"
                        name="author"
                        type="text"
                        class="form-control"
                        placeholder="enter an author for this post (required)"
-                       ng-init="data.post.author = data.post.author || currentUser.fullname"
+                       ng-init="data.post.author = data.post.custom_author || currentUser.fullname"
                        ng-model="data.post.author"
                        ng-minlength="1"
                        ng-maxlength="255"
                        required>
+
+                <
 
                 <p ng-show="(postForm.copyright_owner.$dirty && postForm.author.$invalid) ||
                             (postForm.author.$invalid && !postForm.author.$pristine)"
@@ -169,7 +179,7 @@
                     <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                     &nbsp;The author name is too long.
                 </p>
-            </dd>
+            </dd-->
         </dl>
 
         <dl class="dl-horizontal">

@@ -1,0 +1,66 @@
+<section class="users-edit">
+
+  <h3>Edit User - {{ data.user.fullname }}</h3>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Author Information
+        </div>
+        <div class="panel-body">
+          <form novalidate class="author" name="authorForm">
+            <div class="form-group">
+              <label for="author.firstname">First name</label>
+              <input class="form-control" type="text" name="author.firstname"
+                     ng-model="data.author.firstname" required
+                     placeholder="First name (required)">
+            </div>
+            <div class="form-group">
+              <label for="author.lastname">Last name</label>
+              <input class="form-control" type="text" name="author.lastname"
+                     ng-model="data.author.lastname" required
+                     placeholder="Last name (required)">
+            </div>
+            <div class="form-group">
+              <label for="author.email">Email</label>
+              <input class="form-control" type="text" name="author.email"
+                     ng-model="data.author.email" required
+                     placeholder="Email (required)">
+            </div>
+            <div class="form-group">
+              <label for="author.bio">Biography/Summary</label>
+              <textarea class="form-control bio" name="author.bio"
+                        ng-model="data.author.bio" required
+                        placeholder="Biography (required)"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="author.personal">Personal Website</label>
+              <input class="form-control" type="text" name="author.personal"
+                     ng-model="data.author.personal" placeholder="Personal Website">
+            </div>
+            <div class="form-group">
+              <label for="author.facebook">Facebook</label>
+              <input class="form-control" type="text" name="author.facebook"
+                     ng-model="data.author.facebook" placeholder="Facebook">
+            </div>
+            <div class="form-group">
+              <label for="author.twitter">Twitter</label>
+              <input class="form-control" type="text" name="author.twitter"
+                     ng-model="data.author.twitter" placeholder="Twitter">
+            </div>
+            <div class="form-group">
+              <label for="author.gplus">Google Plus</label>
+              <input class="form-control" type="text" name="author.gplus"
+                     ng-model="data.author.gplus" placeholder="Google Plus">
+            </div>
+            <button type="button" class="btn btn-primary btn-block"
+                    ng-disabled="authorForm.$invalid" ng-click="saveAuthor()">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>

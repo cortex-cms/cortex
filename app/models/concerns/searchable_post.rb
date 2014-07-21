@@ -66,10 +66,11 @@ module SearchablePost
 
     def as_indexed_json(options = {})
       json = as_json(only: [:id, :title, :body, :draft, :short_description, :copyright_owner,
-                            :author, :created_at, :published_at, :job_phase, :type])
+                            :created_at, :published_at, :job_phase, :type])
       json[:categories] = categories.collect{ |c| c.name }
       json[:industries] = industries.collect{ |i| i.soc }
       json[:tags]       = tag_list.to_a
+      json[:author]     = author.fullname
       json
     end
   end

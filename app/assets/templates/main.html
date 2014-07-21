@@ -27,7 +27,7 @@
           <div class="navbar-profile-text">
             <strong>{{ currentUser.firstname }}</strong><br>
             <span class="smaller">
-              <a href="#">My Profile</a> &bull; <a href="#" ng-click="logOut()">Log Out</a>
+              <a ui-sref="cortex.users.edit({userId: currentUser.id})">My Profile</a> &bull; <a href="#" ng-click="logOut()">Log Out</a>
             </span>
           </div>
         </div>

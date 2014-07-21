@@ -56,6 +56,7 @@ gem 'rails-assets-angularjs-file-upload'
 gem 'rails-assets-ng-table'
 gem 'rails-assets-bootstrap-sass-official'
 gem 'rails-assets-ng-tags-input'
+gem 'rails-assets-angular-bootstrap-switch'
 
 # ActiveRecord
 gem 'rails-observers'

@@ -18,11 +18,19 @@
           <div class="content">
             <div class="form-group">
               <label for="draft">Publishing State</label>
-              <div class="btn-group draft row" data-toggle="buttons">
-                  <label class="btn btn-default" ng-model="data.post.draft" btn-radio="true" ng-class="{'active': data.post.draft}"><i class="fa fa-paperclip"></i> Draft
-                  </label>
-                  <label class="btn btn-default" ng-model="data.post.draft" btn-radio="false" ng-class="{'active': !data.post.draft}"><i class="fa fa-file-text"></i> Publish
-                  </label>
+              <div class="draft row">
+                <input
+                        bs-switch
+                        ng-model="data.post.draft"
+                        type="checkbox"
+                        switch-size="large"
+                        switch-active="true"
+                        switch-on-text="Draft"
+                        switch-off-text="Publish"
+                        switch-on-color="default"
+                        switch-off-color="primary"
+                        switch-icon="fa fa-upload"
+                        switch-animate="true"/>
               </div>
             </div>
             <div class="form-group row">

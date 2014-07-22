@@ -65,7 +65,7 @@ module API::V1
           require_scope! :'view:media'
           authorize! :view, media!
 
-          present media, with: Entities::Media
+          present media, with: Entities::Media, full: true
         end
 
         desc 'Create media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "createMedia" }
@@ -81,7 +81,7 @@ module API::V1
           @media = ::Media.new(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
           media.user = current_user!
           media.save!
-          present media, with: Entities::Media
+          present media, with: Entities::Media, full: true
         end
 
         desc 'Update media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "updateMedia" }

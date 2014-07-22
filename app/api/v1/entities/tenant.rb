@@ -14,7 +14,7 @@ module API::V1
       expose :contract, documentation: { type: "String", desc: "Contract" }
       expose :did, documentation: { type: "Integer", desc: "DID" }
       expose :parent_id, documentation: { type: "Integer", desc: "Parent ID" }
-      expose :children, if: lambda { |instance, options| options[:children] }, documentation: { type: "Tenant", is_array: true, desc: "Child Tenants" }
+      expose :children, documentation: { type: "Tenant", is_array: true, desc: "Child Tenants" }, if: lambda { |instance, options| options[:children] }
     end
   end
 end

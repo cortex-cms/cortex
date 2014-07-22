@@ -3,7 +3,7 @@ module API::V1
     class PostBasic < Grape::Entity
 
       expose :id, documentation: {type: "Integer", desc: "Post ID", required: true}
-      expose :title, documentation:  {desc: "Post Title", type: "string" , required: true}
+      expose :title, documentation:  {desc: "Post Title", type: "String" , required: true}
       expose :author, documentation: {desc: "Author", type: "String", required: true}
       expose :type, documentation: {desc: "Post Type", type: "String", enum: ["ArticlePost", "VideoPost", "InfographicPost", "PromoPost"], required: true}
       expose :draft, documentation: {desc: "Draft status", type: "Boolean"}
@@ -29,8 +29,8 @@ module API::V1
       end
 
       expose :categories, using: 'Entities::Category', documentation: {type: 'Category', is_array: true, desc: "Categories"}
-      expose :featured_media, using: 'Entities::MediaBasic', documentation: {type: ::Media, is_array: false, desc: "Featured Media for this post"}
-      expose :tile_media, using: 'Entities::MediaBasic', documentation: {type: ::Media, is_array: false, desc: "Tile Media for this post"}
+      expose :featured_media, using: 'Entities::MediaBasic', documentation: {type: 'Media', is_array: false, desc: "Featured Media for this post"}
+      expose :tile_media, using: 'Entities::MediaBasic', documentation: {type: 'Media', is_array: false, desc: "Tile Media for this post"}
       expose :industries, using: 'Entities::Occupation', documentation: {type: "Industry", is_array: true, desc: "Industries"}
 
       expose :destination_url, { documentation: { type: "String", desc: "Destination URL for a Promo Post"}, if: lambda { |post, _| post.type == 'PromoPost' } }

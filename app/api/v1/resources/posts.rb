@@ -86,6 +86,10 @@ module API::V1
         end
 
         desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createAPost" }
+        params do
+          optional :featured_media_id
+          optional :tile_media_id
+        end
         post do
           require_scope! :'modify:posts'
           authorize! :create, Post
@@ -101,13 +105,13 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :update, post!
 
-          pp declared(params, {include_missing: false}, Entities::Post.documentation.keys)
+          allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media)
 
           if params[:type]
             post.update!({type: params[:type]}) if params[:type]
             reload_post
           end
-          post.update!(declared(params, {include_missing: false}, Entities::Post.documentation.keys))
+          post.update!(declared(params, {include_missing: false}, allowed_params))
 
           if params[:tag_list]
             post.tag_list = params[:tag_list]

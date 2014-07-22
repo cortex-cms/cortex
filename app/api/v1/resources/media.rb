@@ -99,7 +99,7 @@ module API::V1
             media.tag_list = params[:tag_list]
             media.save!
           end
-          present media, with: Entities::Media
+          present media, with: Entities::Media, full: true
         end
 
         desc 'Delete media', { nickname: "deleteMedia" }

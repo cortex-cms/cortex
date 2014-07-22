@@ -20,7 +20,6 @@ module API::V1
              if: lambda { |media, _| media.content_type == 'youtube' }
       expose :video_id, if: lambda { |media, _| media.content_type == 'youtube' }, documentation: { type: "String", desc: "Youtube Video ID"}
 
-
       # Full Only
       with_options if: { full: true } do
         expose :deactive_at, documentation: { type: 'dateTime', desc: "Deactivate Date"}

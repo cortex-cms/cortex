@@ -27,10 +27,10 @@ module API::V1
           end
 
           set_pagination_headers(@posts, 'posts')
-          present @posts, with: Entities::Post
+          present @posts, with: Entities::Post, full: true
         end
 
-        desc 'Show published posts', { entity: Entities::PostBasic, nickname: "postFeed" }
+        desc 'Show published posts', { entity: Entities::Post, nickname: "postFeed" }
         params do
           use :pagination
           use :search
@@ -39,7 +39,7 @@ module API::V1
         get 'feed' do
           @posts = ::Post.search_with_params(params, true).page(page).per(per_page).records
           set_pagination_headers(@posts, 'posts')
-          present @posts, with: Entities::PostBasic
+          present @posts, with: Entities::Post, full: true
         end
 
         desc 'Show post tags'
@@ -75,14 +75,14 @@ module API::V1
           require_scope! :'view:posts'
           authorize! :view, post!
 
-          present post, with: Entities::Post
+          present post, with: Entities::Post, full: true
         end
 
-        desc 'Show related published posts', { entity: Entities::PostBasic, nickname: "relatedPosts" }
+        desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
         get 'feed/:id/related' do
           @posts = published_post!.related(true).page(page).per(per_page).records
           set_pagination_headers(@posts, 'posts')
-          present @posts, with: Entities::PostBasic
+          present @posts, with: Entities::Post
         end
 
         desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createAPost" }
@@ -97,7 +97,7 @@ module API::V1
           @post = ::Post.new(declared(params, {include_missing: false}, Entities::Post.documentation.keys))
           post.user = current_user
           post.save!
-          present post, with: Entities::Post
+          present post, with: Entities::Post, full: true
         end
 
         desc 'Update a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "updateAPost" }
@@ -118,7 +118,7 @@ module API::V1
             post.save!
           end
 
-          present post, with: Entities::Post
+          present post, with: Entities::Post, full: true
         end
 
         desc 'Delete a post', { nickname: "deleteAPost" }

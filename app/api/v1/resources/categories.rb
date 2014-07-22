@@ -21,7 +21,7 @@ module API::V1
           if params[:roots_only] == 'false'
             present Category.all, with: Entities::Category
           else
-            present Category.roots, with: Entities::CategoryWithChildren
+            present Category.roots, with: Entities::Category, children: true
           end
         end
       end

@@ -2,32 +2,15 @@ require_relative '../helpers/resource_helper'
 
 module API::V1
   module Resources
-    module TenantParams
-      extend Grape::API::Helpers
-
-      params :tenant_params do
-        optional :name
-        optional :parent_id
-        optional :contact_name
-        optional :contact_email
-        optional :contact_phone
-        optional :active_at
-        optional :deactive_at
-        optional :contract
-        optional :did
-        optional :subdomain
-      end
-    end
 
     class Tenants < Grape::API
-      helpers TenantParams
       helpers Helpers::SharedParams
 
       resource :tenants do
         helpers Helpers::PaginationHelper
         helpers Helpers::TenantsHelper
 
-        desc 'Show all tenants'
+        desc 'Show all tenants', { entity: Entities::Tenant }
         params do
           use :pagination
         end
@@ -35,8 +18,7 @@ module API::V1
           require_scope! :'view:tenants'
           authorize! :view, Tenant
 
-          present Tenant.page(page).per(per_page),
-                  with: params[:include_children] ? Entities::TenantWithChildren : Entities::Tenant
+          present Tenant.page(page).per(per_page), using: Entities::Tenant, children: params[:include_children]
         end
 
         desc 'Show tenant hierarchy'
@@ -47,37 +29,38 @@ module API::V1
           require_scope! :'view:tenants'
           authorize! :view, Tenant
 
-          present Tenant.roots, with: Entities::TenantWithChildren
+          present Tenant.roots, using: Entities::Tenant, children: true
         end
 
-        desc 'Show a tenant'
+        desc 'Show a tenant', { entity: Entities::Tenant }
         get ':id' do
-          present tenant!, with: params[:include_children] ? Entities::TenantWithChildren : Entities::Tenant
+          present tenant!, with: Entities::Tenant, children: false
         end
 
-        desc 'Create a tenant'
+        desc 'Create a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation }
         params do
-          use :tenant_params
+          requires :name, type: String, desc: "Tenant Name"
         end
         post do
           require_scope! :'modify:tenants'
           authorize! :create, Tenant
 
-          @tenant = ::Tenant.new(declared(params))
+          allowed_params = remove_params(Entities::Tenant.documentation.keys, :children)
+
+          @tenant = ::Tenant.new(declared(params, { include_missing: true }, allowed_params))
           tenant.user = current_user
           tenant.save!
           present tenant, with: Entities::Tenant
         end
 
-        desc 'Update a tenant'
-        params do
-          use :tenant_params
-        end
+        desc 'Update a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation }
         put ':id' do
           require_scope! :'modify:tenants'
           authorize! :update, tenant!
 
-          tenant.update!(declared(params, include_missing: false))
+          allowed_params = remove_params(Entities::Tenant.documentation.keys, :children)
+
+          tenant.update!(declared(params, { include_missing: false }, allowed_params))
           present tenant, with: Entities::Tenant
         end
 

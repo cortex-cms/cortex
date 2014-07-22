@@ -6,11 +6,10 @@ module API::V1
 
       resource :categories do
 
+        desc 'Show all categories', { entity: Entities::Category }
         params do
-          optional :depth, default: 1
+          optional :depth, default: 1, type: Integer, desc: "Minimum category depth"
         end
-
-        desc 'Show all categories'
         get do
           authorize! :view, Category
           present Category.where("depth >= ?", params[:depth]), with: Entities::Category

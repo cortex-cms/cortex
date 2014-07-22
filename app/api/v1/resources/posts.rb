@@ -23,7 +23,7 @@ module API::V1
           if q.to_s != ''
             @posts = ::Post.search_with_params(params).page(page).per(per_page).records
           else
-            @posts = Post.order(created_at: :desc).page(page).per(per_page)
+            @posts = ::Post.order(created_at: :desc).page(page).per(per_page)
           end
 
           set_pagination_headers(@posts, 'posts')
@@ -37,7 +37,7 @@ module API::V1
           use :post_metadata
         end
         get 'feed' do
-          @posts = Post.search_with_params(params, true).page(page).per(per_page).records
+          @posts = ::Post.search_with_params(params, true).page(page).per(per_page).records
           set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::PostBasic
         end
@@ -51,8 +51,8 @@ module API::V1
           authorize! :view, Post
 
           tags = params[:s] \
-            ? Post.tag_counts_on(:tags).where('name ILIKE ?', "%#{params[:s]}%") \
-            : Post.tag_counts_on(:tags)
+            ? ::Post.tag_counts_on(:tags).where('name ILIKE ?', "%#{params[:s]}%") \
+            : ::Post.tag_counts_on(:tags)
 
           if params[:popular]
             tags = tags.order('count DESC').limit(20)

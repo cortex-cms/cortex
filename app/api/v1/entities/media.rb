@@ -22,19 +22,21 @@ module API::V1
 
 
       # Full Only
-      expose :deactive_at, documentation: { type: 'dateTime', desc: "Deactivate Date"}, if: lambda { |instance, options| options[:full] }
-      expose :deleted_at, documentation: { type: 'dateTime', desc: "Deleted Date"}, if: lambda { |instance, options| options[:full] }
-      expose :tags
-      expose :description, documentation: { type: "String", desc: "Description of the media" }, if: lambda { |instance, options| options[:full] }
-      expose :active, documentation: { type: "Boolean", desc: "Media active" }, if: lambda { |instance, options| options[:full] }
+      with_options if: { full: true } do
+        expose :deactive_at, documentation: { type: 'dateTime', desc: "Deactivate Date"}
+        expose :deleted_at, documentation: { type: 'dateTime', desc: "Deleted Date"}
+        expose :tags
+        expose :description, documentation: { type: "String", desc: "Description of the media" }
+        expose :active, documentation: { type: "Boolean", desc: "Media active" }
 
-      ## Aliases
-      expose :attachment_file_size, as: :attachment_size, documentation: { type: "Integer", desc: "Filesize in bytes" }, if: lambda { |instance, options| options[:full] }
-      expose :attachment_content_type, as: :attachment_content_type, documentation: { type: "String", desc: "Attachment Mime Type" }, if: lambda { |instance, options| options[:full] }
-      expose :content_type, as: :type, documentation: { type: "String", desc: "Media type" }, if: lambda { |instance, options| options[:full] }
-      expose :consumed?, as: :consumed, documentation: { type: "Boolean", desc: "Is the media consumed?" }, if: lambda { |instance, options| options[:full] }
+        ## Aliases
+        expose :attachment_file_size, as: :attachment_size, documentation: { type: "Integer", desc: "Filesize in bytes" }
+        expose :attachment_content_type, as: :attachment_content_type, documentation: { type: "String", desc: "Attachment Mime Type" }
+        expose :content_type, as: :type, documentation: { type: "String", desc: "Media type" }
+        expose :consumed?, as: :consumed, documentation: { type: "Boolean", desc: "Is the media consumed?" }
 
-      expose :user, with: 'Entities::UserBasic', as: :creator, documentation: { type: "User", desc: "Owner" }, if: lambda { |instance, options| options[:full] }
+        expose :user, with: 'Entities::UserBasic', as: :creator, documentation: { type: "User", desc: "Owner" }
+      end
     end
   end
 end

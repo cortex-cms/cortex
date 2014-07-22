@@ -78,7 +78,7 @@ describe API::Resources::Media, elasticsearch: true do
         media.name += ' updated'
         expect{ put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count).by(1)
         response.should be_success
-        response.body.should represent(API::Entities::Media, media)
+        response.body.should represent(API::Entities::Media, media, { full: true })
       end
     end
   end

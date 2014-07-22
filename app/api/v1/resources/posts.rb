@@ -90,8 +90,7 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :create, Post
 
-          params[:post_type] = "Promo" if params[:type] == 'promo'
-          @post = ::Post.new(declared(params, {include_missing: false}))
+          @post = ::Post.new(declared(params, {include_missing: false}, Entities::Post.documentation.keys))
           post.user = current_user
           post.save!
           present post, with: Entities::Post
@@ -102,11 +101,13 @@ module API::V1
           require_scope! :'modify:posts'
           authorize! :update, post!
 
+          pp declared(params, {include_missing: false}, Entities::Post.documentation.keys)
+
           if params[:type]
             post.update!({type: params[:type]}) if params[:type]
             reload_post
           end
-          post.update!(declared(params, {include_missing: false}))
+          post.update!(declared(params, {include_missing: false}, Entities::Post.documentation.keys))
 
           if params[:tag_list]
             post.tag_list = params[:tag_list]

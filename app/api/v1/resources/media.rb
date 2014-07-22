@@ -69,26 +69,32 @@ module API::V1
         end
 
         desc 'Create media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "createMedia" }
+        params do
+          optional :attachment
+        end
         post do
           require_scope! :'modify:media'
           authorize! :create, ::Media
 
           media_params = params[:media] || params
 
-          @media = ::Media.new(declared(media_params, include_missing: false))
+          @media = ::Media.new(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
           media.user = current_user!
           media.save!
           present media, with: Entities::Media
         end
 
         desc 'Update media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "updateMedia" }
+        params do
+          optional :attachment
+        end
         put ':id' do
           require_scope! :'modify:media'
           authorize! :update, media!
 
           media_params = params[:media] || params
 
-          media.update!(declared(media_params, include_missing: false))
+          media.update!(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
           if params[:tag_list]
             media.tag_list = params[:tag_list]
             media.save!

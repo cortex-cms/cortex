@@ -5,15 +5,20 @@ angular.module('cortex.controllers.posts.edit.info', [
   'cortex.directives.showErrors'
 ])
 
-.controller('PostsEditInfoCtrl', function($scope, $filter, cortex, delayedBind) {
+.controller('PostsEditInfoCtrl', function($scope, $filter, cortex, delayedBind, currentUser) {
 
     // Auto-generate slug when title changed and field isn't dirty
     $scope.$watch('data.post.title', function(title) {
       if ($scope.postForm.slug.$dirty && $scope.postForm.slug) {
         return;
       }
-      $scope.data.post.slug = $filter('slugify')($scope.data.post.title);
+      $scope.data.post.slug = $filter('slugify')(title);
+    });
 
+    $scope.$watch('data.authorIsUser', function(authorIsUser) {
+      if (authorIsUser) {
+        $scope.data.post.custom_author = currentUser.firstname + ' ' + currentUser.lastname;
+      }
     });
 
     function slugCheck() {

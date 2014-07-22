@@ -15,14 +15,15 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :industries, class_name: '::Onet::Occupation',
                                        association_foreign_key: 'onet_occupation_id'
 
-  belongs_to :user
+  belongs_to :author
+  belongs_to :user # TODO: rename creator
   belongs_to :featured_media, class_name: 'Media'
   belongs_to :tile_media, class_name: 'Media'
   belongs_to :primary_category, class_name: 'Category'
   belongs_to :primary_industry, class_name: '::Onet::Occupation'
 
   validate :primary_category_must_be_in_categories, :primary_industry_must_be_in_industries
-  validates :title, :author, :copyright_owner, presence: true, length: { minimum: 1, maximum: 255 }
+  validates :title, :copyright_owner, presence: true, length: { minimum: 1, maximum: 255 }
   validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }
   validates :tag_list, :seo_title, :seo_description, length: { maximum: 255 }
   validates :type, :job_phase, :display, presence: true, allow_nil: false

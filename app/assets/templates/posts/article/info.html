@@ -51,13 +51,12 @@
   <label>Author *</label>
 
   <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+    <div class="input-group-addon"><i class="fa fa-user"> Self <input type="checkbox" ng-model="data.authorIsUser" name="authorIsUser"></i></div>
     <input type="text"
            class="form-control"
-           placeholder="Enter an author for this post (required)"
-           ng-init="data.post.author = data.post.author || currentUser.fullname"
-           name="author"
-           ng-model="data.post.author"
+           name="custom_author"
+           ng-model="data.post.custom_author"
+           ng-disabled="data.authorIsUser"
            ng-minlength="1"
            ng-maxlength="255"
            required>

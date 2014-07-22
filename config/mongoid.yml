@@ -12,6 +12,13 @@ local:
       hosts:
         - localhost:27017
 
+staging:
+  sessions:
+    default:
+      database: cortex_stg
+      hosts:
+        - localhost:27017
+
 test:
   sessions:
     default:

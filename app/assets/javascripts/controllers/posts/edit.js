@@ -13,8 +13,7 @@ angular.module('cortex.controllers.posts.edit', [
 ])
 
 .controller('PostsEditCtrl', function($scope, $state, $timeout, flash, _,
-                                      post, filters, categoriesHierarchy, AddMediaService) {
-
+                                      post, filters, currentUserAuthor, categoriesHierarchy, AddMediaService) {
   $scope.data = {
     savePost: function() {
       $scope.$broadcast('validate');
@@ -28,6 +27,13 @@ angular.module('cortex.controllers.posts.edit', [
       $scope.data.post.primary_category_id = $scope.data.post.category_ids[0];
       $scope.data.post.industry_ids = [$scope.data.post.primary_industry_id];
       $scope.data.post.tag_list = $scope.data.post.tag_list.map(function(tag) { return tag.name; });
+
+      if ($scope.data.authorIsUser) {
+        $scope.data.post.custom_author = null;
+        $scope.data.post.author_id = currentUserAuthor.id;
+      } else {
+        $scope.data.post.author_id = null;
+      }
 
       $scope.data.post.$save(function(post) {
         flash.success = 'Saved "' + post.title + '"';
@@ -48,6 +54,9 @@ angular.module('cortex.controllers.posts.edit', [
     minHeight: 800
   };
 
+  if (!post || post.author) {
+    $scope.data.authorIsUser = true;
+  }
   $scope.data.post = post;
   $scope.data.categoriesHierarchy = categoriesHierarchy;
 

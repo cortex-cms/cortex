@@ -17,6 +17,7 @@
         <li ng-class="{ active: $state.includes('cortex.products') }"><a class="navbar-item" ui-sref="cortex.products">Applications</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-items-admin small navbar-right">
+        <li><a class="navbar-item" ui-sref="cortex.users.edit({userId: currentUser.id})">Profile</a></li>
         <li><a class="navbar-item" ng-click="logout()">Log Out</a></li>
       </ul>
     </nav>

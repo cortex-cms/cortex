@@ -14,7 +14,6 @@ angular.module('cortex.controllers.posts.edit', [
 
 .controller('PostsEditCtrl', function($scope, $state, $timeout, flash, _,
                                       post, filters, categoriesHierarchy, AddMediaService) {
-
   $scope.data = {
     savePost: function() {
       $scope.$broadcast('validate');
@@ -29,6 +28,13 @@ angular.module('cortex.controllers.posts.edit', [
       $scope.data.post.industry_ids = [$scope.data.post.primary_industry_id];
       $scope.data.post.tag_list = $scope.data.post.tag_list.map(function(tag) { return tag.name; });
 
+      if ($scope.data.authorIsUser) {
+        $scope.data.post.custom_author = null;
+        $scope.data.post.author_id = currentUserAuthor.id;
+      } else {
+        $scope.data.post.author_id = null;
+      }
+
       $scope.data.post.$save(function(post) {
         flash.success = 'Saved "' + post.title + '"';
         $state.go('^.^.^.manage.components');
@@ -38,6 +44,11 @@ angular.module('cortex.controllers.posts.edit', [
       return job_phase.name;
     }),
     industries: filters.industries
+    if ($scope.data.post.author) {
+      $scope.data.authorIsUser = true;
+    }
+
+    $scope.data.authorIsUser = true;
   };
 
   AddMediaService.initRedactorWithMedia();
@@ -58,6 +69,12 @@ angular.module('cortex.controllers.posts.edit', [
     open: function(datepicker) {
       $timeout(function(){
         $scope.datepicker[datepicker] = true;
+    }
+  });
+
+  $scope.$watch('data.authorIsUser', function(authorIsUser) {
+    if (authorIsUser) {
+      $scope.data.post.custom_author = currentUser.firstname + ' ' + currentUser.lastname;
       });
     }
   };

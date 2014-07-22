@@ -13,6 +13,10 @@ development:
   <<: *default
   database: cortex_dev
 
+staging:
+  <<: *default
+  database: cortex_dev
+
 test:
   <<: *default
   database: cortex_test

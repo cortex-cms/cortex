@@ -6,10 +6,14 @@ module API::V1
 
       resource :categories do
 
+        params do
+          optional :depth, default: 1
+        end
+
         desc 'Show all categories'
         get do
           authorize! :view, Category
-          present Category.all, with: Entities::Category
+          present Category.where("depth >= ?", params[:depth]), with: Entities::Category
         end
 
         desc 'Show category hierarchy'

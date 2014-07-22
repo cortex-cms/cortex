@@ -45,19 +45,18 @@
   </div>
 </div>
 
-<div class="form-group has-feedback" show-errors>
-  <label class="control-label">Author</label>
+<div class="author form-group" show-errors data-parent-selector=".info-tab">
+  <label>Author *</label>
 
   <div class="input-group">
-    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+    <div class="input-group-addon">Self <input type="checkbox" ng-model="data.authorIsUser" name="authorIsUser"></i></div>
     <input type="text"
            class="form-control"
-           placeholder="Enter an author for this post (required)"
-           ng-init="data.post.author = data.post.author || currentUser.fullname"
-           ng-model="data.post.author"
+           name="custom_author"
+           ng-model="data.post.custom_author"
+           ng-disabled="data.authorIsUser"
            ng-minlength="1"
            ng-maxlength="255"
            required>
-    <span class="fa fa-asterisk form-control-feedback"></span>
   </div>
 </div>

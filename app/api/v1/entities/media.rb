@@ -34,7 +34,7 @@ module API::V1
         expose :content_type, as: :type, documentation: { type: "String", desc: "Media type" }
         expose :consumed?, as: :consumed, documentation: { type: "Boolean", desc: "Is the media consumed?" }
 
-        expose :user, with: 'Entities::UserBasic', as: :creator, documentation: { type: "User", desc: "Owner" }
+        expose :user, with: 'Entities::User', as: :creator, documentation: { type: "User", desc: "Owner" }
       end
     end
   end

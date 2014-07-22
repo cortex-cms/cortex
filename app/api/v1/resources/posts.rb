@@ -42,7 +42,7 @@ module API::V1
           present @posts, with: Entities::Post, full: true
         end
 
-        desc 'Show post tags'
+        desc 'Show post tags', { entity: Entities::Tag, nickname: "showTags" }
         params do
           optional :s
         end
@@ -61,7 +61,7 @@ module API::V1
           present tags, with: Entities::Tag
         end
 
-        desc 'Show all filters/facets for posts'
+        desc 'Show all filters/facets for posts', { nickname: "showFilters" }
         params do
           optional :depth, default: 1, desc: "Minimum depth of filters"
         end
@@ -85,7 +85,7 @@ module API::V1
           present @posts, with: Entities::Post
         end
 
-        desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createAPost" }
+        desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createPost" }
         params do
           optional :featured_media_id
           optional :tile_media_id
@@ -100,7 +100,7 @@ module API::V1
           present post, with: Entities::Post, full: true
         end
 
-        desc 'Update a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "updateAPost" }
+        desc 'Update a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "updatePost" }
         put ':id' do
           require_scope! :'modify:posts'
           authorize! :update, post!
@@ -121,7 +121,7 @@ module API::V1
           present post, with: Entities::Post, full: true
         end
 
-        desc 'Delete a post', { nickname: "deleteAPost" }
+        desc 'Delete a post', { nickname: "deletePost" }
         delete ':id' do
           require_scope! :'modify:posts'
           authorize! :delete, post!

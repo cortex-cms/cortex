@@ -41,7 +41,7 @@ module API::V1
 
         expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
 
-        expose :user, with: 'Entities::UserBasic'
+        expose :user, with: 'Entities::User'
       end
     end
   end

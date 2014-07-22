@@ -10,7 +10,7 @@ module API::V1
         helpers Helpers::PaginationHelper
         helpers Helpers::TenantsHelper
 
-        desc 'Show all tenants', { entity: Entities::Tenant }
+        desc 'Show all tenants', { entity: Entities::Tenant, nickname: "showAllTenants" }
         params do
           use :pagination
         end
@@ -21,7 +21,7 @@ module API::V1
           present Tenant.page(page).per(per_page), using: Entities::Tenant, children: params[:include_children]
         end
 
-        desc 'Show tenant hierarchy'
+        desc 'Show tenant hierarchy', { entity: Entities::Tenant, nickname: "showTenantHierarchy" }
         params do
           use :pagination
         end
@@ -32,12 +32,12 @@ module API::V1
           present Tenant.roots, using: Entities::Tenant, children: true
         end
 
-        desc 'Show a tenant', { entity: Entities::Tenant }
+        desc 'Show a tenant', { entity: Entities::Tenant, nickname: "showTenant" }
         get ':id' do
           present tenant!, with: Entities::Tenant, children: false
         end
 
-        desc 'Create a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation }
+        desc 'Create a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation, nickname: "createTenant" }
         params do
           requires :name, type: String, desc: "Tenant Name"
         end
@@ -53,7 +53,7 @@ module API::V1
           present tenant, with: Entities::Tenant
         end
 
-        desc 'Update a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation }
+        desc 'Update a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation, nickname: "updateTenant" }
         put ':id' do
           require_scope! :'modify:tenants'
           authorize! :update, tenant!
@@ -64,7 +64,7 @@ module API::V1
           present tenant, with: Entities::Tenant
         end
 
-        desc 'Delete a tenant'
+        desc 'Delete a tenant', { nickname: "deleteTenant" }
         delete ':id' do
           require_scope! :'modify:tenants'
           authorize! :delete, tenant!

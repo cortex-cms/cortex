@@ -6,18 +6,10 @@ module API::V1
 
       resource :users do
 
-        desc 'Get the current user'
+        desc 'Get the current user', { entity: Entities::User, nickname: "currentUser" }
         get :me do
           authorize! :view, current_user!
-          present current_user, with: Entities::User
-        end
-
-        desc 'Update the current user'
-        params do
-          # ??
-        end
-        put :me do
-          # ??
+          present current_user, with: Entities::User, full: true
         end
       end
     end

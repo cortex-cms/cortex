@@ -2,25 +2,8 @@ require_relative '../helpers/resource_helper'
 
 module API::V1
   module Resources
-    module MediaParams
-      extend Grape::API::Helpers
-
-      params :media_params do
-        optional :name
-        optional :attachment
-        optional :description
-        optional :alt
-        optional :active
-        optional :deactive_at
-        optional :tag_list
-        optional :type
-        optional :video_id # youtube
-      end
-    end
-
     class Media < Grape::API
       helpers Helpers::SharedParams
-      # helpers MediaParams
 
       resource :media do
         helpers Helpers::PaginationHelper
@@ -60,7 +43,7 @@ module API::V1
           present @media, with: Entities::Media
         end
 
-        desc 'Get media', { entity: Entities::Media, nickname: "getMedia" }
+        desc 'Get media', { entity: Entities::Media, nickname: "showMedia" }
         get ':id' do
           require_scope! :'view:media'
           authorize! :view, media!

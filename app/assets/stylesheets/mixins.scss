@@ -18,3 +18,9 @@
 @mixin navbar-bg-position-dual($vertical-pos) {
   background-position: center $vertical-pos, center bottom;
 }
+
+@mixin truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

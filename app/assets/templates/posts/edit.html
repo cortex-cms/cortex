@@ -93,17 +93,17 @@
                 <label>Post Type</label>
 
                 <div class="btn-group btn-group-justified" data-toggle="buttons">
-                  <label class="btn btn-default" for="post-type" ui-sref=".sections.article" ui-sref-active="active">
-                    <input type="radio" name="post-type" id="ArticlePost"/><i class="fa fa-quote-right hidden-md hidden-sm hidden-xs"></i> Article
+                  <label class="btn btn-default" ui-sref=".sections.article" ui-sref-active="active" ng-model="data.post.type" btn-radio="'ArticlePost'">
+                    <i class="fa fa-quote-right hidden-md hidden-sm hidden-xs"></i> Article
                   </label>
-                  <label class="btn btn-default" for="post-type" ui-sref=".sections.video" ui-sref-active="active">
-                    <input type="radio" name="post-type" id="VideoPost"/><i class="fa fa-video-camera hidden-md hidden-sm hidden-xs"></i> Video
+                  <label class="btn btn-default" ui-sref=".sections.video" ui-sref-active="active" ng-model="data.post.type" btn-radio="'VideoPost'">
+                    <i class="fa fa-video-camera hidden-md hidden-sm hidden-xs"></i> Video
                   </label>
-                  <label class="btn btn-default" for="post-type" ui-sref=".sections.infographic" ui-sref-active="active">
-                    <input type="radio" name="post-type" id="InfographicPost"/><i class="fa fa-picture-o hidden-md hidden-sm hidden-xs"></i> Infographic
+                  <label class="btn btn-default" ui-sref=".sections.infographic" ui-sref-active="active" ng-model="data.post.type" btn-radio="'InfographicPost'">
+                    <i class="fa fa-picture-o hidden-md hidden-sm hidden-xs"></i> Infographic
                   </label>
-                  <label class="btn btn-default" for="post-type" ui-sref=".sections.promo" ui-sref-active="active">
-                    <input type="radio" name="post-type" id="PromoPost"/><i class="fa fa-bullhorn hidden-md hidden-sm hidden-xs"></i> Promo
+                  <label class="btn btn-default" ui-sref=".sections.promo" ui-sref-active="active" ng-model="data.post.type" btn-radio="'PromoPost'">
+                    <i class="fa fa-bullhorn hidden-md hidden-sm hidden-xs"></i> Promo
                   </label>
                 </div>
               </div>
@@ -133,47 +133,6 @@
             </div>
           </tab>
         </tabset>
-
-        <accordion class="panel-accordion" close-others=true>
-          <accordion-group>
-            <accordion-heading><i class="fa fa-info-circle"></i> Info</accordion-heading>
-            <div class="post-type-group">
-              <label>Post Type</label>
-
-              <div class="btn-group btn-group-justified" data-toggle="buttons">
-                <label class="btn btn-default" ui-sref=".sections.article" ui-sref-active="active">
-                  <input type="radio" id="article"/><i class="fa fa-quote-right hidden-md hidden-sm hidden-xs"></i> Article
-                </label>
-                <label class="btn btn-default" ui-sref=".sections.video" ui-sref-active="active">
-                  <input type="radio" id="Video"/><i class="fa fa-video-camera hidden-md hidden-sm hidden-xs"></i> Video
-                </label>
-                <label class="btn btn-default" ui-sref=".sections.infographic" ui-sref-active="active">
-                  <input type="radio" id="infographic"/><i class="fa fa-picture-o hidden-md hidden-sm hidden-xs"></i> Infographic
-                </label>
-                <label class="btn btn-default" ui-sref=".sections.promo" ui-sref-active="active">
-                  <input type="radio" id="promo"/><i class="fa fa-bullhorn hidden-md hidden-sm hidden-xs"></i> Promo
-                </label>
-              </div>
-            </div>
-
-            <div ui-view="info"></div>
-          </accordion-group>
-          <accordion-group>
-            <accordion-heading><i class="fa fa-tag"></i> Classify</accordion-heading>
-
-            <div ui-view="classify"></div>
-          </accordion-group>
-          <accordion-group>
-            <accordion-heading><i class="fa fa-eye"></i> Display</accordion-heading>
-
-            <div ui-view="display"></div>
-          </accordion-group>
-          <accordion-group>
-            <accordion-heading><i class="fa fa-search"></i> SEO</accordion-heading>
-
-            <div ui-view="seo"></div>
-          </accordion-group>
-        </accordion>
       </div>
     </div>
     <small>Fields marked with * are required. Your input will be retained between tabs.</small>

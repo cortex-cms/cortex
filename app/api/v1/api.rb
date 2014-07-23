@@ -14,11 +14,6 @@ module API
         rack_response({message: 'Validation failed', errors: errors}.to_json, 422)
       end
 
-      before do
-        header['Access-Control-Allow-Origin'] = '*'
-        header['Access-Control-Request-Method'] = '*'
-      end
-
       helpers Helpers::APIHelper
       helpers PaginationHeaders
 

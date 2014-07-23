@@ -527,7 +527,7 @@ DEPENDENCIES
   font-awesome-sass
   foreman
   gon
-  grape (~> 0.7)
+  grape (~> 0.8)
   grape-entity
   grape-swagger
   growl

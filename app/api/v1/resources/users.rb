@@ -7,10 +7,10 @@ module API::V1
       resource :users do
         helpers Helpers::UsersHelper
 
-        desc 'Get the current user'
+        desc 'Get the current user', { entity: API::V1::Entities::User, nickname: "currentUser" }
         get :me do
           authorize! :view, current_user!
-          present current_user, with: Entities::User
+          present current_user, with: Entities::User, full: true
         end
 
         desc "Fetch a user's author info"

@@ -108,7 +108,7 @@ describe API::Resources::Posts, elasticsearch: true do
       post = create(:post)
       get "/api/v1/posts/#{post.id}"
       response.should be_success
-      response.body.should represent(API::Entities::Post, post)
+      response.body.should represent(API::Entities::Post, post, { full: true })
     end
   end
 
@@ -119,7 +119,7 @@ describe API::Resources::Posts, elasticsearch: true do
         valid_post = attributes_for(:post, author_id: author.id)
         expect{ post '/api/v1/posts', valid_post }.to change(Post, :count).by(1)
         response.should be_success
-        response.body.should represent(API::Entities::Post, Post.last)
+        response.body.should represent(API::Entities::Post, Post.last, { full: true })
       end
     end
 
@@ -135,7 +135,7 @@ describe API::Resources::Posts, elasticsearch: true do
         with_media_post = build(:post, :with_featured_media, author_id: author.id).to_json
         expect{ post '/api/v1/posts', with_media_post, application_json }.to change(Post, :count).by(1)
         response.should be_success
-        response.body.should represent(API::Entities::Post, Post.last)
+        response.body.should represent(API::Entities::Post, Post.last, { full: true })
       end
 
       it 'should include the featured media in associated media' do
@@ -152,7 +152,7 @@ describe API::Resources::Posts, elasticsearch: true do
 
         expect{ post '/api/v1/posts',  promo_post }.to change(Post, :count).by(1)
         response.should be_success
-        response.body.should represent(API::Entities::Post, Post.last)
+        response.body.should represent(API::Entities::Post, Post.last, { full: true })
       end
       it 'should require featured_url and call_to_action' do
         promo_post = attributes_for(:post, type: 'PromoPost', author_id: author.id)
@@ -170,7 +170,7 @@ describe API::Resources::Posts, elasticsearch: true do
         post.title += ' updated'
         expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count).by(1)
         response.should be_success
-        response.body.should represent(API::Entities::Post, post)
+        response.body.should represent(API::Entities::Post, post, { full: true })
       end
     end
 
@@ -188,7 +188,7 @@ describe API::Resources::Posts, elasticsearch: true do
         post.destination_url = "http://www.example.com"
         expect{ put "/api/v1/posts/#{post.id}", {destination_url: "http://www.example.com"}.to_json, application_json }.to_not change(Post, :count).by(1)
         response.should be_success
-        response.body.should represent(API::Entities::Post, post)
+        response.body.should represent(API::Entities::Post, post, { full: true })
       end
 
       it 'should not update the post with invalid attributes' do
@@ -210,7 +210,7 @@ describe API::Resources::Posts, elasticsearch: true do
         post.title += ' updated'
         expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count).by(1)
         response.should be_success
-        response.body.should represent(API::Entities::Post, post)
+        response.body.should represent(API::Entities::Post, post, { full: true })
       end
 
       it 'should include the featured media in associated media' do

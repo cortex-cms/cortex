@@ -11,14 +11,11 @@
   }
 
 .posts-filters {
-  @include make-md-column(2, 0);
-  @media (min-width: $screen-md-min) {
-    padding-right: $standard-margin * 2;
-  }
+  @include make-md-column(2);
 }
 
 .posts-grid {
-  @include make-md-column(10, 0);
+  @include make-md-column(10);
 }
 
 ////////////////////////////////

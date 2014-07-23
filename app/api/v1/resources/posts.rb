@@ -111,6 +111,7 @@ module API::V1
         get 'filters' do
           present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
           present :categories, ::Category.where('depth >= ?', params[:depth]), with: Entities::Category
+          present :job_phases, ::Category.roots, with: Entities::CategoryWithChildren
         end
 
         desc 'Show a post'

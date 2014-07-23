@@ -1,7 +1,6 @@
-
 <div id="batch-and-search" class="clearfix">
   <div class="pull-left hmargin-right-small">
-    <button ui-sref="cortex.posts.new" class="btn btn-sm btn-primary" type="button">Create Post</button>
+    <button ui-sref="cortex.posts.new.sections.article" class="btn btn-sm btn-primary" type="button">Create Post</button>
   </div>
 
   <div class="dropdown pull-left">
@@ -26,7 +25,7 @@
 
 <div id="post-grid" class="smaller">
   <table ng-table="postDataParams" class="table posts-table">
-    <tr ng-repeat="post in $data" ui-sref="cortex.posts.edit({postId: post.id})">
+    <tr ng-repeat="post in $data" ui-sref="{{post | editState}}">
       <td data-title="'Title'">{{ post.title }}</td>
       <td data-title="'Type'">{{ post.type }}</td>
       <td data-title="'Status'">{{ post.published_at|publishStatus:post.draft }}</td>

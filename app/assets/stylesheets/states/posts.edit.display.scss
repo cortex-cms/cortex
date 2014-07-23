@@ -1,0 +1,18 @@
+.display {
+  .media-selector {
+    @extend .row;
+
+    .thumb {
+      @include make-md-column(4);
+    }
+
+    .info {
+      @include make-md-column(5);
+    }
+
+    .actions {
+      @include make-md-column(3);
+      @extend .btn-group-vertical;
+    }
+  }
+}

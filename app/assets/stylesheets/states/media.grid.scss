@@ -9,8 +9,4 @@
     @include make-xs-column(6);
     @extend .text-right;
   }
-
-  .media-grid-actions {
-    @extend .btn-group;
-  }
 }

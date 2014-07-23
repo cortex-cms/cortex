@@ -10,7 +10,13 @@ angular.module('cortex.states', [
   'cortex.controllers.media.new',
   'cortex.controllers.organizations',
   'cortex.controllers.organizations.manage',
+
   'cortex.controllers.posts.edit',
+  'cortex.controllers.posts.edit.info',
+  'cortex.controllers.posts.edit.classify',
+  'cortex.controllers.posts.edit.display',
+  'cortex.controllers.posts.edit.seo',
+
   'cortex.controllers.posts.filters',
   'cortex.controllers.posts.grid',
   'cortex.controllers.posts.popup',
@@ -109,12 +115,23 @@ angular.module('cortex.states', [
 
     .state('cortex.posts.new', {
       url: '/new',
+      abstract: true,
       templateUrl: 'posts/edit.html',
       controller: 'PostsEditCtrl',
       resolve: {
-        post: function() {
-          return null;
-        },
+        post: ['$q', 'cortex', 'currentUser', function($q, cortex, currentUser) {
+          var defer = $q.defer();
+
+          var post = new cortex.posts();
+          post.body = '';
+          post.draft = true;
+          post.author = currentUser.full_name;
+          post.copyright_owner = post.copyright_owner || "CareerBuilder, LLC";
+          post.tag_list = '';
+
+          defer.resolve(post);
+          return defer.promise;
+        }],
         categoriesHierarchy: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
         }],
@@ -126,18 +143,78 @@ angular.module('cortex.states', [
         }]
       },
       data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections', {
+      url: '',
+      abstract: true,
+      views: {
+        'info': {
+          templateUrl: 'posts/article/info.html',
+          controller: 'PostsEditInfoCtrl'
+        },
+        'classify': {
+          templateUrl: 'posts/article/classify.html',
+          controller: 'PostsEditClassifyCtrl'
+        },
+        'display': {
+          templateUrl: 'posts/article/display.html',
+          controller: 'PostsEditDisplayCtrl'
+        },
+        'seo': {
+          templateUrl: 'posts/article/seo.html',
+          controller: 'PostsEditSeoCtrl'
+        }
+      }
+    })
+
+    .state('cortex.posts.new.sections.article', {
+      url: '/article',
+      data: {
+        ncyBreadcrumbLabel: 'New Post'
+      }
+    })
+
+    .state('cortex.posts.new.sections.video', {
+      url: '/video',
+      data: {
+        ncyBreadcrumbLabel: 'New Post'
+      }
+    })
+
+    .state('cortex.posts.new.sections.infographic', {
+      url: '/infographic',
+      data: {
+        ncyBreadcrumbLabel: 'New Post'
+      }
+    })
+
+    .state('cortex.posts.new.sections.promo', {
+      url: '/promo',
+      views: {
+        'info@cortex.posts.edit': {
+          templateUrl: 'posts/promo/info.html'
+        },
+        'display@cortex.posts.edit': {
+          templateUrl: 'posts/promo/display.html'
+        },
+        'seo@cortex.posts.edit': {
+          templateUrl: 'posts/promo/seo.html'
+        }
+      },
+      data: {
         ncyBreadcrumbLabel: 'New Post'
       }
     })
 
     .state('cortex.posts.edit', {
       url: '/:postId/edit',
+      abstract: true,
       templateUrl: 'posts/edit.html',
       controller: 'PostsEditCtrl',
       resolve: {
-        post: ['cortex', '$stateParams', function(cortex, $stateParams) {
-          return cortex.posts.get({id: $stateParams.postId}).$promise;
-        }],
         categoriesHierarchy: ['cortex', function(cortex) {
           return cortex.categories.hierarchy().$promise;
         }],
@@ -146,7 +223,97 @@ angular.module('cortex.states', [
         }],
         currentUserAuthor: ['cortex', 'currentUser', function(cortex, currentUser) {
           return cortex.userAuthor.get({user_id: currentUser.id}).$promise;
+        }],
+        post: ['$stateParams', '$q', 'cortex', function($stateParams, $q, cortex, categoriesHierarchy) {
+          var defer = $q.defer();
+
+          cortex.posts.get({id: $stateParams.postId}).$promise
+            .then(function(post) {
+              if (post.industry) {
+                post.industry_id = post.industry.id;
+              }
+
+              var selectedCategoryIds = _.map(post.categories, function (c) {
+                return c.id;
+              });
+
+              _.each(categoriesHierarchy, function (category) {
+                _.each(category.children, function (child) {
+                  if (_.contains(selectedCategoryIds, child.id)) {
+                    child.$selected = true;
+                  }
+                });
+              });
+
+              defer.resolve(post);
+            }, function(response) {
+              defer.reject(response);
+            });
+
+          return defer.promise;
         }]
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections', {
+      url: '',
+      abstract: true,
+      views: {
+        'info': {
+          templateUrl: 'posts/article/info.html',
+          controller: 'PostsEditInfoCtrl'
+        },
+        'classify': {
+          templateUrl: 'posts/article/classify.html',
+          controller: 'PostsEditClassifyCtrl'
+        },
+        'display': {
+          templateUrl: 'posts/article/display.html',
+          controller: 'PostsEditDisplayCtrl'
+        },
+        'seo': {
+          templateUrl: 'posts/article/seo.html',
+          controller: 'PostsEditSeoCtrl'
+        }
+      }
+    })
+
+    .state('cortex.posts.edit.sections.article', {
+      url: '/article',
+      data: {
+        ncyBreadcrumbLabel: 'Edit Post'
+      }
+    })
+
+    .state('cortex.posts.edit.sections.video', {
+      url: '/video',
+      data: {
+        ncyBreadcrumbLabel: 'Edit Post'
+      }
+    })
+
+    .state('cortex.posts.edit.sections.infographic', {
+      url: '/infographic',
+      data: {
+        ncyBreadcrumbLabel: 'Edit Post'
+      }
+    })
+
+    .state('cortex.posts.edit.sections.promo', {
+      url: '/promo',
+      views: {
+        'info@cortex.posts.edit': {
+          templateUrl: 'posts/promo/info.html'
+        },
+        'display@cortex.posts.edit': {
+          templateUrl: 'posts/promo/display.html'
+        },
+        'seo@cortex.posts.edit': {
+          templateUrl: 'posts/promo/seo.html'
+        }
       },
       data: {
         ncyBreadcrumbLabel: 'Edit Post'
@@ -156,17 +323,23 @@ angular.module('cortex.states', [
     // Posts Edit + Media Popup
     // **********************
 
-    .state('cortex.posts.edit.media', {
+    // ** Article/Media Popup (Edit)
+
+    .state('cortex.posts.edit.sections.article.media', {
       url: '/media',
       abstract: true,
-      templateUrl: 'posts/popup.html',
-      controller: 'PostsPopupCtrl',
+      views: {
+        'popup@cortex.posts.edit': {
+          templateUrl: 'posts/popup.html',
+          controller: 'PostsPopupCtrl'
+        }
+      },
       data: {
         ncyBreadcrumbLabel: false
       }
     })
 
-    .state('cortex.posts.edit.media.new', {
+    .state('cortex.posts.edit.sections.article.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
       controller: 'MediaNewCtrl',
@@ -175,7 +348,7 @@ angular.module('cortex.states', [
       }
     })
 
-    .state('cortex.posts.edit.media.edit', {
+    .state('cortex.posts.edit.sections.article.media.edit', {
       url: '/:mediaId/edit',
       templateUrl: 'media/edit.html',
       controller: 'MediaEditCtrl',
@@ -184,7 +357,7 @@ angular.module('cortex.states', [
       }
     })
 
-    .state('cortex.posts.edit.media.manage', {
+    .state('cortex.posts.edit.sections.article.media.manage', {
       url: '',
       abstract: true,
       templateUrl: 'media/manage.html',
@@ -193,7 +366,7 @@ angular.module('cortex.states', [
       }
     })
 
-    .state('cortex.posts.edit.media.manage.components', {
+    .state('cortex.posts.edit.sections.article.media.manage.components', {
       url: '/:page/:perPage/:query',
       views: {
         'media-grid': {
@@ -210,17 +383,23 @@ angular.module('cortex.states', [
       }
     })
 
-    .state('cortex.posts.new.media', {
+    // ** Video/Media Popup (Edit)
+
+    .state('cortex.posts.edit.sections.video.media', {
       url: '/media',
       abstract: true,
-      templateUrl: 'posts/popup.html',
-      controller: 'PostsPopupCtrl',
+      views: {
+        'popup@cortex.posts.edit': {
+          templateUrl: 'posts/popup.html',
+          controller: 'PostsPopupCtrl'
+        }
+      },
       data: {
         ncyBreadcrumbLabel: false
       }
     })
 
-    .state('cortex.posts.new.media.new', {
+    .state('cortex.posts.edit.sections.video.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
       controller: 'MediaNewCtrl',
@@ -229,7 +408,7 @@ angular.module('cortex.states', [
       }
     })
 
-    .state('cortex.posts.new.media.edit', {
+    .state('cortex.posts.edit.sections.video.media.edit', {
       url: '/:mediaId/edit',
       templateUrl: 'media/edit.html',
       controller: 'MediaEditCtrl',
@@ -238,7 +417,7 @@ angular.module('cortex.states', [
       }
     })
 
-    .state('cortex.posts.new.media.manage', {
+    .state('cortex.posts.edit.sections.video.media.manage', {
       url: '',
       abstract: true,
       templateUrl: 'media/manage.html',
@@ -247,7 +426,367 @@ angular.module('cortex.states', [
       }
     })
 
-    .state('cortex.posts.new.media.manage.components', {
+    .state('cortex.posts.edit.sections.video.media.manage.components', {
+      url: '/:page/:perPage/:query',
+      views: {
+        'media-grid': {
+          templateUrl: 'media/grid.html',
+          controller: 'MediaGridCtrl'
+        },
+        'media-filters': {
+          templateUrl: 'media/filters.html',
+          controller: 'MediaFiltersCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    // ** Infographic/Media Popup (Edit)
+
+    .state('cortex.posts.edit.sections.infographic.media', {
+      url: '/media',
+      abstract: true,
+      views: {
+        'popup@cortex.posts.edit': {
+          templateUrl: 'posts/popup.html',
+          controller: 'PostsPopupCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.infographic.media.new', {
+      url: '/new',
+      templateUrl: 'media/new.html',
+      controller: 'MediaNewCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.infographic.media.edit', {
+      url: '/:mediaId/edit',
+      templateUrl: 'media/edit.html',
+      controller: 'MediaEditCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.infographic.media.manage', {
+      url: '',
+      abstract: true,
+      templateUrl: 'media/manage.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.infographic.media.manage.components', {
+      url: '/:page/:perPage/:query',
+      views: {
+        'media-grid': {
+          templateUrl: 'media/grid.html',
+          controller: 'MediaGridCtrl'
+        },
+        'media-filters': {
+          templateUrl: 'media/filters.html',
+          controller: 'MediaFiltersCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    // ** Promo/Media Popup (Edit)
+
+    .state('cortex.posts.edit.sections.promo.media', {
+      url: '/media',
+      abstract: true,
+      views: {
+        'popup@cortex.posts.edit': {
+          templateUrl: 'posts/popup.html',
+          controller: 'PostsPopupCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.promo.media.new', {
+      url: '/new',
+      templateUrl: 'media/new.html',
+      controller: 'MediaNewCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.promo.media.edit', {
+      url: '/:mediaId/edit',
+      templateUrl: 'media/edit.html',
+      controller: 'MediaEditCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.promo.media.manage', {
+      url: '',
+      abstract: true,
+      templateUrl: 'media/manage.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.promo.media.manage.components', {
+      url: '/:page/:perPage/:query',
+      views: {
+        'media-grid': {
+          templateUrl: 'media/grid.html',
+          controller: 'MediaGridCtrl'
+        },
+        'media-filters': {
+          templateUrl: 'media/filters.html',
+          controller: 'MediaFiltersCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    // ** Article/Media Popup (New)
+
+    .state('cortex.posts.new.sections.article.media', {
+      url: '/media',
+      abstract: true,
+      views: {
+        'popup@cortex.posts.new': {
+          templateUrl: 'posts/popup.html',
+          controller: 'PostsPopupCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.article.media.new', {
+      url: '/new',
+      templateUrl: 'media/new.html',
+      controller: 'MediaNewCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.article.media.edit', {
+      url: '/:mediaId/edit',
+      templateUrl: 'media/edit.html',
+      controller: 'MediaEditCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.article.media.manage', {
+      url: '',
+      abstract: true,
+      templateUrl: 'media/manage.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.article.media.manage.components', {
+      url: '/:page/:perPage/:query',
+      views: {
+        'media-grid': {
+          templateUrl: 'media/grid.html',
+          controller: 'MediaGridCtrl'
+        },
+        'media-filters': {
+          templateUrl: 'media/filters.html',
+          controller: 'MediaFiltersCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    // ** Video/Media Popup (New)
+
+    .state('cortex.posts.new.sections.video.media', {
+      url: '/media',
+      abstract: true,
+      views: {
+        'popup@cortex.posts.edit': {
+          templateUrl: 'posts/popup.html',
+          controller: 'PostsPopupCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.video.media.new', {
+      url: '/new',
+      templateUrl: 'media/new.html',
+      controller: 'MediaNewCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.video.media.edit', {
+      url: '/:mediaId/edit',
+      templateUrl: 'media/edit.html',
+      controller: 'MediaEditCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.video.media.manage', {
+      url: '',
+      abstract: true,
+      templateUrl: 'media/manage.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.video.media.manage.components', {
+      url: '/:page/:perPage/:query',
+      views: {
+        'media-grid': {
+          templateUrl: 'media/grid.html',
+          controller: 'MediaGridCtrl'
+        },
+        'media-filters': {
+          templateUrl: 'media/filters.html',
+          controller: 'MediaFiltersCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    // ** Infographic/Media Popup (New)
+
+    .state('cortex.posts.new.sections.infographic.media', {
+      url: '/media',
+      abstract: true,
+      views: {
+        'popup@cortex.posts.edit': {
+          templateUrl: 'posts/popup.html',
+          controller: 'PostsPopupCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.infographic.media.new', {
+      url: '/new',
+      templateUrl: 'media/new.html',
+      controller: 'MediaNewCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.infographic.media.edit', {
+      url: '/:mediaId/edit',
+      templateUrl: 'media/edit.html',
+      controller: 'MediaEditCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.infographic.media.manage', {
+      url: '',
+      abstract: true,
+      templateUrl: 'media/manage.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.infographic.media.manage.components', {
+      url: '/:page/:perPage/:query',
+      views: {
+        'media-grid': {
+          templateUrl: 'media/grid.html',
+          controller: 'MediaGridCtrl'
+        },
+        'media-filters': {
+          templateUrl: 'media/filters.html',
+          controller: 'MediaFiltersCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    // ** Promo/Media Popup (New)
+
+    .state('cortex.posts.new.sections.promo.media', {
+      url: '/media',
+      abstract: true,
+      views: {
+        'popup@cortex.posts.edit': {
+          templateUrl: 'posts/popup.html',
+          controller: 'PostsPopupCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.promo.media.new', {
+      url: '/new',
+      templateUrl: 'media/new.html',
+      controller: 'MediaNewCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.promo.media.edit', {
+      url: '/:mediaId/edit',
+      templateUrl: 'media/edit.html',
+      controller: 'MediaEditCtrl',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.promo.media.manage', {
+      url: '',
+      abstract: true,
+      templateUrl: 'media/manage.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.promo.media.manage.components', {
       url: '/:page/:perPage/:query',
       views: {
         'media-grid': {
@@ -370,7 +909,7 @@ angular.module('cortex.states', [
 
     .state('cortex.products', {
       url: '/products',
-      template: '<div class="container">Here ly thy beast, Products</div>',
+      template: 'Applications placeholder',
       data: {
         ncyBreadcrumbLabel: 'Apps/Products'
       }
@@ -380,7 +919,7 @@ angular.module('cortex.states', [
 
     .state('cortex.permissions', {
       url: '/permissions',
-      template: '<div class="container">Here ly thy beast, Permissions</div>',
+      template: 'Permissions placeholder',
       data: {
         ncyBreadcrumbLabel: 'Roles/Permissions'
       }

@@ -1,0 +1,41 @@
+.seo {
+  .title-group {
+    @extend .form-group;
+
+    .title-input-group {
+      @extend .input-group;
+
+      .addon {
+        @extend .input-group-addon;
+      }
+
+      .control {
+        @extend .form-control;
+      }
+    }
+  }
+
+  .description-group {
+    @extend .form-group;
+
+    .description-input-group {
+      @extend .input-group;
+
+      .addon {
+        @extend .input-group-addon;
+      }
+
+      .control {
+        @extend .form-control;
+      }
+    }
+  }
+
+  .preview-group {
+    @extend .form-group;
+
+    .control {
+      @extend .form-control;
+    }
+  }
+}

@@ -4,7 +4,7 @@ FactoryGirl.define do
     sequence(:slug)     { |n| "post-#{n}" }
     short_description   'This is a short description of the post that is long enough'
     copyright_owner     :'CareerBuilder, LLC'
-    job_phase           :discovery
+    job_phase           :Discovery
     display             :large
     type                'ArticlePost'
     draft               true
@@ -26,7 +26,7 @@ FactoryGirl.define do
     sequence(:slug)     { |n| "post-#{n}" }
     short_description   'This is a short description of the post that is long enough'
     copyright_owner     :'CareerBuilder, LLC'
-    job_phase           :discovery
+    job_phase           :Discovery
     display             :large
     type                'PromoPost'
     draft               true

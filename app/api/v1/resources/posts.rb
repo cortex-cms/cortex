@@ -73,7 +73,7 @@ module API::V1
         get 'filters' do
           present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
           present :categories, ::Category.where('depth >= ?', params[:depth]), with: Entities::Category
-          present :job_phases, ::Category.roots, with: Entities::CategoryWithChildren
+          present :job_phases, ::Category.roots, with: Entities::Category, children: true
         end
 
         desc 'Show a post', { entity: API::V1::Entities::Post, nickname: "showPost" }

@@ -9,7 +9,7 @@ module API::V1
       resource :posts do
         helpers Helpers::PaginationHelper
 
-        desc 'Show all posts', { entity: Entities::Post, nickname: "showAllPosts" }
+        desc 'Show all posts', { entity: API::V1::Entities::Post, nickname: "showAllPosts" }
         params do
           use :pagination
           use :search
@@ -30,7 +30,7 @@ module API::V1
           present @posts, with: Entities::Post, full: true
         end
 
-        desc 'Show published posts', { entity: Entities::Post, nickname: "postFeed" }
+        desc 'Show published posts', { entity: API::V1::Entities::Post, nickname: "postFeed" }
         params do
           use :pagination
           use :search
@@ -42,7 +42,7 @@ module API::V1
           present @posts, with: Entities::Post, full: true
         end
 
-        desc 'Show post tags', { entity: Entities::Tag, nickname: "showTags" }
+        desc 'Show post tags', { entity: API::V1::Entities::Tag, nickname: "showTags" }
         params do
           optional :s
         end
@@ -70,7 +70,7 @@ module API::V1
           present :categories, ::Category.where('depth >= ?', params[:depth]), with: Entities::Category
         end
 
-        desc 'Show a post', { entity: Entities::Post, nickname: "showPost" }
+        desc 'Show a post', { entity: API::V1::Entities::Post, nickname: "showPost" }
         get ':id' do
           require_scope! :'view:posts'
           authorize! :view, post!
@@ -78,14 +78,14 @@ module API::V1
           present post, with: Entities::Post, full: true
         end
 
-        desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
+        desc 'Show related published posts', { entity: API::V1::Entities::Post, nickname: "relatedPosts" }
         get 'feed/:id/related' do
           @posts = published_post!.related(true).page(page).per(per_page).records
           set_pagination_headers(@posts, 'posts')
           present @posts, with: Entities::Post
         end
 
-        desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createPost" }
+        desc 'Create a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "createPost" }
         params do
           optional :featured_media_id
           optional :tile_media_id
@@ -100,7 +100,7 @@ module API::V1
           present post, with: Entities::Post, full: true
         end
 
-        desc 'Update a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "updatePost" }
+        desc 'Update a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "updatePost" }
         put ':id' do
           require_scope! :'modify:posts'
           authorize! :update, post!

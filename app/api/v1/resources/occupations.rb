@@ -6,12 +6,12 @@ module API::V1
 
       resource :occupations do
 
-        desc 'Show all occupations', { entity: Entities::Occupation, nickname: "showAllOccupations" }
+        desc 'Show all occupations', { entity: API::V1::Entities::Occupation, nickname: "showAllOccupations" }
         get do
           present ::Onet::Occupation.all, with: Entities::Occupation
         end
 
-        desc 'Show all industries', { entity: Entities::Occupation, nickname: "showAllIndustries" }
+        desc 'Show all industries', { entity: API::V1::Entities::Occupation, nickname: "showAllIndustries" }
         get :industries do
           present ::Onet::Occupation.industries, with: Entities::Occupation
         end

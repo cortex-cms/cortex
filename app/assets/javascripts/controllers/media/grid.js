@@ -5,16 +5,16 @@ angular.module('cortex.controllers.media.grid', [
     'angular-flash.service',
     'cortex.settings',
     'cortex.services.cortex',
+    'cortex.services.postBodyEditor',
+    'cortex.services.postsPopup',
     'cortex.directives.delayedInput',
-    'cortex.controllers.posts.edit',
-    'cortex.controllers.posts.popup',
     'cortex.filters',
     'cortex.services.cortex'
 ])
 
 .controller('MediaGridCtrl', function($scope, $state, $stateParams, $window, cortex, settings,
                                       mediaSelectType, flash, PostBodyEditorService,
-                                      PostsPopupService){
+                                      PostsPopupService) {
 
     $scope.data = {};
 

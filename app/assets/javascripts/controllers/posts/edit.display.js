@@ -1,7 +1,9 @@
 angular.module('cortex.controllers.posts.edit.display', [
   'cortex.filters',
   'cortex.settings',
-  'cortex.services.mediaConstraints'
+  'cortex.services.mediaConstraints',
+  'cortex.services.postBodyEditor',
+  'cortex.services.postsPopup'
 ])
 
 .controller('PostsEditDisplayCtrl', function($scope, $state,
@@ -64,18 +66,4 @@ angular.module('cortex.controllers.posts.edit.display', [
         }
       }
     });
-})
-
-.factory('PostBodyEditorService', function($filter) {
-  return {
-    redactor: {},
-    mediaSelectType: '',
-    media: {
-      featured: {},
-      tile: {}
-    },
-    addMediaToPost: function (media) {
-      this.redactor.insertHtml($filter('mediaToHtml')(media));
-    }
-  };
 });

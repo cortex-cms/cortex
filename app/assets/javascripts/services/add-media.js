@@ -1,5 +1,6 @@
 angular.module('cortex.services.addMedia', [
-    'cortex.controllers.posts.popup'
+  'cortex.services.postBodyEditor',
+  'cortex.services.postsPopup'
 ])
 
 .factory('AddMediaService', function($state, $window,

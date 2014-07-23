@@ -40,6 +40,9 @@ angular.module('cortex.controllers.posts.edit', [
         $state.go('^.^.^.manage.components');
       });
     },
+    cancel: function() {
+      $state.go('^.^.^.manage.components');
+    },
     phases: _.map(filters.job_phases, function(job_phase) {
       return job_phase.name;
     }),
@@ -54,7 +57,7 @@ angular.module('cortex.controllers.posts.edit', [
     minHeight: 800
   };
 
-  if (!post || post.author) {
+  if (!post || (post && post.author)) {
     $scope.data.authorIsUser = true;
   }
   $scope.data.post = post;

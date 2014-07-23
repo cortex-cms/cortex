@@ -31,7 +31,7 @@ module API::V1
         ## Aliases
         expose :attachment_file_size, as: :attachment_size, documentation: { type: "Integer", desc: "Filesize in bytes" }
         expose :attachment_content_type, as: :attachment_content_type, documentation: { type: "String", desc: "Attachment Mime Type" }
-        expose :content_type, as: :type, documentation: { type: "String", desc: "Media type" }
+        expose :content_type, as: :content_type, documentation: { type: "String", desc: "Media type" }
         expose :consumed?, as: :consumed, documentation: { type: "Boolean", desc: "Is the media consumed?" }
 
         expose :user, with: 'Entities::User', as: :creator, documentation: { type: "User", desc: "Owner" }

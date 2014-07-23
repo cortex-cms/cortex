@@ -33,18 +33,29 @@
             @extend .panel-body;
 
             .draft {
-              @include make-md-column(12);
+              @include make-md-column(4);
+              @extend .input-group;
+
+              .bootstrap-switch {
+                width: 100%;
+              }
             }
 
             .actions {
-              @include make-md-column(6);
+              @include make-md-column(4);
 
-              button.cancel {
-                @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
-              }
+              .actions-group {
+                width: 100%;
 
-              button.submit {
-                @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+                button.cancel {
+                  width: 50%;
+                  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+                }
+
+                button.submit {
+                  width: 50%;
+                  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+                }
               }
             }
 

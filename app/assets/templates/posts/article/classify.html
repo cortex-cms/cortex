@@ -37,28 +37,26 @@
   </div>
 </div>
 
-<div class="tags form-group">
+<div class="tags">
   <label>Post Tags</label>
 
-  <div class="input-group">
-    <div class="tagger">
-      <tags-input display-property="name"
-                  type="text"
-                  placeholder="Enter relevant tags for this post"
-                  ng-model="data.post.tag_list"
-                  ng-maxlength="255">
-        <auto-complete source="loadTags($query)"></auto-complete>
-      </tags-input>
-    </div>
-    <span class="input-group-btn" dropdown>
+  <div class="tags-group">
+    <tags-input display-property="name"
+                type="text"
+                placeholder="Enter relevant tags for this post"
+                ng-model="data.post.tag_list"
+                ng-maxlength="255">
+      <auto-complete source="loadTags($query)"></auto-complete>
+    </tags-input>
+    <span dropdown>
       <button class="btn btn-default dropdown-toggle" type="button">
-        Popular <span class="caret"></span>
+        Popular <i class="caret"></i>
       </button>
       <ul class="dropdown-menu">
         <li ng-repeat="tag in data.popularTags">
           <a ng-click="addTag(tag)">{{ tag.name }} <span class="pull-right">{{ tag.count }}</span></a>
         </li>
       </ul>
-    </div>
+    </span>
   </div>
 </div>

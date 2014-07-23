@@ -194,13 +194,13 @@ angular.module('cortex.states', [
     .state('cortex.posts.new.sections.promo', {
       url: '/promo',
       views: {
-        'info@cortex.posts.edit': {
+        'info@cortex.posts.new': {
           templateUrl: 'posts/promo/info.html'
         },
-        'display@cortex.posts.edit': {
+        'display@cortex.posts.new': {
           templateUrl: 'posts/promo/display.html'
         },
-        'seo@cortex.posts.edit': {
+        'seo@cortex.posts.new': {
           templateUrl: 'posts/promo/seo.html'
         }
       },
@@ -629,7 +629,7 @@ angular.module('cortex.states', [
       url: '/media',
       abstract: true,
       views: {
-        'popup@cortex.posts.edit': {
+        'popup@cortex.posts.new': {
           templateUrl: 'posts/popup.html',
           controller: 'PostsPopupCtrl'
         }
@@ -689,7 +689,7 @@ angular.module('cortex.states', [
       url: '/media',
       abstract: true,
       views: {
-        'popup@cortex.posts.edit': {
+        'popup@cortex.posts.new': {
           templateUrl: 'posts/popup.html',
           controller: 'PostsPopupCtrl'
         }
@@ -749,7 +749,7 @@ angular.module('cortex.states', [
       url: '/media',
       abstract: true,
       views: {
-        'popup@cortex.posts.edit': {
+        'popup@cortex.posts.new': {
           templateUrl: 'posts/popup.html',
           controller: 'PostsPopupCtrl'
         }

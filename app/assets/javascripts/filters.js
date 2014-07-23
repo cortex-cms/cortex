@@ -86,10 +86,19 @@ angular.module('cortex.filters', [
   };
 })
 
-.filter('editState', function() {
+.filter('postEditState', function() {
+  return function(post, sref) {
+    var state = "cortex.posts.edit.sections." + post.type.replace('Post', '').toLowerCase();
+    if (sref) {
+      state = state + "({postId: " + post.id + "})";
+    }
+    return state;
+  };
+})
+
+.filter('postNewState', function() {
   return function(post) {
-    var stateName = post.type.replace('Post', '').toLowerCase();
-    return "cortex.posts.edit.sections." + stateName + "({postId: " + post.id + "})";
+    return "cortex.posts.new.sections." + post.type.replace('Post', '').toLowerCase();
   };
 });
 

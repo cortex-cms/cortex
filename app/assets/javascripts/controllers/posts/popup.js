@@ -1,9 +1,10 @@
 angular.module('cortex.controllers.posts.popup', [
   'ui.router.state',
+  'cortex.filters',
   'cortex.services.postsPopup'
 ])
 
-.controller('PostsPopupCtrl', function ($scope, $timeout, $state, PostsPopupService) {
+.controller('PostsPopupCtrl', function ($scope, $timeout, $state, $filter, PostsPopupService) {
   $scope.postsPopupService = PostsPopupService;
   $scope.postsPopupService.popupOpen = true;
 
@@ -13,12 +14,12 @@ angular.module('cortex.controllers.posts.popup', [
       if ($state.includes('cortex.posts.new')) {
         // We need to wait long enough for bootstrap-modal to fade away, otherwise we're stuck with a blocked-out page
         $timeout(function () {
-          $state.go('cortex.posts.new.sections.article');
+          $state.go($filter('postNewState')($scope.data.post));
         }, 500);
       }
       else {
         $timeout(function () {
-          $state.go('cortex.posts.edit.sections.article');
+          $state.go($filter('postEditState')($scope.data.post, false), {postId: $scope.data.post.id});
         }, 500);
       }
     }

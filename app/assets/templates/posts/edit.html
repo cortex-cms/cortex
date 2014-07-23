@@ -16,9 +16,9 @@
             <i class="fa fa-sitemap"></i> Publish/Distribute
           </div>
           <div class="content">
-            <div class="form-group">
-              <label for="draft">Publishing State</label>
-              <div class="draft row">
+            <label for="draft">Publishing State</label>
+            <div class="form-group row">
+              <div id="class" class="draft">
                 <input
                         bs-switch
                         ng-model="data.post.draft"
@@ -65,13 +65,15 @@
               </div>
             </div>
             <div class="row">
-              <div class="actions btn-group">
-                <button type="button" class="btn cancel" ng-click="data.cancel()">
-                  <i class="fa fa-reply"></i> Cancel
-                </button>
-                <button type="submit" class="btn submit" >
-                  <i class="fa fa-cloud-upload"></i> {{ data.post.draft ? "Save" : "Post" }}
-                </button>
+              <div class="actions">
+                <div class="actions-group btn-group">
+                  <button type="button" class="btn cancel" ng-click="data.cancel()">
+                    <i class="fa fa-reply"></i> Cancel
+                  </button>
+                  <button type="submit" class="btn submit" >
+                    <i class="fa fa-cloud-upload"></i> {{ data.post.draft ? "Save" : "Post" }}
+                  </button>
+                </div>
               </div>
               <div class="form-status" ng-show="postForm.$invalid">Please fill out the required fields, marked with a *</div>
             </div>

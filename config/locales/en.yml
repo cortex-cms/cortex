@@ -2,8 +2,6 @@ en:
   doorkeeper:
     scopes:
       'public': View your public information
-      'view:profile': View your profile information
-      'modify:profile': Make changes to your profile information
       'view:tenants': View tenants you control
       'modify:tenants': Make changes to, create and delete, tenants you control
       'view:users': View users you control

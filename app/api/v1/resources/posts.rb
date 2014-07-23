@@ -42,7 +42,12 @@ module API::V1
           present @posts, with: Entities::Post, full: true
         end
 
-        desc 'Show post tags', { entity: API::V1::Entities::Tag, nickname: "showTags" }
+        desc 'Show published post authors'
+        get 'feed/authors' do
+          present Author.published.distinct, with: Entities::Author
+        end
+
+        desc 'Show post tags'
         params do
           optional :s
         end

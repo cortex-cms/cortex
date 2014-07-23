@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include HasGravatar
+  include HasFirstnameLastname
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,9 +8,12 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
   belongs_to :tenant
+  has_one :author
   has_many :media
   has_many :tenants
-  has_many :posts
+  has_many :posts, through: :authors
+
+  after_create :add_author
 
   validates_presence_of :email
 
@@ -29,10 +34,6 @@ class User < ActiveRecord::Base
     @profile ||= UserProfile.find_or_create_by(:user_id => self.id)
   end
 
-  def fullname
-    lastname.to_s == '' ? firstname : "#{firstname} #{lastname}"
-  end
-
   def to_json(options={})
     options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname)
     options[:methods] ||= %w(fullname)
@@ -48,6 +49,12 @@ class User < ActiveRecord::Base
     def anonymous
       User.new
     end
+  end
+
+  private
+
+  def add_author
+    author = Author.create(user_id: id, firstname: firstname, lastname: lastname, email: email)
   end
 end
 

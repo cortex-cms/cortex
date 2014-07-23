@@ -6,7 +6,11 @@ angular.module('cortex.services.cortex', [
 .factory('cortex', function($rootScope, $http, cortexResource, paginatedResource, settings) {
 
   var categories = cortexResource('/categories/:id', {id: '@id'}, {
-    hierarchy: {method: 'GET', url: settings.cortex_base_url + '/categories/:id/hierarchy', isArray: true}
+    hierarchy: {
+      method: 'GET',
+      url:     settings.cortex_base_url + '/categories/:id/hierarchy',
+      isArray: true
+    }
   });
 
   var posts = paginatedResource('/posts/:id', {id: '@id'}, {
@@ -22,6 +26,8 @@ angular.module('cortex.services.cortex', [
 
   var tenants = cortexResource('/tenants/:id', {id: '@id'});
 
+  var userAuthor = cortexResource('/users/:user_id/author', {user_id: '@user_id'});
+
   var users = cortexResource('/users/:id', {id: '@id'}, {
     me: {method: 'GET', params: {id: 'me'}}
   });
@@ -36,6 +42,7 @@ angular.module('cortex.services.cortex', [
     media:       media,
     tenants:     tenants,
     users:       users,
+    userAuthor:  userAuthor,
     occupations: occupations
   };
 });

@@ -32,6 +32,7 @@ module API::V1
       expose :featured_media, using: 'Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Featured Media for this post"}
       expose :tile_media, using: 'Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Tile Media for this post"}
       expose :industries, using: 'Entities::Occupation', documentation: {type: "Industry", is_array: true, desc: "Industries"}
+      expose :author, using: 'Entities::Author'
 
       expose :destination_url, { documentation: { type: "String", desc: "Destination URL for a Promo Post"}, if: lambda { |post, _| post.type == 'PromoPost' } }
       expose :call_to_action, { documentation: { type: "String", desc: "Call to Action for a Promo Post"}, if: lambda { |post, _| post.type == 'PromoPost' } }

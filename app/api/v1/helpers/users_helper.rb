@@ -1,13 +1,15 @@
-module API::V1
-  module Helpers
-    module UsersHelper
+module API
+  module V1
+    module Helpers
+      module UsersHelper
 
-      def user
-        @user ||= User.find(params[:user_id])
-      end
+        def user
+          @user ||= User.find(params[:user_id])
+        end
 
-      def user!
-        user || not_found!
+        def user!
+          user || not_found!
+        end
       end
     end
   end

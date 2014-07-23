@@ -2,31 +2,14 @@ require_relative '../helpers/resource_helper'
 
 module API::V1
   module Resources
-    module MediaParams
-      extend Grape::API::Helpers
-
-      params :media_params do
-        optional :name
-        optional :attachment
-        optional :description
-        optional :alt
-        optional :active
-        optional :deactive_at
-        optional :tag_list
-        optional :type
-        optional :video_id # youtube
-      end
-    end
-
     class Media < Grape::API
       helpers Helpers::SharedParams
-      helpers MediaParams
 
       resource :media do
         helpers Helpers::PaginationHelper
         helpers Helpers::MediaHelper
 
-        desc 'Show all media'
+        desc 'Show all media', { entity: API::V1::Entities::Media, nickname: "showAllMedia" }
         params do
           use :pagination
         end
@@ -40,9 +23,10 @@ module API::V1
           present @media, with: Entities::Media
         end
 
-        desc 'Search for media'
+        desc 'Search for media', { entity: API::V1::Entities::Media, nickname: "searchMedia" }
         params do
           use :pagination
+          use :search
         end
         get :search do
           require_scope! :'view:media'
@@ -59,17 +43,17 @@ module API::V1
           present @media, with: Entities::Media
         end
 
-        desc 'Get media'
+        desc 'Get media', { entity: API::V1::Entities::Media, nickname: "showMedia" }
         get ':id' do
           require_scope! :'view:media'
           authorize! :view, media!
 
-          present media, with: Entities::Media
+          present media, with: Entities::Media, full: true
         end
 
-        desc 'Create media'
+        desc 'Create media', { entity: API::V1::Entities::Media, params: API::V1::Entities::Media.documentation, nickname: "createMedia" }
         params do
-          use :media_params
+          optional :attachment
         end
         post do
           require_scope! :'modify:media'
@@ -77,15 +61,15 @@ module API::V1
 
           media_params = params[:media] || params
 
-          @media = ::Media.new(declared(media_params, include_missing: false))
+          @media = ::Media.new(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
           media.user = current_user!
           media.save!
-          present media, with: Entities::Media
+          present media, with: Entities::Media, full: true
         end
 
-        desc 'Update media'
+        desc 'Update media', { entity: API::V1::Entities::Media, params: API::V1::Entities::Media.documentation, nickname: "updateMedia" }
         params do
-          use :media_params
+          optional :attachment
         end
         put ':id' do
           require_scope! :'modify:media'
@@ -93,15 +77,15 @@ module API::V1
 
           media_params = params[:media] || params
 
-          media.update!(declared(media_params, include_missing: false))
+          media.update!(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
           if params[:tag_list]
             media.tag_list = params[:tag_list]
             media.save!
           end
-          present media, with: Entities::Media
+          present media, with: Entities::Media, full: true
         end
 
-        desc 'Delete media'
+        desc 'Delete media', { nickname: "deleteMedia" }
         delete ':id' do
           require_scope! :'modify:media'
           authorize! :delete, media!

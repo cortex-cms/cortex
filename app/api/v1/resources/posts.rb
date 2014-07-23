@@ -2,51 +2,18 @@ require_relative '../helpers/resource_helper'
 
 module API::V1
   module Resources
-    module PostParams
-      extend Grape::API::Helpers
-
-      params :post_params do
-        optional :title
-        optional :type
-        optional :published_at
-        optional :expired_at
-        optional :deleted_at
-        optional :draft
-        optional :body
-        optional :short_description
-        optional :job_phase
-        optional :display
-        optional :featured_media_id
-        optional :tile_media_id
-        optional :notes
-        optional :copyright_owner
-        optional :seo_title
-        optional :seo_description
-        optional :seo_preview
-        optional :author_id
-        optional :custom_author
-        optional :tag_list
-        optional :primary_category_id
-        optional :category_ids
-        optional :slug
-        optional :primary_industry_id
-        optional :industry_ids
-        optional :destination_url
-        optional :call_to_action
-      end
-    end
-
     class Posts < Grape::API
-      helpers PostParams
       helpers Helpers::SharedParams
+      helpers Helpers::PostsHelper
 
       resource :posts do
         helpers Helpers::PaginationHelper
-        helpers Helpers::PostsHelper
 
-        desc 'Show all posts'
+        desc 'Show all posts', { entity: API::V1::Entities::Post, nickname: "showAllPosts" }
         params do
           use :pagination
+          use :search
+          use :post_metadata
         end
         get do
           require_scope! :'view:posts'
@@ -56,33 +23,28 @@ module API::V1
           if q.to_s != ''
             @posts = ::Post.search_with_params(params).page(page).per(per_page).records
           else
-            @posts = Post.order(created_at: :desc).page(page).per(per_page)
+            @posts = ::Post.order(created_at: :desc).page(page).per(per_page)
           end
 
           set_pagination_headers(@posts, 'posts')
-          present @posts, with: Entities::Post
+          present @posts, with: Entities::Post, full: true
         end
 
-        desc 'Show published posts'
+        desc 'Show published posts', { entity: API::V1::Entities::Post, nickname: "postFeed" }
         params do
           use :pagination
+          use :search
+          use :post_metadata
         end
         get 'feed' do
-          @posts = Post.search_with_params(params, true).page(page).per(per_page).records
+          @posts = ::Post.search_with_params(params, true).page(page).per(per_page).records
           set_pagination_headers(@posts, 'posts')
-          present @posts, with: Entities::PostBasic
+          present @posts, with: Entities::Post, full: true
         end
 
         desc 'Show published post authors'
         get 'feed/authors' do
           present Author.published.distinct, with: Entities::Author
-        end
-
-        desc 'Show related published posts'
-        get 'feed/:id/related' do
-          @posts = published_post!.related(true).page(page).per(per_page).records
-          set_pagination_headers(@posts, 'posts')
-          present @posts, with: Entities::PostBasic
         end
 
         desc 'Show post tags'
@@ -94,8 +56,8 @@ module API::V1
           authorize! :view, Post
 
           tags = params[:s] \
-            ? Post.tag_counts_on(:tags).where('name ILIKE ?', "%#{params[:s]}%") \
-            : Post.tag_counts_on(:tags)
+            ? ::Post.tag_counts_on(:tags).where('name ILIKE ?', "%#{params[:s]}%") \
+            : ::Post.tag_counts_on(:tags)
 
           if params[:popular]
             tags = tags.order('count DESC').limit(20)
@@ -104,9 +66,9 @@ module API::V1
           present tags, with: Entities::Tag
         end
 
-        desc 'Show all filters/facets for posts'
+        desc 'Show all filters/facets for posts', { nickname: "showFilters" }
         params do
-          optional :depth, default: 1
+          optional :depth, default: 1, desc: "Minimum depth of filters"
         end
         get 'filters' do
           present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
@@ -114,52 +76,58 @@ module API::V1
           present :job_phases, ::Category.roots, with: Entities::CategoryWithChildren
         end
 
-        desc 'Show a post'
+        desc 'Show a post', { entity: API::V1::Entities::Post, nickname: "showPost" }
         get ':id' do
           require_scope! :'view:posts'
           authorize! :view, post!
 
-          present post, with: Entities::Post
+          present post, with: Entities::Post, full: true
         end
 
-        desc 'Create a post'
+        desc 'Show related published posts', { entity: API::V1::Entities::Post, nickname: "relatedPosts" }
+        get 'feed/:id/related' do
+          @posts = published_post!.related(true).page(page).per(per_page).records
+          set_pagination_headers(@posts, 'posts')
+          present @posts, with: Entities::Post
+        end
+
+        desc 'Create a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "createPost" }
         params do
-          use :post_params
+          optional :featured_media_id
+          optional :tile_media_id
         end
         post do
           require_scope! :'modify:posts'
           authorize! :create, Post
 
-          params[:post_type] = "Promo" if params[:type] == 'promo'
-          @post = ::Post.new(declared(params, {include_missing: false}))
+          @post = ::Post.new(declared(params, {include_missing: false}, Entities::Post.documentation.keys))
           post.user = current_user
           post.save!
-          present post, with: Entities::Post
+          present post, with: Entities::Post, full: true
         end
 
-        desc 'Update a post'
-        params do
-          use :post_params
-        end
+        desc 'Update a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "updatePost" }
         put ':id' do
           require_scope! :'modify:posts'
           authorize! :update, post!
+
+          allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media)
 
           if params[:type]
             post.update!({type: params[:type]}) if params[:type]
             reload_post
           end
-          post.update!(declared(params, {include_missing: false}))
+          post.update!(declared(params, {include_missing: false}, allowed_params))
 
           if params[:tag_list]
             post.tag_list = params[:tag_list]
             post.save!
           end
 
-          present post, with: Entities::Post
+          present post, with: Entities::Post, full: true
         end
 
-        desc 'Delete a post'
+        desc 'Delete a post', { nickname: "deletePost" }
         delete ':id' do
           require_scope! :'modify:posts'
           authorize! :delete, post!

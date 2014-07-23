@@ -55,7 +55,7 @@ describe API::Resources::Media, elasticsearch: true do
     it 'should return the correct media' do
       get "/api/v1/media/#{media.id}"
       response.should be_success
-      response.body.should represent(API::Entities::Media, media)
+      response.body.should represent(API::Entities::Media, media, { full: true })
     end
   end
 
@@ -65,7 +65,7 @@ describe API::Resources::Media, elasticsearch: true do
       it 'should create new media' do
         expect{ post '/api/v1/media', media: attributes_for(:media) }.to change(Media, :count).by(1)
         response.should be_success
-        response.body.should represent(API::Entities::Media, Media.last)
+        response.body.should represent(API::Entities::Media, Media.last, { full: true })
       end
     end
   end
@@ -78,7 +78,7 @@ describe API::Resources::Media, elasticsearch: true do
         media.name += ' updated'
         expect{ put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count).by(1)
         response.should be_success
-        response.body.should represent(API::Entities::Media, media)
+        response.body.should represent(API::Entities::Media, media, { full: true })
       end
     end
   end

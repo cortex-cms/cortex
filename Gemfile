@@ -15,7 +15,7 @@ end
 gem 'rails', '~> 4'
 
 # API
-gem 'grape', '~> 0.7'
+gem 'grape', '~> 0.8'
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'

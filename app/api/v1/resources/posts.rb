@@ -114,7 +114,7 @@ module API
             require_scope! :'modify:posts'
             authorize! :update, post!
 
-            allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media)
+            allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories)
 
             if params[:type]
               post.update!({type: params[:type]}) if params[:type]

@@ -15,7 +15,7 @@ angular.module('cortex.filters', [
   return function(media) {
     var outputHtml;
 
-    if (media.type === 'image') {
+    if (media.content_type === 'image') {
       outputHtml = '<p><a href="' +
         media.url +
         '"><img alt="' +
@@ -101,4 +101,3 @@ angular.module('cortex.filters', [
     return "cortex.posts.new.sections." + post.type.replace('Post', '').toLowerCase();
   };
 });
-

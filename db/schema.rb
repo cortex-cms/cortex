@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721143837) do
+ActiveRecord::Schema.define(version: 20140724182815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+  enable_extension "uuid-ossp"
 
   create_table "applications", force: true do |t|
     t.string   "name"
@@ -134,33 +135,34 @@ ActiveRecord::Schema.define(version: 20140721143837) do
   end
 
   create_table "posts", force: true do |t|
-    t.integer  "user_id",                              null: false
+    t.integer  "user_id",                                            null: false
     t.string   "title"
     t.datetime "published_at"
     t.datetime "expired_at"
     t.datetime "deleted_at"
-    t.boolean  "draft",               default: true,   null: false
-    t.integer  "comment_count",       default: 0,      null: false
+    t.boolean  "draft",               default: true,                 null: false
+    t.integer  "comment_count",       default: 0,                    null: false
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "short_description"
-    t.integer  "job_phase",                            null: false
-    t.integer  "display",                              null: false
+    t.integer  "job_phase",                                          null: false
+    t.integer  "display",                                            null: false
     t.text     "notes"
     t.string   "copyright_owner"
     t.string   "seo_title"
     t.string   "seo_description"
     t.string   "seo_preview"
     t.string   "custom_author"
-    t.string   "slug",                                 null: false
+    t.string   "slug",                                               null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "type",                default: "Post", null: false
+    t.string   "type",                default: "Post",               null: false
     t.integer  "author_id"
+    t.uuid     "uuid",                default: "uuid_generate_v4()"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree

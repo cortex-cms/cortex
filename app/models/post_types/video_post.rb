@@ -2,7 +2,7 @@ class VideoPost < Post
   index_name     [Rails.env, 'posts'].join('_')
   document_type  'post'
 
-  validates :copyright_owner, presence: true, length: { minimum: 1, maximum: 255 }
+  validates :copyright_owner, :slug, presence: true, length: { minimum: 1, maximum: 255 }
   validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }
   validates :tag_list, :seo_title, :seo_description, length: { maximum: 255 }
 

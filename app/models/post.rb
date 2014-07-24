@@ -24,8 +24,6 @@ class Post < ActiveRecord::Base
 
   validate :primary_category_must_be_in_categories, :primary_industry_must_be_in_industries
   validates :title, presence: true, length: { minimum: 1, maximum: 255 }
-  # validates :short_description, presence: true, length: { minimum: 25, maximum: 255 }
-  # validates :tag_list, :seo_title, :seo_description, length: { maximum: 255 }
   validates :type, :job_phase, :display, presence: true, allow_nil: false
 
   enum job_phase: ['Discovery', 'Find the Job', 'Get the Job', 'On the Job']

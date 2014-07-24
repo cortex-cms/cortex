@@ -195,13 +195,16 @@ angular.module('cortex.states', [
       url: '/promo',
       views: {
         'info@cortex.posts.new': {
-          templateUrl: 'posts/promo/info.html'
+          templateUrl: 'posts/promo/info.html',
+          controller: 'PostsEditInfoCtrl'
         },
         'display@cortex.posts.new': {
-          templateUrl: 'posts/promo/display.html'
+          templateUrl: 'posts/promo/display.html',
+          controller: 'PostsEditDisplayCtrl'
         },
         'seo@cortex.posts.new': {
-          templateUrl: 'posts/promo/seo.html'
+          templateUrl: 'posts/promo/seo.html',
+          controller: 'PostsEditSeoCtrl'
         }
       },
       data: {

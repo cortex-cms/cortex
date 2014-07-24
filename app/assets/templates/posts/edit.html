@@ -38,7 +38,7 @@
                 <div class="input-group">
                   <input id="publish-date" name="publish-date" type="text" class="form-control"
                          ng-model="data.post.published_at" placeholder="Publish time (optional)"
-                         datepicker-popup="{{datepicker.format}}" is-open="datepicker.publishAtOpen"
+                         datepicker-popup="MMMM dd yyyy, h:mm:ss a" is-open="datepicker.publishAtOpen"
                          show-weeks="false" ng-disabled="data.post.draft">
                 <span class="input-group-btn">
                   <button class="btn btn-default" type="button"
@@ -53,7 +53,7 @@
                 <div class="input-group">
                   <input id="expiration-date" name="expiration-date" type="text" class="form-control"
                          ng-model="data.post.expired_at" placeholder="Expiration time (optional)"
-                         datepicker-popup="{{datepicker.format}}" is-open="datepicker.expireAtOpen"
+                         datepicker-popup="MMMM dd yyyy, h:mm:ss a" is-open="datepicker.expireAtOpen"
                          show-weeks="false" ng-disabled="data.post.draft">
                   <span class="input-group-btn">
                     <button class="btn btn-default" type="button"

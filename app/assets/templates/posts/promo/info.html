@@ -5,6 +5,7 @@
     <div class="input-group-addon"><i class="fa fa-header"></i></div>
     <input type="text"
            class="form-control"
+           name="title"
            ng-model="data.post.title"
            ng-minlength="1"
            ng-maxlength="255"
@@ -19,6 +20,7 @@
     <div class="input-group-addon"><i class="fa fa-link"></i></div>
     <input type="text"
            class="form-control"
+           name="destination_url"
            ng-model="data.post.destination_url"
            placeholder="Destination URL for this promo (required)"
            ng-minlength="1"
@@ -34,6 +36,7 @@
     <div class="input-group-addon"><i class="fa fa-magic"></i></div>
     <input type="text"
            class="form-control"
+           name="call_to_action"
            ng-model="data.post.call_to_action"
            placeholder="Call to Action text (required)"
            ng-minlength="1"

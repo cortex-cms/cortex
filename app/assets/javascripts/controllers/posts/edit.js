@@ -65,7 +65,6 @@ angular.module('cortex.controllers.posts.edit', [
   $scope.data.categoriesHierarchy = categoriesHierarchy;
 
   $scope.datepicker = {
-    format: 'MMMM dd yyyy, h:mm:ss a',
     expireAtOpen: false,
     publishAtOpen: false,
     open: function(datepicker) {

@@ -15,7 +15,7 @@ development:
 
 staging:
   <<: *default
-  database: cortex_dev
+  database: cortex_staging
 
 test:
   <<: *default

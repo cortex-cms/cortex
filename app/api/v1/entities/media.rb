@@ -12,6 +12,7 @@ module API
         expose :created_at, documentation: { type: 'dateTime', desc: "Created Date"}
         expose :updated_at, documentation: { type: 'dateTime', desc: "Updated Date"}
         expose :attachment_file_name, as: :attachment_name, documentation: { type: "String", desc: "Filename" }
+        expose :content_type, as: :content_type, documentation: { type: "String", desc: "Media type" }
 
         ## Thumbnails
         expose :attachment, using: 'Entities::MediaThumbnails', as: :thumbs, if: lambda { |media, _| media.can_thumb }, documentation: { type: "MediaThumbnails", desc: "Thumbnails of the media"}
@@ -32,7 +33,6 @@ module API
           ## Aliases
           expose :attachment_file_size, as: :attachment_size, documentation: { type: "Integer", desc: "Filesize in bytes" }
           expose :attachment_content_type, as: :attachment_content_type, documentation: { type: "String", desc: "Attachment Mime Type" }
-          expose :content_type, as: :content_type, documentation: { type: "String", desc: "Media type" }
           expose :consumed?, as: :consumed, documentation: { type: "Boolean", desc: "Is the media consumed?" }
 
           expose :user, with: 'Entities::User', as: :creator, documentation: { type: "User", desc: "Owner" }

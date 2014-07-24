@@ -19,6 +19,7 @@
         $stateParams = _$stateParams_;
         $q           = _$q_;
         $httpBackend = _$httpBackend_;
+        post         = {};
         flash        = _flash_;
         cortex = _cortex_;
         filters = cortex.posts.filters();
@@ -64,21 +65,25 @@
       });
 
       it('should set data.authorIsUser to true if creating a new post', function() {
-        post = undefined;
+        post = {};
         var controller = constructController();
         expect($scope.data.authorIsUser).toBeTruthy();
       });
 
       it('should set data.authorIsUser to true if editing a post that has an author', function() {
         post = {
-          author: 'Plinkett'
+          id: 1,
+          author: {id: 1, firstname: 'Plinkett'}
         };
         var controller = constructController();
         expect($scope.data.authorIsUser).toBeTruthy();
       });
 
-      it('should not set data.authorIsUser if editing a post that has no author', function() {
-        post = {};
+      it('should not set data.authorIsUser if editing a post that has a custom author', function() {
+        post = {
+          id: 1,
+          custom_author: 'Locke'
+        };
         var controller = constructController();
         expect($scope.data.authorIsUser).toBeFalsy();
       });

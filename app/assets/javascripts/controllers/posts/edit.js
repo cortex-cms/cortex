@@ -48,6 +48,7 @@ angular.module('cortex.controllers.posts.edit', [
     }),
     industries: filters.industries
   };
+    $scope.media = {};
 
   AddMediaService.initRedactorWithMedia();
 

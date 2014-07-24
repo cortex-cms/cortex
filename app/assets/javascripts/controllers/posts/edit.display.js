@@ -9,29 +9,27 @@ angular.module('cortex.controllers.posts.edit.display', [
 .controller('PostsEditDisplayCtrl', function($scope, $state,
                                              AddMediaService, mediaSelectType, PostBodyEditorService, PostsPopupService,
                                              featuredMediaConstraintsService, tileMediaConstraintsService) {
-
     $scope.postBodyEditorService = PostBodyEditorService;
     $scope.postBodyEditorService.media.featured = $scope.data.post.featured_media;
     $scope.postBodyEditorService.media.tile = $scope.data.post.tile_media;
 
-    $scope.setFeaturedMedia = function () {
-      AddMediaService.setMedia(mediaSelectType.SET_FEATURED, 'Set Featured Media from Media Library');
-    };
-
-    $scope.removeFeaturedMedia = function () {
-      $scope.data.post.featured_media = {};
-      $scope.data.post.featured_media_id = null;
-      $scope.data.featured_media_too_small = false;
-    };
-
-    $scope.setTileMedia = function () {
-      AddMediaService.setMedia(mediaSelectType.SET_TILE, 'Set Tile Media from Media Library');
-    };
-
-    $scope.removeTileMedia = function () {
-      $scope.data.post.tile_media = {};
-      $scope.data.post.tile_media_id = null;
-      $scope.data.tile_media_too_small = false;
+    $scope.media = {
+      setFeatured: function () {
+        AddMediaService.setMedia(mediaSelectType.SET_FEATURED, 'Set Featured Media from Media Library');
+      },
+      removeFeatured: function () {
+        $scope.data.post.featured_media = {};
+        $scope.data.post.featured_media_id = null;
+        $scope.data.featured_media_too_small = false;
+      },
+      setTile: function () {
+        AddMediaService.setMedia(mediaSelectType.SET_TILE, 'Set Tile Media from Media Library');
+      },
+      removeTile: function () {
+        $scope.data.post.tile_media = {};
+        $scope.data.post.tile_media_id = null;
+        $scope.data.tile_media_too_small = false;
+      }
     };
 
     $scope.$watch('postBodyEditorService.media.featured', function (media) {

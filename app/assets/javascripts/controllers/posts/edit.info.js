@@ -22,7 +22,7 @@ angular.module('cortex.controllers.posts.edit.info', [
 
   function slugCheck() {
     var slug = $scope.data.post.slug;
-    if (!slug) {
+    if (!slug || !postForm.slug) {
       return;
     }
 

@@ -28,7 +28,7 @@ angular.module('cortex.filters', [
     }
     else {
       outputHtml = '<a href="' +
-        media.attachment_url +
+        media.url +
         '" data-media-id="' +
         media.id +
         '">' +

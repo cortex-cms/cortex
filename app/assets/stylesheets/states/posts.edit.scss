@@ -34,7 +34,7 @@
 
             .draft {
               @include make-md-column(4);
-
+              @include make-sm-column(8);
 
               .bootstrap-switch {
                 width: 100%;
@@ -43,6 +43,7 @@
 
             .actions {
               @include make-md-column(4);
+              @include make-sm-column(8);
 
               .actions-group {
                 width: 100%;

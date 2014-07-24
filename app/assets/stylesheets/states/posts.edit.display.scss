@@ -7,11 +7,11 @@
     }
 
     .info {
-      @include make-md-column(5);
+      @include make-md-column(4.5);
     }
 
     .actions {
-      @include make-md-column(3);
+      @include make-md-column(3.5);
       @extend .btn-group-vertical;
     }
   }

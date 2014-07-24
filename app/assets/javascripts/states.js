@@ -128,6 +128,9 @@ angular.module('cortex.states', [
           post.author = currentUser.full_name;
           post.copyright_owner = post.copyright_owner || "CareerBuilder, LLC";
           post.tag_list = '';
+          post.published_at = new Date();
+          post.type = 'ArticlePost';
+          post.display = 'medium';
 
           defer.resolve(post);
           return defer.promise;
@@ -309,13 +312,16 @@ angular.module('cortex.states', [
       url: '/promo',
       views: {
         'info@cortex.posts.edit': {
-          templateUrl: 'posts/promo/info.html'
+          templateUrl: 'posts/promo/info.html',
+          controller: 'PostsEditInfoCtrl'
         },
         'display@cortex.posts.edit': {
-          templateUrl: 'posts/promo/display.html'
+          templateUrl: 'posts/promo/display.html',
+          controller: 'PostsEditDisplayCtrl'
         },
         'seo@cortex.posts.edit': {
-          templateUrl: 'posts/promo/seo.html'
+          templateUrl: 'posts/promo/seo.html',
+          controller: 'PostsEditSeoCtrl'
         }
       },
       data: {

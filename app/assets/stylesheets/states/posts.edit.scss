@@ -61,7 +61,9 @@
             }
 
             .form-status {
-              @include make-md-column(6);
+              @extend .row;
+              @include make-md-column(12);
+
               color: $brand-danger;
               &.hidden {
                 display: none;

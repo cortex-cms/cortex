@@ -1,11 +1,12 @@
-<div class="headline form-group has-feedback" show-errors>
+<div class="headline form-group" show-errors data-parent-selector=".info-tab">
   <label class="control-label">Headline *</label>
 
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-header"></i></div>
     <input type="text"
            class="form-control"
-           name="title"
+           name="headline"
+           placeholder="Headline for the post"
            ng-model="data.post.title"
            ng-minlength="1"
            ng-maxlength="255"
@@ -13,7 +14,7 @@
   </div>
 </div>
 
-<div class="form-group has-feedback">
+<div class="form-group" show-errors data-parent-selector=".info-tab">
   <label class="control-label">Destination URL *</label>
 
   <div class="input-group">
@@ -29,7 +30,7 @@
   </div>
 </div>
 
-<div class="form-group has-feedback" show-errors>
+<div class="form-group" show-errors data-parent-selector=".info-tab">
   <label class="control-label">Call to Action *</label>
 
   <div class="input-group">

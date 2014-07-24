@@ -16,9 +16,9 @@
             <i class="fa fa-sitemap"></i> Publish/Distribute
           </div>
           <div class="content">
-            <label for="draft">Publishing State</label>
+            <label>Publishing State</label>
             <div class="form-group row">
-              <div id="class" class="draft">
+              <div class="draft">
                 <input
                         bs-switch
                         ng-model="data.post.draft"
@@ -75,8 +75,8 @@
                   </button>
                 </div>
               </div>
-              <div class="form-status" ng-show="postForm.$invalid">Please fill out the required fields, marked with a *</div>
             </div>
+            <div class="form-status" ng-show="postForm.$invalid">Please fill out the required fields, marked with a *</div>
           </div>
         </div>
       </div>
@@ -90,19 +90,19 @@
 
             <div class="info">
               <div class="post-type-group">
-                <label>Post Type</label>
+                <label>Post Type *</label>
 
                 <div class="btn-group btn-group-justified" data-toggle="buttons">
-                  <label class="btn btn-default" ui-sref=".sections.article" ui-sref-active="active" ng-model="data.post.type" btn-radio="'ArticlePost'">
+                  <label class="btn btn-default" ui-sref=".sections.article" ui-sref-active="active" ng-model="data.post.type" btn-radio="'ArticlePost'" uncheckable required>
                     <i class="fa fa-quote-right hidden-md hidden-sm hidden-xs"></i> Article
                   </label>
-                  <label class="btn btn-default" ui-sref=".sections.video" ui-sref-active="active" ng-model="data.post.type" btn-radio="'VideoPost'">
+                  <label class="btn btn-default" ui-sref=".sections.video" ui-sref-active="active" ng-model="data.post.type" btn-radio="'VideoPost'" uncheckable required>
                     <i class="fa fa-video-camera hidden-md hidden-sm hidden-xs"></i> Video
                   </label>
-                  <label class="btn btn-default" ui-sref=".sections.infographic" ui-sref-active="active" ng-model="data.post.type" btn-radio="'InfographicPost'">
+                  <label class="btn btn-default" ui-sref=".sections.infographic" ui-sref-active="active" ng-model="data.post.type" btn-radio="'InfographicPost'" uncheckable required>
                     <i class="fa fa-picture-o hidden-md hidden-sm hidden-xs"></i> Infographic
                   </label>
-                  <label class="btn btn-default" ui-sref=".sections.promo" ui-sref-active="active" ng-model="data.post.type" btn-radio="'PromoPost'">
+                  <label class="btn btn-default" ui-sref=".sections.promo" ui-sref-active="active" ng-model="data.post.type" btn-radio="'PromoPost'" uncheckable required>
                     <i class="fa fa-bullhorn hidden-md hidden-sm hidden-xs"></i> Promo
                   </label>
                 </div>

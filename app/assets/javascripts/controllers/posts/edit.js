@@ -48,7 +48,6 @@ angular.module('cortex.controllers.posts.edit', [
     }),
     industries: filters.industries
   };
-    $scope.media = {};
 
   AddMediaService.initRedactorWithMedia();
 
@@ -61,6 +60,20 @@ angular.module('cortex.controllers.posts.edit', [
   if (!post.id || post.author) {
     $scope.data.authorIsUser = true;
   }
+  
+  if ($state.includes('cortex.posts.*.sections.article')) {
+    post.type = 'ArticlePost';
+  }
+  else if ($state.includes('cortex.posts.*.sections.video')) {
+    post.type = 'VideoPost'
+  }
+  else if ($state.includes('cortex.posts.*.sections.infographic')) {
+    post.type = 'InfographicPost'
+  }
+  else if ($state.includes('cortex.posts.*.sections.promo')) {
+    post.type = 'PromoPost'
+  }
+
   $scope.data.post = post;
   $scope.data.categoriesHierarchy = categoriesHierarchy;
 

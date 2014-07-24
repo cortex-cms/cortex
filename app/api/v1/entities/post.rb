@@ -5,7 +5,7 @@ module API
 
         expose :id, documentation: {type: "Integer", desc: "Post ID", required: true}
         expose :title, documentation:  {desc: "Post Title", type: "String" , required: true}
-        expose :author, documentation: {desc: "Author", type: "String", required: true}
+        expose :custom_author, documentation: {desc: "Ad hoc author", type: "String", required: true}
         expose :type, documentation: {desc: "Post Type", type: "String", enum: ["ArticlePost", "VideoPost", "InfographicPost", "PromoPost"], required: true}
         expose :draft, documentation: {desc: "Draft status", type: "Boolean"}
         expose :comment_count, documentation: {desc: "Number of comments", type: "Integer"}
@@ -39,13 +39,9 @@ module API
 
         with_options if: { full: true } do
           represent :media, with: 'Entities::Media', full: true, documentation: {type: "Media", is_array: true, desc: "All Media for this post"}
-
           expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
-
           expose :user, with: 'Entities::User'
-
           expose :author, using: 'Entities::Author'
-
         end
       end
     end

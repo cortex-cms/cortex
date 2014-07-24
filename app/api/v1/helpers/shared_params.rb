@@ -19,6 +19,12 @@ module API
           optional :job_phase, type: String, desc: "Job Phase"
           optional :type, type: String, desc: "Post Type"
         end
+
+        params :post_associations do
+          optional :featured_media_id, type: Integer, desc: "Featured Media ID"
+          optional :tile_media_id, type: Integer, desc: "Tile Media ID"
+          optional :author_id, type: Integer, desc: "Author ID"
+        end
       end
     end
   end

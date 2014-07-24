@@ -57,7 +57,7 @@ angular.module('cortex.controllers.posts.edit', [
     minHeight: 800
   };
 
-  if (!post || (post && post.author)) {
+  if (!post.id || post.author) {
     $scope.data.authorIsUser = true;
   }
   $scope.data.post = post;

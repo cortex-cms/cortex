@@ -94,8 +94,7 @@ module API
 
           desc 'Create a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "createPost" }
           params do
-            optional :featured_media_id
-            optional :tile_media_id
+            use :post_associations
           end
           post do
             require_scope! :'modify:posts'
@@ -108,6 +107,9 @@ module API
           end
 
           desc 'Update a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "updatePost" }
+          params do
+            use :post_associations
+          end
           put ':id' do
             require_scope! :'modify:posts'
             authorize! :update, post!

@@ -1,0 +1,12 @@
+.tags {
+  @extend .form-group;
+
+  .tags-group {
+    @extend .input-group;
+    width: 100%;
+
+    tags-input input {
+      width: 100%;
+    }
+  }
+}

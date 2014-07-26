@@ -1,6 +1,6 @@
 /*
-	Redactor v9.2.3
-	Updated: May 6, 2014
+	Redactor v9.2.5
+	Updated: Jun 5, 2014
 
 	http://imperavi.com/redactor/
 
@@ -9,7 +9,6 @@
 
 	Usage: $('#content').redactor();
 */
-
 (function($)
 {
 	var uuid = 0;
@@ -74,7 +73,7 @@
 	}
 
 	$.Redactor = Redactor;
-	$.Redactor.VERSION = '9.2.3';
+	$.Redactor.VERSION = '9.2.5';
 	$.Redactor.opts = {
 
 			// settings
@@ -117,7 +116,7 @@
 				'ctrl+shift+7': "this.execCommand('insertorderedlist', false)",
 				'ctrl+shift+8': "this.execCommand('insertunorderedlist', false)"
 			},
-			shortcutsAdd: {},
+			shortcutsAdd: false,
 
 			autosave: false, // false or url
 			autosaveInterval: 60, // seconds
@@ -1009,11 +1008,17 @@
 
 			// remove spans
 			html = html.replace(/<span(.*?)>([\w\W]*?)<\/span>/gi, '$2');
+			html = html.replace(/<inline>([\w\W]*?)<\/inline>/gi, '$1');
 			html = html.replace(/<inline>/gi, '<span>');
 			html = html.replace(/<inline /gi, '<span ');
 			html = html.replace(/<\/inline>/gi, '</span>');
-			html = html.replace(/<span(.*?)class="redactor_placeholder"(.*?)>([\w\W]*?)<\/span>/gi, '');
 
+			if (this.opts.removeEmptyTags)
+			{
+				html = html.replace(/<span>([\w\W]*?)<\/span>/gi, '$1');
+			}
+
+			html = html.replace(/<span(.*?)class="redactor_placeholder"(.*?)>([\w\W]*?)<\/span>/gi, '');
 			html = html.replace(/<img(.*?)contenteditable="false"(.*?)>/gi, '<img$1$2>');
 
 			// special characters
@@ -1021,7 +1026,7 @@
 			html = html.replace(/\u2122/gi, '&trade;');
 			html = html.replace(/\u00a9/gi, '&copy;');
 			html = html.replace(/\u2026/gi, '&hellip;');
-			html = html.replace(/\u2014/gi, '&mdash');
+			html = html.replace(/\u2014/gi, '&mdash;');
 			html = html.replace(/\u2010/gi, '&dash;');
 
 			html = this.cleanReConvertProtected(html);
@@ -1222,6 +1227,7 @@
 				this.selectall = false;
 
 			}, this));
+
 			this.$editor.on('input.redactor', $.proxy(this.sync, this));
 			this.$editor.on('paste.redactor', $.proxy(this.buildEventPaste, this));
 			this.$editor.on('keydown.redactor', $.proxy(this.buildEventKeydown, this));
@@ -1475,7 +1481,7 @@
 			}
 
 			// enter
-			if (key == this.keyCode.ENTER && !e.shiftKey && !e.ctrlKey && !e.metaKey )
+			if (key == this.keyCode.ENTER && !e.shiftKey && !e.ctrlKey && !e.metaKey)
 			{
 				// remove selected content on enter
 				var range = this.getRange();
@@ -2036,11 +2042,14 @@
 				var keys = str.split(',');
 				for (var i in keys)
 				{
-					this.shortcutsHandler(e, $.trim(keys[i]), $.proxy(function()
+					if (typeof keys[i] === 'string')
 					{
-						eval(command);
+						this.shortcutsHandler(e, $.trim(keys[i]), $.proxy(function()
+						{
+							eval(command);
+						}, this));
+					}
 
-					}, this));
 				}
 
 			}, this));
@@ -2187,10 +2196,14 @@
 		toggleVisual: function()
 		{
 			var html = this.$source.hide().val();
-
 			if (typeof this.modified !== 'undefined')
 			{
-				this.modified = this.cleanRemoveSpaces(this.modified, false) !== this.cleanRemoveSpaces(html, false);
+				var modified = this.modified.replace(/\n/g, '');
+
+				var thtml = html.replace(/\n/g, '');
+				thtml = this.cleanRemoveSpaces(thtml, false);
+
+				this.modified = this.cleanRemoveSpaces(modified, false) !== thtml;
 			}
 
 			if (this.modified)
@@ -2208,6 +2221,8 @@
 						this.buildBindKeyboard();
 					}
 				}
+
+				this.callback('change', false, html);
 			}
 
 			if (this.opts.iframe) this.$frame.show();
@@ -2224,6 +2239,8 @@
 			this.buttonActiveVisual();
 			this.buttonInactive('html');
 			this.opts.visual = true;
+
+
 		},
 		toggleCode: function(direct)
 		{
@@ -2661,7 +2678,7 @@
 				var top = (btnHeight + this.opts.toolbarFixedTopOffset) + 'px';
 
 				if (this.opts.toolbarFixed && this.toolbarFixed) position = 'fixed';
-				else if (!this.opts.air) top = keyPosition.top + btnHeight + 'px';
+				else top = keyPosition.top + btnHeight + 'px';
 
 				$dropdown.css({ position: position, left: left, top: top }).show();
 				this.callback('dropdownShown', { dropdown: $dropdown, key: key, button: $button });
@@ -4394,7 +4411,25 @@
 			}
 			else
 			{
-				this.document.execCommand('fontSize', false, 4 );
+				var cmd, arg = value;
+				switch (attr)
+				{
+					case 'font-size':
+						cmd = 'fontSize';
+						arg = 4;
+					break;
+					case 'font-family':
+						cmd = 'fontName';
+					break;
+					case 'color':
+						cmd = 'foreColor';
+					break;
+					case 'background-color':
+						cmd = 'backColor';
+					break;
+				}
+
+				this.document.execCommand(cmd, false, arg);
 
 				var fonts = this.$editor.find('font');
 				$.each(fonts, $.proxy(function(i, s)
@@ -5935,6 +5970,7 @@
 
 				if (node1.length != 0 && node2.length != 0)
 				{
+
 					this.selectionSet(node1[0], 0, node2[0], 0);
 				}
 				else if (node1.length != 0)
@@ -6635,7 +6671,7 @@
 				}
 				else
 				{
-					$('#redactor-modal-tab-2').remove();
+					$('#redactor-tab-control-2').remove();
 				}
 
 				if (this.opts.imageUpload || this.opts.s3)
@@ -6690,8 +6726,8 @@
 					}
 					else
 					{
-						$('#redactor-modal-tab-1').remove();
-						$('#redactor-modal-tab-2').addClass('redactor_tabs_act');
+						$('#redactor-tab-control-1').remove();
+						$('#redactor-tab-control-2').addClass('redactor_tabs_act');
 						$('#redactor_tab2').show();
 					}
 				}
@@ -7196,12 +7232,11 @@
 		showProgressBar: function()
 		{
 			this.buildProgressBar();
-			this.$progressBar.fadeIn();
+			$('#redactor-progress').fadeIn();
 		},
 		hideProgressBar: function()
 		{
-			this.buildProgressBar();
-			this.$progressBar.fadeOut(1500);
+			$('#redactor-progress').fadeOut(1500);
 		},
 
 		// MODAL

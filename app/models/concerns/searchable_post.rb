@@ -66,10 +66,11 @@ module SearchablePost
 
     def as_indexed_json(options = {})
       json = as_json(only: [:id, :title, :body, :draft, :short_description, :copyright_owner,
-                            :author, :created_at, :published_at, :job_phase, :type])
+                            :created_at, :published_at, :job_phase, :type])
       json[:categories] = categories.collect{ |c| c.name }
       json[:industries] = industries.collect{ |i| i.soc }
       json[:tags]       = tag_list.to_a
+      json[:author]     = author.fullname
       json
     end
   end
@@ -77,7 +78,7 @@ module SearchablePost
   module ClassMethods
     def search_with_params(params, published = nil)
       query = { query_string: { default_field: "_all", query: self.query_massage(params[:q]) } }
-      sort = { created_at: :desc }
+      sort = { published_at: :desc }
 
       categories = params[:categories]
       job_phase  = params[:job_phase]

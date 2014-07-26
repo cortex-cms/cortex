@@ -43,7 +43,7 @@
       it('should provide data.media', function() {
         createController();
         expect($scope.data.media).toBeDefined();
-      })
+      });
 
       it('should save youtube', function() {
         createController();

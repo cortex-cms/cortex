@@ -1,0 +1,63 @@
+<div class="headline form-group" show-errors data-parent-selector=".info-tab">
+  <label class="control-label">Headline *</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-header"></i></div>
+    <input type="text"
+           class="form-control"
+           name="headline"
+           placeholder="Headline for the post"
+           ng-model="data.post.title"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+  </div>
+</div>
+
+<div class="form-group" show-errors data-parent-selector=".info-tab">
+  <label class="control-label">Destination URL *</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-link"></i></div>
+    <input type="text"
+           class="form-control"
+           name="destination_url"
+           ng-model="data.post.destination_url"
+           placeholder="Destination URL for this promo (required)"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+  </div>
+</div>
+
+<div class="form-group" show-errors data-parent-selector=".info-tab">
+  <label class="control-label">Call to Action *</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-magic"></i></div>
+    <input type="text"
+           class="form-control"
+           name="call_to_action"
+           ng-model="data.post.call_to_action"
+           placeholder="Call to Action text (required)"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+  </div>
+</div>
+
+<div class="author form-group" show-errors data-parent-selector=".info-tab">
+  <label>Author *</label>
+
+  <div class="input-group">
+    <div class="input-group-addon">Self <input type="checkbox" ng-model="data.authorIsUser" name="authorIsUser"></i></div>
+    <input type="text"
+           class="form-control"
+           name="custom_author"
+           ng-model="data.post.custom_author"
+           ng-disabled="data.authorIsUser"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+  </div>
+</div>

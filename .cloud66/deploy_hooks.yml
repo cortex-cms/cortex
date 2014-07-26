@@ -15,3 +15,6 @@ production:
 
 development:
   <<: *default
+
+staging:
+  <<: *default

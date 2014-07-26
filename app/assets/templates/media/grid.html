@@ -90,7 +90,7 @@
                alt="Thumbnail">
             <img ng-if="!media.thumbs"
                ph-img="100x100"
-               ph-text="{{ media.type | uppercase }}"
+               ph-text="{{ media.content_type | uppercase }}"
                alt="Thumbnail">
           </a>
         </div>
@@ -113,7 +113,7 @@
         <strong>Status: </strong>{{ media.deactive_at != null && (Date().new) >
         moment(media.deactive_at).toDate() ? 'Deactive' : 'Active' }}<br>
         <br>
-        <div class="media-grid-actions">
+        <div class="btn-group">
           <button class="btn btn-sm btn-danger" type="button" ng-click="deleteMedia(media)" ng-if="!media.consumed"><i class="fa fa-trash-o"></i> Delete
           </button>
           <button class="btn btn-sm btn-primary" type="button"

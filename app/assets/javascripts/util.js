@@ -49,4 +49,19 @@ angular.module('cortex.util', [])
   return function (children) {
     return hierarchyUtils.flattenTenantHierarchy(children).length;
   };
+})
+
+.factory('delayedBind', function($timeout) {
+  return function(scope, watch, delay, callback) {
+    var pending;
+
+    scope.$watch(watch, function() {
+      if (pending) {
+        $timeout.cancel(pending);
+      }
+      pending = $timeout(function() {
+        callback();
+      }, delay);
+    });
+  };
 });

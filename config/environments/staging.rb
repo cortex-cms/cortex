@@ -10,9 +10,9 @@ Cortex::Application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
-  # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  # Full error reports are disabled and caching is turned on.
+  config.consider_all_requests_local       = false
+  config.action_controller.perform_caching = true
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -79,10 +79,15 @@ Cortex::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
-  Paperclip::Attachment.default_options[:storage] = :fog
-  Paperclip::Attachment.default_options[:fog_credentials] = {:provider => "Local", :local_root => "#{Rails.root}/public"}
-  Paperclip::Attachment.default_options[:fog_directory] = ""
-  Paperclip::Attachment.default_options[:fog_host] = "http://stg.api.cbcortex.com"
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket            => ENV['S3_BUCKET_NAME'],
+      :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
 
   Sidekiq.configure_server do |config|
     config.redis = { :namespace => 'cortex_stg' }

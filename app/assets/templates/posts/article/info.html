@@ -1,0 +1,80 @@
+<div class="headline form-group" show-errors data-parent-selector=".info-tab">
+  <label class="control-label">Headline *</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-header"></i></div>
+    <input type="text"
+           class="form-control"
+           name="headline"
+           placeholder="Headline for the post"
+           ng-model="data.post.title"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+  </div>
+</div>
+
+<div class="slug form-group" show-errors data-parent-selector=".info-tab">
+  <label>Slug *</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-anchor"></i></div>
+    <input name="slug"
+           ng-init="data.post.slug = data.post.slug || (data.post.title | slugify)"
+           placeholder="Unique slug to use in URLs (required)"
+           type="text"
+           name="slug"
+           class="form-control"
+           ng-model="data.post.slug"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+  </div>
+</div>
+
+<div class="description form-group" show-errors data-parent-selector=".info-tab">
+  <label>Description * <small class="help-block" ng-show="!postForm.description.$pristine && postForm.description.$error.minlength">Please enter a description of at least 25 characters</small></label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-ellipsis-h"></i></div>
+    <textarea class="form-control"
+              name="description"
+              ng-model="data.post.short_description"
+              ng-minlength="25"
+              ng-maxlength="255"
+              placeholder="Enter a short description for the post of at least 25 characters (required)" required>
+    </textarea>
+  </div>
+</div>
+
+<div class="author form-group" show-errors data-parent-selector=".info-tab">
+  <label>Author *</label>
+
+  <div class="input-group">
+    <div class="input-group-addon">Self <input type="checkbox" ng-model="data.authorIsUser" name="authorIsUser"></i></div>
+    <input type="text"
+           class="form-control"
+           name="custom_author"
+           ng-model="data.post.custom_author"
+           ng-disabled="data.authorIsUser"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+  </div>
+</div>
+
+<div class="copyright-owner form-group" show-errors data-parent-selector=".info-tab">
+  <label>Copyright Owner *</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
+    <input type="text"
+           class="form-control"
+           name="Copyright Owner"
+           placeholder="Enter a copyright owner for this post (required)"
+           ng-model="data.post.copyright_owner"
+           ng-minlength="1"
+           ng-maxlength="255"
+           required>
+  </div>
+</div>

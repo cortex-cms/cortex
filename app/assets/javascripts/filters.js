@@ -15,20 +15,20 @@ angular.module('cortex.filters', [
   return function(media) {
     var outputHtml;
 
-    if (media.general_type ==='image') {
+    if (media.content_type === 'image') {
       outputHtml = '<p><a href="' +
-        media.attachment_url +
+        media.url +
         '"><img alt="' +
         (media.alt || '') +
         '" src="' +
-        media.attachment_url +
+        media.url +
         '" data-media-id="' +
         media.id +
         '"></a></p>';
     }
     else {
-      outputHtml = '<a href=""' +
-        media.attachment_url +
+      outputHtml = '<a href="' +
+        media.url +
         '" data-media-id="' +
         media.id +
         '">' +
@@ -58,7 +58,7 @@ angular.module('cortex.filters', [
 })
 
 // https://gist.github.com/thomseddon/3511330
-.filter('bytes', function(){
+.filter('bytes', function() {
     return function(bytes, precision) {
 
         if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) {
@@ -77,11 +77,27 @@ angular.module('cortex.filters', [
 })
 
 .filter('slugify', function() {
-  return function(value) {
+  return function(value, delim) {
     if (!value) {
       return '';
     }
-    return value.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+    delim = delim || "-";
+    return value.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, delim);
+  };
+})
+
+.filter('postEditState', function() {
+  return function(post, sref) {
+    var state = "cortex.posts.edit.sections." + post.type.replace('Post', '').toLowerCase();
+    if (sref) {
+      state = state + "({postId: " + post.id + "})";
+    }
+    return state;
+  };
+})
+
+.filter('postNewState', function() {
+  return function(post) {
+    return "cortex.posts.new.sections." + post.type.replace('Post', '').toLowerCase();
   };
 });
-

@@ -1,0 +1,56 @@
+<div class="form-group" show-errors data-parent-selector=".display-tab">
+  <label>Home Page Display *</label>
+  <div class="input-group">
+    <div class="btn-group">
+      <button type="button"
+              name="display"
+              class="btn btn-default"
+              ng-model="data.post.display"
+              btn-radio="'small'" required>
+        Small
+      </button>
+      <button type="button"
+              name="display"
+              class="btn btn-default"
+              ng-model="data.post.display"
+              btn-radio="'medium'" required>
+        Medium
+      </button>
+      <button type="button"
+              name="display"
+              class="btn btn-default"
+              ng-model="data.post.display"
+              btn-radio="'large'" required>
+        Large
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Tile Media</label>
+
+  <div class="alert alert-warning" ng-show="data.post.tile_media_warnings"><ul ng-repeat="warning in data.post.tile_media_warnings"><li>{{warning}}</li></ul></div>
+
+  <div class="media-selector">
+    <div class="thumb">
+      <img src="{{data.post.tile_media.thumbs.mini}}" alt="{{data.post.tile_media.alt}}" ng-if="data.post.tile_media">
+    </div>
+    <div class="info">
+      <strong>{{data.post.tile_media.name}}</strong>
+      <strong>{{data.post.tile_media.taxon}}</strong>
+    </div>
+    <div class="actions btn-group">
+      <button type="button"
+              class="btn btn-primary btn-sm"
+              ng-click="media.setTile()">
+        <i class="fa fa-search-plus"></i> Browse...
+      </button>
+      <button type="button"
+              class="btn btn-danger btn-sm"
+              ng-click="media.removeTile()">
+        <i class="fa fa-trash-o"></i> Remove
+      </button>
+    </div>
+  </div>
+</div>

@@ -15,7 +15,7 @@ end
 gem 'rails', '~> 4'
 
 # API
-gem 'grape', '~> 0.7'
+gem 'grape', '~> 0.8'
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
@@ -56,6 +56,7 @@ gem 'rails-assets-angularjs-file-upload'
 gem 'rails-assets-ng-table'
 gem 'rails-assets-bootstrap-sass-official'
 gem 'rails-assets-ng-tags-input'
+gem 'rails-assets-angular-bootstrap-switch'
 
 # ActiveRecord
 gem 'rails-observers'
@@ -73,7 +74,7 @@ gem 'pg'
 # Mongoid
 gem 'mongoid', '~> 4.0.0.rc2', git: 'git://github.com/mongoid/mongoid'
 gem 'bson_ext'
-gem 'mongoid-paranoia', github: 'simi/mongoid-paranoia'
+gem 'mongoid_paranoia'
 
 # Authorization
 gem 'six'
@@ -97,7 +98,7 @@ gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim' # Sidekiq-web
 
-group :test, :development do
+group :test, :development, :local do
 
   # Rspec
   gem 'rspec', '~> 2.99'

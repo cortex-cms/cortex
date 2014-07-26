@@ -1,7 +1,9 @@
-module API; end
-
-Dir["#{Rails.root}/app/api/v1/**/*.rb"].each {|file| require file}
 require "#{Rails.root}/lib/pagination_headers"
+
+# Load modules in order
+Dir["#{Rails.root}/app/api/v1/entities/*.rb"].each {|file| require file}
+Dir["#{Rails.root}/app/api/v1/helpers/*.rb"].each {|file| require file}
+Dir["#{Rails.root}/app/api/v1/resources/*.rb"].each {|file| require file}
 
 module API
   module V1
@@ -24,7 +26,7 @@ module API
       mount Resources::Users
       mount Resources::Occupations
 
-      add_swagger_documentation
+      add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1', models: [Entities::Post, Entities::Category, Entities::Media, Entities::Tenant, Entities::Occupation, Entities::User])
     end
   end
 end

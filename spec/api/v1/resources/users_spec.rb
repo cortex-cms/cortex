@@ -11,7 +11,7 @@ describe API::Resources::Users do
       login_as user
       get '/api/v1/users/me'
       response.should be_success
-      response.body.should represent(API::Entities::User, user)
+      response.body.should represent(API::Entities::User, user, { full: true })
     end
 
     it 'should NOT get the current user if unauthorized' do

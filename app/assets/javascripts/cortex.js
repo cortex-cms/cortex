@@ -69,7 +69,7 @@ angular.module('cortex', [
     });
   }
 
-  $rootScope.logOut = function() {
+  $rootScope.logout = function() {
     $http.delete('/users/sign_out.json').success(function() {
       $window.location.href = "/";
     });

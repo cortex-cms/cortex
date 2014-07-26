@@ -2,3 +2,7 @@
 
 // Correct cursors for Angular Bootstrap
 .nav, .pagination, .carousel, .panel-title a, [ng-click] { cursor: pointer; }
+
+.btn {
+  @include truncate;
+}

@@ -1,8 +1,8 @@
 ////////////////////////////////
 // Container
 
-.view {
-  @include make-md-column(12, 0);
+main {
+  @extend .container-fluid;
 }
 
 ////////////////////////////////
@@ -54,54 +54,6 @@
 .hr-below, .heading-decorative {
   padding-bottom: $standard-margin / 2;
   margin-bottom: $standard-margin;
-  border-bottom: $standard-border;
-}
-
-////////////////////////////////
-// Bootstrap Restyling/Overrides
-
-header div.container {
-  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-    width: 100%;
-  }
-}
-
-.container {
-  .navbar-collapse {
-    @media (max-width: $screen-md-min) {
-      box-shadow: none;
-    }
-  }
-
-  .navbar-form {
-    @extend .clearfix;
-    margin: 5px 0 0.625em 0;
-    padding: 0;
-
-    .btn-search {
-      width: 2em;
-      border: none;
-      @include border-right-radius(5px);
-      background-color: rgba(255,255,255,0.05);
-      color: white;
-    }
-  }
-
-  .pagination {
-    margin-top: 0;
-  }
-}
-
-legend {
-  font-size: 18px;
-  font-weight: 500;
-  @extend .heading-decorative;
-  margin-top: $standard-margin;
-  padding-bottom: 0;
-}
-
-dl.dl-horizontal {
-  margin-bottom: $standard-margin;
 }
 
 ////////////////////////////////
@@ -111,7 +63,11 @@ dl.dl-horizontal {
   @include make-xs-column(12);
   @include make-md-column-offset(3);
   @include make-md-column(6);
-  margin-top: $standard-margin * 2;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
 }
 
 // Fix message flash transition
@@ -147,47 +103,6 @@ dl.dl-horizontal {
 }
 
 ////////////////////////////////
-// Inputs
-
-/*
-// Emphasize required input fields
-input.form-control[required]:not(:focus) {
-  border-color: $gray;
-  @include placeholder {
-    color: #000;
-  }
-}
-*/
-
-.btn-file {
-  position: relative;
-  overflow: hidden;
-
-  input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 999px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    background: red;
-    cursor: inherit;
-    display: block;
-  }
-}
-
-.drag-and-drop-area {
-  height: 8.5em;
-  padding: 1em;
-  border: 1px dashed #f47937;
-  border-radius: 5px;
-  margin-top: $standard-margin;
-}
-
-////////////////////////////////
 // Transitions
 
 .fade {
@@ -210,160 +125,47 @@ input.form-control[required]:not(:focus) {
 }
 
 ////////////////////////////////
-// Cortex Navbar
+// Cortex Navbar - screech!
 
 .navbar {
   margin-bottom: 0;
 }
 
-.nav li a {
-  padding: 10px;
-}
-
 .navbar-admin {
+  @extend .container-fluid;
   background-color: #104070;
-  padding: 0;
   font-family: 'PT Sans', Arial, sans-serif;
-}
 
-.nav-button {
-  color: white;
-  font-size: 22px;
-}
-
-.menu-item-bg {
-  background: asset-url('header-sprites.png') no-repeat, asset-url('header-active.png') repeat-x;
-  padding-top: 5.35em;
-  padding-bottom: 0.75em;
-  @media (max-width: $screen-sm-max) {
-      background: none;
-      padding: 0.5em 0.5em 0.5em 2em;
-  }
-}
-
-.profile-search {
-  @extend .hidden-xs;
-  @extend .hidden-sm;
-  @extend .pull-right;
-
-  @media (max-width: $screen-md-min) {
-    margin-left: $standard-margin / 2;
-  }
-}
-
-.navbar-profile-box {
-  @extend .clearfix;
-  width: 11.6em;
-  padding: .31em;
-  margin-top: 0.625em;
-  border-radius: 5px;
-  background-color: rgba(255,255,255,0.05);
-  color: white;
-  @include text-overflow();
-
-  .navbar-profile-avatar {
-    @extend .pull-left;
-    width: 40px;
-    height: 40px;
+  .navbar-brand {
+    padding-left: 0px;
   }
 
-  .navbar-profile-text {
-    margin-left: $standard-margin / 2;
-    width: 7.5em;
-    overflow: hidden;
-  }
-}
-
-.form-search{
-  height: 1.67em;
-  width: 11.7em !important;
-  border: none;
-  background-color: rgba(255,255,255,0.05);
-  color: white;
-  @include border-left-radius(5px);
-}
-
-.navbar-items-admin {
-  a {
-    color: white;
+  .navbar-toggle {
+    color: #eee;
   }
 
-  a:hover {
-    @media (max-width: $screen-sm-max) {
-      color: #f47937;
+  .navbar-items-admin {
+    a {
+      color: #eee;
+    }
+
+    a:hover {
+      background-color: #183654 !important;
+    }
+
+    li.active{
+      background: #183654;
     }
   }
-
-  li.active{
-    background: asset-url('header-active.png') center bottom repeat-x;
-    @media (max-width: $screen-sm-max) {
-      background: #eee;
-      font-weight: bold;
-
-      a {
-        color: #f47937;
-      }
-    }
-  }
-
-  a.navbar-item, a.navbar-item:hover, a.navbar-item:focus {
-    @extend .menu-item-bg;
-  }
-
-  a.navbar-item-tenant {
-    @include navbar-bg-position(-100px);
-  }
-
-  a.navbar-item-tenant:hover, a.navbar-item-tenant:focus {
-    @include navbar-bg-position-dual(0);
-  }
-
-  a.navbar-item-media {
-    @include navbar-bg-position(-300px);
-  }
-
-  a.navbar-item-media:hover, a.navbar-item-media:focus {
-    @include navbar-bg-position-dual(-200px);
-  }
-
-  a.navbar-item-permissions {
-    @include navbar-bg-position(-500px);
-  }
-
-  a.navbar-item-permissions:hover, a.navbar-item-permissions:focus {
-    @include navbar-bg-position-dual(-400px);
-  }
-
-  a.navbar-item-posts {
-    @include navbar-bg-position(-700px);
-  }
-
-  a.navbar-item-posts:hover, a.navbar-item-posts:focus {
-    @include navbar-bg-position-dual(-600px);
-  }
-
-  a.navbar-item-apps {
-    @include navbar-bg-position(-900px);
-  }
-
-  a.navbar-item-apps:hover, a.navbar-item-apps:focus {
-    @include navbar-bg-position-dual(-800px);
-  }
-}
-
-.navbar-profile-avatar {
-  background-image: asset-url('navbar-profile.jpg');
-  background-size: contain;
-  height: 40px;
-  width: 40px;
 }
 
 ////////////////////////////////
 // Cortex Breadcrumb Bar
 
 div.breadcrumb-container {
-  width: 100%;
-  background: #f5f5f5;
+  @extend .container-fluid;
+  margin-bottom: $standard-margin;
+  background: $breadcrumb-bg;
 
   .breadcrumb {
     font: 13px $humanist;

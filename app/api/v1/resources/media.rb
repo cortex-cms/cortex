@@ -97,8 +97,8 @@ module API
               error!({
                   error: "UnprocessableEntity",
                   message: "This media cannot be deleted, as it is currently consumed by other content.",
-                  status: 422
-                     }, 422)
+                  status: 409
+                     }, 409)
             end
           end
         end

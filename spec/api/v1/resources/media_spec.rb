@@ -114,7 +114,7 @@ describe API::Resources::Media, elasticsearch: true do
       post.featured_media = media
       post.save
       expect { delete "/api/v1/media/#{media.id}" }.not_to change(Media, :count).by(-1)
-      expect(response.status).to eq(422)
+      expect(response.status).to eq(409)
     end
   end
   after do

@@ -13,6 +13,8 @@ class Media < ActiveRecord::Base
 
   default_scope { order('created_at DESC')  }
 
+  scope :consumed, lambda { joins(:posts).where("posts.id is not null") }
+
   serialize :dimensions
   before_save :extract_dimensions
   before_save :generate_digest
@@ -36,7 +38,7 @@ class Media < ActiveRecord::Base
 
   # This will indicate whether an asset is associated with another
   def consumed?
-    false
+    Media.consumed.include?(self)
   end
 
   # Human friendly content type generalization

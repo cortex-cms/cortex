@@ -37,7 +37,7 @@ describe API::Resources::Media, elasticsearch: true do
 
     # TODO: Enable when Ben's media resource is merged in.
     it 'should allow search on q' do
-      pending("Waiting on Ben's reworked media resource")
+      skip("Waiting on Ben's reworked media resource")
       media_1 = create(:media)
       media_2 = create(:media, name: "RANDOM")
       Media.import({refresh: true})
@@ -79,6 +79,17 @@ describe API::Resources::Media, elasticsearch: true do
         expect{ put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count).by(1)
         response.should be_success
         response.body.should represent(API::Entities::Media, media, { full: true })
+      end
+
+      it 'should only update allowed parameters' do
+        media = create(:media)
+        media.name += ' updated'
+        media.taxon = 'BreakingTaxon'
+        expect { put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count).by(1)
+        response.should be_success
+        response_obj = JSON.parse(response.body)
+        response_obj["name"].should eq "#{media.name}"
+        response_obj["taxon"].should_not eq "BreakingTaxon"
       end
     end
   end

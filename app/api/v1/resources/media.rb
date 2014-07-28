@@ -78,7 +78,9 @@ module API
 
             media_params = params[:media] || params
 
-            media.update!(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
+            allowed_params = [:name, :alt, :description, :tag_list, :status, :expiration_date]
+
+            media.update!(declared(media_params, { include_missing: false }, allowed_params))
             if params[:tag_list]
               media.tag_list = params[:tag_list]
               media.save!

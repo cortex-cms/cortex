@@ -17,6 +17,6 @@ RSpec.describe Media, type: :model do
     post = create(:post)
     post.featured_media = media
     post.save
-    expect(media.destroy).to be_false
+    expect {media.destroy}.to raise_error
   end
 end

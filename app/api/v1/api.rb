@@ -1,4 +1,5 @@
 require "#{Rails.root}/lib/pagination_headers"
+require "#{Rails.root}/lib/exceptions"
 
 # Load modules in order
 Dir["#{Rails.root}/app/api/v1/entities/*.rb"].each {|file| require file}

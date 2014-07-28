@@ -96,7 +96,10 @@ class Media < ActiveRecord::Base
   end
 
   def prevent_consumed_deletion
-    !self.consumed?
+    # !self.consumed?
+    if self.consumed?
+      raise Exceptions::ObjectConsumed
+    end
   end
 end
 

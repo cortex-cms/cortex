@@ -93,7 +93,13 @@ module API
             require_scope! :'modify:media'
             authorize! :delete, media!
 
-            media.destroy
+            unless media.destroy
+              error!({
+                  error: "UnprocessableEntity",
+                  message: "This media cannot be deleted, as it is currently consumed by other content.",
+                  status: 422
+                     }, 422)
+            end
           end
         end
       end

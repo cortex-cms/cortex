@@ -18,6 +18,7 @@ class Media < ActiveRecord::Base
   serialize :dimensions
   before_save :extract_dimensions
   before_save :generate_digest
+  before_destroy :prevent_consumed_deletion
 
   has_attached_file :attachment, :styles => {
       :large   => {geometry: '1800x1800>', format: :png},
@@ -92,6 +93,10 @@ class Media < ActiveRecord::Base
     unless tempfile.nil?
       self.digest = Digest::SHA1.file(tempfile.path).to_s
     end
+  end
+
+  def prevent_consumed_deletion
+    !self.consumed?
   end
 end
 

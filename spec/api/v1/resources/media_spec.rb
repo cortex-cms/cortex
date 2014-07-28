@@ -107,6 +107,15 @@ describe API::Resources::Media, elasticsearch: true do
       expect{ delete "/api/v1/media/#{media.id+1}" }.to_not change(Media, :count).by(-1)
       response.should_not be_success
     end
+
+    it 'should not delete consumed media' do
+      media = create(:media)
+      post = create(:post)
+      post.featured_media = media
+      post.save
+      expect { delete "/api/v1/media/#{media.id}" }.not_to change(Media, :count).by(-1)
+      expect(response.status).to eq(409)
+    end
   end
   after do
     Media.__elasticsearch__.client.indices.delete index: Media.index_name

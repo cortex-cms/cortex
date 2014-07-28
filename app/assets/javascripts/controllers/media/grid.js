@@ -56,6 +56,8 @@ angular.module('cortex.controllers.media.grid', [
             cortex.media.delete({id: media.id}, function() {
                 $scope.data.media = _.reject($scope.data.media, function(m) { return m.id == media.id; });
                 flash.info = media.name + " deleted.";
+            }, function(res) {
+              flash.error = media.name + " could not be deleted: " + res.data.message;
             });
         }
     };

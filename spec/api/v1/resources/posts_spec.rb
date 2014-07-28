@@ -49,7 +49,7 @@ describe API::Resources::Posts, elasticsearch: true do
   describe 'GET /posts/feed' do
 
     before(:all) do
-      pending("Tests intermittently broken, don't fail")
+      skip("Tests intermittently broken, don't fail")
       #
       # Post.connection
       # @industry_1 = create(:onet_occupation, soc: '12-0000')

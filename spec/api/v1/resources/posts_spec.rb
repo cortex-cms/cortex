@@ -40,7 +40,7 @@ describe API::Resources::Posts, elasticsearch: true do
       post_1 = create(:post)
       post_2 = create(:post, title: "Test Post for testing queries.")
       Post.import({refresh: true})
-      get '/api/v1/posts?q=Test'
+      get '/api/v1/posts?q=queries'
       response.should be_success
       JSON.parse(response.body).count.should == 1
     end

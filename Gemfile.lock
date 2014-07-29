@@ -519,6 +519,7 @@ DEPENDENCIES
   database_cleaner
   devise
   doorkeeper!
+  dotenv
   elasticsearch-extensions
   elasticsearch-model (~> 0.1)
   elasticsearch-rails (~> 0.1)

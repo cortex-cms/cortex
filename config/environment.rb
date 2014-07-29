@@ -3,5 +3,3 @@ require File.expand_path('../application', __FILE__)
 
 # Initialize the Rails application.
 Cortex::Application.initialize!
-
-ENV['RAILS_ENV'] ||= 'local'

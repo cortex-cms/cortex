@@ -88,6 +88,7 @@ gem 'unf'
 gem 'hashr'
 gem 'mime-types'
 gem 'json'
+gem 'dotenv'
 
 # Middleware
 gem 'rack-cors', require: 'rack/cors'

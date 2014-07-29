@@ -43,6 +43,18 @@ module API
             present @posts, with: Entities::Post, full: true, sanitize: true
           end
 
+          desc 'Show a published post', { entity: API::V1::Entities::Post, nickname: "showFeedPost" }
+          get 'feed/:id' do
+            present post, with: Entities::Post, full: true, sanitize: true
+          end
+
+          desc 'Show related published posts', { entity: API::V1::Entities::Post, nickname: "relatedPosts" }
+          get 'feed/:id/related' do
+            @posts = published_post!.related(true).page(page).per(per_page).records
+            set_pagination_headers(@posts, 'posts')
+            present @posts, with: Entities::Post
+          end
+
           desc 'Show published post authors'
           get 'feed/authors' do
             present Author.published.distinct, with: Entities::Author
@@ -83,13 +95,6 @@ module API
             authorize! :view, post!
 
             present post, with: Entities::Post, full: true
-          end
-
-          desc 'Show related published posts', { entity: API::V1::Entities::Post, nickname: "relatedPosts" }
-          get 'feed/:id/related' do
-            @posts = published_post!.related(true).page(page).per(per_page).records
-            set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post
           end
 
           desc 'Create a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "createPost" }

@@ -33,8 +33,11 @@ module API
         end
 
         format_with(:sanitize_body) { |body| Sanitize.fragment(body, Cortex.config.sanitize_whitelist.post) }
-        with_options(format_with: :sanitize_body) do
+        with_options if: { sanitize: true }, format_with: :sanitize_body do
           expose :body, documentation: {desc: "Body of the post (sanitized)", type: "String"}
+        end
+        with_options unless: { sanitize: true } do
+          expose :body, documentation: {desc: "Body of the post", type: "String"}
         end
 
         with_options if: lambda { |post, _| post.type == 'PromoPost' } do

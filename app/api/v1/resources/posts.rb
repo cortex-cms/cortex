@@ -40,7 +40,7 @@ module API
           get 'feed' do
             @posts = ::Post.search_with_params(params, true).page(page).per(per_page).records
             set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post, full: true
+            present @posts, with: Entities::Post, full: true, sanitize: true
           end
 
           desc 'Show published post authors'

@@ -13,9 +13,12 @@ class Media < ActiveRecord::Base
 
   default_scope { order('created_at DESC')  }
 
+  scope :consumed, lambda { joins(:posts).where("posts.id is not null") }
+
   serialize :dimensions
   before_save :extract_dimensions
   before_save :generate_digest
+  before_destroy :prevent_consumed_deletion
 
   has_attached_file :attachment, :styles => {
       :large   => {geometry: '1800x1800>', format: :png},
@@ -36,7 +39,7 @@ class Media < ActiveRecord::Base
 
   # This will indicate whether an asset is associated with another
   def consumed?
-    false
+    Media.consumed.include?(self)
   end
 
   # Human friendly content type generalization
@@ -89,6 +92,13 @@ class Media < ActiveRecord::Base
     tempfile = attachment.queued_for_write[:original]
     unless tempfile.nil?
       self.digest = Digest::SHA1.file(tempfile.path).to_s
+    end
+  end
+
+  def prevent_consumed_deletion
+    # !self.consumed?
+    if self.consumed?
+      raise Exceptions::ObjectConsumed
     end
   end
 end

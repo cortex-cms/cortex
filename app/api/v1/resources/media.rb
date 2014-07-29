@@ -93,7 +93,15 @@ module API
             require_scope! :'modify:media'
             authorize! :delete, media!
 
-            media.destroy
+            begin
+              media.destroy
+            rescue Exceptions::ObjectConsumed => e
+              error!({
+                  error: "Conflict",
+                  message: e.message,
+                  status: 409
+                     }, 409)
+            end
           end
         end
       end

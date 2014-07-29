@@ -9,11 +9,12 @@ angular.module('cortex.controllers.posts.edit', [
   'frapontillo.bootstrap-switch',
 
   'cortex.vendor.underscore',
-  'cortex.services.addMedia'
+  'cortex.services.addMedia',
+  'cortex.services.imageFit'
 ])
 
 .controller('PostsEditCtrl', function($scope, $state, $timeout, flash, _,
-                                      post, filters, currentUserAuthor, categoriesHierarchy, AddMediaService) {
+                                      post, filters, currentUserAuthor, categoriesHierarchy, AddMediaService, ImageFitService) {
   $scope.data = {
     savePost: function() {
       $scope.$broadcast('validate');
@@ -49,10 +50,11 @@ angular.module('cortex.controllers.posts.edit', [
     industries: filters.industries
   };
 
-  AddMediaService.initRedactorWithMedia();
+  AddMediaService.initRedactorMediaPlugin();
+  ImageFitService.initRedactorImageFitPlugin();
 
   $scope.redactorOptions = {
-    plugins: ['media'],
+    plugins: ['media', 'imageFit'],
     toolbarFixedBox: true,
     minHeight: 800
   };

@@ -16,7 +16,7 @@ angular.module('cortex.controllers.posts.edit', [
                                       post, filters, currentUserAuthor, categoriesHierarchy, AddMediaService) {
   $scope.data = {
     savePost: function() {
-      $scope.$broadcast('validateDirectiveFields');
+      $scope.$broadcast('validateShowErrors');
       if ($scope.postForm.$invalid) {
         return;
       }

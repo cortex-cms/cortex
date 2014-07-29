@@ -31,7 +31,7 @@ angular.module('cortex.directives.showErrors', [])
       };
 
       inputNgEl.on('blur select change', toggleErrors);
-      scope.$on('validateDirectiveFields', toggleErrors);
+      scope.$on('validateShowErrors', toggleErrors);
     }
   }
 })

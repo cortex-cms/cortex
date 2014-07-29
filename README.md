@@ -4,6 +4,14 @@
 
 Cortex is an identity, content management and reporting platform built by [Talent Development][td-github]. Its purpose is to provide central infrastructure for next-generation applications; exposing a single point of management while enabling quicker build-out of new software.
 
+### Initial Setup
+
+Copy the example .env file and modify
+
+```sh
+$ cp .env.example .env
+```
+
 ### Setup - OS X
 
 **Prerequisites:** Xcode, Ruby ([rvm](https://rvm.io/) or [rbenv](https://github.com/sstephenson/rbenv)), [Homebrew](http://brew.sh/)

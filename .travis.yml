@@ -4,12 +4,9 @@ rvm:
   - 2.1.2
 bundler_args: --without production staging development
 before_script:
-  - cp config/database.yml.travis config/database.yml
   - psql -c 'create database cortex_test;' -U postgres
+  - bundle exec rake db:migrate db:seed cortex:create_categories
 script:
-  - bundle exec rake db:migrate
-  - bundle exec rake db:seed
-  - bundle exec rake cortex:create_categories
   - bundle exec rake spec
   - bundle exec rake spec:javascript
 addons:
@@ -20,14 +17,13 @@ services:
   - elasticsearch
   - mongodb
   - redis-server
-notifications:
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/13594b3ce2e4db11a414
-      - https://webhooks.gitter.im/e/d2e5a208e6376294ce51
-    on_success: change
-    on_failure: always
-    on_start: false
+env:
+  global:
+    - APP_SECRET=180d0b7491b1f574801b62853532775a60d58a0cdf1ef2848967618e507e94b72e3d1223c3c2ab8fde641aff237774a72c6c3a5cf541b4baba2ff70fd97d121a
+    - DEVISE_SECRET=88e9dfa013e8b4f99ecd0470cdbf76709856db22a14b4e2e3576f75809e7054e743c5b2b9fce196f979acf5c64d55ce9c1a26cf542bb73abaa2aa80acc9c040d
+    - MONGODB_DATABASE=cortex_test
+    - MONGODB_HOST=localhost
+    - MONOGDB_PORT=27017
 deploy:
   - provider: cloud66
     master:

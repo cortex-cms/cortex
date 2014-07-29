@@ -1,25 +1,18 @@
-defaults: &defaults
-  extra: {}
-  default_page_size: 25
-  default_subdomain: public
-  allowed_origins:
-    - 'localhost:3000'
-    - 'localhost:3001'
-    - 'cbcortex.com'
-  allowed_origins_regex:
-    - '.+\.cbcortex\.com'
+development: &defaults
+  extra:
+    google_analytics_id: <%= ENV['GOOGLE_ANALYTICS_ID'] %>
+  cors:
+    allowed_origins: <%= ENV['CORS_ALLOWED_ORIGINS'] %>
+    allowed_origins_regex: <%= ENV['CORS_ALLOWED_ORIGINS_REGEX'] %>
   media:
-    max_size_mb: 100
+    max_size_mb: <%= ENV['MEDIA_MAX_SIZE_MB'] || 100 %>
   onet:
-    version: '18.1'
-
-test:
-  <<: *defaults
+    version: <%= ENV['ONET_VERSION'] || '18.1' %>
 
 development:
   <<: *defaults
 
-local:
+test:
   <<: *defaults
 
 staging:

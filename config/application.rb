@@ -2,6 +2,8 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'elasticsearch/rails/instrumentation'
 Bundler.require(:default, Rails.env)
+Dotenv.load
+
 
 module Cortex
   class Application < Rails::Application
@@ -18,7 +20,8 @@ module Cortex
     # Insert Rack::CORS as one of the first middleware
     config.middleware.insert_after Rack::Sendfile, Rack::Cors do
       allow do
-        origins *(Cortex.config.allowed_origins + Cortex.config.allowed_origins_regex.map{ |o| /#{o}/ })
+        origins *((Cortex.config.cors.allowed_origins || '').split(',') +
+                  [Cortex.config.cors.allowed_origins_regex || ''])
         resource '*',
                  :headers => :any,
                  :expose  => %w(Content-Range Link),

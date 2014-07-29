@@ -10,7 +10,7 @@ module API
         resource :posts do
           helpers Helpers::PaginationHelper
 
-          desc 'Show all posts', { entity: API::V1::Entities::Post, nickname: "showAllPosts" }
+          desc 'Show all posts', { entity: Entities::Post, nickname: "showAllPosts" }
           params do
             use :pagination
             use :search
@@ -31,7 +31,7 @@ module API
             present @posts, with: Entities::Post
           end
 
-          desc 'Show published posts', { entity: API::V1::Entities::Post, nickname: "postFeed" }
+          desc 'Show published posts', { entity: Entities::Post, nickname: "postFeed" }
           params do
             use :pagination
             use :search
@@ -89,7 +89,7 @@ module API
             present :job_phases, ::Category.roots, with: Entities::Category, children: true
           end
 
-          desc 'Show a post', { entity: API::V1::Entities::Post, nickname: "showPost" }
+          desc 'Show a post', { entity: Entities::Post, nickname: "showPost" }
           get ':id' do
             require_scope! :'view:posts'
             authorize! :view, post!
@@ -97,7 +97,14 @@ module API
             present post, with: Entities::Post, full: true
           end
 
-          desc 'Create a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "createPost" }
+          desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
+          get 'feed/:id/related' do
+            @posts = published_post!.related(true).page(page).per(per_page).records
+            set_pagination_headers(@posts, 'posts')
+            present @posts, with: Entities::Post
+          end
+
+          desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createPost" }
           params do
             use :post_associations
           end
@@ -113,7 +120,7 @@ module API
             present post, with: Entities::Post, full: true
           end
 
-          desc 'Update a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "updatePost" }
+          desc 'Update a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "updatePost" }
           params do
             use :post_associations
           end

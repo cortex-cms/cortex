@@ -33,7 +33,7 @@ class Media < ActiveRecord::Base
   validates_attachment :attachment, :presence => true,
                        :unless => :skip_attachment_validation,
                        :content_type => {:content_type => Cortex.config.media.allowed_media_types.collect{|allowed| allowed[:type]}},
-                       :size => {:in => 0..Cortex.config.media.max_size_mb.megabytes}
+                       :size => {:in => 0..Cortex.config.media.max_size_mb.to_i.megabytes}
 
   validates :type, inclusion: { in: %w(Media Youtube) }
 

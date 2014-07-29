@@ -1,7 +1,7 @@
 angular.module('cortex.services.imageFit', [
 ])
 
-.factory('ImageFitService', function($window) {
+.factory('ImageFitService', function($window, flash) {
   return {
     initRedactorImageFitPlugin: function() {
       if (!$window.RedactorPlugins) {
@@ -22,7 +22,7 @@ angular.module('cortex.services.imageFit', [
             imgElement.css( "width", "100%" );
           }
           else {
-            alert('Image not found at selection.');
+            flash.error = 'Image not found at selection.';
           }
         }
       };

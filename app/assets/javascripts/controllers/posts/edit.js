@@ -16,9 +16,8 @@ angular.module('cortex.controllers.posts.edit', [
                                       post, filters, currentUserAuthor, categoriesHierarchy, AddMediaService) {
   $scope.data = {
     savePost: function() {
-      $scope.$broadcast('validate');
+      $scope.$broadcast('validateDirectiveFields');
       if ($scope.postForm.$invalid) {
-        angular.element('.form-status').toggleClass('hidden', !$scope.postForm.$invalid);
         return;
       }
       // Find selected categories

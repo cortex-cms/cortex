@@ -3,7 +3,7 @@ require 'nokogiri'
 class Post < ActiveRecord::Base
   include SearchablePost
 
-  default_scope { includes(:categories, :media) }
+  default_scope -> { includes(:categories, :media, :industries) }
   scope :published, -> { where('published_at <= ?', DateTime.now) }
 
   acts_as_taggable

@@ -43,12 +43,12 @@ module API
             present @posts, with: Entities::Post, sanitize: true
           end
 
-          desc 'Show a published post', { entity: API::V1::Entities::Post, nickname: "showFeedPost" }
+          desc 'Show a published post', { entity: Entities::Post, nickname: "showFeedPost" }
           get 'feed/:id' do
             present post, with: Entities::Post, sanitize: true
           end
 
-          desc 'Show related published posts', { entity: API::V1::Entities::Post, nickname: "relatedPosts" }
+          desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
           get 'feed/:id/related' do
             @posts = published_post!.related(true).page(page).per(per_page).records
             set_pagination_headers(@posts, 'posts')

@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'api_v1_helper'
 
-describe API::Resources::Users do
+describe API::Resources::Users, :type => :request do
 
   describe 'GET /users/me' do
 
@@ -10,13 +10,13 @@ describe API::Resources::Users do
     it 'should get the current user if authorized' do
       login_as user
       get '/api/v1/users/me'
-      response.should be_success
-      response.body.should represent(API::Entities::User, user, { full: true })
+      expect(response).to be_success
+      expect(response.body).to represent(API::Entities::User, user, { full: true })
     end
 
     it 'should NOT get the current user if unauthorized' do
       get '/api/v1/users/me'
-      response.status.should == 401
+      expect(response.status).to eq(401)
     end
   end
 end

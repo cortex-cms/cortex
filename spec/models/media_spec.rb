@@ -9,7 +9,7 @@ RSpec.describe Media, type: :model do
 
   it "should allow deletion of unconsumed media" do
     media = create(:media)
-    expect(media.destroy).to be_true
+    expect(media.destroy).to be_truthy
   end
 
   it "should not allow deletion of consumed media" do

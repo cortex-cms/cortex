@@ -8,7 +8,7 @@ FactoryGirl.define do
     job_phase           :Discovery
     display             :large
     type                'ArticlePost'
-    draft               true
+    draft               false
     published_at        DateTime.now
     industries          []
     primary_industry_id 1
@@ -30,7 +30,7 @@ FactoryGirl.define do
     job_phase           :Discovery
     display             :large
     type                'PromoPost'
-    draft               true
+    draft               false
     published_at        DateTime.now
     industries          []
     primary_industry_id 1

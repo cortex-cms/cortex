@@ -38,7 +38,7 @@ module API
             use :post_metadata
           end
           get 'feed' do
-            @posts = ::Post.search_with_params(params, true).page(page).per(per_page).records
+            @posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
             set_pagination_headers(@posts, 'posts')
             present @posts, with: Entities::Post, sanitize: true
           end

@@ -50,22 +50,22 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
 
     before(:all) do
       skip("Tests intermittently broken, don't fail")
-
+      #
       # Post.connection
       # @industry_1 = create(:onet_occupation, soc: '12-0000')
       # @industry_2 = create(:onet_occupation, soc: '13-0000')
       # @industry_3 = create(:onet_occupation)
       # @category_1 = create(:category)
       # @category_2 = create(:category)
-      # @post_1 = create(:post, type: "VideoPost", job_phase: "get_the_job")
+      # @post_1 = create(:post, type: "VideoPost", job_phase: "Get the Job")
       # @post_1.industries << @industry_1
       # @post_1.categories << @category_1
-      # @post_2 = create(:post, job_phase: "on_the_job")
+      # @post_2 = create(:post, job_phase: "On the Job")
       # @post_2.industries << @industry_2
       # @post_2.categories << @category_2
       # @post_3 = create(:post, type: "PromoPost")
       # @post_3.industries << @industry_1
-      # @post_4 = create(:post, type: "VideoPost", job_phase: "get_the_job")
+      # @post_4 = create(:post, type: "VideoPost", job_phase: "Get the Job")
       # @post_4.industries << @industry_3
       # Post.import({refresh: true})
     end

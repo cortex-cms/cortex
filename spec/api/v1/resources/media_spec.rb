@@ -36,13 +36,12 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
 
     # TODO: Enable when Ben's media resource is merged in.
     it 'should allow search on q' do
-      skip("Waiting on Ben's reworked media resource")
+      pending("Waiting on Ben's reworked media resource")
       media_1 = create(:media)
       media_2 = create(:media, name: "RANDOM")
       Media.import({refresh: true})
       get '/api/v1/media?q=RANDOM'
       expect(response).to be_success
-      pp JSON.parse(response.body)
       expect(JSON.parse(response.body).count).to eq(1)
     end
   end

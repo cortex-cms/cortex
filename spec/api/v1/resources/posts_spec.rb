@@ -50,7 +50,7 @@ describe API::Resources::Posts, elasticsearch: true do
 
     before(:all) do
       skip("Tests intermittently broken, don't fail")
-      #
+
       # Post.connection
       # @industry_1 = create(:onet_occupation, soc: '12-0000')
       # @industry_2 = create(:onet_occupation, soc: '13-0000')
@@ -125,7 +125,7 @@ describe API::Resources::Posts, elasticsearch: true do
 
     context 'with invalid attributes' do
       it 'should NOT create a new post' do
-        expect{ post '/api/v1/posts', attributes_for(:post, title: nil) }.to_not change(Post, :count).by(1)
+        expect{ post '/api/v1/posts', attributes_for(:post, title: nil) }.to_not change(Post, :count)
         response.should_not be_success
       end
     end
@@ -156,7 +156,7 @@ describe API::Resources::Posts, elasticsearch: true do
       end
       it 'should require featured_url and call_to_action' do
         promo_post = attributes_for(:post, type: 'PromoPost', author_id: author.id)
-        expect{ post '/api/v1/posts', promo_post }.to_not change(Post, :count).by(1)
+        expect{ post '/api/v1/posts', promo_post }.to_not change(Post, :count)
         response.should_not be_success
       end
     end
@@ -168,7 +168,7 @@ describe API::Resources::Posts, elasticsearch: true do
       it 'should update the post' do
         post = create(:post)
         post.title += ' updated'
-        expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count).by(1)
+        expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count)
         response.should be_success
         response.body.should represent(API::Entities::Post, post, { full: true })
       end
@@ -177,7 +177,7 @@ describe API::Resources::Posts, elasticsearch: true do
     context 'with invalid attributes' do
       it 'should NOT update the post' do
         post = create(:post)
-        expect{ put "/api/v1/posts/#{post.id}", {title: nil}.to_json, application_json }.to_not change(Post, :count).by(1)
+        expect{ put "/api/v1/posts/#{post.id}", {title: nil}.to_json, application_json }.to_not change(Post, :count)
         response.should_not be_success
       end
     end
@@ -186,20 +186,20 @@ describe API::Resources::Posts, elasticsearch: true do
       it 'should update the post with valid attributes' do
         post = create(:promo)
         post.destination_url = "http://www.example.com"
-        expect{ put "/api/v1/posts/#{post.id}", {destination_url: "http://www.example.com"}.to_json, application_json }.to_not change(Post, :count).by(1)
+        expect{ put "/api/v1/posts/#{post.id}", {destination_url: "http://www.example.com"}.to_json, application_json }.to_not change(Post, :count)
         response.should be_success
         response.body.should represent(API::Entities::Post, post, { full: true })
       end
 
       it 'should not update the post with invalid attributes' do
         post = create(:promo)
-        expect{ put "/api/v1/posts/#{post.id}", {destination_url: nil}.to_json, application_json }.to_not change(Post, :count).by(1)
+        expect{ put "/api/v1/posts/#{post.id}", {destination_url: nil}.to_json, application_json }.to_not change(Post, :count)
         response.should_not be_success
       end
 
       it 'should support updating from article to promo' do
         post = create(:post)
-        expect{ put "/api/v1/posts/#{post.id}", {type: 'PromoPost', destination_url: "Example.com", call_to_action: "Click here"}.to_json, application_json}.to_not change(Post, :count).by(1)
+        expect{ put "/api/v1/posts/#{post.id}", {type: 'PromoPost', destination_url: "Example.com", call_to_action: "Click here"}.to_json, application_json}.to_not change(Post, :count)
         response.should be_success
       end
     end
@@ -208,7 +208,7 @@ describe API::Resources::Posts, elasticsearch: true do
       it 'should update the post' do
         post = create(:post, :with_featured_media)
         post.title += ' updated'
-        expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count).by(1)
+        expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count)
         response.should be_success
         response.body.should represent(API::Entities::Post, post, { full: true })
       end
@@ -216,7 +216,7 @@ describe API::Resources::Posts, elasticsearch: true do
       it 'should include the featured media in associated media' do
         post = create(:post, :with_featured_media)
         post.featured_media = build(:post, :with_featured_media).featured_media
-        expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count).by(1)
+        expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count)
         Post.find(post.id).media.should include(post.featured_media)
       end
     end
@@ -232,7 +232,7 @@ describe API::Resources::Posts, elasticsearch: true do
 
     it 'should NOT delete a non-existent post' do
       post = create(:post)
-      expect{ delete "/api/v1/posts/#{post.id+1}" }.to_not change(Post, :count).by(-1)
+      expect{ delete "/api/v1/posts/#{post.id+1}" }.to_not change(Post, :count)
       response.should_not be_success
     end
   end

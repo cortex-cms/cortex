@@ -8,7 +8,6 @@ describe API::Resources::Media, elasticsearch: true do
   before do
     login_as user
     Media.__elasticsearch__.create_index! index: Media.index_name
-
   end
 
   describe 'GET /media' do
@@ -76,7 +75,7 @@ describe API::Resources::Media, elasticsearch: true do
       it 'should update media' do
         media = create(:media)
         media.name += ' updated'
-        expect{ put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count).by(1)
+        expect{ put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count)
         response.should be_success
         response.body.should represent(API::Entities::Media, media, { full: true })
       end
@@ -85,7 +84,7 @@ describe API::Resources::Media, elasticsearch: true do
         media = create(:media)
         media.name += ' updated'
         media.taxon = 'BreakingTaxon'
-        expect { put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count).by(1)
+        expect { put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count)
         response.should be_success
         response_obj = JSON.parse(response.body)
         response_obj["name"].should eq "#{media.name}"
@@ -104,7 +103,7 @@ describe API::Resources::Media, elasticsearch: true do
 
     it 'should NOT delete non-existent media' do
       media = create(:media)
-      expect{ delete "/api/v1/media/#{media.id+1}" }.to_not change(Media, :count).by(-1)
+      expect{ delete "/api/v1/media/#{media.id+1}" }.to_not change(Media, :count)
       response.should_not be_success
     end
 
@@ -113,7 +112,7 @@ describe API::Resources::Media, elasticsearch: true do
       post = create(:post)
       post.featured_media = media
       post.save
-      expect { delete "/api/v1/media/#{media.id}" }.not_to change(Media, :count).by(-1)
+      expect { delete "/api/v1/media/#{media.id}" }.to_not change(Media, :count)
       expect(response.status).to eq(409)
     end
   end

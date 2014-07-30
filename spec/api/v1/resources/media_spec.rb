@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'api_v1_helper'
 
-describe API::Resources::Media, elasticsearch: true do
+describe API::Resources::Media, type: :request, elasticsearch: true do
 
   let(:user) { create(:user, :admin) }
 
@@ -14,24 +14,24 @@ describe API::Resources::Media, elasticsearch: true do
 
     it 'returns an empty array if there is no media' do
       get '/api/v1/media'
-      response.should be_success
-      JSON.parse(response.body).should == []
+      expect(response).to be_success
+      expect(JSON.parse(response.body)).to eq([])
     end
 
     it 'should return two media items' do
       2.times { create(:media) }
       get '/api/v1/media'
-      response.should be_success
-      JSON.parse(response.body).count.should == 2
+      expect(response).to be_success
+      expect(JSON.parse(response.body).count).to eq(2)
     end
 
     it 'should return paginated results' do
       5.times { create(:media) }
       get '/api/v1/media?per_page=2'
-      response.should be_success
-      JSON.parse(response.body).count.should == 2
-      response.headers['X-Total-Items'].should == '5'
-      response.headers['Content-Range'].should == 'media 0-1:2/5'
+      expect(response).to be_success
+      expect(JSON.parse(response.body).count).to eq(2)
+      expect(response.headers['X-Total-Items']).to eq('5')
+      expect(response.headers['Content-Range']).to eq('media 0-1:2/5')
     end
 
     # TODO: Enable when Ben's media resource is merged in.
@@ -41,9 +41,9 @@ describe API::Resources::Media, elasticsearch: true do
       media_2 = create(:media, name: "RANDOM")
       Media.import({refresh: true})
       get '/api/v1/media?q=RANDOM'
-      response.should be_success
+      expect(response).to be_success
       pp JSON.parse(response.body)
-      JSON.parse(response.body).count.should == 1
+      expect(JSON.parse(response.body).count).to eq(1)
     end
   end
 
@@ -53,8 +53,8 @@ describe API::Resources::Media, elasticsearch: true do
 
     it 'should return the correct media' do
       get "/api/v1/media/#{media.id}"
-      response.should be_success
-      response.body.should represent(API::Entities::Media, media, { full: true })
+      expect(response).to be_success
+      expect(response.body).to represent(API::Entities::Media, media, { full: true })
     end
   end
 
@@ -63,8 +63,8 @@ describe API::Resources::Media, elasticsearch: true do
     context 'with valid attributes' do
       it 'should create new media' do
         expect{ post '/api/v1/media', media: attributes_for(:media) }.to change(Media, :count).by(1)
-        response.should be_success
-        response.body.should represent(API::Entities::Media, Media.last, { full: true })
+        expect(response).to be_success
+        expect(response.body).to represent(API::Entities::Media, Media.last, { full: true })
       end
     end
   end
@@ -76,8 +76,8 @@ describe API::Resources::Media, elasticsearch: true do
         media = create(:media)
         media.name += ' updated'
         expect{ put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count)
-        response.should be_success
-        response.body.should represent(API::Entities::Media, media, { full: true })
+        expect(response).to be_success
+        expect(response.body).to represent(API::Entities::Media, media, { full: true })
       end
 
       it 'should only update allowed parameters' do
@@ -85,10 +85,10 @@ describe API::Resources::Media, elasticsearch: true do
         media.name += ' updated'
         media.taxon = 'BreakingTaxon'
         expect { put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count)
-        response.should be_success
+        expect(response).to be_success
         response_obj = JSON.parse(response.body)
-        response_obj["name"].should eq "#{media.name}"
-        response_obj["taxon"].should_not eq "BreakingTaxon"
+        expect(response_obj["name"]).to eq "#{media.name}"
+        expect(response_obj["taxon"]).not_to eq "BreakingTaxon"
       end
     end
   end
@@ -98,13 +98,13 @@ describe API::Resources::Media, elasticsearch: true do
     it 'should delete media' do
       media = create(:media)
       expect{ delete "/api/v1/media/#{media.id}" }.to change(Media, :count).by(-1)
-      response.should be_success
+      expect(response).to be_success
     end
 
     it 'should NOT delete non-existent media' do
       media = create(:media)
       expect{ delete "/api/v1/media/#{media.id+1}" }.to_not change(Media, :count)
-      response.should_not be_success
+      expect(response).not_to be_success
     end
 
     it 'should not delete consumed media' do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Taxon do
+describe Taxon, :type => :model do
 
   before do
     Timecop.freeze(Time.local(2014, 1, 1, 10, 5, 0))

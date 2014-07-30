@@ -30,4 +30,8 @@ describe Taxon, :type => :model do
       expect(doc_taxon2).to eq('MDOC1401010002')
     end
   end
+
+  after do
+    Timecop.return
+  end
 end

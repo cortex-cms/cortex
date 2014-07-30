@@ -96,5 +96,5 @@ def seed_industries
 end
 
 def onet_package_name
-  "db_#{(Cortex.config.onet.version || '18.1').gsub('.', '_')}"
+  "db_#{(Cortex.config.onet.version.to_s || '18.1').gsub('.', '_')}"
 end

@@ -18,7 +18,9 @@ gem 'rails', '~> 4'
 gem 'grape', '~> 0.8'
 gem 'grape-entity'
 gem 'grape-swagger'
+gem 'grape-rails-cache'
 gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
+gem 'redis-rails', '~> 4.0'
 
 # Templating
 gem 'haml'

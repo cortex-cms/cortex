@@ -17,6 +17,8 @@ development:
       vendor: aws
       region: us-east-1
       size: m1.medium
+    configuration:
+      version: 1.3.1
   redis:
     server:
       unique_name: cache-dev

@@ -1,21 +1,25 @@
 default: &default
   rails:
     server:
+      unique_name: web
       vendor: aws
       region: us-east-1
       size: m1.medium
   postgresql:
     server:
+      unique_name: db
       vendor: aws
       region: us-east-1
       size: m1.medium
   elasticsearch:
     server:
+      unique_name: search
       vendor: aws
       region: us-east-1
       size: m1.medium
   redis:
     server:
+      unique_name: cache
       vendor: aws
       region: us-east-1
       size: m1.medium
@@ -24,21 +28,25 @@ production:
   <<: *default
   rails:
     server:
+      unique_name: web
       vendor: aws
       region: us-east-1
       size: m3.medium
   postgresql:
     server:
+      unique_name: db
       vendor: aws
       region: us-east-1
       size: m3.medium
   elasticsearch:
     server:
+      unique_name: search
       vendor: aws
       region: us-east-1
       size: m3.medium
   redis:
     server:
+      unique_name: cache
       vendor: aws
       region: us-east-1
       size: m3.medium

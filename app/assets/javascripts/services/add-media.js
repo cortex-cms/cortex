@@ -11,7 +11,7 @@ angular.module('cortex.services.addMedia', [
       PostsPopupService.title = title;
       $state.go('.media.manage.components');
     },
-    initRedactorWithMedia: function() {
+    initRedactorMediaPlugin: function() {
       var that = this;
 
       if (!$window.RedactorPlugins) {

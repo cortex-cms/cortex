@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Taxon do
+describe Taxon, :type => :model do
 
   before do
     Timecop.freeze(Time.local(2014, 1, 1, 10, 5, 0))
@@ -29,5 +29,9 @@ describe Taxon do
       doc_taxon2 = media2.taxon
       expect(doc_taxon2).to eq('MDOC1401010002')
     end
+  end
+
+  after do
+    Timecop.return
   end
 end

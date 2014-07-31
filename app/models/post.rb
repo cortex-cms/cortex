@@ -3,12 +3,12 @@ require 'nokogiri'
 class Post < ActiveRecord::Base
   include SearchablePost
 
-  default_scope { includes(:categories, :media) }
+  default_scope -> { includes(:categories, :media, :industries) }
   scope :published, -> { where('published_at <= ?', DateTime.now) }
 
   acts_as_taggable
 
-  before_save :update_media!, :sanitize_body!
+  before_save :update_media!
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
@@ -45,12 +45,6 @@ class Post < ActiveRecord::Base
 
   def update_media!
     self.media = find_all_associated_media
-  end
-
-  def sanitize_body!
-    if body
-      body = Sanitize.fragment(body, Cortex.config.sanitize_whitelist.post)
-    end
   end
 
   def find_all_associated_media

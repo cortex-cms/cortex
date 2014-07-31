@@ -6,10 +6,15 @@ module Cortex
   private
 
   def self.load_config
-    c = Hashr.new(YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env])
-    c.media.allowed_media_types = Hashr.new(YAML.load_file("#{Rails.root}/config/media_types.yml")).allowed
-    c.sanitize_whitelist = Hashr.new(YAML.load_file("#{Rails.root}/config/sanitize_whitelist.yml"))
+    c = Hashr.new(self.load_yaml("#{Rails.root}/config/config.yml")[Rails.env])
+    c.media.allowed_media_types = Hashr.new(self.load_yaml("#{Rails.root}/config/media_types.yml")).allowed
+    c.sanitize_whitelist = Hashr.new(self.load_yaml("#{Rails.root}/config/sanitize_whitelist.yml"))
     c
+  end
+
+  def self.load_yaml(file)
+    # interpolate file with ERB to allow templating (<%= ENV['...'] %>)
+    YAML.load(ERB.new(File.new(file).read).result)
   end
 end
 

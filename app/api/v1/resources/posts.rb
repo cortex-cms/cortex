@@ -10,7 +10,7 @@ module API
         resource :posts do
           helpers Helpers::PaginationHelper
 
-          desc 'Show all posts', { entity: API::V1::Entities::Post, nickname: "showAllPosts" }
+          desc 'Show all posts', { entity: Entities::Post, nickname: "showAllPosts" }
           params do
             use :pagination
             use :search
@@ -28,19 +28,31 @@ module API
             end
 
             set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post, full: true
+            present @posts, with: Entities::Post
           end
 
-          desc 'Show published posts', { entity: API::V1::Entities::Post, nickname: "postFeed" }
+          desc 'Show published posts', { entity: Entities::Post, nickname: "postFeed" }
           params do
             use :pagination
             use :search
             use :post_metadata
           end
           get 'feed' do
-            @posts = ::Post.search_with_params(params, true).page(page).per(per_page).records
+            @posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
             set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post, full: true
+            present @posts, with: Entities::Post, sanitize: true
+          end
+
+          desc 'Show a published post', { entity: Entities::Post, nickname: "showFeedPost" }
+          get 'feed/:id' do
+            present post, with: Entities::Post, sanitize: true
+          end
+
+          desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
+          get 'feed/:id/related' do
+            @posts = published_post!.related(true).page(page).per(per_page).records
+            set_pagination_headers(@posts, 'posts')
+            present @posts, with: Entities::Post
           end
 
           desc 'Show published post authors'
@@ -77,7 +89,7 @@ module API
             present :job_phases, ::Category.roots, with: Entities::Category, children: true
           end
 
-          desc 'Show a post', { entity: API::V1::Entities::Post, nickname: "showPost" }
+          desc 'Show a post', { entity: Entities::Post, nickname: "showPost" }
           get ':id' do
             require_scope! :'view:posts'
             authorize! :view, post!
@@ -85,14 +97,14 @@ module API
             present post, with: Entities::Post, full: true
           end
 
-          desc 'Show related published posts', { entity: API::V1::Entities::Post, nickname: "relatedPosts" }
+          desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
           get 'feed/:id/related' do
             @posts = published_post!.related(true).page(page).per(per_page).records
             set_pagination_headers(@posts, 'posts')
             present @posts, with: Entities::Post
           end
 
-          desc 'Create a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "createPost" }
+          desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createPost" }
           params do
             use :post_associations
           end
@@ -100,13 +112,15 @@ module API
             require_scope! :'modify:posts'
             authorize! :create, Post
 
-            @post = ::Post.new(declared(params, {include_missing: false}, Entities::Post.documentation.keys))
+            allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories)
+
+            @post = ::Post.new(declared(params, {include_missing: false}, allowed_params))
             post.user = current_user
             post.save!
             present post, with: Entities::Post, full: true
           end
 
-          desc 'Update a post', { entity: API::V1::Entities::Post, params: API::V1::Entities::Post.documentation, nickname: "updatePost" }
+          desc 'Update a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "updatePost" }
           params do
             use :post_associations
           end

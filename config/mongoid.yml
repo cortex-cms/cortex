@@ -1,27 +1,22 @@
-development:
+defaults: &defaults
   sessions:
     default:
-      database: cortex
+      database: <%= ENV['MONGODB_DATABASE'] || 'cortex_dev' %>
       hosts:
-        - localhost:27017
-
-local:
-  sessions:
-    default:
-      database: cortex
-      hosts:
-        - localhost:27017
-
-staging:
-  sessions:
-    default:
-      database: cortex_stg
-      hosts:
-        - localhost:27017
+        - <%= "#{ENV['MONGODB_HOST'] || 'localhost'}:#{ENV['MONGODB_PORT'] || 27017}" %>
 
 test:
   sessions:
     default:
-      database: cortex_test
+      database: <%= ENV['TEST_MONGODB_DATABASE'] || 'cortex_test' %>
       hosts:
-        - localhost:27017
+        - <%= "#{ENV['TEST_MONGODB_HOST'] || 'localhost'}:#{ENV['TEST_MONGODB_PORT'] || 27017}" %>
+
+development:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

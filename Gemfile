@@ -88,6 +88,7 @@ gem 'unf'
 gem 'hashr'
 gem 'mime-types'
 gem 'json'
+gem 'dotenv'
 
 # Middleware
 gem 'rack-cors', require: 'rack/cors'
@@ -101,7 +102,7 @@ gem 'slim' # Sidekiq-web
 group :test, :development, :local do
 
   # Rspec
-  gem 'rspec', '~> 2.99'
+  gem 'rspec', '~> 3.0'
   gem 'rspec-rails'
   gem 'json_spec'
 

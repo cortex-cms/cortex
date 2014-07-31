@@ -1,26 +1,31 @@
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  user: cortex
-  pool: 5
-  timeout: 5000
-
-local:
-  <<: *default
-  database: cortex_dev
-
-development:
-  <<: *default
-  database: cortex_dev
-
-staging:
-  <<: *default
-  database: cortex_staging
+defaults: &defaults
+  adapter: <%= ENV['DATABASE_ADAPTER'] || 'postgresql' %>
+  encoding: <%= ENV['DATABASE_ENCODING'] || 'utf8' %>
+  reconnect: <%= ENV['DATABASE_RECONNECT'] || 'true' %>
+  database: <%= ENV['DATABASE_NAME'] || 'cortex_dev' %>
+  pool: <%= ENV['DATABASE_POOL'] || '5' %>
+  username: <%= ENV['DATABASE_USERNAME'] || '' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || '' %>
+  host: <%= ENV['DATABASE_HOST'] || '' %>
+  port: <%= ENV['DATABASE_PORT'] || '' %>
 
 test:
-  <<: *default
-  database: cortex_test
+  adapter: <%= ENV['TEST_DATABASE_ADAPTER'] || 'postgresql' %>
+  encoding: <%= ENV['TEST_DATABASE_ENCODING'] || 'utf8' %>
+  reconnect: <%= ENV['TEST_DATABASE_RECONNECT'] || 'true' %>
+  database: <%= ENV['TEST_DATABASE_NAME'] || 'cortex_test' %>
+  pool: <%= ENV['TEST_DATABASE_POOL'] || '5' %>
+  username: <%= ENV['TEST_DATABASE_USERNAME'] || '' %>
+  password: <%= ENV['TEST_DATABASE_PASSWORD'] || '' %>
+  host: <%= ENV['TEST_DATABASE_HOST'] || '' %>
+  port: <%= ENV['TEST_DATABASE_PORT'] || '' %>
+
+development:
+  <<: *defaults
+
+staging:
+  <<: *defaults
 
 production:
-  <<: *default
-  database: cortex
+  <<: *defaults
+

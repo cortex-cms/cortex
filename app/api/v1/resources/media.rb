@@ -10,7 +10,7 @@ module API
           helpers Helpers::PaginationHelper
           helpers Helpers::MediaHelper
 
-          desc 'Show all media', { entity: API::V1::Entities::Media, nickname: "showAllMedia" }
+          desc 'Show all media', { entity: Entities::Media, nickname: "showAllMedia" }
           params do
             use :pagination
           end
@@ -24,7 +24,7 @@ module API
             present @media, with: Entities::Media
           end
 
-          desc 'Search for media', { entity: API::V1::Entities::Media, nickname: "searchMedia" }
+          desc 'Search for media', { entity: Entities::Media, nickname: "searchMedia" }
           params do
             use :pagination
             use :search
@@ -44,7 +44,7 @@ module API
             present @media, with: Entities::Media
           end
 
-          desc 'Get media', { entity: API::V1::Entities::Media, nickname: "showMedia" }
+          desc 'Get media', { entity: Entities::Media, nickname: "showMedia" }
           get ':id' do
             require_scope! :'view:media'
             authorize! :view, media!
@@ -52,7 +52,7 @@ module API
             present media, with: Entities::Media, full: true
           end
 
-          desc 'Create media', { entity: API::V1::Entities::Media, params: API::V1::Entities::Media.documentation, nickname: "createMedia" }
+          desc 'Create media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "createMedia" }
           params do
             optional :attachment
           end
@@ -68,7 +68,7 @@ module API
             present media, with: Entities::Media, full: true
           end
 
-          desc 'Update media', { entity: API::V1::Entities::Media, params: API::V1::Entities::Media.documentation, nickname: "updateMedia" }
+          desc 'Update media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "updateMedia" }
           params do
             optional :attachment
           end
@@ -78,7 +78,9 @@ module API
 
             media_params = params[:media] || params
 
-            media.update!(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
+            allowed_params = [:name, :alt, :description, :tag_list, :status, :expiration_date]
+
+            media.update!(declared(media_params, { include_missing: false }, allowed_params))
             if params[:tag_list]
               media.tag_list = params[:tag_list]
               media.save!
@@ -91,7 +93,15 @@ module API
             require_scope! :'modify:media'
             authorize! :delete, media!
 
-            media.destroy
+            begin
+              media.destroy
+            rescue Exceptions::ObjectConsumed => e
+              error!({
+                  error: "Conflict",
+                  message: e.message,
+                  status: 409
+                     }, 409)
+            end
           end
         end
       end

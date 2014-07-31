@@ -1,5 +1,5 @@
 defaults: &defaults
-  adapter: <%= ENV['DATABASE_ADAPTER'] || 'postgresql' %>
+  adapter: postgresql
   encoding: <%= ENV['DATABASE_ENCODING'] || 'utf8' %>
   reconnect: <%= ENV['DATABASE_RECONNECT'] || 'true' %>
   database: <%= ENV['DATABASE_NAME'] || 'cortex_dev' %>

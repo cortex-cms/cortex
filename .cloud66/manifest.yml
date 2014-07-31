@@ -1,0 +1,50 @@
+default: &default
+  rails:
+    server:
+      vendor: aws
+      region: us-east-1
+      size: m1.medium
+  postgresql:
+    server:
+      vendor: aws
+      region: us-east-1
+      size: m1.medium
+  elasticsearch:
+    server:
+      vendor: aws
+      region: us-east-1
+      size: m1.medium
+  redis:
+    server:
+      vendor: aws
+      region: us-east-1
+      size: m1.medium
+
+production:
+  <<: *default
+  rails:
+    server:
+      vendor: aws
+      region: us-east-1
+      size: m3.medium
+  postgresql:
+    server:
+      vendor: aws
+      region: us-east-1
+      size: m3.medium
+  elasticsearch:
+    server:
+      vendor: aws
+      region: us-east-1
+      size: m3.medium
+  redis:
+    server:
+      vendor: aws
+      region: us-east-1
+      size: m3.medium
+
+development:
+  <<: *default
+
+staging:
+  <<: *default

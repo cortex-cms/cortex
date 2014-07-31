@@ -94,10 +94,34 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
     end
   end
 
+  describe 'GET /posts/feed/:id' do
+
+    it 'should return the correct post' do
+      post = create(:post)
+      get "/api/v1/posts/feed/#{post.id}"
+      expect(response).to be_success
+      expect(response.body).to represent(API::Entities::Post, post, { full: true, sanitize: true })
+    end
+
+    it 'should not show unpublished posts' do
+      post = create(:post, draft: true)
+      get "/api/v1/posts/feed/#{post.id}"
+      expect(response).to be_success
+      expect(response.body).to eq("null")
+    end
+  end
+
   describe 'GET /posts/:id' do
 
     it 'should return the correct post' do
       post = create(:post)
+      get "/api/v1/posts/#{post.id}"
+      expect(response).to be_success
+      expect(response.body).to represent(API::Entities::Post, post, { full: true })
+    end
+
+    it 'should return unpublished posts' do
+      post = create(:post, draft: true)
       get "/api/v1/posts/#{post.id}"
       expect(response).to be_success
       expect(response.body).to represent(API::Entities::Post, post, { full: true })

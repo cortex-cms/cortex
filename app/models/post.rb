@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   include SearchablePost
 
   default_scope -> { includes(:categories, :media, :industries) }
-  scope :published, -> { where('published_at <= ?', DateTime.now) }
+  scope :published, -> { where('published_at <= ? and draft = ?', DateTime.now, false) }
 
   acts_as_taggable
 

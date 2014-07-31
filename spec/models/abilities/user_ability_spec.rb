@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Abilities::UserAbility do
+describe Abilities::UserAbility, :type => :model do
 
   begin
     context 'admin' do

@@ -24,5 +24,5 @@
 
 require 'spec_helper'
 
-describe Tenant do
+RSpec.describe Tenant, type: :model do
 end

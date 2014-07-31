@@ -6,6 +6,7 @@ module API
       class Posts < Grape::API
         helpers Helpers::SharedParams
         helpers Helpers::PostsHelper
+        include Grape::Rails::Cache
 
         resource :posts do
           helpers Helpers::PaginationHelper
@@ -19,12 +20,15 @@ module API
           get do
             require_scope! :'view:posts'
             authorize! :view, ::Post
-
-            q = params[:q]
-            if q.to_s != ''
-              @posts = ::Post.search_with_params(params).page(page).per(per_page).records
+            intersect = Array(params.keys & %w{q categories industries type job_phase})
+            key_name = "posts:list:"
+            intersect.each do |k|
+              key_name += "#{k}=#{params[k]}"
+            end
+            if intersect.length == 0
+              @posts = ::Post.page(page).per(per_page)
             else
-              @posts = ::Post.order(created_at: :desc).page(page).per(per_page)
+              @posts = ::Post.search_with_params(declared(params, include_missing: false), false).page(page).per(per_page).records
             end
 
             set_pagination_headers(@posts, 'posts')
@@ -38,14 +42,27 @@ module API
             use :post_metadata
           end
           get 'feed' do
-            @posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
-            set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post, sanitize: true
+            intersect = Array(params.keys & %w{q categories industries type job_phase})
+            key_name = "posts:feed:list:"
+            intersect.each do |k|
+              key_name += "#{k}=#{params[k]}"
+            end
+            cache(key: key_name, etag: Post.order("updated_at desc").take(1), expires_in: 2.hours) do
+              if intersect.length == 0
+                @posts = ::Post.published.page(page).per(per_page)
+              else
+                @posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
+              end
+              set_pagination_headers(@posts, 'posts')
+              present @posts, with: Entities::Post, sanitize: true
+            end
           end
 
           desc 'Show a published post', { entity: Entities::Post, nickname: "showFeedPost" }
           get 'feed/:id' do
-            present post, with: Entities::Post, sanitize: true
+            cache(key: "posts:feed:id:#{params[:id]}", etag: post.updated_at, expires_in: 2.hours) do
+              present post, with: Entities::Post, sanitize: true, full: true
+            end
           end
 
           desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
@@ -93,15 +110,9 @@ module API
           get ':id' do
             require_scope! :'view:posts'
             authorize! :view, post!
-
-            present post, with: Entities::Post, full: true
-          end
-
-          desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
-          get 'feed/:id/related' do
-            @posts = published_post!.related(true).page(page).per(per_page).records
-            set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post
+            cache(key: "posts:id:#{params[:id]}", etag: post.updated_at, expires_in: 2.hours) do
+              present post, with: Entities::Post, full: true
+            end
           end
 
           desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createPost" }

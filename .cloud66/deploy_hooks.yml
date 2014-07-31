@@ -1,0 +1,14 @@
+defaults: &defaults
+  first_thing:
+    - source: /.cloud66/database.yml
+      destination: $STACK_PATH/config/database.yml
+      target: rails
+
+development:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
+staging:
+  <<: *defaults

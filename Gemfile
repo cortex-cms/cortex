@@ -71,11 +71,6 @@ gem 'sanitize', '~> 3.0'
 gem 'paranoia', '~> 2.0'
 gem 'pg'
 
-# Mongoid
-gem 'mongoid', '~> 4.0.0.rc2', git: 'git://github.com/mongoid/mongoid'
-gem 'bson_ext'
-gem 'mongoid_paranoia'
-
 # Authorization
 gem 'six'
 gem 'devise'

@@ -30,10 +30,6 @@ class User < ActiveRecord::Base
     self.email == 'surgeon@careerbuilder.com'
   end
 
-  def profile
-    @profile ||= UserProfile.find_or_create_by(:user_id => self.id)
-  end
-
   def to_json(options={})
     options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname)
     options[:methods] ||= %w(fullname)

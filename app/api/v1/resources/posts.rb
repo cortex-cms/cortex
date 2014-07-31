@@ -61,7 +61,7 @@ module API
           desc 'Show a published post', { entity: Entities::Post, nickname: "showFeedPost" }
           get 'feed/:id' do
             cache(key: "posts:feed:id:#{params[:id]}", etag: post.updated_at, expires_in: 2.hours) do
-              present post, with: Entities::Post, sanitize: true, full: true
+              present published_post, with: Entities::Post, sanitize: true, full: true
             end
           end
 

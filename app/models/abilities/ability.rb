@@ -7,7 +7,7 @@ module Abilities
         if user.kind_of? User
           Abilities::UserAbility.allowed(user, subject)
         elsif user.kind_of? Application
-          Abilities::ApplicationAbility.allowed()
+          Abilities::ApplicationAbility.allowed(user)
         else
           []
         end

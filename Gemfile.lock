@@ -232,6 +232,7 @@ GEM
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kgio (2.9.2)
     kramdown (1.4.0)
     libv8 (3.16.14.3)
     listen (2.7.9)
@@ -364,6 +365,7 @@ GEM
       activesupport (= 4.1.4)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    raindrops (0.13.0)
     rake (10.3.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
@@ -492,6 +494,13 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.6)
+    unicorn (4.8.3)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
+    unicorn-rails (2.1.1)
+      rack
+      unicorn
     virtus (1.0.3)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -597,3 +606,4 @@ DEPENDENCIES
   uglifier
   underscore-rails
   unf
+  unicorn-rails

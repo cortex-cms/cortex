@@ -11,6 +11,9 @@ def linux_only(require_as)
   RUBY_PLATFORM.include?('linux') && require_as
 end
 
+# Server
+gem 'unicorn-rails'
+
 # Rails
 gem 'rails', '~> 4'
 

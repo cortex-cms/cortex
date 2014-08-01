@@ -11,6 +11,9 @@ def linux_only(require_as)
   RUBY_PLATFORM.include?('linux') && require_as
 end
 
+# Server
+gem 'unicorn-rails'
+
 # Rails
 gem 'rails', '~> 4'
 
@@ -18,7 +21,9 @@ gem 'rails', '~> 4'
 gem 'grape', '~> 0.8'
 gem 'grape-entity'
 gem 'grape-swagger'
+gem 'grape-rails-cache'
 gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
+gem 'redis-rails', '~> 4.0'
 
 # Templating
 gem 'haml'

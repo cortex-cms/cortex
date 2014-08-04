@@ -1,6 +1,8 @@
+app_root = Rails.root
+
 worker_processes 2
 
-working_directory "#{ENV['APP_PATH']}"
+working_directory app_root
 
 listen "/tmp/web_server.sock", :backlog => 64
 
@@ -13,8 +15,8 @@ if Rails.env.development?
   listen '127.0.0.1:3000'
 end
 
-stderr_path "#{ENV['APP_PATH']}/log/unicorn.stderr.log"
-stdout_path "#{ENV['APP_PATH']}/log/unicorn.stdout.log"
+stderr_path "#{app_root}/log/unicorn.stderr.log"
+stdout_path "#{app_root}/log/unicorn.stdout.log"
 
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and

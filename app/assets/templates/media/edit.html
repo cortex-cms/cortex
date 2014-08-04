@@ -55,48 +55,13 @@
 
     <dl class="dl-horizontal">
       <dt>Description</dt>
-      <dd class="vmargin-bottom-small"><textarea id="media-description" class="form-control input-sm" rows="3" ng-model="media.description"></textarea></dd>
-
-      <dt>Phase</dt>
       <dd class="vmargin-bottom-small">
-        <select id="media-phase" class="form-control input-sm">
-          <option>Sample Phase Name 1</option>
-          <option>Sample Phase Name 2</option>
-          <option>Sample Phase Name n</option>
-        </select>
-      </dd>
-
-      <dt>Category</dt>
-      <dd class="vmargin-bottom-small">
-        <select id="media-category" class="form-control input-sm">
-          <option>Sample Category 1</option>
-          <option>Sample Category 2</option>
-          <option>Sample Category n</option>
-        </select>
+        <textarea id="media-description" class="form-control input-sm" rows="3" ng-model="media.description"></textarea>
       </dd>
 
       <dt>Tags</dt>
-      <dd class="vmargin-bottom-small"><input id="media-tags" type="text" class="form-control input-sm" rows="3" ng-model="data.tags"></dd>
-    </dl>
-
-    <h4 class="heading-decorative">Status</h4>
-
-    <dl class="dl-horizontal heading-decorative">
-      <dt>Status</dt>
       <dd class="vmargin-bottom-small">
-        <div class="btn-group btn-group-sm">
-          <button type="button" class="btn btn-default" ng-model="media.active" btn-radio="true">Active</button>
-          <button type="button" class="btn btn-default" ng-model="media.active" btn-radio="false">Inactive</button>
-        </div>
-      </dd>
-
-      <dt>Expiration Date</dt>
-      <dd class="vmargin-bottom-small input-group form-group">
-        <input type="text" class="form-control input-sm" datepicker-popup="{{datepicker.format}}"
-             is-open="datepicker.expireAtOpen"
-             show-weeks="false"
-             ng-model="media.deactive_at" />
-        <span class="input-group-btn"><button class="btn btn-default btn-sm" ng-click="datepicker.open('expireAtOpen')"><i class="fa fa-calendar"></i></button></span>
+        <input id="media-tags" type="text" class="form-control input-sm" rows="3" ng-model="data.tags">
       </dd>
     </dl>
 

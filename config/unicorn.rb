@@ -8,6 +8,11 @@ timeout 30
 
 pid '/tmp/web_server.pid'
 
+# Bind to a port for quick debugging
+if Rails.env.development?
+  listen '127.0.0.1:3000'
+end
+
 stderr_path "#{ENV['APP_PATH']}/log/unicorn.stderr.log"
 stdout_path "#{ENV['APP_PATH']}/log/unicorn.stdout.log"
 

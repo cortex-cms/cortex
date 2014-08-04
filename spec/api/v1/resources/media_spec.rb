@@ -112,6 +112,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
       post.featured_media = media
       post.save
       expect { delete "/api/v1/media/#{media.id}" }.to_not change(Media, :count)
+      expect(Media.exists? media.id).to be_truthy
       expect(response.status).to eq(409)
     end
   end

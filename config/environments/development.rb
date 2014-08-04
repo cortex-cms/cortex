@@ -27,6 +27,8 @@ Cortex::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.cache_store = :redis_store, ENV['CACHE_URL']
+
   if ENV['S3_BUCKET_NAME'].to_s != ''
     config.paperclip_defaults = {
       :storage => :s3,

@@ -1,6 +1,6 @@
 worker_processes 2
 
-working_directory "#{Rails.root}"
+working_directory "#{ENV['APP_PATH']}"
 
 listen "/tmp/web_server.sock", :backlog => 64
 
@@ -8,8 +8,8 @@ timeout 30
 
 pid '/tmp/web_server.pid'
 
-stderr_path "#{ENV['STACK_PATH']}/log/unicorn.stderr.log"
-stdout_path "#{ENV['STACK_PATH']}/log/unicorn.stdout.log"
+stderr_path "#{ENV['APP_PATH']}/log/unicorn.stderr.log"
+stdout_path "#{ENV['APP_PATH']}/log/unicorn.stdout.log"
 
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and

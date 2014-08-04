@@ -9,7 +9,7 @@ timeout 30
 pid '/tmp/web_server.pid'
 
 # Bind to a port for quick debugging
-if Rails.env.development?
+if ENV['RAILS_ENV'] == 'development'
   listen '127.0.0.1:3000'
 end
 

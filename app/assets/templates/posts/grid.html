@@ -29,12 +29,12 @@
       <td data-title="'Title'">{{ post.title }}</td>
       <td data-title="'Type'">{{ post.type }}</td>
       <td data-title="'Status'">{{ post.published_at|publishStatus:post.draft }}</td>
-      <td data-title="'Author'">{{ post.custom_author || post.author.fullname }}</td>
+      <td data-title="'Author'">{{ post.custom_author }}</td>
       <td data-title="'Categories'">{{ post.categories|tagList }}</td>
       <td data-title="'Created'">{{ post.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
       <td data-title="'Modified'">{{ post.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
       <td data-title="'Active'" class="text-center">{{ post.deleted_at == null ? "\u2713" : "" }}</td>
-      <td data-title="'Tags'">{{ post.tags.join(', ') }}</td>
+      <td data-title="'Tags'">{{ post.tag_list.join(', ') }}</td>
     </tr>
   </table>
 </div>

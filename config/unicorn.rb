@@ -1,4 +1,4 @@
-app_root = Rails.root
+app_root = ENV['APP_PATH'] || Rails.root
 
 worker_processes 2
 

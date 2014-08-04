@@ -90,6 +90,9 @@ gem 'mime-types'
 gem 'json'
 gem 'dotenv'
 
+# Monitoring
+gem 'honeybadger'
+
 # Middleware
 gem 'rack-cors', require: 'rack/cors'
 

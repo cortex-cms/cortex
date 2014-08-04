@@ -242,13 +242,11 @@ angular.module('cortex.states', [
                 return c.id;
               });
 
-              _.each(categoriesHierarchy, function (category) {
-                _.each(category.children, function (child) {
-                  if (_.contains(selectedCategoryIds, child.id)) {
-                    child.$selected = true;
-                  }
-                });
+            postCategories = {};
+              angular.forEach(selectedCategoryIds, function(id) {
+                postCategories[id] = true;
               });
+              post.postCategories = postCategories;
 
               defer.resolve(post);
             }, function(response) {

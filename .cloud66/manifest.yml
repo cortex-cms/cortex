@@ -1,31 +1,3 @@
-development:
-  rails:
-    server:
-      unique_name: web-dev
-      vendor: aws
-      region: us-east-1
-      size: m1.medium
-  postgresql:
-    server:
-      unique_name: db-dev
-      vendor: aws
-      region: us-east-1
-      size: m1.medium
-  elasticsearch:
-    server:
-      unique_name: search-dev
-      vendor: aws
-      region: us-east-1
-      size: m1.medium
-    configuration:
-      version: 1.3.1
-  redis:
-    server:
-      unique_name: cache-dev
-      vendor: aws
-      region: us-east-1
-      size: m1.medium
-
 staging:
   rails:
     server:

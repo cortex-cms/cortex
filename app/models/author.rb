@@ -5,6 +5,6 @@ class Author < ActiveRecord::Base
   scope :published, -> { joins(:posts).where('authors.user_id IS NOT NULL AND posts.published_at <= ?', DateTime.now) }
 
   store_accessor :sites, :personal, :facebook, :twitter, :google
-  belongs_to :user
+  belongs_to :user, touch: true
   has_many :posts
 end

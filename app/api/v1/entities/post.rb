@@ -4,7 +4,6 @@ module API
       class Post < Grape::Entity
         expose :id, documentation: {type: "Integer", desc: "Post ID", required: true}
         expose :title, documentation:  {desc: "Post Title", type: "String" , required: true}
-        expose :custom_author, documentation: {desc: "Ad hoc author", type: "String", required: true}
         expose :type, documentation: {desc: "Post Type", type: "String", enum: ["ArticlePost", "VideoPost", "InfographicPost", "PromoPost"], required: true}
         expose :draft, documentation: {desc: "Draft status", type: "Boolean"}
         expose :comment_count, documentation: {desc: "Number of comments", type: "Integer"}
@@ -32,6 +31,16 @@ module API
           post.display
         end
 
+        expose :custom_author, documentation: {desc: "Author's name", type: "String", required: true} do |post, options|
+          if post.author
+            post.author.fullname
+          elsif options[:type] == true
+            nil
+          else
+            post[:custom_author]
+          end
+        end
+
         expose :body, documentation: {desc: "Body of the post", type: "String"} do |post, options|
           if options[:sanitize]
             Sanitize.fragment(post[:body], Cortex.config.sanitize_whitelist.post)
@@ -40,6 +49,8 @@ module API
           end
         end
 
+        expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
+
         with_options if: lambda { |post, _| post.type == 'PromoPost' } do
           expose :destination_url, { documentation: { type: "String", desc: "Destination URL for a Promo Post"} }
           expose :call_to_action, { documentation: { type: "String", desc: "Call to Action for a Promo Post"} }
@@ -47,7 +58,6 @@ module API
 
         with_options if: { full: true } do
           represent :media, with: 'Entities::Media', full: true, documentation: {type: "Media", is_array: true, desc: "All Media for this post"}
-          expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
           expose :user, with: 'Entities::User'
           expose :author, using: 'Entities::Author'
         end

@@ -70,7 +70,7 @@ module SearchablePost
       json[:categories] = categories.collect{ |c| c.name }
       json[:industries] = industries.collect{ |i| i.soc }
       json[:tags]       = tag_list.to_a
-      json[:author]     = author.fullname
+      json[:author]     = author ? author.fullname : custom_author
       json
     end
   end

@@ -1,6 +1,6 @@
 worker_processes 2
 
-working_directory "#{ENV['STACK_PATH']}"
+working_directory "#{Rails.root}"
 
 listen "/tmp/web_server.sock", :backlog => 64
 
@@ -35,4 +35,3 @@ after_fork do |server, worker|
     defined?(ActiveRecord::Base) and
         ActiveRecord::Base.establish_connection
 end
-

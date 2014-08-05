@@ -1,32 +1,28 @@
-<div id="batch-and-search" class="clearfix">
-  <div class="pull-left">
-    <button ui-sref="cortex.posts.new.sections.article" class="btn btn-sm btn-primary" type="button">Create Post</button>
+<div class="actions-and-search" class="clearfix">
+  <div class="manipulate-actions">
+    <button ui-sref="cortex.posts.new.sections.article" class="btn btn-primary" type="button">Create Post</button>
   </div>
 
   <div class="post-search">
-    <!--<input type="text" class="form-control input-sm" placeholder="Search Posts...">-->
     <delayed-input
             autofocus="true"
-            class="form-control input-sm"
+            class="form-control"
             ng-model='data.query'
             placeholder="Search Posts..."
             delay="500"></delayed-input>
   </div>
-  </div>
 </div>
 
-<div id="post-grid" class="smaller">
-  <table ng-table="postDataParams" class="table posts-table">
-    <tr ng-repeat="post in $data" ui-sref="{{post | postEditState: true}}">
-      <td data-title="'Title'">{{ post.title }}</td>
-      <td data-title="'Type'">{{ post.type }}</td>
-      <td data-title="'Status'">{{ post.published_at|publishStatus:post.draft }}</td>
-      <td data-title="'Author'">{{ post.custom_author }}</td>
-      <td data-title="'Categories'">{{ post.categories|tagList }}</td>
-      <td data-title="'Created'">{{ post.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
-      <td data-title="'Modified'">{{ post.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
-      <td data-title="'Active'" class="text-center">{{ post.deleted_at == null ? "\u2713" : "" }}</td>
-      <td data-title="'Tags'">{{ post.tag_list.join(', ') }}</td>
-    </tr>
-  </table>
-</div>
+<table ng-table="postDataParams" class="table posts-table">
+  <tr ng-repeat="post in $data" ui-sref="{{post | postEditState: true}}">
+    <td data-title="'Title'">{{ post.title }}</td>
+    <td data-title="'Type'">{{ post.type }}</td>
+    <td data-title="'Status'">{{ post.published_at|publishStatus:post.draft }}</td>
+    <td data-title="'Author'">{{ post.custom_author }}</td>
+    <td data-title="'Categories'">{{ post.categories|tagList }}</td>
+    <td data-title="'Created'">{{ post.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
+    <td data-title="'Modified'">{{ post.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
+    <td data-title="'Active'" class="text-center">{{ post.deleted_at == null ? "\u2713" : "" }}</td>
+    <td data-title="'Tags'">{{ post.tag_list.join(', ') }}</td>
+  </tr>
+</table>

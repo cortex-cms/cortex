@@ -8,44 +8,12 @@ main {
 ////////////////////////////////
 // Typography
 
-.smaller {
-  font-size: .75em;
-}
-
 .word-break-all {
   word-break: break-all;
 }
 
 .font-humanist {
   font-family: $humanist;
-}
-
-////////////////////////////////
-// Margins
-// Keeping the hard-defined margins until refactoring is complete
-
-.hmargin-left-small {
-  margin-left: $standard-margin;
-}
-
-.hmargin-right-small {
-  margin-right: $standard-margin;
-}
-
-.vmargin-top-small {
-  margin-top: $standard-margin;
-}
-
-.vmargin-top-large {
-  margin-top: $standard-margin * 2;
-}
-
-.vmargin-bottom-small {
-  margin-bottom: $standard-margin;
-}
-
-.vmargin-bottom-large {
-  margin-bottom: $standard-margin * 2;
 }
 
 ////////////////////////////////
@@ -154,7 +122,7 @@ main {
     }
 
     li.active{
-      background: #183654;
+      background-color: #183654;
     }
   }
 }

@@ -18,7 +18,7 @@
 
   <div class="checkbox" ng-repeat="category in data.jobPhaseCategories">
     <label>
-      <input type="checkbox" ng-model="category.$selected">
+      <input type="checkbox" ng-model="data.post.postCategories[category.id]">
       {{ category.name }}
     </label>
   </div>

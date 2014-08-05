@@ -13,7 +13,7 @@
   <!-- /instructions -->
 
   <div class="col-md-5">
-      <h4 class="vmargin-top-large">1. {{ levelName.charAt(0).toUpperCase() + levelName.slice(1) }} Information</h4>
+      <h4>1. {{ levelName.charAt(0).toUpperCase() + levelName.slice(1) }} Information</h4>
 
       <form novalidate name="tenantForm">
         <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.name" name="name" placeholder="Name (Required)" required maxlength="100" /></div>
@@ -47,8 +47,8 @@
   <!-- /form column -->
 
   <div class="col-md-5">
-    <h4 class="vmargin-top-large" ng-show="creatingTenant && !creatingOrganization">2. Tenant Location in Organization Hierarchy</h4>
-    <h4 class="vmargin-top-large" ng-hide="creatingTenant && !creatingOrganization">2. {{ levelName.charAt(0).toUpperCase() + levelName.slice(1) }} Settings</h4>
+    <h4 ng-show="creatingTenant && !creatingOrganization">2. Tenant Location in Organization Hierarchy</h4>
+    <h4 ng-hide="creatingTenant && !creatingOrganization">2. {{ levelName.charAt(0).toUpperCase() + levelName.slice(1) }} Settings</h4>
     <abn-tree ng-show="creatingTenant" tree-data="data.tenants.hierarchy"
                                                  on-select="selectParent(branch)"
                                                  expand-level="2"></abn-tree>

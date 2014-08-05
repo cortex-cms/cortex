@@ -1,10 +1,20 @@
-.media-grid {
+.media-tiles {
   .media-data-row {
     @extend .row;
-    margin-bottom: 15px;
+    margin-bottom: $standard-margin;
   }
 
-  .media-data-row-action-status {
+  .media-thumb {
+    @include make-sm-column(3);
+    @include make-xs-column(12);
+  }
+
+  .media-data-desc {
+    @include make-sm-column(5);
+    @include make-xs-column(6);
+  }
+
+  .media-data-actions {
     @include make-sm-column(4);
     @include make-xs-column(6);
     @extend .text-right;

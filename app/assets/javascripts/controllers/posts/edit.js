@@ -21,9 +21,12 @@ angular.module('cortex.controllers.posts.edit', [
       if ($scope.postForm.$invalid) {
         return;
       }
-      // Find selected categories
-      var selectedCategories = _.filter($scope.data.jobPhaseCategories, function(category) { return category.$selected; });
-      $scope.data.post.category_ids = _.map(selectedCategories, function(category) { return category.id; });
+      $scope.data.post.category_ids = [];
+      angular.forEach($scope.data.post.postCategories, function(value, key) {
+        if (value) {
+          this.push(key);
+        }
+      }, $scope.data.post.category_ids);
       $scope.data.post.primary_category_id = $scope.data.post.category_ids[0];
       $scope.data.post.industry_ids = [$scope.data.post.primary_industry_id];
       $scope.data.post.tag_list = $scope.data.post.tag_list.map(function(tag) { return tag.name; });
@@ -61,7 +64,7 @@ angular.module('cortex.controllers.posts.edit', [
   if (!post.id || post.author) {
     $scope.data.authorIsUser = true;
   }
-  
+
   if ($state.includes('cortex.posts.*.sections.article')) {
     post.type = 'ArticlePost';
   }

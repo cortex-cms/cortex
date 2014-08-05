@@ -1,81 +1,111 @@
-<div class="media-file-details">
-  <div class="panel panel-default">
-    <div class="panel-heading">File Info</div>
+<div class="media-edit">
+  <div class="media-info">
+    <div class="panel panel-default">
+      <div class="panel-heading">File Info</div>
 
-    <div class="panel-body">
-      <img src="{{media.thumbs.mini}}" alt="{{media.alt}}"/>
+      <div class="panel-body">
+        <img src="{{data.media.thumbs.mini}}" alt="{{data.media.alt}}"/>
 
-      <dl class="smaller word-break-all">
-        <dt>Filename</dt>
-        <dd>{{media.attachment_file_name}}</dd>
+        <dl class="word-break-all">
+          <dt>Filename</dt>
+          <dd>{{data.media.attachment_file_name}}</dd>
 
-        <dt>File Type</dt>
-        <dd>{{media.attachment_content_type}}</dd>
+          <dt>File Type</dt>
+          <dd>{{data.media.attachment_content_type}}</dd>
 
-        <dt>File Size</dt>
-        <dd>{{media.attachment_file_size | bytes}}</dd>
+          <dt>File Size</dt>
+          <dd>{{data.media.attachment_file_size | bytes}}</dd>
 
-        <span ng-if="media.dimensions">
-          <dt>Dimensions</dt>
-          <dd>{{media.dimensions.0}} x {{media.dimensions.1}}</dd>
-        </span>
+          <span ng-if="data.media.dimensions">
+            <dt>Dimensions</dt>
+            <dd>{{data.media.dimensions[0]}} x {{data.media.dimensions[1]}}</dd>
+          </span>
 
-        <dt>Author</dt>
-        <dd>{{media.creator.fullname}}</dd>
+          <dt>Author</dt>
+          <dd>{{data.media.creator.fullname}}</dd>
 
-        <dt>Created</dt>
-        <dd>{{media.created_at | date:"y/M/d h:mm:ss a"}}</dd>
+          <dt>Created</dt>
+          <dd>{{data.media.created_at | date:"y/M/d h:mm:ss a"}}</dd>
 
-        <dt>Last Modified</dt>
-        <dd>{{media.updated_at | date:"y/M/d h:mm:ss a"}}</dd>
+          <dt>Last Modified</dt>
+          <dd>{{data.media.updated_at | date:"y/M/d h:mm:ss a"}}</dd>
 
-        <dt>Last Published</dt>
-        <dd>Placeholder</dd>
+          <dt>Last Published</dt>
+          <dd>Placeholder</dd>
 
-        <dt>Direct URL</dt>
-        <dd><a href="{{media.url}}">{{media.url}}</a></dd>
-      </dl>
+          <dt>Direct URL</dt>
+          <dd><a href="{{data.media.url}}">{{data.media.url}}</a></dd>
+        </dl>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="media-edit-form">
-  <form novalidate name="mediaForm">
-    <h4 class="heading-decorative">Image Properties</h4>
+  <div class="media-details">
+    <form novalidate name="mediaForm">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-pencil-square-o"></i> Provide Details
+        </div>
+        <div class="panel-body">
 
-    <dl class="dl-horizontal">
-      <dt>Media Display Name</dt>
-      <dd class="vmargin-bottom-small"><input id="media-display-name" type="text" class="form-control input-sm" ng-model="media.name" required maxlength="100"></dd>
+          <div class="row">
+            <div class="display-name-container">
+              <div class="form-group">
+                <label for="display-name">Display Name</label>
+                <input id="display-name" name="display-name" type="text" class="form-control"
+                       ng-model="data.media.name" placeholder="Friendly media name" required>
+              </div>
+            </div>
 
-      <dt>Alt Text</dt>
-      <dd><input id="media-alt" type="text" class="form-control input-sm" ng-model="media.alt" maxlength="100"></dd>
-    </dl>
+            <div class="expiration-container">
+              <div class="form-group">
+                <label for="expiration-date">Expiration</label>
+                <div class="input-group">
+                  <input id="expiration-date" name="expiration-date" type="text" class="form-control"
+                         ng-model="data.media.deactive_at" placeholder="Expiration time (optional)"
+                         datepicker-popup="{{datepicker.format}}" is-open="datepicker.expireAtOpen"
+                         show-weeks="false">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"
+                                ng-click="datepicker.open('expireAtOpen')">
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                      </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <h4 class="heading-decorative">Catalog Data</h4>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control"
+                      ng-model="data.media.description"
+                      placeholder="Additional details (optional)">
+            </textarea>
+          </div>
 
-    <dl class="dl-horizontal">
-      <dt>Description</dt>
-      <dd class="vmargin-bottom-small">
-        <textarea id="media-description" class="form-control input-sm" rows="3" ng-model="media.description"></textarea>
-      </dd>
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <input id="tags" name="tags" type="text" class="form-control"
+                   ng-model="data.tags" placeholder="Comma separated tags">
+          </div>
 
-      <dt>Tags</dt>
-      <dd class="vmargin-bottom-small">
-        <input id="media-tags" type="text" class="form-control input-sm" rows="3" ng-model="data.tags">
-      </dd>
-    </dl>
+          <div class="actions row">
+            <div>
+              <button type="button" class="btn btn-default btn-block" ng-click="cancel()">
+                <i class="fa fa-reply"></i> Cancel
+              </button>
+            </div>
 
-    <dl class="dl-horizontal">
-      <dt></dt>
-      <dd class="vmargin-bottom-small">
-          <button type="button"
-              class="btn btn-sm btn-primary"
-              ng-disabled="mediaForm.$invalid || !mediaForm.$dirty"
-              ng-click="update()">Update</button>
-          <button type="button"
-              class="btn btn-sm btn-default"
-              ng-click="cancel()">Cancel</button>
-      </dd>
-    </dl>
-  </form>
+            <div>
+              <button type="button" class="btn btn-primary btn-block"
+                      ng-disabled="mediaForm.$invalid || !mediaForm.$dirty" ng-click="update()">
+                <i class="fa fa-cloud-upload"></i> Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

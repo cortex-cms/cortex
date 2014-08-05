@@ -1,9 +1,21 @@
-.media-file-details {
-  @include make-md-column(3);
-  @include make-md-column-push(9);
-}
+.media-edit {
+  @extend .row;
 
-.media-edit-form {
-  @include make-md-column(9);
-  @include make-md-column-pull(3);
+  .media-details {
+    @include make-md-column(9);
+    @include make-md-column-pull(3);
+  }
+
+  .media-info {
+    @include make-md-column(3);
+    @include make-md-column-push(9);
+  }
+
+  .display-name-container, .expiration-container, .actions div {
+    @include make-md-column(6);
+  }
+
+  textarea {
+    resize: none;
+  }
 }

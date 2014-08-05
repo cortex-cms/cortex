@@ -80,14 +80,14 @@ angular.module('cortex.controllers.media.new', [
     }
 
     return d.promise;
-  };
+  }
   // </saveFile()>
 
   function saveYoutube() {
     $scope.data.media.type     = 'Youtube';
     $scope.data.media.video_id = $scope.data.media.$youtube;
     return $scope.data.media.$save();
-  };
+  }
 
   $scope.saveMedia = function() {
     var tab = $scope.currentTab;
@@ -112,7 +112,7 @@ angular.module('cortex.controllers.media.new', [
       function(error) {
         flash.error = error;
       });
-  }
+  };
 
   $scope.selectTab = function(tab) {
     $scope.currentTab = tab;

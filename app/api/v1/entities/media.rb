@@ -13,6 +13,11 @@ module API
         expose :updated_at, documentation: { type: 'dateTime', desc: "Updated Date"}
         expose :attachment_file_name, documentation: { type: "String", desc: "Filename" }
         expose :content_type, documentation: { type: "String", desc: "Media type" }
+        expose :description, documentation: { type: "String", desc: "Description of the media" }
+        expose :active, documentation: { type: "Boolean", desc: "Media active" }
+        expose :tags
+
+        expose :user, with: 'Entities::User', as: :creator, documentation: { type: "User", desc: "Owner" }
 
         ## Thumbnails
         expose :attachment, using: 'Entities::MediaThumbnails', as: :thumbs, if: lambda { |media, _| media.can_thumb }, documentation: { type: "MediaThumbnails", desc: "Thumbnails of the media"}
@@ -26,16 +31,11 @@ module API
         with_options if: { full: true } do
           expose :deactive_at, documentation: { type: 'dateTime', desc: "Deactivate Date"}
           expose :deleted_at, documentation: { type: 'dateTime', desc: "Deleted Date"}
-          expose :tags
-          expose :description, documentation: { type: "String", desc: "Description of the media" }
-          expose :active, documentation: { type: "Boolean", desc: "Media active" }
 
           ## Aliases
           expose :attachment_file_size, documentation: { type: "Integer", desc: "Filesize in bytes" }
           expose :attachment_content_type, documentation: { type: "String", desc: "Attachment Mime Type" }
           expose :consumed?, as: :consumed, documentation: { type: "Boolean", desc: "Is the media consumed?" }
-
-          expose :user, with: 'Entities::User', as: :creator, documentation: { type: "User", desc: "Owner" }
         end
       end
     end

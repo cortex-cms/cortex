@@ -19,12 +19,12 @@
     margin-bottom: $standard-margin;
 
     .media-sort {
-      @include make-md-column(8);
+      @include make-md-column(9);
       @extend .pull-left;
     }
 
     .media-page {
-      @include make-md-column(2);
+      @include make-md-column(3);
       @extend .pull-right;
 
       ul {

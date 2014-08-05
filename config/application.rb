@@ -2,8 +2,6 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'elasticsearch/rails/instrumentation'
 Bundler.require(:default, Rails.env)
-Dotenv.load
-
 
 module Cortex
   class Application < Rails::Application

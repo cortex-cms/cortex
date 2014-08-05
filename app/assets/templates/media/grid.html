@@ -71,14 +71,16 @@
   <div ng-repeat="media in data.media">
     <div class="media-data-row">
       <div class="media-thumb">
-        <a class="thumbnail" href="{{media.url}}" target="_blank">
+        <a href="{{media.url}}" target="_blank">
           <img ng-if="media.thumbs"
-             ng-src="{{ media.thumbs.mini }}"
-             alt="Thumbnail">
+               ng-src="{{ media.thumbs.mini }}"
+               alt="Thumbnail"
+               class="thumbnail">
           <img ng-if="!media.thumbs"
-             ph-img="100x100"
-             ph-text="{{ media.content_type | uppercase }}"
-             alt="Thumbnail">
+               ph-img="100x100"
+               ph-text="{{ media.content_type | uppercase }}"
+               alt="Thumbnail"
+               class="thumbnail">
         </a>
       </div>
 

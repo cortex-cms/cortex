@@ -5,7 +5,6 @@ angular.module('cortex.states', [
   'cortex.templates',
 
   'cortex.controllers.media.edit',
-  'cortex.controllers.media.filters',
   'cortex.controllers.media.grid',
   'cortex.controllers.media.new',
   'cortex.controllers.organizations',
@@ -17,7 +16,6 @@ angular.module('cortex.states', [
   'cortex.controllers.posts.edit.display',
   'cortex.controllers.posts.edit.seo',
 
-  'cortex.controllers.posts.filters',
   'cortex.controllers.posts.grid',
   'cortex.controllers.posts.popup',
   'cortex.controllers.tenants.edit',
@@ -91,10 +89,6 @@ angular.module('cortex.states', [
         'media-grid': {
           templateUrl: 'media/grid.html',
           controller: 'MediaGridCtrl'
-        },
-        'media-filters': {
-          templateUrl: 'media/filters.html',
-          controller: 'MediaFiltersCtrl'
         }
       },
       data: {
@@ -380,10 +374,6 @@ angular.module('cortex.states', [
         'media-grid': {
           templateUrl: 'media/grid.html',
           controller: 'MediaGridCtrl'
-        },
-        'media-filters': {
-          templateUrl: 'media/filters.html',
-          controller: 'MediaFiltersCtrl'
         }
       },
       data: {
@@ -440,10 +430,6 @@ angular.module('cortex.states', [
         'media-grid': {
           templateUrl: 'media/grid.html',
           controller: 'MediaGridCtrl'
-        },
-        'media-filters': {
-          templateUrl: 'media/filters.html',
-          controller: 'MediaFiltersCtrl'
         }
       },
       data: {
@@ -500,10 +486,6 @@ angular.module('cortex.states', [
         'media-grid': {
           templateUrl: 'media/grid.html',
           controller: 'MediaGridCtrl'
-        },
-        'media-filters': {
-          templateUrl: 'media/filters.html',
-          controller: 'MediaFiltersCtrl'
         }
       },
       data: {
@@ -560,10 +542,6 @@ angular.module('cortex.states', [
         'media-grid': {
           templateUrl: 'media/grid.html',
           controller: 'MediaGridCtrl'
-        },
-        'media-filters': {
-          templateUrl: 'media/filters.html',
-          controller: 'MediaFiltersCtrl'
         }
       },
       data: {
@@ -620,10 +598,6 @@ angular.module('cortex.states', [
         'media-grid': {
           templateUrl: 'media/grid.html',
           controller: 'MediaGridCtrl'
-        },
-        'media-filters': {
-          templateUrl: 'media/filters.html',
-          controller: 'MediaFiltersCtrl'
         }
       },
       data: {
@@ -680,10 +654,6 @@ angular.module('cortex.states', [
         'media-grid': {
           templateUrl: 'media/grid.html',
           controller: 'MediaGridCtrl'
-        },
-        'media-filters': {
-          templateUrl: 'media/filters.html',
-          controller: 'MediaFiltersCtrl'
         }
       },
       data: {
@@ -740,10 +710,6 @@ angular.module('cortex.states', [
         'media-grid': {
           templateUrl: 'media/grid.html',
           controller: 'MediaGridCtrl'
-        },
-        'media-filters': {
-          templateUrl: 'media/filters.html',
-          controller: 'MediaFiltersCtrl'
         }
       },
       data: {
@@ -800,10 +766,6 @@ angular.module('cortex.states', [
         'media-grid': {
           templateUrl: 'media/grid.html',
           controller: 'MediaGridCtrl'
-        },
-        'media-filters': {
-          templateUrl: 'media/filters.html',
-          controller: 'MediaFiltersCtrl'
         }
       },
       data: {
@@ -828,10 +790,6 @@ angular.module('cortex.states', [
         'posts-grid': {
           templateUrl: 'posts/grid.html',
           controller: 'PostsGridCtrl'
-        },
-        'posts-filters': {
-          templateUrl: 'posts/filters.html',
-          controller: 'PostsFiltersCtrl'
         }
       },
       data: {

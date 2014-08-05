@@ -1,15 +1,12 @@
 .media {
+  @extend .row;
 
   .media-search {
-    @include make-md-column(4);
+    width: 250px;
     @extend .pull-right;
   }
 
-  .media-filters {
-    @include make-md-column(2);
-  }
-
   .media-grid {
-    @include make-md-column(10);
+    @include make-md-column(12);
   }
 }

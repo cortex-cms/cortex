@@ -1,21 +1,18 @@
-  #post-grid {
-    height: 400px;
-  }
+#post-grid {
+  height: 400px;
+}
 
-  #batch-and-search {
-    margin-bottom: 10px;
-  }
+#batch-and-search {
+  margin-bottom: 10px;
+}
 
-  #post-search {
-    width: 250px;
-  }
-
-.posts-filters {
-  @include make-md-column(2);
+.post-search {
+  @extend .pull-right;
+  width: 250px;
 }
 
 .posts-grid {
-  @include make-md-column(10);
+  @include make-md-column(12);
 }
 
 ////////////////////////////////

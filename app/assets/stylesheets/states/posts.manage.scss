@@ -1,14 +1,16 @@
-#post-grid {
-  height: 400px;
-}
+.actions-and-search {
+  @extend .row;
+  margin-bottom: $standard-margin;
 
-#batch-and-search {
-  margin-bottom: 10px;
-}
+  .manipulate-actions {
+    @include make-md-column(8);
+    @extend .pull-left;
+  }
 
-.post-search {
-  @extend .pull-right;
-  width: 250px;
+  .post-search {
+    @include make-md-column(4);
+    @extend .pull-right;
+  }
 }
 
 .posts-grid {

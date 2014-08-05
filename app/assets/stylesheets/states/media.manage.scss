@@ -1,12 +1,36 @@
 .media {
-  @extend .row;
+  .actions-and-search {
+    @extend .row;
+    margin-bottom: $standard-margin;
 
-  .media-search {
-    width: 250px;
-    @extend .pull-right;
+    .manipulate-actions {
+      @include make-md-column(8);
+      @extend .pull-left;
+    }
+
+    .media-search {
+      @include make-md-column(4);
+      @extend .pull-right;
+    }
   }
 
-  .media-grid {
-    @include make-md-column(12);
+  .pagination-sorting {
+    @extend .row;
+    margin-bottom: $standard-margin;
+
+    .media-sort {
+      @include make-md-column(8);
+      @extend .pull-left;
+    }
+
+    .media-page {
+      @include make-md-column(2);
+      @extend .pull-right;
+
+      ul {
+        @extend .pagination, .pull-right;
+        margin: 0 0 0 $standard-margin;
+      }
+    }
   }
 }

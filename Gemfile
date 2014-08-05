@@ -88,7 +88,6 @@ gem 'unf'
 gem 'hashr'
 gem 'mime-types'
 gem 'json'
-gem 'dotenv'
 
 # Monitoring
 gem 'honeybadger'
@@ -102,7 +101,9 @@ gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim' # Sidekiq-web
 
-group :test, :development, :local do
+group :test, :development do
+  # Environment
+  gem 'dotenv'
 
   # Rspec
   gem 'rspec', '~> 3.0'

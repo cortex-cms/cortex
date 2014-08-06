@@ -124,6 +124,7 @@ angular.module('cortex.states', [
           post.tag_list = '';
           post.published_at = new Date();
           post.display = 'medium';
+          post.postCategories = {};
 
           defer.resolve(post);
           return defer.promise;

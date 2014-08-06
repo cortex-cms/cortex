@@ -7,7 +7,11 @@ Cortex::Application.routes.draw do
   get 'login', to: 'home#login'
 
   # Authentication
-  use_doorkeeper
+  use_doorkeeper do
+    unless Rails.env.development?
+      skip_controllers :applications, :authorized_applications
+    end
+  end
   devise_for :users
 
   # Sidekiq Admin

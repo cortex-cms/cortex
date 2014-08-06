@@ -124,6 +124,7 @@ angular.module('cortex.states', [
           post.tag_list = '';
           post.published_at = new Date();
           post.display = 'medium';
+          post.postCategories = {};
 
           defer.resolve(post);
           return defer.promise;
@@ -223,7 +224,7 @@ angular.module('cortex.states', [
         currentUserAuthor: ['cortex', 'currentUser', function(cortex, currentUser) {
           return cortex.userAuthor.get({user_id: currentUser.id}).$promise;
         }],
-        post: ['$stateParams', '$q', 'cortex', function($stateParams, $q, cortex, categoriesHierarchy) {
+        post: ['$stateParams', '$q', 'cortex', function($stateParams, $q, cortex) {
           var defer = $q.defer();
 
           cortex.posts.get({id: $stateParams.postId}).$promise

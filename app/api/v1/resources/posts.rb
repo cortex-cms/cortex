@@ -58,6 +58,11 @@ module API
             end
           end
 
+          desc 'Show published post authors'
+          get 'feed/authors' do
+            present Author.published.distinct, with: Entities::Author
+          end
+
           desc 'Show a published post', { entity: Entities::Post, nickname: "showFeedPost" }
           get 'feed/:id' do
             cache(key: "posts:feed:id:#{params[:id]}", etag: post.updated_at, expires_in: 2.hours) do
@@ -70,11 +75,6 @@ module API
             @posts = published_post!.related(true).page(page).per(per_page).records
             set_pagination_headers(@posts, 'posts')
             present @posts, with: Entities::Post
-          end
-
-          desc 'Show published post authors'
-          get 'feed/authors' do
-            present Author.published.distinct, with: Entities::Author
           end
 
           desc 'Show post tags'

@@ -89,9 +89,6 @@ gem 'hashr'
 gem 'mime-types'
 gem 'json'
 
-# Monitoring
-gem 'honeybadger'
-
 # Middleware
 gem 'rack-cors', require: 'rack/cors'
 
@@ -167,4 +164,9 @@ end
 
 group :production do
   gem 'aws-sdk'
+end
+
+group :staging, :production do
+  # Monitoring
+  gem 'honeybadger'
 end

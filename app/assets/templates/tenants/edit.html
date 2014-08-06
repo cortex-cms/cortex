@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <h3 class="hr-below">Add {{creatingOrganization ? 'Organization' : 'Tenant'}}</h3>
+  <h3>Add {{creatingOrganization ? 'Organization' : 'Tenant'}}</h3>
 
   <div class="col-md-2 hidden-xs">
 
-    <h6 class="text-muted hr-below">INSTRUCTIONS</h6>
+    <h6 class="text-muted">INSTRUCTIONS</h6>
 
       Create or edit {{creatingOrganization ? 'an organization' : 'a tenant'}}.
 
@@ -68,7 +68,7 @@
 
     <div class="text-right">
       <button type="button"
-        class="btn btn-primary btn-sm"
+        class="btn btn-primary"
         ng-disabled="tenantForm.$invalid || (!data.tenants.selected && creatingTenant && !creatingOrganization)"
         ng-click="save()">{{ creatingTenant ? 'Create' : 'Save' }}</button>
     </div>

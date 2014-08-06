@@ -1,72 +1,52 @@
-<div class="col-md-4">
-  <div class="row">
-    <div class="col-md-8">
-      <form class="form-inline" role="form">
-        <label class="sr-only" for="tenantSearchBar">Search for Organization</label>
-        <input id="tenantSearchBar" class="form-control input-sm pull-left" type="text"
-               placeholder="Search for Organization"/>
-        <button type="button" class="btn btn-sm btn-default pull-left"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
+<div class="row">
+  <div class="col-md-4">
+    <button type="button" class="btn btn-primary org-btn"
+            ui-sref="cortex.organizations.tenants.new({organizationId: ''})">Add New Org.
+    </button>
 
-    <div class="col-md-4">
-      <button type="button" class="btn btn-sm btn-primary pull-right"
-              ui-sref="cortex.organizations.tenants.new({organizationId: ''})">Add New Org.
-      </button>
+    <button ng-repeat="organization in data.organizations"
+            class="btn btn-block"
+            ui-sref=".tenants({organizationId:organization.id})"
+            ng-class="{'btn-primary': organization.id == data.organization.id}">
+      {{ organization.name }}
+    </button>
+  </div>
+
+  <div class="col-md-4">
+    <div ng-show="$state.includes('cortex.organizations.manage.tenants')">
+      <span class="panel-title h3">Hierarchy</span>
+
+      <div class="btn-group pull-right">
+        <button ng-disabled="!tenantsTreeStatus.isLoaded" type="button" class="btn btn-default"
+                ui-sref="cortex.organizations.tenants.new({organizationId: data.organization.id})">
+          <span class="fa fa-plus"></span> Add Tenant
+        </button>
+      </div>
+
+      <div class="panel-body" ui-view="tenants-tree">
+      </div>
     </div>
   </div>
 
-  <div id="filterByLetter" class="text-center text-muted small">
-    # A B C D E F G H I J K L M N O P Q <a href="#">R</a> S T U V W X Y Z
-  </div>
-
-  <h3 class="panel-title hr-below">R</h3>
-
-  <button ng-repeat="organization in data.organizations"
-          class="btn btn-block"
-          ui-sref=".tenants({organizationId:organization.id})"
-          ng-class="{'btn-primary': organization.id == data.organization.id}">
-    {{ organization.name }}
-  </button>
-</div>
-
-<div class="col-md-4">
-  <div ng-show="$state.includes('cortex.organizations.manage.tenants')">
-    <span class="panel-title h3">Hierarchy</span>
-
-    <div class="btn-group pull-right">
-      <button ng-disabled="!tenantsTreeStatus.isLoaded" type="button" class="btn btn-default btn-xs"
-              ui-sref="cortex.organizations.tenants.new({organizationId: data.organization.id})">
-        <span class="fa fa-plus"></span> Add Tenant
-      </button>
-    </div>
-
-    <div class="panel-body" ui-view="tenants-tree">
-    </div>
-  </div>
-</div>
-
-<div class="col-md-4">
-  <span ng-show="$state.includes('cortex.organizations.manage.tenants') && data.tenants.selected">
-
-    <div class="hr-below">
+  <div class="col-md-4">
+    <span ng-show="$state.includes('cortex.organizations.manage.tenants') && data.tenants.selected">
       <span class="panel-title h3">Details</span>
 
       <div class="btn-group pull-right">
-        <button type="button" class="btn btn-default btn-xs"
+        <button type="button" class="btn btn-default"
                 ui-sref="cortex.organizations.tenants.edit({organizationId: data.organization.id, tenantId: data.tenants.selected.id})">
           <span class="fa fa-plus"></span> Edit Details
         </button>
       </div>
 
       <div class="btn-group pull-right">
-        <button type="button" class="btn btn-default btn-xs" ng-click="deleteTenant(data.tenants.selected)">
+        <button type="button" class="btn btn-default" ng-click="deleteTenant(data.tenants.selected)">
           <span class="fa fa-minus"></span> Delete Tenant
         </button>
       </div>
-    </div>
 
-    <div class="panel-body" ui-view="tenants-details">
-    </div>
-  </span>
+      <div class="panel-body" ui-view="tenants-details">
+      </div>
+    </span>
+  </div>
 </div>

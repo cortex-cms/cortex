@@ -35,7 +35,7 @@ Cortex::Application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  config.cache_store = :redis_store, ENV['CACHE_URL']
+  config.cache_store = :memory_store
 
   Sidekiq.configure_server do |config|
     config.redis = { :namespace => 'cortex_test' }

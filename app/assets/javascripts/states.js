@@ -223,7 +223,7 @@ angular.module('cortex.states', [
         currentUserAuthor: ['cortex', 'currentUser', function(cortex, currentUser) {
           return cortex.userAuthor.get({user_id: currentUser.id}).$promise;
         }],
-        post: ['$stateParams', '$q', 'cortex', function($stateParams, $q, cortex, categoriesHierarchy) {
+        post: ['$stateParams', '$q', 'cortex', function($stateParams, $q, cortex) {
           var defer = $q.defer();
 
           cortex.posts.get({id: $stateParams.postId}).$promise

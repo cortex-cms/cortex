@@ -23,11 +23,11 @@ env:
 deploy:
   - provider: cloud66
     master:
-    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/b7cbba409a70314651a4da8e7551fbab
+    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/a88940b34a01c689de29f49037905106
     on: develop
     edge: true
   - provider: cloud66
     master:
-    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/fde5a72f14c83c41bc72fbad298a7e84
+    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/67197f9592d583d1f9d0d622e5855c7d
     on: master
     edge: true

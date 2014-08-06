@@ -32,3 +32,7 @@
 .posts-table tbody tr:hover {
   @extend .btn:hover;
 }
+
+.posts-table .pagination {
+  margin: 0;
+}

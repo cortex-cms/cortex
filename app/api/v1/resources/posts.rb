@@ -20,7 +20,7 @@ module API
           get do
             require_scope! :'view:posts'
             authorize! :view, ::Post
-            intersect = Array(params.keys & %w{q categories industries type job_phase})
+            intersect = Array(params.keys & %w{q categories industries type job_phase page per_page})
             key_name = "posts:list:"
             intersect.each do |k|
               key_name += "#{k}=#{params[k]}"

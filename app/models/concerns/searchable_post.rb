@@ -82,7 +82,7 @@ module SearchablePost
 
       categories = params[:categories]
       job_phase  = params[:job_phase]
-      post_type  = params[:type]
+      post_type  = params[:post_type]
       industries = params[:industries]
       bool = { bool: { must: [ query ], must_not: [], should: [] } }
 

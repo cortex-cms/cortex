@@ -42,7 +42,7 @@ module API
             use :post_metadata
           end
           get 'feed' do
-            intersect = Array(params.keys & %w{q categories industries type job_phase})
+            intersect = Array(params.keys & %w{q categories industries type job_phase page per_page})
             key_name = "posts:feed:list:"
             intersect.each do |k|
               key_name += "#{k}=#{params[k]}"
@@ -53,9 +53,9 @@ module API
               else
                 @posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
               end
-              set_pagination_headers(@posts, 'posts')
-              present @posts, with: Entities::Post, sanitize: true
             end
+            set_pagination_headers(@posts, 'posts')
+            present @posts, with: Entities::Post, sanitize: true
           end
 
           desc 'Show published post authors'
@@ -126,7 +126,7 @@ module API
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories)
 
             @post = ::Post.new(declared(params, {include_missing: false}, allowed_params))
-            post.user = current_user
+            post.user = params[:user] ? User.find(params[:user]) : current_user
             post.save!
             present post, with: Entities::Post, full: true
           end
@@ -140,7 +140,7 @@ module API
             authorize! :update, post!
 
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
-            
+
             if params[:type]
               post.update!({type: params[:type]}) if params[:type]
               reload_post

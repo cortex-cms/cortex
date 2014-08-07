@@ -90,15 +90,9 @@ def seed_industries
 
   industries_seed.each do |industry|
     unless Onet::Occupation.find_by soc: industry[:soc]
-      industry = strip_industry_occupation(industry)
       Onet::Occupation.create!(industry)
     end
   end
-end
-
-def strip_industry_occupation(industry)
-  industry.title.slice! ' Occupations'
-  industry
 end
 
 def onet_package_name

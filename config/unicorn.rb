@@ -1,4 +1,4 @@
-rails_root = File.expand_path('..', File.dirname(__FILE__))
+rails_root = ENV['APP_PATH'] || File.expand_path('..', File.dirname(__FILE__))
 pid_path   = '/tmp/web_server.pid'
 working_directory rails_root
 timeout 30

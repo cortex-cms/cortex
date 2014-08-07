@@ -40,73 +40,73 @@ defaults: &defaults
         - {name: General}
   onet_industries:
     - soc: '11-0000'
-      title: 'Management Occupations'
+      title: 'Management'
 
     - soc: '13-0000'
-      title: 'Business and Financial Operations Occupations'
+      title: 'Business and Financial Operations'
 
     - soc: '15-0000'
-      title: 'Computer and Mathematical Occupations'
+      title: 'Computer and Mathematical'
 
     - soc: '17-0000'
-      title: 'Architecture and Engineering Occupations'
+      title: 'Architecture and Engineering'
 
     - soc: '19-0000'
-      title: 'Life, Physical, and Social Science Occupations'
+      title: 'Life, Physical, and Social Science'
 
     - soc: '21-0000'
-      title: 'Community and Social Service Occupations'
+      title: 'Community and Social Service'
 
     - soc: '23-0000'
-      title: 'Legal Occupations'
+      title: 'Legal'
 
     - soc: '25-0000'
-      title: 'Education, Training, and Library Occupations'
+      title: 'Education, Training, and Library'
 
     - soc: '27-0000'
-      title: 'Arts, Design, Entertainment, Sports, and Media Occupations'
+      title: 'Arts, Design, Entertainment, Sports, and Media'
 
     - soc: '29-0000'
-      title: 'Healthcare Practitioners and Technical Occupations'
+      title: 'Healthcare Practitioners and Technical'
 
     - soc: '31-0000'
-      title: 'Healthcare Support Occupations'
+      title: 'Healthcare Support'
 
     - soc: '33-0000'
-      title: 'Protective Service Occupations'
+      title: 'Protective Service'
 
     - soc: '35-0000'
-      title: 'Food Preparation and Serving Related Occupations'
+      title: 'Food Preparation and Serving Related'
 
     - soc: '37-0000'
-      title: 'Building and Grounds Cleaning and Maintenance Occupations'
+      title: 'Building and Grounds Cleaning and Maintenance'
 
     - soc: '39-0000'
-      title: 'Personal Care and Service Occupations'
+      title: 'Personal Care and Service'
 
     - soc: '41-0000'
-      title: 'Sales and Related Occupations'
+      title: 'Sales and Related'
 
     - soc: '43-0000'
-      title: 'Office and Administrative Support Occupations'
+      title: 'Office and Administrative Support'
 
     - soc: '45-0000'
-      title: 'Farming, Fishing, and Forestry Occupations'
+      title: 'Farming, Fishing, and Forestry'
 
     - soc: '47-0000'
-      title: 'Construction and Extraction Occupations'
+      title: 'Construction and Extraction'
 
     - soc: '49-0000'
-      title: 'Installation, Maintenance, and Repair Occupations'
+      title: 'Installation, Maintenance, and Repair'
 
     - soc: '51-0000'
-      title: 'Production Occupations'
+      title: 'Production'
 
     - soc: '53-0000'
-      title: 'Transportation and Material Moving Occupations'
+      title: 'Transportation and Material Moving'
 
     - soc: '55-0000'
-      title: 'Military Specific Occupations'
+      title: 'Military Specific'
 
 test:
   <<: *defaults

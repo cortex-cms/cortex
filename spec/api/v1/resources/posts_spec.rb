@@ -106,8 +106,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
     it 'should not show unpublished posts' do
       post = create(:post, draft: true)
       get "/api/v1/posts/feed/#{post.id}"
-      expect(response).to be_success
-      expect(response.body).to eq("null")
+      expect(response.status.to_i).to eq(404)
     end
   end
 

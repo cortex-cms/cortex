@@ -1,20 +1,22 @@
-worker_processes 2
-
-working_directory "#{ENV['APP_PATH']}"
-
-listen "/tmp/web_server.sock", :backlog => 64
-
+rails_root = File.expand_path('..', File.dirname(__FILE__))
+pid_path   = '/tmp/unicorn.pid'
+working_directory rails_root
 timeout 30
 
-pid '/tmp/web_server.pid'
-
-# Bind to a port for quick debugging
+# Environmental specific bindings
 if ENV['RAILS_ENV'] == 'development'
-  listen '127.0.0.1:3000'
+  worker_processes 1
+  listen "127.0.0.1:#{ENV['PORT'] || 3000}"
+  pid_path = "#{rails_root}/tmp/pids/unicorn.pid"
+  listen "#{rails_root}/tmp/sockets/unicorn.sock", :backlog => 64
+else
+  worker_processes 3
+  listen "/tmp/web_server.sock", :backlog => 64
+  stderr_path "#{rails_root}/log/unicorn.stderr.log"
+  stdout_path "#{rails_root}/log/unicorn.stdout.log"
 end
 
-stderr_path "#{ENV['APP_PATH']}/log/unicorn.stderr.log"
-stdout_path "#{ENV['APP_PATH']}/log/unicorn.stdout.log"
+pid pid_path
 
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and
@@ -23,7 +25,7 @@ GC.respond_to?(:copy_on_write_friendly=) and
 check_client_connection false
 
 before_fork do |server, worker|
-    old_pid = '/tmp/web_server.pid.oldbin'
+    old_pid = "#{pid_path}.oldbin"
     if File.exists?(old_pid) && server.pid != old_pid
         begin
             Process.kill("QUIT", File.read(old_pid).to_i)

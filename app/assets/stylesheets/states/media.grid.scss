@@ -10,7 +10,6 @@
   }
 
   .media-data-desc {
-    @include make-md-column(6);
     @include make-xs-column(6);
   }
 

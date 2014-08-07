@@ -42,7 +42,7 @@ module API
             use :post_metadata
           end
           get 'feed' do
-            intersect = Array(params.keys & %w{q categories industries type job_phase})
+            intersect = Array(params.keys & %w{q categories industries type job_phase page per_page})
             key_name = "posts:feed:list:"
             intersect.each do |k|
               key_name += "#{k}=#{params[k]}"
@@ -140,7 +140,7 @@ module API
             authorize! :update, post!
 
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
-            
+
             if params[:type]
               post.update!({type: params[:type]}) if params[:type]
               reload_post

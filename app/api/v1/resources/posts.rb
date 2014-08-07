@@ -20,7 +20,7 @@ module API
           get do
             require_scope! :'view:posts'
             authorize! :view, ::Post
-            intersect = Array(params.keys & %w{q categories industries type job_phase page per_page post_type})
+            intersect = Array(params.keys & %w{q categories industries type job_phase post_type})
             key_name = "posts:list:"
             intersect.each do |k|
               key_name += "#{k}=#{params[k]}"
@@ -42,7 +42,7 @@ module API
             use :post_metadata
           end
           get 'feed' do
-            intersect = Array(params.keys & %w{q categories industries type job_phase page per_page post_type})
+            intersect = Array(params.keys & %w{q categories industries type job_phase post_type})
             if intersect.length == 0
               @posts = ::Post.published.page(page).per(per_page)
             else

@@ -47,15 +47,15 @@ module API
             intersect.each do |k|
               key_name += "#{k}=#{params[k]}"
             end
-            cache(key: key_name, etag: Post.order("updated_at desc").take(1), expires_in: 2.hours) do
-              if intersect.length == 0
-                @posts = ::Post.published.page(page).per(per_page)
-              else
-                @posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
-              end
+            if intersect.length == 0
+              @posts = ::Post.published.page(page).per(per_page)
+            else
+              @posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
             end
             set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post, sanitize: true
+            cache(key: key_name, etag: Post.order("updated_at desc").take(1), expires_in: 2.hours) do
+                present @posts, with: Entities::Post, sanitize: true
+            end
           end
 
           desc 'Show published post authors'

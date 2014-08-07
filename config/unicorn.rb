@@ -1,5 +1,5 @@
 rails_root = File.expand_path('..', File.dirname(__FILE__))
-pid_path   = '/tmp/unicorn.pid'
+pid_path   = '/tmp/web_server.pid'
 working_directory rails_root
 timeout 30
 
@@ -10,7 +10,7 @@ if ENV['RAILS_ENV'] == 'development'
   pid_path = "#{rails_root}/tmp/pids/unicorn.pid"
   listen "#{rails_root}/tmp/sockets/unicorn.sock", :backlog => 64
 else
-  worker_processes 3
+  worker_processes 2
   listen "/tmp/web_server.sock", :backlog => 64
   stderr_path "#{rails_root}/log/unicorn.stderr.log"
   stdout_path "#{rails_root}/log/unicorn.stdout.log"

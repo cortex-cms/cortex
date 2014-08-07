@@ -75,7 +75,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
       end
 
       it 'should filter on post types' do
-        get "/api/v1/posts/feed?type=VideoPost,PromoPost"
+        get "/api/v1/posts/feed?post_type=VideoPost,PromoPost"
         expect(response).to be_success
         expect(JSON.parse(response.body).count).to eq(3)
       end

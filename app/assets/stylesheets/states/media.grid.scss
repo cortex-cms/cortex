@@ -5,12 +5,12 @@
   }
 
   .media-thumb {
-    @include make-sm-column(3);
+    @include make-sm-column(2);
     @include make-xs-column(12);
   }
 
   .media-data-desc {
-    @include make-sm-column(5);
+    @include make-md-column(6);
     @include make-xs-column(6);
   }
 

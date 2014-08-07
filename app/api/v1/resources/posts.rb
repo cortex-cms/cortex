@@ -126,7 +126,7 @@ module API
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories)
 
             @post = ::Post.new(declared(params, {include_missing: false}, allowed_params))
-            post.user = current_user
+            post.user = params[:user] ? User.find(params[:user]) : current_user
             post.save!
             present post, with: Entities::Post, full: true
           end

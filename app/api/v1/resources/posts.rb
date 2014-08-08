@@ -25,7 +25,7 @@ module API
               key_name += "#{k}=#{params[k]}"
             end
             if intersect.length == 0
-              @posts = ::Post.page(page).per(per_page)
+              @posts = ::Post.page(page).per(per_page).order(published_at: :desc)
             else
               @posts = ::Post.search_with_params(declared(params, include_missing: false), false).page(page).per(per_page).records
             end
@@ -49,7 +49,7 @@ module API
               if params_has_search?
                 posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
               else
-                posts = ::Post.published.page(page).per(per_page)
+                posts = ::Post.published.page(page).per(per_page).order(published_at: :desc)
               end
               entity_page(posts, Entities::Post, sanitize: true)
             end

@@ -18,6 +18,7 @@ module API
           optional :industries, type: String, desc: "Industries"
           optional :job_phase, type: String, desc: "Job Phase"
           optional :post_type, type: String, desc: "Post Type"
+          optional :author, type: String, desc: "Post Author"
         end
 
         params :post_associations do

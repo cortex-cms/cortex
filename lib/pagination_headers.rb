@@ -12,6 +12,7 @@ module PaginationHeaders
 
   def create_pagination(scope, name)
     per_page         = scope.limit_value
+
     total_items      = scope.total_count
     page             = scope.current_page
 

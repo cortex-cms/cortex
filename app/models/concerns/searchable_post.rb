@@ -84,12 +84,14 @@ module SearchablePost
       job_phase  = params[:job_phase]
       post_type  = params[:post_type]
       industries = params[:industries]
+      author     = params[:author]
       bool = { bool: { must: [ query ], must_not: [], should: [] } }
 
       if categories; bool[:bool][:must] << self.terms_search('categories', categories.split(',')) end
       if job_phase; bool[:bool][:must] << self.terms_search('job_phase', job_phase.split(',')) end
       if post_type; bool[:bool][:must] << self.terms_search('type', post_type.split(',')) end
       if industries; bool[:bool][:must] << self.or_null('industries', industries.split(',')) end
+      if author; bool[:bool][:must] << self.or_null('author', [author]) end
       if published; bool[:bool][:must] << self.range_search('published_at', 'lte', DateTime.now); bool[:bool][:must] << self.terms_search('draft', [false]) end
 
       self.search query: bool, sort: sort

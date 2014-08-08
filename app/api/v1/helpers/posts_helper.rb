@@ -23,6 +23,10 @@ module API
         def published_post!
           published_post || not_found!
         end
+
+        def params_has_search?
+          Array(params.keys & %w{q categories industries type job_phase post_type author}).length > 0
+        end
       end
     end
   end

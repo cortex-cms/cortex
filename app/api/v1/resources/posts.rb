@@ -45,8 +45,6 @@ module API
             params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
             cache_key       = "feed-#{last_updated_at}-#{params_hash}"
 
-            puts cache_key
-
             posts_page = ::Rails.cache.fetch(cache_key) do
               if params_has_search?
                 posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records

@@ -6,7 +6,6 @@ module API
       class Posts < Grape::API
         helpers Helpers::SharedParams
         helpers Helpers::PostsHelper
-        include Grape::Rails::Cache
 
         resource :posts do
           helpers Helpers::PaginationHelper
@@ -42,14 +41,23 @@ module API
             use :post_metadata
           end
           get 'feed' do
-            intersect = Array(params.keys & %w{q categories industries type job_phase post_type author})
-            if intersect.length == 0
-              @posts = ::Post.published.page(page).per(per_page)
-            else
-              @posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
+            last_updated_at = Post.published_last_updated_at
+            params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
+            cache_key       = "feed-#{last_updated_at}-#{params_hash}"
+
+            puts cache_key
+
+            posts_page = ::Rails.cache.fetch(cache_key) do
+              if params_has_search?
+                posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
+              else
+                posts = ::Post.published.page(page).per(per_page)
+              end
+              entity_page(posts, Entities::Post, sanitize: true)
             end
-            set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post, sanitize: true
+
+            set_pagination_headers(OpenStruct.new(posts_page[:paging]), 'posts')
+            JSON.parse(posts_page[:items])
           end
 
           desc 'Show published post authors'

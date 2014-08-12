@@ -77,7 +77,7 @@ module SearchablePost
 
   module ClassMethods
     def search_with_params(params, published = nil)
-      query = { query_string: { fields: ['title^2', '_all'], query: self.query_massage(params[:q]) } }
+      query = { query_string: { fields: ['title^100', '_all'], query: self.query_massage(params[:q]) } }
 
       categories = params[:categories]
       job_phase  = params[:job_phase]

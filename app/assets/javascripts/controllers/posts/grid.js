@@ -9,7 +9,7 @@ angular.module('cortex.controllers.posts.grid', [
     $scope.data = {
         totalServerItems: 0,
         posts: [],
-        query: ''
+        query: null
     };
 
     $scope.postDataParams = new ngTableParams({

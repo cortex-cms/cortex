@@ -113,7 +113,7 @@ module API
             require_scope! :'modify:posts'
             authorize! :create, Post
 
-            allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories)
+            allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
 
             @post = ::Post.new(declared(params, {include_missing: false}, allowed_params))
             post.user = params[:user] ? User.find(params[:user]) : current_user

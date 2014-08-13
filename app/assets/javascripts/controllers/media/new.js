@@ -4,6 +4,7 @@ angular.module('cortex.controllers.media.new', [
     'ui.bootstrap.progressbar',
     'ui.bootstrap.tabs',
     'angular-flash.service',
+    'ngTagsInput',
     'cortex.settings',
     'cortex.services.cortex',
     'cortex.directives.fileSelector',

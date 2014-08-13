@@ -67,15 +67,12 @@
 
             <div class="form-group">
               <label for="tags">Tags</label>
-              <!--<input id="tags" name="tags" type="text" class="form-control"-->
-                     <!--ng-model="data.media.tag_list" placeholder="Comma separated tags">-->
               <div class="tags-group">
                 <tags-input display-property="name"
                             type="text"
                             placeholder="Enter relevant tags for this post"
                             ng-model="data.media.tag_list"
                             ng-maxlength="255">
-                  <!--<auto-complete source="loadTags($query)"></auto-complete>-->
                 </tags-input>
                 </div>
             </div>

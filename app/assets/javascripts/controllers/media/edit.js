@@ -28,8 +28,7 @@ angular.module('cortex.controllers.media.edit', [
   });
 
   $scope.update = function () {
-    $scope.data.media.tag_list = $scope.data.tags;
-    delete $scope.data.media.tags;
+    $scope.data.media.tag_list = $scope.data.media.tag_list.map(function(tag) { return tag.name; });
 
     $scope.data.media.$save(function (media) {
       unsavedChanges.fnListen($scope, $scope.data.media);
@@ -41,5 +40,13 @@ angular.module('cortex.controllers.media.edit', [
 
   $scope.cancel = function () {
     $state.go('^.manage.components');
+  };
+
+  // Adds a tag to tag_list if it doesn't already exist in array
+  $scope.addTag = function(tag) {
+    if (_.some($scope.data.media.tag_list, function(t) { return t.name == tag.name; })) {
+      return;
+    }
+    $scope.data.media.tag_list.push({name: tag.name, id: tag.id});
   };
 });

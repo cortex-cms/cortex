@@ -34,9 +34,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
       expect(response.headers['Content-Range']).to eq('media 0-1:2/5')
     end
 
-    # TODO: Enable when Ben's media resource is merged in.
     it 'should allow search on q' do
-      pending("Waiting on Ben's reworked media resource")
       media_1 = create(:media)
       media_2 = create(:media, name: "RANDOM")
       Media.import({refresh: true})

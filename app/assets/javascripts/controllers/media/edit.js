@@ -45,6 +45,8 @@ angular.module('cortex.controllers.media.edit', [
     return cortex.media.tags({s: search}).$promise;
   };
 
+  $scope.data.popularTags = cortex.media.tags({popular: true});
+
   // Adds a tag to tag_list if it doesn't already exist in array
   $scope.addTag = function(tag) {
     if (_.some($scope.data.media.tag_list, function(t) { return t.name == tag.name; })) {

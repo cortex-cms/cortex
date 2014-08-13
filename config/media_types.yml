@@ -21,7 +21,7 @@ allowed:
     thumb: True
     taxon_type: IMG
   - type: application/pdf
-    thumb: True
+    thumb: False
     taxon_type: DOC
   - type: application/vnd.ms-excel
     taxon_type: DOC

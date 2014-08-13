@@ -38,11 +38,12 @@
 </div>
 
 <div class="tags">
-  <label>Post Tags</label>
+  <label>Post Tags (space starts a new tag, to create a multiword tag use - between words)</label>
 
   <div class="tags-group">
     <tags-input display-property="name"
                 type="text"
+                add-on-space="true"
                 placeholder="Enter relevant tags for this post"
                 ng-model="data.post.tag_list"
                 ng-maxlength="255">

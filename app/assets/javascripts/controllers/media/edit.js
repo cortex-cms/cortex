@@ -24,7 +24,6 @@ angular.module('cortex.controllers.media.edit', [
   $scope.data.media = cortex.media.get({id: $stateParams.mediaId}, function (media) {
     unsavedChanges.fnListen($scope, $scope.data.media);
 
-    $scope.data.tags = $filter('tagList')(media.tags);
   });
 
   $scope.update = function () {
@@ -40,6 +39,10 @@ angular.module('cortex.controllers.media.edit', [
 
   $scope.cancel = function () {
     $state.go('^.manage.components');
+  };
+
+  $scope.loadTags = function (search) {
+    return cortex.media.tags({s: search}).$promise;
   };
 
   // Adds a tag to tag_list if it doesn't already exist in array

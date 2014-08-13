@@ -73,6 +73,7 @@
                             placeholder="Enter relevant tags for this post"
                             ng-model="data.media.tag_list"
                             ng-maxlength="255">
+                  <auto-complete source="loadTags($query)"></auto-complete>
                 </tags-input>
                 </div>
             </div>

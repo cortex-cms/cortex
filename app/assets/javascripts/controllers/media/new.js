@@ -18,6 +18,7 @@ angular.module('cortex.controllers.media.new', [
   $scope.data            = $scope.data || {};
   $scope.data.currentTab = 'file';
   $scope.data.media      = new cortex.media();
+  $scope.data.media.tag_list = [];
   $scope.data.upload     = {
     progress: 0
   };

@@ -40,12 +40,6 @@ angular.module('cortex.filters', [
   };
 })
 
-.filter('tagList', function() {
-    return function(tags) {
-        return _.map(tags, function(t) { return t.name; }).join(', ');
-    };
-})
-
 .filter('publishStatus', function(moment) {
     return function(value, draft) {
         if (!value || draft) {

@@ -1,6 +1,6 @@
 # Cortex
 
-[![Build Status](https://magnum.travis-ci.com/cb-talent-development/cortex.svg?token=sAtZ4frpstZnGHoeyxTz&branch=master)](https://magnum.travis-ci.com/cb-talent-development/cortex)
+[![Build Status](https://magnum.travis-ci.com/cbdr/cortex.svg?token=sAtZ4frpstZnGHoeyxTz&branch=master)](https://magnum.travis-ci.com/cbdr/cortex)
 
 Cortex is an identity, content management and reporting platform built by [Talent Development][td-github]. Its purpose is to provide central infrastructure for next-generation applications; exposing a single point of management while enabling quicker build-out of new software.
 
@@ -32,6 +32,6 @@ Finally, start Cortex: `$ rails s`
 
 ### Applications
 
-- [Advice and Resources](https://github.com/cb-talent-development/advice-and-resources) - Redesigned Workbuzz/Advice & Resources platform
+- [Advice and Resources](https://github.com/cbdr/advice-and-resources) - Redesigned Workbuzz/Advice & Resources platform
 
 [td-github]: https://github.com/cb-talent-development "Talent Development on GitHub"

@@ -13,25 +13,11 @@ module API
           desc 'Show all media', { entity: Entities::Media, nickname: "showAllMedia" }
           params do
             use :pagination
+            use :search
           end
           get do
             authorize! :view, ::Media
             require_scope! :'view:media'
-
-            @media = ::Media.order(created_at: :desc).page(page).per(per_page)
-
-            set_pagination_headers(@media, 'media')
-            present @media, with: Entities::Media
-          end
-
-          desc 'Search for media', { entity: Entities::Media, nickname: "searchMedia" }
-          params do
-            use :pagination
-            use :search
-          end
-          get :search do
-            require_scope! :'view:media'
-            authorize! :view, ::Media
 
             q = params[:q]
             if q.to_s != ''
@@ -42,6 +28,25 @@ module API
 
             set_pagination_headers(@media, 'media')
             present @media, with: Entities::Media
+          end
+
+          desc 'Show media tags'
+          params do
+            optional :s
+          end
+          get 'tags' do
+            require_scope! :'view:media'
+            authorize! :view, ::Media
+
+            tags = params[:s] \
+              ? ::Media.tag_counts_on(:tags).where('name ILIKE ?', "%#{params[:s]}%") \
+              : ::Media.tag_counts_on(:tags)
+
+            if params[:popular]
+              tags = tags.order('count DESC').limit(20)
+            end
+
+            present tags, with: Entities::Tag
           end
 
           desc 'Get media', { entity: Entities::Media, nickname: "showMedia" }
@@ -65,6 +70,10 @@ module API
             @media = ::Media.new(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
             media.user = current_user!
             media.save!
+            if params[:tag_list]
+              media.tag_list = params[:tag_list]
+              media.save!
+            end
             present media, with: Entities::Media, full: true
           end
 

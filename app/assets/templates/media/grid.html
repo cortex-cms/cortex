@@ -90,7 +90,7 @@
         <br>
         <strong>Author: </strong>{{ media.creator.fullname }}<br>
         <strong>Description: </strong>{{ media.description }}<br>
-        <strong>Tags: </strong>{{ media.tags|tagList }}
+        <strong>Tags: </strong>{{ media.tag_list.join(', ') }}
       </div>
 
       <div class="media-data-actions">

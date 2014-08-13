@@ -3,18 +3,22 @@ angular.module('cortex.controllers.media.new', [
     'ui.bootstrap.datepicker',
     'ui.bootstrap.progressbar',
     'ui.bootstrap.tabs',
+    'ui.bootstrap.dropdown',
     'angular-flash.service',
+    'ngTagsInput',
     'cortex.settings',
     'cortex.services.cortex',
     'cortex.directives.fileSelector',
-    'cortex.directives.youtubeSelector'
+    'cortex.directives.youtubeSelector',
+    'cortex.directives.showErrors'
 ])
 
 .controller('MediaNewCtrl', function($scope, $timeout, $upload, $state, $q, flash, cortex, settings) {
 
   $scope.data            = $scope.data || {};
-  $scope.data.currentTab = 'file;'
+  $scope.data.currentTab = 'file';
   $scope.data.media      = new cortex.media();
+  $scope.data.media.tag_list = [];
   $scope.data.upload     = {
     progress: 0
   };
@@ -93,6 +97,10 @@ angular.module('cortex.controllers.media.new', [
     var tab = $scope.currentTab;
     var save;
 
+    $scope.$broadcast('validateShowErrors');
+
+    $scope.data.media.tag_list = $scope.data.media.tag_list.map(function(tag) { return tag.name; });
+
     if (tab === 'file') {
       save = saveFile;
     }
@@ -120,5 +128,19 @@ angular.module('cortex.controllers.media.new', [
 
   $scope.cancel = function() {
     $state.go('^.manage.components');
+  };
+
+  $scope.loadTags = function (search) {
+    return cortex.media.tags({s: search}).$promise;
+  };
+
+  $scope.data.popularTags = cortex.media.tags({popular: true});
+
+  // Adds a tag to tag_list if it doesn't already exist in array
+  $scope.addTag = function(tag) {
+    if (_.some($scope.data.media.tag_list, function(t) { return t.name == tag.name; })) {
+      return;
+    }
+    $scope.data.media.tag_list.push({name: tag.name, id: tag.id});
   };
 });

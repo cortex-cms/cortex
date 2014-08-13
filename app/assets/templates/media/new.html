@@ -31,8 +31,8 @@
 
             <div class="row">
               <div class="display-name-container">
-                <div class="form-group">
-                  <label for="display-name">Display Name</label>
+                <div class="form-group" show-errors>
+                  <label for="display-name" class="control-label">Display Name*</label>
                   <input id="display-name" name="display-name" type="text" class="form-control"
                          ng-model="data.media.name" placeholder="Friendly media name" required>
                 </div>
@@ -65,10 +65,27 @@
               </textarea>
             </div>
 
-            <div class="form-group">
+            <div class="tags">
               <label for="tags">Tags</label>
-              <input id="tags" name="tags" type="text" class="form-control"
-                     ng-model="data.media.tag_list" placeholder="Comma separated tags">
+              <div class="tags-group">
+                <tags-input display-property="name"
+                            type="text"
+                            placeholder="Enter relevant tags for this post"
+                            ng-model="data.media.tag_list"
+                            ng-maxlength="255">
+                  <auto-complete source="loadTags($query)"></auto-complete>
+                </tags-input>
+                <span dropdown>
+                  <button class="btn btn-default dropdown-toggle" type="button">
+                    Popular <i class="caret"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li ng-repeat="tag in data.popularTags">
+                      <a ng-click="addTag(tag)">{{ tag.name }} <span class="pull-right">{{ tag.count }}</span></a>
+                    </li>
+                  </ul>
+                </span>
+                </div>
             </div>
 
             <div class="actions row">

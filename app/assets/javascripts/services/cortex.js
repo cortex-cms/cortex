@@ -21,7 +21,8 @@ angular.module('cortex.services.cortex', [
   });
 
   var media = paginatedResource('/media/:id', {id: '@id'}, {
-    search: {method: 'GET', params: {id: 'search'}, isArray: true, paginated: true}
+    tags:   {method: 'GET', params: {id: 'tags'}, isArray: true},
+    search: {method: 'GET', params: { }, isArray: true, paginated: true}
   });
 
   var tenants = cortexResource('/tenants/:id', {id: '@id'});

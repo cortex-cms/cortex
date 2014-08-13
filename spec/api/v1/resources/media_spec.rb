@@ -34,15 +34,39 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
       expect(response.headers['Content-Range']).to eq('media 0-1:2/5')
     end
 
-    # TODO: Enable when Ben's media resource is merged in.
     it 'should allow search on q' do
-      pending("Waiting on Ben's reworked media resource")
       media_1 = create(:media)
       media_2 = create(:media, name: "RANDOM")
       Media.import({refresh: true})
       get '/api/v1/media?q=RANDOM'
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(1)
+    end
+  end
+
+  describe 'GET /media/tags' do
+
+    it 'returns an empty array if there are no tags' do
+      get '/api/v1/media/tags'
+      expect(response).to be_success
+      expect(JSON.parse(response.body)).to eq([])
+    end
+
+    it 'should return the correct number of tags' do
+      5.times { |i| create(:media, tag_list: ["tag_#{i}"]) }
+      get '/api/v1/media/tags'
+      expect(response).to be_success
+      result = JSON.parse(response.body)
+      expect(result.count).to eq(5)
+    end
+
+    it 'should return popular tags in order' do
+      5.times { |i| create(:media, tag_list: ['popular_tag', "tag_#{i}"]) }
+      get '/api/v1/media/tags?popular=true'
+      expect(response).to be_success
+      result = JSON.parse(response.body)
+      expect(result.count).to eq(6)
+      expect(result[0]).to include('name' => 'popular_tag', 'count' => 5)
     end
   end
 

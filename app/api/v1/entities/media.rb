@@ -15,7 +15,7 @@ module API
         expose :content_type, documentation: { type: "String", desc: "Media type" }
         expose :description, documentation: { type: "String", desc: "Description of the media" }
         expose :active, documentation: { type: "Boolean", desc: "Media active" }
-        expose :tags
+        expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
 
         expose :user, with: 'Entities::User', as: :creator, documentation: { type: "User", desc: "Owner" }
 

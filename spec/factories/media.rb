@@ -23,6 +23,7 @@
 FactoryGirl.define do
   factory :media do
     user
+    tag_list []
     sequence(:name) { |n| "Media#{n}" }
     attachment { fixture_file_upload("#{Rails.root}/spec/support/media/test.txt", 'text/plain') }
 

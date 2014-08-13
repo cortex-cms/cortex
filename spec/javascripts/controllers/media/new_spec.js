@@ -37,15 +37,21 @@
       }));
 
       it('should construct', function() {
+        $httpBackend.expectGET('/media/tags?popular=true').respond([]);
+        $httpBackend.expectGET('/media/tags').respond([]);
         expect(createController()).toBeTruthy();
       });
 
       it('should provide data.media', function() {
+        $httpBackend.expectGET('/media/tags?popular=true').respond([]);
+        $httpBackend.expectGET('/media/tags').respond([]);
         createController();
         expect($scope.data.media).toBeDefined();
       });
 
       it('should save youtube', function() {
+        $httpBackend.expectGET('/media/tags?popular=true').respond([]);
+        $httpBackend.expectGET('/media/tags').respond([]);
         createController();
         var saved = false;
 
@@ -72,6 +78,7 @@
       });
 
       it('should upload files', function() {
+        $httpBackend.expectGET('/media/tags?popular=true').respond([]);
         createController();
 
         $state.go = function(stateName) {

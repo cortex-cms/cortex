@@ -115,12 +115,12 @@
       });
 
       it('should provide deleteMedia()', function() {
-        $window.confirm = function() { return true; }
+        $window.confirm = function() { return true; };
         cortex.media.delete = function(args, successFn) {
           successFn();
         };
         createController();
-        $scope.deleteMedia(media[0])
+        $scope.deleteMedia(media[0]);
         expect($scope.data.media).toNotContain(media[0]);
       });
     });

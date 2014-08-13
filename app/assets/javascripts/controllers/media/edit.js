@@ -24,12 +24,10 @@ angular.module('cortex.controllers.media.edit', [
   $scope.data.media = cortex.media.get({id: $stateParams.mediaId}, function (media) {
     unsavedChanges.fnListen($scope, $scope.data.media);
 
-    $scope.data.tags = $filter('tagList')(media.tags);
   });
 
   $scope.update = function () {
-    $scope.data.media.tag_list = $scope.data.tags;
-    delete $scope.data.media.tags;
+    $scope.data.media.tag_list = $scope.data.media.tag_list.map(function(tag) { return tag.name; });
 
     $scope.data.media.$save(function (media) {
       unsavedChanges.fnListen($scope, $scope.data.media);
@@ -41,5 +39,19 @@ angular.module('cortex.controllers.media.edit', [
 
   $scope.cancel = function () {
     $state.go('^.manage.components');
+  };
+
+  $scope.loadTags = function (search) {
+    return cortex.media.tags({s: search}).$promise;
+  };
+
+  $scope.data.popularTags = cortex.media.tags({popular: true});
+
+  // Adds a tag to tag_list if it doesn't already exist in array
+  $scope.addTag = function(tag) {
+    if (_.some($scope.data.media.tag_list, function(t) { return t.name == tag.name; })) {
+      return;
+    }
+    $scope.data.media.tag_list.push({name: tag.name, id: tag.id});
   };
 });

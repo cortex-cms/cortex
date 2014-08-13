@@ -7,13 +7,14 @@ angular.module('cortex.controllers.media.new', [
     'cortex.settings',
     'cortex.services.cortex',
     'cortex.directives.fileSelector',
-    'cortex.directives.youtubeSelector'
+    'cortex.directives.youtubeSelector',
+    'cortex.directives.showErrors'
 ])
 
 .controller('MediaNewCtrl', function($scope, $timeout, $upload, $state, $q, flash, cortex, settings) {
 
   $scope.data            = $scope.data || {};
-  $scope.data.currentTab = 'file;'
+  $scope.data.currentTab = 'file';
   $scope.data.media      = new cortex.media();
   $scope.data.upload     = {
     progress: 0
@@ -92,6 +93,8 @@ angular.module('cortex.controllers.media.new', [
   $scope.saveMedia = function() {
     var tab = $scope.currentTab;
     var save;
+
+    $scope.$broadcast('validateShowErrors');
 
     if (tab === 'file') {
       save = saveFile;

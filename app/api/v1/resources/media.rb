@@ -65,6 +65,10 @@ module API
             @media = ::Media.new(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
             media.user = current_user!
             media.save!
+            if params[:tag_list]
+              media.tag_list = params[:tag_list]
+              media.save!
+            end
             present media, with: Entities::Media, full: true
           end
 

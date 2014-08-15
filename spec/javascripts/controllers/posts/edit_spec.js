@@ -52,21 +52,18 @@
         expect(controller.data.authorIsUser).toBeTruthy();
       });
 
-      xit('should set data.authorIsUser to true if editing a post that has an author', function() {
-        post = {
-          id: 1,
-          author: {id: 1, firstname: 'Plinkett'}
-        };
+      it('should set data.authorIsUser to true if editing a post that has an author', function() {
         var controller = constructController();
-        expect(controller.data.authorIsUser).toBeTruthy();
+        controller.data.post.author = "Demosthenes";
+        controller.data.post.id = 1;
+        expect(controller.isAuthorUser(controller.data.post)).toBeTruthy();
       });
 
-      xit('should not set data.authorIsUser if editing a post that has a custom author', function() {
+      it('should not set data.authorIsUser if editing a post that has a custom author', function() {
         var controller = constructController();
         controller.data.post.custom_author = "Locke";
         controller.data.post.id = 1;
-        controller.$apply();
-        expect(controller.data.authorIsUser).toBeFalsy();
+        expect(controller.isAuthorUser(controller.data.post)).toBeFalsy();
       });
     });
   });

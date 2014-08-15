@@ -15,6 +15,7 @@
           .object('$state', { go: function() { return { } }, includes: function() { return true } } )
           .object('post', { })
           .object('categoriesHierarchy', {})
+          .object('$state', { go: function() { return { } }, includes: function() { return true } } )
           .module('cortex.services.cortex')
           .debase()
     });
@@ -54,14 +55,14 @@
 
       it('should set data.authorIsUser to true if editing a post that has an author', function() {
         var controller = constructController();
-        controller.data.post.author = "Demosthenes";
+        controller.data.post.author = { id: 1, first_name: "Calvin" };
         controller.data.post.id = 1;
         expect(controller.isAuthorUser(controller.data.post)).toBeTruthy();
       });
 
       it('should not set data.authorIsUser if editing a post that has a custom author', function() {
         var controller = constructController();
-        controller.data.post.custom_author = "Locke";
+        controller.data.post.custom_author = "Hobbes";
         controller.data.post.id = 1;
         expect(controller.isAuthorUser(controller.data.post)).toBeFalsy();
       });

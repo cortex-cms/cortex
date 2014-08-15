@@ -14,27 +14,16 @@
           .object('ImageFitService').withFunc('initRedactorImageFitPlugin').returns({ })
           .object('flash').withFunc('success').returns({ })
           .object('categoriesHierarchy', {})
+          .object('$state', { go: function() { return { } }, includes: function() { return true } } )
           .module('cortex.services.cortex')
           .debase()
     });
 
     describe('PostsEditCtrl', function($rootScope) {
-      var $scope, $window, $state, $stateParams, $q, $httpBackend, flash, cortex, post, filters, categoriesHierarchy, constructController;
-      beforeEach(inject(function($controller,  _$window_, _$state_, _$stateParams_, _$q_, _$httpBackend_, _cortex_) {
-        $window = _$window_;
-        $state = _$state_;
-        $stateParams = _$stateParams_;
-        $q           = _$q_;
-        $httpBackend = _$httpBackend_;
-        cortex = _cortex_;
-
+      var constructController;
+      beforeEach(inject(function($controller) {
         constructController = function() {
-          return $controller('PostsEditCtrl', {
-            $state: $state,
-            $stateParams: $stateParams,
-            $q: $q,
-            $httpBackend: $httpBackend,
-          });
+          return $controller('PostsEditCtrl', {});
         };
       }));
 
@@ -59,21 +48,20 @@
       });
 
       it('should set data.authorIsUser to true if creating a new post', function() {
-        post = {};
         var controller = constructController();
         expect(controller.data.authorIsUser).toBeTruthy();
       });
 
       it('should set data.authorIsUser to true if editing a post that has an author', function() {
         var controller = constructController();
-        controller.data.post.author = "Demosthenes";
+        controller.data.post.author = { id: 1, first_name: "Calvin" };
         controller.data.post.id = 1;
         expect(controller.isAuthorUser(controller.data.post)).toBeTruthy();
       });
 
       it('should not set data.authorIsUser if editing a post that has a custom author', function() {
         var controller = constructController();
-        controller.data.post.custom_author = "Locke";
+        controller.data.post.custom_author = "Hobbes";
         controller.data.post.id = 1;
         expect(controller.isAuthorUser(controller.data.post)).toBeFalsy();
       });

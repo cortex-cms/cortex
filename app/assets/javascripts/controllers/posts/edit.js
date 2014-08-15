@@ -61,9 +61,16 @@ angular.module('cortex.controllers.posts.edit', [
     minHeight: 800
   };
 
-  if (!post.id || post.author) {
-    $scope.data.authorIsUser = true;
+  $scope.isAuthorUser = function(post) {
+    if (!post.id || post.author) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
+
+  $scope.data.authorIsUser = $scope.isAuthorUser(post);
 
   if ($state.includes('cortex.posts.*.sections.article')) {
     post.type = 'ArticlePost';

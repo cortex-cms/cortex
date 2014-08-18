@@ -19,6 +19,7 @@
     });
 
     describe('PostsEditCtrl', function() {
+      var constructController;
       beforeEach(inject(function($controller) {
         constructController = function() {
           return $controller('PostsEditCtrl', {});

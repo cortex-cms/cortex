@@ -19,7 +19,6 @@
     });
 
     describe('PostsEditCtrl', function() {
-      var constructController;
       beforeEach(inject(function($controller) {
         constructController = function() {
           return $controller('PostsEditCtrl', {});
@@ -33,17 +32,17 @@
 
       it('should provide data.industries on scope', function() {
         var controller = constructController();
-        expect(controller.data.industries).toBeDefined;
+        expect(controller.data.industries).toBeDefined();
       });
 
       it('should provide data.post on scope', function() {
         var controller = constructController();
-        expect(controller.data.post).toBeDefined;
+        expect(controller.data.post).toBeDefined();
       });
 
       it('should provide data.categoriesHierarchy on scope', function() {
         var controller = constructController();
-        expect(controller.data.categoriesHierarchy).toBeDefined;
+        expect(controller.data.categoriesHierarchy).toBeDefined();
       });
 
       it('should set data.authorIsUser to true if creating a new post', function() {

@@ -20,7 +20,7 @@
         };
       }));
 
-      it('should contstruct', function() {
+      it('should construct', function() {
         var controller = constructController();
         expect(controller).toBeTruthy();
       });

@@ -9,7 +9,6 @@
         .module('cortex.controllers.posts.edit')
         .object('AddMediaService').withFunc('initRedactorMediaPlugin').returns({ })
         .object('ImageFitService').withFunc('initRedactorImageFitPlugin').returns({ })
-        .object('flash').withFunc('success').returns({ })
         .object('currentUserAuthor', { full_name: "Test User"})
         .object('filters', { job_phases: [], industries: [] })
         .object('$state', { go: function() { return { } }, includes: function() { return true } } )
@@ -19,7 +18,7 @@
         .debase()
     });
 
-    describe('PostsEditCtrl', function($rootScope) {
+    describe('PostsEditCtrl', function() {
       var constructController;
       beforeEach(inject(function($controller) {
         constructController = function() {

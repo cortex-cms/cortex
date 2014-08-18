@@ -11,7 +11,7 @@ module Searchable
         return '*' if q.nil? or q.empty?
         result = q.chomp.strip
         return '*' if result.nil? or result.empty?
-        result.index(/\s/).nil? ? "#{result}*" : result
+        result.index(/\s|\-/).nil? ? "#{result}*" : result
       end
 
       def or_null(field, q)

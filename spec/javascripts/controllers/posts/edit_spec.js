@@ -6,17 +6,17 @@
   describe('Post Editor Module', function() {
     beforeEach(function() {
       debaser()
-          .module('cortex.controllers.posts.edit')
-          .object('AddMediaService').withFunc('initRedactorMediaPlugin').returns({ })
-          .object('ImageFitService').withFunc('initRedactorImageFitPlugin').returns({ })
-          .object('flash').withFunc('success').returns({ })
-          .object('currentUserAuthor', { full_name: "Test User"})
-          .object('filters', { job_phases: [], industries: [] })
-          .object('$state', { go: function() { return { } }, includes: function() { return true } } )
-          .object('post', { })
-          .object('categoriesHierarchy', {})
-          .module('cortex.services.cortex')
-          .debase()
+        .module('cortex.controllers.posts.edit')
+        .object('AddMediaService').withFunc('initRedactorMediaPlugin').returns({ })
+        .object('ImageFitService').withFunc('initRedactorImageFitPlugin').returns({ })
+        .object('flash').withFunc('success').returns({ })
+        .object('currentUserAuthor', { full_name: "Test User"})
+        .object('filters', { job_phases: [], industries: [] })
+        .object('$state', { go: function() { return { } }, includes: function() { return true } } )
+        .object('mediaSelectType', { })
+        .object('post', { })
+        .object('categoriesHierarchy', { })
+        .debase()
     });
 
     describe('PostsEditCtrl', function($rootScope) {

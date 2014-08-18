@@ -15,7 +15,6 @@
           .object('$state', { go: function() { return { } }, includes: function() { return true } } )
           .object('post', { })
           .object('categoriesHierarchy', {})
-          .object('$state', { go: function() { return { } }, includes: function() { return true } } )
           .module('cortex.services.cortex')
           .debase()
     });

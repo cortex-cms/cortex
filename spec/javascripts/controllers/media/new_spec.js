@@ -42,7 +42,7 @@
         expect(controller.currentTab).toBe('file');
       });
 
-      it('should provide cancel()', inject(function($state) {
+      it('should provide a cancel function', inject(function($state) {
         var controller = constructController();
         expect(controller.cancel).toBeDefined();
         expect(controller.cancel).toEqual(jasmine.any(Function));
@@ -74,6 +74,12 @@
         expect($upload.upload.called).toBeTruthy();
       }));
 
+      it('should add a tag', inject(function(cortex) {
+        var controller = constructController();
+        var tag = {name: "Test Tag", id: 1};
+        controller.addTag(tag);
+        expect(controller.data.media.tag_list).toContain(tag);
+      }));
 
     });
   });

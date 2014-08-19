@@ -35,17 +35,17 @@
     });
 
     describe('MediaGridCtrl', function() {
-      var createController;
+      var constructController;
 
       beforeEach(inject(function($controller) {
 
-        createController = function() {
+        constructController = function() {
           return $controller('MediaGridCtrl', {});
         };
       }));
 
       it('should construct', function() {
-        var controller = createController();
+        var controller = constructController();
         expect(controller).toBeTruthy();
       });
 
@@ -53,52 +53,52 @@
 
         it('should provide query', inject(function($stateParams) {
           $stateParams.query = 'query';
-          var controller = createController();
+          var controller = constructController();
           expect(controller.page.query).toEqual('query');
         }));
 
         it('should use $stateParams.page if available', inject(function($stateParams) {
           $stateParams.page = 2;
-          var controller = createController();
+          var controller = constructController();
           expect(controller.page.page).toEqual(2);
         }));
 
         it('should provide default page', function() {
-          var controller = createController();
+          var controller = constructController();
           expect(controller.page.page).toEqual(1);
         });
 
         it('should provide default perPage', function() {
-          var controller = createController();
+          var controller = constructController();
           expect(controller.page.perPage).toEqual(10);
         });
 
         it('should use $stateParams.perPage if available', inject(function($stateParams) {
           $stateParams.perPage = 23;
-          var controller = createController();
+          var controller = constructController();
           expect(controller.page.perPage).toEqual(23);
         }));
 
         it('should provide next()', function() {
-          var controller = createController();
+          var controller = constructController();
           controller.page.next();
           expect(controller.page.page).toEqual(2);
         });
 
         it('should provide previous()', function() {
-          var controller = createController();
+          var controller = constructController();
           controller.page.previous();
           expect(controller.page.page).toEqual(0);
         });
       });
 
       it('should provide data.media', function() {
-        var controller = createController();
+        var controller = constructController();
         expect(controller.data.media.length).toEqual(2);
       });
 
       it('should provide deleteMedia()', function() {
-        var controller = createController();
+        var controller = constructController();
         controller.deleteMedia({id: 1});
         expect(controller.data.media).not.toContain({id: 1});
       });

@@ -20,7 +20,7 @@
       beforeEach(inject(function($controller) {
         constructController = function() {
           return $controller('MediaEditCtrl', {});
-        }
+        };
       }));
 
       it('should construct', function() {

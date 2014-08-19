@@ -6,117 +6,75 @@
   describe('Media New Module', function() {
 
     beforeEach(function() {
-      angular.mock.module('cortex.controllers.media.new');
+      debaser()
+          .module('cortex.controllers.media.new')
+          .object('settings', {})
+          .object('$state').withFunc('go').returnsArg(0)
+          .withFunc('cortex').returns(sinon.stub())
+          .object('$upload').withFunc('upload').fulfills(true)
+          .debase();
     });
 
-    describe('MediaGridCtrl', function($rootScope) {
-      var createController, $scope, $state, $q, $upload, $httpBackend, flash;
+    describe('MediaGridCtrl', function() {
+      var createController;
 
-      beforeEach(inject(function($controller, _$rootScope_, $timeout, _$upload_, _$state_, _flash_,
-                                 cortex, settings, _$q_, _$httpBackend_) {
-        $rootScope   = _$rootScope_;
-        $scope       = $rootScope.$new();
-        $state       = _$state_;
-        $q           = _$q_;
-        $upload      = _$upload_;
-        $httpBackend = _$httpBackend_;
-        flash        = _flash_;
-
+      beforeEach(inject(function($controller) {
         createController = function() {
-          return $controller('MediaNewCtrl', {
-            $scope   : $scope,
-            $timeout : $timeout,
-            $upload  : $upload,
-            $state   : $state,
-            $q       : $q,
-            flash    : flash,
-            cortex   : cortex,
-            settings : settings
-          });
+          return $controller('MediaNewCtrl', { });
         };
       }));
 
       it('should construct', function() {
-        $httpBackend.expectGET('/media/tags?popular=true').respond([]);
-        $httpBackend.expectGET('/media/tags').respond([]);
-        expect(createController()).toBeTruthy();
+        var controller = createController();
+        expect(controller).toBeTruthy();
       });
 
       it('should provide data.media', function() {
-        $httpBackend.expectGET('/media/tags?popular=true').respond([]);
-        $httpBackend.expectGET('/media/tags').respond([]);
-        createController();
-        expect($scope.data.media).toBeDefined();
-      });
-
-      it('should save youtube', function() {
-        $httpBackend.expectGET('/media/tags?popular=true').respond([]);
-        $httpBackend.expectGET('/media/tags').respond([]);
-        createController();
-        var saved = false;
-
-        $state.go = function(stateName) {
-          $state.current.name = stateName;
-        };
-
-        $scope.data.media.$save = function() {
-          saved = true;
-          var defer = $q.defer();
-          defer.resolve();
-          return defer.promise;
-        };
-
-        angular.extend($scope.data.media, {video_id: '1234', name: 'Youtube video'});
-        $scope.selectTab('youtube');
-        $scope.saveMedia();
-
-        $rootScope.$apply();
-
-        expect($state.current.name).toBe('^.manage.components');
-        expect(flash.success).toBe('Youtube video created');
-        expect(saved).toBe(true);
-      });
-
-      it('should upload files', function() {
-        $httpBackend.expectGET('/media/tags?popular=true').respond([]);
-        createController();
-
-        $state.go = function(stateName) {
-          $state.current.name = stateName;
-        };
-
-        $httpBackend.expectPOST('/media').respond($scope.data.media);
-
-        $scope.selectTab('file');
-        $scope.data.media.$file = {name: 'file'};
-        angular.extend($scope.data.media, {name: 'File', attachment: true});
-        $scope.saveMedia();
-
-        $rootScope.$apply();
-        $httpBackend.flush();
-
-        expect($state.current.name).toBe('^.manage.components');
-        expect(flash.success).toBe('File created');
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
+        var controller = createController();
+        expect(controller.data.media).toBeDefined();
       });
 
       it('should allow the tab to be selected', function() {
-        createController();
-        $scope.selectTab('file');
-        expect($scope.currentTab).toBe('file');
+        var controller = createController();
+        expect(controller.selectTab).toBeDefined();
+        expect(controller.selectTab).toEqual(jasmine.any(Function));
+        controller.selectTab('file');
+        expect(controller.currentTab).toBe('file');
       });
 
-      it('should provide cancel()', function() {
-        createController();
+      it('should provide cancel()', inject(function($state) {
+        var controller = createController();
+        expect(controller.cancel).toBeDefined();
+        expect(controller.cancel).toEqual(jasmine.any(Function));
+        controller.cancel();
+        expect($state.go.calledWith('^.manage.components')).toBeTruthy();
+      }));
 
-        $state.go = function(stateName) {
-          $state.current.name = stateName;
-        };
-
-        $scope.cancel();
-        expect($state.current.name).toBe('^.manage.components');
+      it('should provide a saveMedia function', function() {
+        var controller = createController();
+        expect(controller.saveMedia).toBeDefined();
+        expect(controller.saveMedia).toEqual(jasmine.any(Function));
       });
+
+      it('should save youtube', function() {
+        var controller = createController();
+        sinon.stub(controller.data.media, '$save').fulfills({});
+        angular.extend(controller.data.media, {video_id: '1234', name: 'Youtube video'});
+        controller.selectTab('youtube');
+        controller.saveMedia();
+        expect(controller.data.media.$save.called).toBeTruthy();
+      });
+
+      it('should upload files', inject(function($upload) {
+        var controller = createController();
+        controller.selectTab('file');
+        controller.data.media.$file = {name: 'file'};
+        angular.extend(controller.data.media, {name: 'File', attachment: true});
+        controller.saveMedia();
+        expect($upload.upload.called).toBeTruthy();
+      }));
+
+
     });
   });
 })();

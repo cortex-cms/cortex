@@ -63,25 +63,27 @@ angular.module('cortex.controllers.media.new', [
 
       $scope.data.upload.progress = 1;
       $scope.data.upload = $upload.upload(httpConfig)
-        .progress(function(e) {
-          if (uploadError) { return; }
-          $scope.data.upload.progress = parseInt(100.0 * e.loaded / e.total);
-        })
-        .success(function(media) {
-          d.resolve();
-        })
-        .error(function(error, status) {
-          uploadError                 = true;
-          $scope.data.upload.progress = 0;
-          $scope.data.upload.file     = null;
+          .then(
+          function(media) { //Success
+            d.resolve();
+          },
+          function(error, status) { //Error
+            uploadError                 = true;
+            $scope.data.upload.progress = 0;
+            $scope.data.upload.file     = null;
 
-          if (status === 422) {
-            d.reject('Selected file type is not supported. Please choose a different file.');
+            if (status === 422) {
+              d.reject('Selected file type is not supported. Please choose a different file.');
+            }
+            else {
+              d.reject('Unhandled error');
+            }
+          },
+          function(e) { //Progress
+            if (uploadError) { return; }
+            $scope.data.upload.progress = parseInt(100.0 * e.loaded / e.total);
           }
-          else {
-            d.reject('Unhandled error');
-          }
-        });
+        );
     }
 
     return d.promise;

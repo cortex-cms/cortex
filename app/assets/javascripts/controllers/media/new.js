@@ -5,6 +5,7 @@ angular.module('cortex.controllers.media.new', [
     'ui.bootstrap.tabs',
     'ui.bootstrap.dropdown',
     'angular-flash.service',
+    'angularFileUpload',
     'ngTagsInput',
     'cortex.settings',
     'cortex.services.cortex',

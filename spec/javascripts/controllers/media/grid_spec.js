@@ -51,19 +51,17 @@
 
       describe('$scope.page', function() {
 
-        xit('should provide query', function() {
-          // TODO: Figure out stateParams being variable
-          var query = 'query';
+        it('should provide query', inject(function($stateParams) {
+          $stateParams.query = 'query';
           var controller = createController();
-          expect(controller.page.query).toEqual(query);
-        });
+          expect(controller.page.query).toEqual('query');
+        }));
 
-        xit('should use $stateParams.page if available', function() {
-          // TODO: Figure out stateParams being variable
-          var page = 2;
+        it('should use $stateParams.page if available', inject(function($stateParams) {
+          $stateParams.page = 2;
           var controller = createController();
-          expect(controller.page.page).toEqual(page);
-        });
+          expect(controller.page.page).toEqual(2);
+        }));
 
         it('should provide default page', function() {
           var controller = createController();
@@ -75,12 +73,11 @@
           expect(controller.page.perPage).toEqual(10);
         });
 
-        xit('should use $stateParams.perPage if available', function() {
-          // TODO: Figure out stateParams being variable
-          var perPage = 23;
+        it('should use $stateParams.perPage if available', inject(function($stateParams) {
+          $stateParams.perPage = 23;
           var controller = createController();
-          expect(controller.page.perPage).toEqual(perPage);
-        });
+          expect(controller.page.perPage).toEqual(23);
+        }));
 
         it('should provide next()', function() {
           var controller = createController();

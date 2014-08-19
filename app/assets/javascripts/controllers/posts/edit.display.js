@@ -60,7 +60,7 @@ angular.module('cortex.controllers.posts.edit.display', [
           $scope.data.post.tile_media_warnings.push("Warning! Your tile media might appear stretched, as it is smaller than our recommended width of 375.");
         }
         if (!tileMediaConstraintsService.aspectratio(media)) {
-          $scope.data.post.tile_media_warnings.push("Warning! Your tile media might not display properly, as it does not match our recommended aspect ratio. Try 1:1 or 4:3.");
+          $scope.data.post.tile_media_warnings.push("Warning! Your tile media might not display properly, as it does not match our recommended aspect ratio. Try 1:1");
         }
       }
     });

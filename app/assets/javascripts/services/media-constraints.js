@@ -70,7 +70,7 @@ angular.module('cortex.services.mediaConstraints', [])
 	};
 
 	child.aspectratio = function(media) {
-		return parent.aspectratio(media, [1.0, 1.1, 1.2, 1.333]);
+		return parent.aspectratio(media, [1.0, 1.1, 1.2]);
 	};
 
 	return child;

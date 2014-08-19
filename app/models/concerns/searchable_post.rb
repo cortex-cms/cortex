@@ -26,7 +26,7 @@ module SearchablePost
       filter_bool = {must_not: { ids: { values: [id] } } }
 
       if published
-        filter_bool[:must] = { range: { published_at: { lte: DateTime.now } } }
+        filter_bool[:must] = [ { range: { published_at: { lte: DateTime.now } } }, { terms: { 'draft' => [false] } } ]
       end
 
       mlt_fields = [

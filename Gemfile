@@ -135,6 +135,9 @@ group :test, :development do
   gem 'guard-jasmine'
   gem 'jasmine-core', '~> 1.3'
   gem 'rails-assets-angular-mocks'
+  gem 'rails-assets-sinonjs'
+  gem 'rails-assets-sinon-ng'
+  gem 'rails-assets-angular-debaser'
 end
 
 group :development do

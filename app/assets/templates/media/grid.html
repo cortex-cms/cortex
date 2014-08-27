@@ -33,14 +33,14 @@
       <div class="form-group">
         <label class="sr-only" for="sort-order">Sort by</label>
         <select class="form-control" id="sort-order">
-          <option>Last modified (recent first)</option>
-          <option>Last modified (oldest first)</option>
+          <!--<option>Last modified (recent first)</option>-->
+          <!--<option>Last modified (oldest first)</option>-->
           <option>Creation date (recent first)</option>
-          <option>Creation date (oldest first)</option>
-          <option>Display name (ascending)</option>
-          <option>Display name (descending)</option>
-          <option>Filename (ascending)</option>
-          <option>Filename (descending)</option>
+          <!--<option>Creation date (oldest first)</option>-->
+          <!--<option>Display name (ascending)</option>-->
+          <!--<option>Display name (descending)</option>-->
+          <!--<option>Filename (ascending)</option>-->
+          <!--<option>Filename (descending)</option>-->
         </select>
       </div>
     </form>
@@ -48,15 +48,8 @@
 
   <div class="media-page">
     <div class="pull-left">
-      <span ng-if="data.paging.pages > 1">
-        <span ng-if="data.media.length == 1">Showing 1 item</span>
-        <span ng-if="data.media.length != 1">Showing {{ data.media.length }} items</span>
-        &bull; Page {{ data.paging.page }} of {{ data.paging.pages }}
-      </span>
-      <span ng-if="data.paging.pages == 1">
-        <span ng-if="data.media.length == 1">Showing 1 item</span>
-        <span ng-if="data.media.length != 1">Showing {{ data.paging.count }} items</span>
-      </span>
+      <ng-pluralize count="data.media.length" when="{'1': 'Showing 1 item', 'other': 'Showing {} items'}"></ng-pluralize>
+      <span>Page {{ data.paging.page }} of {{ data.paging.pages }}</span>
     </div>
 
     <ul ng-show="data.paging.pages > 1">

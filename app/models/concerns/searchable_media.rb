@@ -38,10 +38,9 @@ module SearchableMedia
   module ClassMethods
     # TODO: Rewrite to handle filters
     def search_with_params(params)
-      query = { query_string: { fields: %w[name^100 _all],
-                                query: self.query_massage(params[:q]) } }
+      query = { query_string: { fields: %w[name^100 _all], query: query_massage(params[:q]) } }
 
-      bool = { bool: { must: [ query ], must_not: [], should: [] } }
+      bool = { bool: { must: [query], must_not: [], should: [] } }
 
       search query: bool, sort: [{ created_at: { order: :desc } }]
     end

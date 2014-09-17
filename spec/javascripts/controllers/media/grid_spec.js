@@ -6,122 +6,101 @@
   describe('Media Grid Module', function() {
 
     beforeEach(function() {
-      angular.mock.module('cortex.controllers.media.grid');
+      var media = [{id: 1}, {id: 2}];
+      var searchPaged = function(args, successFn) {
+        var paging = {per_page: 10, page: 1};
+        if (args) {
+          paging = angular.extend(paging, args);
+        }
+
+        if (successFn) {
+          successFn(media, {}, paging);
+        }
+
+        return media;
+      };
+      debaser()
+          .module('cortex.controllers.media.grid')
+          .object('settings', { paging: { defaultPerPage: 10 } } )
+          .object('$stateParams', { query: '', page: 1 } )
+          .object('$state').withFunc('go').returns(true)
+          .object('media', media)
+          .object('mediaSelectType', {})
+          .object('$window').withFunc('confirm').returns(true)
+          .object('cortex', { media: { delete: function(a, s) { s() }, searchPaged: searchPaged } } )
+          .object('PostsPopupService', { popupOpen: false } )
+          .object('mediaSelectType', { })
+          .object('PostBodyEditorService', { })
+          .debase();
     });
 
-    describe('MediaGridCtrl', function($rootScope) {
-      var createController, $scope, $stateParams, $state, $window, settings, media, cortex;
+    describe('MediaGridCtrl', function() {
+      var constructController;
 
-      beforeEach(inject(function($controller, $rootScope, _$state_, _$httpBackend_, _cortex_,
-                                 _settings_, mediaSelectType, flash, PostBodyEditorService,
-                                 PostsPopupService, _$window_) {
-        $scope       = $rootScope.$new();
-        $stateParams = {};
-        $state       = _$state_;
-        $window      = _$window_;
-        settings     = _settings_;
-        cortex       = _cortex_;
-        media        = [{id: 1}, {id: 2}];
+      beforeEach(inject(function($controller) {
 
-        // Mocked media response
-        cortex.media.searchPaged = function(args, successFn) {
-          var paging = {per_page: 10, page: 1};
-          if (args) {
-            paging = angular.extend(paging, args);
-          }
-
-          if (successFn) {
-            successFn(media, {}, paging);
-          }
-
-          return media;
-        };
-
-        createController = function() {
-          return $controller('MediaGridCtrl', {
-            $scope                : $scope,
-            $state                : $state,
-            $stateParams          : $stateParams,
-            cortex                : cortex,
-            settings              : settings,
-            mediaSelectType       : mediaSelectType,
-            flash                 : flash,
-            PostBodyEditorService : PostBodyEditorService,
-            PostsPopupService     : PostsPopupService
-          });
+        constructController = function() {
+          return $controller('MediaGridCtrl', {});
         };
       }));
 
       it('should construct', function() {
-        expect(createController()).toBeTruthy();
+        var controller = constructController();
+        expect(controller).toBeTruthy();
       });
 
       describe('$scope.page', function() {
 
-        it('should provide query', function() {
+        it('should provide query', inject(function($stateParams) {
           $stateParams.query = 'query';
-          createController();
-          expect($scope.page.query).toEqual($stateParams.query);
-        });
+          var controller = constructController();
+          expect(controller.page.query).toEqual('query');
+        }));
 
-        it('should use $stateParams.page if available', function() {
+        it('should use $stateParams.page if available', inject(function($stateParams) {
           $stateParams.page = 2;
-          createController();
-          expect($scope.page.page).toEqual($stateParams.page);
-        });
+          var controller = constructController();
+          expect(controller.page.page).toEqual(2);
+        }));
 
         it('should provide default page', function() {
-          createController();
-          expect($scope.page.page).toEqual(1);
-        });
-
-        it('should use $stateParams.page if available', function() {
-          $stateParams.page = 2;
-          createController();
-          expect($scope.page.page).toEqual($stateParams.page);
+          var controller = constructController();
+          expect(controller.page.page).toEqual(1);
         });
 
         it('should provide default perPage', function() {
-          createController();
-          expect($scope.page.perPage).toEqual(settings.paging.defaultPerPage);
+          var controller = constructController();
+          expect(controller.page.perPage).toEqual(10);
         });
 
-        it('should use $stateParams.perPage if available', function() {
+        it('should use $stateParams.perPage if available', inject(function($stateParams) {
           $stateParams.perPage = 23;
-          createController();
-          expect($scope.page.perPage).toEqual($stateParams.perPage);
-        });
+          var controller = constructController();
+          expect(controller.page.perPage).toEqual(23);
+        }));
 
         it('should provide next()', function() {
-          $stateParams.page = 1;
-          createController();
-          $state.go = angular.noop;
-          $scope.page.next();
-          expect($scope.page.page).toEqual(2);
+          var controller = constructController();
+          controller.page.next();
+          expect(controller.page.page).toEqual(2);
         });
 
         it('should provide previous()', function() {
-          $stateParams.page = 2;
-          createController();
-          $state.go = angular.noop;
-          $scope.page.previous();
-          expect($scope.page.page).toEqual(1);
+          var controller = constructController();
+          controller.page.previous();
+          expect(controller.page.page).toEqual(0);
         });
       });
 
       it('should provide data.media', function() {
-        createController();
-        expect($scope.data.media.length).toEqual(2);
+        var controller = constructController();
+        expect(controller.data.media.length).toEqual(2);
       });
 
       it('should provide deleteMedia()', function() {
-        $window.confirm = function() { return true; };
-        cortex.media.delete = function(args, successFn) {
-          successFn();
-        };
-        createController();
-        $scope.deleteMedia(media[0]);
-        expect($scope.data.media).toNotContain(media[0]);
+        var controller = constructController();
+        controller.deleteMedia({id: 1});
+        expect(controller.data.media).not.toContain({id: 1});
       });
     });
   });

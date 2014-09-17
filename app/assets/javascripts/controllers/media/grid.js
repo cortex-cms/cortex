@@ -44,6 +44,10 @@ angular.module('cortex.controllers.media.grid', [
         updatePage();
     });
 
+    $scope.$watch('page.perPage', function() {
+      updatePage();
+    });
+
     $scope.data.media = cortex.media.searchPaged({q: $scope.page.query,
             per_page: $scope.page.perPage,
             page: $scope.page.page},

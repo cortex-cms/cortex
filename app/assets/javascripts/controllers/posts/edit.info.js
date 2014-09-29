@@ -8,10 +8,15 @@ angular.module('cortex.controllers.posts.edit.info', [
 .controller('PostsEditInfoCtrl', function($scope, $filter, cortex, delayedBind, currentUser) {
   // Auto-generate slug when title changed and field isn't dirty
   $scope.$watch('data.post.title', function(title) {
-    if ($scope.postForm.slug.$dirty && $scope.postForm.slug) {
+
+    var slug = $filter('slugify')(title);
+
+    var slugOverridden = $scope.postForm.slug.$dirty && $scope.postForm.slug;
+
+    if (slugOverridden) {
       return;
     }
-    $scope.data.post.slug = $filter('slugify')(title);
+    $scope.data.post.slug = slug;
   });
 
   $scope.$watch('data.authorIsUser', function(authorIsUser) {
@@ -32,17 +37,17 @@ angular.module('cortex.controllers.posts.edit.info', [
 
           // A post may have its own slug
           if (post.id === $scope.data.post.id) {
-            $scope.postForm.slug.$error.unavailable = false;
+            $scope.postForm.slug.$setValidity('unavailable', true);
             $scope.data.postWithDuplicateSlug = null;
           }
           else {
-            $scope.postForm.slug.$error.unavailable = true;
+            $scope.postForm.slug.$setValidity('unavailable', false);
             $scope.data.postWithDuplicateSlug = post;
           }
         },
         // Slug unused
         function() {
-          $scope.postForm.slug.$error.unavailable = false;
+          $scope.postForm.slug.$setValidity('unavailable', true);
           $scope.data.postWithDuplicateSlug = null;
         }
     );

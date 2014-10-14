@@ -170,5 +170,5 @@ end
 
 group :staging, :production do
   # Monitoring
-  gem 'honeybadger'
+  gem 'newrelic_rpm'
 end

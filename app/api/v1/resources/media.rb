@@ -104,7 +104,7 @@ module API
 
             begin
               media.destroy
-            rescue Exceptions::ObjectConsumed => e
+            rescue Cortex::Exceptions::ResourceConsumed => e
               error!({
                   error: "Conflict",
                   message: e.message,

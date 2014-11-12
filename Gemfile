@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-ruby '2.1.2'
+ruby '2.1.4'
 
 def darwin_only(require_as)
   RUBY_PLATFORM.include?('darwin') && require_as
@@ -16,6 +16,9 @@ gem 'unicorn-rails'
 
 # Rails
 gem 'rails', '~> 4.2.0.beta4'
+
+# Cortex-specific
+gem 'cortex-exceptions'
 
 # API
 gem 'grape', '~> 0.8'

@@ -102,6 +102,7 @@ GEM
     coffee-script-source (1.8.0)
     colored (1.2)
     connection_pool (2.0.0)
+    cortex-exceptions (0.0.1)
     crass (0.2.1)
     daemons (1.1.9)
     database_cleaner (1.3.0)
@@ -344,14 +345,14 @@ GEM
       rails-assets-jquery (>= 1.9.0)
     rails-assets-angular-cookies (1.2.26)
       rails-assets-angular (= 1.2.26)
-    rails-assets-angular-debaser (0.3.0)
+    rails-assets-angular-debaser (0.3.2)
       rails-assets-angular (= 1.2.26)
       rails-assets-angular-mocks
     rails-assets-angular-flash (0.1.13)
       rails-assets-angular (>= 1.0, < 1.3)
     rails-assets-angular-mocks (1.2.26)
       rails-assets-angular (= 1.2.26)
-    rails-assets-angular-redactor-patched (1.0.0)
+    rails-assets-angular-redactor-patched (1.0.1)
       rails-assets-angular (>= 1.2.0)
       rails-assets-jquery (>= 2.0.0)
     rails-assets-angular-resource (1.2.26)
@@ -361,8 +362,8 @@ GEM
     rails-assets-angular-ui-router (0.2.11)
       rails-assets-angular (>= 1.0.8)
     rails-assets-angularjs-file-upload (1.6.12)
-    rails-assets-bootstrap (3.3.0)
-      rails-assets-jquery (>= 1.9.1)
+    rails-assets-bootstrap (3.3.1)
+      rails-assets-jquery (>= 1.9.0)
     rails-assets-bootstrap-sass-official (3.3.0)
       rails-assets-jquery (>= 1.9.0)
     rails-assets-bootstrap-switch (3.0.2)
@@ -561,6 +562,7 @@ DEPENDENCIES
   binding_of_caller
   codeclimate-test-reporter
   coffee-rails
+  cortex-exceptions
   database_cleaner
   devise
   doorkeeper!

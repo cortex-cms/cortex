@@ -1,10 +1,10 @@
-class YoutubeMediaWorker
-  include Sidekiq::Worker
+class YoutubeMediaJob < ActiveJob::Base
+  queue_as :default
 
   def perform(media_id)
-    media = Media.find(media_id)
+    media = Cortex::Media.find(media_id)
 
-    info = YoutubeHelper::fetch_info(media.video_id)
+    info = Cortex::YoutubeHelper::fetch_info(media.video_id)
 
     media.url                 = info[:url]
     media.title               = info[:title]

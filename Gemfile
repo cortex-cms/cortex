@@ -15,7 +15,7 @@ end
 gem 'unicorn-rails'
 
 # Rails
-gem 'rails', '~> 4'
+gem 'rails', '~> 4.2.0.beta4'
 
 # API
 gem 'grape', '~> 0.8'
@@ -28,10 +28,10 @@ gem 'redis-rails', '~> 4.0'
 gem 'haml'
 
 # Style
-gem 'sass-rails', '~> 4'
+gem 'sass-rails', '~> 5.0.0.beta1'
 gem 'font-awesome-sass'
 
-gem 'sprockets'
+gem 'sprockets-rails', '~> 3.0.0.beta1'
 
 # JS
 gem 'ng-rails-csrf'
@@ -91,7 +91,8 @@ gem 'json'
 # Middleware
 gem 'rack-cors', require: 'rack/cors'
 
-# Sidekiq
+# Jobs
+gem 'activejob', '~> 4.2.0.beta4'
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', require: false

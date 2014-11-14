@@ -13,7 +13,7 @@ module API
             require_scope! :'view:localizations'
             authorize! :view, ::Localization
 
-            @localizations = jargon.localizations.get
+            @localizations = jargon.localizations.query
 
             status @localizations.status
             present @localizations, with: Entities::Localization

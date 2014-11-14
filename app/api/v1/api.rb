@@ -26,8 +26,13 @@ module API
       mount Resources::Tenants
       mount Resources::Users
       mount Resources::Occupations
+      mount Resources::Localizations
+      mount Resources::Locales
 
-      add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1', models: [Entities::Post, Entities::Category, Entities::Media, Entities::Tenant, Entities::Occupation, Entities::User])
+      add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1',
+                                models: [Entities::Post, Entities::Category, Entities::Media,
+                                         Entities::Tenant, Entities::Occupation, Entities::User,
+                                         Entities::Localization, Entities::Locale])
     end
   end
 end

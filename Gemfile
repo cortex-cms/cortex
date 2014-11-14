@@ -20,6 +20,9 @@ gem 'rails', '~> 4.2.0.beta4'
 # Cortex-specific
 gem 'cortex-exceptions'
 
+# Localization
+gem 'jargon-client', git: 'git://github.com/cb-talent-development/jargon-client'
+
 # API
 gem 'grape', '~> 0.8'
 gem 'grape-entity'

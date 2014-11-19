@@ -1,5 +1,5 @@
-class YoutubeMediaJob < ActiveJob::Base
-  queue_as :default
+class YoutubeMediaWorker
+  include Sidekiq::Worker
 
   def perform(media_id)
     media = Media.find(media_id)

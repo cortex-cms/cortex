@@ -15,7 +15,7 @@ end
 gem 'unicorn-rails'
 
 # Rails
-gem 'rails', '~> 4.2.0.beta4'
+gem 'rails', '~> 4.1'
 
 # Cortex-specific
 gem 'cortex-exceptions'
@@ -24,7 +24,7 @@ gem 'cortex-exceptions'
 gem 'jargon-client', git: 'git://github.com/cb-talent-development/jargon-client'
 
 # API
-gem 'grape', '~> 0.8'
+gem 'grape', '~> 0.9'
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
@@ -34,10 +34,10 @@ gem 'redis-rails', '~> 4.0'
 gem 'haml'
 
 # Style
-gem 'sass-rails', '~> 5.0.0.beta1'
+gem 'sass-rails', '~> 4.0'
 gem 'font-awesome-sass'
 
-gem 'sprockets-rails', '~> 3.0.0.beta1'
+gem 'sprockets-rails', '~> 2.2'
 
 # JS
 gem 'ng-rails-csrf'
@@ -58,7 +58,7 @@ gem 'rails-assets-angular-resource'
 gem 'rails-assets-angular-cookies'
 
 gem 'rails-assets-angular-ui-router', '~> 0.2'
-gem 'rails-assets-angular-bootstrap', '~> 0.11'
+gem 'rails-assets-angular-bootstrap', '~> 0.12'
 gem 'rails-assets-angular-flash'
 gem 'rails-assets-angular-bootstrap-datetimepicker'
 gem 'rails-assets-angular-redactor-patched'
@@ -70,9 +70,9 @@ gem 'rails-assets-angular-bootstrap-switch'
 
 # ActiveRecord
 gem 'rails-observers'
-gem 'awesome_nested_set', '~> 3.0.0.rc.5'
-gem 'paperclip', '~> 4.1'
-gem 'acts-as-taggable-on', '~> 3.2'
+gem 'awesome_nested_set', '~> 3.0'
+gem 'paperclip', '~> 4.2'
+gem 'acts-as-taggable-on', '~> 3.4'
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'elasticsearch-model', '~> 0.1'
 gem 'elasticsearch-rails', '~> 0.1'
@@ -80,6 +80,8 @@ gem 'kaminari'
 gem 'sanitize', '~> 3.0'
 gem 'paranoia', '~> 2.0'
 gem 'pg'
+gem 'activeuuid'
+gem 'active_attr'
 
 # Authorization
 gem 'six'
@@ -98,7 +100,7 @@ gem 'json'
 gem 'rack-cors', require: 'rack/cors'
 
 # Jobs
-gem 'activejob', '~> 4.2.0.beta4'
+#gem 'activejob', '~> 4.2.0.beta4'
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', require: false
@@ -109,7 +111,7 @@ group :test, :development do
   gem 'dotenv'
 
   # Rspec
-  gem 'rspec', '~> 3.0'
+  gem 'rspec', '~> 3.1'
   gem 'rspec-rails'
   gem 'json_spec'
 
@@ -140,7 +142,7 @@ group :test, :development do
 
   gem 'jasmine-rails'
   gem 'guard-jasmine'
-  gem 'jasmine-core', '~> 1.3'
+  gem 'jasmine-core', '~> 2.1'
   gem 'rails-assets-angular-mocks'
   gem 'rails-assets-sinonjs'
   gem 'rails-assets-sinon-ng'

@@ -5,7 +5,7 @@ rvm:
 bundler_args: --without production staging development
 before_script:
   - psql -c 'create database cortex_test;' -U postgres
-  - bundle exec rake db:migrate db:seed cortex:create_categories
+  - bundle exec rake db:schema:load db:seed cortex:create_categories
 script:
   - bundle exec rake spec
   - bundle exec rake spec:javascript

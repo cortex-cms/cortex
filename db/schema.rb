@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801142854) do
+ActiveRecord::Schema.define(version: 20141117174354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+  enable_extension "uuid-ossp"
 
   create_table "applications", force: true do |t|
     t.string   "name"
@@ -51,6 +52,24 @@ ActiveRecord::Schema.define(version: 20140801142854) do
     t.integer "post_id",     null: false
     t.integer "category_id", null: false
   end
+
+  create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string  "jargon_id", null: false
+    t.integer "user_id"
+  end
+
+  add_index "locales", ["id"], name: "index_locales_on_id", using: :btree
+  add_index "locales", ["jargon_id"], name: "index_locales_on_jargon_id", using: :btree
+  add_index "locales", ["user_id"], name: "index_locales_on_user_id", using: :btree
+
+  create_table "localizations", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.integer "jargon_id", null: false
+    t.integer "user_id"
+  end
+
+  add_index "localizations", ["id"], name: "index_localizations_on_id", using: :btree
+  add_index "localizations", ["jargon_id"], name: "index_localizations_on_jargon_id", using: :btree
+  add_index "localizations", ["user_id"], name: "index_localizations_on_user_id", using: :btree
 
   create_table "media", force: true do |t|
     t.string   "name"

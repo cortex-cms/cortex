@@ -13,7 +13,7 @@ module API
             require_scope! :'view:localizations'
             authorize! :view, ::Localization
 
-            @localizations = jargon.localizations.query
+            @localizations = LocalizationService.all
 
             status @localizations.status
             present @localizations, with: Entities::Localization
@@ -24,7 +24,7 @@ module API
             require_scope! :'view:localizations'
             authorize! :view, localization!
 
-            @localization = jargon.localizations(params[:id]).get
+            @localization = LocalizationService.get(params[:id])
 
             status @localization.status
             present @localization, with: Entities::Localization
@@ -35,7 +35,7 @@ module API
             require_scope! :'modify:localizations'
             authorize! :delete, localization!
 
-            @localization = jargon.localizations(params[:id]).delete
+            @localization = LocalizationService.delete(params[:id])
 
             status @localization.status
             present @localization, with: Entities::Localization
@@ -48,7 +48,7 @@ module API
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
 
-            @localization = jargon.localizations.save(declared(params, {include_missing: false}, allowed_params))
+            @localization = LocalizationService.create(declared(params, {include_missing: false}, allowed_params))
 
             status @localization.status
             present @localization, with: Entities::Localization
@@ -61,7 +61,7 @@ module API
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
 
-            @localization = jargon.localizations.save(declared(params, {include_missing: false}, allowed_params))
+            @localization = LocalizationService.update(declared(params, {include_missing: false}, allowed_params))
 
             status @localization.status
             present @localization, with: Entities::Localization

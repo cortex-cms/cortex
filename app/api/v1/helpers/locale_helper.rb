@@ -3,11 +3,11 @@ module API
     module Helpers
       module LocaleHelper
         def locale
-          @locale ||= jargon.localizations(params[:localization_id]).get_locale(params[:id])
+          @locale ||= ::Locale.find_by_id(params[:id])
         end
 
         def locale!
-          locale.status == 404 ? not_found! : locale
+          locale || not_found!
         end
       end
     end

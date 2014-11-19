@@ -3,11 +3,11 @@ module API
     module Helpers
       module LocalizationHelper
         def localization
-          @localization ||= jargon.localizations(params[:id]).get
+          @localization ||= ::Localization.find_by_id(params[:id])
         end
 
         def localization!
-          localization.status == 404 ? not_found! : localization
+          localization || not_found!
         end
       end
     end

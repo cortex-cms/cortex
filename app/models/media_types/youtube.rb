@@ -25,6 +25,6 @@ class Youtube < Media
   private
 
   def fetch_youtube
-    YoutubeMediaJob.enqueue(id)
+    YoutubeMediaWorker.perform_async(id)
   end
 end

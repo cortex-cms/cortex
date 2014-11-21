@@ -2,7 +2,7 @@ module LocaleService
   def all_locales
     expects_id!
 
-    merge_locals(::Localization.find_by_id(id).list_locales, jargon.localizations(id).query_locales)
+    merge_locales(::Localization.find_by_id(id).list_locales, jargon.localizations(id).query_locales)
   end
 
   def get_locale(locale_name)

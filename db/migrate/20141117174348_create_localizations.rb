@@ -4,6 +4,8 @@ class CreateLocalizations < ActiveRecord::Migration
       t.uuid :id, primary_key: true, default: 'uuid_generate_v4()'
       t.integer :jargon_id, null: false
       t.belongs_to :user
+
+      t.timestamps
     end
 
     add_index :localizations, :id

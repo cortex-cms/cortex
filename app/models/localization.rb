@@ -1,5 +1,14 @@
 class Localization < ActiveRecord::Base
-  acts_as_paranoid
-
+  has_many :locales, dependent: :destroy
   belongs_to :user
+
+  validates :name, presence: true, uniqueness: true
+
+  def list_locales
+    locales.inject([]) { |memo, enum| memo << enum.name }
+  end
+
+  def retrieve_locale(locale_name)
+    locales.find { |locale| locale.name == locale_name }
+  end
 end

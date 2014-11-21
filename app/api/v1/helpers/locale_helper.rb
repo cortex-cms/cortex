@@ -3,7 +3,7 @@ module API
     module Helpers
       module LocaleHelper
         def locale
-          @locale ||= ::Locale.find_by_id(params[:id])
+          @locale ||= ::Localization.find_by_id(params[:localization_id]).retrieve_locale(params[:name])
         end
 
         def locale!

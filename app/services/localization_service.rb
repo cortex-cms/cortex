@@ -1,17 +1,27 @@
 class LocalizationService
+  include LocaleService
+
+  def initialize(id)
+    @id = id
+    @jargon_id = ::Localization.find_by_id(id).jargon_id
+  end
+
   def all
-    jargon.localizations.query
+    rejects_id!
+    merge_localizations(::Localization.all, jargon.localizations.query)
   end
 
-  def get(id)
-    localization_cortex = ::Localization.find_by_id(id)
-    localization_jargon = jargon.localizations(localization_cortex.jargon_id).get
+  def get
+    expects_id!
+    cortex_localization = ::Localization.find_by_id(id)
+    jargon_localization = jargon.localizations(jargon_id).get
 
-    localization_cortex.merge(localization_jargon)
+    merge_localization(cortex_localization, jargon_localization)
   end
 
-  def delete(id)
-    jargon_localization = jargon.localizations(id).delete
+  def delete
+    expects_id!
+    jargon_localization = jargon.localizations(jargon_id).delete
     if jargon_localization.is_error?
       throw Exception.new(jargon_localization)
     else
@@ -46,30 +56,6 @@ class LocalizationService
     end
   end
 
-  private
-
-  def merge_all(cortex_results, jargon_results)
-    cortex_results.map { |cortex_localization|
-      jargon_localization = jargon_results.select { |jargon_localization| jargon_localization.id == cortex_localization.jargon_id }.first
-      merge_localization(cortex_localization, jargon_localization)
-    }
-  end
-
-  def merge_localization(cortex_localization, jargon_localization)
-    jargon_localization.id = cortex_localization.id
-    jargon_localization.user = cortex_localization.user
-    jargon_localization.locales = jargon_localization.locales.map { |jargon_locale|
-      cortex_locale = cortex_localization.select { |cortex_locale| cortex_locale.jargon_id == jargon_locale.id }.first
-      merge_locale(cortex_locale, jargon_locale)
-    }
-
-    jargon_localization
-  end
-
-  def merge_locale(cortex_locale, jargon_locale)
-    jargon_locale.id = cortex_locale.id
-    jargon_locale.user = cortex_locale.user
-
-    jargon_locale
-  end
+  protected
+  attr_accessor :id, :jargon_id
 end

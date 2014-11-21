@@ -54,17 +54,22 @@ ActiveRecord::Schema.define(version: 20141117174354) do
   end
 
   create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
-    t.string  "jargon_id", null: false
-    t.integer "user_id"
+    t.string   "name",            null: false
+    t.integer  "localization_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "locales", ["id"], name: "index_locales_on_id", using: :btree
-  add_index "locales", ["jargon_id"], name: "index_locales_on_jargon_id", using: :btree
+  add_index "locales", ["localization_id"], name: "index_locales_on_localization_id", using: :btree
   add_index "locales", ["user_id"], name: "index_locales_on_user_id", using: :btree
 
   create_table "localizations", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
-    t.integer "jargon_id", null: false
-    t.integer "user_id"
+    t.integer  "jargon_id",  null: false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "localizations", ["id"], name: "index_localizations_on_id", using: :btree

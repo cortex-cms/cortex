@@ -24,7 +24,7 @@ module API
             require_scope! :'view:localizations'
             authorize! :view, localization!
 
-            @localization = LocalizationService.get(params[:id])
+            @localization = LocalizationService(params[:id]).get
 
             status @localization.status
             present @localization, with: Entities::Localization
@@ -35,7 +35,7 @@ module API
             require_scope! :'modify:localizations'
             authorize! :delete, localization!
 
-            @localization = LocalizationService.delete(params[:id])
+            @localization = LocalizationService(params[:id]).delete
 
             status @localization.status
             present @localization, with: Entities::Localization

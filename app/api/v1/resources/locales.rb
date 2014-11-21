@@ -15,29 +15,29 @@ module API
                 require_scope! :'view:locales'
                 authorize! :view, ::Locale
 
-                @locales = jargon.localizations(params[:localization_id]).query_locales
+                @locales = LocalizationService(params[:localization_id]).all
 
                 status @locales.status
                 present @locales, with: Entities::Locale
               end
 
               desc 'Get locale', {entity: Entities::Locale, nickname: 'showLocale'}
-              get ':id' do
+              get ':name' do
                 require_scope! :'view:locales'
                 authorize! :view, locale!
 
-                @locale = jargon.localizations(params[:localization_id]).get_locale(params[:id])
+                @locale = LocalizationService(params[:localization_id]).get_locale(params[:name])
 
                 status @locale.status
                 present @locale, with: Entities::Locale
               end
 
               desc 'Delete locale', {nickname: 'deleteLocale'}
-              delete ':id' do
+              delete ':name' do
                 require_scope! :'modify:locales'
                 authorize! :delete, locale!
 
-                @locale = jargon.localizations(params[:localization_id]).delete_locale(params[:id])
+                @locale = LocalizationService(params[:localization_id]).delete_locale(params[:name])
 
                 status @locale.status
                 present @locale, with: Entities::Locale
@@ -50,20 +50,20 @@ module API
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
 
-                @locale = jargon.localizations(params[:localization_id]).save_locale(declared(params, {include_missing: false}, allowed_params))
+                @locale = LocalizationService(params[:localization_id]).create_locale(declared(params, {include_missing: false}, allowed_params))
 
                 status @locale.status
                 present @locale, with: Entities::Locale
               end
 
               desc 'Update a locale', {entity: Entities::Locale, params: Entities::Locale.documentation, nickname: 'updateLocale'}
-              put ':id' do
+              put ':name' do
                 require_scope! :'modify:locales'
                 authorize! :update, locale!
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
 
-                @locale = jargon.localizations(params[:localization_id]).save_locale(declared(params, {include_missing: false}, allowed_params))
+                @locale = LocalizationService(params[:localization_id]).update_locale(declared(params, {include_missing: false}, allowed_params))
 
                 status @locale.status
                 present @locale, with: Entities::Locale

@@ -13,9 +13,8 @@ module API
             require_scope! :'view:localizations'
             authorize! :view, ::Localization
 
-            @localizations = LocalizationService.all
+            @localizations = localization_service.all
 
-            status @localizations.status
             present @localizations, with: Entities::Localization
           end
 
@@ -24,9 +23,8 @@ module API
             require_scope! :'view:localizations'
             authorize! :view, localization!
 
-            @localization = LocalizationService(params[:id]).get
+            @localization = localization_service.get
 
-            status @localization.status
             present @localization, with: Entities::Localization
           end
 
@@ -35,9 +33,8 @@ module API
             require_scope! :'modify:localizations'
             authorize! :delete, localization!
 
-            @localization = LocalizationService(params[:id]).delete
+            @localization = localization_service.delete
 
-            status @localization.status
             present @localization, with: Entities::Localization
           end
 
@@ -48,9 +45,8 @@ module API
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
 
-            @localization = LocalizationService.create(declared(params, {include_missing: false}, allowed_params))
+            @localization = localization_service.create(declared(params, {include_missing: false}, allowed_params))
 
-            status @localization.status
             present @localization, with: Entities::Localization
           end
 
@@ -61,9 +57,8 @@ module API
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
 
-            @localization = LocalizationService.update(declared(params, {include_missing: false}, allowed_params))
+            @localization = localization_service.update(declared(params, {include_missing: false}, allowed_params))
 
-            status @localization.status
             present @localization, with: Entities::Localization
           end
         end

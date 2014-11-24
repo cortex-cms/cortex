@@ -1,0 +1,24 @@
+<div class="actions-and-search" class="clearfix">
+  <div class="manipulate-actions">
+    <button ui-sref="cortex.localizations.new.sections.article" class="btn btn-primary" type="button">Create Localization</button>
+  </div>
+
+  <div class="localization-search">
+    <delayed-input
+            autofocus="true"
+            class="form-control"
+            ng-model='data.query'
+            placeholder="Search Localizations..."
+            delay="500"></delayed-input>
+  </div>
+</div>
+
+<table ng-table="localizationDataParams" class="table localizations-table">
+  <tr ng-repeat="localization in $data" ui-sref="^.^.edit({localizationId: {{localization.id}}})">
+    <td data-title="'Title'">{{ localization.name }}</td>
+    <td data-title="'Created'">{{ localization.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
+    <td data-title="'Modified'">{{ localization.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
+    <td data-title="'Active'" class="text-center">{{ localization.deleted_at == null ? "\u2713" : "" }}</td>
+    <td data-title="'Tags'">{{ localization.tag_list.join(', ') }}</td>
+  </tr>
+</table>

@@ -4,23 +4,27 @@ angular.module('cortex.states', [
   'cortex.services.cortex',
   'cortex.templates',
 
+  'cortex.controllers.users.edit',
+
   'cortex.controllers.media.edit',
   'cortex.controllers.media.grid',
   'cortex.controllers.media.new',
+
   'cortex.controllers.organizations',
   'cortex.controllers.organizations.manage',
+  'cortex.controllers.tenants.edit',
+  'cortex.controllers.tenants.manage',
 
   'cortex.controllers.posts.edit',
   'cortex.controllers.posts.edit.info',
   'cortex.controllers.posts.edit.classify',
   'cortex.controllers.posts.edit.display',
   'cortex.controllers.posts.edit.seo',
-
   'cortex.controllers.posts.grid',
   'cortex.controllers.posts.popup',
-  'cortex.controllers.tenants.edit',
-  'cortex.controllers.tenants.manage',
-  'cortex.controllers.users.edit'
+
+  'cortex.controllers.localizations.edit',
+  'cortex.controllers.localizations.grid'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -41,6 +45,57 @@ angular.module('cortex.states', [
       templateUrl: 'main.html',
       data: {
         ncyBreadcrumbLabel: 'Home'
+      }
+    })
+
+    // Localizations
+
+    .state('cortex.localizations', {
+      url: '/localizations',
+      abstract: true,
+      template: '<div class="localizations" ui-view></div>',
+      data: {
+        ncyBreadcrumbLabel: 'Localizations'
+      }
+    })
+
+    .state('cortex.localizations.new', {
+      url: '/new',
+      templateUrl: 'localizations/edit.html',
+      controller: 'LocalizationsEditCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Add Localizations'
+      }
+    })
+
+    .state('cortex.localizations.edit', {
+      url: '/:localizationId/edit',
+      templateUrl: 'localizations/edit.html',
+      controller: 'LocalizationsEditCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Edit Localizations'
+      }
+    })
+
+    .state('cortex.localizations.manage', {
+      url: '',
+      abstract: true,
+      templateUrl: 'localizations/manage.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.localizations.manage.components', {
+      url: '/:page/:perPage/:query',
+      views: {
+        'localizations-grid': {
+          templateUrl: 'localizations/grid.html',
+          controller: 'LocalizationsGridCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
       }
     })
 

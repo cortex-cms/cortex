@@ -8,8 +8,7 @@ angular.module('cortex.controllers.media.grid', [
     'cortex.services.postBodyEditor',
     'cortex.services.postsPopup',
     'cortex.directives.delayedInput',
-    'cortex.filters',
-    'cortex.services.cortex'
+    'cortex.filters'
 ])
 
 .controller('MediaGridCtrl', function($scope, $state, $stateParams, $window, cortex, settings,

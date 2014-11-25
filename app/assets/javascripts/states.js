@@ -64,7 +64,7 @@ angular.module('cortex.states', [
       templateUrl: 'localizations/edit.html',
       controller: 'LocalizationsEditCtrl',
       data: {
-        ncyBreadcrumbLabel: 'Add Localizations'
+        ncyBreadcrumbLabel: 'Add Localization'
       }
     })
 
@@ -73,7 +73,7 @@ angular.module('cortex.states', [
       templateUrl: 'localizations/edit.html',
       controller: 'LocalizationsEditCtrl',
       data: {
-        ncyBreadcrumbLabel: 'Edit Localizations'
+        ncyBreadcrumbLabel: 'Edit Localization'
       }
     })
 

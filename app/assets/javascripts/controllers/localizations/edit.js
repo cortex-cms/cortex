@@ -1,21 +1,33 @@
 angular.module('cortex.controllers.localizations.edit', [
-  'angular-flash.service'
+  'ui.router.state',
+  'angular-flash.service',
+  'cortex.services.cortex',
+  'cortex.util'
 ])
 
-.controller('LocalizationsEditCtrl', function($scope, $anchorScroll, flash, user, author) {
-  $scope.data        = $scope.data || {};
-  $scope.data.user   = user;
-  $scope.data.author = author;
+.controller('LocalizationsEditCtrl', function ($scope, $state, $stateParams, $anchorScroll, flash, cortex, util) {
+  $scope.data = $scope.data || {};
 
-  $scope.saveAuthor = function() {
-    $scope.data.author.$save().then(
-      function() {
+  if (util.isEmpty($stateParams.localizationId)) {
+    $scope.data.localization = new cortex.localizations();
+  }
+  else {
+    $scope.data.localization = cortex.localizations.get({id: $stateParams.localizationId});
+  }
+
+  $scope.cancel = function () {
+    $state.go('^.manage.components');
+  };
+
+  $scope.saveLocalization = function () {
+    $scope.data.localization.$save().then(
+      function () {
         $anchorScroll();
-        flash.info = 'Saved author information';
+        flash.info = 'Saved localization information';
       },
-      function() {
+      function () {
         $anchorScroll();
-        flash.error = 'Error while saving author information';
+        flash.error = 'Error while saving localization information';
       }
     );
   }

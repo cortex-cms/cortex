@@ -1,63 +1,64 @@
-<div class="container-fluid">
-  <h3>Add {{creatingOrganization ? 'Organization' : 'Tenant'}}</h3>
-
+<div class="row">
   <div class="col-md-2 hidden-xs">
-
     <h6 class="text-muted">INSTRUCTIONS</h6>
-
-      Create or edit {{creatingOrganization ? 'an organization' : 'a tenant'}}.
-
-
-
+    Create or edit {{creatingOrganization ? 'an organization' : 'a tenant'}}.
   </div>
-  <!-- /instructions -->
 
   <div class="col-md-5">
-      <h4>1. {{ levelName.charAt(0).toUpperCase() + levelName.slice(1) }} Information</h4>
+    <h4>1. {{ levelName.charAt(0).toUpperCase() + levelName.slice(1) }} Information</h4>
 
-      <form novalidate name="tenantForm">
-        <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.name" name="name" placeholder="Name (Required)" required maxlength="100" /></div>
-        <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.contact_name" placeholder="Contact Name" maxlength="100" /></div>
-        <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.contact_email" placeholder="Contact Email" maxlength="100" /></div>
-        <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.contact_phone" placeholder="Contact Phone" maxlength="100" /></div>
+    <form novalidate name="tenantForm">
+      <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.name" name="name"
+                                     placeholder="Name (Required)" required maxlength="100"/></div>
+      <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.contact_name"
+                                     placeholder="Contact Name" maxlength="100"/></div>
+      <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.contact_email"
+                                     placeholder="Contact Email" maxlength="100"/></div>
+      <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.contact_phone"
+                                     placeholder="Contact Phone" maxlength="100"/></div>
 
 
-        <div class="input-group form-group">
-          <input type="text" class="form-control" datepicker-popup="{{datepicker.format}}"
-                                                  is-open="datepicker.activateAtOpen"
-                                                  show-weeks="false"
-                                                  ng-model="data.tenant.active_at"
-                                                  placeholder="Activate Date"/>
-          <span class="input-group-btn"><button class="btn btn-default" ng-click="datepicker.open('activateAtOpen')"><i class="fa fa-calendar"></i></button></span>
-        </div>
+      <div class="input-group form-group">
+        <input type="text" class="form-control" datepicker-popup="{{datepicker.format}}"
+               is-open="datepicker.activateAtOpen"
+               show-weeks="false"
+               ng-model="data.tenant.active_at"
+               placeholder="Activate Date"/>
+        <span class="input-group-btn"><button class="btn btn-default" ng-click="datepicker.open('activateAtOpen')"><i
+            class="fa fa-calendar"></i></button></span>
+      </div>
 
-        <div class="input-group form-group">
-          <input type="text" class="form-control" datepicker-popup="{{datepicker.format}}"
-                                                  is-open="datepicker.deactivateAtOpen"
-                                                  show-weeks="false"
-                                                  ng-model="data.tenant.deactive_at"
-                                                  placeholder="Deactivate Date"/>
-          <span class="input-group-btn"><button class="btn btn-default" ng-click="datepicker.open('deactivateAtOpen')"><i class="fa fa-calendar"></i></button></span>
-        </div>
+      <div class="input-group form-group">
+        <input type="text" class="form-control" datepicker-popup="{{datepicker.format}}"
+               is-open="datepicker.deactivateAtOpen"
+               show-weeks="false"
+               ng-model="data.tenant.deactive_at"
+               placeholder="Deactivate Date"/>
+        <span class="input-group-btn"><button class="btn btn-default" ng-click="datepicker.open('deactivateAtOpen')"><i
+            class="fa fa-calendar"></i></button></span>
+      </div>
 
-        <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.contract" placeholder="Contract Number" maxlength="100" /></div>
-        <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.did" placeholder="DID" maxlength="100" /></div>
-      </form>
+      <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.contract"
+                                     placeholder="Contract Number" maxlength="100"/></div>
+      <div class="form-group"><input type="text" class="form-control" ng-model="data.tenant.did" placeholder="DID"
+                                     maxlength="100"/></div>
+    </form>
   </div>
-  <!-- /form column -->
 
   <div class="col-md-5">
     <h4 ng-show="creatingTenant && !creatingOrganization">2. Tenant Location in Organization Hierarchy</h4>
-    <h4 ng-hide="creatingTenant && !creatingOrganization">2. {{ levelName.charAt(0).toUpperCase() + levelName.slice(1) }} Settings</h4>
+    <h4 ng-hide="creatingTenant && !creatingOrganization">2. {{ levelName.charAt(0).toUpperCase() + levelName.slice(1)
+      }} Settings</h4>
     <abn-tree ng-show="creatingTenant" tree-data="data.tenants.hierarchy"
-                                                 on-select="selectParent(branch)"
-                                                 expand-level="2"></abn-tree>
+              on-select="selectParent(branch)"
+              expand-level="2"></abn-tree>
 
 
     <div ng-show="data.tenants.selected">
       <div class="checkbox">
         <label>
-          <input type="checkbox" ng-model="data.tenant.inherit_from_parent" /> Inherit settings from parent, <span class="text-info">{{ data.tenants.selected.name }}</span>
+          <input type="checkbox" ng-model="data.tenant.inherit_from_parent"/> Inherit settings from parent, <span
+            class="text-info">{{ data.tenants.selected.name }}</span>
         </label>
       </div>
     </div>
@@ -68,10 +69,10 @@
 
     <div class="text-right">
       <button type="button"
-        class="btn btn-primary"
-        ng-disabled="tenantForm.$invalid || (!data.tenants.selected && creatingTenant && !creatingOrganization)"
-        ng-click="save()">{{ creatingTenant ? 'Create' : 'Save' }}</button>
+              class="btn btn-primary"
+              ng-disabled="tenantForm.$invalid || (!data.tenants.selected && creatingTenant && !creatingOrganization)"
+              ng-click="save()">{{ creatingTenant ? 'Create' : 'Save' }}
+      </button>
     </div>
   </div>
-<!-- /hierarchy column -->
 </div>

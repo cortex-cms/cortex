@@ -3,8 +3,7 @@ class Youtube < Media
   index_name [Rails.env, 'media'].join('_')
   document_type    'media'
   taxon_class_name 'media'
-
-  after_create :fetch_youtube
+  
   store_accessor :meta, :url, :duration, :video_id, :title, :authors, :source_published_at,
                  :source_updated_at, :video_description
 
@@ -20,12 +19,5 @@ class Youtube < Media
 
   def taxon_type
     'VID'
-  end
-
-  private
-
-  def fetch_youtube
-    # Switch to async when Sidekiq is working
-    YoutubeMediaWorker.perform_async(id)
   end
 end

@@ -13,6 +13,14 @@ angular.module('cortex.services.cortex', [
     }
   });
 
+  var locales = paginatedResource('/locales/:id', {id: '@id'}, {
+    search: {method: 'GET', params: {}, isArray: true, paginated: true}
+  });
+
+  var localizations = paginatedResource('/localizations/:id', {id: '@id'}, {
+    search: {method: 'GET', params: {}, isArray: true, paginated: true}
+  });
+
   var posts = paginatedResource('/posts/:id', {id: '@id'}, {
     feed:    {method: 'GET', params: {id: 'feed'}, isArray: true, paginated: true},
     tags:    {method: 'GET', params: {id: 'tags'}, isArray: true},
@@ -38,12 +46,14 @@ angular.module('cortex.services.cortex', [
   });
 
   return {
-    categories:  categories,
-    posts:       posts,
-    media:       media,
-    tenants:     tenants,
-    users:       users,
-    userAuthor:  userAuthor,
-    occupations: occupations
+    categories:    categories,
+    locales:       locales,
+    localizations: localizations,
+    posts:         posts,
+    media:         media,
+    tenants:       tenants,
+    users:         users,
+    userAuthor:    userAuthor,
+    occupations:   occupations
   };
 });

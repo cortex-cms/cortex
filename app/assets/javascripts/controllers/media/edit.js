@@ -4,8 +4,7 @@ angular.module('cortex.controllers.media.edit', [
   'angular-flash.service',
   'cortex.filters',
   'unsavedChanges',
-  'cortex.services.cortex',
-  'cortex.filters'
+  'cortex.services.cortex'
 ])
 
 .controller('MediaEditCtrl', function ($scope, $filter, $stateParams, $state, $timeout, flash, cortex, unsavedChanges) {

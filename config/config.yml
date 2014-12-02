@@ -8,6 +8,12 @@ development: &defaults
     max_size_mb: <%= ENV['MEDIA_MAX_SIZE_MB'] || 100 %>
   onet:
     version: <%= ENV['ONET_VERSION'] || '18.1' %>
+  jargon:
+    client_id: <%= ENV['JARGON_CLIENT_ID'] %>
+    client_secret: <%= ENV['JARGON_CLIENT_SECRET'] %>
+    site_url: <%= ENV['JARGON_SITE_URL'] %>
+    username: <%= ENV['JARGON_USERNAME'] %>
+    password: <%= ENV['JARGON_PASSWORD'] %>
 
 development:
   <<: *defaults

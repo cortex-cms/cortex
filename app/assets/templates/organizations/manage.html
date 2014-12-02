@@ -16,7 +16,7 @@
     <div ng-show="$state.includes('cortex.organizations.manage.tenants')">
       <span class="panel-title h3">Hierarchy</span>
 
-      <div class="btn-group pull-right">
+      <div class="pull-right">
         <button ng-disabled="!tenantsTreeStatus.isLoaded" type="button" class="btn btn-default"
                 ui-sref="cortex.organizations.tenants.new({organizationId: data.organization.id})">
           <span class="fa fa-plus"></span> Add Tenant

@@ -5,7 +5,7 @@ module API
     module Resources
       class Locales < Grape::API
         resource :localizations do
-          segment '/:localization_id' do
+          segment '/:id' do
             resource :locales do
               helpers Helpers::JargonHelper
               helpers Helpers::LocaleHelper
@@ -15,9 +15,8 @@ module API
                 require_scope! :'view:locales'
                 authorize! :view, ::Locale
 
-                @locales = LocalizationService(params[:localization_id]).all
+                @locales = localization_service.all
 
-                status @locales.status
                 present @locales, with: Entities::Locale
               end
 
@@ -26,9 +25,8 @@ module API
                 require_scope! :'view:locales'
                 authorize! :view, locale!
 
-                @locale = LocalizationService(params[:localization_id]).get_locale(params[:name])
+                @locale = localization_service.get_locale(params[:name])
 
-                status @locale.status
                 present @locale, with: Entities::Locale
               end
 
@@ -37,9 +35,8 @@ module API
                 require_scope! :'modify:locales'
                 authorize! :delete, locale!
 
-                @locale = LocalizationService(params[:localization_id]).delete_locale(params[:name])
+                @locale = localization_service.delete_locale(params[:name])
 
-                status @locale.status
                 present @locale, with: Entities::Locale
               end
 
@@ -50,9 +47,8 @@ module API
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
 
-                @locale = LocalizationService(params[:localization_id]).create_locale(declared(params, {include_missing: false}, allowed_params))
+                @locale = localization_service.create_locale(declared(params, {include_missing: false}, allowed_params))
 
-                status @locale.status
                 present @locale, with: Entities::Locale
               end
 
@@ -63,9 +59,8 @@ module API
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
 
-                @locale = LocalizationService(params[:localization_id]).update_locale(declared(params, {include_missing: false}, allowed_params))
+                @locale = localization_service.update_locale(declared(params, {include_missing: false}, allowed_params))
 
-                status @locale.status
                 present @locale, with: Entities::Locale
               end
             end

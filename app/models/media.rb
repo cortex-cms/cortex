@@ -66,10 +66,6 @@ class Media < ActiveRecord::Base
 
   private
 
-  def image?
-    attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
-  end
-
   def taxon_type
     Cortex.config.media.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_type]
   end

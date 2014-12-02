@@ -12,8 +12,12 @@ class MediaObserver < ActiveRecord::Observer
 
   private
 
+  def image?(media)
+    media.attachment_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
+  end
+
   def extract_dimensions(media)
-    return unless image?
+    return unless image?(media)
     tempfile = media.attachment.queued_for_write[:original]
     unless tempfile.nil?
       geometry = Paperclip::Geometry.from_file(tempfile)

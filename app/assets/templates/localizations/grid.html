@@ -1,15 +1,23 @@
-<div class="actions-and-search" class="clearfix">
-  <div class="manipulate-actions">
-    <button ui-sref="cortex.localizations.new" class="btn btn-primary" type="button">Create Localization</button>
+<div class="localizations-grid">
+  <div class="actions-and-search" class="clearfix">
+    <div class="manipulate-actions">
+      <button ui-sref="cortex.localizations.new" class="btn btn-primary" type="button">Create Localization</button>
+    </div>
   </div>
-</div>
 
-<table ng-table="localizationDataParams" class="table localizations-table">
-  <tr ng-repeat="localization in $data" ui-sref="^.^.edit({localizationId: {{localization.id}}})">
-    <td data-title="'Title'">{{ localization.name }}</td>
-    <td data-title="'Created'">{{ localization.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
-    <td data-title="'Modified'">{{ localization.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
-    <td data-title="'Active'" class="text-center">{{ localization.deleted_at == null ? "\u2713" : "" }}</td>
-    <td data-title="'Tags'">{{ localization.tag_list.join(', ') }}</td>
-  </tr>
-</table>
+  <table ng-table="localizationDataParams" class="table localizations-table">
+    <tr ng-repeat="localization in $data" ui-sref="^.edit({localizationId: {{localization.id}}})">
+      <td data-title="'Name'">{{ localization.name }}</td>
+      <td data-title="'Owner'">{{ localization.creator.fullname }}</td>
+      <td data-title="'Created'">{{ localization.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td data-title="'Modified'">{{ localization.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-danger">Delete</button>
+          <button type="button" class="btn btn-info">Duplicate</button>
+          <button type="button" class="btn btn-primary">Edit</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

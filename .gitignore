@@ -42,7 +42,6 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
-config/initializers/secret_token.rb
 .env
 
 # these should all be checked in to normalise the environment:

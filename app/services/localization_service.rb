@@ -1,9 +1,12 @@
 class LocalizationService
   include ::LocaleService
 
-  def initialize(id=nil)
+  def initialize(current_user, id=nil)
     @id = id
     @jargon_id = id ? ::Localization.find_by_id(id).jargon_id : nil
+
+    #TODO: Emergency! ELIMINATE this cross-cutting concern by abstracting authorization to central lib. Absolutely critical.
+    @current_user = current_user
   end
 
   def all
@@ -36,8 +39,9 @@ class LocalizationService
     if jargon_localization.is_error?
       throw Exception.new(jargon_localization)
     else
-      cortex_localization = ::Localization.new(body)
-      cortex_localization.user = current_user!
+      cortex_localization = ::Localization.new
+      cortex_localization.jargon_id = jargon_localization.id
+      cortex_localization.user = @current_user
       cortex_localization.save!
 
       cortex_localization
@@ -48,12 +52,9 @@ class LocalizationService
     jargon_localization = jargon.localizations.save(body)
     if jargon_localization.is_error?
       throw Exception.new(jargon_localization)
-    else
-      cortex_localization = ::Localization.update!(body)
-      cortex_localization.save!
-
-      cortex_localization
     end
+
+    ::Localization.find_by_id(body.id)
   end
 
   private
@@ -61,7 +62,9 @@ class LocalizationService
   def jargon
     @jargon ||= Jargon::Client.new(key: Cortex.config.jargon.client_id,
                                    secret: Cortex.config.jargon.client_secret,
-                                   base_url: Cortex.config.jargon.site_url)
+                                   base_url: Cortex.config.jargon.site_url,
+                                   username: Cortex.config.jargon.username,
+                                   password: Cortex.config.jargon.password)
   end
 
   def merge_localizations(cortex_localizations, jargon_localizations)

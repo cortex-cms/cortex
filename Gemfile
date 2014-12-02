@@ -27,7 +27,7 @@ gem 'jargon-client', git: 'git://github.com/cb-talent-development/jargon-client'
 gem 'grape', '~> 0.9'
 gem 'grape-entity'
 gem 'grape-swagger'
-gem 'doorkeeper', git: 'git://github.com/applicake/doorkeeper'
+gem 'doorkeeper'
 gem 'redis-rails', '~> 4.0'
 
 # Templating

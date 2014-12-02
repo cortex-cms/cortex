@@ -24,7 +24,9 @@ angular.module('cortex.states', [
   'cortex.controllers.posts.popup',
 
   'cortex.controllers.localizations.edit',
-  'cortex.controllers.localizations.grid'
+  'cortex.controllers.localizations.grid',
+  'cortex.controllers.locales.edit',
+  'cortex.controllers.locales.grid'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -53,7 +55,8 @@ angular.module('cortex.states', [
     .state('cortex.localizations', {
       url: '/localizations',
       abstract: true,
-      template: '<div class="localizations" ui-view></div>',
+      template: '<div class="localizations" ui-view="localizations"></div>' +
+      '<div class="locales-grid" ui-view="locales-grid"></div>',
       data: {
         ncyBreadcrumbLabel: 'Localizations'
       }
@@ -61,17 +64,39 @@ angular.module('cortex.states', [
 
     .state('cortex.localizations.new', {
       url: '/new',
-      templateUrl: 'localizations/edit.html',
-      controller: 'LocalizationsEditCtrl',
+      views: {
+        'localizations@cortex.localizations': {
+          templateUrl: 'localizations/edit.html',
+          controller: 'LocalizationsEditCtrl'
+        }
+      },
       data: {
         ncyBreadcrumbLabel: 'Add Localization'
       }
     })
 
-    .state('cortex.localizations.edit', {
-      url: '/:localizationId/edit',
+    .state('cortex.localizations.localization', {
+      url: '/:localizationId',
+      abstract: true,
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.localizations.localization.edit', {
+      url: '/edit',
       templateUrl: 'localizations/edit.html',
       controller: 'LocalizationsEditCtrl',
+      views: {
+        'localizations@cortex.localizations': {
+          templateUrl: 'localizations/edit.html',
+          controller: 'LocalizationsEditCtrl'
+        },
+        'locales-grid@cortex.localizations': {
+          templateUrl: 'locales/grid.html',
+          controller: 'LocalesGridCtrl'
+        }
+      },
       data: {
         ncyBreadcrumbLabel: 'Edit Localization'
       }
@@ -79,23 +104,42 @@ angular.module('cortex.states', [
 
     .state('cortex.localizations.manage', {
       url: '',
-      abstract: true,
-      templateUrl: 'localizations/manage.html',
-      data: {
-        ncyBreadcrumbLabel: false
-      }
-    })
-
-    .state('cortex.localizations.manage.components', {
-      url: '/:page/:perPage/:query',
       views: {
-        'localizations-grid': {
+        'localizations@cortex.localizations': {
           templateUrl: 'localizations/grid.html',
           controller: 'LocalizationsGridCtrl'
         }
       },
       data: {
         ncyBreadcrumbLabel: false
+      }
+    })
+
+    // Locales
+
+    .state('cortex.localizations.localization.new_locale', {
+      url: '/new',
+      views: {
+        'localizations@cortex.localizations': {
+          templateUrl: 'locales/edit.html',
+          controller: 'LocalesEditCtrl',
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: 'Add Locale'
+      }
+    })
+
+    .state('cortex.localizations.localization.edit_locale', {
+      url: '/:localeId/edit',
+      views: {
+        'localizations@cortex.localizations': {
+          templateUrl: 'locales/edit.html',
+          controller: 'LocalesEditCtrl',
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: 'Edit Locale'
       }
     })
 

@@ -27,13 +27,17 @@ module LocaleService
 
   def create_locale(body)
     expects_id!
+
+    body.json = YAML.parse(body.yaml).to_json
+    body.delete(:yaml)
     jargon_locale = jargon.localizations(jargon_id).save_locale(body)
     if jargon_locale.is_error?
       throw Exception.new(jargon_locale)
     else
+      body.delete(:json)
       cortex_locale = ::Locale.new(body)
       cortex_locale.localization_id = id
-      cortex_locale.user = current_user!
+      cortex_locale.user = @current_user
       cortex_locale.save!
 
       cortex_locale
@@ -42,10 +46,14 @@ module LocaleService
 
   def update_locale(body)
     expects_id!
+
+    body.json = YAML.parse(body.yaml).to_json
+    body.delete(:yaml)
     jargon_locale = jargon.localizations(jargon_id).save_locale(body)
     if jargon_locale.is_error?
       throw Exception.new(jargon_locale)
     else
+      body.delete(:json)
       cortex_locale = ::Locale.update!(body)
       cortex_locale.localization_id = id
       cortex_locale.save!

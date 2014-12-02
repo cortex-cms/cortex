@@ -1,13 +1,6 @@
 GIT
-  remote: git://github.com/applicake/doorkeeper
-  revision: 93a66ab15c5068574d71acec298219f32fb0c3a2
-  specs:
-    doorkeeper (2.0.0.alpha1)
-      railties (>= 3.1)
-
-GIT
   remote: git://github.com/cb-talent-development/jargon-client
-  revision: 57b6b8e2341ba58ea5580e49d615dad990bfe00f
+  revision: b163202339812e7980bdf3e0746b7a19898e6c21
   specs:
     jargon-client (0.0.1)
       faraday (~> 0.9)
@@ -95,7 +88,7 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     code_analyzer (0.4.5)
       sexp_processor
-    codeclimate-test-reporter (0.4.1)
+    codeclimate-test-reporter (0.4.2)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
     coercible (1.0.0)
@@ -125,6 +118,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    doorkeeper (1.4.0)
+      railties (>= 3.1)
     dotenv (1.0.2)
     elasticsearch (1.0.6)
       elasticsearch-api (= 1.0.6)
@@ -145,7 +140,7 @@ GEM
     equalizer (0.0.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    excon (0.41.0)
+    excon (0.42.0)
     execjs (2.2.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -174,10 +169,10 @@ GEM
       ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
       opennebula
-    fog-brightbox (0.6.1)
+    fog-brightbox (0.7.0)
       fog-core (~> 1.22)
       fog-json
-      inflecto
+      inflecto (~> 0.0.2)
     fog-core (1.25.0)
       builder
       excon (~> 0.38)
@@ -198,7 +193,7 @@ GEM
     fog-sakuracloud (0.1.1)
       fog-core
       fog-json
-    fog-softlayer (0.3.24)
+    fog-softlayer (0.3.25)
       fog-core
       fog-json
     fog-terremark (0.0.3)
@@ -207,7 +202,7 @@ GEM
     fog-vmfusion (0.0.1)
       fission
       fog-core
-    fog-voxel (0.0.1)
+    fog-voxel (0.0.2)
       fog-core
       fog-xml
     fog-xml (0.1.1)
@@ -215,9 +210,9 @@ GEM
       nokogiri (~> 1.5, >= 1.5.11)
     font-awesome-sass (4.2.2)
       sass (~> 3.2)
-    foreman (0.63.0)
-      dotenv (>= 0.7)
-      thor (>= 0.13.6)
+    foreman (0.76.0)
+      dotenv (~> 1.0.2)
+      thor (~> 0.19.1)
     formatador (0.2.5)
     gon (5.2.3)
       actionpack (>= 2.3.0)
@@ -241,7 +236,7 @@ GEM
       grape
       grape-entity
     growl (1.0.3)
-    guard (2.8.2)
+    guard (2.10.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
@@ -256,9 +251,9 @@ GEM
     guard-rspec (4.3.1)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
-    haml (4.0.5)
+    haml (4.0.6)
       tilt
-    hashie (3.3.1)
+    hashie (3.3.2)
     hashr (0.0.22)
     hike (1.2.3)
     hitimes (1.2.2)
@@ -267,7 +262,7 @@ GEM
     ice_nine (0.11.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
-    jasmine-core (2.1.2)
+    jasmine-core (2.1.3)
     jasmine-rails (0.10.2)
       jasmine-core (>= 1.3, < 3.0)
       phantomjs
@@ -286,7 +281,7 @@ GEM
       activesupport (>= 3.0.0)
     kgio (2.9.2)
     libv8 (3.16.14.7)
-    listen (2.8.1)
+    listen (2.8.3)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -312,7 +307,7 @@ GEM
     ng-rails-csrf (0.1.0)
     ngmin-rails (0.4.0)
       rails (>= 3.1)
-    nokogiri (1.6.4.1)
+    nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     nokogumbo (1.1.12)
       nokogiri
@@ -393,11 +388,11 @@ GEM
       rails-assets-jquery (>= 2.0.0)
     rails-assets-angular-resource (1.2.26)
       rails-assets-angular (= 1.2.26)
-    rails-assets-angular-sanitize (1.3.3)
+    rails-assets-angular-sanitize (1.3.5)
       rails-assets-angular (>= 1.2, < 2)
     rails-assets-angular-ui-router (0.2.13)
       rails-assets-angular (>= 1.0.8)
-    rails-assets-angularjs-file-upload (1.6.12)
+    rails-assets-angularjs-file-upload (2.0.2)
     rails-assets-bootstrap (3.3.1)
       rails-assets-jquery (>= 1.9.0)
     rails-assets-bootstrap-sass-official (3.3.1)
@@ -432,7 +427,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
-    rake (10.3.2)
+    rake (10.4.1)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -496,10 +491,10 @@ GEM
       nokogiri (>= 1.4.4)
       nokogumbo (= 1.1.12)
     sass (3.2.19)
-    sass-rails (4.0.4)
+    sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.2)
-      sprockets (~> 2.8, < 2.12)
+      sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
     sexp_processor (4.4.4)
     shoulda (3.5.0)
@@ -530,12 +525,12 @@ GEM
       temple (~> 0.6.9)
       tilt (>= 1.3.3, < 2.1)
     slop (3.6.0)
-    sprockets (2.11.3)
+    sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.2.1)
+    sprockets-rails (2.2.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
@@ -601,7 +596,7 @@ DEPENDENCIES
   cortex-exceptions
   database_cleaner
   devise
-  doorkeeper!
+  doorkeeper
   dotenv
   elasticsearch-extensions
   elasticsearch-model (~> 0.1)

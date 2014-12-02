@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many   :media
   has_many   :tenants
   has_many   :posts, through: :authors
+  has_many   :localizations
+  has_many   :locales
 
   validates_presence_of :email
 

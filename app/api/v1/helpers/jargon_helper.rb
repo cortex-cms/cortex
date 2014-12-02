@@ -3,7 +3,7 @@ module API
     module Helpers
       module JargonHelper
         def localization_service
-          @localization ||= ::LocalizationService.new(params[:id])
+          @localization ||= ::LocalizationService.new(current_user!, params[:id])
         end
       end
     end

@@ -63,6 +63,7 @@ relaxed: &relaxed
     - ul
     - var
     - wbr
+    - iframe
   :attributes: &relaxed_attributes
     :all:
     - dir

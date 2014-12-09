@@ -168,3 +168,11 @@ post:
     - src
     - width
     - data-media
+    iframe:
+    - width
+    - height
+    - src
+    - frameborder
+    - seamless
+    - scrolling
+

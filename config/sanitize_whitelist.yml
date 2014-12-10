@@ -63,6 +63,7 @@ relaxed: &relaxed
     - ul
     - var
     - wbr
+    - iframe
   :attributes: &relaxed_attributes
     :all:
     - dir
@@ -167,3 +168,11 @@ post:
     - src
     - width
     - data-media
+    iframe:
+    - width
+    - height
+    - src
+    - frameborder
+    - seamless
+    - scrolling
+

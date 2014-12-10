@@ -6,7 +6,7 @@
   </div>
 
   <table ng-table="localizationDataParams" class="table localizations-table">
-    <tr ng-repeat="localization in $data" ui-sref="^.edit({localizationId: {{localization.id}}})">
+    <tr ng-repeat="localization in $data">
       <td data-title="'Name'">{{ localization.name }}</td>
       <td data-title="'Owner'">{{ localization.creator.fullname }}</td>
       <td data-title="'Created'">{{ localization.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
@@ -15,7 +15,7 @@
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-danger">Delete</button>
           <button type="button" class="btn btn-info">Duplicate</button>
-          <button type="button" class="btn btn-primary">Edit</button>
+          <button type="button" class="btn btn-primary" ui-sref="^.localization.edit({localizationId: '{{localization.id}}'})">Edit</button>
         </div>
       </td>
     </tr>

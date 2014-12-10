@@ -1,4 +1,6 @@
 class Locale < ActiveRecord::Base
-  belongs_to :user, :localizations
-  validates_uniqueness_of :locale, scope: :localization_id
+  belongs_to :user
+  belongs_to :localizations
+
+  validates_uniqueness_of :name, scope: :localization_id
 end

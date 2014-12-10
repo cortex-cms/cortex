@@ -13,7 +13,7 @@ angular.module('cortex.services.cortex', [
     }
   });
 
-  var locales = paginatedResource('/locales/:id', {id: '@id'}, {
+  var locales = paginatedResource('/localizations/:localization_id/locales/:id', {id: '@id'}, {
     search: {method: 'GET', params: {}, isArray: true, paginated: true}
   });
 

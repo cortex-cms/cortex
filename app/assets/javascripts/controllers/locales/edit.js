@@ -16,7 +16,7 @@ angular.module('cortex.controllers.locales.edit', [
   }
 
   $scope.cancel = function () {
-    $state.go('^.^');
+    $state.go('^.edit');
   };
 
   $scope.saveLocale = function () {

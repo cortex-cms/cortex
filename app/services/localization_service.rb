@@ -11,13 +11,21 @@ class LocalizationService
 
   def all
     rejects_id!
-    merge_localizations(::Localization.all, jargon.localizations.query)
+
+    jargon_localizations = jargon.localizations.query
+    if jargon_localizations.is_error?
+      throw Exception.new(jargon_localizations)
+    else
+      cortex_localizations = ::Localization.all
+
+      merge_localizations(cortex_localizations, jargon_localizations.contents[:localizations])
+    end
   end
 
   def get
     expects_id!
     cortex_localization = ::Localization.find_by_id(id)
-    jargon_localization = jargon.localizations(jargon_id).get
+    jargon_localization = jargon.localizations(jargon_id).get.contents[:localization]
 
     merge_localization(cortex_localization, jargon_localization)
   end
@@ -40,21 +48,24 @@ class LocalizationService
       throw Exception.new(jargon_localization)
     else
       cortex_localization = ::Localization.new
-      cortex_localization.jargon_id = jargon_localization.id
+      cortex_localization.jargon_id = jargon_localization.contents[:localization][:id]
       cortex_localization.user = @current_user
       cortex_localization.save!
 
-      cortex_localization
+      merge_localization(cortex_localization, jargon_localization.contents[:localization])
     end
   end
 
   def update(body)
+    cortex_localization = ::Localization.find_by_id(body[:id])
+
+    body[:id] = cortex_localization.jargon_id
     jargon_localization = jargon.localizations.save(body)
     if jargon_localization.is_error?
       throw Exception.new(jargon_localization)
     end
 
-    ::Localization.find_by_id(body.id)
+    merge_localization(cortex_localization, jargon_localization.contents[:localization])
   end
 
   private
@@ -69,29 +80,29 @@ class LocalizationService
 
   def merge_localizations(cortex_localizations, jargon_localizations)
     cortex_localizations.map { |cortex_localization|
-      jargon_localization = jargon_localizations.select { |jargon_localization| jargon_localization.id == cortex_localization.jargon_id }.first
+      jargon_localization = jargon_localizations.select { |jargon_localization| jargon_localization[:id] == cortex_localization.jargon_id }.first
       merge_localization(cortex_localization, jargon_localization)
     }
   end
 
   def merge_localization(cortex_localization, jargon_localization)
-    jargon_localization.id = cortex_localization.id
-    jargon_localization.user = cortex_localization.user
-    jargon_localization.locales = merge_locales(cortex_localization.locales, jargon_localization.locales)
+    jargon_localization[:id] = cortex_localization.id
+    jargon_localization[:user] = cortex_localization.user
+    jargon_localization[:locales] = merge_locales(cortex_localization.locales, jargon_localization[:locales])
 
     jargon_localization
   end
 
   def merge_locales(cortex_locales, jargon_locales)
     jargon_locales.map { |jargon_locale|
-      cortex_locale = cortex_locales.select { |cortex_locale| cortex_locale.name == jargon_locale.name }.first
+      cortex_locale = cortex_locales.select { |cortex_locale| cortex_locale.name == jargon_locale[:name] }.first
       merge_locale(cortex_locale, jargon_locale)
     }
   end
 
   def merge_locale(cortex_locale, jargon_locale)
-    jargon_locale.id = cortex_locale.id
-    jargon_locale.user = cortex_locale.user
+    jargon_locale[:id] = cortex_locale.id
+    jargon_locale[:user] = cortex_locale.user
 
     jargon_locale
   end

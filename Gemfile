@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-ruby '2.1.4'
-
 def darwin_only(require_as)
   RUBY_PLATFORM.include?('darwin') && require_as
 end

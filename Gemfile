@@ -21,7 +21,7 @@ gem 'rails', '~> 4.1'
 gem 'cortex-exceptions'
 
 # Localization
-gem 'jargon-client', :path => '/home/atharp/Repos/jargon-client'
+gem 'jargon-client', git: 'git://github.com/cb-talent-development/jargon-client'
 
 # API
 gem 'grape', '~> 0.9'
@@ -82,8 +82,6 @@ gem 'paranoia', '~> 2.0'
 gem 'pg'
 gem 'activeuuid'
 gem 'active_attr'
-
-# Pagination
 
 # Authorization
 gem 'six'

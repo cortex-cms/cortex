@@ -12,7 +12,7 @@ angular.module('cortex.controllers.locales.edit', [
     $scope.data.locale = new cortex.locales();
   }
   else {
-    $scope.data.locale = cortex.locales.get({id: $stateParams.localeId});
+    $scope.data.locale = cortex.locales.get({localization_id: $stateParams.localizationId, id: $stateParams.localeId});
   }
 
   $scope.cancel = function () {
@@ -20,7 +20,7 @@ angular.module('cortex.controllers.locales.edit', [
   };
 
   $scope.saveLocale = function () {
-    $scope.data.locale.$save().then(
+    $scope.data.locale.$save({localization_id: $stateParams.localizationId}).then(
       function () {
         $anchorScroll();
         flash.info = 'Saved locale information';

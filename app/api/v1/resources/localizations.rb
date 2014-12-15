@@ -4,17 +4,24 @@ module API
   module V1
     module Resources
       class Localizations < Grape::API
+        helpers Helpers::SharedParams
+
         resource :localizations do
+          helpers Helpers::PaginationHelper
           helpers Helpers::JargonHelper
           helpers Helpers::LocalizationHelper
 
           desc 'Show all localizations', { entity: Entities::Localization, nickname: 'showAllLocalizations' }
+          params do
+            use :pagination
+          end
           get do
             require_scope! :'view:localizations'
             authorize! :view, ::Localization
 
-            @localizations = localization_service.all
+            @localizations = Kaminari.paginate_array(localization_service.all).page(page).per(per_page)
 
+            set_pagination_headers(@localizations, 'localizations')
             present @localizations, with: Entities::Localization
           end
 

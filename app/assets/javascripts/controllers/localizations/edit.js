@@ -16,7 +16,7 @@ angular.module('cortex.controllers.localizations.edit', [
   }
 
   $scope.cancel = function () {
-    $state.go('^.manage');
+    $state.go('cortex.localizations.manage');
   };
 
   $scope.saveLocalization = function () {

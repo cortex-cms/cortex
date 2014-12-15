@@ -4,9 +4,12 @@ module API
   module V1
     module Resources
       class Locales < Grape::API
+        helpers Helpers::SharedParams
+
         resource :localizations do
           segment '/:id' do
             resource :locales do
+              helpers Helpers::PaginationHelper
               helpers Helpers::JargonHelper
               helpers Helpers::LocaleHelper
 
@@ -15,8 +18,9 @@ module API
                 require_scope! :'view:locales'
                 authorize! :view, ::Locale
 
-                @locales = localization_service.all
+                @locales = Kaminari.paginate_array(localization_service.all_locales).page(page).per(per_page)
 
+                set_pagination_headers(@locales, 'locales')
                 present @locales, with: Entities::Locale
               end
 

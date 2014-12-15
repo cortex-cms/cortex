@@ -1,55 +1,38 @@
 angular.module('cortex.controllers.localizations.grid', [
-  'ui.router.state',
+  'ngTable',
   'ui.bootstrap',
   'angular-flash.service',
-  'cortex.settings',
   'cortex.services.cortex',
-  'cortex.directives.delayedInput',
   'cortex.filters'
 ])
 
-  .controller('LocalizationsGridCtrl', function ($scope, $state, $stateParams, $window, cortex, settings, flash) {
-
-    $scope.data = {};
-
-    var updatePage = function () {
-      $state.go('.', {page: $scope.page.page, perPage: $scope.page.perPage, query: $scope.page.query});
+  .controller('LocalizationsGridCtrl', function ($scope, $window, ngTableParams, cortex, flash) {
+    $scope.data = {
+      totalServerItems: 0,
+      localizations: [],
+      query: null
     };
 
-    $scope.page = {
-      query: $stateParams.query,
-      page: parseInt($stateParams.page) || 1,
-      perPage: parseInt($stateParams.perPage) || settings.paging.defaultPerPage,
-      next: function () {
-        $scope.page.page++;
-        updatePage();
-      },
-      previous: function () {
-        $scope.page.page--;
-        updatePage();
-      },
-      flip: function (page) {
-        $scope.page.page = page;
-        updatePage();
+    $scope.localizationDataParams = new ngTableParams({
+      page: 1,
+      count: 10,
+      sorting: {
+        created_at: 'desc'
       }
-    };
-
-    $scope.$watch('page.query', function () {
-      updatePage();
+    }, {
+      total: 0,
+      getData: function ($defer, params) {
+        cortex.localizations.searchPaged({page: params.page(), per_page: params.count()},
+          function (localizations, headers, paging) {
+            params.total(paging.total);
+            $defer.resolve(localizations);
+          },
+          function (data) {
+            $defer.reject(data);
+          }
+        );
+      }
     });
-
-    $scope.$watch('page.perPage', function () {
-      updatePage();
-    });
-
-    $scope.data.localizations = cortex.localizations.searchPaged({
-        q: $scope.page.query,
-        per_page: $scope.page.perPage,
-        page: $scope.page.page
-      },
-      function (localizations, headers, paging) {
-        $scope.data.paging = paging;
-      });
 
     $scope.deleteLocalization = function (localization) {
       if ($window.confirm('Are you sure you want to delete "' + localization.name + '?"')) {

@@ -1,3 +1,5 @@
+require 'json'
+
 module LocaleService
   def all_locales
     expects_id!
@@ -14,9 +16,9 @@ module LocaleService
   def get_locale(locale_name)
     expects_id!
     cortex_locale = ::Localization.find_by_id(id).retrieve_locale(locale_name)
-    jargon_locale = jargon.localizations(jargon_id).get_locale(locale_name).contents[:locale]
+    jargon_locale = jargon.localizations(jargon_id).get_locale(locale_name)
 
-    merge_locale(cortex_locale, jargon_locale)
+    merge_locale(cortex_locale, jargon_locale.contents[:locale])
   end
 
   def delete_locale(locale_name)
@@ -27,40 +29,43 @@ module LocaleService
     else
       cortex_locale = ::Localization.find_by_id(id).retrieve_locale(locale_name).delete
 
-      cortex_locale
+      merge_locale(cortex_locale, jargon_locale.contents[:locale])
     end
   end
 
   def create_locale(body)
     expects_id!
 
-    body[:json] = YAML.parse(body[:json]).to_json
+    body.delete(:id)
+    body[:json] = JSON.dump(YAML.parse(body[:json]))
     jargon_locale = jargon.localizations(jargon_id).save_locale(body)
     if jargon_locale.is_error?
       throw Exception.new(jargon_locale)
     else
+      body.delete(:json)
       cortex_locale = ::Locale.new(body)
       cortex_locale.localization_id = id
       cortex_locale.user = @current_user
       cortex_locale.save!
 
-      cortex_locale
+      merge_locale(cortex_locale, jargon_locale.contents[:locale])
     end
   end
 
   def update_locale(body)
     expects_id!
 
-    body[:json] = YAML.parse(body[:json]).to_json
+    body[:json] = JSON.generate(YAML.parse(body[:json]))
     jargon_locale = jargon.localizations(jargon_id).save_locale(body)
     if jargon_locale.is_error?
       throw Exception.new(jargon_locale)
     else
+      body.delete(:json)
       cortex_locale = ::Locale.update!(body)
       cortex_locale.localization_id = id
       cortex_locale.save!
 
-      cortex_locale
+      merge_locale(cortex_locale, jargon_locale.contents[:locale])
     end
   end
 end

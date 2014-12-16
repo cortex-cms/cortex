@@ -23,12 +23,13 @@ angular.module('cortex.controllers.locales.edit', [
     $scope.data.locale.$save({localization_id: $stateParams.localizationId}).then(
       function () {
         $anchorScroll();
-        flash.info = 'Saved locale information';
+        flash.success = 'Saved locale information';
+        $state.go('^.edit');
       },
       function () {
         $anchorScroll();
         flash.error = 'Error while saving locale information';
       }
     );
-  }
+  };
 });

@@ -55,7 +55,7 @@ module LocaleService
   def update_locale(body)
     expects_id!
 
-    body[:json] = JSON.generate(YAML.parse(body[:json]))
+    body[:json] = JSON.dump(YAML.parse(body[:json]))
     jargon_locale = jargon.localizations(jargon_id).save_locale(body)
     if jargon_locale.is_error?
       throw Exception.new(jargon_locale)

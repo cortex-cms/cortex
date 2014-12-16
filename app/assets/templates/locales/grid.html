@@ -13,9 +13,9 @@
     <td data-title="'Modified'">{{ locale.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
     <td>
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-danger" ng-click="deleteLocale(locale)">Delete</button>
         <button type="button" class="btn btn-info">Duplicate</button>
-        <button type="button" class="btn btn-primary">Edit</button>
+        <button type="button" class="btn btn-primary" ui-sref="cortex.localizations.localization.edit_locale({localizationId: '{{localization.id}}', localeId: '{{locale.id}}'})">Edit</button>
       </div>
     </td>
   </tr>

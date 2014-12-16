@@ -38,10 +38,8 @@ angular.module('cortex.controllers.locales.grid', [
     $scope.deleteLocale = function (locale) {
       if ($window.confirm('Are you sure you want to delete "' + locale.name + '?"')) {
         cortex.locales.delete({id: locale.id}, function () {
-          $scope.data.locales = _.reject($scope.data.locales, function (l) {
-            return l.id == locale.id;
-          });
-          flash.info = locale.name + " deleted.";
+          flash.warn = locale.name + " deleted.";
+          $scope.localeDataParams.reload();
         }, function (res) {
           flash.error = locale.name + " could not be deleted: " + res.data.message;
         });

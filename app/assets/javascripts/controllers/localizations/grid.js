@@ -37,12 +37,26 @@ angular.module('cortex.controllers.localizations.grid', [
     $scope.deleteLocalization = function (localization) {
       if ($window.confirm('Are you sure you want to delete "' + localization.name + '?"')) {
         cortex.localizations.delete({id: localization.id}, function () {
-          $scope.data.localizations = _.reject($scope.data.localizations, function (l) {
-            return l.id == localization.id;
-          });
-          flash.info = localization.name + " deleted.";
-        }, function (res) {
-          flash.error = localization.name + " could not be deleted: " + res.data.message;
+          flash.warn = localization.name + ' deleted.';
+          $scope.localizationDataParams.reload();
+        }, function () {
+          flash.error = localization.name + ' could not be deleted due to an error.';
+        });
+      }
+    };
+
+    $scope.duplicateLocalization = function (localization) {
+      if ($window.confirm('Are you sure you want to duplicate "' + localization.name + '?"')) {
+        var duplicate = new cortex.localizations(localization);
+        delete duplicate.id;
+        duplicate.name += ' - Copy';
+        duplicate.$save().then(
+          function () {
+            flash.success = localization.name + ' duplicated.';
+            $scope.localizationDataParams.reload();
+          },
+          function () {
+            flash.error = localization.name + ' could not be duplicated due to an error.';
         });
       }
     };

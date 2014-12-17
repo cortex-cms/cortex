@@ -49,8 +49,8 @@ module API
               access_token.application.owner
             end
           # Basic Auth
-          elsif current_user
-            current_user
+          elsif warden_current_user
+            warden_current_user
           else
             req = Rack::Auth::Basic::Request.new(env)
             unless req.provided? and req.basic?

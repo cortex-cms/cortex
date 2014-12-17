@@ -19,7 +19,7 @@ module API
           get do
             require_scope! :'view:posts'
             authorize! :view, ::Post
-            @posts = GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: find_current_user.tenant.id).posts
+            @posts = ::GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: find_current_user.tenant.id).posts
 
             set_pagination_headers(@posts, 'posts')
             present @posts, with: Entities::Post
@@ -39,7 +39,7 @@ module API
             cache_key       = "feed-#{last_updated_at}-#{params_hash}"
 
             posts_page = ::Rails.cache.fetch(cache_key) do
-              posts = GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: find_current_user.tenant.id, published: true).posts
+              posts = ::GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: find_current_user.tenant.id, published: true).posts
               entity_page(posts, Entities::Post, sanitize: true)
             end
 
@@ -54,7 +54,7 @@ module API
 
           desc 'Show a published post', { entity: Entities::Post, nickname: "showFeedPost" }
           get 'feed/:id' do
-            @post = GetPost.call(id: params[:id], published: true, tenant: find_current_user.tenant.id).post
+            @post = ::GetPost.call(id: params[:id], published: true, tenant: find_current_user.tenant.id).post
             not_found! unless @post
             authorize! :view, @post
             present @post, with: Entities::Post, sanitize: true, full: true
@@ -105,7 +105,7 @@ module API
           desc 'Show a post', { entity: Entities::Post, nickname: "showPost" }
           get ':id' do
             require_scope! :'view:posts'
-            @post = GetPost.call(id: params[:id], tenant: find_current_user.tenant.id).post
+            @post = ::GetPost.call(id: params[:id], tenant: find_current_user.tenant.id).post
             not_found! unless @post
             authorize! :view, @post
             present @post, with: Entities::Post, full: true

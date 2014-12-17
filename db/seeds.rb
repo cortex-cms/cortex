@@ -10,7 +10,7 @@ unless Tenant.find_by_name(tenant_seed.name)
                            lastname: user_seed.lastname,
                            password: user_seed.password,
                            password_confirmation: user_seed.password,
-                           tenant_id: cortex_tenant.id,
+                           tenant: cortex_tenant,
                            admin: true)
 
   cortex_tenant.save!

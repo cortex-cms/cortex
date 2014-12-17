@@ -20,7 +20,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
     end
 
     it 'should return paginated results' do
-      5.times { create(:post) }
+      5.times { create(:post, user: user) }
       get '/api/v1/posts?per_page=2'
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(2)
@@ -97,7 +97,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
   describe 'GET /posts/feed/:id' do
 
     it 'should return the correct post' do
-      post = create(:post)
+      post = create(:post, user: user)
       get "/api/v1/posts/feed/#{post.id}"
       expect(response).to be_success
       expect(response.body).to represent(API::Entities::Post, post, { full: true, sanitize: true })
@@ -113,14 +113,14 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
   describe 'GET /posts/:id' do
 
     it 'should return the correct post' do
-      post = create(:post)
+      post = create(:post, user: user)
       get "/api/v1/posts/#{post.id}"
       expect(response).to be_success
       expect(response.body).to represent(API::Entities::Post, post, { full: true })
     end
 
     it 'should return unpublished posts' do
-      post = create(:post, draft: true)
+      post = create(:post, draft: true, user: user)
       get "/api/v1/posts/#{post.id}"
       expect(response).to be_success
       expect(response.body).to represent(API::Entities::Post, post, { full: true })

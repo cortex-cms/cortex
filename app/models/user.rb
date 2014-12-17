@@ -41,9 +41,9 @@ class User < ActiveRecord::Base
       user = User.find_by_email(username)
       user && user.valid_password?(password) ? user : nil
     end
-
-    def anonymous
-      User.new
-    end
+    #
+    # def anonymous
+    #   User.new
+    # end
   end
 end

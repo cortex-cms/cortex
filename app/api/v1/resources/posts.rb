@@ -19,16 +19,7 @@ module API
           get do
             require_scope! :'view:posts'
             authorize! :view, ::Post
-            intersect = Array(params.keys & %w{q categories industries type job_phase post_type author})
-            key_name = "posts:list:"
-            intersect.each do |k|
-              key_name += "#{k}=#{params[k]}"
-            end
-            if intersect.length == 0
-              @posts = ::Post.page(page).per(per_page).order(published_at: :desc)
-            else
-              @posts = ::Post.search_with_params(declared(params, include_missing: false), false).page(page).per(per_page).records
-            end
+            @posts = GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: find_current_user.tenant.id).posts
 
             set_pagination_headers(@posts, 'posts')
             present @posts, with: Entities::Post
@@ -41,16 +32,14 @@ module API
             use :post_metadata
           end
           get 'feed' do
+            require_scope! :'view:posts'
+            authorize! :view, ::Post
             last_updated_at = Post.published_last_updated_at
             params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
             cache_key       = "feed-#{last_updated_at}-#{params_hash}"
 
             posts_page = ::Rails.cache.fetch(cache_key) do
-              if params_has_search?
-                posts = ::Post.search_with_params(declared(params, include_missing: false), true).page(page).per(per_page).records
-              else
-                posts = ::Post.published.page(page).per(per_page).order(published_at: :desc)
-              end
+              posts = GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: find_current_user.tenant.id, published: true).posts
               entity_page(posts, Entities::Post, sanitize: true)
             end
 
@@ -65,12 +54,19 @@ module API
 
           desc 'Show a published post', { entity: Entities::Post, nickname: "showFeedPost" }
           get 'feed/:id' do
-            present published_post!, with: Entities::Post, sanitize: true, full: true
+            @post = GetPost.call(id: params[:id], published: true, tenant: find_current_user.tenant.id).post
+            not_found! unless @post
+            authorize! :view, @post
+            present @post, with: Entities::Post, sanitize: true, full: true
           end
 
           desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
           get 'feed/:id/related' do
-            @posts = published_post!.related(true).page(page).per(per_page).records
+            require_scope! :'view:posts'
+            post = GetPost.call(id: params[:id], published: true).post
+            not_found! unless post
+            authorize! :view, post
+            @posts = post.related(true).page(page).per(per_page).records
             set_pagination_headers(@posts, 'posts')
             present @posts, with: Entities::Post
           end
@@ -99,6 +95,8 @@ module API
             optional :depth, default: 1, desc: "Minimum depth of filters"
           end
           get 'filters' do
+            require_scope! :'view:posts'
+            authorize! :view, Post
             present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
             present :categories, ::Category.where('depth >= ?', params[:depth]), with: Entities::Category
             present :job_phases, ::Category.roots, with: Entities::Category, children: true
@@ -107,8 +105,10 @@ module API
           desc 'Show a post', { entity: Entities::Post, nickname: "showPost" }
           get ':id' do
             require_scope! :'view:posts'
-            authorize! :view, post!
-            present post, with: Entities::Post, full: true
+            @post = GetPost.call(id: params[:id], tenant: find_current_user.tenant.id).post
+            not_found! unless @post
+            authorize! :view, @post
+            present @post, with: Entities::Post, full: true
           end
 
           desc 'Create a post', { entity: Entities::Post, params: Entities::Post.documentation, nickname: "createPost" }

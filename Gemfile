@@ -104,6 +104,9 @@ gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim' # Sidekiq-web
 
+# Interactors
+gem "interactor-rails", "~> 2.0"
+
 group :test, :development do
   # Environment
   gem 'dotenv'
@@ -132,7 +135,6 @@ group :test, :development do
   gem 'rb-inotify', require: linux_only('rb-inotify')
 
   # Pretty
-  gem 'pry'
   gem 'awesome_print'
 
   # IDE
@@ -152,6 +154,7 @@ group :development do
   gem 'better_errors'
   gem 'annotate'
   gem 'binding_of_caller'
+  gem 'pry-rails', '~> 0.3.2'
 
   # Coverage
   gem 'rails_best_practices'

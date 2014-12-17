@@ -23,7 +23,8 @@ angular.module('cortex.controllers.locales.grid', [
     }, {
       total: 0,
       getData: function ($defer, params) {
-        cortex.locales.searchPaged({localization_id: $stateParams.localizationId, page: params.page(), per_page: params.count()},
+        cortex.locales.searchPaged({localization_id: $stateParams.localizationId,
+            page: params.page(), per_page: params.count()},
           function (locales, headers, paging) {
             params.total(paging.total);
             $defer.resolve(locales);
@@ -38,11 +39,27 @@ angular.module('cortex.controllers.locales.grid', [
     $scope.deleteLocale = function (locale) {
       if ($window.confirm('Are you sure you want to delete "' + locale.name + '?"')) {
         cortex.locales.delete({id: locale.id}, function () {
-          flash.warn = locale.name + " deleted.";
+          flash.warn = locale.name + ' deleted.';
           $scope.localeDataParams.reload();
-        }, function (res) {
-          flash.error = locale.name + " could not be deleted: " + res.data.message;
+        }, function () {
+          flash.error = locale.name + ' could not be deleted due to an error.';
         });
+      }
+    };
+
+    $scope.duplicateLocale = function (locale) {
+      if ($window.confirm('Are you sure you want to duplicate "' + locale.name + '?"')) {
+        var duplicate = new cortex.locales(locale);
+        delete duplicate.id;
+        duplicate.name += ' - Copy';
+        duplicate.$save({localization_id: $stateParams.localizationId}).then(
+          function () {
+            flash.success = locale.name + ' duplicated.';
+            $scope.localeDataParams.reload();
+          },
+          function () {
+            flash.error = locale.name + ' could not be duplicated due to an error.';
+          });
       }
     };
   });

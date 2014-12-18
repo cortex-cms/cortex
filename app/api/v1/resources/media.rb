@@ -19,7 +19,7 @@ module API
             authorize! :view, ::Media
             require_scope! :'view:media'
 
-            @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), page: page, per_page: per_page, tenant: find_current_user.tenant.id).media
+            @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).media
             set_pagination_headers(@media, 'media')
             present @media, with: Entities::Media
           end
@@ -46,9 +46,11 @@ module API
           desc 'Get media', { entity: Entities::Media, nickname: "showMedia" }
           get ':id' do
             require_scope! :'view:media'
-            authorize! :view, media!
+            @media = ::GetSingleMedia.call(id: params[:id], tenant: current_tenant.id).media
+            not_found! unless @media
+            authorize! :view, @media
 
-            present media, with: Entities::Media, full: true
+            present @media, with: Entities::Media, full: true
           end
 
           desc 'Create media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "createMedia" }
@@ -77,33 +79,38 @@ module API
           end
           put ':id' do
             require_scope! :'modify:media'
-            authorize! :update, media!
+            @media = ::GetSingleMedia.call(id: params[:id], tenant: current_tenant.id).media
+            not_found! unless @media
+            authorize! :update, @media
 
             media_params = params[:media] || params
 
             allowed_params = [:name, :alt, :description, :tag_list, :status, :expiration_date]
 
-            media.update!(declared(media_params, { include_missing: false }, allowed_params))
+            @media.update!(declared(media_params, { include_missing: false }, allowed_params))
             if params[:tag_list]
-              media.tag_list = params[:tag_list]
-              media.save!
+              @media.tag_list = params[:tag_list]
+              @media.save!
             end
-            present media, with: Entities::Media, full: true
+            present @media, with: Entities::Media, full: true
           end
 
           desc 'Delete media', { nickname: "deleteMedia" }
           delete ':id' do
             require_scope! :'modify:media'
-            authorize! :delete, media!
+            @media = ::GetSingleMedia.call(id: params[:id], tenant: current_tenant.id).media
+            not_found! unless @media
+            authorize! :delete, @media
 
             begin
-              media.destroy
+              @media.destroy
             rescue Cortex::Exceptions::ResourceConsumed => e
-              error!({
-                  error: "Conflict",
-                  message: e.message,
-                  status: 409
-                     }, 409)
+              error = error!({
+                                error:   "Conflict",
+                                message: e.message,
+                                status:  409
+                              }, 409)
+              error
             end
           end
         end

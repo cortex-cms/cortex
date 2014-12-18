@@ -43,11 +43,7 @@ module API
         def find_current_user
           # OAuth
           if access_token
-            if access_token.application.owner_type == 'User'
-              access_token.application.owner
-            elsif access_token.application.owner_type == 'Application'
-              access_token.application.owner
-            end
+            access_token.application.owner
           # Basic Auth
           elsif warden_current_user
             warden_current_user
@@ -60,6 +56,10 @@ module API
 
             User.authenticate(login, password) || User.anonymous
           end
+        end
+
+        def current_tenant
+          current_user.tenant
         end
 
         def can?(object, action, subject)

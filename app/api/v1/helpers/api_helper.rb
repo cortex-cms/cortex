@@ -48,13 +48,7 @@ module API
           elsif warden_current_user
             warden_current_user
           else
-            req = Rack::Auth::Basic::Request.new(env)
-            unless req.provided? and req.basic?
-              return User.anonymous
-            end
-            login, password = req.credentials
-
-            User.authenticate(login, password) || User.anonymous
+            User.anonymous
           end
         end
 

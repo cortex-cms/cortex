@@ -44,7 +44,7 @@ module API
           # OAuth
           if access_token
             if access_token.application.owner_type == 'User'
-              User.find(access_token.resource_owner_id)
+              access_token.application.owner
             elsif access_token.application.owner_type == 'Application'
               access_token.application.owner
             end
@@ -111,6 +111,12 @@ module API
             new_params.delete(r)
           end
           new_params
+        end
+
+        def clean_params(params)
+          params.reject do |_,v|
+            v.blank?
+          end
         end
       end
     end

@@ -9,6 +9,10 @@ module API
         def media!
           media || not_found!
         end
+
+        def media_params
+          clean_params(params)
+        end
       end
     end
   end

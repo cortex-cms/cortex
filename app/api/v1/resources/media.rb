@@ -19,13 +19,7 @@ module API
             authorize! :view, ::Media
             require_scope! :'view:media'
 
-            q = params[:q]
-            if q.to_s != ''
-              @media = ::Media.search_with_params(params).page(page).per(per_page).records
-            else
-              @media = ::Media.order(created_at: :desc).page(page).per(per_page)
-            end
-
+            @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), page: page, per_page: per_page, tenant: find_current_user.tenant.id).media
             set_pagination_headers(@media, 'media')
             present @media, with: Entities::Media
           end

@@ -29,9 +29,7 @@ module API
         end
 
         def post_params
-          params.reject do |_,v|
-            v.nil? || v.class == 'String' ? v.empty? : false
-          end
+          clean_params(params)
         end
       end
     end

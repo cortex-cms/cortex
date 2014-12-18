@@ -15,7 +15,7 @@
         <div class="btn-group pull-right" role="group">
           <button type="button" class="btn btn-danger" ng-click="deleteLocalization(localization)">Delete</button>
           <button type="button" class="btn btn-info" ng-click="duplicateLocalization(localization)">Duplicate</button>
-          <button type="button" class="btn btn-primary" ui-sref="^.localization.edit({localizationId: '{{localization.id}}'})">Edit</button>
+          <button type="button" class="btn btn-primary" ng-click="editLocalization(localization)">Edit</button>
         </div>
       </td>
     </tr>

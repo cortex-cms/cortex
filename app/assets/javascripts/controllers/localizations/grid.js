@@ -1,4 +1,5 @@
 angular.module('cortex.controllers.localizations.grid', [
+  'ui.router.state',
   'ngTable',
   'ui.bootstrap',
   'angular-flash.service',
@@ -6,7 +7,7 @@ angular.module('cortex.controllers.localizations.grid', [
   'cortex.filters'
 ])
 
-  .controller('LocalizationsGridCtrl', function ($scope, $window, ngTableParams, cortex, flash) {
+  .controller('LocalizationsGridCtrl', function ($scope, $window, $state, ngTableParams, cortex, flash) {
     $scope.data = {
       totalServerItems: 0,
       localizations: [],
@@ -33,6 +34,10 @@ angular.module('cortex.controllers.localizations.grid', [
         );
       }
     });
+
+    $scope.editLocalization = function(localization) {
+      $state.go('^.localization.edit', {localizationId: localization.id});
+    };
 
     $scope.deleteLocalization = function (localization) {
       if ($window.confirm('Are you sure you want to delete "' + localization.name + '?"')) {

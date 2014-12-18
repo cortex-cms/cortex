@@ -7,7 +7,7 @@ angular.module('cortex.controllers.locales.grid', [
   'cortex.filters'
 ])
 
-  .controller('LocalesGridCtrl', function ($scope, $window, $stateParams, ngTableParams, cortex, flash) {
+  .controller('LocalesGridCtrl', function ($scope, $window, $state, $stateParams, ngTableParams, cortex, flash) {
     $scope.data = {
       totalServerItems: 0,
       locales: [],
@@ -36,9 +36,13 @@ angular.module('cortex.controllers.locales.grid', [
       }
     });
 
+    $scope.editLocale = function(locale) {
+      $state.go('cortex.localizations.localization.edit_locale', {localeName: locale.name});
+    };
+
     $scope.deleteLocale = function (locale) {
       if ($window.confirm('Are you sure you want to delete "' + locale.name + '?"')) {
-        cortex.locales.delete({id: locale.id}, function () {
+        cortex.locales.delete({localization_id: $stateParams.localizationId, locale_name: locale.name}, function () {
           flash.warn = locale.name + ' deleted.';
           $scope.localeDataParams.reload();
         }, function () {

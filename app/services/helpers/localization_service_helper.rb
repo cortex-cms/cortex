@@ -19,6 +19,8 @@ module LocalizationServiceHelper
   def merge_localization(cortex_localization, jargon_localization)
     jargon_localization[:id] = cortex_localization.id
     jargon_localization[:user] = cortex_localization.user
+    jargon_localization[:created_at] = cortex_localization.created_at
+    jargon_localization[:updated_at] = cortex_localization.updated_at
     jargon_localization[:locales] = merge_locales(cortex_localization.locales, jargon_localization[:locales])
 
     jargon_localization
@@ -34,6 +36,8 @@ module LocalizationServiceHelper
   def merge_locale(cortex_locale, jargon_locale)
     jargon_locale[:id] = cortex_locale.id
     jargon_locale[:user] = cortex_locale.user
+    jargon_locale[:created_at] = cortex_locale.created_at
+    jargon_locale[:updated_at] = cortex_locale.updated_at
 
     jargon_locale
   end

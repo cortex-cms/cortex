@@ -131,7 +131,7 @@ angular.module('cortex.states', [
     })
 
     .state('cortex.localizations.localization.edit_locale', {
-      url: '/:localeId/edit',
+      url: '/:localeName/edit',
       views: {
         'localizations@cortex.localizations': {
           templateUrl: 'locales/edit.html',

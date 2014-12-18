@@ -3,7 +3,7 @@ module API
     module Helpers
       module MediaHelper
         def media
-          @media ||= ::Media.find_by_id(params[:id])
+          @media ||= ::GetSingleMedia.call(id: params[:id], tenant: current_tenant.id).media
         end
 
         def media!

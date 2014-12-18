@@ -4,7 +4,7 @@ class GetSingleMedia
   def call
     media = ::Media
     media = media.find_by_tenant_id(context.tenant) if context.tenant
-    media = media.find(context.id)
+    media = media.find_by id: context.id
     context.media = media
   end
 end

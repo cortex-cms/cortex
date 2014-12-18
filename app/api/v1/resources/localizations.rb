@@ -50,7 +50,7 @@ module API
             require_scope! :'modify:localizations'
             authorize! :create, ::Localization
 
-            allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
+            allowed_params = remove_params(Entities::Localization.documentation.keys, :id, :created_at, :updated_at, :available_locales, :locales, :creator)
 
             @localization = localization_service.create(declared(params, {include_missing: false}, allowed_params))
 
@@ -62,7 +62,7 @@ module API
             require_scope! :'modify:localizations'
             authorize! :update, localization!
 
-            allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
+            allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :locales, :creator)
 
             @localization = localization_service.update(declared(params, {include_missing: false}, allowed_params))
 

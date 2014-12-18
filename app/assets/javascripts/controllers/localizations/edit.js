@@ -23,12 +23,13 @@ angular.module('cortex.controllers.localizations.edit', [
     $scope.data.localization.$save().then(
       function () {
         $anchorScroll();
-        flash.info = 'Saved localization information';
+        flash.success = 'Saved localization information';
+        $state.go('cortex.localizations.manage');
       },
       function () {
         $anchorScroll();
         flash.error = 'Error while saving localization information';
       }
     );
-  }
+  };
 });

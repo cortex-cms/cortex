@@ -25,21 +25,21 @@ module API
               end
 
               desc 'Get locale', {entity: Entities::Locale, nickname: 'showLocale'}
-              get ':name' do
+              get ':locale_name' do
                 require_scope! :'view:locales'
                 authorize! :view, locale!
 
-                @locale = localization_service.get_locale(params[:name])
+                @locale = localization_service.get_locale(params[:locale_name])
 
                 present @locale, with: Entities::Locale
               end
 
               desc 'Delete locale', {nickname: 'deleteLocale'}
-              delete ':name' do
+              delete ':locale_name' do
                 require_scope! :'modify:locales'
                 authorize! :delete, locale!
 
-                @locale = localization_service.delete_locale(params[:name])
+                @locale = localization_service.delete_locale(params[:locale_name])
 
                 present @locale, with: Entities::Locale
               end
@@ -49,7 +49,7 @@ module API
                 require_scope! :'modify:locales'
                 authorize! :create, ::Locale
 
-                allowed_params = remove_params(Entities::Locale.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
+                allowed_params = remove_params(Entities::Locale.documentation.keys, :id, :created_at, :updated_at, :available_locales, :locales, :creator)
 
                 @locale = localization_service.create_locale(declared(params, {include_missing: false}, allowed_params))
 
@@ -57,13 +57,13 @@ module API
               end
 
               desc 'Update a locale', {entity: Entities::Locale, params: Entities::Locale.documentation, nickname: 'updateLocale'}
-              put ':name' do
+              put ':locale_name' do
                 require_scope! :'modify:locales'
                 authorize! :update, locale!
 
-                allowed_params = remove_params(Entities::Locale.documentation.keys, :created_at, :updated_at, :available_locales, :locales)
+                allowed_params = remove_params(Entities::Locale.documentation.keys, :id, :created_at, :updated_at, :available_locales, :locales, :creator)
 
-                @locale = localization_service.update_locale(declared(params, {include_missing: false}, allowed_params))
+                @locale = localization_service.update_locale(params[:locale_name], declared(params, {include_missing: false}, allowed_params))
 
                 present @locale, with: Entities::Locale
               end

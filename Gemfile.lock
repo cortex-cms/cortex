@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/cb-talent-development/jargon-client
-  revision: c51a1c95a346dd7bdb3f9d67c071326f2612ab10
+  revision: 03ea0ce0b2072bb9cd5d71a0fb869d39fe780084
   specs:
     jargon-client (0.0.1)
       faraday (~> 0.9)

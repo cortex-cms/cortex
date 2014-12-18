@@ -15,15 +15,11 @@ class LocalizationService
   def all
     rejects_id!
     cortex_localizations = ::Localization.all
-    if cortex_localizations
-      jargon_localizations = jargon.localizations.query
-      if jargon_localizations.is_error?
-        throw Exception.new(jargon_localizations)
-      else
-        merge_localizations(cortex_localizations, jargon_localizations.contents[:localizations])
-      end
+    jargon_localizations = jargon.localizations.query
+    if jargon_localizations.is_error?
+      throw Exception.new(jargon_localizations)
     else
-      throw ActiveRecord::ActiveRecordError
+      merge_localizations(cortex_localizations, jargon_localizations.contents[:localizations])
     end
   end
 
@@ -44,16 +40,13 @@ class LocalizationService
 
   def delete
     expects_id!
-    cortex_localization = ::Localization.destroy(id)
-    if cortex_localization
-      jargon_localization = jargon.localizations(jargon_id).delete
-      if jargon_localization.is_error?
-        throw Exception.new(jargon_localization)
-      else
-        merge_localization(cortex_localization, jargon_localization.contents[:localization])
-      end
+    cortex_localization = ::Localization.find_by_id(id)
+    cortex_localization.destroy!
+    jargon_localization = jargon.localizations(jargon_id).delete
+    if jargon_localization.is_error?
+      throw Exception.new(jargon_localization)
     else
-      throw ActiveRecord::RecordNotDestroyed
+      merge_localization(cortex_localization, jargon_localization.contents[:localization])
     end
   end
 

@@ -41,14 +41,20 @@ module API
 
         # Gross, move to central authorization lib during OAuth implementation
         def find_current_user
-          # OAuth
           if access_token
-            access_token.application.owner
-          # Basic Auth
+            lookup_owner access_token
           elsif warden_current_user
             warden_current_user
           else
             User.anonymous
+          end
+        end
+
+        def lookup_owner(access_token)
+          if access_token.resource_owner_id?
+            User.find_by id: access_token.resource_owner_id
+          else
+            access_token.application.owner
           end
         end
 

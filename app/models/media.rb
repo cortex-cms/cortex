@@ -3,6 +3,7 @@ require 'mime/types'
 class Media < ActiveRecord::Base
   include SearchableMedia
   include Taxon
+  include FindByTenant
 
   acts_as_taggable
   acts_as_paranoid

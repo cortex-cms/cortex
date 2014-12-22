@@ -5,15 +5,15 @@ module API
         include ActsAsTaggableOn::TagsHelper
 
         def post
-          @post ||= ::Post.find_by_id_or_slug(params[:id])
+          @post ||= ::GetPost.call(id: params[:id], tenant: current_tenant.id).post
         end
 
         def reload_post
-          @post = ::Post.find_by_id_or_slug(params[:id])
+          @post = ::GetPost.call(id: params[:id], tenant: current_tenant.id).post
         end
 
         def published_post
-          @post = ::Post.published.find_by_id_or_slug(params[:id])
+          @post = ::GetPost.call(id: params[:id], tenant: current_tenant.id, published: true).post
         end
 
         def post!
@@ -24,8 +24,8 @@ module API
           published_post || not_found!
         end
 
-        def params_has_search?
-          Array(params.keys & %w{q categories industries type job_phase post_type author}).length > 0
+        def post_params
+          clean_params(params)
         end
       end
     end

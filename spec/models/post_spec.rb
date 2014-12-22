@@ -14,4 +14,23 @@ RSpec.describe Post, type: :model do
       expect(Post.find_by_id_or_slug(post2.slug).id).to eq(post2.id)
     end
   end
+
+  describe 'find_by_tenant_id' do
+    let (:user) { create(:user) }
+    let (:other_user) { create(:user) }
+    let (:post) { create(:post, user: user) }
+    let (:other_post) { create(:post, user: other_user) }
+
+    it 'should return the post from the first tenant' do
+      this_post = Post.find post.id
+      that_post = Post.find other_post.id
+      expect(Post.find_by_tenant_id(user.tenant.id)).to include(this_post)
+    end
+
+    it 'should not return the post from the other tenant' do
+      this_post = Post.find post.id
+      that_post = Post.find other_post.id
+      expect(Post.find_by_tenant_id(user.tenant.id)).not_to include(that_post)
+    end
+  end
 end

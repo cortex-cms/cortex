@@ -2,6 +2,7 @@ require 'nokogiri'
 
 class Post < ActiveRecord::Base
   include SearchablePost
+  include FindByTenant
 
   default_scope -> { includes(:categories, :media, :industries) }
   scope :published, -> { where('published_at <= ? and draft = ?', DateTime.now, false) }

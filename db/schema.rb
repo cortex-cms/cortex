@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117174354) do
+ActiveRecord::Schema.define(version: 20141217142705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,10 @@ ActiveRecord::Schema.define(version: 20141117174354) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "write",      default: false
+    t.integer  "tenant_id"
   end
+
+  add_index "applications", ["tenant_id"], name: "index_applications_on_tenant_id", using: :btree
 
   create_table "authors", force: true do |t|
     t.string  "firstname"
@@ -227,7 +230,7 @@ ActiveRecord::Schema.define(version: 20141117174354) do
     t.string   "did"
     t.datetime "active_at"
     t.datetime "deactive_at"
-    t.integer  "user_id"
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

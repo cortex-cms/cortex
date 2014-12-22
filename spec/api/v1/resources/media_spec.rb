@@ -19,14 +19,14 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
     end
 
     it 'should return two media items' do
-      2.times { create(:media) }
+      2.times { create(:media, user: user) }
       get '/api/v1/media'
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(2)
     end
 
     it 'should return paginated results' do
-      5.times { create(:media) }
+      5.times { create(:media, user: user) }
       get '/api/v1/media?per_page=2'
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(2)
@@ -35,8 +35,8 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
     end
 
     it 'should allow search on q' do
-      media_1 = create(:media)
-      media_2 = create(:media, name: "RANDOM")
+      media_1 = create(:media, user: user)
+      media_2 = create(:media, name: "RANDOM", user: user)
       Media.import({refresh: true})
       get '/api/v1/media?q=RANDOM'
       expect(response).to be_success
@@ -53,7 +53,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
     end
 
     it 'should return the correct number of tags' do
-      5.times { |i| create(:media, tag_list: ["tag_#{i}"]) }
+      5.times { |i| create(:media, tag_list: ["tag_#{i}"], user: user) }
       get '/api/v1/media/tags'
       expect(response).to be_success
       result = JSON.parse(response.body)
@@ -61,7 +61,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
     end
 
     it 'should return popular tags in order' do
-      5.times { |i| create(:media, tag_list: ['popular_tag', "tag_#{i}"]) }
+      5.times { |i| create(:media, tag_list: ['popular_tag', "tag_#{i}"], user: user) }
       get '/api/v1/media/tags?popular=true'
       expect(response).to be_success
       result = JSON.parse(response.body)
@@ -72,7 +72,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
 
   describe 'GET /media/:id' do
 
-    let(:media) { create(:media) }
+    let(:media) { create(:media, user: user) }
 
     it 'should return the correct media' do
       get "/api/v1/media/#{media.id}"
@@ -96,7 +96,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
 
     context 'with valid attributes' do
       it 'should update media' do
-        media = create(:media)
+        media = create(:media, user: user)
         media.name += ' updated'
         expect{ put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count)
         expect(response).to be_success
@@ -104,7 +104,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
       end
 
       it 'should only update allowed parameters' do
-        media = create(:media)
+        media = create(:media, user: user)
         media.name += ' updated'
         media.taxon = 'BreakingTaxon'
         expect { put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count)
@@ -119,20 +119,20 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
   describe 'DELETE /media/:id' do
 
     it 'should delete media' do
-      media = create(:media)
+      media = create(:media, user: user)
       expect{ delete "/api/v1/media/#{media.id}" }.to change(Media, :count).by(-1)
       expect(response).to be_success
     end
 
     it 'should NOT delete non-existent media' do
-      media = create(:media)
+      media = create(:media, user: user)
       expect{ delete "/api/v1/media/#{media.id+1}" }.to_not change(Media, :count)
       expect(response).not_to be_success
     end
 
     it 'should not delete consumed media' do
-      media = create(:media)
-      post = create(:post)
+      media = create(:media, user: user)
+      post = create(:post, user: user)
       post.featured_media = media
       post.save
       expect { delete "/api/v1/media/#{media.id}" }.to_not change(Media, :count)

@@ -49,7 +49,7 @@ module API
             allowed_params = remove_params(Entities::Tenant.documentation.keys, :children)
 
             @tenant = ::Tenant.new(declared(params, { include_missing: true }, allowed_params))
-            tenant.user = current_user
+            tenant.owner = current_user
             tenant.save!
             present tenant, with: Entities::Tenant
           end

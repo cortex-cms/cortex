@@ -4,17 +4,14 @@ user_seed     = tenant_seed.creator
 
 unless Tenant.find_by_name(tenant_seed.name)
   cortex_tenant = Tenant.new(name: tenant_seed.name)
-  cortex_tenant.save!
 
-  cortex_user   = User.new(email: user_seed.email,
+  cortex_tenant.owner   = User.new(email: user_seed.email,
                            firstname: user_seed.firstname,
                            lastname: user_seed.lastname,
                            password: user_seed.password,
                            password_confirmation: user_seed.password,
-                           tenant_id: cortex_tenant.id,
+                           tenant: cortex_tenant,
                            admin: true)
 
-  cortex_user.save!
-  cortex_tenant.user = cortex_user
   cortex_tenant.save!
 end

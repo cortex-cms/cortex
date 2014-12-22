@@ -3,11 +3,12 @@ class Tenant < ActiveRecord::Base
   acts_as_nested_set
   acts_as_paranoid
 
-  belongs_to :user
-  has_and_belongs_to_many :posts
+  has_many :applications
+  has_many :users
+  belongs_to :owner, class_name: "User"
 
   validates_presence_of :name
-  validates_associated :user
+  validates_associated :owner
 
   def is_organization?
     self.root?

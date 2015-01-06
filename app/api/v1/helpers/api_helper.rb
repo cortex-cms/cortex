@@ -51,7 +51,7 @@ module API
         end
 
         def lookup_owner(access_token)
-          if access_token.resource_owner_id?
+          if access_token.resource_owner_id.present?
             User.find_by id: access_token.resource_owner_id
           else
             access_token.application.owner

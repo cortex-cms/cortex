@@ -1,6 +1,6 @@
 <section class="users-edit">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           Author Information - {{ data.user.fullname }}
@@ -57,7 +57,33 @@
         </div>
       </div>
     </div>
-
+  <div class="col-md-6 col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Password Management
+      </div>
+      <div class="panel-body">
+        <form novalidate class="password" name="passwordForm">
+          <div class="form-group">
+            <label for="user.current_password">Current Password</label>
+            <input class="form-control" type="password" name="user.current_password"
+                   ng-model="data.user.current_password" required>
+          </div>
+          <div class="form-group">
+            <label for="user.password">New Password</label>
+            <input class="form-control" type="password" name="user.password"
+                   ng-model="data.user.password" required ng-minlength="8">
+          </div>
+          <div class="form-group">
+            <label for="user.password_confirmation">Confirm Password</label>
+            <input class="form-control" type="password" name="user.password_confirmation"
+                   ng-model="data.user.password_confirmation" required ng-minlength="8">
+          </div>
+          <button type="button" class="btn btn-primary btn-block"
+                  ng-disabled="passwordForm.$invalid" ng-click="changePassword()">Change Password</button>
+        </form>
+      </div>
+    </div>
   </div>
-
+</div>
 </section>

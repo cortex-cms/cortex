@@ -3,7 +3,7 @@ angular.module('cortex.controllers.users.edit', [
   'angular-flash.service'
 ])
 
-.controller('UsersEditCtrl', function($scope, $state, $anchorScroll, flash, user, author) {
+.controller('UsersEditCtrl', function($scope, $timeout, $state, $anchorScroll, flash, user, author) {
   $scope.data        = $scope.data || {};
   $scope.data.user   = user;
   $scope.data.author = author;
@@ -23,8 +23,8 @@ angular.module('cortex.controllers.users.edit', [
   $scope.changePassword = function() {
     $scope.data.user.$save().then(
         function() {
-          $state.go('login');
-          flash.info = "Successfully updated password";
+          flash.success = "Successfully updated password, redirecting to login page in 5 seconds...";
+          $timeout(function () { $state.go('login') }, 5000);
         },
         function(res) {
           $anchorScroll();

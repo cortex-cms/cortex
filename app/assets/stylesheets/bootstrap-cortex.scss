@@ -6,3 +6,7 @@
 .btn {
   @include truncate;
 }
+
+.modal {
+  z-index: 1054; // Priority over Redactor toolbar
+}

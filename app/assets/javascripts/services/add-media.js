@@ -18,21 +18,24 @@ angular.module('cortex.services.addMedia', [
         $window.RedactorPlugins = {};
       }
 
-      $window.RedactorPlugins.media = {
-        init: function()
-        {
-          this.buttonAdd('media', 'Media', this.addMediaPopup);
-          this.buttonAwesome('media', 'fa-picture-o');
+      $window.RedactorPlugins.media = function() {
+        return {
+          init: function()
+          {
+            var mediaButton = this.button.add('media', 'Media');
+            this.button.setAwesome('media', 'fa-picture-o');
+            this.button.addCallback(mediaButton, this.media.addMediaPopup);
 
-          this.buttonRemove('image');
-          this.buttonRemove('video');
+            this.button.remove('image');
+            this.button.remove('video');
 
-          PostBodyEditorService.redactor = this;
-        },
-        addMediaPopup: function()
-        {
-          that.setMedia(mediaSelectType.ADD_MEDIA, 'Insert Media from Media Library');
-        }
+            PostBodyEditorService.redactor = this;
+          },
+          addMediaPopup: function()
+          {
+            that.setMedia(mediaSelectType.ADD_MEDIA, 'Insert Media from Media Library');
+          }
+        };
       };
     }
   };

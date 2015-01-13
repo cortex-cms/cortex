@@ -71,7 +71,7 @@
       directiveScope.files = [file, {name: 'foo.png'}];
 
       directiveScope.remove(file);
-      expect(directiveScope.files).toNotContain(file);
+      expect(directiveScope.files).not.toContain(file);
     });
 
     it('should add a file dropped into the dropzone');

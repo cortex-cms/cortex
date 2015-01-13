@@ -19,7 +19,7 @@ angular.module('cortex', [
   $provide.constant('currentUser', copy(window.gon.current_user));
   $provide.constant('settings', copy(window.gon.settings));
 
-  $urlRouterProvider.when('/media', '/media/');
+  $urlRouterProvider.when('/media/', '/media///');
 
   $urlRouterProvider.otherwise(function($injector) {
     var $state = $injector.get('$state');

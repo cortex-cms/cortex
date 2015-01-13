@@ -44,6 +44,25 @@ module API
             present author, with: Entities::Author
           end
 
+          desc "Save a user's info"
+          params do
+            requires :current_password
+            optional :password
+            optional :password_confirmation
+          end
+          put ':user_id' do
+            require_scope! :'modify:users'
+            authorize! :update, user!
+            forbidden! unless user.valid_password? params[:current_password]
+
+            allowed_params = [:password, :password_confirmation]
+
+            user.update!(declared(params, {include_missing: false}, allowed_params))
+            user.save!
+
+            present user, with: Entities::User, full: true
+          end
+
           desc 'Show a user'
           get ':user_id' do
             require_scope! :'view:users'

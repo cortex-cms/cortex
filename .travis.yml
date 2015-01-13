@@ -1,33 +1,36 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.1.2
-bundler_args: --without production staging development
+- 2.1.4
+bundler_args: "--without production staging development"
 before_script:
-  - psql -c 'create database cortex_test;' -U postgres
-  - bundle exec rake db:migrate db:seed cortex:create_categories
+- psql -c 'create database cortex_test;' -U postgres
+- bundle exec rake db:schema:load db:seed cortex:create_categories
 script:
-  - bundle exec rake spec
-  - bundle exec rake spec:javascript
+- bundle exec rake spec
+- bundle exec rake spec:javascript
 addons:
-  postgresql: "9.3"
-  code_climate:
-    repo_token: 6cedeabef4da2bf513d1b1a89e48b9ea36535f91b4fcd1420bbdcf7b765fdc49
+  postgresql: '9.3'
 services:
-  - elasticsearch
-  - redis-server
+- elasticsearch
+- redis-server
 env:
   global:
-    - APP_SECRET=180d0b7491b1f574801b62853532775a60d58a0cdf1ef2848967618e507e94b72e3d1223c3c2ab8fde641aff237774a72c6c3a5cf541b4baba2ff70fd97d121a
-    - DEVISE_SECRET=88e9dfa013e8b4f99ecd0470cdbf76709856db22a14b4e2e3576f75809e7054e743c5b2b9fce196f979acf5c64d55ce9c1a26cf542bb73abaa2aa80acc9c040d
+  - APP_SECRET=180d0b7491b1f574801b62853532775a60d58a0cdf1ef2848967618e507e94b72e3d1223c3c2ab8fde641aff237774a72c6c3a5cf541b4baba2ff70fd97d121a
+  - DEVISE_SECRET=88e9dfa013e8b4f99ecd0470cdbf76709856db22a14b4e2e3576f75809e7054e743c5b2b9fce196f979acf5c64d55ce9c1a26cf542bb73abaa2aa80acc9c040d
+  - secure: kWX87Atpm82EyyD2EMIhHGZ3ohzR8qDvrEs3Ngwu2Lj1gDgAYvMyMHfcuVwgRmff80ecKYsL/LGFiwHQqO9zF9eizddNYnjS1jF4fS+vsDge0nN/t+5fw3i3jvAA8demU6HOTui9o/NhaBGg48S6OdBJQVuMtJAqFTa2ACXVnq4=
+notifications:
+  hipchat:
+    rooms:
+      secure: m+nNmj/kN4I40quLaAq0DyykTp88cifiwP1aDGJX4plBUxswWaTSjo+MQF2x8EVZyQlZU8xS9skgjexwbcomyhb08Wrwow3h/zinkxZBoJ9FWA+An7axY55Wq0AYIfd9o4nw9aGtZFXfF6pK7Wx1uTRKwlAuoXqUn9OGe9uG56M=
 deploy:
-  - provider: cloud66
-    master:
-    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/a88940b34a01c689de29f49037905106
-    on: develop
-    edge: true
-  - provider: cloud66
-    master:
-    redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/67197f9592d583d1f9d0d622e5855c7d
-    on: master
-    edge: true
+- provider: cloud66
+  master:
+  redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/a88940b34a01c689de29f49037905106
+  on: develop
+  edge: true
+- provider: cloud66
+  master:
+  redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/67197f9592d583d1f9d0d622e5855c7d
+  on: master
+  edge: true

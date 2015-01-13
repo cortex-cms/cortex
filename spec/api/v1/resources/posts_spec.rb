@@ -20,7 +20,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
     end
 
     it 'should return paginated results' do
-      5.times { create(:post) }
+      5.times { create(:post, user: user) }
       get '/api/v1/posts?per_page=2'
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(2)
@@ -29,8 +29,8 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
     end
 
     it 'should allow search on q' do
-      post_1 = create(:post)
-      post_2 = create(:post, title: "Test Post for testing queries.")
+      post_1 = create(:post, user: user)
+      post_2 = create(:post, title: "Test Post for testing queries.", user: user)
       Post.import({refresh: true})
       get '/api/v1/posts?q=queries'
       expect(response).to be_success
@@ -48,15 +48,15 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
       @industry_3 = create(:onet_occupation)
       @category_1 = create(:category)
       @category_2 = create(:category)
-      @post_1 = create(:post, type: "VideoPost", job_phase: "Get the Job")
+      @post_1 = create(:post, type: "VideoPost", job_phase: "Get the Job", user: user)
       @post_1.industries << @industry_1
       @post_1.categories << @category_1
-      @post_2 = create(:post, job_phase: "On the Job")
+      @post_2 = create(:post, job_phase: "On the Job", user: user)
       @post_2.industries << @industry_2
       @post_2.categories << @category_2
-      @post_3 = create(:post, type: "PromoPost")
+      @post_3 = create(:post, type: "PromoPost", user: user)
       @post_3.industries << @industry_1
-      @post_4 = create(:post, type: "VideoPost", job_phase: "Get the Job")
+      @post_4 = create(:post, type: "VideoPost", job_phase: "Get the Job", user: user)
       @post_4.industries << @industry_3
       Post.import({refresh: true})
     end
@@ -97,7 +97,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
   describe 'GET /posts/feed/:id' do
 
     it 'should return the correct post' do
-      post = create(:post)
+      post = create(:post, user: user)
       get "/api/v1/posts/feed/#{post.id}"
       expect(response).to be_success
       expect(response.body).to represent(API::Entities::Post, post, { full: true, sanitize: true })
@@ -113,14 +113,14 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
   describe 'GET /posts/:id' do
 
     it 'should return the correct post' do
-      post = create(:post)
+      post = create(:post, user: user)
       get "/api/v1/posts/#{post.id}"
       expect(response).to be_success
       expect(response.body).to represent(API::Entities::Post, post, { full: true })
     end
 
     it 'should return unpublished posts' do
-      post = create(:post, draft: true)
+      post = create(:post, draft: true, user: user)
       get "/api/v1/posts/#{post.id}"
       expect(response).to be_success
       expect(response.body).to represent(API::Entities::Post, post, { full: true })
@@ -181,7 +181,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
 
     context 'with valid attributes' do
       it 'should update the post' do
-        post = create(:post)
+        post = create(:post, user: user)
         post.title += ' updated'
         expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count)
         expect(response).to be_success
@@ -191,7 +191,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
 
     context 'with invalid attributes' do
       it 'should NOT update the post' do
-        post = create(:post)
+        post = create(:post, user: user)
         expect{ put "/api/v1/posts/#{post.id}", {title: nil}.to_json, application_json }.to_not change(Post, :count)
         expect(response).not_to be_success
       end
@@ -199,7 +199,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
 
     context 'for a promo post' do
       it 'should update the post with valid attributes' do
-        post = create(:promo)
+        post = create(:promo, user: user)
         post.destination_url = "http://www.example.com"
         expect{ put "/api/v1/posts/#{post.id}", {destination_url: "http://www.example.com"}.to_json, application_json }.to_not change(Post, :count)
         expect(response).to be_success
@@ -207,13 +207,13 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
       end
 
       it 'should not update the post with invalid attributes' do
-        post = create(:promo)
+        post = create(:promo, user: user)
         expect{ put "/api/v1/posts/#{post.id}", {destination_url: nil}.to_json, application_json }.to_not change(Post, :count)
         expect(response).not_to be_success
       end
 
       it 'should support updating from article to promo' do
-        post = create(:post)
+        post = create(:post, user: user)
         expect{ put "/api/v1/posts/#{post.id}", {type: 'PromoPost', destination_url: "Example.com", call_to_action: "Click here"}.to_json, application_json}.to_not change(Post, :count)
         expect(response).to be_success
       end
@@ -221,7 +221,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
 
     context 'with featured media' do
       it 'should update the post' do
-        post = create(:post, :with_featured_media)
+        post = create(:post, :with_featured_media, user: user)
         post.title += ' updated'
         expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count)
         expect(response).to be_success
@@ -229,7 +229,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
       end
 
       it 'should include the featured media in associated media' do
-        post = create(:post, :with_featured_media)
+        post = create(:post, :with_featured_media, user: user)
         post.featured_media = build(:post, :with_featured_media).featured_media
         expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count)
         expect(Post.find(post.id).media).to include(post.featured_media)
@@ -240,13 +240,13 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
   describe 'DELETE /posts/:id' do
 
     it 'should delete the post' do
-      post = create(:post)
+      post = create(:post, user: user)
       expect{ delete "/api/v1/posts/#{post.id}" }.to change(Post, :count).by(-1)
       expect(response).to be_success
     end
 
     it 'should NOT delete a non-existent post' do
-      post = create(:post)
+      post = create(:post, user: user)
       expect{ delete "/api/v1/posts/#{post.id+1}" }.to_not change(Post, :count)
       expect(response).not_to be_success
     end

@@ -2,14 +2,13 @@ require 'nokogiri'
 
 class Post < ActiveRecord::Base
   include SearchablePost
+  include FindByTenant
 
   default_scope -> { includes(:categories, :media, :industries) }
   scope :published, -> { where('published_at <= ? and draft = ?', DateTime.now, false) }
   scope :published_last_updated_at, -> { published.order(updated_at: :desc).select('updated_at').first.updated_at }
 
   acts_as_taggable
-
-  before_save :update_media!
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories
@@ -48,20 +47,6 @@ class Post < ActiveRecord::Base
 
   private
 
-  def update_media!
-    self.media = find_all_associated_media
-  end
-
-  def find_all_associated_media
-    find_media_from_body.push(self.featured_media, self.tile_media).compact.uniq
-  end
-
-  def find_media_from_body
-    document = Nokogiri::HTML::Document.parse(body)
-    media_ids = document.xpath('//@data-media-id').map{|element| element.to_s }
-    Media.find(media_ids)
-  end
-
   def primary_category_must_be_in_categories
     unless categories.to_a.empty? || categories.collect{ |c| c.id}.include?(primary_category_id)
       errors.add(:primary_category_id, 'must be in categories')
@@ -74,31 +59,3 @@ class Post < ActiveRecord::Base
     end
   end
 end
-
-# == Schema Information
-#
-# Table name: posts
-#
-#  id                 :integer          not null, primary key
-#  user_id            :integer          not null
-#  title              :string(255)
-#  published_at       :datetime
-#  expired_at         :datetime
-#  deleted_at         :datetime
-#  draft              :boolean          default(TRUE), not null
-#  comment_count      :integer          default(0), not null
-#  body               :text
-#  created_at         :datetime
-#  updated_at         :datetime
-#  short_description  :string(255)
-#  job_phase          :integer          not null
-#  display            :integer          not null
-#  featured_image_url :string(255)
-#  notes              :text
-#  copyright_owner    :string(255)
-#  seo_title          :string(255)
-#  seo_description    :string(255)
-#  seo_preview        :string(255)
-#  type               :integer          not null
-#  author             :string
-#

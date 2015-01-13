@@ -1,0 +1,23 @@
+<div class="localizations-grid">
+  <div class="actions-and-search" class="clearfix">
+    <div class="manipulate-actions">
+      <button ui-sref="cortex.localizations.new" class="btn btn-primary" type="button">Create Localization</button>
+    </div>
+  </div>
+
+  <table ng-table="localizationDataParams" class="table localizations-table">
+    <tr ng-repeat="localization in $data">
+      <td data-title="'Name'">{{ localization.name }}</td>
+      <td data-title="'Owner'">{{ localization.creator.fullname }}</td>
+      <td data-title="'Created'">{{ localization.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td data-title="'Modified'">{{ localization.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td>
+        <div class="btn-group pull-right" role="group">
+          <button type="button" class="btn btn-danger" ng-click="deleteLocalization(localization)">Delete</button>
+          <button type="button" class="btn btn-info" ng-click="duplicateLocalization(localization)">Duplicate</button>
+          <button type="button" class="btn btn-primary" ng-click="editLocalization(localization)">Edit</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

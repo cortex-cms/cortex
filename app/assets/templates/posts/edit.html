@@ -76,7 +76,12 @@
                 </div>
               </div>
             </div>
-            <div class="form-status" ng-show="postForm.$invalid && postForm.$dirty">Please fill out the required fields, marked with a *</div>
+            <div class="form-status" ng-show="postForm.$invalid && postForm.$dirty">
+              Please fill out the required fields, marked with a *
+            </div>
+            <div class="form-status" ng-show="postForm.slug.$error.unavailable">
+              Slug "{{ data.post.slug }}" already taken, please use something else
+            </div>
           </div>
         </div>
       </div>

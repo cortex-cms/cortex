@@ -41,23 +41,25 @@ module API
 
         # Gross, move to central authorization lib during OAuth implementation
         def find_current_user
-          # OAuth
           if access_token
-            if access_token.application.owner_type == 'User'
-              User.find(access_token.resource_owner_id)
-            elsif access_token.application.owner_type == 'Application'
-              access_token.application.owner
-            end
-          # Basic Auth
+            lookup_owner access_token
+          elsif warden_current_user
+            warden_current_user
           else
-            req = Rack::Auth::Basic::Request.new(env)
-            unless req.provided? and req.basic?
-              return User.anonymous
-            end
-            login, password = req.credentials
-
-            User.authenticate(login, password) || User.anonymous
+            User.anonymous
           end
+        end
+
+        def lookup_owner(access_token)
+          if access_token.resource_owner_id.present?
+            User.find_by id: access_token.resource_owner_id
+          else
+            access_token.application.owner
+          end
+        end
+
+        def current_tenant
+          current_user.tenant
         end
 
         def can?(object, action, subject)
@@ -109,6 +111,12 @@ module API
             new_params.delete(r)
           end
           new_params
+        end
+
+        def clean_params(params)
+          params.reject do |_,v|
+            v.blank?
+          end
         end
       end
     end

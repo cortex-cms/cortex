@@ -5,7 +5,7 @@ class YoutubeObserver < ActiveRecord::Observer
 
   private
 
-  def fetch_youtube
-    YoutubeMediaWorker.perform_async(id)
+  def fetch_youtube(media)
+    YoutubeMediaJob.perform_later(media.id)
   end
 end

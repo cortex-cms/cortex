@@ -57,7 +57,6 @@ angular.module('cortex.controllers.posts.edit', [
 
   $scope.redactorOptions = {
     plugins: ['media', 'imageFit'],
-    toolbarFixedBox: true,
     minHeight: 800
   };
 

@@ -8,23 +8,26 @@ angular.module('cortex.services.imageFit', [
         $window.RedactorPlugins = {};
       }
 
-      $window.RedactorPlugins.imageFit = {
-        init: function()
-        {
-          this.buttonAdd('imageFit', 'Fit to Page', this.fitImageToPage);
-          this.buttonAwesome('imageFit', 'fa-arrows-alt');
-        },
-        fitImageToPage: function()
-        {
-          var imgElement = angular.element(this.getCurrent()).find('img');
+      $window.RedactorPlugins.imageFit = function() {
+        return {
+          init: function()
+          {
+            var imageFitButton = this.button.add('imageFit', 'Fit to Page');
+            this.button.setAwesome('imageFit', 'fa-arrows-alt');
+            this.button.addCallback(imageFitButton, this.imageFit.fitImageToPage);
+          },
+          fitImageToPage: function()
+          {
+            var imgElement = angular.element(this.selection.getCurrent()).find('img');
 
-          if (imgElement.length) {
-            imgElement.css( "width", "100%" );
+            if (imgElement.length) {
+              imgElement.css( "width", "100%" );
+            }
+            else {
+              flash.error = 'Image not found at selection.';
+            }
           }
-          else {
-            flash.error = 'Image not found at selection.';
-          }
-        }
+        };
       };
     }
   };

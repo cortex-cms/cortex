@@ -13,7 +13,7 @@ end
 gem 'unicorn-rails'
 
 # Rails
-gem 'rails', '~> 4.1'
+gem 'rails', '~> 4.2'
 
 # Cortex-specific
 gem 'cortex-exceptions'
@@ -22,17 +22,17 @@ gem 'cortex-exceptions'
 gem 'jargon-client', git: 'git://github.com/cb-talent-development/jargon-client'
 
 # API
-gem 'grape', '~> 0.9'
+gem 'grape', '~> 0.10'
 gem 'grape-entity'
 gem 'grape-swagger'
-gem 'doorkeeper', '~> 1.4.0'
+gem 'doorkeeper', '~> 2.0'
 gem 'redis-rails', '~> 4.0'
 
 # Templating
 gem 'haml'
 
 # Style
-gem 'sass-rails', '~> 4.0'
+gem 'sass-rails', '~> 5.0'
 gem 'font-awesome-sass'
 
 gem 'sprockets-rails', '~> 2.2'
@@ -59,12 +59,12 @@ gem 'rails-assets-angular-ui-router', '~> 0.2'
 gem 'rails-assets-angular-bootstrap', '~> 0.12'
 gem 'rails-assets-angular-flash'
 gem 'rails-assets-angular-bootstrap-datetimepicker'
-gem 'rails-assets-angular-redactor-patched'
+gem 'rails-assets-angular-redactor'
 gem 'rails-assets-angularjs-file-upload'
 gem 'rails-assets-ng-table'
 gem 'rails-assets-bootstrap-sass-official'
 gem 'rails-assets-ng-tags-input'
-gem 'rails-assets-angular-bootstrap-switch'
+gem 'rails-assets-angular-bootstrap-switch', '~> 0.3'
 
 # ActiveRecord
 gem 'rails-observers'
@@ -75,10 +75,10 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'elasticsearch-model', '~> 0.1'
 gem 'elasticsearch-rails', '~> 0.1'
 gem 'kaminari'
-gem 'sanitize', '~> 3.0'
+gem 'sanitize', '~> 3.1'
 gem 'paranoia', '~> 2.0'
 gem 'pg'
-gem 'activeuuid'
+gem 'activeuuid', git: 'git@github.com:cb-talent-development/activeuuid.git'
 gem 'active_attr'
 
 # Authorization
@@ -98,14 +98,13 @@ gem 'json'
 gem 'rack-cors', require: 'rack/cors'
 
 # Jobs
-#gem 'activejob', '~> 4.2.0.beta4'
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim' # Sidekiq-web
 
 # Interactors
-gem "interactor-rails", "~> 2.0"
+gem 'interactor-rails', '~> 2.0'
 
 group :test, :development do
   # Environment
@@ -154,7 +153,7 @@ group :development do
   gem 'better_errors'
   gem 'annotate'
   gem 'binding_of_caller'
-  gem 'pry-rails', '~> 0.3.2'
+  gem 'pry-rails', '~> 0.3'
 
   # Coverage
   gem 'rails_best_practices'

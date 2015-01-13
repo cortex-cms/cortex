@@ -11,6 +11,7 @@ module Cortex
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/models/media_types #{config.root}/app/models/post_types #{config.root}/app/models/observers)
     config.active_record.default_timezone = :utc
     config.active_record.observers = :media_observer, :post_observer, :tenant_observer, :user_observer, :youtube_observer
+    config.active_job.queue_adapter = :sidekiq
 
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true

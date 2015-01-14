@@ -30,7 +30,9 @@ angular.module('cortex.states', [
 
   'cortex.controllers.applications.grid',
   'cortex.controllers.credentials.grid',
-  'cortex.controllers.credentials.edit'
+  'cortex.controllers.credentials.edit',
+  'cortex.controllers.credentials.new'
+
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -1072,8 +1074,8 @@ angular.module('cortex.states', [
       url: '/new',
       views: {
         'applications@cortex.applications': {
-          templateUrl: 'credentials/edit.html',
-          controller: 'CredentialsEditCtrl'
+          templateUrl: 'credentials/new.html',
+          controller: 'CredentialsNewCtrl'
         }
       },
       data: {

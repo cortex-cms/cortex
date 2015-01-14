@@ -1,19 +1,17 @@
-angular.module('cortex.controllers.credentials.edit', [
+angular.module('cortex.controllers.credentials.new', [
   'ui.router.state',
   'angular-flash.service',
   'cortex.services.cortex',
   'cortex.util'
 ])
 
-  .controller('CredentialsEditCtrl', function ($scope, $state, $stateParams, $anchorScroll, flash, cortex, util) {
+  .controller('CredentialsNewCtrl', function ($scope, $state, $stateParams, flash, cortex, util) {
     $scope.data = $scope.data || {};
 
-    $scope.data.credentials = cortex.credentials.get({application_id: $stateParams.applicationId,
-      credentials_id: $stateParams.credentialsId});
+    $scope.data.credentials = new cortex.credentials();
 
     $scope.saveCredentials = function() {
-      $scope.data.credentials.$save({application_id: $stateParams.applicationId,
-        credentials_id: $stateParams.credentialsId}, function() {
+      $scope.data.credentials.$save({application_id: $stateParams.applicationId}, function() {
         flash.success = "Successfully saved " + $scope.data.credentials.name;
         $state.go('^');
       }, function(res) {

@@ -46,7 +46,7 @@ module API
               desc 'Create a credential', {entity: Entities::Credential, params: Entities::Credential.documentation, nickname: 'createCredential'}
               post do
                 require_scope! :'modify:application'
-                authorize! :create, ::Credential
+                authorize! :create, ::Application
 
                 allowed_params = remove_params(Entities::Credential.documentation.keys, :id, :created_at, :updated_at)
 

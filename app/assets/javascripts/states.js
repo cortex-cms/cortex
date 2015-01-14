@@ -1090,7 +1090,7 @@ angular.module('cortex.states', [
         }
       },
       data: {
-        ncyBreadcrumbLabel: 'New'
+        ncyBreadcrumbLabel: 'Edit'
       }
     });
 });

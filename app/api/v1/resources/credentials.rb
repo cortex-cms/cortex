@@ -63,8 +63,8 @@ module API
 
                 allowed_params = remove_params(Entities::Credential.documentation.keys, :id, :created_at, :updated_at)
 
-                @credential = application!.credentials.find(params[:credential_id]).update(declared(params, {include_missing: false}, allowed_params))
-                @credential.save!
+                @credential = application!.credentials.find(params[:credential_id])
+                @credential.update!(declared(params, {include_missing: false}, allowed_params))
 
                 present @credential, with: Entities::Credential
               end

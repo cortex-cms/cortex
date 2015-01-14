@@ -35,25 +35,6 @@ angular.module('cortex.controllers.credentials.grid', [
       }
     });
 
-    //$scope.newCredential = function() {
-    //  var application = new cortex.applications();
-    //  var name = $window.prompt("Provide a name for the application");
-    //  if (name !== null && name !== '') {
-    //    application.name = name;
-    //    application.$save(function() {
-    //        flash.success = "Successfully created new application " + name;
-    //        $scope.applicationsTableParams.reload();
-    //      },
-    //      function () {
-    //        flash.error = "Could not create new application, please try again.";
-    //      });
-    //  }
-    //};
-
-    //$scope.editCredential = function(credential) {
-    //
-    //};
-
     $scope.deleteCredential = function (credential) {
       if ($window.confirm('Are you sure you want to delete "' + credential.name + '?"')) {
         cortex.credentials.delete({application_id: $stateParams.applicationId, credential_id: credential.id}, function () {

@@ -49,7 +49,7 @@ angular.module('cortex.services.cortex', [
     search: {method: 'GET', params: {}, isArray: true, paginated: true}
   });
 
-  var credentials = paginatedResource('/applications/:application_id/credentials/:credential_id', {credential_id: '@credential_id'}, {
+  var credentials = paginatedResource('/applications/:application_id/credentials/:credentials_id', {credential_ids: '@credentials_id'}, {
     search: {method: 'GET', params: {}, isArray: true, paginated: true}
   });
 

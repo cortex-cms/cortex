@@ -1051,5 +1051,20 @@ angular.module('cortex.states', [
       data: {
         ncyBreadcrumbLabel: false
       }
-    });
+    })
+
+    .state('cortex.applications.manage.credentials', {
+      url: '/:applicationId/credentials',
+      views: {
+        'applications@cortex.applications': {
+          templateUrl: 'credentials/grid.html',
+          controller: 'CredentialsGridCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: 'Credentials'
+      }
+    })
+
+  ;
 });

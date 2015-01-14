@@ -35,7 +35,7 @@ angular.module('cortex.controllers.credentials.grid', [
       }
     });
 
-    //$scope.newApplication = function() {
+    //$scope.newCredential = function() {
     //  var application = new cortex.applications();
     //  var name = $window.prompt("Provide a name for the application");
     //  if (name !== null && name !== '') {
@@ -49,29 +49,19 @@ angular.module('cortex.controllers.credentials.grid', [
     //      });
     //  }
     //};
+
+    //$scope.editCredential = function(credential) {
     //
-    //$scope.editApplication = function(application) {
-    //  var name = $window.prompt("Provide a new name for the application");
-    //  if (name !== null && name !== '') {
-    //    application.name = name;
-    //    application.$save(function() {
-    //        flash.success = "Successfully renamed application " + name;
-    //        $scope.applicationsTableParams.reload();
-    //      },
-    //      function () {
-    //        flash.error = "Could not rename application, please try again.";
-    //      });
-    //  }
     //};
-    //
-    //$scope.deleteApplication = function (application) {
-    //  if ($window.confirm('Are you sure you want to delete "' + application.name + '?"')) {
-    //    cortex.applications.delete({id: application.id}, function () {
-    //      flash.warn = application.name + ' deleted.';
-    //      $scope.applicationsTableParams.reload();
-    //    }, function () {
-    //      flash.error = application.name + ' could not be deleted due to an error.';
-    //    });
-    //  }
-    //};
+
+    $scope.deleteCredential = function (credential) {
+      if ($window.confirm('Are you sure you want to delete "' + credential.name + '?"')) {
+        cortex.credentials.delete({application_id: $stateParams.applicationId, credential_id: credential.id}, function () {
+          flash.warn = credential.name + ' deleted.';
+          $scope.credentialsTableParams.reload();
+        }, function () {
+          flash.error = credential.name + ' could not be deleted due to an error.';
+        });
+      }
+    };
   });

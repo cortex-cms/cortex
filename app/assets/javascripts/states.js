@@ -28,7 +28,9 @@ angular.module('cortex.states', [
   'cortex.controllers.locales.edit',
   'cortex.controllers.locales.grid',
 
-  'cortex.controllers.applications.grid'
+  'cortex.controllers.applications.grid',
+  'cortex.controllers.credentials.grid',
+  'cortex.controllers.credentials.edit'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -1066,5 +1068,29 @@ angular.module('cortex.states', [
       }
     })
 
-  ;
+    .state('cortex.applications.manage.credentials.new', {
+      url: '/new',
+      views: {
+        'applications@cortex.applications': {
+          templateUrl: 'credentials/edit.html',
+          controller: 'CredentialsEditCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: 'New'
+      }
+    })
+
+    .state('cortex.applications.manage.credentials.edit', {
+      url: '/edit/:credentialsId',
+      views: {
+        'applications@cortex.applications': {
+          templateUrl: 'credentials/edit.html',
+          controller: 'CredentialsEditCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: 'New'
+      }
+    });
 });

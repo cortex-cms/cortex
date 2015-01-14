@@ -10,7 +10,7 @@ module API
           segment '/:id' do
             resource :credentials do
               helpers Helpers::PaginationHelper
-              helpers Helpers::ApplicationHelper
+              helpers Helpers::ApplicationsHelper
 
               desc 'Show all credentials', {entity: Entities::Credential, nickname: 'showAllCredentials'}
               get do

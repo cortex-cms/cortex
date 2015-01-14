@@ -29,11 +29,13 @@ module API
       mount Resources::Localizations
       mount Resources::Locales
       mount Resources::Applications
+      mount Resources::Credentials
 
       add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1',
                                 models: [Entities::Post, Entities::Category, Entities::Media,
                                          Entities::Tenant, Entities::Occupation, Entities::User,
-                                         Entities::Localization, Entities::Locale])
+                                         Entities::Localization, Entities::Locale,
+                                         Entities::Applications, Entities::Credentials])
     end
   end
 end

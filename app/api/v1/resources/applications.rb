@@ -8,6 +8,7 @@ module API
 
         resource :applications do
           helpers Helpers::PaginationHelper
+          helpers Helpers::ApplicationsHelper
 
 
           desc 'Show all applications', { entity: Entities::Application, nickname: 'showAllApplications' }
@@ -36,6 +37,7 @@ module API
             allowed_params = remove_params(Entities::Application.documentation.keys, :children)
 
             @application = ::Application.new(declared(params, { include_missing: true }, allowed_params))
+            application.tenant = current_tenant
             application.save!
             present application, with: Entities::Application
           end

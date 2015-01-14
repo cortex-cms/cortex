@@ -28,6 +28,7 @@ module API
       mount Resources::Occupations
       mount Resources::Localizations
       mount Resources::Locales
+      mount Resources::Applications
 
       add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1',
                                 models: [Entities::Post, Entities::Category, Entities::Media,

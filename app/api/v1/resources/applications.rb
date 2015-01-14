@@ -19,7 +19,7 @@ module API
             require_scope! :'view:applications'
             authorize! :view, ::Application
 
-            @applications = Application.page(page).per(per_page)
+            @applications = Application.find_by(tenant: current_tenant).page(page).per(per_page)
 
             set_pagination_headers(@applications, 'applications')
             present @applications, with: Entities::Application

@@ -46,7 +46,11 @@ angular.module('cortex.services.cortex', [
   });
 
   var applications = paginatedResource('/applications/:id', {id: '@id', isArray: true}, {
-    search: {method: 'GET', params: { }, isArray: true, paginated: true}
+    search: {method: 'GET', params: {}, isArray: true, paginated: true}
+  });
+
+  var credentials = paginatedResource('/applications/:application_id/credentials/:credential_id', {credential_id: '@credential_id'}, {
+    search: {method: 'GET', params: {}, isArray: true, paginated: true}
   });
 
   return {
@@ -59,6 +63,7 @@ angular.module('cortex.services.cortex', [
     users:         users,
     userAuthor:    userAuthor,
     occupations:   occupations,
-    applications:  applications
+    applications:  applications,
+    credentials:   credentials
   };
 });

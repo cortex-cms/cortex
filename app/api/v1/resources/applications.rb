@@ -18,6 +18,8 @@ module API
           get do
             require_scope! :'view:applications'
             authorize! :view, ::Application
+
+            present Application.page(page).per(per_page), with: Entities::Application
           end
 
           desc 'Show an application', { entity: Entities::Application, nickname: "showApplication" }

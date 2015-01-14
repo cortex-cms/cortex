@@ -19,7 +19,10 @@ module API
             require_scope! :'view:applications'
             authorize! :view, ::Application
 
-            present Application.page(page).per(per_page), with: Entities::Application
+            @applications = Application.page(page).per(per_page)
+
+            set_pagination_headers(@applications, 'applications')
+            present @applications, with: Entities::Application
           end
 
           desc 'Show an application', { entity: Entities::Application, nickname: "showApplication" }

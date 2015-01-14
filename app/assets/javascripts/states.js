@@ -26,7 +26,9 @@ angular.module('cortex.states', [
   'cortex.controllers.localizations.edit',
   'cortex.controllers.localizations.grid',
   'cortex.controllers.locales.edit',
-  'cortex.controllers.locales.grid'
+  'cortex.controllers.locales.grid',
+
+  'cortex.controllers.applications.grid'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -1024,6 +1026,30 @@ angular.module('cortex.states', [
 
           return defer.promise;
         }]
+      }
+    })
+
+    // Applications
+
+    .state('cortex.applications', {
+      url: '/applications',
+      abstract: true,
+      template: '<div class="applications" ui-view="applications"></div>',
+      data: {
+        ncyBreadcrumbLabel: 'Applications'
+      }
+    })
+
+    .state('cortex.applications.manage', {
+      url: '',
+      views: {
+        'applications@cortex.applications': {
+          templateUrl: 'applications/grid.html',
+          controller: 'ApplicationsGridCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
       }
     });
 });

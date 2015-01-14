@@ -1,0 +1,21 @@
+<div class="applications-grid">
+  <div class="actions-and-search" class="clearfix">
+    <div class="manipulate-actions">
+      <button ui-sref="cortex.application.new" class="btn btn-primary" type="button">Create Application</button>
+    </div>
+  </div>
+
+  <table ng-table="applicationsTableParams" class="table applications-table">
+    <tr ng-repeat="application in $data">
+      <td data-title="'Name'">{{ application.name }}</td>
+      <td data-title="'Created'">{{ application.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td data-title="'Modified'">{{ application.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td>
+        <div class="btn-group pull-right" role="group">
+          <button type="button" class="btn btn-danger" ng-click="deleteApplication(application)">Delete</button>
+          <button type="button" class="btn btn-primary" ng-click="editApplication(application)">Edit</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

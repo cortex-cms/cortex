@@ -35,8 +35,33 @@ angular.module('cortex.controllers.applications.grid', [
       }
     });
 
+    $scope.newApplication = function() {
+      var application = new cortex.applications();
+      var name = $window.prompt("Provide a name for the application");
+      if (name !== null && name !== '') {
+        application.name = name;
+        application.$save(function() {
+          flash.success = "Successfully created new application " + name;
+          $scope.applicationsTableParams.reload();
+          },
+        function () {
+          flash.error = "Could not create new application, please try again.";
+        });
+      }
+    };
+
     $scope.editApplication = function(application) {
-      $state.go('^.localization.edit', {id: application.id});
+      var name = $window.prompt("Provide a new name for the application");
+      if (name !== null && name !== '') {
+        application.name = name;
+        application.$save(function() {
+            flash.success = "Successfully renamed application " + name;
+            $scope.applicationsTableParams.reload();
+          },
+          function () {
+            flash.error = "Could not rename application, please try again.";
+          });
+      }
     };
 
     $scope.deleteApplication = function (application) {

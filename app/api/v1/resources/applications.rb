@@ -21,6 +21,7 @@ module API
 
           desc 'Show an application', { entity: Entities::Application, nickname: "showApplication" }
           get ':id' do
+            require_scope! :'view:applications'
             present application!, with: Entities::Application
           end
 
@@ -29,7 +30,7 @@ module API
             requires :name, type: String, desc: "Application Name"
           end
           post do
-            require_scope! :'modify:tenants'
+            require_scope! :'modify:applications'
             authorize! :create, Application
 
             allowed_params = remove_params(Entities::Application.documentation.keys, :children)
@@ -41,7 +42,7 @@ module API
 
           desc 'Update an application', { entity: Entities::Application, params: Entities::Application.documentation, nickname: "updateApplication" }
           put ':id' do
-            require_scope! :'modify:tenants'
+            require_scope! :'modify:applications'
             authorize! :update, application!
 
             allowed_params = remove_params(Entities::Application.documentation.keys, :children)
@@ -52,7 +53,7 @@ module API
 
           desc 'Delete an application', { nickname: "deleteApplication" }
           delete ':id' do
-            require_scope! :'modify:tenants'
+            require_scope! :'modify:applications'
             authorize! :delete, application!
 
             application.destroy

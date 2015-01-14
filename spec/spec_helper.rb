@@ -65,7 +65,7 @@ RSpec::Sidekiq.configure do |config|
 end
 
 def test_elasticsearch
-  url = URI('http://localhost:9200/');
+  url = URI('http://localhost:9200/')
   begin
     res = Net::HTTP.get_response(url)
     res.is_a?(Net::HTTPSuccess)

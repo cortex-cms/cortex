@@ -35,7 +35,7 @@ module API
                                 models: [Entities::Post, Entities::Category, Entities::Media,
                                          Entities::Tenant, Entities::Occupation, Entities::User,
                                          Entities::Localization, Entities::Locale,
-                                         Entities::Applications, Entities::Credentials])
+                                         Entities::Application, Entities::Credential])
     end
   end
 end

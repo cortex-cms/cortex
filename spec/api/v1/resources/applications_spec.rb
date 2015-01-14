@@ -81,6 +81,7 @@ describe API::Resources::Applications, :type => :request do
       let(:application) { create(:application) }
 
       it 'should NOT update the application' do
+        application
         expect{ put "/api/v1/applications/#{application.id}", {name: nil}.to_json, application_json }.to_not change(Application, :count)
       end
 
@@ -102,6 +103,7 @@ describe API::Resources::Applications, :type => :request do
       end
 
       it 'should delete the application' do
+        application
         expect{ delete "/api/v1/applications/#{application.id}" }.to change(Application, :count).by(-1)
       end
     end
@@ -110,11 +112,13 @@ describe API::Resources::Applications, :type => :request do
       let(:application) { create(:application) }
 
       it 'should not be a success' do
+        application
         delete "/api/v1/applications/#{application.id+1}"
         expect(response).not_to be_success
       end
 
       it 'should not change the application count' do
+        application
         expect{ delete "/api/v1/applications/#{application.id+1}" }.to_not change(Application, :count)
       end
     end

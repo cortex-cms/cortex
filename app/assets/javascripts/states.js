@@ -4,7 +4,9 @@ angular.module('cortex.states', [
   'cortex.services.cortex',
   'cortex.templates',
 
+  'cortex.controllers.users.facets',
   'cortex.controllers.users.edit',
+  'cortex.controllers.users.grid',
 
   'cortex.controllers.media.edit',
   'cortex.controllers.media.grid',
@@ -989,10 +991,38 @@ angular.module('cortex.states', [
       }
     })
 
+    // Users
+
     .state('cortex.users', {
       url: '/users',
       abstract: true,
-      template: '<ui-view/>'
+      template: '<div class="admin-users" ui-view></div>',
+      data: {
+        ncyBreadcrumbLabel: 'Users'
+      }
+    })
+
+    .state('cortex.users.facets', {
+      url: '',
+      abstract: true,
+      controller: 'UsersFacetCtrl',
+      templateUrl: 'users/facets.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.users.facets.grid', {
+      url: '',
+      views: {
+        'users-grid': {
+          templateUrl: 'users/grid.html',
+          controller: 'UsersGridCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
     })
 
     .state('cortex.users.edit', {

@@ -1,0 +1,20 @@
+<div class="actions-and-search" class="clearfix">
+  <div class="manipulate-actions">
+    <button ui-sref="cortex.users.new" class="btn btn-primary" type="button">Create User</button>
+  </div>
+
+  <div class="user-search">
+    <delayed-input
+            autofocus="true"
+            class="form-control"
+            ng-model='data.query'
+            placeholder="Search Users..."
+            delay="500"></delayed-input>
+  </div>
+</div>
+
+<table ng-table="userDataParams" class="table users-table">
+  <tr ng-repeat="user in $data">
+    <td data-title="'Email'">{{ user.email }}</td>
+  </tr>
+</table>

@@ -5,7 +5,7 @@ angular.module('cortex.controllers.posts.grid', [
     'cortex.filters'
 ])
 
-.controller('PostsGridCtrl', function($scope, ngTableParams, cortex){
+.controller('PostsGridCtrl', function($scope, ngTableParams, cortex) {
     $scope.data = {
         totalServerItems: 0,
         posts: [],

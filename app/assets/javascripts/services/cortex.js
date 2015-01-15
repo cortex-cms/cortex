@@ -48,6 +48,14 @@ angular.module('cortex.services.cortex', [
     industries: {method: 'GET', params: {id: 'industries'}, isArray: true}
   });
 
+  var applications = paginatedResource('/applications/:id', {id: '@id', isArray: true}, {
+    search: {method: 'GET', params: {}, isArray: true, paginated: true}
+  });
+
+  var credentials = paginatedResource('/applications/:application_id/credentials/:credentials_id', {credential_ids: '@credentials_id'}, {
+    search: {method: 'GET', params: {}, isArray: true, paginated: true}
+  });
+
   return {
     categories:    categories,
     locales:       locales,
@@ -57,6 +65,8 @@ angular.module('cortex.services.cortex', [
     tenants:       tenants,
     users:         users,
     userAuthor:    userAuthor,
-    occupations:   occupations
+    occupations:   occupations,
+    applications:  applications,
+    credentials:   credentials
   };
 });

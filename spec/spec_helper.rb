@@ -13,7 +13,7 @@ require 'net/http'
 
 include ActionDispatch::TestProcess
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+ActiveRecord::Migration.maintain_test_schema! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
 
@@ -65,7 +65,7 @@ RSpec::Sidekiq.configure do |config|
 end
 
 def test_elasticsearch
-  url = URI('http://localhost:9200/');
+  url = URI('http://localhost:9200/')
   begin
     res = Net::HTTP.get_response(url)
     res.is_a?(Net::HTTPSuccess)

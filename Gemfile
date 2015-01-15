@@ -60,7 +60,7 @@ gem 'rails-assets-angular-bootstrap', '~> 0.12'
 gem 'rails-assets-angular-flash'
 gem 'rails-assets-angular-bootstrap-datetimepicker'
 gem 'rails-assets-angular-redactor'
-gem 'rails-assets-angularjs-file-upload'
+gem 'rails-assets-angularjs-file-upload', '~> 2.0.2'
 gem 'rails-assets-ng-table'
 gem 'rails-assets-bootstrap-sass-official'
 gem 'rails-assets-ng-tags-input'
@@ -135,9 +135,6 @@ group :test, :development do
 
   # Pretty
   gem 'awesome_print'
-
-  # IDE
-  gem 'ruby-debug-ide', require: false
 
   gem 'jasmine-rails'
   gem 'guard-jasmine'

@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many   :localizations
   has_many   :locales
 
-  validates_presence_of :email
+  validates_presence_of :email, :tenant, :password, :firstname, :lastname
 
   def anonymous?
     self.id == nil

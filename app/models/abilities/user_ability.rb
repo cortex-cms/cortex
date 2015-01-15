@@ -12,6 +12,7 @@ module Abilities
           elsif subject == Category;     abilities += category_class_abilities(user)
           elsif subject == Localization; abilities += localization_class_abilities(user)
           elsif subject == Locale;       abilities += locale_class_abilities(user)
+          elsif subject == Application;  abilities += application_class_abilities(user);
           end
         else
           if subject.kind_of? User;            abilities += user_abilities(user, subject)
@@ -20,6 +21,7 @@ module Abilities
           elsif subject.kind_of? Media;        abilities += media_abilities(user, subject)
           elsif subject.kind_of? Localization; abilities += localization_abilities(user, subject)
           elsif subject.kind_of? Locale;       abilities += locale_abilities(user, subject)
+          elsif subject.kind_of? Application;  abilities += application_abilities(user, subject)
           end
         end
 
@@ -83,10 +85,7 @@ module Abilities
 
       def media_abilities(user, media)
         if user.is_admin?
-
-
-
-       [:view, :update, :delete]
+          [:view, :update, :delete]
         else
           []
         end
@@ -133,6 +132,22 @@ module Abilities
       end
 
       def locale_class_abilities(user)
+        if user.is_admin?
+          [:view, :create]
+        else
+          []
+        end
+      end
+
+      def application_abilities(user, application)
+        if user.is_admin? || user.tenant == application.tenant
+          [:view, :update, :delete]
+        else
+          []
+        end
+      end
+
+      def application_class_abilities(user)
         if user.is_admin?
           [:view, :create]
         else

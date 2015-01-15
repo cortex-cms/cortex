@@ -545,8 +545,6 @@ GEM
       rspec (~> 3.0, >= 3.0.0)
       sidekiq (>= 2.4.0)
     rspec-support (3.1.2)
-    ruby-debug-ide (0.4.24)
-      rake (>= 0.8.1)
     ruby-prof (0.15.2)
     ruby-progressbar (1.7.1)
     sanitize (3.1.0)
@@ -727,7 +725,6 @@ DEPENDENCIES
   rspec (~> 3.1)
   rspec-rails
   rspec-sidekiq
-  ruby-debug-ide
   sanitize (~> 3.1)
   sass-rails (~> 5.0)
   shoulda

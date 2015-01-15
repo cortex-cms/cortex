@@ -136,9 +136,6 @@ group :test, :development do
   # Pretty
   gem 'awesome_print'
 
-  # IDE
-  gem 'ruby-debug-ide', require: false
-
   gem 'jasmine-rails'
   gem 'guard-jasmine'
   gem 'jasmine-core', '~> 2.1'

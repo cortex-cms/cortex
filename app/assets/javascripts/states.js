@@ -26,7 +26,13 @@ angular.module('cortex.states', [
   'cortex.controllers.localizations.edit',
   'cortex.controllers.localizations.grid',
   'cortex.controllers.locales.edit',
-  'cortex.controllers.locales.grid'
+  'cortex.controllers.locales.grid',
+
+  'cortex.controllers.applications.grid',
+  'cortex.controllers.credentials.grid',
+  'cortex.controllers.credentials.edit',
+  'cortex.controllers.credentials.new'
+
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -1024,6 +1030,69 @@ angular.module('cortex.states', [
 
           return defer.promise;
         }]
+      }
+    })
+
+    // Applications
+
+    .state('cortex.applications', {
+      url: '/applications',
+      abstract: true,
+      template: '<div class="applications" ui-view="applications"></div>',
+      data: {
+        ncyBreadcrumbLabel: 'Applications'
+      }
+    })
+
+    .state('cortex.applications.manage', {
+      url: '',
+      views: {
+        'applications@cortex.applications': {
+          templateUrl: 'applications/grid.html',
+          controller: 'ApplicationsGridCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.applications.manage.credentials', {
+      url: '/:applicationId/credentials',
+      views: {
+        'applications@cortex.applications': {
+          templateUrl: 'credentials/grid.html',
+          controller: 'CredentialsGridCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: 'Credentials'
+      }
+    })
+
+    .state('cortex.applications.manage.credentials.new', {
+      url: '/new',
+      views: {
+        'applications@cortex.applications': {
+          templateUrl: 'credentials/new.html',
+          controller: 'CredentialsNewCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: 'New'
+      }
+    })
+
+    .state('cortex.applications.manage.credentials.edit', {
+      url: '/edit/:credentialsId',
+      views: {
+        'applications@cortex.applications': {
+          templateUrl: 'credentials/edit.html',
+          controller: 'CredentialsEditCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: 'Edit'
       }
     });
 });

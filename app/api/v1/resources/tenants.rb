@@ -40,7 +40,7 @@ module API
 
           desc 'Create a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation, nickname: "createTenant" }
           params do
-            requires :name, type: String, desc: "Tenant Name"
+            optional :name, type: String, desc: "Tenant Name"
           end
           post do
             require_scope! :'modify:tenants'

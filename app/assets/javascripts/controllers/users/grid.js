@@ -1,12 +1,13 @@
 angular.module('cortex.controllers.users.grid', [
   'ngTable',
+  'ui.router.state',
   'ui.bootstrap',
   'cortex.services.cortex',
   'cortex.filters',
   'cortex.controllers.users.facets'
 ])
 
-  .controller('UsersGridCtrl', function ($scope, ngTableParams, cortex, TenantTree) {
+  .controller('UsersGridCtrl', function ($scope, $state, ngTableParams, cortex, TenantTree) {
     $scope.data = {
       totalServerItems: 0,
       users: [],
@@ -23,15 +24,17 @@ angular.module('cortex.controllers.users.grid', [
     }, {
       total: 0,
       getData: function ($defer, params) {
-        cortex.users.searchPaged({page: params.page(), per_page: params.count(), q: $scope.data.query},
-          function (users, headers, paging) {
-            params.total(paging.total);
-            $defer.resolve(users);
-          },
-          function (data) {
-            $defer.reject(data);
-          }
-        );
+        if ($scope.data.tenantTree.selected) {
+          cortex.tenants.usersPaged({page: params.page(), per_page: params.count(), id: $scope.data.tenantTree.selected.id},
+            function (users, headers, paging) {
+              params.total(paging.total);
+              $defer.resolve(users);
+            },
+            function (data) {
+              $defer.reject(data);
+            }
+          );
+        }
       }
     });
 
@@ -42,4 +45,8 @@ angular.module('cortex.controllers.users.grid', [
     $scope.$watch('data.tenantTree.selected', function () {
       $scope.userDataParams.reload();
     });
+
+    $scope.editUser = function(user) {
+      $state.go('^.^.edit', {userId: user.id});
+    };
   });

@@ -21,7 +21,7 @@ module SearchablePost
       indexes :industries,        :analyzer => :keyword
     end
 
-    def related(publishebecaud = nil)
+    def related(published = nil)
       # Filter the current post from results, this is not necessary with ES 1.2
       filter_bool = {must_not: { ids: { values: [id] } } }
 

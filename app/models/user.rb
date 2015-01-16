@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :email, :tenant, :password, :firstname, :lastname
 
+  scope :tenantUsers, -> (tenant_id) { where(tenant_id: tenant_id) }
+
   def anonymous?
     self.id == nil
   end

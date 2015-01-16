@@ -44,18 +44,47 @@ module API
             present author, with: Entities::Author
           end
 
-          desc "Save a user's info"
+          desc "Create a new user"
           params do
-            requires :current_password
+            optional :email
+            optional :firstname
+            optional :lastname
+            optional :tenant_id
             optional :password
             optional :password_confirmation
+          end
+          post do
+            require_scope! :'modify:users'
+            authorize! :create, User
+
+            allowed_params = [:password, :password_confirmation, :firstname, :lastname, :email, :tenant_id]
+
+            @user = User.new(declared(params, {include_missing: false}, allowed_params))
+            @user.is_admin = true # literally mad about this
+            @user.save!
+
+            present @user, with: Entities::User, full: true
+          end
+
+          desc "Save a user's info"
+          params do
+            optional :current_password
+            optional :password
+            optional :password_confirmation
+            optional :firstname
+            optional :lastname
           end
           put ':user_id' do
             require_scope! :'modify:users'
             authorize! :update, user!
-            forbidden! unless user.valid_password? params[:current_password]
 
-            allowed_params = [:password, :password_confirmation]
+            allowed_params = [:firstname, :lastname, :gravatar]
+
+            if user == current_user
+              forbidden! unless user.valid_password?(params[:current_password])
+              allowed_params += [:password, :password_confirmation]
+              render_api_error!("Requires both password and password_confirmation fields", 422) unless params[:password] && params[:password_confirmation]
+            end
 
             user.update!(declared(params, {include_missing: false}, allowed_params))
             user.save!

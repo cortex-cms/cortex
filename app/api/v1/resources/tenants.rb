@@ -40,7 +40,7 @@ module API
 
           desc 'Create a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation, nickname: "createTenant" }
           params do
-            requires :name, type: String, desc: "Tenant Name"
+            optional :name, type: String, desc: "Tenant Name"
           end
           post do
             require_scope! :'modify:tenants'
@@ -71,6 +71,24 @@ module API
             authorize! :delete, tenant!
 
             tenant.destroy
+          end
+
+          segment '/:id' do
+            resource :users do
+              desc 'Show all users belonging to a tenant', { entity: Entities::User, nickname: "showAllTenantUsers" }
+              params do
+                use :pagination
+                use :search
+              end
+              get do
+                authorize! :view, User
+                require_scope! :'view:users'
+
+                @users = User.tenantUsers(params[:id]).page(page).per(per_page)
+                set_pagination_headers(@users, 'users')
+                present @users, with: Entities::User, full: true
+              end
+            end
           end
         end
       end

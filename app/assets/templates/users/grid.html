@@ -1,0 +1,28 @@
+<div class="actions-and-search">
+  <div class="manipulate-actions">
+    <button ui-sref="cortex.users.new" class="btn btn-primary" type="button">Create User</button>
+  </div>
+
+  <div class="search">
+    <delayed-input
+            autofocus="true"
+            class="form-control"
+            ng-model='data.query'
+            placeholder="Search Users... (not implemented)"
+            delay="500"></delayed-input>
+  </div>
+</div>
+
+<table ng-table="userDataParams" class="table users-table">
+  <tr ng-repeat="user in $data">
+    <td data-title="'Email'">{{ user.email }}</td>
+    <td data-title="'Name'">{{ user.fullname }}</td>
+    <td data-title="'Created'">{{ user.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
+    <td data-title="'Modified'">{{ user.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
+    <td>
+      <div class="btn-group pull-right" role="group">
+        <button type="button" class="btn btn-primary" ng-click="editUser(user)">Edit</button>
+      </div>
+    </td>
+  </tr>
+</table>

@@ -11,6 +11,7 @@
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav navbar-items-admin small">
         <li ng-class="{ active: $state.includes('cortex.organizations') }"><a class="navbar-item" ui-sref="cortex.organizations.manage">Tenants</a></li>
+        <li ng-class="{ active: $state.includes('cortex.users') }"><a class="navbar-item" ui-sref="cortex.users.facets.grid">Users</a></li>
         <li ng-class="{ active: $state.includes('cortex.media') }"><a class="navbar-item" ui-sref="cortex.media.manage.components">Media</a></li>
         <li ng-class="{ active: $state.includes('cortex.posts') }"><a class="navbar-item" ui-sref="cortex.posts.manage.components">Posts</a></li>
         <li ng-class="{ active: $state.includes('cortex.localizations') }"><a class="navbar-item" ui-sref="cortex.localizations.manage">Localizations</a></li>

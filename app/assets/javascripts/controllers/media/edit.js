@@ -21,15 +21,14 @@ angular.module('cortex.controllers.media.edit', [
   $scope.data = {};
 
   $scope.data.media = cortex.media.get({id: $stateParams.mediaId}, function (media) {
-    unsavedChanges.fnListen($scope, $scope.data.media);
-
+    unsavedChanges.fnListen($scope, media);
   });
 
   $scope.update = function () {
     $scope.data.media.tag_list = $scope.data.media.tag_list.map(function(tag) { return tag.name; });
 
     $scope.data.media.$save(function (media) {
-      unsavedChanges.fnListen($scope, $scope.data.media);
+      unsavedChanges.fnListen($scope, media);
 
       flash.success = 'Saved media "' + media.name + '"';
       $state.go('^.manage.components');

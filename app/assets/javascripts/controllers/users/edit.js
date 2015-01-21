@@ -11,6 +11,10 @@ angular.module('cortex.controllers.users.edit', [
   $scope.data.user = new cortex.users();
   $scope.data.selectedTenant = TenantTree.selected;
 
+  $scope.cancel = function () {
+    $state.go('^.facets.grid');
+  };
+
   $scope.saveUser = function() {
     $scope.data.user.tenant_id = $scope.data.selectedTenant.id;
     $scope.data.user.$save().then(

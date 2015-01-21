@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def to_json(options={})
-    options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname)
+    options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname admin)
     options[:methods] ||= %w(fullname)
     super(options)
   end

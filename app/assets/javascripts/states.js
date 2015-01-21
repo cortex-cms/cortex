@@ -5,7 +5,7 @@ angular.module('cortex.states', [
   'cortex.templates',
 
   'cortex.controllers.users.facets',
-  'cortex.controllers.users.edit',
+  'cortex.controllers.users.profile',
   'cortex.controllers.users.grid',
 
   'cortex.controllers.media.edit',
@@ -1031,12 +1031,12 @@ angular.module('cortex.states', [
       }
     })
 
-    .state('cortex.users.edit', {
+    .state('cortex.users.profile', {
       url: '/:userId',
-      templateUrl: 'users/edit.html',
-      controller: 'UsersEditCtrl',
+      templateUrl: 'users/profile.html',
+      controller: 'UsersProfileCtrl',
       data: {
-        ncyBreadcrumbLabel: 'Users/Edit'
+        ncyBreadcrumbLabel: 'Users/Profile'
       },
       resolve: {
         user: ['$stateParams', 'cortex', function($stateParams, cortex) {

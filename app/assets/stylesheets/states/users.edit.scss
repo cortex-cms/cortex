@@ -1,0 +1,7 @@
+section.users-edit {
+  @include make-md-column(12);
+
+  .actions div {
+    @include make-md-column(6);
+  }
+}

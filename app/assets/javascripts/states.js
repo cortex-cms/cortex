@@ -7,6 +7,7 @@ angular.module('cortex.states', [
   'cortex.controllers.users.facets',
   'cortex.controllers.users.profile',
   'cortex.controllers.users.grid',
+  'cortex.controllers.users.edit',
 
   'cortex.controllers.media.edit',
   'cortex.controllers.media.grid',
@@ -1031,12 +1032,21 @@ angular.module('cortex.states', [
       }
     })
 
+  .state('cortex.users.new', {
+      url: '/:userId',
+      templateUrl: 'users/edit.html',
+      controller: 'UsersEditCtrl',
+      data: {
+          ncyBreadcrumbLabel: 'New User'
+      }
+  })
+
     .state('cortex.users.profile', {
       url: '/:userId',
       templateUrl: 'users/profile.html',
       controller: 'UsersProfileCtrl',
       data: {
-        ncyBreadcrumbLabel: 'Users/Profile'
+        ncyBreadcrumbLabel: 'Profile'
       },
       resolve: {
         user: ['$stateParams', 'cortex', function($stateParams, cortex) {

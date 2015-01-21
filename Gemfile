@@ -65,6 +65,7 @@ gem 'rails-assets-ng-table'
 gem 'rails-assets-bootstrap-sass-official'
 gem 'rails-assets-ng-tags-input'
 gem 'rails-assets-angular-bootstrap-switch', '~> 0.3'
+gem 'rails-assets-angular-validation-match', '< 1.4'
 
 # ActiveRecord
 gem 'rails-observers'

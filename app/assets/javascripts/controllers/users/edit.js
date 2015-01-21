@@ -1,6 +1,7 @@
 angular.module('cortex.controllers.users.edit', [
   'ui.router.state',
   'angular-flash.service',
+  'validation.match',
   'cortex.services.cortex',
   'cortex.controllers.users.facets'
 ])

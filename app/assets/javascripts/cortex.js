@@ -24,11 +24,13 @@ angular.module('cortex', [
   $urlRouterProvider.otherwise(function($injector) {
     var $state = $injector.get('$state');
 
-    if ($injector.get('currentUser').admin) {
-      $state.go('cortex.organizations.manage')
-    }
-    else if ($injector.get('currentUser')) {
-      $state.go('cortex.media.manage.components')
+    if ($injector.get('currentUser')) {
+      if ($injector.get('currentUser').admin) {
+        $state.go('cortex.organizations.manage')
+      }
+      else {
+        $state.go('cortex.media.manage.components')
+      }
     }
     else {
       $state.go('login');

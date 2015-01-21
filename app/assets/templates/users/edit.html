@@ -8,40 +8,46 @@
         <form novalidate class="user" name="userForm">
           <div class="form-group">
             <label for="user.firstname">First name</label>
-            <input class="form-control" type="text" name="user.firstname"
+            <input class="form-control" type="text" id="user.firstname"
                    ng-model="data.user.firstname" required
                    placeholder="First name (required)">
           </div>
           <div class="form-group">
             <label for="user.lastname">Last name</label>
-            <input class="form-control" type="text" name="user.lastname"
+            <input class="form-control" type="text" id="user.lastname"
                    ng-model="data.user.lastname" required
                    placeholder="Last name (required)">
           </div>
           <div class="form-group">
             <label for="user.email">Email</label>
-            <input class="form-control" type="text" name="user.email"
+            <input class="form-control" type="text" id="user.email"
                    ng-model="data.user.email" required
                    placeholder="Email (required)">
           </div>
           <div class="form-group">
             <label for="user.password">Password</label>
-            <input class="form-control" type="password" name="user.password"
+            <input class="form-control" type="password" id="user.password"
                    ng-model="data.user.password" required ng-minlength="8"
                    placeholder="Password (required - 8 characters or more)">
           </div>
           <div class="form-group">
+            <label for="user.password_confirmation">Confirm Password</label>
+            <input class="form-control" type="password" id="user.password_confirmation" name="password_confirmation"
+                   ng-model="data.user.password_confirmation" required ng-minlength="8"
+                   data-match="data.user.password" placeholder="Please re-enter your password">
+          </div>
+          <div data-ng-show="userForm.password_confirmation.$error.match">Passwords do not match!</div>
+          <div class="form-group">
             <label for="user.tenant">Selected Tenant</label>
-            <input class="form-control" type="text" name="user.tenant"
-                   ng-model="data.selectedTenant.name" disabled>
+            <div id="user.tenant" class="form-control-static">{{data.selectedTenant.name}}</div>
           </div>
           <div class="form-group">
-            <input type="checkbox" name="user.admin"
+            <input type="checkbox" id="user.admin"
                    ng-model="data.user.admin">
             <label for="user.admin">Is Admin?</label>
           </div>
           <button type="button" class="btn btn-primary btn-block"
-                  ng-disabled="userForm.$invalid" ng-click="saveUser()">Save
+                  ng-disabled="userForm.$invalid || userForm.$pistine" ng-click="saveUser()">Save
           </button>
         </form>
       </div>

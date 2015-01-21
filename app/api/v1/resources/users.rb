@@ -59,8 +59,7 @@ module API
 
             allowed_params = [:password, :password_confirmation, :firstname, :lastname, :email, :tenant_id, :admin]
 
-            @user = User.new(declared(params, {include_missing: false}, allowed_params))
-            @user.save!
+            @user = User.create!(declared(params, {include_missing: false}, allowed_params))
 
             present @user, with: Entities::User, full: true
           end

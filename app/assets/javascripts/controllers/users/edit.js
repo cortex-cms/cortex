@@ -15,7 +15,7 @@ angular.module('cortex.controllers.users.edit', [
     $scope.data.user.$save().then(
       function() {
         $state.go('^.facets.grid');
-        flash.info = 'Saved user information';
+        flash.success = 'Saved user information';
       },
       function(res) {
         $anchorScroll();

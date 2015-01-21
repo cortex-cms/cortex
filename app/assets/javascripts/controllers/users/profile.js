@@ -1,9 +1,9 @@
-angular.module('cortex.controllers.users.edit', [
+angular.module('cortex.controllers.users.profile', [
   'ui.router.state',
   'angular-flash.service'
 ])
 
-.controller('UsersEditCtrl', function($scope, $timeout, $state, $anchorScroll, flash, user, author) {
+.controller('UsersProfileCtrl', function($scope, $timeout, $state, $anchorScroll, flash, user, author) {
   $scope.data        = $scope.data || {};
   $scope.data.user   = user;
   $scope.data.author = author;

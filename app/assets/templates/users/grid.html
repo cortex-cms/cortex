@@ -1,6 +1,6 @@
 <div class="actions-and-search">
   <div class="manipulate-actions">
-    <button ui-sref="cortex.users.new" class="btn btn-primary" type="button">Create User</button>
+    <button ng-disabled="!data.tenantTree.selected" ui-sref="cortex.users.new" class="btn btn-primary" type="button">Create User in Tenant</button>
   </div>
 
   <div class="search">
@@ -21,7 +21,7 @@
     <td data-title="'Modified'">{{ user.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
     <td>
       <div class="btn-group pull-right" role="group">
-        <button type="button" class="btn btn-primary" ng-click="editUser(user)">Edit</button>
+        <button type="button" class="btn btn-primary" ng-click="editUser(user)" disabled>Edit</button>
       </div>
     </td>
   </tr>

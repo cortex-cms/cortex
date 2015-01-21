@@ -57,10 +57,9 @@ module API
             require_scope! :'modify:users'
             authorize! :create, User
 
-            allowed_params = [:password, :password_confirmation, :firstname, :lastname, :email, :tenant_id]
+            allowed_params = [:password, :password_confirmation, :firstname, :lastname, :email, :tenant_id, :admin]
 
             @user = User.new(declared(params, {include_missing: false}, allowed_params))
-            @user.is_admin = true # literally mad about this
             @user.save!
 
             present @user, with: Entities::User, full: true

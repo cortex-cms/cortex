@@ -1,0 +1,50 @@
+<section class="users-edit">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        User Information
+      </div>
+      <div class="panel-body">
+        <form novalidate class="user" name="userForm">
+          <div class="form-group">
+            <label for="user.firstname">First name</label>
+            <input class="form-control" type="text" name="user.firstname"
+                   ng-model="data.user.firstname" required
+                   placeholder="First name (required)">
+          </div>
+          <div class="form-group">
+            <label for="user.lastname">Last name</label>
+            <input class="form-control" type="text" name="user.lastname"
+                   ng-model="data.user.lastname" required
+                   placeholder="Last name (required)">
+          </div>
+          <div class="form-group">
+            <label for="user.email">Email</label>
+            <input class="form-control" type="text" name="user.email"
+                   ng-model="data.user.email" required
+                   placeholder="Email (required)">
+          </div>
+          <div class="form-group">
+            <label for="user.password">Password</label>
+            <input class="form-control" type="password" name="user.password"
+                   ng-model="data.user.password" required ng-minlength="8"
+                   placeholder="Password (required - 8 characters or more)">
+          </div>
+          <div class="form-group">
+            <label for="user.tenant">Selected Tenant</label>
+            <input class="form-control" type="text" name="user.tenant"
+                   ng-model="data.selectedTenant.name" disabled>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" name="user.admin"
+                   ng-model="data.user.admin">
+            <label for="user.admin">Is Admin?</label>
+          </div>
+          <button type="button" class="btn btn-primary btn-block"
+                  ng-disabled="userForm.$invalid" ng-click="saveUser()">Save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

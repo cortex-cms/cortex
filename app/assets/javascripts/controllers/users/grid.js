@@ -61,17 +61,4 @@ angular.module('cortex.controllers.users.grid', [
         });
       }
     };
-
-    $scope.deleteMedia = function (media) {
-      if ($window.confirm('Are you sure you want to delete "' + media.name + '?"')) {
-        cortex.media.delete({id: media.id}, function () {
-          $scope.data.media = _.reject($scope.data.media, function (m) {
-            return m.id == media.id;
-          });
-          flash.warn = media.name + " deleted.";
-        }, function (res) {
-          flash.error = media.name + " could not be deleted: " + res.data.message;
-        });
-      }
-    };
   });

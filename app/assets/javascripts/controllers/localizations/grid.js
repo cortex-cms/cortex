@@ -7,7 +7,7 @@ angular.module('cortex.controllers.localizations.grid', [
   'cortex.filters'
 ])
 
-  .controller('LocalizationsGridCtrl', function ($scope, $window, $state, ngTableParams, cortex, flash) {
+  .controller('LocalizationsGridCtrl', function ($scope, $window, $state, ngTableParams, flash, cortex) {
     $scope.data = {
       totalServerItems: 0,
       localizations: [],

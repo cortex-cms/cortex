@@ -11,7 +11,7 @@ angular.module('cortex.services.postBodyEditor', [
       tile: {}
     },
     addMediaToPost: function (media) {
-      this.redactor.insert.html($filter('mediaToHtml')(media));
+      this.redactor.insert.htmlWithoutClean($filter('mediaToHtml')(media));
     }
   };
 });

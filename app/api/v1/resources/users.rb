@@ -90,12 +90,28 @@ module API
             present user, with: Entities::User, full: true
           end
 
-          desc 'Show a user'
+          desc 'Show a user', {nickname: 'showUser'}
           get ':user_id' do
             require_scope! :'view:users'
             authorize! :view, user!
 
             present user, with: Entities::User
+          end
+
+          desc 'Delete a user', {nickname: 'deleteUser'}
+          delete ':user_id' do
+            require_scope! :'modify:users'
+            authorize! :delete, user!
+
+            begin
+              user.destroy
+            rescue Cortex::Exceptions::ResourceConsumed => e
+              error!({
+                       error:   'Conflict',
+                       message: e.message,
+                       status:  409
+                     }, 409)
+            end
           end
         end
       end

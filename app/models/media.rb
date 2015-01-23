@@ -13,7 +13,7 @@ class Media < ActiveRecord::Base
 
   default_scope { order('created_at DESC')  }
 
-  scope :consumed, lambda { joins(:posts).where("posts.id is not null") }
+  scope :consumed, lambda { joins(:posts).where('posts.id is not null') }
 
   serialize :dimensions
 

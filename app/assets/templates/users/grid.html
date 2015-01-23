@@ -21,6 +21,7 @@
     <td data-title="'Modified'">{{ user.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
     <td>
       <div class="btn-group pull-right" role="group">
+        <button type="button" class="btn btn-danger" ng-click="deleteUser(user)">Delete</button>
         <button type="button" class="btn btn-primary" ng-click="editUser(user)" disabled>Edit</button>
       </div>
     </td>

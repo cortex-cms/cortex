@@ -33,9 +33,9 @@ module Abilities
       def user_abilities(user, user_subject)
         abilities = []
 
-        # Users can view themselves, admins can view all
+        # Users can view/modify/delete themselves, admins can for all
         if user_subject.id == user.id || user.is_admin?
-          abilities += [:view, :update]
+          abilities += [:view, :update, :delete]
         end
 
         abilities

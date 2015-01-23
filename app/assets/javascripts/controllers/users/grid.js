@@ -2,12 +2,13 @@ angular.module('cortex.controllers.users.grid', [
   'ngTable',
   'ui.router.state',
   'ui.bootstrap',
+  'angular-flash.service',
   'cortex.services.cortex',
   'cortex.filters',
   'cortex.controllers.users.facets'
 ])
 
-  .controller('UsersGridCtrl', function ($scope, $state, ngTableParams, cortex, TenantTree) {
+  .controller('UsersGridCtrl', function ($scope, $window, $state, ngTableParams, flash, cortex, TenantTree) {
     $scope.data = {
       totalServerItems: 0,
       users: [],
@@ -48,5 +49,29 @@ angular.module('cortex.controllers.users.grid', [
 
     $scope.editUser = function(user) {
       $state.go('^.^.edit', {userId: user.id});
+    };
+
+    $scope.deleteUser = function (user) {
+      if ($window.confirm('Are you sure you want to delete "' + user.email + '?"')) {
+        cortex.users.delete({id: user.id}, function () {
+          flash.warn = user.email + ' deleted.';
+          $scope.userDataParams.reload();
+        }, function (res) {
+          flash.error = user.email + " could not be deleted: " + res.data.message;
+        });
+      }
+    };
+
+    $scope.deleteMedia = function (media) {
+      if ($window.confirm('Are you sure you want to delete "' + media.name + '?"')) {
+        cortex.media.delete({id: media.id}, function () {
+          $scope.data.media = _.reject($scope.data.media, function (m) {
+            return m.id == media.id;
+          });
+          flash.warn = media.name + " deleted.";
+        }, function (res) {
+          flash.error = media.name + " could not be deleted: " + res.data.message;
+        });
+      }
     };
   });

@@ -557,16 +557,16 @@ DEPENDENCIES
   rack-oauth2 (~> 1.0.9)
   rails (~> 4.2)
   rails-assets-angular (~> 1.2)
-  rails-assets-angular-animate
+  rails-assets-angular-animate (~> 1.2)
   rails-assets-angular-bootstrap (~> 0.12)
   rails-assets-angular-bootstrap-datetimepicker
   rails-assets-angular-bootstrap-switch (~> 0.3)
-  rails-assets-angular-cookies
-  rails-assets-angular-debaser
+  rails-assets-angular-cookies (~> 1.2)
+  rails-assets-angular-debaser (~> 0.3.2)
   rails-assets-angular-flash
-  rails-assets-angular-mocks
+  rails-assets-angular-mocks (~> 1.2)
   rails-assets-angular-redactor
-  rails-assets-angular-resource
+  rails-assets-angular-resource (~> 1.2)
   rails-assets-angular-sanitize
   rails-assets-angular-ui-router (~> 0.2)
   rails-assets-angular-validation-match (< 1.4)
@@ -574,8 +574,8 @@ DEPENDENCIES
   rails-assets-bootstrap-sass-official
   rails-assets-ng-table
   rails-assets-ng-tags-input
-  rails-assets-sinon-ng
-  rails-assets-sinonjs
+  rails-assets-sinon-ng (~> 0.1.2)
+  rails-assets-sinonjs (~> 1.10.2)
   rails-observers (~> 0.1.2)
   redis-rails (~> 4.0)
   rspec (~> 3.1)

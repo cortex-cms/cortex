@@ -41,11 +41,10 @@ gem 'uglifier', '~> 2.7.0'
 gem 'underscore-rails', '~> 1.7.0'
 
 gem 'rails-assets-angular', '~> 1.2'
-gem 'rails-assets-angular-animate'
+gem 'rails-assets-angular-animate', '~> 1.2'
 gem 'rails-assets-angular-sanitize'
-gem 'rails-assets-angular-resource'
-gem 'rails-assets-angular-cookies'
-
+gem 'rails-assets-angular-resource', '~> 1.2'
+gem 'rails-assets-angular-cookies', '~> 1.2'
 gem 'rails-assets-angular-ui-router', '~> 0.2'
 gem 'rails-assets-angular-bootstrap', '~> 0.12'
 gem 'rails-assets-angular-flash'
@@ -114,10 +113,10 @@ group :test, :development do
   gem 'jasmine-rails', '~> 0.10.6'
   gem 'guard-jasmine', '~> 2.0.2'
   gem 'jasmine-core', '~> 2.1'
-  gem 'rails-assets-angular-mocks'
-  gem 'rails-assets-sinonjs'
-  gem 'rails-assets-sinon-ng'
-  gem 'rails-assets-angular-debaser'
+  gem 'rails-assets-angular-mocks', '~> 1.2'
+  gem 'rails-assets-sinonjs', '~> 1.10.2'
+  gem 'rails-assets-sinon-ng', '~> 0.1.2'
+  gem 'rails-assets-angular-debaser', '~> 0.3.2'
 end
 
 group :development do

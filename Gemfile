@@ -109,7 +109,7 @@ group :test, :development do
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner', '~> 1.4.0'
 
-
+  # Javascript
   gem 'jasmine-rails', '~> 0.10.6'
   gem 'guard-jasmine', '~> 2.0.2'
   gem 'jasmine-core', '~> 2.1'
@@ -122,7 +122,7 @@ end
 group :development do
   # Pretty
   gem 'better_errors', '~> 2.1.1'
-  gem 'binding_of_caller'
+  gem 'binding_of_caller', '~> 0.7.2' # Used by Better Errors
   gem 'pry-rails', '~> 0.3'
 end
 
@@ -138,7 +138,7 @@ group :assets do
 end
 
 group :production do
-  gem 'aws-sdk', '~> 1.61.0'
+  gem 'aws-sdk', '~> 1.61.0' # Used by Paperclip
 end
 
 group :staging, :production do

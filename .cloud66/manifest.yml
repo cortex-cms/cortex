@@ -4,25 +4,25 @@ staging:
       unique_name: web-stg
       vendor: aws
       region: us-east-1
-      size: m1.medium
+      size: m3.medium
   postgresql:
     server:
       unique_name: db-stg
       vendor: aws
       region: us-east-1
-      size: m1.medium
+      size: m3.medium
   elasticsearch:
     server:
       unique_name: search-stg
       vendor: aws
       region: us-east-1
-      size: m1.medium
+      size: m3.medium
   redis:
     server:
       unique_name: cache-stg
       vendor: aws
       region: us-east-1
-      size: m1.medium
+      size: m3.large
 
 production:
   rails:
@@ -48,4 +48,4 @@ production:
       unique_name: cache-prod
       vendor: aws
       region: us-east-1
-      size: m3.medium
+      size: m3.large

@@ -6,7 +6,6 @@ require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
 require 'rspec/rails'
-require 'shoulda'
 require 'mocha/api'
 require 'elasticsearch/extensions/test/cluster'
 require 'net/http'

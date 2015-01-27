@@ -563,9 +563,9 @@ DEPENDENCIES
   rails-assets-angular-bootstrap-switch (~> 0.3)
   rails-assets-angular-cookies (~> 1.2)
   rails-assets-angular-debaser (~> 0.3.2)
-  rails-assets-angular-flash
+  rails-assets-angular-flash (~> 0.1.14)
   rails-assets-angular-mocks (~> 1.2)
-  rails-assets-angular-redactor
+  rails-assets-angular-redactor (~> 1.1.3)
   rails-assets-angular-resource (~> 1.2)
   rails-assets-angular-sanitize
   rails-assets-angular-ui-router (~> 0.2)

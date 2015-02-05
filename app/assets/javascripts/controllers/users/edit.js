@@ -1,41 +1,35 @@
 angular.module('cortex.controllers.users.edit', [
   'ui.router.state',
-  'angular-flash.service'
+  'angular-flash.service',
+  'validation.match',
+  'cortex.services.cortex',
+  'cortex.controllers.users.facets'
 ])
 
-.controller('UsersEditCtrl', function($scope, $timeout, $state, $anchorScroll, flash, user, author) {
-  $scope.data        = $scope.data || {};
-  $scope.data.user   = user;
-  $scope.data.author = author;
+.controller('UsersEditCtrl', function($scope, $timeout, $state, $anchorScroll, flash, cortex, TenantTree) {
+  $scope.data = $scope.data || {};
+  $scope.data.user = new cortex.users();
+  $scope.data.selectedTenant = TenantTree.selected;
 
-  $scope.saveAuthor = function() {
-    $scope.data.author.$save().then(
-      function() {
-        $anchorScroll();
-        flash.info = 'Saved author information';
-      },
-      function() {
-        $anchorScroll();
-        flash.error = 'Error while saving author information';
-      }
-    );
+  $scope.cancel = function () {
+    $state.go('^.facets.grid');
   };
-  $scope.changePassword = function() {
+
+  $scope.saveUser = function() {
+    $scope.data.user.tenant_id = $scope.data.selectedTenant.id;
     $scope.data.user.$save().then(
-        function() {
-          flash.success = "Successfully updated password, redirecting to login page in 5 seconds...";
-          $timeout(function () { $state.go('login') }, 5000);
-        },
-        function(res) {
-          $anchorScroll();
-          if (res.status === 403) {
-            flash.error = "Current password is invalid";
-          } else if (res.data.errors[0] === "password_confirmation doesn't match Password") {
-            flash.error = "Passwords don't match.";
-          } else {
-            flash.error = "Could not change password, please try again'";
-          }
+      function() {
+        $state.go('^.facets.grid');
+        flash.success = 'Saved user information';
+      },
+      function(res) {
+        $anchorScroll();
+        if (res.status === 403) {
+          flash.error = "Chosen password is invalid";
+        } else {
+          flash.error = 'Error while saving user information';
         }
+      }
     );
   };
 });

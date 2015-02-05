@@ -33,13 +33,21 @@ angular.module('cortex.services.cortex', [
     search: {method: 'GET', params: { }, isArray: true, paginated: true}
   });
 
-  var tenants = cortexResource('/tenants/:id', {id: '@id'});
+  var users = paginatedResource('/users/:id', {id: '@id'}, {
+    me:     {method: 'GET', params: {id: 'me'}}
+  });
+
+  var tenants = paginatedResource('/tenants/:id', {id: '@id'}, {
+    hierarchicalIndex: {method: 'GET', params: {include_children: true}, isArray: true},
+    users: {
+      method: 'GET',
+      url:     settings.cortex_base_url + '/tenants/:id/users',
+      isArray: true,
+      paginated: true
+    }
+  });
 
   var userAuthor = cortexResource('/users/:user_id/author', {user_id: '@user_id'});
-
-  var users = cortexResource('/users/:id', {id: '@id'}, {
-    me: {method: 'GET', params: {id: 'me'}}
-  });
 
   var occupations = cortexResource('/occupations/:id', {id: '@id', isArray: true}, {
     industries: {method: 'GET', params: {id: 'industries'}, isArray: true}

@@ -1,8 +1,7 @@
 section.users-edit {
-  form.author {
-    textarea.bio {
-      resize: none;
-      height: 300px;
-    }
+  @include make-md-column(12);
+
+  .actions div {
+    @include make-md-column(6);
   }
 }

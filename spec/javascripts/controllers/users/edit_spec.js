@@ -3,22 +3,22 @@
 (function() {
   'use strict';
 
-  describe('User Edit Module', function() {
+  describe('User Profile Module', function() {
     beforeEach(function() {
       debaser()
-          .module('cortex.controllers.users.edit')
+          .module('cortex.controllers.users.profile')
           .object('$scope', {})
           .object('user', {})
           .object('author').withFunc('$save').fulfills({})
           .debase();
     });
 
-    describe('UsersEditCtrl', function() {
+    describe('UsersProfileCtrl', function() {
       var constructController;
 
       beforeEach(inject(function($controller) {
         constructController = function() {
-          return $controller('UsersEditCtrl', {});
+          return $controller('UsersProfileCtrl', {});
         };
       }));
 

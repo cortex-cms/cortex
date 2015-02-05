@@ -57,7 +57,8 @@ angular.module('cortex.controllers.posts.edit', [
 
   $scope.redactorOptions = {
     plugins: ['media', 'imageFit'],
-    minHeight: 800
+    minHeight: 800,
+    buttonSource: true
   };
 
   $scope.isAuthorUser = function(post) {

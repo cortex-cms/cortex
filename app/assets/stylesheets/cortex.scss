@@ -96,8 +96,10 @@ main {
   background-color: #104070;
   font-family: 'PT Sans', Arial, sans-serif;
 
-  .navbar-brand {
-    padding-left: 0px;
+  @media (min-width: $screen-md-min) {
+    .navbar-brand {
+      padding-left: 0px;
+    }
   }
 
   .navbar-toggle {

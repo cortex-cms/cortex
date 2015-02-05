@@ -25,7 +25,12 @@ angular.module('cortex', [
     var $state = $injector.get('$state');
 
     if ($injector.get('currentUser')) {
-      $state.go('cortex.organizations.manage')
+      if ($injector.get('currentUser').admin) {
+        $state.go('cortex.organizations.manage')
+      }
+      else {
+        $state.go('cortex.media.manage.components')
+      }
     }
     else {
       $state.go('login');

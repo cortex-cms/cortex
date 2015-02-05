@@ -22,6 +22,7 @@
 //= require ng-tags-input
 //= require bootstrap-switch
 //= require angular-bootstrap-switch
+//= require angular-validation-match
 
 //= require_tree ../templates
 

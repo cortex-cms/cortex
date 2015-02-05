@@ -33,9 +33,9 @@ module Abilities
       def user_abilities(user, user_subject)
         abilities = []
 
-        # Users can view themselves, admins can view all
+        # Users can view/modify/delete themselves, admins can for all
         if user_subject.id == user.id || user.is_admin?
-          abilities += [:view, :update]
+          abilities += [:view, :update, :delete]
         end
 
         abilities
@@ -66,77 +66,39 @@ module Abilities
       end
 
       def post_abilities(user, post)
-        if user.is_admin?
-          [:view, :update, :delete]
-        elsif post.published?
-          [:view]
-        else
-          []
-        end
+        [:view, :update, :delete]
       end
 
       def post_class_abilities(user)
-        if user.is_admin?
-          [:view, :create]
-        else
-          []
-        end
+        [:view, :create]
       end
 
       def media_abilities(user, media)
-        if user.is_admin?
-          [:view, :update, :delete]
-        else
-          []
-        end
+        [:view, :update, :delete]
       end
 
       def media_class_abilities(user)
-        if user.is_admin?
-          [:view, :create]
-        else
-          []
-        end
+        [:view, :create]
       end
 
       def category_class_abilities(user)
-        if user.is_admin?
-          [:view]
-        else
-          []
-        end
+        [:view]
       end
 
       def localization_abilities(user, localization)
-        if user.is_admin?
-          [:view, :update, :delete]
-        else
-          []
-        end
+        [:view, :update, :delete]
       end
 
       def localization_class_abilities(user)
-        if user.is_admin?
-          [:view, :create]
-        else
-          []
-        end
+        [:view, :create]
       end
 
       def locale_abilities(user, locale)
-        if user.is_admin?
-          [:view, :update, :delete]
-        else
-          []
-        end
+        [:view, :update, :delete]
       end
 
       def locale_class_abilities(user)
-        if user.is_admin?
-          [:view, :create]
-        else
-          []
-        end
+        [:view, :create]
       end
 
       def application_abilities(user, application)

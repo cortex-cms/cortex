@@ -4,6 +4,9 @@ angular.module('cortex.states', [
   'cortex.services.cortex',
   'cortex.templates',
 
+  'cortex.controllers.users.facets',
+  'cortex.controllers.users.profile',
+  'cortex.controllers.users.grid',
   'cortex.controllers.users.edit',
 
   'cortex.controllers.media.edit',
@@ -995,18 +998,55 @@ angular.module('cortex.states', [
       }
     })
 
+    // Users
+
     .state('cortex.users', {
       url: '/users',
       abstract: true,
-      template: '<ui-view/>'
+      template: '<div class="admin-users" ui-view></div>',
+      data: {
+        ncyBreadcrumbLabel: 'Users'
+      }
     })
 
-    .state('cortex.users.edit', {
+    .state('cortex.users.facets', {
+      url: '',
+      abstract: true,
+      controller: 'UsersFacetCtrl',
+      templateUrl: 'users/facets.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.users.facets.grid', {
+      url: '',
+      views: {
+        'users-grid': {
+          templateUrl: 'users/grid.html',
+          controller: 'UsersGridCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+
+  .state('cortex.users.new', {
       url: '/:userId',
       templateUrl: 'users/edit.html',
       controller: 'UsersEditCtrl',
       data: {
-        ncyBreadcrumbLabel: 'Users/Edit'
+          ncyBreadcrumbLabel: 'New User'
+      }
+  })
+
+    .state('cortex.users.profile', {
+      url: '/:userId',
+      templateUrl: 'users/profile.html',
+      controller: 'UsersProfileCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Profile'
       },
       resolve: {
         user: ['$stateParams', 'cortex', function($stateParams, cortex) {

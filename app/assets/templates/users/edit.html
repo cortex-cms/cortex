@@ -1,89 +1,65 @@
 <section class="users-edit">
-  <div class="row">
-    <div class="col-md-6 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Author Information - {{ data.user.fullname }}
-        </div>
-        <div class="panel-body">
-          <form novalidate class="author" name="authorForm">
-            <div class="form-group">
-              <label for="author.firstname">First name</label>
-              <input class="form-control" type="text" name="author.firstname"
-                     ng-model="data.author.firstname" required
-                     placeholder="First name (required)">
-            </div>
-            <div class="form-group">
-              <label for="author.lastname">Last name</label>
-              <input class="form-control" type="text" name="author.lastname"
-                     ng-model="data.author.lastname" required
-                     placeholder="Last name (required)">
-            </div>
-            <div class="form-group">
-              <label for="author.email">Email</label>
-              <input class="form-control" type="text" name="author.email"
-                     ng-model="data.author.email" required
-                     placeholder="Email (required)">
-            </div>
-            <div class="form-group">
-              <label for="author.bio">Biography/Summary</label>
-              <textarea class="form-control bio" name="author.bio"
-                        ng-model="data.author.bio" required
-                        placeholder="Biography (required)"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="author.personal">Personal Website</label>
-              <input class="form-control" type="text" name="author.personal"
-                     ng-model="data.author.personal" placeholder="Personal Website">
-            </div>
-            <div class="form-group">
-              <label for="author.facebook">Facebook</label>
-              <input class="form-control" type="text" name="author.facebook"
-                     ng-model="data.author.facebook" placeholder="Facebook">
-            </div>
-            <div class="form-group">
-              <label for="author.twitter">Twitter</label>
-              <input class="form-control" type="text" name="author.twitter"
-                     ng-model="data.author.twitter" placeholder="Twitter">
-            </div>
-            <div class="form-group">
-              <label for="author.gplus">Google Plus</label>
-              <input class="form-control" type="text" name="author.gplus"
-                     ng-model="data.author.gplus" placeholder="Google Plus">
-            </div>
-            <button type="button" class="btn btn-primary btn-block"
-                    ng-disabled="authorForm.$invalid" ng-click="saveAuthor()">Save</button>
-          </form>
-        </div>
-      </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      New User Information
     </div>
-  <div class="col-md-6 col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Password Management
-      </div>
-      <div class="panel-body">
-        <form novalidate class="password" name="passwordForm">
-          <div class="form-group">
-            <label for="user.current_password">Current Password</label>
-            <input class="form-control" type="password" name="user.current_password"
-                   ng-model="data.user.current_password" required>
+    <div class="panel-body">
+      <form novalidate class="user" name="userForm">
+        <div class="form-group">
+          <label for="user.firstname">First name</label>
+          <input class="form-control" type="text" id="user.firstname"
+                 ng-model="data.user.firstname" required
+                 placeholder="First name (required)">
+        </div>
+        <div class="form-group">
+          <label for="user.lastname">Last name</label>
+          <input class="form-control" type="text" id="user.lastname"
+                 ng-model="data.user.lastname" required
+                 placeholder="Last name (required)">
+        </div>
+        <div class="form-group">
+          <label for="user.email">Email</label>
+          <input class="form-control" type="text" id="user.email"
+                 ng-model="data.user.email" required
+                 placeholder="Email (required)">
+        </div>
+        <div class="form-group">
+          <label for="user.password">Password</label>
+          <input class="form-control" type="password" id="user.password"
+                 ng-model="data.user.password" required ng-minlength="8"
+                 placeholder="Password (required - 8 characters or more)">
+        </div>
+        <div class="form-group">
+          <label for="user.password_confirmation">Confirm Password</label>
+          <input class="form-control" type="password" id="user.password_confirmation" name="password_confirmation"
+                 ng-model="data.user.password_confirmation" required ng-minlength="8"
+                 data-match="data.user.password" placeholder="Please re-enter your password">
+        </div>
+        <div data-ng-show="userForm.password_confirmation.$error.match">Passwords do not match!</div>
+        <div class="form-group">
+          <label for="user.tenant">Selected Tenant</label>
+          <div id="user.tenant" class="form-control-static">{{data.selectedTenant.name}}</div>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="user.admin"
+                 ng-model="data.user.admin">
+          <label for="user.admin">Is Admin?</label>
+        </div>
+        <div class="actions row">
+          <div>
+            <button type="button" class="btn btn-default btn-block" ng-click="cancel()">
+              <i class="fa fa-reply"></i> Cancel
+            </button>
           </div>
-          <div class="form-group">
-            <label for="user.password">New Password</label>
-            <input class="form-control" type="password" name="user.password"
-                   ng-model="data.user.password" required ng-minlength="8">
+
+          <div>
+            <button type="button" class="btn btn-primary btn-block"
+                    ng-disabled="userForm.$invalid || userForm.$pistine" ng-click="saveUser()">
+              <i class="fa fa-cloud-upload"></i> Submit
+            </button>
           </div>
-          <div class="form-group">
-            <label for="user.password_confirmation">Confirm Password</label>
-            <input class="form-control" type="password" name="user.password_confirmation"
-                   ng-model="data.user.password_confirmation" required ng-minlength="8">
-          </div>
-          <button type="button" class="btn btn-primary btn-block"
-                  ng-disabled="passwordForm.$invalid" ng-click="changePassword()">Change Password</button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
-</div>
 </section>

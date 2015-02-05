@@ -15,7 +15,15 @@ class User < ActiveRecord::Base
   has_many   :localizations
   has_many   :locales
 
-  validates_presence_of :email
+  validates_presence_of :email, :tenant, :password, :firstname, :lastname
+
+  scope :tenantUsers, -> (tenant_id) { where(tenant_id: tenant_id) }
+
+  def referenced?
+    [Media, Post, Locale, Localization].find do |resource|
+      true if resource.where(user: self).count > 0
+    end
+  end
 
   def anonymous?
     self.id == nil
@@ -31,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def to_json(options={})
-    options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname)
+    options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname admin)
     options[:methods] ||= %w(fullname)
     super(options)
   end

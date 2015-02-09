@@ -16,7 +16,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
     it 'should return all posts' do
       get '/api/v1/posts'
       expect(response).to be_success
-      expect(JSON.parse(response.body).count).to eq(::Post.count)
+      expect(JSON.parse(response.body).count).to eq ::Post.count
     end
 
     it 'should return paginated results' do
@@ -24,7 +24,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
       get '/api/v1/posts?per_page=2'
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(2)
-      expect(response.headers['X-Total-Items']).to eq("#{::Post.count}")
+      expect(response.headers['X-Total-Items'].to_i).to eq ::Post.count
       expect(response.headers['Content-Range']).to eq("posts 0-1:2/#{::Post.count}")
     end
 

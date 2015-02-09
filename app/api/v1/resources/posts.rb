@@ -34,7 +34,7 @@ module API
           get 'feed' do
             require_scope! :'view:posts'
             authorize! :view, ::Post
-            last_updated_at = Post.published_last_updated_at
+            last_updated_at = Post.last_updated_at
             params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
             cache_key       = "feed-#{last_updated_at}-#{params_hash}"
 

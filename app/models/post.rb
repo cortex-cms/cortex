@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   include FindByTenant
 
   default_scope -> { includes(:categories, :media, :industries) }
-  scope :published, -> { where('published_at <= ? and draft = ?', DateTime.now, false) }
+  scope :published, -> { where('published_at <= ? and draft = ? and (expired_at >= ? OR expired_at is null)', DateTime.now, false, DateTime.now) }
   scope :published_last_updated_at, -> { published.order(updated_at: :desc).select('updated_at').first.updated_at }
 
   acts_as_taggable

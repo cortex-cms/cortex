@@ -36,9 +36,10 @@ RSpec.describe Post, type: :model do
 
   describe Post.published do
     before :all do
-      @unpublished_post = create(:post, draft: true)
-      @future_post = create(:post, published_at: Time.now + 2.days)
-      @expired_post =  create(:post, expired_at: Time.now - 2.days)
+      user = create(:user)
+      @unpublished_post = create(:post, user: user, draft: true)
+      @future_post = create(:post, user: user, published_at: Time.now + 2.days)
+      @expired_post =  create(:post, user: user, expired_at: Time.now - 2.days)
       @post = create(:post)
     end
 

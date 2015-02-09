@@ -38,7 +38,7 @@ module API
             params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
             cache_key       = "feed-#{last_updated_at}-#{params_hash}"
 
-            posts_page = ::Rails.cache.fetch(cache_key) do
+            posts_page = ::Rails.cache.fetch(cache_key, expires_in: 1.hour) do
               posts = ::GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id, published: true).posts
               entity_page(posts, Entities::Post, sanitize: true)
             end

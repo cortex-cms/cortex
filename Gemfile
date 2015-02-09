@@ -77,6 +77,7 @@ gem 'devise', '~> 3.4.1'
 gem 'rack-oauth2', '~> 1.0.9'
 
 # Utility
+gem 'excon', '~> 0.44.1'
 gem 'hashr', '~> 0.0.22'
 gem 'mime-types', '~> 2.4.3'
 gem 'json'
@@ -135,6 +136,10 @@ end
 
 group :assets do
   gem 'coffee-rails', '~> 4.1.0'
+end
+
+group :test, :development, :staging do
+  gem 'fog', '~> 1.27.0'
 end
 
 group :production do

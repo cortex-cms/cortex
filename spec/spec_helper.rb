@@ -28,7 +28,7 @@ RSpec.configure do |config|
   config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: /spec\/api/
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.strategy = :transaction, {except: %w[public.schema_migrations]}
     DatabaseCleaner.clean_with(:truncation)
     elasticsearch_status = test_elasticsearch
   end

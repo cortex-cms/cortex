@@ -40,6 +40,8 @@ Cortex::Application.configure do
 
   config.cache_store = :memory_store
 
+  Fog.mock!
+
   Sidekiq.configure_server do |config|
     config.redis = { :namespace => 'cortex_test' }
   end

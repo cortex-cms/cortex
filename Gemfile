@@ -69,7 +69,7 @@ gem 'kaminari', '~> 0.16.1'
 gem 'sanitize', '~> 3.1'
 gem 'paranoia', '~> 2.0'
 gem 'pg', '~> 0.18.1'
-gem 'activeuuid', git: 'git@github.com:cb-talent-development/activeuuid.git'
+gem 'activeuuid', '~> 0.6.0'
 
 # Authorization
 gem 'six', '~> 0.2.0'

@@ -37,29 +37,7 @@ Cortex::Application.configure do
 
   config.cache_store = :memory_store
 
-  if ENV['S3_BUCKET_NAME'].to_s != ''
-    config.paperclip_defaults = {
-      :storage => :s3,
-      :s3_credentials => {
-        :bucket => ENV['S3_BUCKET_NAME'],
-        :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-        :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
-        :url => ':s3_alias_url',
-        :s3_host_alias => ENV['S3_HOST_ALIAS']
-      }
-    }
-  else
-    Paperclip.options[:command_path] = "/usr/local/bin/"
-    config.paperclip_defaults = {
-      storage: :fog,
-      fog_host: ENV['HOST'],
-      fog_directory: '',
-      fog_credentials: {
-        provider: 'Local',
-        local_root: "#{Rails.root}/public"
-      }
-    }
-  end
+  Fog.mock!
 
   Sidekiq.configure_server do |config|
     config.redis = { :namespace => 'cortex_test' }

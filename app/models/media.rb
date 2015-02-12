@@ -22,8 +22,9 @@ class Media < ActiveRecord::Base
       :medium  => {geometry: '800x800>', format: :jpg},
       :default => {geometry: '300x300>', format: :jpg},
       :mini    => {geometry: '100x100>', format: :jpg},
-      :micro   => {geometry: '50x50>', format: :jpg}
-  }
+      :micro   => {geometry: '50x50>', format: :jpg},
+      :ar_post => {geometry: '1140x', format: :jpg}
+  }, processors: [:thumbnail, :paperclip_optimizer]
 
   before_attachment_post_process :can_thumb
 

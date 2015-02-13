@@ -1,4 +1,9 @@
+default: &default
+  extra_packages:
+    - jpegoptim
+
 staging:
+  <<: *default
   rails:
     server:
       unique_name: web-stg
@@ -25,6 +30,7 @@ staging:
       size: m3.large
 
 production:
+  <<: *default
   rails:
     server:
       unique_name: web-prod

@@ -114,9 +114,9 @@ module API
         end
 
         def clean_params(params)
-          params.reject do |_,v|
+          Hashie::Mash.new(params.reject do |_,v|
             v.blank?
-          end
+          end)
         end
       end
     end

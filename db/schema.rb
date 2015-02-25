@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20150113171837) do
     t.integer  "display",                              null: false
     t.text     "notes"
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.string   "copyright_owner",     limit: 255
     t.string   "seo_title",           limit: 255
     t.string   "seo_description",     limit: 255
@@ -192,12 +193,17 @@ ActiveRecord::Schema.define(version: 20150113171837) do
     t.string   "custom_author",       limit: 255
     t.string   "slug",                limit: 255,                  null: false
 =======
+=======
+>>>>>>> 7c2df1164560cb4cdcb5e94588995a99516e73cf
     t.string   "copyright_owner"
     t.string   "seo_title"
     t.string   "seo_description"
     t.string   "seo_preview"
     t.string   "custom_author"
     t.string   "slug",                                 null: false
+<<<<<<< HEAD
+>>>>>>> 7c2df1164560cb4cdcb5e94588995a99516e73cf
+=======
 >>>>>>> 7c2df1164560cb4cdcb5e94588995a99516e73cf
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
@@ -205,7 +211,11 @@ ActiveRecord::Schema.define(version: 20150113171837) do
     t.integer  "tile_media_id"
     t.hstore   "meta"
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.string   "type",                limit: 255, default: "Post", null: false
+=======
+    t.string   "type",                default: "Post", null: false
+>>>>>>> 7c2df1164560cb4cdcb5e94588995a99516e73cf
 =======
     t.string   "type",                default: "Post", null: false
 >>>>>>> 7c2df1164560cb4cdcb5e94588995a99516e73cf

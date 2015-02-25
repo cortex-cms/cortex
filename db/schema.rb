@@ -19,21 +19,21 @@ ActiveRecord::Schema.define(version: 20150113171837) do
   enable_extension "uuid-ossp"
 
   create_table "applications", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "write",      default: false
+    t.boolean  "write",                  default: false
     t.integer  "tenant_id"
   end
 
   add_index "applications", ["tenant_id"], name: "index_applications_on_tenant_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
-    t.string  "firstname"
-    t.string  "lastname"
-    t.string  "email"
+    t.string  "firstname", limit: 255
+    t.string  "lastname",  limit: 255
+    t.string  "email",     limit: 255
     t.hstore  "sites"
-    t.string  "title"
+    t.string  "title",     limit: 255
     t.text    "bio"
     t.integer "user_id"
   end
@@ -182,13 +182,13 @@ ActiveRecord::Schema.define(version: 20150113171837) do
     t.string   "seo_description",     limit: 255
     t.string   "seo_preview",         limit: 255
     t.string   "custom_author",       limit: 255
-    t.string   "slug",                                             null: false
+    t.string   "slug",                limit: 255,                  null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "type",                            default: "Post", null: false
+    t.string   "type",                limit: 255, default: "Post", null: false
     t.integer  "author_id"
   end
 

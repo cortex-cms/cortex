@@ -34,7 +34,7 @@ angular.module('cortex.states', [
   'cortex.controllers.applications.grid',
   'cortex.controllers.credentials.grid',
   'cortex.controllers.credentials.edit',
-  'cortex.controllers.credentials.new'
+  'cortex.controllers.credentials.new',
 
 ])
 
@@ -1134,5 +1134,15 @@ angular.module('cortex.states', [
       data: {
         ncyBreadcrumbLabel: 'Edit'
       }
-    });
+    })
+
+    // Page Editor
+
+    .state('cortex.pages', {
+          url: '/pages',
+          template: '<div class="pages" ui-view></div>',
+          data: {
+              ncyBreadcrumbLabel: 'Page Editor'
+          }
+      });
 });

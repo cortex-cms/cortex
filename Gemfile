@@ -61,6 +61,7 @@ gem 'rails-assets-angular-validation-match', '< 1.4'
 gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.0'
 gem 'paperclip', '~> 4.2'
+gem 'paperclip-optimizer', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'bcrypt', '~> 3.1.9'
 gem 'elasticsearch-model', '~> 0.1'
@@ -69,7 +70,7 @@ gem 'kaminari', '~> 0.16.1'
 gem 'sanitize', '~> 3.1'
 gem 'paranoia', '~> 2.0'
 gem 'pg', '~> 0.18.1'
-gem 'activeuuid', git: 'git@github.com:cb-talent-development/activeuuid.git'
+gem 'activeuuid', '~> 0.6.0'
 
 # Authorization
 gem 'six', '~> 0.2.0'
@@ -77,6 +78,7 @@ gem 'devise', '~> 3.4.1'
 gem 'rack-oauth2', '~> 1.0.9'
 
 # Utility
+gem 'excon', '~> 0.44.1'
 gem 'hashr', '~> 0.0.22'
 gem 'mime-types', '~> 2.4.3'
 gem 'json'
@@ -107,7 +109,7 @@ group :test, :development do
   # Mocking/Faking
   gem 'mocha', '~> 1.1.0', require: false
   gem 'factory_girl_rails', '~> 4.5.0'
-  gem 'database_cleaner', '~> 1.4.0'
+  gem 'database_cleaner', '~> 1.3.0'
 
   # Javascript
   gem 'jasmine-rails', '~> 0.10.6'
@@ -135,6 +137,10 @@ end
 
 group :assets do
   gem 'coffee-rails', '~> 4.1.0'
+end
+
+group :test, :development, :staging do
+  gem 'fog', '~> 1.27.0'
 end
 
 group :production do

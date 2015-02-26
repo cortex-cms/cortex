@@ -12,6 +12,7 @@ module Cortex
     config.active_record.default_timezone = :utc
     config.active_record.observers = :media_observer, :post_observer, :tenant_observer, :user_observer, :youtube_observer
     config.active_job.queue_adapter = :sidekiq
+    config.assets.image_optim = false
 
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true

@@ -7,18 +7,11 @@ GIT
       faraday_middleware (~> 0.9.1)
       oauth2 (~> 1.0)
 
-GIT
-  remote: git@github.com:cb-talent-development/activeuuid.git
-  revision: 894d00f69bf1467345d54b2e4d417aacdf687e6a
-  specs:
-    activeuuid (0.5.0)
-      activerecord (>= 3.1)
-      uuidtools
-
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
+    CFPropertyList (2.3.0)
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
       actionview (= 4.2.0)
@@ -54,6 +47,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    activeuuid (0.6.0)
+      activerecord (>= 3.1)
+      uuidtools
     acts-as-taggable-on (3.4.3)
       activerecord (>= 3.2, < 5)
     angular-rails-templates (0.1.3)
@@ -105,7 +101,7 @@ GEM
     connection_pool (2.1.1)
     cortex-exceptions (0.0.4)
     crass (1.0.1)
-    database_cleaner (1.4.0)
+    database_cleaner (1.3.0)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -139,7 +135,9 @@ GEM
       multi_json
     equalizer (0.0.9)
     erubis (2.7.0)
+    excon (0.44.1)
     execjs (2.2.2)
+    exifr (1.2.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
@@ -150,9 +148,87 @@ GEM
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
     ffi (1.9.6)
+    fission (0.5.0)
+      CFPropertyList (~> 2.2)
+    fog (1.27.0)
+      fog-atmos
+      fog-aws (~> 0.0)
+      fog-brightbox (~> 0.4)
+      fog-core (~> 1.27, >= 1.27.3)
+      fog-ecloud
+      fog-json
+      fog-profitbricks
+      fog-radosgw (>= 0.0.2)
+      fog-sakuracloud (>= 0.0.4)
+      fog-serverlove
+      fog-softlayer
+      fog-storm_on_demand
+      fog-terremark
+      fog-vmfusion
+      fog-voxel
+      fog-xml (~> 0.1.1)
+      ipaddress (~> 0.5)
+      nokogiri (~> 1.5, >= 1.5.11)
+    fog-atmos (0.1.0)
+      fog-core
+      fog-xml
+    fog-aws (0.0.6)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-brightbox (0.7.1)
+      fog-core (~> 1.22)
+      fog-json
+      inflecto (~> 0.0.2)
+    fog-core (1.27.3)
+      builder
+      excon (~> 0.38)
+      formatador (~> 0.2)
+      mime-types
+      net-scp (~> 1.1)
+      net-ssh (>= 2.1.3)
+    fog-ecloud (0.0.2)
+      fog-core
+      fog-xml
+    fog-json (1.0.0)
+      multi_json (~> 1.0)
+    fog-profitbricks (0.0.1)
+      fog-core
+      fog-xml
+      nokogiri
+    fog-radosgw (0.0.3)
+      fog-core (>= 1.21.0)
+      fog-json
+      fog-xml (>= 0.0.1)
+    fog-sakuracloud (0.1.1)
+      fog-core
+      fog-json
+    fog-serverlove (0.1.1)
+      fog-core
+      fog-json
+    fog-softlayer (0.3.28)
+      fog-core (>= 1.27.3)
+      fog-json
+    fog-storm_on_demand (0.1.0)
+      fog-core
+      fog-json
+    fog-terremark (0.0.3)
+      fog-core
+      fog-xml
+    fog-vmfusion (0.0.1)
+      fission
+      fog-core
+    fog-voxel (0.0.2)
+      fog-core
+      fog-xml
+    fog-xml (0.1.1)
+      fog-core
+      nokogiri (~> 1.5, >= 1.5.11)
     font-awesome-sass (4.2.2)
       sass (~> 3.2)
     formatador (0.2.5)
+    fspath (2.1.1)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
     gon (5.2.3)
@@ -207,10 +283,20 @@ GEM
     httpclient (2.6.0.1)
     i18n (0.7.0)
     ice_nine (0.11.1)
+    image_optim (0.20.2)
+      exifr (~> 1.1, >= 1.1.3)
+      fspath (~> 2.1)
+      image_size (~> 1.3)
+      in_threads (~> 1.3)
+      progress (~> 3.0, >= 3.0.1)
+    image_size (1.4.1)
+    in_threads (1.3.1)
+    inflecto (0.0.2)
     interactor (3.1.0)
     interactor-rails (2.0.1)
       interactor (~> 3.0)
       rails (>= 3, < 5)
+    ipaddress (0.8.0)
     jasmine (2.1.0)
       jasmine-core (~> 2.1.0)
       phantomjs
@@ -257,6 +343,9 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     nenv (0.2.0)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
     newrelic_rpm (3.9.9.275)
     ng-rails-csrf (0.1.0)
     ngmin-rails (0.4.0)
@@ -280,10 +369,14 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paperclip-optimizer (2.0.0)
+      image_optim (~> 0.19)
+      paperclip (>= 3.4)
     paranoia (2.1.0)
       activerecord (~> 4.0)
     pg (0.18.1)
     phantomjs (1.9.8.0)
+    progress (3.1.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -507,7 +600,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activeuuid!
+  activeuuid (~> 0.6.0)
   acts-as-taggable-on (~> 3.4)
   angular-rails-templates (~> 0.1.3)
   awesome_nested_set (~> 3.0)
@@ -518,14 +611,16 @@ DEPENDENCIES
   codeclimate-test-reporter (~> 0.4.5)
   coffee-rails (~> 4.1.0)
   cortex-exceptions (~> 0.0.4)
-  database_cleaner (~> 1.4.0)
+  database_cleaner (~> 1.3.0)
   devise (~> 3.4.1)
   doorkeeper (~> 1.4)
   dotenv (~> 1.0.2)
   elasticsearch-extensions (~> 0.0.17)
   elasticsearch-model (~> 0.1)
   elasticsearch-rails (~> 0.1)
+  excon (~> 0.44.1)
   factory_girl_rails (~> 4.5.0)
+  fog (~> 1.27.0)
   font-awesome-sass (~> 4.2.2)
   gon (~> 5.2.3)
   grape (~> 0.10)
@@ -550,6 +645,7 @@ DEPENDENCIES
   ng-rails-csrf (~> 0.1.0)
   ngmin-rails (~> 0.4.0)
   paperclip (~> 4.2)
+  paperclip-optimizer (~> 2.0)
   paranoia (~> 2.0)
   pg (~> 0.18.1)
   pry-rails (~> 0.3)

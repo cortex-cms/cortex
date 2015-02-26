@@ -9,8 +9,10 @@ guard :rspec, cmd: "bundle exec rspec" do
   # Rails example
   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^app/(.*)(\.erb|\.haml|\.slim)$})          { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }
-  watch(%r{^app/controllers/(.+)_(controller)\.rb$})  { |m| "spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb"] }
+  watch(%r{^app/controllers/(.+)_(controller)\.rb$})  { |m| "spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb" }
+  watch(%r{^app/interactors/(.+)\.rb$})               { |m| "spec/interactors/#{m[1]}_Spec.rb" }
   watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
+  watch(%r{^spec/factories/(.+)\.rb$})                { "spec" }
   watch('app/controllers/application_controller.rb')  { ["spec/controllers", "spec/api"] }
   watch('app/controllers/api_controller.rb')          { "spec/api" }
 end

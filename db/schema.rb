@@ -205,6 +205,8 @@ ActiveRecord::Schema.define(version: 20150113171837) do
     t.string   "type",                limit: 255, default: "Post", null: false
     t.string   "type",                default: "Post", null: false
     t.string   "type",                            default: "Post", null: false
+    t.string   "type",                limit: 255, default: "Post", null: false
+    t.string   "type",                default: "Post", null: false
     t.integer  "author_id"
   end
 

@@ -19,21 +19,21 @@ ActiveRecord::Schema.define(version: 20150113171837) do
   enable_extension "uuid-ossp"
 
   create_table "applications", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "write",                  default: false
+    t.boolean  "write",      default: false
     t.integer  "tenant_id"
   end
 
   add_index "applications", ["tenant_id"], name: "index_applications_on_tenant_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
-    t.string  "firstname", limit: 255
-    t.string  "lastname",  limit: 255
-    t.string  "email",     limit: 255
+    t.string  "firstname"
+    t.string  "lastname"
+    t.string  "email"
     t.hstore  "sites"
-    t.string  "title",     limit: 255
+    t.string  "title"
     t.text    "bio"
     t.integer "user_id"
   end
@@ -184,31 +184,27 @@ ActiveRecord::Schema.define(version: 20150113171837) do
     t.integer  "job_phase",                            null: false
     t.integer  "display",                              null: false
     t.text     "notes"
-<<<<<<< HEAD
     t.string   "copyright_owner",     limit: 255
     t.string   "seo_title",           limit: 255
     t.string   "seo_description",     limit: 255
     t.string   "seo_preview",         limit: 255
     t.string   "custom_author",       limit: 255
     t.string   "slug",                limit: 255,                  null: false
-=======
     t.string   "copyright_owner"
     t.string   "seo_title"
     t.string   "seo_description"
     t.string   "seo_preview"
     t.string   "custom_author"
     t.string   "slug",                                 null: false
->>>>>>> 7c2df1164560cb4cdcb5e94588995a99516e73cf
+    t.string   "slug",                                             null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-<<<<<<< HEAD
     t.string   "type",                limit: 255, default: "Post", null: false
-=======
     t.string   "type",                default: "Post", null: false
->>>>>>> 7c2df1164560cb4cdcb5e94588995a99516e73cf
+    t.string   "type",                            default: "Post", null: false
     t.integer  "author_id"
   end
 

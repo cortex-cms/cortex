@@ -1135,10 +1135,7 @@ angular.module('cortex.states', [
         ncyBreadcrumbLabel: 'Edit'
       }
     })
-
-    // Page Editor
-
-    .state('cortex.pages', {
+      .state('cortex.pages', {
           url: '/pages',
           template: '<div class="pages" ui-view></div>',
           data: {

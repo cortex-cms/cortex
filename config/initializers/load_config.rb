@@ -8,7 +8,6 @@ module Cortex
   def self.load_config
     c = Hashr.new(self.load_yaml("#{Rails.root}/config/config.yml")[Rails.env])
     c.media.allowed_media_types = Hashr.new(self.load_yaml("#{Rails.root}/config/media_types.yml")).allowed
-    c.sanitize_whitelist = Hashr.new(self.load_yaml("#{Rails.root}/config/sanitize_whitelist.yml"))
     c
   end
 

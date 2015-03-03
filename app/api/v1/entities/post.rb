@@ -20,6 +20,8 @@ module API
         expose :seo_description, documentation: {type: "String", desc: "SEO-specific description for this post"}
         expose :primary_category_id, documentation: {type: "Integer", desc: "Primary Category ID"}
         expose :primary_industry_id, documentation: {type: "Integer", desc: "Primary Industry ID"}
+        expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
+        expose :body, documentation: {desc: "Body of the post", type: "String"}
 
         expose :categories, using: 'Entities::Category', documentation: {type: 'Category', is_array: true, desc: "Categories"}
         expose :featured_media, using: 'Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Featured Media for this post"}
@@ -40,16 +42,6 @@ module API
             post[:custom_author]
           end
         end
-
-        expose :body, documentation: {desc: "Body of the post", type: "String"} do |post, options|
-          if options[:sanitize]
-            Sanitize.fragment(post[:body], Cortex.config.sanitize_whitelist.post)
-          else
-            post[:body]
-          end
-        end
-
-        expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
 
         with_options if: lambda { |post, _| post.type == 'PromoPost' } do
           expose :destination_url, { documentation: { type: "String", desc: "Destination URL for a Promo Post"} }

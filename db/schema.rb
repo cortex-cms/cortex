@@ -184,28 +184,17 @@ ActiveRecord::Schema.define(version: 20150113171837) do
     t.integer  "job_phase",                            null: false
     t.integer  "display",                              null: false
     t.text     "notes"
-    t.string   "copyright_owner",     limit: 255
-    t.string   "seo_title",           limit: 255
-    t.string   "seo_description",     limit: 255
-    t.string   "seo_preview",         limit: 255
-    t.string   "custom_author",       limit: 255
-    t.string   "slug",                limit: 255,                  null: false
     t.string   "copyright_owner"
     t.string   "seo_title"
     t.string   "seo_description"
     t.string   "seo_preview"
     t.string   "custom_author"
     t.string   "slug",                                 null: false
-    t.string   "slug",                                             null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "type",                limit: 255, default: "Post", null: false
-    t.string   "type",                default: "Post", null: false
-    t.string   "type",                            default: "Post", null: false
-    t.string   "type",                limit: 255, default: "Post", null: false
     t.string   "type",                default: "Post", null: false
     t.integer  "author_id"
   end

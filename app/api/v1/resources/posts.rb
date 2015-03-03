@@ -40,7 +40,7 @@ module API
 
             posts_page = ::Rails.cache.fetch(cache_key, expires_in: 1.hour) do
               posts = ::GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id, published: true).posts
-              entity_page(posts, Entities::Post, sanitize: true)
+              entity_page(posts, Entities::Post)
             end
 
             set_pagination_headers(OpenStruct.new(posts_page[:paging]), 'posts')
@@ -57,7 +57,7 @@ module API
             @post = ::GetPost.call(id: params[:id], published: true, tenant: current_tenant.id).post
             not_found! unless @post
             authorize! :view, @post
-            present @post, with: Entities::Post, sanitize: true, full: true
+            present @post, with: Entities::Post, full: true
           end
 
           desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }

@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:title)    { |n| "post#{n}" }
     sequence(:slug)     { |n| "post-#{n}" }
     short_description   'This is a short description of the post that is long enough'
-    body                '<p style="sanitize-test-class">Test paragraph text</p><script type="javascript">alert("I should be stripped out");</script>'
+    body                '<p style="sanitize-test-class">Test paragraph text</p><script type="javascript">alert("I should still remain");</script>'
     copyright_owner     :'CareerBuilder, LLC'
     job_phase           :Discovery
     display             :large

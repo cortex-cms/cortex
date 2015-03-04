@@ -2,11 +2,13 @@
   .page-tile-style {
     width: 90px;
     height: 100px;
-    border: 2px
-    solid #000
+    border: 2px solid  #000;
+    text-align: center;
+    i {
+      display: block;
+    }
   }
   .page-plus-sign{
-    line-height: 1.5;
-    font-size: 50px
+    line-height: 1.4;
   }
 }

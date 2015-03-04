@@ -15,7 +15,7 @@
         <li ng-class="{ active: $state.includes('cortex.posts') }"><a class="navbar-item" ui-sref="cortex.posts.manage.components">Posts</a></li>
         <li ng-class="{ active: $state.includes('cortex.localizations') }"><a class="navbar-item" ui-sref="cortex.localizations.manage">Localizations</a></li>
         <li ng-if="currentUser.admin" ng-class="{ active: $state.includes('cortex.applications') }"><a class="navbar-item" ui-sref="cortex.applications.manage">Applications</a></li>
-        <li ng-class="{ active: $state.includes('cortex.pages') }"><a class="navbar-item" ui-sref="cortex.pages">Page Editor</a></li>
+        <li ng-class="{ active: $state.includes('cortex.pages') }"><a class="navbar-item" ui-sref="cortex.pages.manage">Page Editor</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-items-admin small navbar-right">
         <li ng-class="{ active: $state.includes('cortex.users.profile') }"><a class="navbar-item" ui-sref="cortex.users.profile({userId: currentUser.id})">Profile</a></li>

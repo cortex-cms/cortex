@@ -1137,9 +1137,17 @@ angular.module('cortex.states', [
     })
       .state('cortex.pages', {
           url: '/pages',
+          abstract: true,
           template: '<div class="pages" ui-view></div>',
           data: {
               ncyBreadcrumbLabel: 'Page Editor'
+          }
+      })
+      .state('cortex.pages.manage', {
+          url: '',
+          templateUrl: 'pages/manage.html',
+          data: {
+              ncyBreadcrumbLabel: false
           }
       });
 });

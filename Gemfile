@@ -42,7 +42,6 @@ gem 'underscore-rails', '~> 1.7.0'
 
 gem 'rails-assets-angular', '~> 1.2'
 gem 'rails-assets-angular-animate', '~> 1.2'
-gem 'rails-assets-angular-sanitize', '~> 1.3.5'
 gem 'rails-assets-angular-resource', '~> 1.2'
 gem 'rails-assets-angular-cookies', '~> 1.2'
 gem 'rails-assets-angular-ui-router', '~> 0.2'

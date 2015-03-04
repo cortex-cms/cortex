@@ -9,7 +9,6 @@
 //= require angular
 //= require angular-rails-templates
 //= require angular-resource
-//= require angular-sanitize
 //= require angular-animate
 //= require angular-ui-router
 //= require angular-bootstrap

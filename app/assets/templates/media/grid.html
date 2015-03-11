@@ -83,7 +83,10 @@
         <br>
         <strong>Author: </strong>{{ media.creator.fullname }}<br>
         <strong>Description: </strong>{{ media.description }}<br>
-        <strong>Tags: </strong>{{ media.tag_list.join(', ') }}
+        <strong>Tags: </strong>
+          <span class="label label-primary" ng-repeat="tag in media.tag_list">
+            {{ tag }}
+          </span>
       </div>
 
       <div class="media-data-actions">

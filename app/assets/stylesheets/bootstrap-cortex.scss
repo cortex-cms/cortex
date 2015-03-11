@@ -10,6 +10,14 @@ $navbar-inverse-link-color: #BFBFBF;
   @include truncate;
 }
 
+.label {
+  margin-right: $standard-margin / 4;
+}
+
+.breadcrumb {
+  margin-bottom: $standard-margin;
+}
+
 .modal {
   z-index: 1054; // Priority over Redactor toolbar
 }

@@ -657,7 +657,7 @@ DEPENDENCIES
   rails-assets-angular-ui-router (~> 0.2)
   rails-assets-angular-validation-match (< 1.4)
   rails-assets-angularjs-file-upload (~> 2.0.2)
-  rails-assets-bootstrap-sass-official (~> 3.3.1)
+  rails-assets-bootstrap-sass-official (~> 3.3.3)
   rails-assets-ng-table (~> 0.3.3)
   rails-assets-ng-tags-input (~> 2.1.1)
   rails-assets-sinon-ng (~> 0.1.2)

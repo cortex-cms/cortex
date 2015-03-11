@@ -40,7 +40,7 @@ main {
 // Sidebar Filters
 
 .filter-group {
-  button{
+  button {
     margin-top: $standard-margin;
     margin-bottom: $standard-margin;
   }
@@ -93,30 +93,11 @@ main {
 
 .navbar-admin {
   @extend .container-fluid;
-  background-color: #104070;
   font-family: 'PT Sans', Arial, sans-serif;
 
   @media (min-width: $screen-md-min) {
     .navbar-brand {
       padding-left: 0px;
-    }
-  }
-
-  .navbar-toggle {
-    color: #eee;
-  }
-
-  .navbar-items-admin {
-    a {
-      color: #eee;
-    }
-
-    a:hover {
-      background-color: #183654 !important;
-    }
-
-    li.active{
-      background-color: #183654;
     }
   }
 }

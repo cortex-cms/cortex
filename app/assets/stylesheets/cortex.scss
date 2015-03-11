@@ -1,24 +1,8 @@
-////////////////////////////////
-// Container
-
 main {
   @extend .container-fluid;
 }
 
-////////////////////////////////
-// Typography
-
-.word-break-all {
-  word-break: break-all;
-}
-
-.font-humanist {
-  font-family: $humanist;
-}
-
-////////////////////////////////
 // Alerts
-
 .alert-box {
   @include make-xs-column(12);
   @include make-md-column-offset(3);
@@ -36,35 +20,7 @@ main {
   transition-property: all;
 }
 
-////////////////////////////////
-// Sidebar Filters
-
-.filter-group {
-  button {
-    margin-top: $standard-margin;
-    margin-bottom: $standard-margin;
-  }
-
-  legend {
-    padding-bottom: 3px;
-    @extend .small;
-    @extend .text-muted;
-    margin-bottom: $standard-margin;
-  }
-
-  .input-group button {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  label {
-    font-weight: normal;
-  }
-}
-
-////////////////////////////////
 // Transitions
-
 .fade {
   transition-property: all;
   height: 0;
@@ -84,16 +40,13 @@ main {
   }
 }
 
-////////////////////////////////
 // Cortex Navbar - screech!
-
 .navbar {
   margin-bottom: 0;
 }
 
 .navbar-admin {
   @extend .container-fluid;
-  font-family: 'PT Sans', Arial, sans-serif;
 
   @media (min-width: $screen-md-min) {
     .navbar-brand {
@@ -102,32 +55,10 @@ main {
   }
 }
 
-////////////////////////////////
-// Cortex Breadcrumb Bar
-
-div.breadcrumb-container {
-  @extend .container-fluid;
-  margin-bottom: $standard-margin;
-  background: $breadcrumb-bg;
-
-  .breadcrumb {
-    font: 13px $humanist;
-    padding-left: 0;
-    padding-right: 0;
-    margin-bottom: 0;
-  }
-
-  .breadcrumb > li + li:before {
-    content: "\00a0\00BB";
-  }
-}
-
-////////////////////////////////
 // Modal Dialogs
 @media (min-width: $screen-md-min) {
   .modal-xl {
     width: $screen-lg-min; } }
 
-////////////////////////////////
 // AngularJS
 [ng-click], [ui-sref] { cursor: pointer; }

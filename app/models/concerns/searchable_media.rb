@@ -19,7 +19,7 @@ module SearchableMedia
         indexes :created_by, :analyzer => :keyword
         indexes :file_name, :analyzer => :keyword
         indexes :description, :analyzer => :snowball
-        indexes :tags, :analyzer => :keyword
+        indexes :tag_list, :type => :string, :analyzer => :keyword
         indexes :created_at, :type => :date, :include_in_all => false
         indexes :taxon, :analyzer => :taxon_analyzer
         indexes :meta, :type => :object

@@ -46,6 +46,12 @@ angular.module('cortex.filters', [
     };
 })
 
+.filter('prettifyArrayString', function() {
+    return function(arrayString) {
+        return JSON.parse(arrayString).join(", ")
+    };
+})
+
 .filter('publishStatus', function(moment) {
     return function(value, draft) {
         if (!value || draft) {

@@ -6,7 +6,7 @@ module API
         expose :name, documentation: { type: "String", desc: "Media Name", required: true }
         expose :alt, documentation: { type: "String", desc: "Alt-text for Media" }
         expose :taxon, documentation: { type: "String", desc: "Taxon string" }
-        expose :dimensions, documentation: { type: "Array", desc: "Array of [Width, Height]" }
+        expose :dimensions, documentation: { type: "Integer", is_array: true, desc: "Array of [Width, Height]" }
         expose :url, documentation: { type: "String", desc: "URL of Media" }
         expose :type, documentation: { type: "String", desc: "Media Type" }
         expose :created_at, documentation: { type: 'dateTime', desc: "Created Date"}
@@ -23,9 +23,13 @@ module API
         expose :attachment, using: 'Entities::MediaThumbnails', as: :thumbs, if: lambda { |media, _| media.can_thumb }, documentation: { type: "MediaThumbnails", desc: "Thumbnails of the media"}
 
         ## Youtube Specific
-        expose :duration, :title, :authors, :video_description,
-               if: lambda { |media, _| media.content_type == 'youtube' }
-        expose :video_id, if: lambda { |media, _| media.content_type == 'youtube' }, documentation: { type: "String", desc: "Youtube Video ID"}
+        with_options if: lambda { |media, _| media.content_type == 'youtube' } do
+          expose :duration, documentation: { type: "Integer", desc: "Video duration in seconds"}
+          expose :title, documentation: { type: "String", desc: "Video Title"}
+          expose :authors, documentation: { type: "String", desc: "String representing array of video's Youtube authors"}
+          expose :video_description, documentation: { type: "String", desc: "Youtube video description"}
+          expose :video_id, documentation: { type: "String", desc: "Youtube video ID"}
+        end
 
         # Full Only
         with_options if: { full: true } do

@@ -1,16 +1,18 @@
 language: ruby
 cache: bundler
 rvm:
-- 2.1.4
+- 2.2.1
 bundler_args: "--without production staging development"
 before_script:
+- sudo apt-get update -qq
+- sudo apt-get install -y jpegoptim
 - psql -c 'create database cortex_test;' -U postgres
 - bundle exec rake db:schema:load db:seed cortex:create_categories
 script:
 - bundle exec rake spec
 - bundle exec rake spec:javascript
 addons:
-  postgresql: '9.3'
+  postgresql: '9.4'
 services:
 - elasticsearch
 - redis-server

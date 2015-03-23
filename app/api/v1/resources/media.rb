@@ -81,7 +81,7 @@ module API
 
             media_params = params[:media] || params
 
-            allowed_params = [:name, :alt, :description, :tag_list, :status, :expiration_date]
+            allowed_params = [:name, :alt, :description, :tag_list, :status, :deactive_at]
 
             media.update!(declared(media_params, { include_missing: false }, allowed_params))
             if params[:tag_list]

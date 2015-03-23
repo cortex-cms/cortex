@@ -100,7 +100,7 @@ describe API::Resources::Posts, type: :request, elasticsearch: true do
       post = create(:post, user: user)
       get "/api/v1/posts/feed/#{post.id}"
       expect(response).to be_success
-      expect(response.body).to represent(API::Entities::Post, post, { full: true, sanitize: true })
+      expect(response.body).to represent(API::Entities::Post, post, { full: true })
     end
 
     it 'should not show unpublished posts' do

@@ -85,4 +85,8 @@ angular.module('cortex.controllers.media.grid', [
 
       PostsPopupService.popupOpen = false;
     };
+
+    $scope.searchMedia = function (keyword) {
+      $scope.page.query = keyword;
+    }
   });

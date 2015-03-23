@@ -1,3 +1,7 @@
+$navbar-inverse-bg: #333333;
+$navbar-inverse-link-color: #BFBFBF;
+$border-radius-base: 0;
+
 @import 'bootstrap-sass-official';
 
 // Correct cursors for Angular Bootstrap
@@ -5,6 +9,14 @@
 
 .btn {
   @include truncate;
+}
+
+.label {
+  margin-right: $standard-margin / 4;
+}
+
+.breadcrumb {
+  margin-bottom: $standard-margin;
 }
 
 .modal {

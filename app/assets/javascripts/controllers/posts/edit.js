@@ -58,7 +58,8 @@ angular.module('cortex.controllers.posts.edit', [
   $scope.redactorOptions = {
     plugins: ['media', 'imageFit'],
     minHeight: 800,
-    buttonSource: true
+    buttonSource: true,
+    deniedTags: ['html', 'head', 'link', 'body', 'meta', 'applet'] // Allow script, style
   };
 
   $scope.isAuthorUser = function(post) {
@@ -68,7 +69,7 @@ angular.module('cortex.controllers.posts.edit', [
     else {
       return false;
     }
-  }
+  };
 
   $scope.data.authorIsUser = $scope.isAuthorUser(post);
 

@@ -5,11 +5,11 @@
 
   <div class="media-search">
     <delayed-input
-             autofocus="true"
-             class="form-control"
-             ng-model='page.query'
-             placeholder="Search Media..."
-             delay="500"></delayed-input>
+        autofocus="true"
+        class="form-control"
+        ng-model='page.query'
+        placeholder="Search Media..."
+        delay="500"></delayed-input>
   </div>
 </div>
 
@@ -83,7 +83,10 @@
         <br>
         <strong>Author: </strong>{{ media.creator.fullname }}<br>
         <strong>Description: </strong>{{ media.description }}<br>
-        <strong>Tags: </strong>{{ media.tag_list.join(', ') }}
+        <strong>Tags: </strong>
+          <span ng-click="searchMedia(tag)" class="label label-primary" ng-repeat="tag in media.tag_list">
+            {{ tag }}
+          </span>
       </div>
 
       <div class="media-data-actions">
@@ -98,7 +101,7 @@
           <button class="btn btn-danger" type="button" ng-click="deleteMedia(media)" ng-if="!media.consumed"><i class="fa fa-trash-o"></i> Delete
           </button>
           <button class="btn btn-primary" type="button"
-              ui-sref="^.^.edit({mediaId: {{media.id}}})"><i class="fa fa-edit"></i> Edit
+                  ui-sref="^.^.edit({mediaId: {{media.id}}})"><i class="fa fa-edit"></i> Edit
           </button>
           <button ng-if="$state.includes('cortex.posts')" class="btn btn-primary" type="button" ng-click="selectMedia(media)">
             <i class="fa fa-share"></i> Select

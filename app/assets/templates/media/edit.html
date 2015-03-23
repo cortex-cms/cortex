@@ -7,7 +7,7 @@
       <div class="panel-body">
         <img src="{{data.media.thumbs.mini}}" alt="{{data.media.alt}}"/>
 
-        <dl class="word-break-all">
+        <dl>
           <dt>Filename</dt>
           <dd>{{data.media.attachment_file_name}}</dd>
 
@@ -31,11 +31,19 @@
           <dt>Last Modified</dt>
           <dd>{{data.media.updated_at | date:"y/M/d h:mm:ss a"}}</dd>
 
-          <dt>Last Published</dt>
-          <dd>Placeholder</dd>
-
           <dt>Direct URL</dt>
           <dd><a href="{{data.media.url}}">{{data.media.url}}</a></dd>
+
+          <span ng-if="data.media.video_id">
+            <dt>Youtube Title</dt>
+            <dd>{{data.media.title}}</dd>
+
+            <dt>Youtube Description</dt>
+            <dd>{{data.media.video_description}}</dd>
+
+            <dt>Youtube Authors</dt>
+            <dd>{{data.media.authors | prettifyArrayString}}</dd>
+          </span>
         </dl>
       </div>
     </div>
@@ -94,7 +102,7 @@
                           ng-model="data.media.tag_list"
                           ng-maxlength="255">
                 <auto-complete source="loadTags($query)"></auto-complete>
-                </tags-input>
+              </tags-input>
               <span dropdown>
                   <button class="btn btn-default dropdown-toggle" type="button">
                     Popular <i class="caret"></i>
@@ -105,7 +113,7 @@
                     </li>
                   </ul>
                 </span>
-              </div>
+            </div>
           </div>
 
           <div class="actions row">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406045848) do
+ActiveRecord::Schema.define(version: 20150406144756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,21 +19,21 @@ ActiveRecord::Schema.define(version: 20150406045848) do
   enable_extension "uuid-ossp"
 
   create_table "applications", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "write",      default: false
+    t.boolean  "write",                  default: false
     t.integer  "tenant_id"
   end
 
   add_index "applications", ["tenant_id"], name: "index_applications_on_tenant_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
-    t.string  "firstname"
-    t.string  "lastname"
-    t.string  "email"
+    t.string  "firstname", limit: 255
+    t.string  "lastname",  limit: 255
+    t.string  "email",     limit: 255
     t.hstore  "sites"
-    t.string  "title"
+    t.string  "title",     limit: 255
     t.text    "bio"
     t.integer "user_id"
   end
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150406045848) do
   add_index "authors", ["user_id"], name: "index_authors_on_user_id", using: :btree
 
   create_table "bulk_jobs", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "type",                  null: false
+    t.string   "content_type",          null: false
     t.integer  "user_id"
     t.string   "status"
     t.text     "log"
@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 20150406045848) do
     t.datetime "updated_at",            null: false
   end
 
+  add_index "bulk_jobs", ["content_type"], name: "index_bulk_jobs_on_content_type", using: :btree
   add_index "bulk_jobs", ["id"], name: "index_bulk_jobs_on_id", using: :btree
-  add_index "bulk_jobs", ["type"], name: "index_bulk_jobs_on_type", using: :btree
   add_index "bulk_jobs", ["user_id"], name: "index_bulk_jobs_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20150406045848) do
   end
 
   create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "name",            null: false
+    t.string   "name",            limit: 255, null: false
     t.integer  "localization_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -203,13 +203,13 @@ ActiveRecord::Schema.define(version: 20150406045848) do
     t.string   "seo_description",     limit: 255
     t.string   "seo_preview",         limit: 255
     t.string   "custom_author",       limit: 255
-    t.string   "slug",                                             null: false
+    t.string   "slug",                limit: 255,                  null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "type",                            default: "Post", null: false
+    t.string   "type",                limit: 255, default: "Post", null: false
     t.integer  "author_id"
   end
 

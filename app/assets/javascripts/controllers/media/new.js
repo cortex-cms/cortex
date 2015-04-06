@@ -49,7 +49,7 @@ angular.module('cortex.controllers.media.new', [
       var httpConfig  = {
         url: settings.cortex_base_url + '/media',
         method: 'POST',
-        data: {media: $scope.data.media},
+        fields: {media: $scope.data.media},
         file: file,
         fileFormDataName: 'media[attachment]',
         formDataAppender: function(formData, key, value) {

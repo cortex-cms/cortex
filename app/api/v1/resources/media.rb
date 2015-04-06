@@ -64,11 +64,11 @@ module API
 
             @media = ::Media.new(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
             media.user = current_user!
-            media.save!
             if params[:tag_list]
               media.tag_list = params[:tag_list]
-              media.save!
             end
+            media.save!
+
             present media, with: Entities::Media, full: true
           end
 
@@ -110,12 +110,21 @@ module API
           end
 
           desc 'Bulk create media', { entity: Entities::BulkJob, nickname: 'bulkCreateMedia' }
+          params do
+            group :bulkJob, type: Hash do
+              requires :assets
+            end
+          end
           post :bulk_job do
-            require_scope! :'modify:media', :'modify:bulk_jobs'
+            require_scope! :'modify:media'
+            require_scope! :'modify:bulk_jobs'
             authorize! :create, ::Media
             authorize! :create, ::BulkJob
 
+            bulk_job_params = params[:bulkJob] || params
+
             @bulk_job = ::BulkJob.new(declared(bulk_job_params, { include_missing: false }, Entities::BulkJob.documentation.keys))
+            bulk_job.content_type = 'Media'
             bulk_job.user = current_user!
             bulk_job.save!
 

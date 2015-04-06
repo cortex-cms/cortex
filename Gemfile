@@ -14,9 +14,9 @@ gem 'cortex-exceptions', '~> 0.0.4'
 gem 'jargon-client', git: 'git://github.com/cb-talent-development/jargon-client'
 
 # API
-gem 'grape', '~> 0.10'
-gem 'grape-entity', '~> 0.4.4'
-gem 'grape-swagger', '~> 0.9.0'
+gem 'grape', '~> 0.11'
+gem 'grape-entity', '~> 0.4.5'
+gem 'grape-swagger', '~> 0.10.1'
 gem 'doorkeeper', '~> 1.4'
 gem 'redis-rails', '~> 4.0'
 

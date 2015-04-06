@@ -9,8 +9,9 @@ module API
         resource :media do
           helpers Helpers::PaginationHelper
           helpers Helpers::MediaHelper
+          helpers Helpers::BulkJobsHelper
 
-          desc 'Show all media', { entity: Entities::Media, nickname: "showAllMedia" }
+          desc 'Show all media', { entity: Entities::Media, nickname: 'showAllMedia' }
           params do
             use :pagination
             use :search
@@ -43,7 +44,7 @@ module API
             present tags, with: Entities::Tag
           end
 
-          desc 'Get media', { entity: Entities::Media, nickname: "showMedia" }
+          desc 'Get media', { entity: Entities::Media, nickname: 'showMedia' }
           get ':id' do
             require_scope! :'view:media'
             authorize! :view, media!
@@ -51,7 +52,7 @@ module API
             present media, with: Entities::Media, full: true
           end
 
-          desc 'Create media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "createMedia" }
+          desc 'Create media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: 'createMedia' }
           params do
             optional :attachment
           end
@@ -71,7 +72,7 @@ module API
             present media, with: Entities::Media, full: true
           end
 
-          desc 'Update media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "updateMedia" }
+          desc 'Update media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: 'updateMedia' }
           params do
             optional :attachment
           end
@@ -91,7 +92,7 @@ module API
             present media, with: Entities::Media, full: true
           end
 
-          desc 'Delete media', { nickname: "deleteMedia" }
+          desc 'Delete media', { nickname: 'deleteMedia' }
           delete ':id' do
             require_scope! :'modify:media'
             authorize! :delete, media!
@@ -100,12 +101,27 @@ module API
               media.destroy
             rescue Cortex::Exceptions::ResourceConsumed => e
               error = error!({
-                                error:   "Conflict",
+                                error:   'Conflict',
                                 message: e.message,
                                 status:  409
                               }, 409)
               error
             end
+          end
+
+          desc 'Bulk create media', { entity: Entities::BulkJob, nickname: 'bulkCreateMedia' }
+          post :bulk_job do
+            require_scope! :'modify:media', :'modify:bulk_jobs'
+            authorize! :create, ::Media
+            authorize! :create, ::BulkJob
+
+            @bulk_job = ::BulkJob.new(declared(bulk_job_params, { include_missing: false }, Entities::BulkJob.documentation.keys))
+            bulk_job.user = current_user!
+            bulk_job.save!
+
+            BulkCreateMediaJob.perform_later(bulk_job)
+
+            present bulk_job, with: Entities::BulkJob
           end
         end
       end

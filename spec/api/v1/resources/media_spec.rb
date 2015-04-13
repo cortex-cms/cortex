@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'api_v1_helper'
 
-describe API::Resources::Media, type: :request, elasticsearch: true do
+describe SPEC_API::Resources::Media, type: :request, elasticsearch: true do
 
   let(:user) { create(:user, :admin) }
 
@@ -77,7 +77,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
     it 'should return the correct media' do
       get "/api/v1/media/#{media.id}"
       expect(response).to be_success
-      expect(response.body).to represent(API::Entities::Media, media, { full: true })
+      expect(response.body).to represent(SPEC_API::Entities::Media, media, { full: true })
     end
   end
 
@@ -87,7 +87,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
       it 'should create new media' do
         expect{ post '/api/v1/media', media: attributes_for(:media) }.to change(Media, :count).by(1)
         expect(response).to be_success
-        expect(response.body).to represent(API::Entities::Media, Media.last, { full: true })
+        expect(response.body).to represent(SPEC_API::Entities::Media, Media.last, { full: true })
       end
     end
   end
@@ -100,7 +100,7 @@ describe API::Resources::Media, type: :request, elasticsearch: true do
         media.name += ' updated'
         expect{ put "/api/v1/media/#{media.id}", media.to_json, application_json }.to_not change(Media, :count)
         expect(response).to be_success
-        expect(response.body).to represent(API::Entities::Media, media, { full: true })
+        expect(response.body).to represent(SPEC_API::Entities::Media, media, { full: true })
       end
 
       it 'should only update allowed parameters' do

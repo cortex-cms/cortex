@@ -1,7 +1,7 @@
 class GetMultipleMedia
   include Interactor
 
-  SEARCH_PARAMS = %i{q}
+  SEARCH_PARAMS = %w{q}
 
   def call
     media = ::Media

@@ -33,4 +33,8 @@ angular.module('cortex.controllers.bulk_jobs.grid', [
         );
       }
     });
+
+    $scope.displayLog = function(bulkJob) {
+      alert(bulkJob.log.join('\n'));
+    };
   });

@@ -70,7 +70,6 @@ gem 'elasticsearch-rails', '~> 0.1'
 gem 'kaminari', '~> 0.16.3'
 gem 'paranoia', '~> 2.1'
 gem 'pg', '~> 0.18.1'
-gem 'activeuuid', '~> 0.6.0'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 
 # Authorization
@@ -84,6 +83,7 @@ gem 'hashie', '~> 3.4.1'
 gem 'hashr', '~> 0.0.22'
 gem 'mime-types', '~> 2.4.3'
 gem 'json'
+gem 'rubyzip', '~> 1.1.7'
 
 # Middleware
 gem 'rack-cors', '~> 0.3.1', require: 'rack/cors'

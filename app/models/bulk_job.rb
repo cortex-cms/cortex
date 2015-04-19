@@ -1,5 +1,8 @@
 class BulkJob < ActiveRecord::Base
   belongs_to :user
+
+  serialize :log
+
   has_attached_file :metadata
   has_attached_file :assets
 

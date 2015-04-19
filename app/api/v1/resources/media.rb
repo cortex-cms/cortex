@@ -128,7 +128,7 @@ module API
             bulk_job.user = current_user!
             bulk_job.save!
 
-            BulkCreateMediaJob.perform_later(bulk_job)
+            BulkCreateMediaJob.perform_later(bulk_job, current_user!)
 
             present bulk_job, with: Entities::BulkJob
           end

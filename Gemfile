@@ -149,7 +149,7 @@ group :test, :development, :staging do
 end
 
 group :production do
-  gem 'aws-sdk', '~> 2.0.37' # Used by Paperclip
+  gem 'aws-sdk', '~> 1.64' # Used by Paperclip
 end
 
 group :staging, :production do

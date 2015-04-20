@@ -30,12 +30,14 @@ module API
       mount Resources::Locales
       mount Resources::Applications
       mount Resources::Credentials
+      mount Resources::BulkJobs
 
       add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1',
                                 models: [Entities::Post, Entities::Category, Entities::Media,
                                          Entities::Tenant, Entities::Occupation, Entities::User,
                                          Entities::Localization, Entities::Locale,
-                                         Entities::Application, Entities::Credential])
+                                         Entities::Application, Entities::Credential,
+                                         Entities::BulkJob])
     end
   end
 end

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   scope :tenantUsers, -> (tenant_id) { where(tenant_id: tenant_id) }
 
   def referenced?
-    [Media, Post, Locale, Localization].find do |resource|
+    [Media, Post, Locale, Localization, BulkJob].find do |resource|
       true if resource.where(user: self).count > 0
     end
   end

@@ -13,6 +13,7 @@ module Abilities
           elsif subject == Localization; abilities += localization_class_abilities(user)
           elsif subject == Locale;       abilities += locale_class_abilities(user)
           elsif subject == Application;  abilities += application_class_abilities(user);
+          elsif subject == BulkJob;      abilities += bulk_job_class_abilities(user);
           end
         else
           if subject.kind_of? User;            abilities += user_abilities(user, subject)
@@ -22,6 +23,7 @@ module Abilities
           elsif subject.kind_of? Localization; abilities += localization_abilities(user, subject)
           elsif subject.kind_of? Locale;       abilities += locale_abilities(user, subject)
           elsif subject.kind_of? Application;  abilities += application_abilities(user, subject)
+          elsif subject.kind_of? BulkJob;      abilities += bulk_job_abilities(user, subject)
           end
         end
 
@@ -115,6 +117,14 @@ module Abilities
         else
           []
         end
+      end
+
+      def bulk_job_abilities(user, bulk_job)
+        [:view, :update, :delete]
+      end
+
+      def bulk_job_class_abilities(user)
+        [:view, :create]
       end
     end
   end

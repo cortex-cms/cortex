@@ -15,6 +15,7 @@ file-selector {
   .dropzone {
     @extend .text-center;
     @extend h3;
+    margin-top: 10px;
     padding: 20px;
     border: 2px dashed $gray-light;
     @include striped-background-45($gray-lighter, #fff);

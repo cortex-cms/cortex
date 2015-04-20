@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113171837) do
+ActiveRecord::Schema.define(version: 20150406144756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,27 @@ ActiveRecord::Schema.define(version: 20150113171837) do
   end
 
   add_index "authors", ["user_id"], name: "index_authors_on_user_id", using: :btree
+
+  create_table "bulk_jobs", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "content_type",          null: false
+    t.integer  "user_id"
+    t.string   "status"
+    t.text     "log"
+    t.string   "metadata_file_name"
+    t.string   "metadata_content_type"
+    t.integer  "metadata_file_size"
+    t.datetime "metadata_updated_at"
+    t.string   "assets_file_name"
+    t.string   "assets_content_type"
+    t.integer  "assets_file_size"
+    t.datetime "assets_updated_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "bulk_jobs", ["content_type"], name: "index_bulk_jobs_on_content_type", using: :btree
+  add_index "bulk_jobs", ["id"], name: "index_bulk_jobs_on_id", using: :btree
+  add_index "bulk_jobs", ["user_id"], name: "index_bulk_jobs_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"

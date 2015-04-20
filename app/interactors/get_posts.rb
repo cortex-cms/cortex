@@ -1,7 +1,7 @@
 class GetPosts
   include Interactor
 
-  SEARCH_PARAMS = %i{q categories industries type job_phase post_type author}
+  SEARCH_PARAMS = %w{q categories industries type job_phase post_type author}
 
   def call
     posts = ::Post

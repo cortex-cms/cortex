@@ -1,0 +1,37 @@
+<div class="media-bulk">
+  <form novalidate name="mediaBulkForm" ng-disabled="data.upload.progress">
+    <div class="panel panel-default">
+      <div class="panel-heading">Select CSV detailing assets' metadata</div>
+      <div class="panel-body">
+        Please <a href="/bulk_media_template.csv">click here</a> for a Bulk Media Upload CSV template, which includes some basic examples.
+        <file-selector ng-model="data.mediaBulk.metadata"
+                       required>
+        </file-selector>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Select ZIP containing assets</div>
+      <div class="panel-body">
+        <file-selector ng-model="data.mediaBulk.assets"
+                       required>
+        </file-selector>
+      </div>
+    </div>
+
+    <div class="actions row">
+      <div>
+        <button type="button" class="btn btn-default btn-block" ng-click="cancel()">
+          <i class="fa fa-reply"></i> Cancel
+        </button>
+      </div>
+
+      <div>
+        <button type="button" class="btn btn-primary btn-block"
+                ng-disabled="mediaBulkForm.$invalid || data.upload.progress" ng-click="saveMediaBulk()">
+          <i class="fa fa-cloud-upload"></i> Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

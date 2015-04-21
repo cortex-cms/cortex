@@ -8,10 +8,13 @@ angular.module('cortex.states', [
   'cortex.controllers.users.profile',
   'cortex.controllers.users.grid',
   'cortex.controllers.users.edit',
+  'cortex.controllers.users.new',
+  'cortex.controllers.users.bulk',
 
   'cortex.controllers.media.edit',
   'cortex.controllers.media.grid',
   'cortex.controllers.media.new',
+  'cortex.controllers.media.bulk',
 
   'cortex.controllers.organizations',
   'cortex.controllers.organizations.manage',
@@ -34,8 +37,9 @@ angular.module('cortex.states', [
   'cortex.controllers.applications.grid',
   'cortex.controllers.credentials.grid',
   'cortex.controllers.credentials.edit',
-  'cortex.controllers.credentials.new'
+  'cortex.controllers.credentials.new',
 
+  'cortex.controllers.bulk_jobs.grid'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -56,6 +60,30 @@ angular.module('cortex.states', [
       templateUrl: 'main.html',
       data: {
         ncyBreadcrumbLabel: 'Home'
+      }
+    })
+
+    // Bulk Jobs
+
+    .state('cortex.bulk_jobs', {
+      url: '/bulk_jobs',
+      abstract: true,
+      template: '<div class="bulk-jobs" ui-view="bulk-jobs"></div>',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Jobs'
+      }
+    })
+
+    .state('cortex.bulk_jobs.manage', {
+      url: '',
+      views: {
+        'bulk-jobs@cortex.bulk_jobs': {
+          templateUrl: 'bulk_jobs/grid.html',
+          controller: 'BulkJobsGridCtrl'
+        }
+      },
+      data: {
+        ncyBreadcrumbLabel: false
       }
     })
 
@@ -170,6 +198,15 @@ angular.module('cortex.states', [
       controller: 'MediaNewCtrl',
       data: {
         ncyBreadcrumbLabel: 'Add Media'
+      }
+    })
+
+    .state('cortex.media.bulk', {
+      url: '/bulk',
+      templateUrl: 'media/bulk.html',
+      controller: 'MediaBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Media'
       }
     })
 
@@ -457,6 +494,15 @@ angular.module('cortex.states', [
       }
     })
 
+    .state('cortex.posts.edit.sections.article.media.bulk', {
+      url: '/bulk',
+      templateUrl: 'media/bulk.html',
+      controller: 'MediaBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Media'
+      }
+    })
+
     .state('cortex.posts.edit.sections.article.media.edit', {
       url: '/:mediaId/edit',
       templateUrl: 'media/edit.html',
@@ -510,6 +556,15 @@ angular.module('cortex.states', [
       controller: 'MediaNewCtrl',
       data: {
         ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.video.media.bulk', {
+      url: '/bulk',
+      templateUrl: 'media/bulk.html',
+      controller: 'MediaBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Media'
       }
     })
 
@@ -569,6 +624,15 @@ angular.module('cortex.states', [
       }
     })
 
+    .state('cortex.posts.edit.sections.infographic.media.bulk', {
+      url: '/bulk',
+      templateUrl: 'media/bulk.html',
+      controller: 'MediaBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Media'
+      }
+    })
+
     .state('cortex.posts.edit.sections.infographic.media.edit', {
       url: '/:mediaId/edit',
       templateUrl: 'media/edit.html',
@@ -622,6 +686,15 @@ angular.module('cortex.states', [
       controller: 'MediaNewCtrl',
       data: {
         ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.edit.sections.promo.media.bulk', {
+      url: '/bulk',
+      templateUrl: 'media/bulk.html',
+      controller: 'MediaBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Media'
       }
     })
 
@@ -681,6 +754,15 @@ angular.module('cortex.states', [
       }
     })
 
+    .state('cortex.posts.new.sections.article.media.bulk', {
+      url: '/bulk',
+      templateUrl: 'media/bulk.html',
+      controller: 'MediaBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Media'
+      }
+    })
+
     .state('cortex.posts.new.sections.article.media.edit', {
       url: '/:mediaId/edit',
       templateUrl: 'media/edit.html',
@@ -734,6 +816,15 @@ angular.module('cortex.states', [
       controller: 'MediaNewCtrl',
       data: {
         ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.video.media.bulk', {
+      url: '/bulk',
+      templateUrl: 'media/bulk.html',
+      controller: 'MediaBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Media'
       }
     })
 
@@ -793,6 +884,15 @@ angular.module('cortex.states', [
       }
     })
 
+    .state('cortex.posts.new.sections.infographic.media.bulk', {
+      url: '/bulk',
+      templateUrl: 'media/bulk.html',
+      controller: 'MediaBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Media'
+      }
+    })
+
     .state('cortex.posts.new.sections.infographic.media.edit', {
       url: '/:mediaId/edit',
       templateUrl: 'media/edit.html',
@@ -846,6 +946,15 @@ angular.module('cortex.states', [
       controller: 'MediaNewCtrl',
       data: {
         ncyBreadcrumbLabel: false
+      }
+    })
+
+    .state('cortex.posts.new.sections.promo.media.bulk', {
+      url: '/bulk',
+      templateUrl: 'media/bulk.html',
+      controller: 'MediaBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Media'
       }
     })
 
@@ -1032,17 +1141,36 @@ angular.module('cortex.states', [
       }
     })
 
-  .state('cortex.users.new', {
+    .state('cortex.users.new', {
+      url: '/new',
+      templateUrl: 'users/new.html',
+      controller: 'UsersNewCtrl',
+      data: {
+          ncyBreadcrumbLabel: 'New User'
+      },
+      resolve: {
+        user: ['cortex', function(cortex) {
+          return new cortex.users();
+        }]
+      }
+    })
+
+    .state('cortex.users.edit', {
       url: '/:userId',
       templateUrl: 'users/edit.html',
       controller: 'UsersEditCtrl',
       data: {
-          ncyBreadcrumbLabel: 'New User'
+        ncyBreadcrumbLabel: 'Edit'
+      },
+      resolve: {
+        user: ['$stateParams', 'cortex', function($stateParams, cortex) {
+          return cortex.users.get({id: $stateParams.userId});
+        }]
       }
-  })
+    })
 
     .state('cortex.users.profile', {
-      url: '/:userId',
+      url: '/profile/:userId',
       templateUrl: 'users/profile.html',
       controller: 'UsersProfileCtrl',
       data: {
@@ -1070,6 +1198,15 @@ angular.module('cortex.states', [
 
           return defer.promise;
         }]
+      }
+    })
+
+    .state('cortex.users.bulk', {
+      url: '/bulk',
+      templateUrl: 'users/bulk.html',
+      controller: 'UsersBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Users'
       }
     })
 

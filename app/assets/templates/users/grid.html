@@ -1,6 +1,7 @@
 <div class="actions-and-search">
   <div class="manipulate-actions">
-    <button ng-disabled="!data.tenantTree.selected" ui-sref="cortex.users.new" class="btn btn-primary" type="button">Create User in Tenant</button>
+    <button ng-disabled="!data.tenantTree.selected" ui-sref="cortex.users.new" class="btn btn-primary" type="button"><i class="fa fa-plus-square"></i> Create User in Tenant</button>
+    <button ui-sref="^.^.bulk" class="btn btn-info" type="button"><i class="fa fa-upload"></i> Bulk Create Users</button>
   </div>
 
   <div class="search">
@@ -22,7 +23,7 @@
     <td>
       <div class="btn-group pull-right" role="group">
         <button type="button" class="btn btn-danger" ng-click="deleteUser(user)">Delete</button>
-        <button type="button" class="btn btn-primary" ng-click="editUser(user)" disabled>Edit</button>
+        <button type="button" class="btn btn-primary" ng-click="editUser(user)">Edit</button>
       </div>
     </td>
   </tr>

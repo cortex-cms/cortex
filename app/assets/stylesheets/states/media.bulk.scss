@@ -1,0 +1,5 @@
+.media-bulk {
+  .actions div {
+    @include make-lg-column(6);
+  }
+}

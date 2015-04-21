@@ -31,6 +31,7 @@
 @import 'states/media.grid';
 @import 'states/media.manage';
 @import 'states/media.new';
+@import 'states/media.bulk';
 @import 'states/posts.edit';
 @import 'states/posts.edit.classify';
 @import 'states/posts.edit.display';
@@ -41,6 +42,9 @@
 @import 'states/users.edit';
 @import 'states/users.facets';
 @import 'states/users.profile';
+@import 'states/users.bulk';
+@import 'states/credentials.new';
+@import 'states/credentials.edit';
 
 // Pages
 @import 'states/pages.manage';

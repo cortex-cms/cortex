@@ -1,0 +1,18 @@
+<div class="bulk-jobs-grid">
+  <table ng-table="bulkJobDataParams" class="table bulk-jobs-table">
+    <tr ng-repeat="bulkJob in $data">
+      <td data-title="'Content Type'">{{ bulkJob.content_type }}</td>
+      <td data-title="'Status'">{{ bulkJob.status }}</td>
+      <td data-title="'Owner'">{{ bulkJob.creator.fullname }}</td>
+      <td data-title="'Created'">{{ bulkJob.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td data-title="'Modified'">{{ bulkJob.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
+      <td>
+        <div class="btn-group pull-right" role="group">
+          <a ng-click="displayLog(bulkJob)"><button type="button" class="btn btn-info">Log</button></a>
+          <a ng-href="{{ bulkJob.assets }}" ng-if="bulkJob.assets"><button type="button" class="btn btn-info">Assets (ZIP)</button></a>
+          <a ng-href="{{ bulkJob.metadata }}"><button type="button" class="btn btn-info">Metadata (CSV)</button></a>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -8,6 +8,7 @@ module API
         expose :fullname, documentation: { type: "String", desc: "User's full name" }
         with_options if: { full: true } do
           expose :email, documentation: { type: "String", desc: "User Email" }
+          expose :admin, documentation: { type: "Boolean", desc: "Is User Admin?" }
           expose :created_at, documentation: { type: 'dateTime', desc: "Created Date" }
           expose :updated_at, documentation: { type: 'dateTime', desc: "Updated Date" }
           expose :sign_in_count, documentation: { type: "Integer", desc: "Sign in Count" }

@@ -30,11 +30,19 @@ angular.module('cortex.services.cortex', [
 
   var media = paginatedResource('/media/:id', {id: '@id'}, {
     tags:   {method: 'GET', params: {id: 'tags'}, isArray: true},
-    search: {method: 'GET', params: { }, isArray: true, paginated: true}
+    search: {method: 'GET', params: { }, isArray: true, paginated: true},
+    bulkJob: {
+      method: 'POST',
+      url: settings.cortex_base_url + '/media/bulk_job'
+    }
   });
 
   var users = paginatedResource('/users/:id', {id: '@id'}, {
-    me:     {method: 'GET', params: {id: 'me'}}
+    me:     {method: 'GET', params: {id: 'me'}},
+    bulkJob: {
+      method: 'POST',
+      url: settings.cortex_base_url + '/users/bulk_job'
+    }
   });
 
   var tenants = paginatedResource('/tenants/:id', {id: '@id'}, {
@@ -61,6 +69,10 @@ angular.module('cortex.services.cortex', [
     search: {method: 'GET', params: {}, isArray: true, paginated: true}
   });
 
+  var bulkJobs = paginatedResource('/bulk_jobs/:id', {id: '@id'}, {
+    search:  {method: 'GET', params: { }, isArray: true, paginated: true}
+  });
+
   return {
     categories:    categories,
     locales:       locales,
@@ -72,6 +84,7 @@ angular.module('cortex.services.cortex', [
     userAuthor:    userAuthor,
     occupations:   occupations,
     applications:  applications,
-    credentials:   credentials
+    credentials:   credentials,
+    bulk_jobs:     bulkJobs
   };
 });

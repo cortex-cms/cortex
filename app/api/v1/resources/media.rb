@@ -9,8 +9,9 @@ module API
         resource :media do
           helpers Helpers::PaginationHelper
           helpers Helpers::MediaHelper
+          helpers Helpers::BulkJobsHelper
 
-          desc 'Show all media', { entity: Entities::Media, nickname: "showAllMedia" }
+          desc 'Show all media', { entity: Entities::Media, nickname: 'showAllMedia' }
           params do
             use :pagination
             use :search
@@ -43,7 +44,7 @@ module API
             present tags, with: Entities::Tag
           end
 
-          desc 'Get media', { entity: Entities::Media, nickname: "showMedia" }
+          desc 'Get media', { entity: Entities::Media, nickname: 'showMedia' }
           get ':id' do
             require_scope! :'view:media'
             authorize! :view, media!
@@ -51,7 +52,7 @@ module API
             present media, with: Entities::Media, full: true
           end
 
-          desc 'Create media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "createMedia" }
+          desc 'Create media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: 'createMedia' }
           params do
             optional :attachment
           end
@@ -63,15 +64,15 @@ module API
 
             @media = ::Media.new(declared(media_params, { include_missing: false }, Entities::Media.documentation.keys))
             media.user = current_user!
-            media.save!
             if params[:tag_list]
               media.tag_list = params[:tag_list]
-              media.save!
             end
+            media.save!
+
             present media, with: Entities::Media, full: true
           end
 
-          desc 'Update media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: "updateMedia" }
+          desc 'Update media', { entity: Entities::Media, params: Entities::Media.documentation, nickname: 'updateMedia' }
           params do
             optional :attachment
           end
@@ -83,15 +84,15 @@ module API
 
             allowed_params = [:name, :alt, :description, :tag_list, :status, :deactive_at]
 
-            media.update!(declared(media_params, { include_missing: false }, allowed_params))
             if params[:tag_list]
               media.tag_list = params[:tag_list]
-              media.save!
             end
+            media.update!(declared(media_params, { include_missing: false }, allowed_params))
+
             present media, with: Entities::Media, full: true
           end
 
-          desc 'Delete media', { nickname: "deleteMedia" }
+          desc 'Delete media', { nickname: 'deleteMedia' }
           delete ':id' do
             require_scope! :'modify:media'
             authorize! :delete, media!
@@ -100,12 +101,36 @@ module API
               media.destroy
             rescue Cortex::Exceptions::ResourceConsumed => e
               error = error!({
-                                error:   "Conflict",
+                                error:   'Conflict',
                                 message: e.message,
                                 status:  409
                               }, 409)
               error
             end
+          end
+
+          desc 'Bulk create media', { entity: Entities::BulkJob, nickname: 'bulkCreateMedia' }
+          params do
+            group :bulkJob, type: Hash do
+              requires :assets
+            end
+          end
+          post :bulk_job do
+            require_scope! :'modify:media'
+            require_scope! :'modify:bulk_jobs'
+            authorize! :create, ::Media
+            authorize! :create, ::BulkJob
+
+            bulk_job_params = params[:bulkJob] || params
+
+            @bulk_job = ::BulkJob.new(declared(bulk_job_params, { include_missing: false }, Entities::BulkJob.documentation.keys))
+            bulk_job.content_type = 'Media'
+            bulk_job.user = current_user!
+            bulk_job.save!
+
+            BulkCreateMediaJob.perform_later(bulk_job, current_user!)
+
+            present bulk_job, with: Entities::BulkJob
           end
         end
       end

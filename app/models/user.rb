@@ -15,12 +15,12 @@ class User < ActiveRecord::Base
   has_many   :localizations
   has_many   :locales
 
-  validates_presence_of :email, :tenant, :password, :firstname, :lastname
+  validates_presence_of :email, :tenant, :firstname, :lastname
 
   scope :tenantUsers, -> (tenant_id) { where(tenant_id: tenant_id) }
 
   def referenced?
-    [Media, Post, Locale, Localization].find do |resource|
+    [Media, Post, Locale, Localization, BulkJob].find do |resource|
       true if resource.where(user: self).count > 0
     end
   end

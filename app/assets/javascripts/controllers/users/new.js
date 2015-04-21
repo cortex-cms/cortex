@@ -1,18 +1,21 @@
-angular.module('cortex.controllers.users.edit', [
+angular.module('cortex.controllers.users.new', [
   'ui.router.state',
   'angular-flash.service',
+  'validation.match',
   'cortex.controllers.users.facets'
 ])
 
-.controller('UsersEditCtrl', function($scope, $timeout, $state, $anchorScroll, flash, user) {
+.controller('UsersNewCtrl', function($scope, $timeout, $state, $anchorScroll, flash, user, TenantTree) {
   $scope.data = $scope.data || {};
   $scope.data.user = user;
+  $scope.data.selectedTenant = TenantTree.selected;
 
   $scope.cancel = function () {
     $state.go('^.facets.grid');
   };
 
   $scope.saveUser = function() {
+    $scope.data.user.tenant_id = $scope.data.selectedTenant.id;
     $scope.data.user.$save().then(
       function() {
         $state.go('^.facets.grid');
@@ -20,7 +23,11 @@ angular.module('cortex.controllers.users.edit', [
       },
       function(res) {
         $anchorScroll();
-        flash.error = 'Error while saving user information';
+        if (res.status === 403) {
+          flash.error = "Chosen password is invalid";
+        } else {
+          flash.error = 'Error while saving user information';
+        }
       }
     );
   };

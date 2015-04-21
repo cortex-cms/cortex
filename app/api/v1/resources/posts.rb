@@ -142,12 +142,10 @@ module API
               post.update!({type: params[:type]}) if params[:type]
               reload_post
             end
-            post.update!(declared(params, {include_missing: false}, allowed_params))
-
             if params[:tag_list]
               post.tag_list = params[:tag_list]
-              post.save!
             end
+            post.update!(declared(params, {include_missing: false}, allowed_params))
 
             present post, with: Entities::Post, full: true
           end

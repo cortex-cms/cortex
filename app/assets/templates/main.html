@@ -20,7 +20,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-items-admin small navbar-right">
         <li ng-class="{ active: $state.includes('cortex.users.profile') }"><a class="navbar-item" ui-sref="cortex.users.profile({userId: currentUser.id})">Profile</a></li>
-        <li ng-if="currentUser.admin" ng-class="{ active: $state.includes('cortex.users') }"><a class="navbar-item" ui-sref="cortex.users.facets.grid">Users</a></li>
+        <li ng-if="currentUser.admin" ng-class="{ active: $state.includes('cortex.users.facets') || $state.includes('cortex.users.edit') || $state.includes('cortex.users.new') }"><a class="navbar-item" ui-sref="cortex.users.facets.grid">Users</a></li>
         <li><a class="navbar-item" ng-click="logout()">Log Out</a></li>
       </ul>
     </nav>

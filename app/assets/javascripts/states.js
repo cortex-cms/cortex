@@ -9,6 +9,7 @@ angular.module('cortex.states', [
   'cortex.controllers.users.grid',
   'cortex.controllers.users.edit',
   'cortex.controllers.users.new',
+  'cortex.controllers.users.bulk',
 
   'cortex.controllers.media.edit',
   'cortex.controllers.media.grid',
@@ -1197,6 +1198,15 @@ angular.module('cortex.states', [
 
           return defer.promise;
         }]
+      }
+    })
+
+    .state('cortex.users.bulk', {
+      url: '/bulk',
+      templateUrl: 'users/bulk.html',
+      controller: 'UsersBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Users'
       }
     })
 

@@ -38,7 +38,11 @@ angular.module('cortex.services.cortex', [
   });
 
   var users = paginatedResource('/users/:id', {id: '@id'}, {
-    me:     {method: 'GET', params: {id: 'me'}}
+    me:     {method: 'GET', params: {id: 'me'}},
+    bulkJob: {
+      method: 'POST',
+      url: settings.cortex_base_url + '/users/bulk_job'
+    }
   });
 
   var tenants = paginatedResource('/tenants/:id', {id: '@id'}, {

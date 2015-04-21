@@ -7,8 +7,9 @@ module API
 
         resource :users do
           helpers Helpers::UsersHelper
+          helpers Helpers::BulkJobsHelper
 
-          desc 'Get the current user', { entity: Entities::User, nickname: "currentUser" }
+          desc 'Get the current user', { entity: Entities::User, nickname: 'currentUser' }
           get :me do
             authorize! :view, current_user!
             present current_user, with: Entities::User, full: true
@@ -44,7 +45,7 @@ module API
             present author, with: Entities::Author
           end
 
-          desc "Create a new user"
+          desc 'Create a new user'
           params do
             optional :email
             optional :firstname
@@ -115,6 +116,25 @@ module API
                        status:  409
                      }, 409)
             end
+          end
+
+          desc 'Bulk create users', { entity: Entities::BulkJob, nickname: 'bulkCreateUsers' }
+          post :bulk_job do
+            require_scope! :'modify:users'
+            require_scope! :'modify:bulk_jobs'
+            authorize! :create, ::User
+            authorize! :create, ::BulkJob
+
+            bulk_job_params = params[:bulkJob] || params
+
+            @bulk_job = ::BulkJob.new(declared(bulk_job_params, { include_missing: false }, Entities::BulkJob.documentation.keys))
+            bulk_job.content_type = 'Users'
+            bulk_job.user = current_user!
+            bulk_job.save!
+
+            BulkCreateUsersJob.perform_later(bulk_job, current_user!)
+
+            present bulk_job, with: Entities::BulkJob
           end
         end
       end

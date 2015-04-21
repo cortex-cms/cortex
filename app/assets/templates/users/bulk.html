@@ -1,0 +1,28 @@
+<div class="users-bulk">
+  <form novalidate name="usersBulkForm" ng-disabled="data.upload.progress">
+    <div class="panel panel-default">
+      <div class="panel-heading">Select CSV detailing users' metadata</div>
+      <div class="panel-body">
+        Please <a href="/bulk_users_template.csv">click here</a> for a Bulk Users Upload CSV template, which includes some basic examples. All users will be created with an initial password, 'welcome1'.
+        <file-selector ng-model="data.usersBulk.metadata"
+                       required>
+        </file-selector>
+      </div>
+    </div>
+
+    <div class="actions row">
+      <div>
+        <button type="button" class="btn btn-default btn-block" ng-click="cancel()">
+          <i class="fa fa-reply"></i> Cancel
+        </button>
+      </div>
+
+      <div>
+        <button type="button" class="btn btn-primary btn-block"
+                ng-disabled="usesBulkForm.$invalid || data.upload.progress" ng-click="saveUsersBulk()">
+          <i class="fa fa-cloud-upload"></i> Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

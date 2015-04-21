@@ -1,7 +1,7 @@
 <section class="users-edit">
   <div class="panel panel-default">
     <div class="panel-heading">
-      New User Information
+      Edit User Information
     </div>
     <div class="panel-body">
       <form novalidate class="user" name="userForm">
@@ -22,23 +22,6 @@
           <input class="form-control" type="text" id="user.email"
                  ng-model="data.user.email" required
                  placeholder="Email (required)">
-        </div>
-        <div class="form-group">
-          <label for="user.password">Password</label>
-          <input class="form-control" type="password" id="user.password"
-                 ng-model="data.user.password" required ng-minlength="8"
-                 placeholder="Password (required - 8 characters or more)">
-        </div>
-        <div class="form-group">
-          <label for="user.password_confirmation">Confirm Password</label>
-          <input class="form-control" type="password" id="user.password_confirmation" name="password_confirmation"
-                 ng-model="data.user.password_confirmation" required ng-minlength="8"
-                 data-match="data.user.password" placeholder="Please re-enter your password">
-        </div>
-        <div data-ng-show="userForm.password_confirmation.$error.match">Passwords do not match!</div>
-        <div class="form-group">
-          <label for="user.tenant">Selected Tenant</label>
-          <div id="user.tenant" class="form-control-static">{{data.selectedTenant.name}}</div>
         </div>
         <div class="form-group">
           <input type="checkbox" id="user.admin"

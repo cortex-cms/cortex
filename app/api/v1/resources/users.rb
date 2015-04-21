@@ -71,21 +71,24 @@ module API
             optional :password_confirmation
             optional :firstname
             optional :lastname
+            optional :email
+            optional :admin
           end
           put ':user_id' do
             require_scope! :'modify:users'
             authorize! :update, user!
 
-            allowed_params = [:firstname, :lastname, :gravatar]
+            allowed_params = [:firstname, :lastname]
 
-            if user == current_user
+            if current_user.is_admin?
+              allowed_params += [:email, :admin]
+            elsif user == current_user
               forbidden! unless user.valid_password?(params[:current_password])
               allowed_params += [:password, :password_confirmation]
-              render_api_error!("Requires both password and password_confirmation fields", 422) unless params[:password] && params[:password_confirmation]
+              render_api_error!('Requires both password and password_confirmation fields', 422) unless params[:password] && params[:password_confirmation]
             end
 
             user.update!(declared(params, {include_missing: false}, allowed_params))
-            user.save!
 
             present user, with: Entities::User, full: true
           end
@@ -95,7 +98,7 @@ module API
             require_scope! :'view:users'
             authorize! :view, user!
 
-            present user, with: Entities::User
+            present user, with: Entities::User, full: true
           end
 
           desc 'Delete a user', {nickname: 'deleteUser'}

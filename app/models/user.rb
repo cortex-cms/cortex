@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many   :localizations
   has_many   :locales
 
-  validates_presence_of :email, :tenant, :password, :firstname, :lastname
+  validates_presence_of :email, :tenant, :firstname, :lastname
 
   scope :tenantUsers, -> (tenant_id) { where(tenant_id: tenant_id) }
 

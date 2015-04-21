@@ -84,11 +84,11 @@ module API
 
             allowed_params = [:name, :alt, :description, :tag_list, :status, :deactive_at]
 
-            media.update!(declared(media_params, { include_missing: false }, allowed_params))
             if params[:tag_list]
               media.tag_list = params[:tag_list]
-              media.save!
             end
+            media.update!(declared(media_params, { include_missing: false }, allowed_params))
+
             present media, with: Entities::Media, full: true
           end
 

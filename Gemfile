@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.2'
 
 # Server
 gem 'unicorn-rails', '~> 2.2.0'

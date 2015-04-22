@@ -132,7 +132,7 @@ module API
             bulk_job.user = current_user!
             bulk_job.save!
 
-            BulkCreateUsersJob.perform_later(bulk_job, current_user!)
+            BulkCreateUsersJob.perform_later(bulk_job)
 
             present bulk_job, with: Entities::BulkJob
           end

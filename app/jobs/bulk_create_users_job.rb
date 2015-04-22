@@ -3,7 +3,7 @@ require 'csv'
 class BulkCreateUsersJob < ActiveJob::Base
   queue_as :default
 
-  def perform(bulk_job, current_user)
+  def perform(bulk_job)
     @bulk_job = bulk_job
     metadata_file = Paperclip.io_adapters.for(@bulk_job.metadata).read
 

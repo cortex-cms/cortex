@@ -1275,9 +1275,9 @@ angular.module('cortex.states', [
       .state('cortex.pages', {
           url: '/pages',
           abstract: true,
-          template: '<div class="pages" ui-view></div>',
+          template: '<div class="admin-pages" ui-view></div>',
           data: {
-              ncyBreadcrumbLabel: 'Page Editor'
+              ncyBreadcrumbLabel: 'Pages'
           }
       })
       .state('cortex.pages.manage', {

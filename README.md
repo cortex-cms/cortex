@@ -30,7 +30,7 @@ $ rake db:seed
 $ rake cortex:create_categories
 $ rake cortex:onet:fetch_and_provision
 ```
-Finally, start Cortex: `$ unicorn`
+Finally, start Cortex: `$ rails s`
 
 ### Applications
 

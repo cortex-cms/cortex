@@ -1,10 +1,8 @@
-# Update sources
-update
-
-# Install software required for cortex
-install postgresql
-install redis
-install elasticsearch
-install phantomjs
-install imagemagick
-install ghostscript
+postgresql
+redis
+Caskroom/cask/java
+elasticsearch
+phantomjs
+imagemagick
+jpegoptim
+ghostscript

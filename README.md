@@ -12,16 +12,18 @@ Copy the example .env file and modify
 $ cp .env.example .env
 ```
 
+
 ### Setup - OS X
 
 **Prerequisites:** Xcode, Ruby ([rvm](https://rvm.io/) or [rbenv](https://github.com/sstephenson/rbenv)), [Homebrew](http://brew.sh/)
 
-1. Install all homebrew managed dependencies from the `Brewfile` via `$ brew bundle`
+1. Install all homebrew managed dependencies from the `Brewfile` via `$ brew install $(cat Brewfile|grep -v "#")`
 2. Start servers with `launchctl` or [lunchy](https://github.com/eddiezane/lunchy): `$ lunchy start elasticsearch`
 3. Install Bundler and dependencies `$ gem install bundler && bundle install`
-4. Create `cortex_dev` and `cortex_test` databases and users in PostgreSQL
+4. Create databases by running `rake db:create:all`
 5. Run migrations `$ rake db:migrate`
-6. Seed database:
+6. Create temp folder `mkdir tmp`
+7. Seed database:
 
 ```sh
 $ rake db:seed

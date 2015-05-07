@@ -20,9 +20,10 @@ $ cp .env.example .env
 1. Install all homebrew managed dependencies from the `Brewfile` via `$ brew install $(cat Brewfile|grep -v "#")`
 2. Start servers with `launchctl` or [lunchy](https://github.com/eddiezane/lunchy): `$ lunchy start elasticsearch`
 3. Install Bundler and dependencies `$ gem install bundler && bundle install`
-4. Create databases by running `rake db:create:all`
-5. Run migrations `$ rake db:migrate`
-6. Seed database:
+4. Copy .env.example to .env and edit it to update APP_PATH to current path
+5. Create databases by running `rake db:create:all`
+6. Run migrations `$ rake db:migrate`
+7. Seed database:
 
 ```sh
 $ rake db:seed

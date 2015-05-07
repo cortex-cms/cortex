@@ -22,8 +22,7 @@ $ cp .env.example .env
 3. Install Bundler and dependencies `$ gem install bundler && bundle install`
 4. Create databases by running `rake db:create:all`
 5. Run migrations `$ rake db:migrate`
-6. Create temp folder `mkdir tmp`
-7. Seed database:
+6. Seed database:
 
 ```sh
 $ rake db:seed

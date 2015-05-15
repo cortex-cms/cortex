@@ -1272,17 +1272,17 @@ angular.module('cortex.states', [
         ncyBreadcrumbLabel: 'Edit'
       }
     })
-      .state('cortex.pages', {
-          url: '/pages',
+      .state('cortex.webpages', {
+          url: '/webpages',
           abstract: true,
-          template: '<div class="admin-pages" ui-view></div>',
+          template: '<div class="admin-webpages" ui-view></div>',
           data: {
-              ncyBreadcrumbLabel: 'Pages'
+              ncyBreadcrumbLabel: 'Webpages'
           }
       })
-      .state('cortex.pages.manage', {
+      .state('cortex.webpages.manage', {
           url: '',
-          templateUrl: 'pages/manage.html',
+          templateUrl: 'webpages/manage.html',
           data: {
               ncyBreadcrumbLabel: false
           }

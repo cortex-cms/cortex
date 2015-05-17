@@ -16,7 +16,7 @@ module Abilities
           elsif subject == BulkJob; abilities += bulk_job_class_abilities(user);
           elsif subject == Document; abilities += document_class_abilities(user);
           elsif subject == Webpage; abilities += webpage_class_abilities(user);
-          elsif subject == WebpageDocument; abilities += webpage_document_class_abilities(user);
+          elsif subject == Snippet; abilities += snippet_class_abilities(user);
           end
         else
           if subject.kind_of? User; abilities += user_abilities(user, subject)
@@ -29,7 +29,7 @@ module Abilities
           elsif subject.kind_of? BulkJob; abilities += bulk_job_abilities(user, subject)
           elsif subject.kind_of? Document; abilities += document_abilities(user, subject)
           elsif subject.kind_of? Webpage; abilities += webpage_abilities(user, subject)
-          elsif subject.kind_of? WebpageDocument; abilities += webpage_document_abilities(user, subject)
+          elsif subject.kind_of? Snippet; abilities += snippet_abilities(user, subject)
           end
         end
 
@@ -149,11 +149,11 @@ module Abilities
         [:view, :create]
       end
 
-      def webpage_document_abilities(user, webpage_document)
+      def snippet_abilities(user, snippet)
         [:view, :update, :delete]
       end
 
-      def webpage_document_class_abilities(user)
+      def snippet_class_abilities(user)
         [:view, :create]
       end
     end

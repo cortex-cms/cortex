@@ -1,0 +1,26 @@
+<div class="actions-and-search">
+  <div class="manipulate-actions">
+    <button class="btn btn-primary" type="button" ng-click="newWebpage()"><i class="fa fa-plus-square"></i> Create Webpage</button>
+  </div>
+</div>
+
+<div class="tiles">
+  <div class="webpage-tile-column" ng-repeat="webpage in data.webpages">
+    <div class="webpage-tile">
+      <img ng-if="webpage.tile_thumbnail"
+           ng-src="{{ webpage.tile_thumbnail }}"
+           alt="Thumbnail">
+      <img ng-if="!webpage.tile_thumbnail"
+           ph-img="150x150"
+           ph-text="PROCESSING"
+           alt="Thumbnail">
+      <div class="caption">
+        <h3>{{ webpage.name }}</h3>
+        <p>
+          <button type="button" class="btn btn-danger" ng-click="deleteWebpage(webpage)">Delete</button>
+          <button type="button" class="btn btn-primary" ng-click="editWebpage(webpage)">Edit</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

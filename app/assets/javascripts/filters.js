@@ -102,6 +102,12 @@ angular.module('cortex.filters', [
   };
 })
 
+.filter('trustAsResourceUrl', function($sce) {
+  return function (url) {
+    return $sce.trustAsResourceUrl(url);
+  }
+})
+
 .filter('postNewState', function() {
   return function(post) {
     return "cortex.posts.new.sections." + post.type.replace('Post', '').toLowerCase();

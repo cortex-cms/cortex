@@ -26,7 +26,7 @@ class Media < ActiveRecord::Base
       :ar_post => {geometry: '1140x', format: :jpg}
   }, processors: [:thumbnail, :paperclip_optimizer], :preserve_files => 'true'
 
-  before_attachment_post_process :can_thumb
+  before_attachment_post_process :can_thumb?
 
   validates_attachment :attachment, :presence => true,
                        :unless => :skip_attachment_validation,
@@ -58,7 +58,7 @@ class Media < ActiveRecord::Base
     attachment.url
   end
 
-  def can_thumb
+  def can_thumb?
     Cortex.config.media.allowed_media_types.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
   end
 

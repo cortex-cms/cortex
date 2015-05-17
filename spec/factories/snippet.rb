@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :webpage_document do
+  factory :snippet do
 
   end
 

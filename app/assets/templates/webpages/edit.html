@@ -1,0 +1,38 @@
+<div class="webpage-edit">
+  <form novalidate name="webpageForm">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-pencil-square-o"></i> Provide Details
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" class="form-control"
+                 ng-model="data.webpage.name" placeholder="Webpage name" required>
+        </div>
+        <div class="form-group">
+          <label for="url">URL</label>
+          <input id="url" name="url" type="text" class="form-control"
+                 ng-model="data.webpage.url" placeholder="Webpage URL" required>
+        </div>
+
+        <div class="actions row">
+          <div>
+            <button type="button" class="btn btn-default btn-block" ng-click="cancel()">
+              <i class="fa fa-reply"></i> Cancel
+            </button>
+          </div>
+
+          <div>
+            <button type="button" class="btn btn-primary btn-block"
+                    ng-disabled="webpageForm.$invalid || webpageForm.$pistine" ng-click="saveWebpage()">
+              <i class="fa fa-cloud-upload"></i> Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <iframe class="webpage-frame" ng-src="{{ data.webpage.url | trustAsResourceUrl }}"></iframe>
+  </form>
+</div>

@@ -19,21 +19,21 @@ ActiveRecord::Schema.define(version: 20150512200711) do
   enable_extension "uuid-ossp"
 
   create_table "applications", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "write",                  default: false
+    t.boolean  "write",      default: false
     t.integer  "tenant_id"
   end
 
   add_index "applications", ["tenant_id"], name: "index_applications_on_tenant_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
-    t.string  "firstname", limit: 255
-    t.string  "lastname",  limit: 255
-    t.string  "email",     limit: 255
+    t.string  "firstname"
+    t.string  "lastname"
+    t.string  "email"
     t.hstore  "sites"
-    t.string  "title",     limit: 255
+    t.string  "title"
     t.text    "bio"
     t.integer "user_id"
   end
@@ -88,13 +88,8 @@ ActiveRecord::Schema.define(version: 20150512200711) do
 
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
-  create_table "documents_webpages", id: false, force: :cascade do |t|
-    t.integer "webpage_id",  null: false
-    t.integer "document_id", null: false
-  end
-
   create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "name",            limit: 255, null: false
+    t.string   "name",            null: false
     t.integer  "localization_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -219,19 +214,30 @@ ActiveRecord::Schema.define(version: 20150512200711) do
     t.string   "seo_description",     limit: 255
     t.string   "seo_preview",         limit: 255
     t.string   "custom_author",       limit: 255
-    t.string   "slug",                limit: 255,                  null: false
+    t.string   "slug",                                             null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "type",                limit: 255, default: "Post", null: false
+    t.string   "type",                            default: "Post", null: false
     t.integer  "author_id"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
   add_index "posts", ["type"], name: "index_posts_on_type", using: :btree
+
+  create_table "snippets", id: false, force: :cascade do |t|
+    t.integer  "webpage_id",  null: false
+    t.integer  "document_id", null: false
+    t.integer  "user_id",     null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "snippets", ["user_id"], name: "index_snippets_on_user_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"

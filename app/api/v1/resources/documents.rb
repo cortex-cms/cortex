@@ -32,9 +32,6 @@ module API
           end
 
           desc 'Create document', { entity: Entities::Document, params: Entities::Document.documentation, nickname: 'createDocument' }
-          params do
-            optional :attachment
-          end
           post do
             require_scope! :'modify:document'
             authorize! :create, ::Document
@@ -49,9 +46,6 @@ module API
           end
 
           desc 'Update document', { entity: Entities::Document, params: Entities::Document.documentation, nickname: 'updateDocument' }
-          params do
-            optional :attachment
-          end
           put ':id' do
             require_scope! :'modify:document'
             authorize! :update, document!

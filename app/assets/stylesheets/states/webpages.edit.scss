@@ -1,0 +1,10 @@
+.webpage-edit {
+  .actions div {
+    @include make-md-column(6);
+  }
+
+  .webpage-frame {
+    width: 100%;
+    min-height: 800px;
+  }
+}

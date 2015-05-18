@@ -9,7 +9,7 @@ angular.module('cortex.controllers.posts.edit.seo', [
         if ($scope.postForm.seo_title.$dirty && $scope.postForm.seo_title) {
           return;
         }
-        $scope.data.post.seo_title = $filter('slugify')($scope.data.post.title);
+        $scope.data.post.seo_title = $scope.data.post.title;
       });
 
       // Ditto SEO Description

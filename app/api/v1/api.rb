@@ -32,6 +32,7 @@ module API
       mount Resources::Credentials
       mount Resources::BulkJobs
       mount Resources::Documents
+      mount Resources::Snippets
       mount Resources::Webpages
 
       add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1',
@@ -39,7 +40,8 @@ module API
                                          Entities::Tenant, Entities::Occupation, Entities::User,
                                          Entities::Localization, Entities::Locale,
                                          Entities::Application, Entities::Credential,
-                                         Entities::BulkJob, Entities::Document, Entities::Webpage])
+                                         Entities::BulkJob, Entities::Document, Entities::Snippet,
+                                         Entities::Webpage])
     end
   end
 end

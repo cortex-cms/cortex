@@ -4,4 +4,6 @@ class Snippet < ActiveRecord::Base
   belongs_to :user
   belongs_to :webpage
   belongs_to :document
+
+  accepts_nested_attributes_for :document
 end

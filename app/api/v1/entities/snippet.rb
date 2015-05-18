@@ -3,10 +3,9 @@ module API
     module Entities
       class Snippet < Grape::Entity
         expose :id, documentation: { type: 'Integer', desc: 'Snippet ID', required: true }
-        expose :user, with: 'Entities::User', documentation: {type: 'User', desc: 'Owner'}
         expose :created_at, documentation: { type: 'dateTime', desc: 'Created Date'}
         expose :updated_at, documentation: { type: 'dateTime', desc: 'Updated Date'}
-        represent :document, with: 'Entities::Document', documentation: {type: 'Document', desc: 'Associated Document'}
+        expose :document, with: 'Entities::Document', documentation: {type: 'Document', desc: 'Associated Document'}
       end
     end
   end

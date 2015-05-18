@@ -228,7 +228,7 @@ ActiveRecord::Schema.define(version: 20150512200711) do
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
   add_index "posts", ["type"], name: "index_posts_on_type", using: :btree
 
-  create_table "snippets", id: false, force: :cascade do |t|
+  create_table "snippets", force: :cascade do |t|
     t.integer  "webpage_id",  null: false
     t.integer  "document_id", null: false
     t.integer  "user_id",     null: false

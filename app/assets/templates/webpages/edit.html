@@ -15,24 +15,9 @@
           <input id="url" name="url" type="text" class="form-control"
                  ng-model="data.webpage.url" placeholder="Webpage URL" required>
         </div>
-
-        <div class="actions row">
-          <div>
-            <button type="button" class="btn btn-default btn-block" ng-click="cancel()">
-              <i class="fa fa-reply"></i> Cancel
-            </button>
-          </div>
-
-          <div>
-            <button type="button" class="btn btn-primary btn-block"
-                    ng-disabled="webpageForm.$invalid || webpageForm.$pistine" ng-click="saveWebpage()">
-              <i class="fa fa-cloud-upload"></i> Submit
-            </button>
-          </div>
-        </div>
       </div>
     </div>
 
-    <iframe class="webpage-frame" ng-src="{{ data.webpage.url | trustAsResourceUrl }}"></iframe>
+    <iframe class="webpage-frame" id="webpage-frame" ng-src="{{ data.webpage.url | trustAsResourceUrl }}" disabled></iframe>
   </form>
 </div>

@@ -16,24 +16,36 @@ module API
           end
           get do
             authorize! :view, ::Webpage
-            require_scope! :'view:webpage'
+            require_scope! :'view:webpages'
 
             @webpage = ::Webpage.order(created_at: :desc).page(page).per(per_page)
             set_pagination_headers(@webpage, 'webpage')
+            present @webpage, with: Entities::Webpage, full: true
+          end
+
+          desc 'Show Webpage Snippets as public feed by URL', { entity: Entities::Webpage, nickname: 'showWebpageFeed' }
+          params do
+            requires :url, type: String
+          end
+          get 'feed' do
+            require_scope! :'view:webpages'
+            @webpage ||= Webpage.find_by_url(params[:url])
+            not_found! unless @webpage
+            authorize! :view, @webpage
             present @webpage, with: Entities::Webpage
           end
 
           desc 'Get webpage', { entity: Entities::Webpage, nickname: 'showWebpage' }
           get ':id' do
-            require_scope! :'view:webpage'
+            require_scope! :'view:webpages'
             authorize! :view, webpage!
 
-            present webpage, with: Entities::Webpage
+            present webpage, with: Entities::Webpage, full: true
           end
 
           desc 'Create webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'createWebpage' }
           post do
-            require_scope! :'modify:webpage'
+            require_scope! :'modify:webpages'
             authorize! :create, ::Webpage
 
             webpage_params = params[:webpage] || params
@@ -42,25 +54,25 @@ module API
             webpage.user = current_user!
             webpage.save!
 
-            present webpage, with: Entities::Webpage
+            present webpage, with: Entities::Webpage, full: true
           end
 
           desc 'Update webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'updateWebpage' }
           put ':id' do
-            require_scope! :'modify:webpage'
+            require_scope! :'modify:webpages'
             authorize! :update, webpage!
 
             webpage_params = params[:webpage] || params
-            allowed_params = remove_params(Entities::Webpage.documentation.keys, :tile_thumbnail, :user)
+            allowed_params = remove_params(Entities::Webpage.documentation.keys, :tile_thumbnail, :user) + [:snippets_attributes]
 
-            webpage.update!(declared(webpage_params, { include_missing: false }, allowed_params))
+            webpage.update!(declared(webpage_params, { include_missing: false }, allowed_params).to_hash)
 
-            present webpage, with: Entities::Webpage
+            present webpage, with: Entities::Webpage, full: true
           end
 
           desc 'Delete webpage', { nickname: 'deleteWebpage' }
           delete ':id' do
-            require_scope! :'modify:webpage'
+            require_scope! :'modify:webpages'
             authorize! :delete, webpage!
 
             begin

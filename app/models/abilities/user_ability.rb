@@ -5,25 +5,31 @@ module Abilities
         abilities = []
 
         if subject.is_a? Class
-          if subject == User;            abilities += user_class_abilities(user)
-          elsif subject == Tenant;       abilities += tenant_class_abilities(user)
-          elsif subject == Post;         abilities += post_class_abilities(user)
-          elsif subject == Media;        abilities += media_class_abilities(user)
-          elsif subject == Category;     abilities += category_class_abilities(user)
+          if subject == User; abilities += user_class_abilities(user)
+          elsif subject == Tenant; abilities += tenant_class_abilities(user)
+          elsif subject == Post; abilities += post_class_abilities(user)
+          elsif subject == Media; abilities += media_class_abilities(user)
+          elsif subject == Category; abilities += category_class_abilities(user)
           elsif subject == Localization; abilities += localization_class_abilities(user)
-          elsif subject == Locale;       abilities += locale_class_abilities(user)
-          elsif subject == Application;  abilities += application_class_abilities(user);
-          elsif subject == BulkJob;      abilities += bulk_job_class_abilities(user);
+          elsif subject == Locale; abilities += locale_class_abilities(user)
+          elsif subject == Application; abilities += application_class_abilities(user);
+          elsif subject == BulkJob; abilities += bulk_job_class_abilities(user);
+          elsif subject == Document; abilities += document_class_abilities(user);
+          elsif subject == Webpage; abilities += webpage_class_abilities(user);
+          elsif subject == Snippet; abilities += snippet_class_abilities(user);
           end
         else
-          if subject.kind_of? User;            abilities += user_abilities(user, subject)
-          elsif subject.kind_of? Tenant;       abilities += tenant_abilities(user, subject)
-          elsif subject.kind_of? Post;         abilities += post_abilities(user, subject)
-          elsif subject.kind_of? Media;        abilities += media_abilities(user, subject)
+          if subject.kind_of? User; abilities += user_abilities(user, subject)
+          elsif subject.kind_of? Tenant; abilities += tenant_abilities(user, subject)
+          elsif subject.kind_of? Post; abilities += post_abilities(user, subject)
+          elsif subject.kind_of? Media; abilities += media_abilities(user, subject)
           elsif subject.kind_of? Localization; abilities += localization_abilities(user, subject)
-          elsif subject.kind_of? Locale;       abilities += locale_abilities(user, subject)
-          elsif subject.kind_of? Application;  abilities += application_abilities(user, subject)
-          elsif subject.kind_of? BulkJob;      abilities += bulk_job_abilities(user, subject)
+          elsif subject.kind_of? Locale; abilities += locale_abilities(user, subject)
+          elsif subject.kind_of? Application; abilities += application_abilities(user, subject)
+          elsif subject.kind_of? BulkJob; abilities += bulk_job_abilities(user, subject)
+          elsif subject.kind_of? Document; abilities += document_abilities(user, subject)
+          elsif subject.kind_of? Webpage; abilities += webpage_abilities(user, subject)
+          elsif subject.kind_of? Snippet; abilities += snippet_abilities(user, subject)
           end
         end
 
@@ -124,6 +130,30 @@ module Abilities
       end
 
       def bulk_job_class_abilities(user)
+        [:view, :create]
+      end
+
+      def document_abilities(user, document)
+        [:view, :update, :delete]
+      end
+
+      def document_class_abilities(user)
+        [:view, :create]
+      end
+
+      def webpage_abilities(user, webpage)
+        [:view, :update, :delete]
+      end
+
+      def webpage_class_abilities(user)
+        [:view, :create]
+      end
+
+      def snippet_abilities(user, snippet)
+        [:view, :update, :delete]
+      end
+
+      def snippet_class_abilities(user)
         [:view, :create]
       end
     end

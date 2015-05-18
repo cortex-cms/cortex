@@ -39,7 +39,11 @@ angular.module('cortex.states', [
   'cortex.controllers.credentials.edit',
   'cortex.controllers.credentials.new',
 
-  'cortex.controllers.bulk_jobs.grid'
+  'cortex.controllers.bulk_jobs.grid',
+
+  'cortex.controllers.webpages.grid',
+  'cortex.controllers.webpages.new',
+  'cortex.controllers.webpages.edit'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -1272,19 +1276,36 @@ angular.module('cortex.states', [
         ncyBreadcrumbLabel: 'Edit'
       }
     })
-      .state('cortex.pages', {
-          url: '/pages',
-          abstract: true,
-          template: '<div class="pages" ui-view></div>',
-          data: {
-              ncyBreadcrumbLabel: 'Page Editor'
-          }
-      })
-      .state('cortex.pages.manage', {
-          url: '',
-          templateUrl: 'pages/manage.html',
-          data: {
-              ncyBreadcrumbLabel: false
-          }
-      });
+    .state('cortex.webpages', {
+      url: '/webpages',
+      abstract: true,
+      template: '<div class="admin-webpages" ui-view></div>',
+      data: {
+        ncyBreadcrumbLabel: 'Webpages'
+      }
+    })
+    .state('cortex.webpages.manage', {
+      url: '',
+      controller: 'WebpagesGridCtrl',
+      templateUrl: 'webpages/grid.html',
+      data: {
+        ncyBreadcrumbLabel: false
+      }
+    })
+    .state('cortex.webpages.new', {
+      url: '/new',
+      controller: 'WebpagesNewCtrl',
+      templateUrl: 'webpages/new.html',
+      data: {
+        ncyBreadcrumbLabel: 'New'
+      }
+    })
+    .state('cortex.webpages.edit', {
+      url: '/:webpageId',
+      controller: 'WebpagesEditCtrl',
+      templateUrl: 'webpages/edit.html',
+      data: {
+        ncyBreadcrumbLabel: 'Edit'
+      }
+    });
 });

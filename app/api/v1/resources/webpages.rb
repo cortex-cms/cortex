@@ -64,8 +64,13 @@ module API
 
             webpage_params = params[:webpage] || params
             allowed_params = remove_params(Entities::Webpage.documentation.keys, :tile_thumbnail, :user) + [:snippets_attributes]
+            update_params = declared(webpage_params, { include_missing: false }, allowed_params)
+            update_params[:snippets_attributes].each {|snippet|
+              snippet.user = current_user!
+              snippet[:document_attributes].user = current_user!
+            }
 
-            webpage.update!(declared(webpage_params, { include_missing: false }, allowed_params).to_hash)
+            webpage.update!(update_params.to_hash)
 
             present webpage, with: Entities::Webpage, full: true
           end

@@ -1,4 +1,4 @@
-.admin-pages {
+.admin-webpages {
   .actions-and-search {
     @extend .row;
     margin-bottom: $standard-margin;
@@ -13,11 +13,13 @@
     @extend .row;
   }
 
-  .page-tile-column {
+  .webpage-tile-column {
+    @include make-xs-column(6);
+    @include make-sm-column(4);
     @include make-md-column(2);
   }
 
-  .page-tile {
+  .webpage-tile {
     @extend .thumbnail;
     text-align: center;
   }

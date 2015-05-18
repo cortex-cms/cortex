@@ -26,7 +26,7 @@ module API
         expose :categories, using: 'Entities::Category', documentation: {type: 'Category', is_array: true, desc: "Categories"}
         expose :featured_media, using: 'Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Featured Media for this post"}
         expose :tile_media, using: 'Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Tile Media for this post"}
-        expose :industries, using: 'Entities::Occupation', documentation: {type: "Industry", is_array: true, desc: "Industries"}
+        expose :industries, using: 'Entities::Occupation', documentation: {type: 'Industry', is_array: true, desc: "Industries"}
 
         # This runtime exposure is necessary to correctly resolve the enum value
         expose :display, {documentation: { type: "String", desc: "Post Display Size"}} do |post|

@@ -73,6 +73,11 @@ angular.module('cortex.services.cortex', [
     search:  {method: 'GET', params: { }, isArray: true, paginated: true}
   });
 
+  var webpages = paginatedResource('/webpages/:id', {id: '@id'}, {
+    search: {method: 'GET', params: { }, isArray: true, paginated: true},
+    feed:    {method: 'GET', params: {id: 'feed'}, isArray: true, paginated: true}
+  });
+
   return {
     categories:    categories,
     locales:       locales,
@@ -85,6 +90,7 @@ angular.module('cortex.services.cortex', [
     occupations:   occupations,
     applications:  applications,
     credentials:   credentials,
-    bulk_jobs:     bulkJobs
+    bulk_jobs:     bulkJobs,
+    webpages:      webpages
   };
 });

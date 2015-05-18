@@ -20,7 +20,7 @@ module API
         expose :user, with: 'Entities::User', as: :creator, documentation: { type: "User", desc: "Owner" }
 
         ## Thumbnails
-        expose :attachment, using: 'Entities::MediaThumbnails', as: :thumbs, if: lambda { |media, _| media.can_thumb }, documentation: { type: "MediaThumbnails", desc: "Thumbnails of the media"}
+        expose :attachment, using: 'Entities::MediaThumbnails', as: :thumbs, if: lambda { |media, _| media.can_thumb? }, documentation: { type: "MediaThumbnails", desc: "Thumbnails of the media"}
 
         ## Youtube Specific
         with_options if: lambda { |media, _| media.content_type == 'youtube' } do

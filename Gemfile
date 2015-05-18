@@ -27,15 +27,15 @@ gem 'haml', '~> 4.0.6'
 gem 'sass-rails', '~> 5.0'
 gem 'font-awesome-sass', '~> 4.3.2'
 
-gem 'sprockets-rails', '~> 2.2', :require => 'sprockets/railtie'
+gem 'sprockets-rails', '~> 2.3', :require => 'sprockets/railtie'
 gem 'sprockets', '~> 2.12.3'
 
 # JS
 gem 'ng-rails-csrf', '~> 0.1.0'
-gem 'angular-rails-templates', '~> 0.1.4'
+gem 'angular-rails-templates', '~> 0.2.0'
 gem 'gon', '~> 5.2.3'
 gem 'jquery-rails', '~> 4.0.3'
-gem 'momentjs-rails', '~> 2.9.0'
+gem 'momentjs-rails', '~> 2.10.2'
 gem 'ngmin-rails', '~> 0.4.0'
 gem 'turbolinks', '~> 2.5.3'
 gem 'uglifier', '~> 2.7.1'
@@ -70,28 +70,28 @@ gem 'elasticsearch-model', '~> 0.1'
 gem 'elasticsearch-rails', '~> 0.1'
 gem 'kaminari', '~> 0.16.3'
 gem 'paranoia', '~> 2.1'
-gem 'pg', '~> 0.18.1'
+gem 'pg', '~> 0.18.2'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 
 # Authorization
 gem 'six', '~> 0.2.0'
 gem 'devise', '~> 3.4.1'
-gem 'rack-oauth2', '~> 1.0.9'
+gem 'rack-oauth2', '~> 1.1.1'
 
 # Utility
 gem 'excon', '~> 0.45.1'
 gem 'hashie', '~> 3.4.1'
 gem 'hashr', '~> 0.0.22'
-gem 'mime-types', '~> 2.4.3'
+gem 'mime-types', '~> 2.5.0'
 gem 'json'
 gem 'rubyzip', '~> 1.1.7'
 
 # Middleware
-gem 'rack-cors', '~> 0.3.1', require: 'rack/cors'
+gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
 
 # Jobs
 gem 'sidekiq', '~> 3.3.3'
-gem 'sidekiq-failures', '~> 0.4.3'
+gem 'sidekiq-failures', '~> 0.4.4'
 gem 'sinatra', '~> 1.4.6', require: false
 
 # Interactors
@@ -99,7 +99,7 @@ gem 'interactor-rails', '~> 2.0'
 
 group :test, :development do
   # Environment
-  gem 'dotenv', '~> 1.0.2'
+  gem 'dotenv', '~> 2.0.1'
 
   # Rspec
   gem 'rspec', '~> 3.2'
@@ -116,8 +116,8 @@ group :test, :development do
 
   # Javascript
   gem 'jasmine-rails', '~> 0.10.7'
-  gem 'guard-jasmine', '~> 2.0.5'
-  gem 'jasmine-core', '~> 2.2'
+  gem 'guard-jasmine', '~> 2.0.6'
+  gem 'jasmine-core', '~> 2.3'
 
   source 'https://rails-assets.org' do
     gem 'rails-assets-angular-mocks', '~> 1.2'
@@ -146,7 +146,7 @@ group :assets do
 end
 
 group :test, :development, :staging do
-  gem 'fog', '~> 1.29.0'
+  gem 'fog', '~> 1.30.0'
 end
 
 group :production do
@@ -155,5 +155,5 @@ end
 
 group :staging, :production do
   # Monitoring
-  gem 'newrelic_rpm', '~> 3.11.1'
+  gem 'newrelic_rpm', '~> 3.12.0'
 end

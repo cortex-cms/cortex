@@ -6,6 +6,7 @@ module API
         expose :title, documentation:  {desc: "Post Title", type: "String" , required: true}
         expose :type, documentation: {desc: "Post Type", type: "String", enum: ["ArticlePost", "VideoPost", "InfographicPost", "PromoPost"], required: true}
         expose :draft, documentation: {desc: "Draft status", type: "Boolean"}
+        expose :is_wysiwyg, documentation: {desc: "Post needs a WYSIWYG editor", type: "Boolean"}
         expose :comment_count, documentation: {desc: "Number of comments", type: "Integer"}
         expose :short_description, documentation: {desc: "Short description of the post", type: "String", required: true}
         expose :job_phase, documentation: {desc: "Job Phase", type: "String", enum: ["discovery", "find_the_job", "get_the_job", "on_the_job"], required: true}

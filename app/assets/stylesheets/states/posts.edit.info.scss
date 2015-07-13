@@ -1,0 +1,7 @@
+.is-wysiwyg {
+  @extend .form-group;
+
+  .is-wysiwyg-group {
+    @extend .input-group;
+  }
+}

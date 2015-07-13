@@ -268,6 +268,7 @@ angular.module('cortex.states', [
           var post = new cortex.posts();
           post.body = '';
           post.draft = true;
+          post.is_wysiwyg = true;
           post.author = currentUser.full_name;
           post.copyright_owner = post.copyright_owner || "CareerBuilder, LLC";
           post.tag_list = '';

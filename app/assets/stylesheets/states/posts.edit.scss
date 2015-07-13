@@ -9,6 +9,8 @@
 
       .editor {
         @extend .form-control;
+
+        min-height: 800px;
       }
     }
   }

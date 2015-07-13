@@ -25,3 +25,21 @@
            ng-maxlength="255">
   </div>
 </div>
+
+<div class="is-wysiwyg">
+  <label>Use WYSIWYG Editor?</label>
+  <div class="is-wysiwyg-group">
+    <input
+        bs-switch
+        ng-model="data.post.is_wysiwyg"
+        type="checkbox"
+        switch-active="true"
+        switch-on-text="Enabled"
+        switch-off-text="Disabled"
+        switch-on-color="default"
+        switch-off-color="primary"
+        switch-icon="fa fa-edit"
+        switch-animate="true"/>
+  </div>
+  <p>Consider disabling the WYSIWYG editor if you'd like to input raw HTML</p>
+</div>

@@ -59,7 +59,8 @@ angular.module('cortex.controllers.posts.edit', [
     plugins: ['media', 'imageFit'],
     minHeight: 800,
     buttonSource: true,
-    deniedTags: ['html', 'head', 'link', 'body', 'meta', 'applet'] // Allow script, style
+    deniedTags: [],
+    replaceDivs: false
   };
 
   $scope.isAuthorUser = function(post) {

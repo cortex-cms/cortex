@@ -701,3 +701,6 @@ DEPENDENCIES
   uglifier (~> 2.7.1)
   underscore-rails (~> 1.8.2)
   unicorn-rails (~> 2.2.0)
+
+BUNDLED WITH
+   1.10.3

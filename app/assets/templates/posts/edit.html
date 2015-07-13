@@ -1,10 +1,17 @@
 <form id="postForm" name="postForm" ng-submit="data.savePost()" novalidate>
   <div class="composer-column">
     <div class="composer">
-      <textarea ng-model="data.post.body"
-                redactor="redactorOptions"
-                class="editor">
-      </textarea>
+      <div ng-switch on="data.post.is_wysiwyg">
+        <div ng-switch-when="true">
+          <textarea ng-model="data.post.body"
+                    redactor="redactorOptions"
+                    class="editor">
+          </textarea>
+        </div>
+        <div ng-switch-default>
+          <textarea ng-model="data.post.body" class="editor"></textarea>
+        </div>
+      </div>
     </div>
   </div>
 

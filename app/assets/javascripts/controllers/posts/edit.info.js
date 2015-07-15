@@ -6,12 +6,17 @@ angular.module('cortex.controllers.posts.edit.info', [
 ])
 
 .controller('PostsEditInfoCtrl', function($scope, $filter, cortex, delayedBind, currentUser) {
+  // Set Slug dirty on form load if it's already been changed from the default
+  if ($scope.data.post.slug !== $filter('slugify')($scope.data.post.title)) {
+    $scope.$on('$viewContentLoaded', function () {
+      $scope.postForm.slug.$dirty = true;
+    });
+  }
+
   // Auto-generate slug when title changed and field isn't dirty
   $scope.$watch('data.post.title', function(title) {
-
-    var slug = $filter('slugify')(title);
-
-    var slugOverridden = $scope.postForm.slug.$dirty && $scope.postForm.slug;
+    var slug = $filter('slugify')(title),
+      slugOverridden = $scope.postForm.slug.$dirty && $scope.postForm.slug;
 
     if (slugOverridden) {
       return;

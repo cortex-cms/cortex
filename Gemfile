@@ -155,5 +155,6 @@ end
 
 group :staging, :production do
   # Monitoring
-  gem 'newrelic_rpm', '~> 3.12.0'
+  gem 'newrelic_rpm', '~> 3.12.1'
+  gem 'newrelic-grape', '~> 2.0'
 end

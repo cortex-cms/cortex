@@ -67,6 +67,8 @@ module API
             post = GetPost.call(id: params[:id], published: true).post
             not_found! unless post
             authorize! :view, post
+
+            per_page = params[:per_page] || 5 # Ignore PaginationHelper's/Kaminari's per_page default - too large for related content!
             @posts = post.related(true).page(page).per(per_page).records
             set_pagination_headers(@posts, 'posts')
             present @posts, with: Entities::Post

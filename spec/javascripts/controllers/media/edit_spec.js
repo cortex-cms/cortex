@@ -7,15 +7,15 @@
 
     beforeEach(function() {
       debaser()
-          .module('cortex.controllers.media.edit')
-          .object('settings', {})
-          .object('$state').withFunc('go').returnsArg(0)
-          .withFunc('cortex').returns(sinon.stub())
-          .object('$upload').withFunc('upload').fulfills(true)
-          .debase();
+        .module('cortex.controllers.media.edit')
+        .object('settings', {})
+        .object('$state').withFunc('go').returnsArg(0)
+        .withFunc('cortex').returns(sinon.stub())
+        .object('$upload').withFunc('upload').fulfills(true)
+        .debase();
     });
 
-    describe('MediaGridCtrl', function() {
+    describe('MediaEditCtrl', function() {
       var constructController;
 
       beforeEach(inject(function($controller) {
@@ -59,7 +59,7 @@
       it('should save youtube', function() {
         var controller = constructController();
         sinon.stub(controller.data.media, '$save').fulfills({});
-        angular.extend(controller.data.media, {video_id: '1234', name: 'Youtube video'});
+        angular.extend(controller.data.media, {$youtube: '1234', name: 'Youtube video'});
         controller.selectTab('youtube');
         controller.saveMedia();
         expect(controller.data.media.$save.called).toBeTruthy();

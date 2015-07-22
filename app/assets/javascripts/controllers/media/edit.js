@@ -8,6 +8,7 @@ angular.module('cortex.controllers.media.edit', [
   'angularFileUpload',
   'ngTagsInput',
   'cortex.settings',
+  'cortex.filters',
   'cortex.services.cortex',
   'cortex.directives.fileSelector',
   'cortex.directives.youtubeSelector',

@@ -82,7 +82,7 @@ module API
 
             media_params = params[:media] || params
 
-            allowed_params = [:name, :alt, :description, :tag_list, :status, :deactive_at]
+            allowed_params = [:name, :alt, :description, :tag_list, :status, :deactive_at, :attachment]
 
             if params[:tag_list]
               media.tag_list = params[:tag_list]

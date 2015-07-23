@@ -1,5 +1,4 @@
 // Maintained by Gemfile
-//= require turbolinks
 //= require moment
 //= require underscore
 //= require jquery

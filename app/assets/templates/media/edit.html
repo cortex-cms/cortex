@@ -42,7 +42,7 @@
             <dd>{{data.media.video_description}}</dd>
 
             <dt>Youtube Authors</dt>
-            <dd>{{data.media.authors | prettifyArrayString}}</dd>
+            <dd ng-if="data.media.authors">{{data.media.authors | prettifyArrayString}}</dd>
           </span>
         </dl>
       </div>

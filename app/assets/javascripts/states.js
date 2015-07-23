@@ -1159,6 +1159,15 @@ angular.module('cortex.states', [
       }
     })
 
+    .state('cortex.users.bulk', {
+      url: '/bulk',
+      templateUrl: 'users/bulk.html',
+      controller: 'UsersBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Users'
+      }
+    })
+
     .state('cortex.users.edit', {
       url: '/:userId',
       templateUrl: 'users/edit.html',
@@ -1202,15 +1211,6 @@ angular.module('cortex.states', [
 
           return defer.promise;
         }]
-      }
-    })
-
-    .state('cortex.users.bulk', {
-      url: '/bulk',
-      templateUrl: 'users/bulk.html',
-      controller: 'UsersBulkCtrl',
-      data: {
-        ncyBreadcrumbLabel: 'Bulk Add Users'
       }
     })
 

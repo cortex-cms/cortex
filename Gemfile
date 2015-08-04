@@ -10,15 +10,53 @@ gem 'rails', '~> 4.2'
 # Cortex-specific
 gem 'cortex-exceptions', '~> 0.0.4'
 
-# Localization
-gem 'jargon-client', git: 'git://github.com/cb-talent-development/jargon-client'
-
 # API
 gem 'grape', '~> 0.12'
 gem 'grape-entity', '~> 0.4.5'
 gem 'grape-swagger', '~> 0.10.1'
-gem 'doorkeeper', '2.1.0' # Must upgrade - security risks
 gem 'redis-rails', '~> 4.0'
+
+# Authorization
+gem 'six', '~> 0.2.0'
+gem 'devise', '~> 3.5.1'
+gem 'rack-oauth2', '~> 1.2.0'
+gem 'doorkeeper', '~> 1.4' # Must upgrade - security risks
+
+# ActiveRecord
+gem 'rails-observers', '~> 0.1.2'
+gem 'awesome_nested_set', '~> 3.0'
+gem 'paperclip', '~> 4.3'
+gem 'paperclip-optimizer', '~> 2.0'
+gem 'acts-as-taggable-on', '~> 3.5'
+gem 'bcrypt', '~> 3.1.10'
+gem 'elasticsearch-model', '~> 0.1'
+gem 'elasticsearch-rails', '~> 0.1'
+gem 'kaminari', '~> 0.16.3'
+gem 'paranoia', '~> 2.1'
+gem 'pg', '~> 0.18.2'
+gem 'hashie-forbidden_attributes', '~> 0.1.1'
+
+# Middleware
+gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
+
+# Utility
+gem 'excon', '~> 0.45.4'
+gem 'hashie', '~> 3.4.2'
+gem 'hashr', '~> 0.0.22'
+gem 'mime-types', '~> 2.6.1'
+gem 'json'
+gem 'rubyzip', '~> 1.1.7'
+
+# Jobs
+gem 'sidekiq', '~> 3.4.2'
+gem 'sidekiq-failures', '~> 0.4.5'
+gem 'sinatra', '~> 1.4.6', require: false
+
+# Interactors
+gem 'interactor-rails', '~> 2.0'
+
+# Localization
+gem 'jargon-client', git: 'git://github.com/cb-talent-development/jargon-client'
 
 # Templating
 gem 'haml', '~> 4.0.6'
@@ -57,44 +95,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-bootstrap-switch', '~> 0.4'
   gem 'rails-assets-angular-validation-match', '~> 1.5'
 end
-
-# ActiveRecord
-gem 'rails-observers', '~> 0.1.2'
-gem 'awesome_nested_set', '~> 3.0'
-gem 'paperclip', '~> 4.3'
-gem 'paperclip-optimizer', '~> 2.0'
-gem 'acts-as-taggable-on', '~> 3.5'
-gem 'bcrypt', '~> 3.1.10'
-gem 'elasticsearch-model', '~> 0.1'
-gem 'elasticsearch-rails', '~> 0.1'
-gem 'kaminari', '~> 0.16.3'
-gem 'paranoia', '~> 2.1'
-gem 'pg', '~> 0.18.2'
-gem 'hashie-forbidden_attributes', '~> 0.1.1'
-
-# Authorization
-gem 'six', '~> 0.2.0'
-gem 'devise', '~> 3.5.1'
-gem 'rack-oauth2', '~> 1.2.0'
-
-# Utility
-gem 'excon', '~> 0.45.4'
-gem 'hashie', '~> 3.4.2'
-gem 'hashr', '~> 0.0.22'
-gem 'mime-types', '~> 2.6.1'
-gem 'json'
-gem 'rubyzip', '~> 1.1.7'
-
-# Middleware
-gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
-
-# Jobs
-gem 'sidekiq', '~> 3.4.2'
-gem 'sidekiq-failures', '~> 0.4.5'
-gem 'sinatra', '~> 1.4.6', require: false
-
-# Interactors
-gem 'interactor-rails', '~> 2.0'
 
 group :test, :development do
   # Environment

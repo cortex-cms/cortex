@@ -54,6 +54,7 @@ angular.module('cortex.controllers.localizations.grid', [
       if ($window.confirm('Are you sure you want to duplicate "' + localization.name + '?"')) {
         var duplicate = new cortex.localizations(localization);
         delete duplicate.id;
+        duplicate.locales = _.map(duplicate.locales, function(locale) { return _.omit(locale, 'json'); });
         duplicate.name += ' - Copy';
         duplicate.$save().then(
           function () {

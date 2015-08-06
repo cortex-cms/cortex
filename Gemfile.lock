@@ -1,12 +1,3 @@
-GIT
-  remote: git://github.com/cb-talent-development/jargon-client
-  revision: 26cc55c78d3f91235650b9b4fb56794178310f12
-  specs:
-    jargon-client (0.0.1)
-      faraday (~> 0.9)
-      faraday_middleware (~> 0.9.1)
-      oauth2 (~> 1.0)
-
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -54,16 +45,16 @@ GEM
       sprockets (~> 2)
       tilt
     ansi (1.5.0)
-    arel (6.0.2)
+    arel (6.0.3)
     attr_required (1.0.0)
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
-    aws-sdk (2.1.11)
-      aws-sdk-resources (= 2.1.11)
-    aws-sdk-core (2.1.11)
+    aws-sdk (2.1.12)
+      aws-sdk-resources (= 2.1.12)
+    aws-sdk-core (2.1.12)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.1.11)
-      aws-sdk-core (= 2.1.11)
+    aws-sdk-resources (2.1.12)
+      aws-sdk-core (= 2.1.12)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -142,8 +133,6 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.9.2)
-      faraday (>= 0.7.4, < 0.10)
     ffi (1.9.10)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
@@ -245,7 +234,7 @@ GEM
       sass (~> 3.2)
     formatador (0.2.5)
     fspath (2.1.1)
-    globalid (0.3.5)
+    globalid (0.3.6)
       activesupport (>= 4.1.0)
     gon (5.2.3)
       actionpack (>= 2.3.0)
@@ -336,7 +325,6 @@ GEM
     json_spec (1.1.4)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
-    jwt (1.5.1)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -375,12 +363,6 @@ GEM
     notiffany (0.0.7)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oauth2 (1.0.0)
-      faraday (>= 0.8, < 0.10)
-      jwt (~> 1.0)
-      multi_json (~> 1.3)
-      multi_xml (~> 0.5)
-      rack (~> 1.2)
     orm_adapter (0.5.0)
     paperclip (4.3.0)
       activemodel (>= 3.2.0)
@@ -503,7 +485,7 @@ GEM
       actionpack (~> 4)
       redis-rack (~> 1.5.0)
       redis-store (~> 1.1.0)
-    redis-activesupport (4.1.0)
+    redis-activesupport (4.1.1)
       activesupport (~> 4)
       redis-store (~> 1.1.0)
     redis-namespace (1.5.2)
@@ -645,7 +627,6 @@ DEPENDENCIES
   hashie-forbidden_attributes (~> 0.1.1)
   hashr (~> 0.0.22)
   interactor-rails (~> 2.0)
-  jargon-client!
   jasmine-core (~> 2.3)
   jasmine-rails (~> 0.10.8)
   jquery-rails (~> 4.0.4)

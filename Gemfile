@@ -55,9 +55,6 @@ gem 'sinatra', '~> 1.4.6', require: false
 # Interactors
 gem 'interactor-rails', '~> 2.0'
 
-# Localization
-gem 'jargon-client', git: 'git://github.com/cb-talent-development/jargon-client'
-
 # Templating
 gem 'haml', '~> 4.0.6'
 

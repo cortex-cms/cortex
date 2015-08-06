@@ -4,7 +4,8 @@ module API
       class Locale < Grape::Entity
         expose :id, documentation: {type: 'Integer', desc: 'Locale ID', required: true}
         expose :name, documentation:  {type: 'String', desc: 'Locale Name', required: true}
-        expose :json, documentation:  {type: 'Hash', is_array: true, desc: 'Locale Data'}
+        expose :yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Locale Data as YAML'}
+        expose :json, documentation:  {type: 'Hash', is_array: true, desc: 'Locale Data as JSON'}
         expose :created_at, documentation: { type: 'dateTime', desc: 'Created Date'}
         expose :updated_at, documentation: { type: 'dateTime', desc: 'Last Updated Date'}
 

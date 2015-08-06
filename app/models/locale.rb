@@ -1,5 +1,6 @@
 class Locale < ActiveRecord::Base
   require 'yaml'
+  serialize :data
 
   belongs_to :user
   belongs_to :localization
@@ -20,6 +21,6 @@ class Locale < ActiveRecord::Base
   end
 
   def json= p
-    self.data = JSON.parse(p)
+    self.data = JSON.parse(p, {:quirks_mode => true}) # Quirks mode will let us parse a null JSON object
   end
 end

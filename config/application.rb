@@ -5,7 +5,6 @@ Bundler.require(:default, Rails.env)
 
 module Cortex
   class Application < Rails::Application
-
     config.angular_templates.module_name = 'cortex.templates'
     config.i18n.enforce_available_locales = true
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/models/media_types #{config.root}/app/models/post_types #{config.root}/app/models/observers)

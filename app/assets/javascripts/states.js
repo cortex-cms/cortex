@@ -13,7 +13,6 @@ angular.module('cortex.states', [
 
   'cortex.controllers.media.edit',
   'cortex.controllers.media.grid',
-  'cortex.controllers.media.new',
   'cortex.controllers.media.bulk',
 
   'cortex.controllers.organizations',
@@ -163,7 +162,7 @@ angular.module('cortex.states', [
       views: {
         'localizations@cortex.localizations': {
           templateUrl: 'locales/edit.html',
-          controller: 'LocalesEditCtrl',
+          controller: 'LocalesEditCtrl'
         }
       },
       data: {
@@ -176,7 +175,7 @@ angular.module('cortex.states', [
       views: {
         'localizations@cortex.localizations': {
           templateUrl: 'locales/edit.html',
-          controller: 'LocalesEditCtrl',
+          controller: 'LocalesEditCtrl'
         }
       },
       data: {
@@ -199,7 +198,7 @@ angular.module('cortex.states', [
     .state('cortex.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
-      controller: 'MediaNewCtrl',
+      controller: 'MediaEditCtrl',
       data: {
         ncyBreadcrumbLabel: 'Add Media'
       }
@@ -493,7 +492,7 @@ angular.module('cortex.states', [
     .state('cortex.posts.edit.sections.article.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
-      controller: 'MediaNewCtrl',
+      controller: 'MediaEditCtrl',
       data: {
         ncyBreadcrumbLabel: false
       }
@@ -558,7 +557,7 @@ angular.module('cortex.states', [
     .state('cortex.posts.edit.sections.video.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
-      controller: 'MediaNewCtrl',
+      controller: 'MediaEditCtrl',
       data: {
         ncyBreadcrumbLabel: false
       }
@@ -623,7 +622,7 @@ angular.module('cortex.states', [
     .state('cortex.posts.edit.sections.infographic.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
-      controller: 'MediaNewCtrl',
+      controller: 'MediaEditCtrl',
       data: {
         ncyBreadcrumbLabel: false
       }
@@ -688,7 +687,7 @@ angular.module('cortex.states', [
     .state('cortex.posts.edit.sections.promo.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
-      controller: 'MediaNewCtrl',
+      controller: 'MediaEditCtrl',
       data: {
         ncyBreadcrumbLabel: false
       }
@@ -753,7 +752,7 @@ angular.module('cortex.states', [
     .state('cortex.posts.new.sections.article.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
-      controller: 'MediaNewCtrl',
+      controller: 'MediaEditCtrl',
       data: {
         ncyBreadcrumbLabel: false
       }
@@ -818,7 +817,7 @@ angular.module('cortex.states', [
     .state('cortex.posts.new.sections.video.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
-      controller: 'MediaNewCtrl',
+      controller: 'MediaEditCtrl',
       data: {
         ncyBreadcrumbLabel: false
       }
@@ -883,7 +882,7 @@ angular.module('cortex.states', [
     .state('cortex.posts.new.sections.infographic.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
-      controller: 'MediaNewCtrl',
+      controller: 'MediaEditCtrl',
       data: {
         ncyBreadcrumbLabel: false
       }
@@ -948,7 +947,7 @@ angular.module('cortex.states', [
     .state('cortex.posts.new.sections.promo.media.new', {
       url: '/new',
       templateUrl: 'media/new.html',
-      controller: 'MediaNewCtrl',
+      controller: 'MediaEditCtrl',
       data: {
         ncyBreadcrumbLabel: false
       }
@@ -1160,6 +1159,15 @@ angular.module('cortex.states', [
       }
     })
 
+    .state('cortex.users.bulk', {
+      url: '/bulk',
+      templateUrl: 'users/bulk.html',
+      controller: 'UsersBulkCtrl',
+      data: {
+        ncyBreadcrumbLabel: 'Bulk Add Users'
+      }
+    })
+
     .state('cortex.users.edit', {
       url: '/:userId',
       templateUrl: 'users/edit.html',
@@ -1203,15 +1211,6 @@ angular.module('cortex.states', [
 
           return defer.promise;
         }]
-      }
-    })
-
-    .state('cortex.users.bulk', {
-      url: '/bulk',
-      templateUrl: 'users/bulk.html',
-      controller: 'UsersBulkCtrl',
-      data: {
-        ncyBreadcrumbLabel: 'Bulk Add Users'
       }
     })
 

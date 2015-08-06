@@ -42,7 +42,7 @@
             <dd>{{data.media.video_description}}</dd>
 
             <dt>Youtube Authors</dt>
-            <dd>{{data.media.authors | prettifyArrayString}}</dd>
+            <dd ng-if="data.media.authors">{{data.media.authors | prettifyArrayString}}</dd>
           </span>
         </dl>
       </div>
@@ -50,16 +50,30 @@
   </div>
 
   <div class="media-details">
-    <form novalidate name="mediaForm">
+    <form novalidate name="mediaForm" ng-disabled="data.upload.progress">
+      <tabset class="content-selector-tabs">
+          <tab select="selectTab('file')">
+            <tab-heading><i class="fa fa-file-o"></i> Select File</tab-heading>
+            <file-selector ng-model="data.media.$file;">
+            </file-selector>
+          </tab>
+          <tab select="selectTab('youtube')">
+            <tab-heading><i class="fa fa-youtube"></i> YouTube</tab-heading>
+            <youtube-selector ng-model="data.media.$youtube">
+            </youtube-selector>
+          </tab>
+      </tabset>
+
       <div class="panel panel-default">
         <div class="panel-heading">
           <i class="fa fa-pencil-square-o"></i> Provide Details
         </div>
         <div class="panel-body">
+
           <div class="row">
             <div class="display-name-container">
-              <div class="form-group">
-                <label for="display-name">Display Name</label>
+              <div class="form-group" show-errors>
+                <label for="display-name" class="control-label">Display Name*</label>
                 <input id="display-name" name="display-name" type="text" class="form-control"
                        ng-model="data.media.name" placeholder="Friendly media name" required>
               </div>
@@ -73,12 +87,12 @@
                          ng-model="data.media.deactive_at" placeholder="Expiration time (optional)"
                          datepicker-popup="{{datepicker.format}}" is-open="datepicker.expireAtOpen"
                          show-weeks="false">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"
-                                ng-click="datepicker.open('expireAtOpen')">
-                          <i class="fa fa-calendar"></i>
-                        </button>
-                      </span>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"
+                            ng-click="datepicker.open('expireAtOpen')">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </span>
                 </div>
               </div>
             </div>
@@ -104,16 +118,16 @@
                 <auto-complete source="loadTags($query)"></auto-complete>
               </tags-input>
               <span dropdown>
-                  <button class="btn btn-default dropdown-toggle" type="button">
-                    Popular <i class="caret"></i>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li ng-repeat="tag in data.popularTags">
-                      <a ng-click="addTag(tag)">{{ tag.name }} <span class="pull-right">{{ tag.count }}</span></a>
-                    </li>
-                  </ul>
-                </span>
-            </div>
+                <button class="btn btn-default dropdown-toggle" type="button">
+                  Popular <i class="caret"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="tag in data.popularTags">
+                    <a ng-click="addTag(tag)">{{ tag.name }} <span class="pull-right">{{ tag.count }}</span></a>
+                  </li>
+                </ul>
+              </span>
+              </div>
           </div>
 
           <div class="actions row">
@@ -125,7 +139,7 @@
 
             <div>
               <button type="button" class="btn btn-primary btn-block"
-                      ng-disabled="mediaForm.$invalid || mediaForm.$pistine" ng-click="update()">
+                      ng-disabled="mediaForm.$invalid || data.upload.progress" ng-click="saveMedia()">
                 <i class="fa fa-cloud-upload"></i> Submit
               </button>
             </div>

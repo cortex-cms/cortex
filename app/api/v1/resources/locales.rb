@@ -10,15 +10,15 @@ module API
           segment '/:id' do
             resource :locales do
               helpers Helpers::PaginationHelper
-              helpers Helpers::JargonHelper
               helpers Helpers::LocaleHelper
+              helpers Helpers::LocalizationHelper
 
               desc 'Show all locales', {entity: Entities::Locale, nickname: 'showAllLocales'}
               get do
                 require_scope! :'view:locales'
                 authorize! :view, ::Locale
 
-                @locales = Kaminari.paginate_array(localization_service.all_locales).page(page).per(per_page)
+                @locales = localization.locales.order(created_at: :desc).page(page).per(per_page)
 
                 set_pagination_headers(@locales, 'locales')
                 present @locales, with: Entities::Locale
@@ -29,7 +29,7 @@ module API
                 require_scope! :'view:locales'
                 authorize! :view, locale!
 
-                @locale = localization_service.get_locale(params[:locale_name])
+                @locale = Locale.find_by_name!(params[:locale_name])
 
                 present @locale, with: Entities::Locale
               end
@@ -39,9 +39,7 @@ module API
                 require_scope! :'modify:locales'
                 authorize! :delete, locale!
 
-                @locale = localization_service.delete_locale(params[:locale_name])
-
-                present @locale, with: Entities::Locale
+                locale.destroy!
               end
 
               desc 'Create a locale', {entity: Entities::Locale, params: Entities::Locale.documentation, nickname: 'createLocale'}
@@ -51,7 +49,9 @@ module API
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :id, :created_at, :updated_at, :available_locales, :locales, :creator)
 
-                @locale = localization_service.create_locale(declared(params, {include_missing: false}, allowed_params))
+                @locale = localization.locales.new(declared(params, {include_missing: false}, allowed_params))
+                @locale.user = current_user!
+                localization.save!
 
                 present @locale, with: Entities::Locale
               end
@@ -63,9 +63,9 @@ module API
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :id, :created_at, :updated_at, :available_locales, :locales, :creator)
 
-                @locale = localization_service.update_locale(params[:locale_name], declared(params, {include_missing: false}, allowed_params))
+                locale.update!(declared(params, {include_missing: false}, allowed_params))
 
-                present @locale, with: Entities::Locale
+                present locale, with: Entities::Locale
               end
             end
           end

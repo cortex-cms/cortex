@@ -23,6 +23,7 @@ angular.module('cortex.controllers.locales.edit', [
   };
 
   $scope.saveLocale = function () {
+    delete $scope.data.locale.json;
     $scope.data.locale.$save(saveParams).then(
       function () {
         $anchorScroll();

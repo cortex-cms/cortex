@@ -16,6 +16,12 @@ else
   stdout_path "#{rails_root}/log/unicorn.stdout.log"
 end
 
+# Unicorn kills worker processes that take too long to respond
+# Increase the worker timeout if application is being debugged
+if ENV['IDE_PROCESS_DISPATCHER']
+  timeout 30 * 60 * 60 * 24
+end
+
 pid pid_path
 
 preload_app true

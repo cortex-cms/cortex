@@ -10,6 +10,10 @@ class MediaObserver < ActiveRecord::Observer
     prevent_consumed_deletion(media)
   end
 
+  def before_attachment_post_process(media)
+    can_thumb?(media)
+  end
+
   private
 
   def image?(media)

@@ -6,8 +6,8 @@ class BulkJob < ActiveRecord::Base
   has_attached_file :metadata
   has_attached_file :assets
 
-  validates_attachment :metadata, :presence => true,
-                       :content_type => { :content_type => %w(text/csv text/plain) }
+  # Restore content type validation once Rails/Paperclip fixes downloaded CSVs (from S3) content type showing as 'application/force-download'
+  validates_attachment :metadata, :presence => true
   validates_with AttachmentContentTypeValidator, :attributes => :assets, :content_type => 'application/zip'
   validates_presence_of :content_type
 end

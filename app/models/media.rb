@@ -26,8 +26,6 @@ class Media < ActiveRecord::Base
       :ar_post => {geometry: '1140x', format: :jpg}
   }, processors: [:thumbnail, :paperclip_optimizer], :preserve_files => 'true'
 
-  before_attachment_post_process :can_thumb?
-
   validates_attachment :attachment, :presence => true,
                        :unless => :skip_attachment_validation,
                        :content_type => {:content_type => Cortex.config.media.allowed_media_types.collect{|allowed| allowed[:type]}},

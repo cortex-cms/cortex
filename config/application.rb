@@ -16,10 +16,10 @@ module Cortex
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true
 
-    # Insert Rack::CORS as one of the first middleware
-    config.middleware.insert_after Rack::Sendfile, Rack::Cors do
+    # Insert Rack::CORS as the first middleware
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins *((Cortex.config.cors.allowed_origins || '').split(',') +
+        origins *((Cortex.config.cors.allowed_origins || '*').split(',') +
                   [Cortex.config.cors.allowed_origins_regex || ''])
         resource '*',
                  :headers => :any,

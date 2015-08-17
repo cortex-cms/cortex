@@ -59,7 +59,7 @@ end
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.0'
-gem 'paperclip', git: 'git://github.com/betesh/paperclip', branch: 'aws_v2
+gem 'paperclip', git: 'git://github.com/betesh/paperclip', branch: 'aws_v2'
 gem 'paperclip-optimizer', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 3.5'
 gem 'bcrypt', '~> 3.1.10'

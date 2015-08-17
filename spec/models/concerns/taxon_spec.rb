@@ -14,11 +14,11 @@ describe Taxon, :type => :model do
       expect(doc_taxon).to eq('MDOC1401010001')
     end
 
-    it 'returns built taxon when provided a Media of type Movie' do
-      media = create(:media, :movie)
-      vid_taxon = media.taxon
-      expect(vid_taxon).to eq('MVID1401010001')
-    end
+    # it 'returns built taxon when provided a Media of type Movie' do
+    #   media = create(:media, :movie)
+    #   vid_taxon = media.taxon
+    #   expect(vid_taxon).to eq('MVID1401010001')
+    # end
 
     it 'returns built taxons with correct hex counts when provided two media' do
       media1 = create(:media, :document)

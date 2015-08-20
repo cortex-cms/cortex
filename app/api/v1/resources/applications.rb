@@ -15,8 +15,7 @@ module API
           params do
             use :pagination
           end
-          get do
-            require_scope! :'view:applications'
+          get scopes: [:'view:applications'] do
             authorize! :view, ::Application
 
             @applications = ::Application.where(tenant: current_tenant).page(page).per(per_page)
@@ -26,8 +25,7 @@ module API
           end
 
           desc 'Show an application', { entity: Entities::Application, nickname: "showApplication" }
-          get ':id' do
-            require_scope! :'view:applications'
+          get ':id', scopes: [:'view:applications'] do
             present application!, with: Entities::Application
           end
 
@@ -35,8 +33,7 @@ module API
           params do
             requires :name, type: String, desc: "Application Name"
           end
-          post do
-            require_scope! :'modify:applications'
+          post scopes: [:'modify:applications'] do
             authorize! :create, Application
 
             allowed_params = remove_params(Entities::Application.documentation.keys, :children)
@@ -48,8 +45,7 @@ module API
           end
 
           desc 'Update an application', { entity: Entities::Application, params: Entities::Application.documentation, nickname: "updateApplication" }
-          put ':id' do
-            require_scope! :'modify:applications'
+          put ':id', scopes: [:'modify:applications'] do
             authorize! :update, application!
 
             allowed_params = remove_params(Entities::Application.documentation.keys, :children)
@@ -59,8 +55,7 @@ module API
           end
 
           desc 'Delete an application', { nickname: "deleteApplication" }
-          delete ':id' do
-            require_scope! :'modify:applications'
+          delete ':id', scopes: [:'modify:applications'] do
             authorize! :delete, application!
 
             application.destroy

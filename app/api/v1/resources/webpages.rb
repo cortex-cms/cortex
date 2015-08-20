@@ -14,9 +14,8 @@ module API
           params do
             use :pagination
           end
-          get do
+          get scopes: [:'view:webpages'] do
             authorize! :view, ::Webpage
-            require_scope! :'view:webpages'
 
             @webpage = ::Webpage.order(created_at: :desc).page(page).per(per_page)
             set_pagination_headers(@webpage, 'webpage')
@@ -27,8 +26,7 @@ module API
           params do
             requires :url, type: String
           end
-          get 'feed' do
-            require_scope! :'view:webpages'
+          get 'feed', scopes: [:'view:webpages'] do
             @webpage ||= Webpage.find_by_url(params[:url])
             not_found! unless @webpage
             authorize! :view, @webpage
@@ -36,16 +34,14 @@ module API
           end
 
           desc 'Get webpage', { entity: Entities::Webpage, nickname: 'showWebpage' }
-          get ':id' do
-            require_scope! :'view:webpages'
+          get ':id', scopes: [:'view:webpages'] do
             authorize! :view, webpage!
 
             present webpage, with: Entities::Webpage, full: true
           end
 
           desc 'Create webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'createWebpage' }
-          post do
-            require_scope! :'modify:webpages'
+          post scopes: [:'modify:webpages'] do
             authorize! :create, ::Webpage
 
             webpage_params = params[:webpage] || params
@@ -58,8 +54,7 @@ module API
           end
 
           desc 'Update webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'updateWebpage' }
-          put ':id' do
-            require_scope! :'modify:webpages'
+          put ':id', scopes: [:'modify:webpages'] do
             authorize! :update, webpage!
 
             webpage_params = params[:webpage] || params
@@ -76,8 +71,7 @@ module API
           end
 
           desc 'Delete webpage', { nickname: 'deleteWebpage' }
-          delete ':id' do
-            require_scope! :'modify:webpages'
+          delete ':id', scopes: [:'modify:webpages'] do
             authorize! :delete, webpage!
 
             begin

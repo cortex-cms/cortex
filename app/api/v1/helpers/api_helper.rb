@@ -18,15 +18,6 @@ module API
           end
         end
 
-        def require_scope!(scopes)
-          return unless access_token
-          scopes = [scopes] unless scopes.kind_of? Array
-
-          unless (access_token.scopes && scopes) == scopes
-            forbidden!
-          end
-        end
-
         def access_token
           @token_string ||= request.env[Rack::OAuth2::Server::Resource::ACCESS_TOKEN]
         end

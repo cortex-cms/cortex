@@ -16,9 +16,8 @@ module API
             use :pagination
             use :search
           end
-          get do
+          get scopes: [:'view:media'] do
             authorize! :view, ::Media
-            require_scope! :'view:media'
 
             @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).media
             set_pagination_headers(@media, 'media')
@@ -29,8 +28,7 @@ module API
           params do
             optional :s
           end
-          get 'tags' do
-            require_scope! :'view:media'
+          get 'tags', scopes: [:'view:media'] do
             authorize! :view, ::Media
 
             tags = params[:s] \
@@ -45,8 +43,7 @@ module API
           end
 
           desc 'Get media', { entity: Entities::Media, nickname: 'showMedia' }
-          get ':id' do
-            require_scope! :'view:media'
+          get ':id', scopes: [:'view:media'] do
             authorize! :view, media!
 
             present media, with: Entities::Media, full: true
@@ -56,8 +53,7 @@ module API
           params do
             optional :attachment
           end
-          post do
-            require_scope! :'modify:media'
+          post scopes: [:'modify:media'] do
             authorize! :create, ::Media
 
             media_params = params[:media] || params
@@ -76,8 +72,7 @@ module API
           params do
             optional :attachment
           end
-          put ':id' do
-            require_scope! :'modify:media'
+          put ':id', scopes: [:'modify:media'] do
             authorize! :update, media!
 
             media_params = params[:media] || params
@@ -93,8 +88,7 @@ module API
           end
 
           desc 'Delete media', { nickname: 'deleteMedia' }
-          delete ':id' do
-            require_scope! :'modify:media'
+          delete ':id', scopes: [:'modify:media'] do
             authorize! :delete, media!
 
             begin
@@ -115,9 +109,7 @@ module API
               requires :assets
             end
           end
-          post :bulk_job do
-            require_scope! :'modify:media'
-            require_scope! :'modify:bulk_jobs'
+          post :bulk_job, scopes: [:'modify:media', :'modify:bulk_jobs'] do
             authorize! :create, ::Media
             authorize! :create, ::BulkJob
 

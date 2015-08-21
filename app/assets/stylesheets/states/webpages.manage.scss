@@ -7,20 +7,10 @@
       @include make-md-column(8);
       @extend .pull-left;
     }
-  }
 
-  .tiles {
-    @extend .row;
-  }
-
-  .webpage-tile-column {
-    @include make-xs-column(6);
-    @include make-sm-column(4);
-    @include make-md-column(2);
-  }
-
-  .webpage-tile {
-    @extend .thumbnail;
-    text-align: center;
+    .webpage-search {
+      @include make-md-column(4);
+      @extend .pull-right;
+    }
   }
 }

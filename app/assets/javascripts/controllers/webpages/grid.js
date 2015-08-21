@@ -1,42 +1,42 @@
 angular.module('cortex.controllers.webpages.grid', [
+  'ngTable',
+  'ui.bootstrap',
   'ui.router.state',
-  'placeholders.img',
   'angular-flash.service',
-  'cortex.services.cortex',
-  'cortex.settings'
+  'cortex.services.cortex'
 ])
 
-  .controller('WebpagesGridCtrl', function ($scope, $window, $state, $stateParams, cortex, settings, flash) {
-    var updatePage = function () {
-      $state.go('.', {page: $scope.page.page, perPage: $scope.page.perPage, query: $scope.page.query});
+  .controller('WebpagesGridCtrl', function ($scope, $window, $state, ngTableParams, cortex, flash) {
+    $scope.data = {
+      totalServerItems: 0,
+      webpages: [],
+      query: null
     };
 
-    $scope.data = $scope.data || {};
-    $scope.page = {
-      query: $stateParams.query,
-      page: parseInt($stateParams.page) || 1,
-      perPage: parseInt($stateParams.perPage) || settings.paging.defaultPerPage,
-      next: function () {
-        $scope.page.page++;
-        updatePage();
-      },
-      previous: function () {
-        $scope.page.page--;
-        updatePage();
-      },
-      flip: function (page) {
-        $scope.page.page = page;
-        updatePage();
+    $scope.webpageDataParams = new ngTableParams({
+      page: 1,
+      count: 10,
+      sorting: {
+        created_at: 'desc'
       }
-    };
-    $scope.data.webpages = cortex.webpages.searchPaged({
-        q: $scope.page.query,
-        per_page: $scope.page.perPage,
-        page: $scope.page.page
-      },
-      function (webpages, headers, paging) {
-        $scope.data.paging = paging;
-      });
+    }, {
+      total: 0,
+      getData: function ($defer, params) {
+        cortex.webpages.searchPaged({page: params.page(), per_page: params.count(), q: $scope.data.query},
+          function (webpages, headers, paging) {
+            params.total(paging.total);
+            $defer.resolve(webpages);
+          },
+          function (data) {
+            $defer.reject(data);
+          }
+        );
+      }
+    });
+
+    $scope.$watch('data.query', function () {
+      $scope.webpageDataParams.reload();
+    });
 
     $scope.newWebpage = function () {
       $state.go('^.new');
@@ -53,6 +53,7 @@ angular.module('cortex.controllers.webpages.grid', [
             return w.id == webpage.id;
           });
           flash.warn = webpage.name + " deleted.";
+          $scope.webpageDataParams.reload();
         }, function (res) {
           flash.error = webpage.name + " could not be deleted: " + res.data.message;
         });

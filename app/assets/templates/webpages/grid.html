@@ -2,25 +2,24 @@
   <div class="manipulate-actions">
     <button class="btn btn-primary" type="button" ng-click="newWebpage()"><i class="fa fa-plus-square"></i> Create Webpage</button>
   </div>
-</div>
 
-<div class="tiles">
-  <div class="webpage-tile-column" ng-repeat="webpage in data.webpages">
-    <div class="webpage-tile">
-      <img ng-if="webpage.tile_thumbnail"
-           ng-src="{{ webpage.tile_thumbnail }}"
-           alt="Thumbnail">
-      <img ng-if="!webpage.tile_thumbnail"
-           ph-img="150x150"
-           ph-text="PROCESSING"
-           alt="Thumbnail">
-      <div class="caption">
-        <h3>{{ webpage.name }}</h3>
-        <p>
-          <button type="button" class="btn btn-danger" ng-click="deleteWebpage(webpage)">Delete</button>
-          <button type="button" class="btn btn-primary" ng-click="editWebpage(webpage)">Edit</button>
-        </p>
-      </div>
-    </div>
+  <div class="webpage-search">
+    <input type="text" class="form-control" placeholder="Search Webpages..." disabled>
   </div>
 </div>
+
+<table ng-table="webpageDataParams" class="table webpages-table">
+  <tr ng-repeat="webpage in $data">
+    <td data-title="'Name'">{{ webpage.name }}</td>
+    <td data-title="'URL'">{{ webpage.url }}</td>
+    <td data-title="'Owner'">{{ webpage.creator.fullname }}</td>
+    <td data-title="'Created'">{{ webpage.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
+    <td data-title="'Modified'">{{ webpage.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
+    <td>
+      <div class="btn-group pull-right" role="group">
+        <button type="button" class="btn btn-danger" ng-click="deleteWebpage(webpage)">Delete</button>
+        <button type="button" class="btn btn-primary" ng-click="editWebpage(webpage)">Edit</button>
+      </div>
+    </td>
+  </tr>
+</table>

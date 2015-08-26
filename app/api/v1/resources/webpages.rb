@@ -10,7 +10,7 @@ module API
           helpers Helpers::PaginationHelper
           helpers Helpers::WebpagesHelper
 
-          desc 'Show all webpages', { entity: Entities::Webpage, nickname: 'showAllWebpage' }
+          desc 'Show all webpages', { entity: Entities::Webpage, nickname: 'showAllWebpages' }
           params do
             use :pagination
           end
@@ -18,9 +18,9 @@ module API
             authorize! :view, ::Webpage
             require_scope! :'view:webpages'
 
-            @webpage = ::Webpage.order(created_at: :desc).page(page).per(per_page)
-            set_pagination_headers(@webpage, 'webpage')
-            present @webpage, with: Entities::Webpage, full: true
+            @webpages = ::GetWebpages.call(params: declared(webpage_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).webpages
+            set_pagination_headers(@webpages, 'webpages')
+            present @webpages, with: Entities::Webpage, full: true
           end
 
           desc 'Show Webpage Snippets as public feed by URL', { entity: Entities::Webpage, nickname: 'showWebpageFeed' }
@@ -63,7 +63,7 @@ module API
             authorize! :update, webpage!
 
             webpage_params = params[:webpage] || params
-            allowed_params = remove_params(Entities::Webpage.documentation.keys, :tile_thumbnail, :user) + [:snippets_attributes]
+            allowed_params = remove_params(Entities::Webpage.documentation.keys, :user) + [:snippets_attributes]
             update_params = declared(webpage_params, { include_missing: false }, allowed_params)
             update_params[:snippets_attributes].each {|snippet|
               snippet.user = current_user!

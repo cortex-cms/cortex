@@ -9,6 +9,7 @@ module API
         resource :webpages do
           helpers Helpers::PaginationHelper
           helpers Helpers::WebpagesHelper
+          doorkeeper_for :all, scopes: [:public]
 
           desc 'Show all webpages', { entity: Entities::Webpage, nickname: 'showAllWebpage' }
           params do

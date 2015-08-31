@@ -5,6 +5,7 @@ module API
     module Resources
       class Documents < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :all, scopes: [:public]
 
         resource :documents do
           helpers Helpers::PaginationHelper

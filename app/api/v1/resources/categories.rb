@@ -4,7 +4,7 @@ module API
   module V1
     module Resources
       class Categories < Grape::API
-
+        doorkeeper_for :all, scopes: [:public]
         resource :categories do
 
           desc 'Show all categories', { entity: Entities::Category, nickname: "showAllCategories" }

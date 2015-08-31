@@ -8,6 +8,7 @@ module API
         resource :users do
           helpers Helpers::UsersHelper
           helpers Helpers::BulkJobsHelper
+          doorkeeper_for :all, scopes: [:public]
 
           desc 'Get the current user', { entity: Entities::User, nickname: 'currentUser' }
           get :me do

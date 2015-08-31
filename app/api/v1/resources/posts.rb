@@ -6,6 +6,7 @@ module API
       class Posts < Grape::API
         helpers Helpers::SharedParams
         helpers Helpers::PostsHelper
+        doorkeeper_for :all, scopes: [:public]
 
         resource :posts do
           helpers Helpers::PaginationHelper

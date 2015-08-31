@@ -5,6 +5,7 @@ module API
     module Resources
       class Locales < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :all, scopes: [:public]
 
         resource :localizations do
           segment '/:id' do

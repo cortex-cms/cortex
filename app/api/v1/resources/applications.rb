@@ -6,6 +6,8 @@ module API
       class Applications < Grape::API
         helpers Helpers::SharedParams
 
+        doorkeeper_for :all, scopes: [:public]
+
         resource :applications do
           helpers Helpers::PaginationHelper
           helpers Helpers::ApplicationsHelper

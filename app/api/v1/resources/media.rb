@@ -5,6 +5,7 @@ module API
     module Resources
       class Media < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :all, scopes: [:public]
 
         resource :media do
           helpers Helpers::PaginationHelper

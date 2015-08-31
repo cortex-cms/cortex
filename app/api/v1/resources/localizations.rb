@@ -5,6 +5,7 @@ module API
     module Resources
       class Localizations < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :all, scopes: [:public]
 
         resource :localizations do
           helpers Helpers::PaginationHelper

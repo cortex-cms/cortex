@@ -6,6 +6,7 @@ module API
 
       class Tenants < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :all, scopes: [:public]
 
         resource :tenants do
           helpers Helpers::PaginationHelper

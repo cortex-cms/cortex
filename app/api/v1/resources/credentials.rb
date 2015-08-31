@@ -5,6 +5,7 @@ module API
     module Resources
       class Credentials < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :all, scopes: [:public]
 
         resource :applications do
           segment '/:id' do

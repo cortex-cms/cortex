@@ -6,6 +6,8 @@ module API
       class BulkJobs < Grape::API
         helpers Helpers::SharedParams
 
+        doorkeeper_for :all, scopes: [:public]
+
         resource :bulk_jobs do
           helpers Helpers::PaginationHelper
           helpers Helpers::BulkJobsHelper

@@ -5,6 +5,7 @@ module API
     module Resources
       class Snippets < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :all, scopes: [:public]
 
         resource :snippets do
           helpers Helpers::PaginationHelper

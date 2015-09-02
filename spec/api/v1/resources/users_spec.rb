@@ -12,9 +12,19 @@ describe SPEC_API::Resources::Users, :type => :request do
       expect(response.status).to eq(404)
     end
 
-    it 'should reutrn 201 when the email is on file' do
-      post '/api/v1/users/reset_password', email: user.email
-      expect(response.status).to eq(201)
+    context 'when the email is on file' do
+      it 'should reutrn 201 when the email is on file' do
+        post '/api/v1/users/reset_password', email: user.email
+        expect(response.status).to eq(201)
+      end
+
+      it 'should generate a reset token' do
+        expect{
+          post '/api/v1/users/reset_password', email: user.email
+          user.reload
+        }.to change{ user.encrypted_password }
+      end
+      # expect{ execute }.to change{ spe1.reload.trashed? }.from(true).to(false)
     end
 
   end

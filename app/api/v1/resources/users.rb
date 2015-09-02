@@ -14,8 +14,15 @@ module API
             requires :email
           end
           post 'reset_password' do
-            user = User.where email: params[:email]
-            status 404 unless user.present?
+            user = User.where(email: params[:email]).first
+            if user.present?
+              password = Devise.friendly_token.first(8)
+              user.password = password
+              user.password_confirmation = password
+              user.save
+            else
+              status 404
+            end
           end
 
           desc 'Get the current user', { entity: Entities::User, nickname: 'currentUser' }

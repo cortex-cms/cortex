@@ -17,9 +17,7 @@ module API
             user = User.where(email: params[:email]).first
             if user.present?
               password = Devise.friendly_token.first(8)
-              user.password = password
-              user.password_confirmation = password
-              user.save
+              user.update password: password, password_confirmation: password
             else
               status 404
             end

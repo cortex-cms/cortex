@@ -4,8 +4,19 @@ require 'api_v1_helper'
 describe SPEC_API::Resources::Users, :type => :request do
 
   describe 'POST /users/reset_password' do
-    it 'should return 404 when the email is not on file'
-    it 'should reutrn 200 when the email is on file'
+
+    let(:user) { create(:user) }
+
+    it 'should return 404 when the email is not on file' do
+      post '/api/v1/users/reset_password', email: 'invalid_email@example.com'
+      expect(response.status).to eq(404)
+    end
+
+    it 'should reutrn 201 when the email is on file' do
+      post '/api/v1/users/reset_password', email: user.email
+      expect(response.status).to eq(201)
+    end
+
   end
 
   describe 'GET /users/me' do

@@ -9,6 +9,15 @@ module API
           helpers Helpers::UsersHelper
           helpers Helpers::BulkJobsHelper
 
+          desc 'Reset password'
+          params do
+            requires :email
+          end
+          post 'reset_password' do
+            user = User.where email: params[:email]
+            status 404 unless user.present?
+          end
+
           desc 'Get the current user', { entity: Entities::User, nickname: 'currentUser' }
           get :me do
             authorize! :view, current_user!

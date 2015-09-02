@@ -97,6 +97,7 @@ gem 'interactor-rails', '~> 2.0'
 group :test, :development do
   # Environment
   gem 'dotenv', '~> 2.0.1'
+  gem 'byebug'
 
   # Rspec
   gem 'rspec', '~> 3.2'

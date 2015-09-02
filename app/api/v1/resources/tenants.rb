@@ -15,8 +15,8 @@ module API
           params do
             use :pagination
           end
+          oauth2 'view:tenants'
           get do
-            require_scope! :'view:tenants'
             authorize! :view, Tenant
 
             present Tenant.page(page).per(per_page), using: Entities::Tenant, children: params[:include_children]
@@ -26,8 +26,8 @@ module API
           params do
             use :pagination
           end
+          oauth2 'view:tenants'
           get :hierarchy do
-            require_scope! :'view:tenants'
             authorize! :view, Tenant
 
             present Tenant.roots, using: Entities::Tenant, children: true
@@ -42,8 +42,8 @@ module API
           params do
             optional :name, type: String, desc: "Tenant Name"
           end
+          oauth2 'modify:tenants'
           post do
-            require_scope! :'modify:tenants'
             authorize! :create, Tenant
 
             allowed_params = remove_params(Entities::Tenant.documentation.keys, :children)
@@ -55,8 +55,8 @@ module API
           end
 
           desc 'Update a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation, nickname: "updateTenant" }
+          oauth2 'modify:tenants'
           put ':id' do
-            require_scope! :'modify:tenants'
             authorize! :update, tenant!
 
             allowed_params = remove_params(Entities::Tenant.documentation.keys, :children)
@@ -66,8 +66,8 @@ module API
           end
 
           desc 'Delete a tenant', { nickname: "deleteTenant" }
+          oauth2 'modify:tenants'
           delete ':id' do
-            require_scope! :'modify:tenants'
             authorize! :delete, tenant!
 
             tenant.destroy
@@ -80,9 +80,9 @@ module API
                 use :pagination
                 use :search
               end
+              oauth2 'view:users'
               get do
                 authorize! :view, User
-                require_scope! :'view:users'
 
                 @users = User.tenantUsers(params[:id]).page(page).per(per_page)
                 set_pagination_headers(@users, 'users')

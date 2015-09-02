@@ -16,8 +16,8 @@ module API
             use :search
             use :post_metadata
           end
+          oauth2 'view:posts'
           get do
-            require_scope! :'view:posts'
             authorize! :view, ::Post
             @posts = ::GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).posts
 
@@ -62,8 +62,8 @@ module API
           end
 
           desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
+          oauth2 'view:posts'
           get 'feed/:id/related' do
-            require_scope! :'view:posts'
             post = GetPost.call(id: params[:id], published: true).post
             not_found! unless post
             authorize! :view, post
@@ -78,8 +78,8 @@ module API
           params do
             optional :s
           end
+          oauth2 'view:posts'
           get 'tags' do
-            require_scope! :'view:posts'
             authorize! :view, Post
 
             tags = params[:s] \
@@ -97,8 +97,8 @@ module API
           params do
             optional :depth, default: 1, desc: "Minimum depth of filters"
           end
+          oauth2 'view:posts'
           get 'filters' do
-            require_scope! :'view:posts'
             authorize! :view, Post
             present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
             present :categories, ::Category.where('depth >= ?', params[:depth]), with: Entities::Category
@@ -106,8 +106,8 @@ module API
           end
 
           desc 'Show a post', { entity: Entities::Post, nickname: "showPost" }
+          oauth2 'view:posts'
           get ':id' do
-            require_scope! :'view:posts'
             @post = ::GetPost.call(id: params[:id], tenant: current_tenant.id).post
             not_found! unless @post
             authorize! :view, @post
@@ -118,8 +118,8 @@ module API
           params do
             use :post_associations
           end
+          oauth2 'modify:posts'
           post do
-            require_scope! :'modify:posts'
             authorize! :create, Post
 
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
@@ -134,8 +134,8 @@ module API
           params do
             use :post_associations
           end
+          oauth2 'modify:posts'
           put ':id' do
-            require_scope! :'modify:posts'
             authorize! :update, post!
 
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
@@ -153,8 +153,8 @@ module API
           end
 
           desc 'Delete a post', { nickname: "deletePost" }
+          oauth2 'modify:posts'
           delete ':id' do
-            require_scope! :'modify:posts'
             authorize! :delete, post!
 
             post.destroy

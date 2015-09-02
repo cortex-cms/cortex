@@ -16,9 +16,9 @@ module API
             use :pagination
             use :search
           end
+          oauth2 'view:media'
           get do
             authorize! :view, ::Media
-            require_scope! :'view:media'
 
             @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).media
             set_pagination_headers(@media, 'media')
@@ -29,8 +29,8 @@ module API
           params do
             optional :s
           end
+          oauth2 'view:media'
           get 'tags' do
-            require_scope! :'view:media'
             authorize! :view, ::Media
 
             tags = params[:s] \
@@ -45,8 +45,8 @@ module API
           end
 
           desc 'Get media', { entity: Entities::Media, nickname: 'showMedia' }
+          oauth2 'view:media'
           get ':id' do
-            require_scope! :'view:media'
             authorize! :view, media!
 
             present media, with: Entities::Media, full: true
@@ -56,8 +56,8 @@ module API
           params do
             optional :attachment
           end
+          oauth2 'modify:media'
           post do
-            require_scope! :'modify:media'
             authorize! :create, ::Media
 
             media_params = params[:media] || params
@@ -76,8 +76,8 @@ module API
           params do
             optional :attachment
           end
+          oauth2 'modify:media'
           put ':id' do
-            require_scope! :'modify:media'
             authorize! :update, media!
 
             media_params = params[:media] || params
@@ -93,8 +93,8 @@ module API
           end
 
           desc 'Delete media', { nickname: 'deleteMedia' }
+          oauth2 'modify:media'
           delete ':id' do
-            require_scope! :'modify:media'
             authorize! :delete, media!
 
             begin
@@ -115,9 +115,8 @@ module API
               requires :assets
             end
           end
+          oauth2 'modify:media', 'modify:bulk_jobs'
           post :bulk_job do
-            require_scope! :'modify:media'
-            require_scope! :'modify:bulk_jobs'
             authorize! :create, ::Media
             authorize! :create, ::BulkJob
 

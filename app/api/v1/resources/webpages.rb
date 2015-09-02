@@ -14,9 +14,9 @@ module API
           params do
             use :pagination
           end
+          oauth2 'view:webpages'
           get do
             authorize! :view, ::Webpage
-            require_scope! :'view:webpages'
 
             @webpage = ::Webpage.order(created_at: :desc).page(page).per(per_page)
             set_pagination_headers(@webpage, 'webpage')
@@ -27,8 +27,8 @@ module API
           params do
             requires :url, type: String
           end
+          oauth2 'view:webpages'
           get 'feed' do
-            require_scope! :'view:webpages'
             @webpage ||= Webpage.find_by_url(params[:url])
             not_found! unless @webpage
             authorize! :view, @webpage
@@ -36,16 +36,16 @@ module API
           end
 
           desc 'Get webpage', { entity: Entities::Webpage, nickname: 'showWebpage' }
+          oauth2 'view:webpages'
           get ':id' do
-            require_scope! :'view:webpages'
             authorize! :view, webpage!
 
             present webpage, with: Entities::Webpage, full: true
           end
 
           desc 'Create webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'createWebpage' }
+          oauth2 'modify:webpages'
           post do
-            require_scope! :'modify:webpages'
             authorize! :create, ::Webpage
 
             webpage_params = params[:webpage] || params
@@ -58,8 +58,8 @@ module API
           end
 
           desc 'Update webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'updateWebpage' }
+          oauth2 'modify:webpages'
           put ':id' do
-            require_scope! :'modify:webpages'
             authorize! :update, webpage!
 
             webpage_params = params[:webpage] || params
@@ -76,8 +76,8 @@ module API
           end
 
           desc 'Delete webpage', { nickname: 'deleteWebpage' }
+          oauth2 'modify:webpages'
           delete ':id' do
-            require_scope! :'modify:webpages'
             authorize! :delete, webpage!
 
             begin

@@ -6,16 +6,18 @@ module API
       class Webpages < Grape::API
         helpers Helpers::SharedParams
 
+        doorkeeper_for :index, :feed, :show, scopes: [:'view:webpages']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:webpages']
+
         resource :webpages do
           helpers Helpers::PaginationHelper
           helpers Helpers::WebpagesHelper
-          doorkeeper_for :all, scopes: [:public]
 
           desc 'Show all webpages', { entity: Entities::Webpage, nickname: 'showAllWebpage' }
           params do
             use :pagination
           end
-          get scopes: [:'view:webpages'] do
+          get do
             authorize! :view, ::Webpage
 
             @webpage = ::Webpage.order(created_at: :desc).page(page).per(per_page)
@@ -27,7 +29,7 @@ module API
           params do
             requires :url, type: String
           end
-          get 'feed', scopes: [:'view:webpages'] do
+          get 'feed' do
             @webpage ||= Webpage.find_by_url(params[:url])
             not_found! unless @webpage
             authorize! :view, @webpage
@@ -35,14 +37,14 @@ module API
           end
 
           desc 'Get webpage', { entity: Entities::Webpage, nickname: 'showWebpage' }
-          get ':id', scopes: [:'view:webpages'] do
+          get ':id' do
             authorize! :view, webpage!
 
             present webpage, with: Entities::Webpage, full: true
           end
 
           desc 'Create webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'createWebpage' }
-          post scopes: [:'modify:webpages'] do
+          post do
             authorize! :create, ::Webpage
 
             webpage_params = params[:webpage] || params
@@ -55,7 +57,7 @@ module API
           end
 
           desc 'Update webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'updateWebpage' }
-          put ':id', scopes: [:'modify:webpages'] do
+          put ':id' do
             authorize! :update, webpage!
 
             webpage_params = params[:webpage] || params
@@ -72,7 +74,7 @@ module API
           end
 
           desc 'Delete webpage', { nickname: 'deleteWebpage' }
-          delete ':id', scopes: [:'modify:webpages'] do
+          delete ':id' do
             authorize! :delete, webpage!
 
             begin

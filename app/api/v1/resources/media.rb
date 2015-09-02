@@ -5,7 +5,10 @@ module API
     module Resources
       class Media < Grape::API
         helpers Helpers::SharedParams
-        doorkeeper_for :all, scopes: [:public]
+
+        doorkeeper_for :index, :tags, :show, scopes: [:'view:media']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:media']
+        doorkeeper_for :bulk_job, scopes: [:'modify:media', :'modify:bulk_jobs']
 
         resource :media do
           helpers Helpers::PaginationHelper
@@ -17,7 +20,7 @@ module API
             use :pagination
             use :search
           end
-          get scopes: [:'view:media'] do
+          get do
             authorize! :view, ::Media
 
             @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).media
@@ -29,7 +32,7 @@ module API
           params do
             optional :s
           end
-          get 'tags', scopes: [:'view:media'] do
+          get 'tags' do
             authorize! :view, ::Media
 
             tags = params[:s] \
@@ -44,7 +47,7 @@ module API
           end
 
           desc 'Get media', { entity: Entities::Media, nickname: 'showMedia' }
-          get ':id', scopes: [:'view:media'] do
+          get ':id' do
             authorize! :view, media!
 
             present media, with: Entities::Media, full: true
@@ -54,7 +57,7 @@ module API
           params do
             optional :attachment
           end
-          post scopes: [:'modify:media'] do
+          post do
             authorize! :create, ::Media
 
             media_params = params[:media] || params
@@ -73,7 +76,7 @@ module API
           params do
             optional :attachment
           end
-          put ':id', scopes: [:'modify:media'] do
+          put ':id' do
             authorize! :update, media!
 
             media_params = params[:media] || params
@@ -89,7 +92,7 @@ module API
           end
 
           desc 'Delete media', { nickname: 'deleteMedia' }
-          delete ':id', scopes: [:'modify:media'] do
+          delete ':id' do
             authorize! :delete, media!
 
             begin
@@ -110,7 +113,7 @@ module API
               requires :assets
             end
           end
-          post :bulk_job, scopes: [:'modify:media', :'modify:bulk_jobs'] do
+          post :bulk_job do
             authorize! :create, ::Media
             authorize! :create, ::BulkJob
 

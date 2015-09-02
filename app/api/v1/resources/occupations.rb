@@ -4,7 +4,6 @@ module API
   module V1
     module Resources
       class Occupations < Grape::API
-        doorkeeper_for :all, scopes: [:public]
 
         resource :occupations do
 

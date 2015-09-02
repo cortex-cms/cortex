@@ -8,7 +8,10 @@ module API
         resource :users do
           helpers Helpers::UsersHelper
           helpers Helpers::BulkJobsHelper
-          doorkeeper_for :all, scopes: [:public]
+
+          doorkeeper_for '/:version/users/:user_id/author', :show, scopes: [:'view:users']
+          doorkeeper_for :update, :create, :destroy, scopes: [:'modify:users']
+          doorkeeper_for :bulk_job, scopes: [:'modify:users', :'modify:bulk_jobs']
 
           desc 'Get the current user', { entity: Entities::User, nickname: 'currentUser' }
           get :me do
@@ -17,7 +20,7 @@ module API
           end
 
           desc "Fetch a user's author info"
-          get ':user_id/author', scopes: [:'view:users'] do
+          get ':user_id/author' do
             authorize! :view, user!
 
             present user.author || not_found!, with: Entities::Author
@@ -53,7 +56,7 @@ module API
             optional :password
             optional :password_confirmation
           end
-          post scopes: [:'modify:users'] do
+          post do
             authorize! :create, User
 
             allowed_params = [:password, :password_confirmation, :firstname, :lastname, :email, :tenant_id, :admin]
@@ -73,7 +76,7 @@ module API
             optional :email
             optional :admin
           end
-          put ':user_id', scopes: [:'modify:users'] do
+          put ':user_id' do
             authorize! :update, user!
 
             allowed_params = [:firstname, :lastname]
@@ -92,14 +95,14 @@ module API
           end
 
           desc 'Show a user', {nickname: 'showUser'}
-          get ':user_id', scopes: [:'view:users'] do
+          get ':user_id' do
             authorize! :view, user!
 
             present user, with: Entities::User, full: true
           end
 
           desc 'Delete a user', {nickname: 'deleteUser'}
-          delete ':user_id', scopes: [:'modify:users'] do
+          delete ':user_id' do
             authorize! :delete, user!
 
             begin
@@ -114,7 +117,7 @@ module API
           end
 
           desc 'Bulk create users', { entity: Entities::BulkJob, nickname: 'bulkCreateUsers' }
-          post :bulk_job, scopes: [:'modify:users', :'modify:bulk_jobs'] do
+          post :bulk_job do
             authorize! :create, ::User
             authorize! :create, ::BulkJob
 

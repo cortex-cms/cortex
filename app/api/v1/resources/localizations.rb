@@ -5,7 +5,8 @@ module API
     module Resources
       class Localizations < Grape::API
         helpers Helpers::SharedParams
-        doorkeeper_for :all, scopes: [:public]
+        doorkeeper_for :index, :show, scopes: [:'view:localizations']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:localizations']
 
         resource :localizations do
           helpers Helpers::PaginationHelper
@@ -15,7 +16,7 @@ module API
           params do
             use :pagination
           end
-          get scopes: [:'view:localizations'] do
+          get do
             authorize! :view, ::Localization
 
             @localizations = ::Localization.order(created_at: :desc).page(page).per(per_page)
@@ -25,21 +26,21 @@ module API
           end
 
           desc 'Get localization', { entity: Entities::Localization, nickname: 'showLocalization' }
-          get ':id', scopes: [:'view:localizations'] do
+          get ':id' do
             authorize! :view, localization!
 
             present localization, with: Entities::Localization
           end
 
           desc 'Delete localization', { nickname: 'deleteLocalization' }
-          delete ':id', scopes: [:'modify:localizations'] do
+          delete ':id' do
             authorize! :delete, localization!
 
             localization.destroy
           end
 
           desc 'Create a localization', { entity: Entities::Localization, params: Entities::Localization.documentation, nickname: 'createLocalization' }
-          post scopes: [:'modify:localizations'] do
+          post do
             authorize! :create, ::Localization
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :id, :created_at, :updated_at, :available_locales, :creator)
@@ -52,7 +53,7 @@ module API
           end
 
           desc 'Update a localization', { entity: Entities::Localization, params: Entities::Localization.documentation, nickname: 'updateLocalization' }
-          put ':id', scopes: [:'modify:localizations'] do
+          put ':id' do
             authorize! :update, localization!
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :creator)

@@ -6,7 +6,7 @@ module API
       class BulkJobs < Grape::API
         helpers Helpers::SharedParams
 
-        doorkeeper_for :all, scopes: [:public]
+        doorkeeper_for :index, :show, scopes: [:'view:bulk_jobs']
 
         resource :bulk_jobs do
           helpers Helpers::PaginationHelper
@@ -16,7 +16,7 @@ module API
           params do
             use :pagination
           end
-          get scopes: [:'view:bulk_jobs'] do
+          get do
             authorize! :view, ::BulkJob
 
             @bulk_job = ::BulkJob.order(created_at: :desc).page(page).per(per_page)
@@ -26,7 +26,7 @@ module API
           end
 
           desc 'Get bulk job', { entity: Entities::BulkJob, nickname: 'showBulkJob' }
-          get ':id', scopes: [:'view:bulk_jobs'] do
+          get ':id' do
             authorize! :view, bulk_job!
 
             present bulk_job, with: Entities::BulkJob

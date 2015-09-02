@@ -6,7 +6,8 @@ module API
       class Applications < Grape::API
         helpers Helpers::SharedParams
 
-        doorkeeper_for :all, scopes: [:public]
+        doorkeeper_for :index, :show, scopes: [:'view:applications']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:applications']
 
         resource :applications do
           helpers Helpers::PaginationHelper
@@ -17,7 +18,7 @@ module API
           params do
             use :pagination
           end
-          get scopes: [:'view:applications'] do
+          get do
             authorize! :view, ::Application
 
             @applications = ::Application.where(tenant: current_tenant).page(page).per(per_page)
@@ -27,7 +28,7 @@ module API
           end
 
           desc 'Show an application', { entity: Entities::Application, nickname: "showApplication" }
-          get ':id', scopes: [:'view:applications'] do
+          get ':id' do
             present application!, with: Entities::Application
           end
 
@@ -35,7 +36,7 @@ module API
           params do
             requires :name, type: String, desc: "Application Name"
           end
-          post scopes: [:'modify:applications'] do
+          post do
             authorize! :create, Application
 
             allowed_params = remove_params(Entities::Application.documentation.keys, :children)
@@ -47,7 +48,7 @@ module API
           end
 
           desc 'Update an application', { entity: Entities::Application, params: Entities::Application.documentation, nickname: "updateApplication" }
-          put ':id', scopes: [:'modify:applications'] do
+          put ':id' do
             authorize! :update, application!
 
             allowed_params = remove_params(Entities::Application.documentation.keys, :children)
@@ -57,7 +58,7 @@ module API
           end
 
           desc 'Delete an application', { nickname: "deleteApplication" }
-          delete ':id', scopes: [:'modify:applications'] do
+          delete ':id' do
             authorize! :delete, application!
 
             application.destroy

@@ -5,7 +5,9 @@ module API
     module Resources
       class Locales < Grape::API
         helpers Helpers::SharedParams
-        doorkeeper_for :all, scopes: [:public]
+
+        doorkeeper_for :index, :show, scopes: [:'view:locales']
+        doorkeeper_for :destroy, :create, :update, scopes: [:'modify:locales']
 
         resource :localizations do
           segment '/:id' do
@@ -15,7 +17,7 @@ module API
               helpers Helpers::LocalizationHelper
 
               desc 'Show all locales', {entity: Entities::Locale, nickname: 'showAllLocales'}
-              get scopes: [:'view:locales'] do
+              get do
                 authorize! :view, ::Locale
 
                 @locales = localization.locales.order(created_at: :desc).page(page).per(per_page)
@@ -25,7 +27,7 @@ module API
               end
 
               desc 'Get locale', {entity: Entities::Locale, nickname: 'showLocale'}
-              get ':locale_name', scopes: [:'view:locales'] do
+              get ':locale_name' do
                 authorize! :view, locale!
 
                 @locale = Locale.find_by_name!(params[:locale_name])
@@ -34,14 +36,14 @@ module API
               end
 
               desc 'Delete locale', {nickname: 'deleteLocale'}
-              delete ':locale_name', scopes: [:'modify:locales'] do
+              delete ':locale_name' do
                 authorize! :delete, locale!
 
                 locale.destroy!
               end
 
               desc 'Create a locale', {entity: Entities::Locale, params: Entities::Locale.documentation, nickname: 'createLocale'}
-              post scopes: [:'modify:locales'] do
+              post do
                 authorize! :create, ::Locale
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :id, :created_at, :updated_at, :available_locales, :locales, :creator)
@@ -54,7 +56,7 @@ module API
               end
 
               desc 'Update a locale', {entity: Entities::Locale, params: Entities::Locale.documentation, nickname: 'updateLocale'}
-              put ':locale_name', scopes: [:'modify:locales'] do
+              put do
                 authorize! :update, locale!
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :id, :created_at, :updated_at, :available_locales, :locales, :creator)

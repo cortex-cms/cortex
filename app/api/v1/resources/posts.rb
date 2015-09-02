@@ -6,7 +6,9 @@ module API
       class Posts < Grape::API
         helpers Helpers::SharedParams
         helpers Helpers::PostsHelper
-        doorkeeper_for :all, scopes: [:public]
+
+        doorkeeper_for :index, :show, :feed, '/:version/posts/feed/:id/related', :tags, :filters, scopes: [:'view:posts']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:posts']
 
         resource :posts do
           helpers Helpers::PaginationHelper
@@ -17,7 +19,7 @@ module API
             use :search
             use :post_metadata
           end
-          get scopes: [:'view:posts'] do
+          get do
             authorize! :view, ::Post
             @posts = ::GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).posts
 
@@ -31,7 +33,7 @@ module API
             use :search
             use :post_metadata
           end
-          get 'feed', scopes: [:'view:posts'] do
+          get 'feed' do
             authorize! :view, ::Post
             last_updated_at = Post.last_updated_at
             params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
@@ -61,7 +63,7 @@ module API
           end
 
           desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
-          get 'feed/:id/related', scopes: [:'view:posts'] do
+          get 'feed/:id/related' do
             post = GetPost.call(id: params[:id], published: true).post
             not_found! unless post
             authorize! :view, post
@@ -76,7 +78,7 @@ module API
           params do
             optional :s
           end
-          get 'tags', scopes: [:'view:posts'] do
+          get 'tags' do
             authorize! :view, Post
 
             tags = params[:s] \
@@ -94,7 +96,7 @@ module API
           params do
             optional :depth, default: 1, desc: "Minimum depth of filters"
           end
-          get 'filters', scopes: [:'view:posts'] do
+          get 'filters' do
             authorize! :view, Post
             present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
             present :categories, ::Category.where('depth >= ?', params[:depth]), with: Entities::Category
@@ -113,7 +115,7 @@ module API
           params do
             use :post_associations
           end
-          post scopes: [:'modify:posts'] do
+          post do
             authorize! :create, Post
 
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
@@ -128,7 +130,7 @@ module API
           params do
             use :post_associations
           end
-          put ':id', scopes: [:'modify:posts'] do
+          put ':id' do
             authorize! :update, post!
 
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
@@ -146,7 +148,7 @@ module API
           end
 
           desc 'Delete a post', { nickname: "deletePost" }
-          delete ':id', scopes: [:'modify:posts'] do
+          delete ':id' do
             authorize! :delete, post!
 
             post.destroy

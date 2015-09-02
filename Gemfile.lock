@@ -79,6 +79,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    byebug (6.0.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     childprocess (0.5.6)
@@ -614,6 +615,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.10)
   better_errors (~> 2.1.1)
   binding_of_caller (~> 0.7.2)
+  byebug
   codeclimate-test-reporter (~> 0.4.7)
   coffee-rails (~> 4.1.0)
   cortex-exceptions (~> 0.0.4)

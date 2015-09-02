@@ -14,8 +14,8 @@ module API
           params do
             use :pagination
           end
+          oauth2 'view:localizations'
           get do
-            require_scope! :'view:localizations'
             authorize! :view, ::Localization
 
             @localizations = ::Localization.order(created_at: :desc).page(page).per(per_page)
@@ -25,24 +25,24 @@ module API
           end
 
           desc 'Get localization', { entity: Entities::Localization, nickname: 'showLocalization' }
+          oauth2 'view:localizations'
           get ':id' do
-            require_scope! :'view:localizations'
             authorize! :view, localization!
 
             present localization, with: Entities::Localization
           end
 
           desc 'Delete localization', { nickname: 'deleteLocalization' }
+          oauth2 'modify:localizations'
           delete ':id' do
-            require_scope! :'modify:localizations'
             authorize! :delete, localization!
 
             localization.destroy
           end
 
           desc 'Create a localization', { entity: Entities::Localization, params: Entities::Localization.documentation, nickname: 'createLocalization' }
+          oauth2 'modify:localizations'
           post do
-            require_scope! :'modify:localizations'
             authorize! :create, ::Localization
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :id, :created_at, :updated_at, :available_locales, :creator)
@@ -55,8 +55,8 @@ module API
           end
 
           desc 'Update a localization', { entity: Entities::Localization, params: Entities::Localization.documentation, nickname: 'updateLocalization' }
+          oauth2 'modify:localizations'
           put ':id' do
-            require_scope! :'modify:localizations'
             authorize! :update, localization!
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :creator)

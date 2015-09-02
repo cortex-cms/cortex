@@ -11,6 +11,7 @@ module API
     class API < Grape::API
       version 'v1', using: :path
       format :json
+      use ::WineBouncer::OAuth2
 
       rescue_from ActiveRecord::RecordInvalid do |ex|
         errors = ex.record.errors.map{ |attr, error| "#{attr} #{error}" }

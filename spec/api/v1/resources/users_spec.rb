@@ -3,6 +3,40 @@ require 'api_v1_helper'
 
 describe SPEC_API::Resources::Users, :type => :request do
 
+  describe 'POST /users/reset_password' do
+
+    let(:user) { create(:user) }
+
+    it 'should return 404 when the email is not on file' do
+      post '/api/v1/users/reset_password', email: 'invalid_email@example.com'
+      expect(response.status).to eq(404)
+    end
+
+    context 'when the email is on file' do
+      it 'should reutrn 201 when the email is on file' do
+        post '/api/v1/users/reset_password', email: user.email
+        expect(response.status).to eq(201)
+      end
+
+      it 'should generate a reset token' do
+        expect{
+          post '/api/v1/users/reset_password', email: user.email
+          user.reload
+        }.to change{ user.encrypted_password }
+      end
+
+      context 'the password email' do
+        it 'should be sent' do
+          post '/api/v1/users/reset_password', email: user.email
+          expect(ActionMailer::Base.deliveries).not_to be_empty
+        end
+      end
+
+      # expect{ execute }.to change{ spe1.reload.trashed? }.from(true).to(false)
+    end
+
+  end
+
   describe 'GET /users/me' do
 
     let(:user) { create(:user) }

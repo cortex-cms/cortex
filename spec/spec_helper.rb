@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'mocha/api'
 require 'elasticsearch/extensions/test/cluster'
 require 'net/http'
+require "email_spec"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -24,6 +25,9 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.include FactoryGirl::Syntax::Methods
   config.include Helpers
+
+  config.include EmailSpec::Helpers
+  config.include EmailSpec::Matchers
 
   config.include Devise::TestHelpers, :type => :controller
 

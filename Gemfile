@@ -38,6 +38,9 @@ gem 'turbolinks', '~> 2.5.3'
 gem 'uglifier', '~> 2.7.1'
 gem 'underscore-rails', '~> 1.8.2'
 
+# Mail
+gem 'mailgun_rails'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular', '~> 1.2'
   gem 'rails-assets-angular-animate', '~> 1.2'
@@ -137,6 +140,7 @@ group :test do
   gem 'timecop', '~> 0.7.3'
   gem 'rspec-sidekiq', '~> 2.0.0'
   gem 'elasticsearch-extensions', '~> 0.0.18'
+  gem 'email_spec'
 end
 
 group :assets do

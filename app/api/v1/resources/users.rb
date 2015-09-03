@@ -18,9 +18,14 @@ module API
             if user.present?
               password = Devise.friendly_token.first(8)
               user.update password: password, password_confirmation: password
+              PasswordResetMailer.send_password_reset.deliver_now
+              message = "An email with your new password has been sent to the email on file."
             else
               status 404
+              message = "No user could be found with the email address you provided."
             end
+
+            { "message" => message }
           end
 
           desc 'Get the current user', { entity: Entities::User, nickname: 'currentUser' }

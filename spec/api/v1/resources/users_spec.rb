@@ -24,6 +24,14 @@ describe SPEC_API::Resources::Users, :type => :request do
           user.reload
         }.to change{ user.encrypted_password }
       end
+
+      context 'the password email' do
+        it 'should be sent' do
+          post '/api/v1/users/reset_password', email: user.email
+          expect(ActionMailer::Base.deliveries).not_to be_empty
+        end
+      end
+
       # expect{ execute }.to change{ spe1.reload.trashed? }.from(true).to(false)
     end
 

@@ -11,7 +11,6 @@ module API
         with_options if: { full: true } do
           expose :user, with: 'Entities::User', documentation: {type: 'User', desc: 'Owner'}
           expose :url, documentation: { type: 'String', desc: 'URL of Webpage' }
-          expose :tile_thumbnail, if: lambda { |webpage, _| webpage.has_thumbnail? }, documentation: {desc: 'URL Thumbnail - Tile Size'} do |webpage| webpage.thumbnail.url(:tile) end
         end
       end
     end

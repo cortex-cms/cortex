@@ -13,19 +13,16 @@ module API
           params do
             requires :email
           end
+          format :json
           post 'reset_password' do
             user = User.where(email: params[:email]).first
             if user.present?
               password = Devise.friendly_token.first(8)
               user.update password: password, password_confirmation: password
-              PasswordResetMailer.send_password_reset.deliver_now
-              message = "An email with your new password has been sent to the email on file."
+              PasswordResetMailer.send_password_reset({ email: user.email, password: password }).deliver_now
             else
               status 404
-              message = "No user could be found with the email address you provided."
             end
-
-            { "message" => message }
           end
 
           desc 'Get the current user', { entity: Entities::User, nickname: 'currentUser' }

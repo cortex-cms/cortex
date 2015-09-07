@@ -8,13 +8,16 @@
       .panel-body
         = form_for(:user, :url => session_path(:user),
                    html: {role: 'login', novalidate: '', name: 'loginForm'}) do |f|
+          -flash.each do |name, msg|
+            -if msg.is_a?(String)
+              =content_tag :div, msg, :class => "flash_#{name}"
           .form-group
             = f.text_field :email, class: 'form-control', autofocus: true, placeholder: 'Email', required: '',
                            type: :email, 'ng-model' => 'login.login'
           .form-group
             = f.password_field :password, class: 'form-control', placeholder: 'Password', required: '',
                            'ng-model' => 'login.password'
-          .form-group
+          .reset-password
             = link_to 'Reset Password', controller: 'home', action: 'password_reset'
           %label
             = f.check_box :remember_me

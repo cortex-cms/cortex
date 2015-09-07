@@ -14,6 +14,7 @@
           .form-group
             = f.password_field :password, class: 'form-control', placeholder: 'Password', required: '',
                            'ng-model' => 'login.password'
+          =# link_to 'Reset Password', controller: 'home', action: 'password_reset'
           %label
             = f.check_box :remember_me
             Remember me

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.feature "ResetPasswords", type: :feature do
+RSpec.feature "ResetPasswords", type: :feature, js: true do
   it 'should show a success message with a valid email' do
-    visit '/login'
-    click 'Reset Password'
+    visit '/'
+    click_link 'Reset Password'
     fill_in 'Email', with: 'test@example.com'
-    click_button 'Send Password Reset'
+    page.find(".btn").click
     expect(page).to have_content 'successfully'
   end
 

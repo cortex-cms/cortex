@@ -2,9 +2,9 @@
 %html{lang: 'en', 'ng-app' => 'cortex'}
   = render 'layouts/head'
   %body.default{:'ng-controller' => 'CortexCtrl', 'ng-cloak' => ''}
-  -flash.each do |name, msg|
-    -if msg.is_a?(String)
-      =content_tag :div, msg, :class => "flash_#{name}"
+    -flash.each do |name, msg|
+      -if msg.is_a?(String)
+        =content_tag :div, msg, :class => "flash_#{name}"
     = yield
     = include_gon
     = javascript_include_tag 'application'

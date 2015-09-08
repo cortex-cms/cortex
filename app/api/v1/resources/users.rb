@@ -9,22 +9,6 @@ module API
           helpers Helpers::UsersHelper
           helpers Helpers::BulkJobsHelper
 
-          desc 'Reset password'
-          params do
-            requires :email
-          end
-          format :json
-          post 'reset_password' do
-            user = User.where(email: params[:email]).first
-            if user.present?
-              password = Devise.friendly_token.first(8)
-              user.update password: password, password_confirmation: password
-              PasswordResetMailer.send_password_reset({ email: user.email, password: password }).deliver_now
-            else
-              status 404
-            end
-          end
-
           desc 'Get the current user', { entity: Entities::User, nickname: 'currentUser' }
           get :me do
             authorize! :view, current_user!

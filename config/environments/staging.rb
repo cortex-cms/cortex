@@ -69,4 +69,14 @@ Cortex::Application.configure do
     rescue LoadError
     end
   end
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "mail.cbcortex.com",
+    :user_name => "postmaster@mail.cbcortex.com",
+    :password => "f1e3e8fb354d88dc999c5e03afd11592"
+  }
 end

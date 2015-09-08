@@ -40,13 +40,5 @@ module Cortex
     # Needed until there is a better fix for Paperclip. https://github.com/thoughtbot/paperclip/issues/1924#issuecomment-123927367
     Paperclip.options[:content_type_mappings] = {:csv => 'text/plain'}
 
-    # Mailgun Setup
-    config.action_mailer.delivery_method = :mailgun
-
-    config.action_mailer.mailgun_settings = {
-        api_key: 'key-8254457a35032983871f58bcff1c4434',
-        domain: 'sandbox0d945873f5574fddaf00af756dbbc1e0.mailgun.org'
-      }
-      
   end
 end

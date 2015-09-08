@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   def password_reset; end
   def submit_password_reset
     # Do the password reset logic here
-    user = User.where(email: params[:email]).first
+    user = User.where(email: params[:user][:email]).first
     if user.present?
       password = Devise.friendly_token.first(8)
       user.update password: password, password_confirmation: password

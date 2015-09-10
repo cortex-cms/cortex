@@ -5,6 +5,8 @@ module API
     module Resources
       class Documents < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :index, :show, scopes: [:'view:documents']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:documents']
 
         resource :documents do
           helpers Helpers::PaginationHelper
@@ -16,7 +18,6 @@ module API
           end
           get do
             authorize! :view, ::Document
-            require_scope! :'view:documents'
 
             @document = ::Document.order(created_at: :desc).page(page).per(per_page)
             set_pagination_headers(@document, 'document')
@@ -25,7 +26,6 @@ module API
 
           desc 'Get document', { entity: Entities::Document, nickname: 'showDocument' }
           get ':id' do
-            require_scope! :'view:documents'
             authorize! :view, document!
 
             present document, with: Entities::Document
@@ -33,7 +33,6 @@ module API
 
           desc 'Create document', { entity: Entities::Document, params: Entities::Document.documentation, nickname: 'createDocument' }
           post do
-            require_scope! :'modify:documents'
             authorize! :create, ::Document
 
             document_params = params[:document] || params
@@ -47,7 +46,6 @@ module API
 
           desc 'Update document', { entity: Entities::Document, params: Entities::Document.documentation, nickname: 'updateDocument' }
           put ':id' do
-            require_scope! :'modify:documents'
             authorize! :update, document!
 
             document_params = params[:document] || params
@@ -59,7 +57,6 @@ module API
 
           desc 'Delete document', { nickname: 'deleteDocument' }
           delete ':id' do
-            require_scope! :'modify:documents'
             authorize! :delete, document!
 
             begin

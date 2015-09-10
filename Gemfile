@@ -15,6 +15,7 @@ gem 'grape', '~> 0.11'
 gem 'grape-entity', '~> 0.4.5'
 gem 'grape-swagger', '~> 0.10.1'
 gem 'doorkeeper', '~> 1.4'
+gem 'grape-doorkeeper', '~> 0.0.2'
 gem 'redis-rails', '~> 4.0'
 
 # Templating
@@ -129,6 +130,7 @@ group :development do
   gem 'better_errors', '~> 2.1.1'
   gem 'binding_of_caller', '~> 0.7.2' # Used by Better Errors
   gem 'pry-rails', '~> 0.3'
+  gem 'byebug'
 end
 
 group :test do

@@ -5,6 +5,8 @@ module API
     module Resources
       class Localizations < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :index, :show, scopes: [:'view:localizations']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:localizations']
 
         resource :localizations do
           helpers Helpers::PaginationHelper
@@ -15,7 +17,6 @@ module API
             use :pagination
           end
           get do
-            require_scope! :'view:localizations'
             authorize! :view, ::Localization
 
             @localizations = ::Localization.order(created_at: :desc).page(page).per(per_page)
@@ -26,7 +27,6 @@ module API
 
           desc 'Get localization', { entity: Entities::Localization, nickname: 'showLocalization' }
           get ':id' do
-            require_scope! :'view:localizations'
             authorize! :view, localization!
 
             present localization, with: Entities::Localization
@@ -34,7 +34,6 @@ module API
 
           desc 'Delete localization', { nickname: 'deleteLocalization' }
           delete ':id' do
-            require_scope! :'modify:localizations'
             authorize! :delete, localization!
 
             localization.destroy
@@ -42,7 +41,6 @@ module API
 
           desc 'Create a localization', { entity: Entities::Localization, params: Entities::Localization.documentation, nickname: 'createLocalization' }
           post do
-            require_scope! :'modify:localizations'
             authorize! :create, ::Localization
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :id, :created_at, :updated_at, :available_locales, :creator)
@@ -56,7 +54,6 @@ module API
 
           desc 'Update a localization', { entity: Entities::Localization, params: Entities::Localization.documentation, nickname: 'updateLocalization' }
           put ':id' do
-            require_scope! :'modify:localizations'
             authorize! :update, localization!
 
             allowed_params = remove_params(Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :creator)

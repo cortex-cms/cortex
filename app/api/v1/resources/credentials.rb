@@ -5,6 +5,8 @@ module API
     module Resources
       class Credentials < Grape::API
         helpers Helpers::SharedParams
+        doorkeeper_for :index, :show, scopes: [:'view:application']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:application']
 
         resource :applications do
           segment '/:id' do
@@ -14,7 +16,6 @@ module API
 
               desc 'Show all credentials', {entity: Entities::Credential, nickname: 'showAllCredentials'}
               get do
-                require_scope! :'view:application'
                 authorize! :view, ::Application
 
                 @credentials = application!.credentials.page(page).per(per_page)
@@ -25,7 +26,6 @@ module API
 
               desc 'Get credential', {entity: Entities::Credential, nickname: 'showCredential'}
               get ':credential_id' do
-                require_scope! :'view:application'
                 authorize! :view, application!
 
                 @credential = application!.credentials.find(params[:credential_id])
@@ -35,7 +35,6 @@ module API
 
               desc 'Delete credential', {nickname: 'deleteCredential'}
               delete ':credential_id' do
-                require_scope! :'modify:application'
                 authorize! :delete, application!
 
                 @credential = application!.credentials.find(params[:credential_id]).delete
@@ -45,7 +44,6 @@ module API
 
               desc 'Create a credential', {entity: Entities::Credential, params: Entities::Credential.documentation, nickname: 'createCredential'}
               post do
-                require_scope! :'modify:application'
                 authorize! :create, ::Application
 
                 allowed_params = remove_params(Entities::Credential.documentation.keys, :id, :created_at, :updated_at)
@@ -58,7 +56,6 @@ module API
 
               desc 'Update a credential', {entity: Entities::Credential, params: Entities::Credential.documentation, nickname: 'updateCredential'}
               put ':credential_id' do
-                require_scope! :'modify:application'
                 authorize! :update, application!
 
                 allowed_params = remove_params(Entities::Credential.documentation.keys, :id, :created_at, :updated_at)

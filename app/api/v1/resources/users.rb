@@ -9,6 +9,10 @@ module API
           helpers Helpers::UsersHelper
           helpers Helpers::BulkJobsHelper
 
+          doorkeeper_for '/:version/users/:user_id/author', :show, scopes: [:'view:users']
+          doorkeeper_for :update, :create, :destroy, scopes: [:'modify:users']
+          doorkeeper_for :bulk_job, scopes: [:'modify:users', :'modify:bulk_jobs']
+
           desc 'Get the current user', { entity: Entities::User, nickname: 'currentUser' }
           get :me do
             authorize! :view, current_user!
@@ -17,7 +21,6 @@ module API
 
           desc "Fetch a user's author info"
           get ':user_id/author' do
-            require_scope! :'view:users'
             authorize! :view, user!
 
             present user.author || not_found!, with: Entities::Author
@@ -34,8 +37,7 @@ module API
             optional :google
             optional :bio
           end
-          put ':user_id/author' do
-            require_scope! :'modify:users'
+          put ':user_id/author', scopes: [:'modify:users'] do
             authorize! :update, user!
 
             author = Author.find_or_create_by(user_id: params[:user_id])
@@ -55,7 +57,6 @@ module API
             optional :password_confirmation
           end
           post do
-            require_scope! :'modify:users'
             authorize! :create, User
 
             allowed_params = [:password, :password_confirmation, :firstname, :lastname, :email, :tenant_id, :admin]
@@ -76,7 +77,6 @@ module API
             optional :admin
           end
           put ':user_id' do
-            require_scope! :'modify:users'
             authorize! :update, user!
 
             allowed_params = [:firstname, :lastname]
@@ -96,7 +96,6 @@ module API
 
           desc 'Show a user', {nickname: 'showUser'}
           get ':user_id' do
-            require_scope! :'view:users'
             authorize! :view, user!
 
             present user, with: Entities::User, full: true
@@ -104,7 +103,6 @@ module API
 
           desc 'Delete a user', {nickname: 'deleteUser'}
           delete ':user_id' do
-            require_scope! :'modify:users'
             authorize! :delete, user!
 
             begin
@@ -120,8 +118,6 @@ module API
 
           desc 'Bulk create users', { entity: Entities::BulkJob, nickname: 'bulkCreateUsers' }
           post :bulk_job do
-            require_scope! :'modify:users'
-            require_scope! :'modify:bulk_jobs'
             authorize! :create, ::User
             authorize! :create, ::BulkJob
 

@@ -6,6 +6,9 @@ module API
       class Snippets < Grape::API
         helpers Helpers::SharedParams
 
+        doorkeeper_for :index, :show, scopes: [:'view:snippets']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:snippets']
+
         resource :snippets do
           helpers Helpers::PaginationHelper
           helpers Helpers::SnippetsHelper
@@ -16,7 +19,6 @@ module API
           end
           get do
             authorize! :view, ::Snippet
-            require_scope! :'view:snippets'
 
             @snippet = ::Snippet.order(created_at: :desc).page(page).per(per_page)
             set_pagination_headers(@snippet, 'snippet')
@@ -25,7 +27,6 @@ module API
 
           desc 'Get snippet', { entity: Entities::Snippet, nickname: 'showSnippet' }
           get ':id' do
-            require_scope! :'view:snippets'
             authorize! :view, snippet!
 
             present snippet, with: Entities::Snippet
@@ -33,7 +34,6 @@ module API
 
           desc 'Create snippet', { entity: Entities::Snippet, params: Entities::Snippet.documentation, nickname: 'createSnippet' }
           post do
-            require_scope! :'modify:snippets'
             authorize! :create, ::Snippet
 
             snippet_params = params[:snippet] || params
@@ -47,7 +47,6 @@ module API
 
           desc 'Update snippet', { entity: Entities::Snippet, params: Entities::Snippet.documentation, nickname: 'updateSnippet' }
           put ':id' do
-            require_scope! :'modify:snippets'
             authorize! :update, snippet!
 
             snippet_params = params[:snippet] || params
@@ -59,7 +58,6 @@ module API
 
           desc 'Delete snippet', { nickname: 'deleteSnippet' }
           delete ':id' do
-            require_scope! :'modify:snippets'
             authorize! :delete, snippet!
 
             begin

@@ -7,6 +7,10 @@ module API
       class Tenants < Grape::API
         helpers Helpers::SharedParams
 
+        doorkeeper_for :index, :hierarchy, :show, scopes: [:'view:tenants']
+        doorkeeper_for :update, :create, :destroy, scopes: [:'modify:tenants']
+        doorkeeper_for '/:version/tenants/:id/users', scopes: [:'view:users']
+
         resource :tenants do
           helpers Helpers::PaginationHelper
           helpers Helpers::TenantsHelper
@@ -16,7 +20,6 @@ module API
             use :pagination
           end
           get do
-            require_scope! :'view:tenants'
             authorize! :view, Tenant
 
             present Tenant.page(page).per(per_page), using: Entities::Tenant, children: params[:include_children]
@@ -27,7 +30,6 @@ module API
             use :pagination
           end
           get :hierarchy do
-            require_scope! :'view:tenants'
             authorize! :view, Tenant
 
             present Tenant.roots, using: Entities::Tenant, children: true
@@ -43,7 +45,6 @@ module API
             optional :name, type: String, desc: "Tenant Name"
           end
           post do
-            require_scope! :'modify:tenants'
             authorize! :create, Tenant
 
             allowed_params = remove_params(Entities::Tenant.documentation.keys, :children)
@@ -56,7 +57,6 @@ module API
 
           desc 'Update a tenant', { entity: Entities::Tenant, params: Entities::Tenant.documentation, nickname: "updateTenant" }
           put ':id' do
-            require_scope! :'modify:tenants'
             authorize! :update, tenant!
 
             allowed_params = remove_params(Entities::Tenant.documentation.keys, :children)
@@ -67,7 +67,6 @@ module API
 
           desc 'Delete a tenant', { nickname: "deleteTenant" }
           delete ':id' do
-            require_scope! :'modify:tenants'
             authorize! :delete, tenant!
 
             tenant.destroy
@@ -75,14 +74,15 @@ module API
 
           segment '/:id' do
             resource :users do
+
               desc 'Show all users belonging to a tenant', { entity: Entities::User, nickname: "showAllTenantUsers" }
               params do
                 use :pagination
                 use :search
               end
+
               get do
                 authorize! :view, User
-                require_scope! :'view:users'
 
                 @users = User.tenantUsers(params[:id]).page(page).per(per_page)
                 set_pagination_headers(@users, 'users')

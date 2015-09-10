@@ -6,6 +6,9 @@ module API
       class Webpages < Grape::API
         helpers Helpers::SharedParams
 
+        doorkeeper_for :index, :feed, :show, scopes: [:'view:webpages']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:webpages']
+
         resource :webpages do
           helpers Helpers::PaginationHelper
           helpers Helpers::WebpagesHelper
@@ -16,7 +19,6 @@ module API
           end
           get do
             authorize! :view, ::Webpage
-            require_scope! :'view:webpages'
 
             @webpages = ::GetWebpages.call(params: declared(webpage_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).webpages
             set_pagination_headers(@webpages, 'webpages')
@@ -28,7 +30,6 @@ module API
             requires :url, type: String
           end
           get 'feed' do
-            require_scope! :'view:webpages'
             @webpage ||= Webpage.find_by_url(params[:url])
             not_found! unless @webpage
             authorize! :view, @webpage
@@ -37,7 +38,6 @@ module API
 
           desc 'Get webpage', { entity: Entities::Webpage, nickname: 'showWebpage' }
           get ':id' do
-            require_scope! :'view:webpages'
             authorize! :view, webpage!
 
             present webpage, with: Entities::Webpage, full: true
@@ -45,7 +45,6 @@ module API
 
           desc 'Create webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'createWebpage' }
           post do
-            require_scope! :'modify:webpages'
             authorize! :create, ::Webpage
 
             webpage_params = params[:webpage] || params
@@ -59,7 +58,6 @@ module API
 
           desc 'Update webpage', { entity: Entities::Webpage, params: Entities::Webpage.documentation, nickname: 'updateWebpage' }
           put ':id' do
-            require_scope! :'modify:webpages'
             authorize! :update, webpage!
 
             webpage_params = params[:webpage] || params
@@ -77,7 +75,6 @@ module API
 
           desc 'Delete webpage', { nickname: 'deleteWebpage' }
           delete ':id' do
-            require_scope! :'modify:webpages'
             authorize! :delete, webpage!
 
             begin

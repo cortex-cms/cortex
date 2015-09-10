@@ -7,6 +7,9 @@ module API
         helpers Helpers::SharedParams
         helpers Helpers::PostsHelper
 
+        doorkeeper_for :index, :show, :feed, '/:version/posts/feed/:id/related', :tags, :filters, scopes: [:'view:posts']
+        doorkeeper_for :create, :update, :destroy, scopes: [:'modify:posts']
+
         resource :posts do
           helpers Helpers::PaginationHelper
 
@@ -17,7 +20,6 @@ module API
             use :post_metadata
           end
           get do
-            require_scope! :'view:posts'
             authorize! :view, ::Post
             @posts = ::GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).posts
 
@@ -32,7 +34,6 @@ module API
             use :post_metadata
           end
           get 'feed' do
-            require_scope! :'view:posts'
             authorize! :view, ::Post
             last_updated_at = Post.last_updated_at
             params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
@@ -63,7 +64,6 @@ module API
 
           desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
           get 'feed/:id/related' do
-            require_scope! :'view:posts'
             post = GetPost.call(id: params[:id], published: true).post
             not_found! unless post
             authorize! :view, post
@@ -79,7 +79,6 @@ module API
             optional :s
           end
           get 'tags' do
-            require_scope! :'view:posts'
             authorize! :view, Post
 
             tags = params[:s] \
@@ -98,7 +97,6 @@ module API
             optional :depth, default: 1, desc: "Minimum depth of filters"
           end
           get 'filters' do
-            require_scope! :'view:posts'
             authorize! :view, Post
             present :industries, ::Onet::Occupation.industries, with: Entities::Occupation
             present :categories, ::Category.where('depth >= ?', params[:depth]), with: Entities::Category
@@ -106,8 +104,7 @@ module API
           end
 
           desc 'Show a post', { entity: Entities::Post, nickname: "showPost" }
-          get ':id' do
-            require_scope! :'view:posts'
+          get ':id', scopes: [:'view:posts'] do
             @post = ::GetPost.call(id: params[:id], tenant: current_tenant.id).post
             not_found! unless @post
             authorize! :view, @post
@@ -119,7 +116,6 @@ module API
             use :post_associations
           end
           post do
-            require_scope! :'modify:posts'
             authorize! :create, Post
 
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
@@ -135,7 +131,6 @@ module API
             use :post_associations
           end
           put ':id' do
-            require_scope! :'modify:posts'
             authorize! :update, post!
 
             allowed_params = remove_params(Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
@@ -154,7 +149,6 @@ module API
 
           desc 'Delete a post', { nickname: "deletePost" }
           delete ':id' do
-            require_scope! :'modify:posts'
             authorize! :delete, post!
 
             post.destroy

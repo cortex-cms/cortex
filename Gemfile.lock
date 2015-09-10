@@ -79,6 +79,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    byebug (6.0.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     childprocess (0.5.6)
@@ -395,6 +396,8 @@ GEM
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-cors (0.4.0)
+    rack-current (1.1.0)
+      rack
     rack-mount (0.8.3)
       rack (>= 1.0.0)
     rack-oauth2 (1.1.1)
@@ -599,6 +602,9 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.3)
       rack (>= 1.0)
+    wine_bouncer (0.5.0)
+      doorkeeper (>= 1.4, < 3.1)
+      grape (~> 0.10, < 0.14)
 
 PLATFORMS
   ruby
@@ -611,6 +617,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.10)
   better_errors (~> 2.1.1)
   binding_of_caller (~> 0.7.2)
+  byebug
   codeclimate-test-reporter (~> 0.4.7)
   coffee-rails (~> 4.1.0)
   cortex-exceptions (~> 0.0.4)
@@ -654,6 +661,7 @@ DEPENDENCIES
   pg (~> 0.18.2)
   pry-rails (~> 0.3)
   rack-cors (~> 0.4.0)
+  rack-current
   rack-oauth2 (~> 1.1.1)
   rails (~> 4.2)
   rails-assets-angular (~> 1.2)!
@@ -693,6 +701,7 @@ DEPENDENCIES
   uglifier (~> 2.7.1)
   underscore-rails (~> 1.8.2)
   unicorn-rails (~> 2.2.0)
+  wine_bouncer (~> 0.5)
 
 BUNDLED WITH
    1.10.6

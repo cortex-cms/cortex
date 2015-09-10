@@ -16,8 +16,8 @@ module API
           end
 
           desc "Fetch a user's author info"
+          oauth2 'view:users'
           get ':user_id/author' do
-            require_scope! :'view:users'
             authorize! :view, user!
 
             present user.author || not_found!, with: Entities::Author
@@ -34,8 +34,8 @@ module API
             optional :google
             optional :bio
           end
+          oauth2 'modify:users'
           put ':user_id/author' do
-            require_scope! :'modify:users'
             authorize! :update, user!
 
             author = Author.find_or_create_by(user_id: params[:user_id])
@@ -54,8 +54,8 @@ module API
             optional :password
             optional :password_confirmation
           end
+          oauth2 'modify:users'
           post do
-            require_scope! :'modify:users'
             authorize! :create, User
 
             allowed_params = [:password, :password_confirmation, :firstname, :lastname, :email, :tenant_id, :admin]
@@ -75,8 +75,8 @@ module API
             optional :email
             optional :admin
           end
+          oauth2 'modify:users'
           put ':user_id' do
-            require_scope! :'modify:users'
             authorize! :update, user!
 
             allowed_params = [:firstname, :lastname]
@@ -95,16 +95,16 @@ module API
           end
 
           desc 'Show a user', {nickname: 'showUser'}
+          oauth2 'view:users'
           get ':user_id' do
-            require_scope! :'view:users'
             authorize! :view, user!
 
             present user, with: Entities::User, full: true
           end
 
           desc 'Delete a user', {nickname: 'deleteUser'}
+          oauth2 'modify:users'
           delete ':user_id' do
-            require_scope! :'modify:users'
             authorize! :delete, user!
 
             begin
@@ -119,9 +119,9 @@ module API
           end
 
           desc 'Bulk create users', { entity: Entities::BulkJob, nickname: 'bulkCreateUsers' }
+          oauth2 'modify:users'
+          oauth2 'modify:bulk_jobs'
           post :bulk_job do
-            require_scope! :'modify:users'
-            require_scope! :'modify:bulk_jobs'
             authorize! :create, ::User
             authorize! :create, ::BulkJob
 

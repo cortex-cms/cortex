@@ -14,9 +14,9 @@ module API
           params do
             use :pagination
           end
+          oauth2 'view:documents'
           get do
             authorize! :view, ::Document
-            require_scope! :'view:documents'
 
             @document = ::Document.order(created_at: :desc).page(page).per(per_page)
             set_pagination_headers(@document, 'document')
@@ -24,16 +24,16 @@ module API
           end
 
           desc 'Get document', { entity: Entities::Document, nickname: 'showDocument' }
+          oauth2 'view:documents'
           get ':id' do
-            require_scope! :'view:documents'
             authorize! :view, document!
 
             present document, with: Entities::Document
           end
 
           desc 'Create document', { entity: Entities::Document, params: Entities::Document.documentation, nickname: 'createDocument' }
+          oauth2 'modify:documents'
           post do
-            require_scope! :'modify:documents'
             authorize! :create, ::Document
 
             document_params = params[:document] || params
@@ -46,8 +46,8 @@ module API
           end
 
           desc 'Update document', { entity: Entities::Document, params: Entities::Document.documentation, nickname: 'updateDocument' }
+          oauth2 'modify:documents'
           put ':id' do
-            require_scope! :'modify:documents'
             authorize! :update, document!
 
             document_params = params[:document] || params
@@ -58,8 +58,8 @@ module API
           end
 
           desc 'Delete document', { nickname: 'deleteDocument' }
+          oauth2 'modify:documents'
           delete ':id' do
-            require_scope! :'modify:documents'
             authorize! :delete, document!
 
             begin

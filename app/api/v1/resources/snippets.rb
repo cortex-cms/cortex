@@ -14,9 +14,9 @@ module API
           params do
             use :pagination
           end
+          oauth2 'view:snippets'
           get do
             authorize! :view, ::Snippet
-            require_scope! :'view:snippets'
 
             @snippet = ::Snippet.order(created_at: :desc).page(page).per(per_page)
             set_pagination_headers(@snippet, 'snippet')
@@ -24,16 +24,16 @@ module API
           end
 
           desc 'Get snippet', { entity: Entities::Snippet, nickname: 'showSnippet' }
+          oauth2 'view:snippets'
           get ':id' do
-            require_scope! :'view:snippets'
             authorize! :view, snippet!
 
             present snippet, with: Entities::Snippet
           end
 
           desc 'Create snippet', { entity: Entities::Snippet, params: Entities::Snippet.documentation, nickname: 'createSnippet' }
+          oauth2 'modify:snippets'
           post do
-            require_scope! :'modify:snippets'
             authorize! :create, ::Snippet
 
             snippet_params = params[:snippet] || params
@@ -46,8 +46,8 @@ module API
           end
 
           desc 'Update snippet', { entity: Entities::Snippet, params: Entities::Snippet.documentation, nickname: 'updateSnippet' }
+          oauth2 'modify:snippets'
           put ':id' do
-            require_scope! :'modify:snippets'
             authorize! :update, snippet!
 
             snippet_params = params[:snippet] || params
@@ -58,8 +58,8 @@ module API
           end
 
           desc 'Delete snippet', { nickname: 'deleteSnippet' }
+          oauth2 'modify:snippets'
           delete ':id' do
-            require_scope! :'modify:snippets'
             authorize! :delete, snippet!
 
             begin

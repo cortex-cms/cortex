@@ -14,8 +14,8 @@ module API
               helpers Helpers::LocalizationHelper
 
               desc 'Show all locales', {entity: Entities::Locale, nickname: 'showAllLocales'}
+              oauth2 'view:locales'
               get do
-                require_scope! :'view:locales'
                 authorize! :view, ::Locale
 
                 @locales = localization.locales.order(created_at: :desc).page(page).per(per_page)
@@ -25,8 +25,8 @@ module API
               end
 
               desc 'Get locale', {entity: Entities::Locale, nickname: 'showLocale'}
+              oauth2 'view:locales'
               get ':locale_name' do
-                require_scope! :'view:locales'
                 authorize! :view, locale!
 
                 @locale = Locale.find_by_name!(params[:locale_name])
@@ -35,16 +35,16 @@ module API
               end
 
               desc 'Delete locale', {nickname: 'deleteLocale'}
+              oauth2 'modify:locales'
               delete ':locale_name' do
-                require_scope! :'modify:locales'
                 authorize! :delete, locale!
 
                 locale.destroy!
               end
 
               desc 'Create a locale', {entity: Entities::Locale, params: Entities::Locale.documentation, nickname: 'createLocale'}
+              oauth2 'modify:locales'
               post do
-                require_scope! :'modify:locales'
                 authorize! :create, ::Locale
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :id, :created_at, :updated_at, :available_locales, :locales, :creator)
@@ -57,8 +57,8 @@ module API
               end
 
               desc 'Update a locale', {entity: Entities::Locale, params: Entities::Locale.documentation, nickname: 'updateLocale'}
+              oauth2 'modify:locales'
               put ':locale_name' do
-                require_scope! :'modify:locales'
                 authorize! :update, locale!
 
                 allowed_params = remove_params(Entities::Locale.documentation.keys, :id, :created_at, :updated_at, :available_locales, :locales, :creator)

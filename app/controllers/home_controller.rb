@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     if user.present?
       password = Devise.friendly_token.first(8)
       user.update password: password, password_confirmation: password
-      PasswordResetMailer.send_password_reset({ email: user.email, password: password }).deliver_now
+      PasswordResetMailer.send_password_reset({ email: user.email, password: password }).deliver_later
       flash[:success] = "A new password was successfully sent to your email address."
     else
       flash[:error] = "There's no user on file with that email address."

@@ -1,10 +1,9 @@
 Devise.setup do |config|
   config.secret_key = ENV['DEVISE_SECRET']
-  config.mailer_sender = ENV['DEVISE_MAILER_SENDER']
   require 'devise/orm/active_record'
 
-  config.case_insensitive_keys = [ :email ]
-  config.strip_whitespace_keys = [ :email ]
+  config.case_insensitive_keys = [:email]
+  config.strip_whitespace_keys = [:email]
   config.http_authenticatable = true
   config.skip_session_storage = [:http_auth]
   config.stretches = Rails.env.test? ? 1 : 10
@@ -14,7 +13,7 @@ Devise.setup do |config|
   config.password_length = 8..128
 
   config.lock_strategy = :failed_attempts
-  config.unlock_keys = [ :email ]
+  config.unlock_keys = [:email]
   config.unlock_strategy = :both
   config.maximum_attempts = 10
   config.unlock_in = 1.hour
@@ -23,4 +22,8 @@ Devise.setup do |config|
   config.reset_password_within = 6.hours
 
   config.sign_out_via = :delete
+
+  config.warden do |manager|
+    manager.failure_app = AuthenticationFailure
+  end
 end

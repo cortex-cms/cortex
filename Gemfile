@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
-# Server
-gem 'unicorn-rails', '~> 2.2.0'
-
 # Rails
 gem 'rails', '~> 4.2'
 
@@ -31,33 +28,12 @@ gem 'sprockets', '~> 2.12.3'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'angular-rails-templates', '~> 0.2.0'
 gem 'gon', '~> 5.2.3'
-gem 'jquery-rails', '~> 4.0.3'
-gem 'momentjs-rails', '~> 2.10.2'
 gem 'ngmin-rails', '~> 0.4.0'
 gem 'turbolinks', '~> 2.5.3'
 gem 'uglifier', '~> 2.7.1'
-gem 'underscore-rails', '~> 1.8.2'
 
-# Mail
-gem 'mailgun_rails'
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-angular', '~> 1.2'
-  gem 'rails-assets-angular-animate', '~> 1.2'
-  gem 'rails-assets-angular-resource', '~> 1.2'
-  gem 'rails-assets-angular-cookies', '~> 1.2'
-  gem 'rails-assets-angular-ui-router', '~> 0.2'
-  gem 'rails-assets-angular-bootstrap', '~> 0.12'
-  gem 'rails-assets-angular-flash', '~> 0.1.14'
-  gem 'rails-assets-angular-bootstrap-datetimepicker', '~> 0.3.8'
-  gem 'rails-assets-angular-redactor', '~> 1.1.4'
-  gem 'rails-assets-ng-file-upload', '~> 3.2.4'
-  gem 'rails-assets-ng-table', '~> 0.5.4'
-  gem 'rails-assets-bootstrap-sass-official', '~> 3.3.4'
-  gem 'rails-assets-ng-tags-input', '~> 2.3.0'
-  gem 'rails-assets-angular-bootstrap-switch', '~> 0.3'
-  gem 'rails-assets-angular-validation-match', '< 1.4'
-end
+# Dependency Management
+gem "bower-rails", "~> 0.10.0"
 
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
@@ -119,13 +95,6 @@ group :test, :development do
   gem 'jasmine-rails', '~> 0.10.7'
   gem 'guard-jasmine', '~> 2.0.6'
   gem 'jasmine-core', '~> 2.3'
-
-  source 'https://rails-assets.org' do
-    gem 'rails-assets-angular-mocks', '~> 1.2'
-    gem 'rails-assets-sinonjs', '~> 1.12.2'
-    gem 'rails-assets-sinon-ng', '~> 0.1.2'
-    gem 'rails-assets-angular-debaser', '~> 0.3.3'
-  end
 end
 
 group :development do

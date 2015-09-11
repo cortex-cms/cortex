@@ -14,16 +14,16 @@ gem 'rails', '~> 4.2'
 gem 'cortex-exceptions', '~> 0.0.4'
 
 # API
-gem 'grape', '~> 0.11'
-gem 'grape-entity', '~> 0.4.5'
-gem 'grape-swagger', '~> 0.10.1'
+gem 'grape', '~> 0.13'
+gem 'grape-entity', '~> 0.4.8'
+gem 'grape-swagger', '~> 0.10.2'
 gem 'doorkeeper', '~> 1.4'
 gem 'redis-rails', '~> 4.0'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 3.4.1'
-gem 'rack-oauth2', '~> 1.1.1'
+gem 'devise', '~> 3.5.2'
+gem 'rack-oauth2', '~> 1.2.1'
 
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
@@ -36,17 +36,17 @@ gem 'elasticsearch-model', '~> 0.1'
 gem 'elasticsearch-rails', '~> 0.1'
 gem 'kaminari', '~> 0.16.3'
 gem 'paranoia', '~> 2.1'
-gem 'pg', '~> 0.18.2'
+gem 'pg', '~> 0.18.3'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 
 # Middleware
 gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
 
 # Utility
-gem 'excon', '~> 0.45.1'
-gem 'hashie', '~> 3.4.1'
+gem 'excon', '~> 0.45.4'
+gem 'hashie', '~> 3.4.2'
 gem 'hashr', '~> 0.0.22'
-gem 'mime-types', '~> 2.5.0'
+gem 'mime-types', '~> 2.6.1'
 gem 'json'
 gem 'rubyzip', '~> 1.1.7'
 
@@ -59,11 +59,11 @@ gem 'sinatra', '~> 1.4.6', require: false
 gem 'interactor-rails', '~> 2.0'
 
 # Pipeline
-gem 'sprockets-rails', '~> 2.3', :require => 'sprockets/railtie'
-gem 'sprockets', '~> 2.12.3'
+gem 'sprockets-rails', '2.3.1', :require => 'sprockets/railtie'
+gem 'sprockets', '2.12.3'
 
 # Templating
-gem 'haml', '~> 4.0.6'
+gem 'haml', '~> 4.0.7'
 
 # Style
 gem 'sass-rails', '~> 5.0'
@@ -71,18 +71,18 @@ gem 'sass-rails', '~> 5.0'
 # JS
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'angular-rails-templates', '~> 0.2.0'
-gem 'gon', '~> 5.2.3'
+gem 'gon', '~> 6.0.1'
 gem 'ngmin-rails', '~> 0.4.0'
-gem 'uglifier', '~> 2.7.1'
+gem 'uglifier', '~> 2.7.2'
 
 group :test, :development do
   # Environment
-  gem 'dotenv', '~> 2.0.1'
+  gem 'dotenv', '~> 2.0.2'
   gem 'byebug'
 
   # Rspec
-  gem 'rspec', '~> 3.2'
-  gem 'rspec-rails', '~> 3.2'
+  gem 'rspec', '~> 3.3'
+  gem 'rspec-rails', '~> 3.3'
   gem 'json_spec', '~> 1.1.4'
 
   # Guard
@@ -91,10 +91,10 @@ group :test, :development do
   # Mocking/Faking
   gem 'mocha', '~> 1.1.0', require: false
   gem 'factory_girl_rails', '~> 4.5.0'
-  gem 'database_cleaner', '~> 1.4.1'
+  gem 'database_cleaner', '~> 1.5.0'
 
   # Javascript
-  gem 'jasmine-rails', '~> 0.10.7'
+  gem 'jasmine-rails', '~> 0.11.0'
   gem 'guard-jasmine', '~> 2.0.6'
   gem 'jasmine-core', '~> 2.3'
 end
@@ -107,9 +107,9 @@ group :development do
 end
 
 group :test do
-  gem 'codeclimate-test-reporter', '~> 0.4.7', require: false
-  gem 'timecop', '~> 0.7.3'
-  gem 'rspec-sidekiq', '~> 2.0.0'
+  gem 'codeclimate-test-reporter', '~> 0.4.8', require: false
+  gem 'timecop', '~> 0.8.0'
+  gem 'rspec-sidekiq', '~> 2.1.0'
   gem 'elasticsearch-extensions', '~> 0.0.18'
   gem 'email_spec'
 end
@@ -119,7 +119,7 @@ group :assets do
 end
 
 group :test, :development, :staging do
-  gem 'fog', '~> 1.32.0'
+  gem 'fog', '~> 1.34.0'
 end
 
 group :production do
@@ -128,5 +128,5 @@ end
 
 group :staging, :production do
   # Monitoring
-  gem 'newrelic_rpm', '~> 3.12.1'
+  gem 'newrelic_rpm', '~> 3.13.0'
 end

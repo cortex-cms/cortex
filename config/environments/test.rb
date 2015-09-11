@@ -58,6 +58,6 @@ Cortex::Application.configure do
     :domain => ENV['SMTP_SENDER_DOMAIN'],
     :user_name => ENV['SMTP_USERNAME'],
     :password => ENV['SMTP_PASSWORD'],
-    :tls => true
+    :enable_starttls_auto => true
   }
 end

@@ -1,6 +1,12 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
+# Dependency Management
+gem "bower-rails", "~> 0.10.0"
+
+# Server
+gem 'unicorn-rails', '~> 2.2.0'
+
 # Rails
 gem 'rails', '~> 4.2'
 
@@ -14,25 +20,10 @@ gem 'grape-swagger', '~> 0.10.1'
 gem 'doorkeeper', '~> 1.4'
 gem 'redis-rails', '~> 4.0'
 
-# Templating
-gem 'haml', '~> 4.0.6'
-
-# Style
-gem 'sass-rails', '~> 5.0'
-
-gem 'sprockets-rails', '~> 2.3', :require => 'sprockets/railtie'
-gem 'sprockets', '~> 2.12.3'
-
-# JS
-gem 'ng-rails-csrf', '~> 0.1.0'
-gem 'angular-rails-templates', '~> 0.2.0'
-gem 'gon', '~> 5.2.3'
-gem 'ngmin-rails', '~> 0.4.0'
-gem 'turbolinks', '~> 2.5.3'
-gem 'uglifier', '~> 2.7.1'
-
-# Dependency Management
-gem "bower-rails", "~> 0.10.0"
+# Authorization
+gem 'six', '~> 0.2.0'
+gem 'devise', '~> 3.4.1'
+gem 'rack-oauth2', '~> 1.1.1'
 
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
@@ -48,10 +39,8 @@ gem 'paranoia', '~> 2.1'
 gem 'pg', '~> 0.18.2'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 
-# Authorization
-gem 'six', '~> 0.2.0'
-gem 'devise', '~> 3.4.1'
-gem 'rack-oauth2', '~> 1.1.1'
+# Middleware
+gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
 
 # Utility
 gem 'excon', '~> 0.45.1'
@@ -61,16 +50,30 @@ gem 'mime-types', '~> 2.5.0'
 gem 'json'
 gem 'rubyzip', '~> 1.1.7'
 
-# Middleware
-gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
-
 # Jobs
-gem 'sidekiq', '~> 3.3.3'
-gem 'sidekiq-failures', '~> 0.4.4'
+gem 'sidekiq', '~> 3.5.0'
+gem 'sidekiq-failures', '~> 0.4.5'
 gem 'sinatra', '~> 1.4.6', require: false
 
 # Interactors
 gem 'interactor-rails', '~> 2.0'
+
+# Pipeline
+gem 'sprockets-rails', '~> 2.3', :require => 'sprockets/railtie'
+gem 'sprockets', '~> 2.12.3'
+
+# Templating
+gem 'haml', '~> 4.0.6'
+
+# Style
+gem 'sass-rails', '~> 5.0'
+
+# JS
+gem 'ng-rails-csrf', '~> 0.1.0'
+gem 'angular-rails-templates', '~> 0.2.0'
+gem 'gon', '~> 5.2.3'
+gem 'ngmin-rails', '~> 0.4.0'
+gem 'uglifier', '~> 2.7.1'
 
 group :test, :development do
   # Environment
@@ -83,7 +86,7 @@ group :test, :development do
   gem 'json_spec', '~> 1.1.4'
 
   # Guard
-  gem 'guard-rspec', '~> 4.5.0'
+  gem 'guard-rspec', '~> 4.6.4'
 
   # Mocking/Faking
   gem 'mocha', '~> 1.1.0', require: false

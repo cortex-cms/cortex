@@ -25,6 +25,7 @@
 # OS Files
 .DS_Store
 ._.DS_Store
+.directory
 
 # Text-editor/IDE generated files
 *.sublime-workspace

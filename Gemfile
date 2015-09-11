@@ -19,7 +19,6 @@ gem 'haml', '~> 4.0.6'
 
 # Style
 gem 'sass-rails', '~> 5.0'
-gem 'font-awesome-sass', '~> 4.3.2'
 
 gem 'sprockets-rails', '~> 2.3', :require => 'sprockets/railtie'
 gem 'sprockets', '~> 2.12.3'
@@ -38,7 +37,7 @@ gem "bower-rails", "~> 0.10.0"
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.0'
-gem 'paperclip', git: 'git://github.com/betesh/paperclip', branch: 'aws_v2'
+gem 'paperclip', git: 'git://github.com/betesh/paperclip', branch: 'master'
 gem 'paperclip-optimizer', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 3.5'
 gem 'bcrypt', '~> 3.1.10'

@@ -47,7 +47,7 @@ module Cortex
       :domain => ENV['SMTP_SENDER_DOMAIN'],
       :user_name => ENV['SMTP_USERNAME'],
       :password => ENV['SMTP_PASSWORD'],
-      :enable_starttls_auto => ENV['SMTP_TTLS']
+      :tls => true
     }
 
     # Needed until there is a better fix for Paperclip. https://github.com/thoughtbot/paperclip/issues/1924#issuecomment-123927367

@@ -1,0 +1,18 @@
+default: &default
+  first_thing:
+    - snippet: cloud66/node
+      target: any
+      execute: true
+    - command: npm install -g bower
+      sudo: true
+      target: any
+      execute: true
+
+development:
+  <<: *default
+
+staging:
+  <<: *default
+
+production:
+  <<: *default

@@ -1,10 +1,8 @@
-// Maintained by Gemfile
-//= require moment
-//= require underscore
-//= require jquery
-//= require bootstrap-sass-official
-
 // Maintained by bower-rails
+//= require jquery
+//= require underscore
+//= require moment
+//= require bootstrap-sass-official
 //= require angular
 //= require angular-rails-templates
 //= require angular-resource

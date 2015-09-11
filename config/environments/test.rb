@@ -50,7 +50,7 @@ Cortex::Application.configure do
     config.redis = { :namespace => 'cortex_test' }
   end
   config.action_mailer.default_url_options = {:host => ENV['HOST']}
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :test
   config.action_mailer.smtp_settings = {
     :authentication => :plain,
     :address => ENV['SMTP_ADDRESS'],
@@ -58,6 +58,8 @@ Cortex::Application.configure do
     :domain => ENV['SMTP_SENDER_DOMAIN'],
     :user_name => ENV['SMTP_USERNAME'],
     :password => ENV['SMTP_PASSWORD'],
-    :enable_starttls_auto => true
+    :enable_starttls_auto => ENV['SMTP_STARTTLS'],
+    :tls => ENV['SMTP_STARTTLS']
   }
+
 end

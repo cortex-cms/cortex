@@ -38,6 +38,18 @@ module Cortex
       generator.orm :active_record
     end
 
+    config.action_mailer.default_url_options = {:host => ENV['HOST']}
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :authentication => :plain,
+      :address => ENV['SMTP_ADDRESS'],
+      :port => ENV['SMTP_PORT'],
+      :domain => ENV['SMTP_SENDER_DOMAIN'],
+      :user_name => ENV['SMTP_USERNAME'],
+      :password => ENV['SMTP_PASSWORD'],
+      :tls => true
+    }
+
     # Needed until there is a better fix for Paperclip. https://github.com/thoughtbot/paperclip/issues/1924#issuecomment-123927367
     Paperclip.options[:content_type_mappings] = {:csv => 'text/plain'}
   end

@@ -5,6 +5,8 @@ Cortex::Application.routes.draw do
   root 'home#index'
 
   get 'login', to: 'home#login'
+  get 'login/reset_password', to: 'home#password_reset'
+  post 'login/reset_password', to: 'home#submit_password_reset'
 
   # Authentication
   use_doorkeeper do

@@ -2,6 +2,11 @@ main {
   @extend .container-fluid;
 }
 
+// Login
+.flash_success, .reset-password {
+  margin-bottom: 12px;
+}
+
 // Alerts
 .alert-box {
   @include make-xs-column(12);

@@ -3,8 +3,7 @@ class User < ActiveRecord::Base
   include HasFirstnameLastname
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable
   acts_as_tagger
 
   belongs_to :tenant

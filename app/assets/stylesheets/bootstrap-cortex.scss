@@ -2,7 +2,7 @@ $navbar-inverse-bg: #333333;
 $navbar-inverse-link-color: #BFBFBF;
 $border-radius-base: 0;
 
-@import 'bootstrap-sass-official';
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap';
 
 // Correct cursors for Angular Bootstrap
 .nav, .pagination, .carousel, .panel-title a, [ng-click] { cursor: pointer; }

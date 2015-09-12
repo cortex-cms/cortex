@@ -291,6 +291,8 @@ GEM
     fog-xml (0.1.2)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
+    font-awesome-sass (4.4.0)
+      sass (>= 3.2)
     formatador (0.2.5)
     fspath (2.1.1)
     globalid (0.3.6)
@@ -618,6 +620,7 @@ DEPENDENCIES
   excon (~> 0.45.4)
   factory_girl_rails (~> 4.5.0)
   fog (~> 1.34.0)
+  font-awesome-sass (~> 4.4.0)
   gon (~> 6.0.1)
   grape (~> 0.13)
   grape-entity (~> 0.4.8)

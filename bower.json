@@ -15,7 +15,6 @@
     "jquery": "~> 2.1.4",
     "underscore": "~> 1.8.3",
     "momentjs": "~> 2.10.2",
-    "font-awesome": "~> 4.4.0",
     "angular": "~> 1.2",
     "angular-animate": "~> 1.2",
     "angular-resource": "~> 1.2",

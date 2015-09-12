@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 # Dependency Management
-gem "bower-rails", "~> 0.10.0"
+gem 'bower-rails', '~> 0.10.0'
 
 # Server
 gem 'unicorn-rails', '~> 2.2.0'
@@ -67,6 +67,7 @@ gem 'haml', '~> 4.0.7'
 
 # Style
 gem 'sass-rails', '~> 5.0'
+gem 'font-awesome-sass', '~> 4.4.0'
 
 # JS
 gem 'ng-rails-csrf', '~> 0.1.0'

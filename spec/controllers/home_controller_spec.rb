@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'sidekiq/testing'
+Sidekiq::Testing.inline!
 
 RSpec.describe HomeController, type: :controller do
   describe 'POST login/reset_password' do

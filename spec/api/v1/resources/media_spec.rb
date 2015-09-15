@@ -31,7 +31,6 @@ describe SPEC_API::Resources::Media, type: :request, elasticsearch: true do
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(2)
       expect(response.headers['X-Total']).to eq('5')
-      expect(response.headers['Content-Range']).to eq('media 0-1:2/5')
     end
 
     it 'should allow search on q' do

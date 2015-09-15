@@ -25,7 +25,6 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(2)
       expect(response.headers['X-Total'].to_i).to eq ::Post.find_by_tenant_id(user.tenant.id).count
-      expect(response.headers['Content-Range']).to eq("posts 0-1:2/#{::Post.find_by_tenant_id(user.tenant.id).count}")
     end
 
     it 'should allow search on q' do

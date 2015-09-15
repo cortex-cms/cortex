@@ -4,25 +4,22 @@ module API
   module V1
     module Resources
       class Applications < Grape::API
+        include Grape::Kaminari
         helpers Helpers::SharedParams
 
         resource :applications do
-          helpers Helpers::PaginationHelper
           helpers Helpers::ApplicationsHelper
 
+          paginate per_page: 25
 
           desc 'Show all applications', { entity: Entities::Application, nickname: 'showAllApplications' }
-          params do
-            use :pagination
-          end
           get do
             require_scope! :'view:applications'
             authorize! :view, ::Application
 
-            @applications = ::Application.where(tenant: current_tenant).page(page).per(per_page)
+            @applications = ::Application.where(tenant: current_tenant)
 
-            set_pagination_headers(@applications, 'applications')
-            present @applications, with: Entities::Application
+            Entities::Application.represent paginate(@applications)
           end
 
           desc 'Show an application', { entity: Entities::Application, nickname: "showApplication" }

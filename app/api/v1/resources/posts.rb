@@ -8,21 +8,19 @@ module API
         helpers Helpers::PostsHelper
 
         resource :posts do
-          helpers Helpers::PaginationHelper
+          include Grape::Kaminari
 
           desc 'Show all posts', { entity: Entities::Post, nickname: "showAllPosts" }
           params do
-            use :pagination
             use :search
             use :post_metadata
           end
           get do
             require_scope! :'view:posts'
             authorize! :view, ::Post
-            @posts = ::GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).posts
+            @posts = ::GetPosts.call(params: declared(post_params, include_missing: false), tenant: current_tenant.id).posts
 
-            set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post
+            Entities::Post.represent paginate(@posts)
           end
 
           desc 'Show published posts', { entity: Entities::Post, nickname: "postFeed" }

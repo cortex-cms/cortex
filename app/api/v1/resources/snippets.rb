@@ -10,6 +10,8 @@ module API
           include Grape::Kaminari
           helpers Helpers::SnippetsHelper
 
+          paginate per_page: 25
+
           desc 'Show all snippets', { entity: Entities::Snippet, nickname: 'showAllSnippet' }
           get do
             authorize! :view, ::Snippet

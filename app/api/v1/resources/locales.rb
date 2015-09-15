@@ -13,6 +13,8 @@ module API
               helpers Helpers::LocaleHelper
               helpers Helpers::LocalizationHelper
 
+              paginate per_page: 25
+
               desc 'Show all locales', {entity: Entities::Locale, nickname: 'showAllLocales'}
               get do
                 require_scope! :'view:locales'

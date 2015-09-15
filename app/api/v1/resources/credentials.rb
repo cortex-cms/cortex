@@ -12,6 +12,8 @@ module API
               include Grape::Kaminari
               helpers Helpers::ApplicationsHelper
 
+              paginate per_page: 25
+
               desc 'Show all credentials', {entity: Entities::Credential, nickname: 'showAllCredentials'}
               get do
                 require_scope! :'view:application'

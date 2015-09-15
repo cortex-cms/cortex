@@ -11,6 +11,8 @@ module API
           helpers Helpers::MediaHelper
           helpers Helpers::BulkJobsHelper
 
+          paginate per_page: 25
+
           desc 'Show all media', { entity: Entities::Media, nickname: 'showAllMedia' }
           params do
             use :search

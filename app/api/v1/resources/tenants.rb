@@ -11,6 +11,8 @@ module API
           include Grape::Kaminari
           helpers Helpers::TenantsHelper
 
+          paginate per_page: 25
+
           desc 'Show all tenants', { entity: Entities::Tenant, nickname: "showAllTenants" }
           get do
             require_scope! :'view:tenants'

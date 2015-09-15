@@ -9,6 +9,7 @@ module API
         resource :webpages do
           include Grape::Kaminari
           helpers Helpers::WebpagesHelper
+          paginate per_page: 25
 
           desc 'Show all webpages', { entity: Entities::Webpage, nickname: 'showAllWebpages' }
           get do

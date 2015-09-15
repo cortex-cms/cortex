@@ -10,6 +10,8 @@ module API
           include Grape::Kaminari
           helpers Helpers::DocumentsHelper
 
+          paginate per_page: 25
+
           desc 'Show all documents', { entity: Entities::Document, nickname: 'showAllDocument' }
           params do
             use :pagination

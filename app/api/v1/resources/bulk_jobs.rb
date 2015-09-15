@@ -10,6 +10,8 @@ module API
           include Grape::Kaminari
           helpers Helpers::BulkJobsHelper
 
+          paginate per_page: 25
+
           desc 'Show all bulk jobs', { entity: Entities::BulkJob, nickname: 'showAllBulkJobs' }
           get do
             authorize! :view, ::BulkJob

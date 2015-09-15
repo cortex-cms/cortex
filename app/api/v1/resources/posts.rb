@@ -9,6 +9,7 @@ module API
 
         resource :posts do
           include Grape::Kaminari
+          paginate per_page: 25
 
           desc 'Show all posts', { entity: Entities::Post, nickname: "showAllPosts" }
           params do

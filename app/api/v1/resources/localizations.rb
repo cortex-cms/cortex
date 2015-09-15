@@ -10,6 +10,8 @@ module API
           include Grape::Kaminari
           helpers Helpers::LocalizationHelper
 
+          paginate per_page: 25
+
           desc 'Show all localizations', { entity: Entities::Localization, nickname: 'showAllLocalizations' }
           get do
             require_scope! :'view:localizations'

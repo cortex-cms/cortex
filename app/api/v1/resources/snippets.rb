@@ -7,20 +7,16 @@ module API
         helpers Helpers::SharedParams
 
         resource :snippets do
-          helpers Helpers::PaginationHelper
+          include Grape::Kaminari
           helpers Helpers::SnippetsHelper
 
           desc 'Show all snippets', { entity: Entities::Snippet, nickname: 'showAllSnippet' }
-          params do
-            use :pagination
-          end
           get do
             authorize! :view, ::Snippet
             require_scope! :'view:snippets'
 
-            @snippet = ::Snippet.order(created_at: :desc).page(page).per(per_page)
-            set_pagination_headers(@snippet, 'snippet')
-            present @snippet, with: Entities::Snippet
+            @snippet = ::Snippet.order(created_at: :desc)
+            Entities::Snippet.represent paginate(@snippet)
           end
 
           desc 'Get snippet', { entity: Entities::Snippet, nickname: 'showSnippet' }

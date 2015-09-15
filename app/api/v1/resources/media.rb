@@ -7,22 +7,20 @@ module API
         helpers Helpers::SharedParams
 
         resource :media do
-          helpers Helpers::PaginationHelper
+          include Grape::Kaminari
           helpers Helpers::MediaHelper
           helpers Helpers::BulkJobsHelper
 
           desc 'Show all media', { entity: Entities::Media, nickname: 'showAllMedia' }
           params do
-            use :pagination
             use :search
           end
           get do
             authorize! :view, ::Media
             require_scope! :'view:media'
 
-            @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).media
-            set_pagination_headers(@media, 'media')
-            present @media, with: Entities::Media
+            @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), tenant: current_tenant.id).media
+            Entities::Media.represent pagination(@media)
           end
 
           desc 'Show media tags'

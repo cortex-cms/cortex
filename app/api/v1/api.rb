@@ -18,7 +18,6 @@ module API
       end
 
       helpers Helpers::APIHelper
-      helpers PaginationHeaders
 
       mount Resources::Categories
       mount Resources::Posts

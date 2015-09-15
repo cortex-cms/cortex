@@ -20,7 +20,7 @@ module API
                 require_scope! :'view:locales'
                 authorize! :view, ::Locale
 
-                @locales = localization.locales.order(created_at: :desc).page(page).per(per_page)
+                @locales = localization.locales.order(created_at: :desc)
 
                 Entities::Locale.represent paginate(@locales)
               end

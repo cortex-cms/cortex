@@ -39,8 +39,8 @@ module API
             cache_key       = "feed-#{last_updated_at}-#{tenant}-#{params_hash}"
 
             posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
-              posts = ::GetPosts.call(params: declared(post_params, include_missing: false), page: page, per_page: per_page, tenant: tenant, published: true).posts
-              entity_page(posts, Entities::Post)
+              posts = ::GetPosts.call(params: declared(post_params, include_missing: false), tenant: tenant, published: true).posts
+              Entities::Post.represent paginate(posts)
             end
 
             set_pagination_headers(OpenStruct.new(posts_page[:paging]), 'posts')
@@ -68,9 +68,8 @@ module API
             authorize! :view, post
 
             per_page = params[:per_page] || 5 # Ignore PaginationHelper's/Kaminari's per_page default - too large for related content!
-            @posts = post.related(true).page(page).per(per_page).records
-            set_pagination_headers(@posts, 'posts')
-            present @posts, with: Entities::Post
+            @posts = post.related(true)
+            Entities::Post.represent paginate(@posts, per_page: 5)
           end
 
           desc 'Show post tags'

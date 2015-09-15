@@ -7,21 +7,17 @@ module API
         helpers Helpers::SharedParams
 
         resource :localizations do
-          helpers Helpers::PaginationHelper
+          include Grape::Kaminari
           helpers Helpers::LocalizationHelper
 
           desc 'Show all localizations', { entity: Entities::Localization, nickname: 'showAllLocalizations' }
-          params do
-            use :pagination
-          end
           get do
             require_scope! :'view:localizations'
             authorize! :view, ::Localization
 
-            @localizations = ::Localization.order(created_at: :desc).page(page).per(per_page)
+            @localizations = ::Localization.order(created_at: :desc)
 
-            set_pagination_headers(@localizations, 'localizations')
-            present @localizations, with: Entities::Localization
+            Entities::Localization.represent paginate(@localizations)
           end
 
           desc 'Get localization', { entity: Entities::Localization, nickname: 'showLocalization' }

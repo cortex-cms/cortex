@@ -42,7 +42,7 @@ module API
               Entities::Post.represent paginate(posts)
             end
 
-            posts_page.to_json
+            posts_page
           end
 
           desc 'Show published post authors'

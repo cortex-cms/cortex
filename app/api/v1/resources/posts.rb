@@ -42,8 +42,7 @@ module API
               Entities::Post.represent paginate(posts)
             end
 
-            set_pagination_headers(OpenStruct.new(posts_page[:paging]), 'posts')
-            JSON.parse(posts_page[:items])
+            posts_page.to_json
           end
 
           desc 'Show published post authors'

@@ -21,7 +21,7 @@ module API
 
                 @credentials = application!.credentials
 
-                Entities::Credential.represent pagination(@credentials)
+                Entities::Credential.represent paginate(@credentials)
               end
 
               desc 'Get credential', {entity: Entities::Credential, nickname: 'showCredential'}

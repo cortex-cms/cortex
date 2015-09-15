@@ -18,7 +18,7 @@ module API
             require_scope! :'view:documents'
 
             @document = ::Document.order(created_at: :desc)
-            Entities::Document.represent pagination(@document)
+            Entities::Document.represent paginate(@document)
           end
 
           desc 'Get document', { entity: Entities::Document, nickname: 'showDocument' }

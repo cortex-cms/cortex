@@ -1,5 +1,4 @@
 require 'cortex/exceptions'
-require "#{Rails.root}/lib/pagination_headers"
 
 # Load modules in order
 Dir["#{Rails.root}/app/api/v1/entities/*.rb"].each {|file| require file}

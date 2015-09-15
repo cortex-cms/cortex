@@ -7,21 +7,17 @@ module API
         helpers Helpers::SharedParams
 
         resource :bulk_jobs do
-          helpers Helpers::PaginationHelper
+          include Grape::Kaminari
           helpers Helpers::BulkJobsHelper
 
           desc 'Show all bulk jobs', { entity: Entities::BulkJob, nickname: 'showAllBulkJobs' }
-          params do
-            use :pagination
-          end
           get do
             authorize! :view, ::BulkJob
             require_scope! :'view:bulk_jobs'
 
-            @bulk_job = ::BulkJob.order(created_at: :desc).page(page).per(per_page)
-            set_pagination_headers(@bulk_job, 'bulk_job')
+            @bulk_job = ::BulkJob.order(created_at: :desc)
 
-            present @bulk_job, with: Entities::BulkJob
+            Entities::BulkJob.represent paginate(@bulk_job)
           end
 
           desc 'Get bulk job', { entity: Entities::BulkJob, nickname: 'showBulkJob' }

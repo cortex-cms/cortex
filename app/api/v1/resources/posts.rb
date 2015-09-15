@@ -26,7 +26,6 @@ module API
 
           desc 'Show published posts', { entity: Entities::Post, nickname: "postFeed" }
           params do
-            use :pagination
             use :search
             use :post_metadata
           end

@@ -13,9 +13,6 @@ module API
           paginate per_page: 25
 
           desc 'Show all documents', { entity: Entities::Document, nickname: 'showAllDocument' }
-          params do
-            use :pagination
-          end
           get do
             authorize! :view, ::Document
             require_scope! :'view:documents'

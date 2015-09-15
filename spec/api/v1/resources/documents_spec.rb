@@ -25,7 +25,7 @@ describe SPEC_API::Resources::Document, type: :request do
       get '/api/v1/documents?per_page=2'
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(2)
-      expect(response.headers['X-Total-Items']).to eq('5')
+      expect(response.headers['X-Total']).to eq('5')
       expect(response.headers['Content-Range']).to eq('document 0-1:2/5')
     end
   end

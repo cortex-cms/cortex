@@ -70,7 +70,6 @@ angular.module('cortex.resources', [
                 per_page: per_page,
                 total: total
               };
-              debugger
             }
 
             // Call original callback

@@ -57,9 +57,9 @@ angular.module('cortex.resources', [
             if (range) {
 
               var start    = (headers('X-Page') - 1) * headers('X-Per-Page');
-              var end      = (headers('X-Total') - 1) + start;
+              var end      = parseInt(headers('X-Per-Page')) + start;
               var per_page = headers('X-Per-Page');
-              var total    = headers('X-Page');
+              var total    = headers('X-Total');
               var page     = headers('X-Page') || 1;
 
               pagination = {
@@ -70,6 +70,7 @@ angular.module('cortex.resources', [
                 per_page: per_page,
                 total: total
               };
+              debugger
             }
 
             // Call original callback

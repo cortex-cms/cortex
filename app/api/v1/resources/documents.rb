@@ -7,20 +7,18 @@ module API
         helpers Helpers::SharedParams
 
         resource :documents do
-          helpers Helpers::PaginationHelper
+          include Grape::Kaminari
           helpers Helpers::DocumentsHelper
 
+          paginate per_page: 25
+
           desc 'Show all documents', { entity: Entities::Document, nickname: 'showAllDocument' }
-          params do
-            use :pagination
-          end
           get do
             authorize! :view, ::Document
             require_scope! :'view:documents'
 
-            @document = ::Document.order(created_at: :desc).page(page).per(per_page)
-            set_pagination_headers(@document, 'document')
-            present @document, with: Entities::Document
+            @document = ::Document.order(created_at: :desc)
+            Entities::Document.represent paginate(@document)
           end
 
           desc 'Get document', { entity: Entities::Document, nickname: 'showDocument' }

@@ -53,20 +53,14 @@ angular.module('cortex.resources', [
 
           var wrappedSuccess = function(data, headers) {
             var pagination;
-            var range = headers('Content-Range');
+            var range = headers('X-Total');
             if (range) {
-              // Parse pagination information from Content-Range header (Format: start-end:per_page/count)
-              range = range.match(/(\d+)-(\d+):(\d+)\/(\d+)$/);
 
-              if (range.length != 5) {
-                throw new RangeError('Content-Range header contained ill-formated pagination data.');
-              }
-
-              var start    = range[1];
-              var end      = range[2];
-              var per_page = range[3];
-              var total    = range[4];
-              var page     = params.page || 1;
+              var start    = (headers('X-Page') - 1) * headers('X-Per-Page');
+              var end      = (headers('X-Total') - 1) + start;
+              var per_page = headers('X-Per-Page');
+              var total    = headers('X-Page');
+              var page     = headers('X-Page') || 1;
 
               pagination = {
                 page: page,

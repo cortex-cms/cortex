@@ -9,19 +9,20 @@ module API
         resource :localizations do
           segment '/:id' do
             resource :locales do
-              helpers Helpers::PaginationHelper
+              include Grape::Kaminari
               helpers Helpers::LocaleHelper
               helpers Helpers::LocalizationHelper
+
+              paginate per_page: 25
 
               desc 'Show all locales', {entity: Entities::Locale, nickname: 'showAllLocales'}
               get do
                 require_scope! :'view:locales'
                 authorize! :view, ::Locale
 
-                @locales = localization.locales.order(created_at: :desc).page(page).per(per_page)
+                @locales = localization.locales.order(created_at: :desc)
 
-                set_pagination_headers(@locales, 'locales')
-                present @locales, with: Entities::Locale
+                Entities::Locale.represent paginate(@locales)
               end
 
               desc 'Get locale', {entity: Entities::Locale, nickname: 'showLocale'}

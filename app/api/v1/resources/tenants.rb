@@ -8,24 +8,20 @@ module API
         helpers Helpers::SharedParams
 
         resource :tenants do
-          helpers Helpers::PaginationHelper
+          include Grape::Kaminari
           helpers Helpers::TenantsHelper
 
+          paginate per_page: 25
+
           desc 'Show all tenants', { entity: Entities::Tenant, nickname: "showAllTenants" }
-          params do
-            use :pagination
-          end
           get do
             require_scope! :'view:tenants'
             authorize! :view, Tenant
 
-            present Tenant.page(page).per(per_page), using: Entities::Tenant, children: params[:include_children]
+            Entities::Tenant.represent paginate(Tenant.all), children: params[:include_children]
           end
 
           desc 'Show tenant hierarchy', { entity: Entities::Tenant, nickname: "showTenantHierarchy" }
-          params do
-            use :pagination
-          end
           get :hierarchy do
             require_scope! :'view:tenants'
             authorize! :view, Tenant
@@ -75,18 +71,19 @@ module API
 
           segment '/:id' do
             resource :users do
+              include Grape::Kaminari
+              paginate per_page: 25
+
               desc 'Show all users belonging to a tenant', { entity: Entities::User, nickname: "showAllTenantUsers" }
               params do
-                use :pagination
                 use :search
               end
               get do
                 authorize! :view, User
                 require_scope! :'view:users'
 
-                @users = User.tenantUsers(params[:id]).page(page).per(per_page)
-                set_pagination_headers(@users, 'users')
-                present @users, with: Entities::User, full: true
+                @users = User.tenantUsers(params[:id])
+                Entities::User.represent paginate(@users), full: true
               end
             end
           end

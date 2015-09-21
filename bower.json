@@ -28,7 +28,9 @@
     "ng-table": "~> 0.5.4",
     "bootstrap-sass-official": "~> 3.3.4",
     "ng-tags-input": "~> 2.3.0",
-    "angular-bootstrap-switch": "~> 0.4",
+    "angular-sanitize" : "~> 1.5.0",
+    "bootstrap-switch": "~> 3.3.2",
+    "angular-bootstrap-toggle-switch": "~> 0.5.5",
     "angular-validation-match": "< 1.4"
   },
   "devDependencies": {

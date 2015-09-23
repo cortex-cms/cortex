@@ -110,4 +110,5 @@ Cortex::Application.configure do
     :enable_starttls_auto => ENV['SMTP_STARTTLS'],
     :tls => ENV['SMTP_STARTTLS']
   }
+  ActionMailer::Base.default from: 'noreply@cbcortex.com'
 end

@@ -18,13 +18,6 @@ RSpec.describe HomeController, type: :controller do
         expect(flash[:success]).to be_present
       end
 
-      it 'should generate a reset token' do
-        expect{
-          post 'submit_password_reset', user: { email: user.email }
-          user.reload
-        }.to change{ user.encrypted_password }
-      end
-
       context 'the password email' do
         it 'should be sent' do
           post 'submit_password_reset', user: { email: user.email }

@@ -1,7 +1,7 @@
 rails_root = ENV['APP_PATH'] || File.expand_path('..', File.dirname(__FILE__))
 pid_path   = '/tmp/web_server.pid'
 working_directory rails_root
-timeout 30
+timeout 60
 
 # Environmental specific bindings
 if ENV['RAILS_ENV'] == 'development'

@@ -67,6 +67,6 @@ class Media < ActiveRecord::Base
   private
 
   def taxon_type
-    Cortex.config.media.allowed_media_types.select{|t| t[:type] == attachment_content_type}[0][:taxon_type]
+    Cortex.config.media.allowed_media_types.find { |t| t[:type] == attachment_content_type }
   end
 end

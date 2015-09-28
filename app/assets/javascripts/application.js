@@ -16,8 +16,10 @@
 //= require ng-table
 //= require ng-rails-csrf
 //= require ng-tags-input
+
+//= require angular-sanitize
 //= require bootstrap-switch
-//= require angular-bootstrap-switch
+//= require angular-bootstrap-toggle-switch
 //= require angular-validation-match
 
 //= require_tree ../templates

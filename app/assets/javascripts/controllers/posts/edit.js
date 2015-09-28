@@ -6,8 +6,6 @@ angular.module('cortex.controllers.posts.edit', [
   'ui.bootstrap.datetimepicker',
   'angular-flash.service',
   'angular-redactor',
-  'frapontillo.bootstrap-switch',
-
   'cortex.vendor.underscore',
   'cortex.services.addMedia',
   'cortex.services.imageFit'

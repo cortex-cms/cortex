@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/betesh/paperclip
-  revision: e5603e1116c24c58aba6282da20b64476108f452
+  remote: git://github.com/thoughtbot/paperclip
+  revision: 523bd46c768226893f23889079a7aa9c73b57d68
   branch: master
   specs:
     paperclip (4.3.1)
@@ -401,10 +401,10 @@ GEM
       mime-types (>= 1.16, < 3)
     metaclass (0.0.4)
     method_source (0.8.2)
-    mime-types (2.6.1)
+    mime-types (2.6.2)
     mimemagic (0.3.0)
     mini_portile (0.6.2)
-    minitest (5.8.0)
+    minitest (5.8.1)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     multi_json (1.11.2)

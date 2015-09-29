@@ -6,6 +6,8 @@ angular.module('cortex', [
   'angular-flash.flash-alert-directive',
   'ncy-angular-breadcrumb',
   'ng-rails-csrf',
+  'toggle-switch',
+  'ngSanitize',
 
   // Cortex
   'cortex.states',

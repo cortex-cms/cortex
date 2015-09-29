@@ -7,20 +7,17 @@ module API
         helpers Helpers::SharedParams
 
         resource :webpages do
-          helpers Helpers::PaginationHelper
+          include Grape::Kaminari
           helpers Helpers::WebpagesHelper
+          paginate per_page: 25
 
           desc 'Show all webpages', { entity: Entities::Webpage, nickname: 'showAllWebpages' }
-          params do
-            use :pagination
-          end
           get do
             authorize! :view, ::Webpage
             require_scope! :'view:webpages'
 
-            @webpages = ::GetWebpages.call(params: declared(webpage_params, include_missing: false), page: page, per_page: per_page, tenant: current_tenant.id).webpages
-            set_pagination_headers(@webpages, 'webpages')
-            present @webpages, with: Entities::Webpage, full: true
+            @webpages = ::GetWebpages.call(params: declared(webpage_params, include_missing: false), tenant: current_tenant.id).webpages
+            Entities::Webpage.represent paginate(@webpages), full: true
           end
 
           desc 'Show Webpage Snippets as public feed by URL', { entity: Entities::Webpage, nickname: 'showWebpageFeed' }

@@ -82,8 +82,9 @@ angular.module('cortex.controllers.media.edit', [
 
           if (status === 422) {
             d.reject('Selected file type is not supported. Please choose a different file.');
-          }
-          else {
+          } else if (status === 502) {
+            d.reject('The server is taking too long to respond. Please reduce the file size of the content you are uploading and try again.')
+          } else {
             d.reject('Unhandled error');
           }
         },

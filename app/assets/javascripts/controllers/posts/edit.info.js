@@ -7,7 +7,7 @@ angular.module('cortex.controllers.posts.edit.info', [
 
 .controller('PostsEditInfoCtrl', function($scope, $filter, cortex, delayedBind, currentUser) {
   // Set Slug dirty on form load if it's already been changed from the default
-  if ($scope.data.post.slug !== $filter('slugify')($scope.data.post.title)) {
+  if ($scope.data.post.slug && $scope.data.post.slug !== $filter('slugify')($scope.data.post.title)) {
     $scope.$on('$viewContentLoaded', function () {
       $scope.postForm.slug.$dirty = true;
     });
@@ -21,6 +21,7 @@ angular.module('cortex.controllers.posts.edit.info', [
     if (slugOverridden) {
       return;
     }
+
     $scope.data.post.slug = slug;
   });
 

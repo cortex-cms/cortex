@@ -1,10 +1,8 @@
-// Maintained by Gemfile
-//= require moment
-//= require underscore
-//= require jquery
-//= require bootstrap-sass-official
-
 // Maintained by bower-rails
+//= require jquery
+//= require underscore
+//= require moment
+//= require bootstrap-sass-official
 //= require angular
 //= require angular-rails-templates
 //= require angular-resource
@@ -18,8 +16,10 @@
 //= require ng-table
 //= require ng-rails-csrf
 //= require ng-tags-input
+
+//= require angular-sanitize
 //= require bootstrap-switch
-//= require angular-bootstrap-switch
+//= require angular-bootstrap-toggle-switch
 //= require angular-validation-match
 
 //= require_tree ../templates

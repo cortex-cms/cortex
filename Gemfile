@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
+ruby '2.2.3'
 
 # Dependency Management
 gem 'bower-rails', '~> 0.10.0'
@@ -28,7 +28,7 @@ gem 'rack-oauth2', '~> 1.2.1'
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.0'
-gem 'paperclip', git: 'git://github.com/betesh/paperclip', branch: 'master'
+gem 'paperclip', git: 'git://github.com/thoughtbot/paperclip', branch: 'master'
 gem 'paperclip-optimizer', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 3.5'
 gem 'bcrypt', '~> 3.1.10'

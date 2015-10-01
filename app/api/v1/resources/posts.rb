@@ -59,15 +59,19 @@ module API
           end
 
           desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
+          paginate per_page: 5
           get 'feed/:id/related' do
             require_scope! :'view:posts'
             post = GetPost.call(id: params[:id], published: true).post
             not_found! unless post
             authorize! :view, post
 
-            per_page = params[:per_page] || 5 # Ignore PaginationHelper's/Kaminari's per_page default - too large for related content!
             @posts = post.related(true)
-            Entities::Post.represent paginate(@posts, per_page: 5)
+            ids = @posts.results.map {|post| post._source.id}
+
+            @posts = Post.find(ids).sort_by{ |post| ids.index post.id }
+            Entities::Post.represent paginate(Kaminari.paginate_array(@posts))
+
           end
 
           desc 'Show post tags'

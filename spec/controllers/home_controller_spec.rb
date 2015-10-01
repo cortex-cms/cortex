@@ -9,20 +9,13 @@ RSpec.describe HomeController, type: :controller do
 
     it 'should return 404 when the email is not on file' do
       post 'submit_password_reset', user: { email: 'invalid_email@example.com' }
-      expect(flash[:error]).to be_present
+      expect(flash[:success]).to be_present
     end
 
     context 'when the email is on file' do
       it 'should reutrn 201 when the email is on file' do
         post 'submit_password_reset', user: { email: user.email }
         expect(flash[:success]).to be_present
-      end
-
-      it 'should generate a reset token' do
-        expect{
-          post 'submit_password_reset', user: { email: user.email }
-          user.reload
-        }.to change{ user.encrypted_password }
       end
 
       context 'the password email' do

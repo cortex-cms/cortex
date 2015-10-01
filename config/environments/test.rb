@@ -49,17 +49,17 @@ Cortex::Application.configure do
   Sidekiq.configure_client do |config|
     config.redis = { :namespace => 'cortex_test' }
   end
+
   config.action_mailer.default_url_options = {:host => ENV['HOST']}
   config.action_mailer.delivery_method = :test
   config.action_mailer.smtp_settings = {
-    :authentication => :plain,
+    :authentication => :login,
     :address => ENV['SMTP_ADDRESS'],
     :port => ENV['SMTP_PORT'],
     :domain => ENV['SMTP_SENDER_DOMAIN'],
     :user_name => ENV['SMTP_USERNAME'],
     :password => ENV['SMTP_PASSWORD'],
-    :enable_starttls_auto => ENV['SMTP_STARTTLS'],
-    :tls => ENV['SMTP_STARTTLS']
+    :enable_starttls_auto => ENV['SMTP_STARTTLS']
   }
   ActionMailer::Base.default from: 'noreply@cbcortex.com'
   

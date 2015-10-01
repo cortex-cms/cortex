@@ -24,7 +24,7 @@
       });
 
       it("should recognize paginated responses.", function () {
-        $httpBackend.expectGET('/posts/feed?page=1').respond([], {'Content-Range': 'items 0-9:10/84'});
+        $httpBackend.expectGET('/posts/feed?page=1').respond([], {'X-Total': '84'});
         cortexResource.posts.feedPaged({'page': 1});
         $httpBackend.flush();
       });

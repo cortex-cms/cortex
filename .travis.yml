@@ -1,13 +1,15 @@
 language: ruby
 cache: bundler
 rvm:
-- 2.2.2
+- 2.2.3
 bundler_args: "--without production staging development"
 before_script:
 - sudo apt-get update -qq
 - sudo apt-get install -y jpegoptim
 - psql -c 'create database cortex_test;' -U postgres
 - bundle exec rake db:schema:load db:seed cortex:create_categories
+- npm install bower -g
+- bundle exec rake bower:install:development
 script:
 - bundle exec rake spec
 - bundle exec rake spec:javascript

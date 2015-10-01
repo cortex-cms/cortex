@@ -9,18 +9,19 @@ module API
         resource :applications do
           segment '/:id' do
             resource :credentials do
-              helpers Helpers::PaginationHelper
+              include Grape::Kaminari
               helpers Helpers::ApplicationsHelper
+
+              paginate per_page: 25
 
               desc 'Show all credentials', {entity: Entities::Credential, nickname: 'showAllCredentials'}
               get do
                 require_scope! :'view:application'
                 authorize! :view, ::Application
 
-                @credentials = application!.credentials.page(page).per(per_page)
+                @credentials = application!.credentials
 
-                set_pagination_headers(@credentials, 'credentials')
-                present @credentials, with: Entities::Credential
+                Entities::Credential.represent paginate(@credentials)
               end
 
               desc 'Get credential', {entity: Entities::Credential, nickname: 'showCredential'}

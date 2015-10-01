@@ -1,3 +1,4 @@
+readline
 postgresql
 redis
 Caskroom/cask/java

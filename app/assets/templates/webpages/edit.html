@@ -1,23 +1,69 @@
 <div class="webpage-edit">
-  <form novalidate name="webpageForm">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <i class="fa fa-pencil-square-o"></i> Provide Details
+  <tabset class="panel-tabs" justified="true">
+    <tab>
+      <tab-heading><i class="fa fa-info-circle"></i> Info</span></tab-heading>
+      <div>
+        <form novalidate name="webpageForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" class="form-control"
+                   ng-model="data.webpage.name" placeholder="Webpage name" required>
+          </div>
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input id="url" name="url" type="text" class="form-control"
+                   ng-model="data.webpage.url" placeholder="Webpage URL" required>
+          </div>
+        </form>
       </div>
-      <div class="panel-body">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" class="form-control"
-                 ng-model="data.webpage.name" placeholder="Webpage name" required>
-        </div>
-        <div class="form-group">
-          <label for="url">URL</label>
-          <input id="url" name="url" type="text" class="form-control"
-                 ng-model="data.webpage.url" placeholder="Webpage URL" required>
-        </div>
+    </tab>
+    <tab>
+      <tab-heading><i class="fa fa-building-o"></i> SEO</span></tab-heading>
+      <div>
+        <form novalidate name="webpageForm">
+          <div class="form-group">
+            <label for="title">Title (55 characters max)</label>
+            <input id="title" name="title" type="text" class="form-control"
+                   ng-model="data.webpage.seoTitle" placeholder="Page Title" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description (155 characters max)</label>
+            <textarea id="description" name="description" class="form-control"
+                   ng-model="data.webpage.seoDescription" placeholder="Page Description" required></textarea>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="seoNoIndex" id="seoNoIndex" ng-model="data.webpage.seoNoIndex"> Don't Index This Page In Search Engines (<strong>noindex</strong>)
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="seoNoFollow" id="seoNoFollow" ng-model="data.webpage.seoNoFollow"> Don't Index Any Pages This Page Links To (<strong>nofollow</strong>)
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="seoNoSnippet" id="seoNoSnippet" ng-model="data.webpage.seoNoSnippet"> Don't Show A Snippet in Google Search Results (<strong>nosnippet</strong>)
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="seoNoOdp" id="seoNoOdp" ng-model="data.webpage.seoNoOdp"> Don't Show Description from ODP/DMOZ (<strong>noodp</strong>)
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="seoNoArchive" id="seoNoArchive" ng-model="data.webpage.seoNoArchive"> Don't Show "Cached" Link on Google Search Results (<strong>noarchive</strong>)
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="seoNoImageIndex" id="seoNoImageIndex" ng-model="data.webpage.seoImageIndex"> Don't Show This Page As the Source For Images in Google Image Search (<strong>noimageindex</strong>)
+            </label>
+          </div>
+        </form>
       </div>
-    </div>
-
-    <iframe class="webpage-frame" id="webpage-frame" ng-src="{{ data.webpage.url | trustAsResourceUrl }}" disabled></iframe>
-  </form>
+    </tab>
+  </tabset>
+  <iframe class="webpage-frame" id="webpage-frame" ng-src="{{ data.webpage.url | trustAsResourceUrl }}" disabled></iframe>
 </div>

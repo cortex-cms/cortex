@@ -23,42 +23,42 @@
         <form novalidate name="webpageForm">
           <div class="form-group">
             <label for="title">Title (55 characters max)</label>
-            <input id="title" name="title" type="text" class="form-control"
-                   ng-model="data.webpage.seoTitle" placeholder="Page Title" required>
+            <input id="seo_title" name="seo_title" type="text" class="form-control"
+                   ng-model="data.webpage.seo_title" placeholder="Page Title" required>
           </div>
           <div class="form-group">
             <label for="description">Description (155 characters max)</label>
-            <textarea id="description" name="description" class="form-control"
-                   ng-model="data.webpage.seoDescription" placeholder="Page Description" required></textarea>
+            <textarea id="seo_description" name="seo_description" class="form-control"
+                   ng-model="data.webpage.seo_description" placeholder="Page Description" required></textarea>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="seoNoIndex" id="seoNoIndex" ng-model="data.webpage.seoNoIndex"> Don't Index This Page In Search Engines (<strong>noindex</strong>)
+              <input type="checkbox" name="noindex" id="noindex" ng-model="data.webpage.seoNoIndex"> Don't Index This Page In Search Engines (<strong>noindex</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="seoNoFollow" id="seoNoFollow" ng-model="data.webpage.seoNoFollow"> Don't Index Any Pages This Page Links To (<strong>nofollow</strong>)
+              <input type="checkbox" name="nofollow" id="nofollow" ng-model="data.webpage.nofollow"> Don't Index Any Pages This Page Links To (<strong>nofollow</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="seoNoSnippet" id="seoNoSnippet" ng-model="data.webpage.seoNoSnippet"> Don't Show A Snippet in Google Search Results (<strong>nosnippet</strong>)
+              <input type="checkbox" name="nosnippet" id="nosnippet" ng-model="data.webpage.nosnippet"> Don't Show A Snippet in Google Search Results (<strong>nosnippet</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="seoNoOdp" id="seoNoOdp" ng-model="data.webpage.seoNoOdp"> Don't Show Description from ODP/DMOZ (<strong>noodp</strong>)
+              <input type="checkbox" name="noodp" id="noodp" ng-model="data.webpage.noodp"> Don't Show Description from ODP/DMOZ (<strong>noodp</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="seoNoArchive" id="seoNoArchive" ng-model="data.webpage.seoNoArchive"> Don't Show "Cached" Link on Google Search Results (<strong>noarchive</strong>)
+              <input type="checkbox" name="noarchive" id="noarchive" ng-model="data.webpage.noarchive"> Don't Show "Cached" Link on Google Search Results (<strong>noarchive</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="seoNoImageIndex" id="seoNoImageIndex" ng-model="data.webpage.seoImageIndex"> Don't Show This Page As the Source For Images in Google Image Search (<strong>noimageindex</strong>)
+              <input type="checkbox" name="noimageindex" id="noimageindex" ng-model="data.webpagnoimageindex"> Don't Show This Page As the Source For Images in Google Image Search (<strong>noimageindex</strong>)
             </label>
           </div>
         </form>

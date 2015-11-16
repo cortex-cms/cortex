@@ -1,9 +1,9 @@
 angular.module('cortex.controllers.webpages.edit', [
-  'ui.router.state',
-  'angular-flash.service',
-  'cortex.services.cortex',
-  'cortex.filters'
-])
+    'ui.router.state',
+    'angular-flash.service',
+    'cortex.services.cortex',
+    'cortex.filters'
+  ])
 
   .controller('WebpagesEditCtrl', function ($scope, $window, $document, $state, $stateParams, $anchorScroll, flash, cortex) {
     $scope.data = $scope.data || {};
@@ -22,7 +22,7 @@ angular.module('cortex.controllers.webpages.edit', [
           saveWebpage(event.data.webpage);
           break;
         case 'get_medias':
-          getMedias(event.data.page).$promise.then(function(media) {
+          getMedias(event.data.page).$promise.then(function (media) {
             sendFrameMessage({event: 'medias_data', medias: media});
           });
           break;
@@ -31,7 +31,7 @@ angular.module('cortex.controllers.webpages.edit', [
 
     // Perhaps this should moved to a directive!
     var sendFrameMessage = function (data) {
-      document.getElementById("webpage-frame").contentWindow.postMessage(data, '*');
+      document.getElementById('webpage-frame').contentWindow.postMessage(JSON.parse(JSON.stringify(data)), '*');
     };
 
     var cancel = function () {

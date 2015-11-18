@@ -318,24 +318,20 @@ ActiveRecord::Schema.define(version: 20151106163438) do
   add_index "users", ["tenant_id"], name: "index_users_on_tenant_id", using: :btree
 
   create_table "webpages", force: :cascade do |t|
-    t.integer  "user_id",                                null: false
+    t.integer  "user_id",                         null: false
     t.string   "name"
     t.string   "url"
-    t.string   "thumbnail_file_name"
-    t.string   "thumbnail_content_type"
-    t.integer  "thumbnail_file_size"
-    t.datetime "thumbnail_updated_at"
     t.datetime "deleted_at"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "seo_title"
     t.text     "seo_description"
-    t.boolean  "noindex",                default: false
-    t.boolean  "nofollow",               default: false
-    t.boolean  "nosnippet",              default: false
-    t.boolean  "noodp",                  default: false
-    t.boolean  "noarchive",              default: false
-    t.boolean  "noimageindex",           default: false
+    t.boolean  "noindex",         default: false
+    t.boolean  "nofollow",        default: false
+    t.boolean  "nosnippet",       default: false
+    t.boolean  "noodp",           default: false
+    t.boolean  "noarchive",       default: false
+    t.boolean  "noimageindex",    default: false
   end
 
   add_index "webpages", ["user_id"], name: "index_webpages_on_user_id", using: :btree

@@ -17,7 +17,6 @@ gem 'grape', '~> 0.13'
 gem 'grape-entity', '~> 0.4.8'
 gem 'grape-swagger', '~> 0.10.2'
 gem 'doorkeeper', '~> 1.4'
-gem 'redis-rails', '~> 4.0'
 
 # Authorization
 gem 'six', '~> 0.2.0'
@@ -37,6 +36,10 @@ gem 'grape-kaminari', '~> 0.1.8'
 gem 'paranoia', '~> 2.1'
 gem 'pg', '~> 0.18.4'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
+
+# Memory Store
+gem 'redis-rails', '~> 4.0'
+gem 'redis-namespace', '~> 1.5'
 
 # Middleware
 gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'

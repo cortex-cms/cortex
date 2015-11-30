@@ -13,7 +13,7 @@ RSpec.describe HomeController, type: :controller do
     end
 
     context 'when the email is on file' do
-      it 'should reutrn 201 when the email is on file' do
+      it 'should return 201 when the email is on file' do
         post 'submit_password_reset', user: { email: user.email }
         expect(flash[:success]).to be_present
       end

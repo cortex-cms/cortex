@@ -28,6 +28,8 @@ module API
           params do
             use :search
             use :post_metadata
+            optional :page
+            optional :per_page
           end
           get 'feed' do
             require_scope! :'view:posts'

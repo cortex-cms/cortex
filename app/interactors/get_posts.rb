@@ -8,7 +8,7 @@ class GetPosts
     posts = posts.search_with_params(context.params).records if has_search_params?
     posts = posts.find_by_tenant_id(context.tenant) if context.tenant
     posts = posts.published if context.published
-    context.posts = posts.page(context.page).per(context.per_page).order(published_at: :desc)
+    context.posts = posts.page(context.params.page).per(context.params.per_page).order(published_at: :desc)
   end
 
   private

@@ -5,6 +5,8 @@ default: &default
 staging:
   <<: *default
   rails:
+    configuration:
+      ruby_version: 2.2.3
     server:
       unique_name: web-stg
       vendor: aws
@@ -32,6 +34,8 @@ staging:
 production:
   <<: *default
   rails:
+    configuration:
+      ruby_version: 2.2.3
     server:
       unique_name: web-prod
       vendor: aws

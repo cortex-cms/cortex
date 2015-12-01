@@ -1,9 +1,4 @@
-default: &default
-  extra_packages:
-    - jpegoptim
-
 staging:
-  <<: *default
   rails:
     configuration:
       ruby_version: 2.2.3
@@ -12,6 +7,8 @@ staging:
       vendor: aws
       region: us-east-1
       size: m3.medium
+    extra_packages:
+      - jpegoptim
   postgresql:
     server:
       unique_name: db-stg
@@ -41,6 +38,8 @@ production:
       vendor: aws
       region: us-east-1
       size: m3.medium
+    extra_packages:
+        - jpegoptim
   postgresql:
     server:
       unique_name: db-prod

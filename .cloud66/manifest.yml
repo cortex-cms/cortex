@@ -29,7 +29,6 @@ staging:
       size: m3.large
 
 production:
-  <<: *default
   rails:
     configuration:
       ruby_version: 2.2.3

@@ -64,13 +64,6 @@ angular.module('cortex.controllers.webpages.edit', [
     };
 
     var getMedias = function (page) {
-      cortex.media.searchPaged({
-        q: page.query,
-        per_page: page.perPage,
-        page: page.page
-      }).$promise.then(function (media) {
-        console.log(media);
-      });
       return cortex.media.searchPaged({
         q: page.query,
         per_page: page.perPage,

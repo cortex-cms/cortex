@@ -1,4 +1,5 @@
 require_relative '../helpers/resource_helper'
+require 'uri'
 
 module API
   module V1
@@ -68,6 +69,11 @@ module API
             }
 
             webpage.update!(update_params.to_hash)
+
+            # HTTP request to application to clear cache
+            root_domain_uri = URI.parse(webpage.url)
+            cache_buster_url = root_domain_uri.scheme + "://" + root_domain_uri.host + "/cache" + URI.encode(root_domain_uri.path)
+            Excon.delete root_domain
 
             present webpage, with: Entities::Webpage, full: true
           end

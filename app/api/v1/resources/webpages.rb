@@ -71,9 +71,9 @@ module API
             webpage.update!(update_params.to_hash)
 
             # HTTP request to application to clear cache
-            root_domain_uri = URI.parse(webpage.url)
-            cache_buster_url = root_domain_uri.scheme + "://" + root_domain_uri.host + "/cache?path=" + URI.encode(root_domain_uri.path)
-            Excon.get cache_buster_url
+            # root_domain_uri = URI.parse(webpage.url)
+            # cache_buster_url = root_domain_uri.scheme + "://" + root_domain_uri.host + "/cache?path=" + URI.encode(root_domain_uri.path)
+            # Excon.get cache_buster_url
 
             present webpage, with: Entities::Webpage, full: true
           end

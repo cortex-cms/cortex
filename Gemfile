@@ -8,27 +8,27 @@ gem 'bower-rails', '~> 0.10.0'
 gem 'unicorn-rails', '~> 2.2.0'
 
 # Rails
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 4.2.5'
 
 # Cortex-specific
 gem 'cortex-exceptions', '~> 0.0.4'
 
 # API
-gem 'grape', '~> 0.13'
+gem 'grape', '~> 0.14'
 gem 'grape-entity', '~> 0.4.8'
-gem 'grape-swagger', '~> 0.10.2'
+gem 'grape-swagger', '~> 0.10.4'
 gem 'doorkeeper', '~> 1.4'
 gem 'redis-rails', '~> 4.0'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 3.5.2'
+gem 'devise', '~> 3.5.4'
 gem 'rack-oauth2', '~> 1.2.1'
 
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.0'
-gem 'paperclip', git: 'git://github.com/thoughtbot/paperclip', branch: 'master'
+gem 'paperclip', '~> 4.3'
 gem 'paperclip-optimizer', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 3.5'
 gem 'bcrypt', '~> 3.1.10'
@@ -36,7 +36,7 @@ gem 'elasticsearch-model', '~> 0.1'
 gem 'elasticsearch-rails', '~> 0.1'
 gem 'grape-kaminari', '~> 0.1.8'
 gem 'paranoia', '~> 2.1'
-gem 'pg', '~> 0.18.3'
+gem 'pg', '~> 0.18.4'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 
 # Middleware
@@ -44,14 +44,14 @@ gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
 
 # Utility
 gem 'excon', '~> 0.45.4'
-gem 'hashie', '~> 3.4.2'
+gem 'hashie', '~> 3.4.3'
 gem 'hashr', '~> 0.0.22'
-gem 'mime-types', '~> 2.6.1'
+gem 'mime-types', '~> 2.99'
 gem 'json'
 gem 'rubyzip', '~> 1.1.7'
 
 # Jobs
-gem 'sidekiq', '~> 3.5.0'
+gem 'sidekiq', '~> 4.0.2'
 gem 'sidekiq-failures', '~> 0.4.5'
 gem 'sinatra', '~> 1.4.6', require: false
 
@@ -67,7 +67,7 @@ gem 'haml', '~> 4.0.7'
 
 # Style
 gem 'sass-rails', '~> 5.0'
-gem 'font-awesome-sass', '~> 4.4.0'
+gem 'font-awesome-sass', '~> 4.5.0'
 
 # JS
 gem 'ng-rails-csrf', '~> 0.1.0'
@@ -78,12 +78,12 @@ gem 'uglifier', '~> 2.7.2'
 
 group :test, :development do
   # Environment
-  gem 'dotenv', '~> 2.0.2'
+  gem 'dotenv', '~> 2.1.0'
   gem 'byebug'
 
   # Rspec
-  gem 'rspec', '~> 3.3'
-  gem 'rspec-rails', '~> 3.3'
+  gem 'rspec', '~> 3.4'
+  gem 'rspec-rails', '~> 3.4'
   gem 'json_spec', '~> 1.1.4'
 
   # Guard
@@ -92,12 +92,12 @@ group :test, :development do
   # Mocking/Faking
   gem 'mocha', '~> 1.1.0', require: false
   gem 'factory_girl_rails', '~> 4.5.0'
-  gem 'database_cleaner', '~> 1.5.0'
+  gem 'database_cleaner', '~> 1.5.1'
 
   # Javascript
-  gem 'jasmine-rails', '~> 0.11.0'
+  gem 'jasmine-rails', '~> 0.12.2'
   gem 'guard-jasmine', '~> 2.0.6'
-  gem 'jasmine-core', '~> 2.3'
+  gem 'jasmine-core', '~> 2.4'
 end
 
 group :development do
@@ -110,8 +110,8 @@ end
 group :test do
   gem 'codeclimate-test-reporter', '~> 0.4.8', require: false
   gem 'timecop', '~> 0.8.0'
-  gem 'rspec-sidekiq', '~> 2.1.0'
-  gem 'elasticsearch-extensions', '~> 0.0.18'
+  gem 'rspec-sidekiq', '~> 2.2.0'
+  gem 'elasticsearch-extensions', '~> 0.0.20'
   gem 'email_spec'
 end
 
@@ -120,14 +120,14 @@ group :assets do
 end
 
 group :test, :development, :staging do
-  gem 'fog', '~> 1.34.0'
+  gem 'fog', '~> 1.37.0'
 end
 
 group :production do
-  gem 'aws-sdk', '~> 2.1' # Used by Paperclip
+  gem 'aws-sdk', '~> 2.2' # Used by Paperclip
 end
 
 group :staging, :production do
   # Monitoring
-  gem 'newrelic_rpm', '~> 3.13.0'
+  gem 'newrelic_rpm', '~> 3.14.1'
 end

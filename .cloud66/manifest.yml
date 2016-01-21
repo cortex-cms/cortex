@@ -1,7 +1,7 @@
 staging:
   rails:
     configuration:
-      ruby_version: 2.2.3
+      ruby_version: 2.3.0
     server:
       unique_name: web-stg
       vendor: aws
@@ -26,12 +26,12 @@ staging:
       unique_name: cache-stg
       vendor: aws
       region: us-east-1
-      size: m3.large
+      size: m3.medium
 
 production:
   rails:
     configuration:
-      ruby_version: 2.2.3
+      ruby_version: 2.3.0
     server:
       unique_name: web-prod
       vendor: aws

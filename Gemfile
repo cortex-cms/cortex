@@ -45,7 +45,7 @@ gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
 # Utility
 gem 'excon', '~> 0.45.4'
 gem 'hashie', '~> 3.4.3'
-gem 'hashr', '~> 0.0.22'
+gem 'hashr', '~> 2.0.0'
 gem 'mime-types', '~> 2.99'
 gem 'json'
 gem 'rubyzip', '~> 1.1.7'
@@ -59,8 +59,8 @@ gem 'sinatra', '~> 1.4.6', require: false
 gem 'interactor-rails', '~> 2.0'
 
 # Pipeline
-gem 'sprockets-rails', '2.3.1', :require => 'sprockets/railtie'
-gem 'sprockets', '2.12.3'
+gem 'sprockets-rails', '2.3.3', :require => 'sprockets/railtie'
+gem 'sprockets', '2.12.4'
 
 # Templating
 gem 'haml', '~> 4.0.7'

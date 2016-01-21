@@ -28,7 +28,7 @@ class Media < ActiveRecord::Base
 
   validates_attachment :attachment, :presence => true,
                        :unless => :skip_attachment_validation,
-                       :content_type => {:content_type => Cortex.config.media.allowed_media_types.collect{|allowed| allowed[:type]}},
+                       :content_type => {:content_type => Cortex.config.media.allowed_media_types.to_a.collect{|allowed| allowed[:type]}},
                        :size => {:in => 0..Cortex.config.media.max_size_mb.to_i.megabytes}
 
   validates :type, inclusion: { in: %w(Media Youtube) }
@@ -57,7 +57,7 @@ class Media < ActiveRecord::Base
   end
 
   def can_thumb?
-    Cortex.config.media.allowed_media_types.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
+    Cortex.config.media.allowed_media_types.to_a.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
   end
 
   def skip_attachment_validation
@@ -68,7 +68,7 @@ class Media < ActiveRecord::Base
 
   def taxon_type
     if attachment_content_type
-      Cortex.config.media.allowed_media_types.find { |t| t[:type] == attachment_content_type }[:taxon_type]
+      Cortex.config.media.allowed_media_types.to_a.find { |t| t[:type] == attachment_content_type }[:taxon_type]
     end
   end
 end

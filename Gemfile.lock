@@ -1,3 +1,15 @@
+GIT
+  remote: git://github.com/thoughtbot/paperclip
+  revision: bd016009dbf74fc8f999e78a68c9e5869eb0dd6a
+  branch: master
+  specs:
+    paperclip (4.3.1)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (~> 0.3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -47,14 +59,14 @@ GEM
     ansi (1.5.0)
     arel (6.0.3)
     attr_required (1.0.0)
-    awesome_nested_set (3.0.2)
+    awesome_nested_set (3.0.3)
       activerecord (>= 4.0.0, < 5)
-    aws-sdk (2.2.11)
-      aws-sdk-resources (= 2.2.11)
-    aws-sdk-core (2.2.11)
+    aws-sdk (2.2.13)
+      aws-sdk-resources (= 2.2.13)
+    aws-sdk-core (2.2.13)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.2.11)
-      aws-sdk-core (= 2.2.11)
+    aws-sdk-resources (2.2.13)
+      aws-sdk-core (= 2.2.13)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -94,7 +106,7 @@ GEM
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (3.5.4)
+    devise (3.5.5)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -360,9 +372,9 @@ GEM
     metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (2.99)
-    mimemagic (0.3.0)
+    mimemagic (0.3.1)
     mini_portile2 (2.0.0)
-    minitest (5.8.3)
+    minitest (5.8.4)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     multi_json (1.11.2)
@@ -379,12 +391,6 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
-    paperclip (4.3.2)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      cocaine (~> 0.5.5)
-      mime-types
-      mimemagic (= 0.3.0)
     paperclip-optimizer (2.0.0)
       image_optim (~> 0.19)
       paperclip (>= 3.4)
@@ -605,7 +611,7 @@ DEPENDENCIES
   newrelic_rpm (~> 3.14.1)
   ng-rails-csrf (~> 0.1.0)
   ngmin-rails (~> 0.4.0)
-  paperclip (~> 4.3)
+  paperclip!
   paperclip-optimizer (~> 2.0)
   paranoia (~> 2.1)
   pg (~> 0.18.4)

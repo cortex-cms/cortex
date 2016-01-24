@@ -74,7 +74,7 @@ Cortex::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  Paperclip.options[:command_path] = "/usr/local/bin/"
+  Paperclip.options[:command_path] = '/usr/local/bin/'
 
   config.paperclip_defaults = {
     :storage => :s3,
@@ -88,14 +88,6 @@ Cortex::Application.configure do
       :s3_host_alias => ENV['S3_HOST_ALIAS']
     }
   }
-
-  Sidekiq.configure_server do |config|
-    config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex' }
-  end
-
-  Sidekiq.configure_client do |config|
-    config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex' }
-  end
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = {:host => ENV['HOST']}

@@ -98,6 +98,9 @@ group :test, :development do
   gem 'jasmine-rails', '~> 0.12.2'
   gem 'guard-jasmine', '~> 2.0.6'
   gem 'jasmine-core', '~> 2.4'
+
+  # Cache/Sidekiq
+  gem 'redis-namespace', '~> 1.5'
 end
 
 group :development do

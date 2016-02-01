@@ -33,6 +33,7 @@ module API
       mount Resources::Snippets
       mount Resources::Webpages
 
+=begin
       add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1',
                                 models: [Entities::Post, Entities::Category, Entities::Media,
                                          Entities::Tenant, Entities::Occupation, Entities::User,
@@ -40,6 +41,7 @@ module API
                                          Entities::Application, Entities::Credential,
                                          Entities::BulkJob, Entities::Document, Entities::Snippet,
                                          Entities::Webpage])
+=end
     end
   end
 end

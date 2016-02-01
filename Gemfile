@@ -15,8 +15,8 @@ gem 'cortex-exceptions', '~> 0.0.4'
 
 # API
 gem 'grape', '~> 0.14'
-gem 'grape-entity', '~> 0.4.8'
-gem 'grape-swagger', '~> 0.10.4'
+gem 'grape-entity', '~> 0.5.0'
+#gem 'grape-swagger', '~> 0.10.4' ## Does not yet support grape-entity 0.5
 gem 'doorkeeper', '~> 1.4'
 gem 'redis-rails', '~> 4.0'
 
@@ -38,6 +38,7 @@ gem 'grape-kaminari', '~> 0.1.8'
 gem 'paranoia', '~> 2.1'
 gem 'pg', '~> 0.18.4'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
+gem 'jsonb_accessor', '~> 0.3.1'
 
 # Middleware
 gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
@@ -49,14 +50,12 @@ gem 'hashr', '~> 2.0.0'
 gem 'mime-types', '~> 2.99'
 gem 'json'
 gem 'rubyzip', '~> 1.1.7'
+gem 'interactor-rails', '~> 2.0'
 
 # Jobs
-gem 'sidekiq', '~> 4.0.2'
+gem 'sidekiq', '~> 4.1.0'
 gem 'sidekiq-failures', '~> 0.4.5'
 gem 'sinatra', '~> 1.4.6', require: false
-
-# Interactors
-gem 'interactor-rails', '~> 2.0'
 
 # Pipeline
 gem 'sprockets-rails', '2.3.3', :require => 'sprockets/railtie'

@@ -11,27 +11,32 @@ class Media < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :posts
 
-  default_scope { order('created_at DESC')  }
+  default_scope { order('created_at DESC') }
 
   scope :consumed, lambda { joins(:posts).where('posts.id is not null') }
 
   serialize :dimensions
 
-  has_attached_file :attachment, :styles => {
-      :large   => {geometry: '1800x1800>', format: :jpg},
-      :medium  => {geometry: '800x800>', format: :jpg},
-      :default => {geometry: '300x300>', format: :jpg},
-      :mini    => {geometry: '100x100>', format: :jpg},
-      :micro   => {geometry: '50x50>', format: :jpg},
-      :ar_post => {geometry: '1140x', format: :jpg}
-  }, processors: [:thumbnail, :paperclip_optimizer], :preserve_files => 'true'
+  has_attached_file :attachment,
+                    :styles => {
+                      :large => {geometry: '1800x1800>', format: :jpg},
+                      :medium => {geometry: '800x800>', format: :jpg},
+                      :default => {geometry: '300x300>', format: :jpg},
+                      :mini => {geometry: '100x100>', format: :jpg},
+                      :micro => {geometry: '50x50>', format: :jpg},
+                      :ar_post => {geometry: '1140x', format: :jpg}
+                    },
+                    :processors => [:thumbnail, :paperclip_optimizer],
+                    :preserve_files => 'true',
+                    :path => ':class/:attachment/:style-:id.:extension'
 
-  validates_attachment :attachment, :presence => true,
+  validates_attachment :attachment,
+                       :presence => true,
                        :unless => :skip_attachment_validation,
-                       :content_type => {:content_type => Cortex.config.media.allowed_media_types.to_a.collect{|allowed| allowed[:type]}},
+                       :content_type => {:content_type => Cortex.config.media.allowed_media_types.to_a.collect { |allowed| allowed[:type] }},
                        :size => {:in => 0..Cortex.config.media.max_size_mb.to_i.megabytes}
 
-  validates :type, inclusion: { in: %w(Media Youtube) }
+  validates :type, inclusion: {in: %w(Media Youtube)}
 
   def consumed?
     Media.consumed.include?(self)
@@ -57,7 +62,7 @@ class Media < ActiveRecord::Base
   end
 
   def can_thumb?
-    Cortex.config.media.allowed_media_types.to_a.select{|allowed| allowed[:thumb] && allowed[:type] == attachment_content_type} != []
+    Cortex.config.media.allowed_media_types.to_a.select { |allowed| allowed[:thumb] && allowed[:type] == attachment_content_type } != []
   end
 
   def skip_attachment_validation

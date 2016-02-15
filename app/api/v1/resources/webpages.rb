@@ -21,6 +21,15 @@ module API
             Entities::Webpage.represent paginate(@webpages), full: true
           end
 
+          desc 'Search webpages', { entity: Entities::Webpage, nickname: 'searchWebpages' }
+          get 'search/:query' do
+            authorize! :view, ::Webpage
+            require_scope! :'view:webpages'
+
+            @webpages = ::GetWebpages.call(params: params[:query])
+            Entities::Webpage.represent paginate(@webpages), full: true
+          end
+
           desc 'Show Webpage Snippets as public feed by URL', { entity: Entities::Webpage, nickname: 'showWebpageFeed' }
           params do
             requires :url, type: String

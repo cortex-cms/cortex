@@ -13,20 +13,14 @@ module API
           paginate per_page: 25
 
           desc 'Show all webpages', { entity: Entities::Webpage, nickname: 'showAllWebpages' }
+          params do
+            optional :q, type: String
+          end
           get do
             authorize! :view, ::Webpage
             require_scope! :'view:webpages'
 
             @webpages = ::GetWebpages.call(params: declared(webpage_params, include_missing: false), tenant: current_tenant.id).webpages
-            Entities::Webpage.represent paginate(@webpages), full: true
-          end
-
-          desc 'Search webpages', { entity: Entities::Webpage, nickname: 'searchWebpages' }
-          get 'search/:query' do
-            authorize! :view, ::Webpage
-            require_scope! :'view:webpages'
-
-            @webpages = ::GetWebpages.call(params: params[:query])
             Entities::Webpage.represent paginate(@webpages), full: true
           end
 

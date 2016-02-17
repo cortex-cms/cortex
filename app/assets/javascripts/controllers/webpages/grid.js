@@ -34,9 +34,13 @@ angular.module('cortex.controllers.webpages.grid', [
       }
     });
 
-    $scope.$watch('data.query', function () {
-      $scope.webpageDataParams.reload();
-    });
+    $scope.searchWebpages = function(event) {
+      if (event.which == 13) {
+        $scope.webpageDataParams.reload();
+      }
+
+      event.preventDefault();
+    };
 
     $scope.newWebpage = function () {
       $state.go('^.new');

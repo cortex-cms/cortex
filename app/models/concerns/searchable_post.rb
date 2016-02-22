@@ -93,7 +93,7 @@ module SearchablePost
       if author; bool[:bool][:must] << self.or_null('author', [author]) end
       if published; bool[:bool][:must] << self.range_search('published_at', 'lte', DateTime.now); bool[:bool][:must] << self.terms_search('draft', [false]) end
 
-      self.search query: bool
+      self.search query: bool, size: 30
     end
   end
 end

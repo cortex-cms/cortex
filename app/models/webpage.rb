@@ -1,5 +1,6 @@
 class Webpage < ActiveRecord::Base
   include FindByTenant
+  include SearchableMedia
 
   acts_as_paranoid
 

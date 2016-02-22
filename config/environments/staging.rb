@@ -39,7 +39,7 @@ Cortex::Application.configure do
       }
     }
   else
-    Paperclip.options[:command_path] = "/usr/local/bin/"
+    Paperclip.options[:command_path] = '/usr/local/bin/'
     config.paperclip_defaults = {
       storage: :fog,
       fog_host: ENV['HOST'],
@@ -49,14 +49,6 @@ Cortex::Application.configure do
         local_root: "#{Rails.root}/public"
       }
     }
-  end
-
-  Sidekiq.configure_server do |config|
-    config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' }
-  end
-
-  Sidekiq.configure_client do |config|
-    config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' }
   end
 
   silence_warnings do

@@ -13,6 +13,9 @@ module API
           paginate per_page: 25
 
           desc 'Show all webpages', { entity: Entities::Webpage, nickname: 'showAllWebpages' }
+          params do
+            optional :q, type: String
+          end
           get do
             authorize! :view, ::Webpage
             require_scope! :'view:webpages'

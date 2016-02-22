@@ -1,8 +1,16 @@
 !!! 5
-%html{lang: 'en', 'ng-app' => 'cortex'}
-  = render 'layouts/head'
-  %body.default{:'ng-controller' => 'CortexCtrl', 'ng-cloak' => ''}
+%html{lang: 'en', :'ng-app' => 'cortex'}
+  %head
+    %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
+    %meta{charset: 'utf-8'}
+    %meta{name: 'viewport', content: 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=0'}
+    %title Cortex Administration
+    = favicon_link_tag 'favicon.ico'
+    = stylesheet_link_tag :application
+    = csrf_meta_tags
+
+  %body.default{:'ng-controller' => 'CortexCtrl', :'ng-cloak' => ''}
     = yield
-    = include_gon
-    = javascript_include_tag 'application'
-    = render 'layouts/google_analytics' if extra_config.google_analytics_id
+    = Gon::Base.render_data
+    = javascript_include_tag :application
+    = render 'layouts/google_analytics' if extra_config.google_analytics_id?

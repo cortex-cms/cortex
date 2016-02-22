@@ -15,7 +15,7 @@ Cortex::Application.configure do
 
   # Configure static asset server for tests with Cache-Control for performance.
   config.serve_static_files  = true
-  config.static_cache_control = "public, max-age=3600"
+  config.static_cache_control = 'public, max-age=3600'
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -38,7 +38,7 @@ Cortex::Application.configure do
   # Death to this truncation warning
   config.active_record.raise_in_transactional_callbacks = true
 
-  config.cache_store = :memory_store
+  config.cache_store = :redis_store, ENV['CACHE_URL'], { :namespace => 'cortex_test' }
 
   Fog.mock!
 

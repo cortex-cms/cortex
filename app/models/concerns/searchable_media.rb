@@ -42,7 +42,7 @@ module SearchableMedia
 
       bool = { bool: { must: [query], must_not: [], should: [] } }
 
-      search size: 30, query: bool, sort: [{ created_at: { order: :desc } }]
+      search size: 60, query: bool, sort: [{ created_at: { order: :desc } }]
     end
   end
 end

@@ -4,11 +4,10 @@ module SearchableOnetOccupation
   included do
     include Searchable
 
-
     mapping do
-      indexes :id,          :index => :not_analyzed
-      indexes :soc,         :analyzer => 'keyword'
-      indexes :title,       :analyzer => 'snowball'
+      indexes :id, :type => :integer, :index => :not_analyzed
+      indexes :soc, :analyzer => 'keyword'
+      indexes :title, :analyzer => 'snowball'
       indexes :description, :analyzer => 'snowball'
     end
   end
@@ -16,7 +15,7 @@ module SearchableOnetOccupation
   module ClassMethods
     def search_with_params(params)
       query = self.query_massage(params[:q])
-      self.search query, sort: [ { created_at: { order: :desc } }]
+      self.search query, sort: [{created_at: {order: :desc}}]
     end
   end
 end

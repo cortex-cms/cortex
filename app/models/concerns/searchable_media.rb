@@ -14,7 +14,7 @@ module SearchableMedia
         }
     } do
       mapping do
-        indexes :id, :index => :not_analyzed
+        indexes :id, :type => :integer, :index => :not_analyzed
         indexes :name, :analyzer => :snowball, :boost => 100.0
         indexes :created_by, :analyzer => :keyword
         indexes :file_name, :analyzer => :keyword
@@ -29,8 +29,8 @@ module SearchableMedia
     def as_indexed_json(options = {})
       json = as_json(options)
       json[:created_by] = user.fullname
-      json[:tags]       = tag_list.to_a if respond_to? :tag_list
-      json[:taxon]      = create_taxon if respond_to? :create_taxon
+      json[:tags]       = tag_list.to_a
+      json[:taxon]      = create_taxon
       json
     end
   end

@@ -22,7 +22,7 @@ gem 'redis-rails', '~> 4.0'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 3.5.4'
+gem 'devise', '~> 3.5.6'
 gem 'rack-oauth2', '~> 1.2.1'
 
 # ActiveRecord

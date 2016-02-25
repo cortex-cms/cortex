@@ -1,6 +1,7 @@
 require 'rake'
 require 'net/http'
 require 'csv'
+require 'aws-sdk'
 
 Bundler.require(:default, Rails.env)
 
@@ -47,6 +48,39 @@ namespace :cortex do
     task :fetch_and_provision => :environment do
       fetch_onet_db
       provision_onet_db
+    end
+  end
+
+  namespace :media do
+    desc 'Manage Cortex media'
+    task :update_url => :environment do
+      Media.find_each do |media|
+        unless media.attachment_file_name.blank?
+          object_id = "%05d" % media.id
+          object_key = "media/attachments/00#{object_id.first}/00#{object_id[1]}/#{object_id[2..4]}/original/#{media.attachment_file_name}"
+          puts object_key
+
+          s3 = Aws::S3::Client.new
+
+          begin
+            s3.get_object({ bucket:'cb-talent-development-cortex-prod', key: object_key }, target: media.attachment_file_name)
+
+            file = File.new media.attachment_file_name
+
+            puts "Re-saving image attachment #{media.id} - #{media.attachment_file_name}"
+            image = file
+            media.attachment = image
+            media.save
+            # if there are multiple styles, you want to recreate them :
+            media.attachment.reprocess!
+
+            file.close
+            File.delete media.attachment_file_name
+          rescue => ex
+            puts "An error of type #{ex.class} happened, message is #{ex.message}"
+          end
+        end
+      end
     end
   end
 end

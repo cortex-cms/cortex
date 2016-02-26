@@ -37,7 +37,7 @@ notifications:
 deploy:
 - provider: cloud66
   master:
-  redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/a88940b34a01c689de29f49037905106
+  redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/3e83d5a0de017b108a544d71ec241c83
   on: develop
   edge: true
 - provider: cloud66

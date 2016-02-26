@@ -15,14 +15,14 @@ gem 'cortex-exceptions', '~> 0.0.4'
 
 # API
 gem 'grape', '~> 0.14'
-gem 'grape-entity', '~> 0.5.0'
-#gem 'grape-swagger', '~> 0.10.4' ## Does not yet support grape-entity 0.5
+gem 'grape-entity', '~> 0.4.8'
+gem 'grape-swagger', '~> 0.10.4'
 gem 'doorkeeper', '~> 1.4'
 gem 'redis-rails', '~> 4.0'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 3.5.4'
+gem 'devise', '~> 3.5.6'
 gem 'rack-oauth2', '~> 1.2.1'
 
 # ActiveRecord

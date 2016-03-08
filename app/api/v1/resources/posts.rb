@@ -52,14 +52,6 @@ module API
             present Author.published.distinct, with: Entities::Author
           end
 
-          desc 'Show a published post', { entity: Entities::Post, nickname: "showFeedPost" }
-          get 'feed/:id' do
-            @post = ::GetPost.call(id: params[:id], published: true, tenant: current_tenant.id).post
-            not_found! unless @post
-            authorize! :view, @post
-            present @post, with: Entities::Post, full: true
-          end
-
           desc 'Show related published posts', { entity: Entities::Post, nickname: "relatedPosts" }
           paginate per_page: 5
           get 'feed/:id/related' do
@@ -73,7 +65,14 @@ module API
 
             @posts = Post.find(ids).sort_by{ |post| ids.index post.id }
             Entities::Post.represent paginate(Kaminari.paginate_array(@posts))
+          end
 
+          desc 'Show a published post', { entity: Entities::Post, nickname: "showFeedPost" }
+          get 'feed/*id' do
+            @post = ::GetPost.call(id: params[:id], published: true, tenant: current_tenant.id).post
+            not_found! unless @post
+            authorize! :view, @post
+            present @post, with: Entities::Post, full: true
           end
 
           desc 'Show post tags'

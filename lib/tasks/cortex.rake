@@ -32,6 +32,23 @@ namespace :cortex do
     end
   end
 
+  desc 'Remove leaked data by deleting duplicates and orphans'
+  task :unleak => :environment do
+    # First, remove all orphaned snippets, where orphaning can occur on user, document or webpage
+    Snippet.where([
+        "user_id NOT IN (?) OR document_id NOT IN (?) OR webpage_id NOT IN (?)",
+        User.select("id"),
+        Document.select("id"),
+        Webpage.select("id")
+    ]).destroy_all
+
+    # Now, loop through all the webpages...
+    Webpage.all.each do |webpage|
+      # Download the template...
+      template = Excon.get webpage.url
+    end
+  end
+
   namespace :onet do
     desc 'Download ONET database'
     task :fetch => :environment do

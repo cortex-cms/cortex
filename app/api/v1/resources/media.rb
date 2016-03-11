@@ -21,8 +21,8 @@ module API
             authorize! :view, ::Media
             require_scope! :'view:media'
 
-            @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), tenant: current_tenant.id).media
-            Entities::Media.represent paginate(@media)
+            @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), tenant: current_tenant).media
+            Entities::Media.represent set_paginate_headers(@media)
           end
 
           desc 'Show media tags'

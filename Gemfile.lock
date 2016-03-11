@@ -617,6 +617,7 @@ DEPENDENCIES
   newrelic_rpm (~> 3.14.1)
   ng-rails-csrf (~> 0.1.0)
   ngmin-rails (~> 0.4.0)
+  nokogiri
   paperclip!
   paperclip-optimizer (~> 2.0)
   paranoia (~> 2.1)

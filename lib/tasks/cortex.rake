@@ -1,6 +1,7 @@
 require 'rake'
 require 'net/http'
 require 'csv'
+require 'open-uri'
 
 Bundler.require(:default, Rails.env)
 
@@ -45,7 +46,30 @@ namespace :cortex do
     # Now, loop through all the webpages...
     Webpage.all.each do |webpage|
       # Download the template...
-      template = Excon.get webpage.url
+      puts "Fetching template for #{webpage.url}"
+      begin
+        template = Nokogiri::HTML open(webpage.url)
+        template_snippets = template.xpath("//snippet").map {|element| element['id']}
+
+        # Find all snippets for this webpage that aren't in the array above and delete them
+        Snippet.joins(:document).where([
+          "webpage_id = (?) AND documents.name NOT IN (?)",
+          webpage.id,
+          template_snippets
+        ]).destroy_all
+
+        # Then, check for duplicates on the name field, sort according to the API and delete all but the first ones
+        grouped = Snippet.joins(:document).all.group_by{|model| [model.document.name, model.webpage_id] }
+
+        grouped.values.each do |duplicates|
+          # the first one we want to keep right?
+          first_one = duplicates.shift # or pop for last one
+          # if there are any more left, they are duplicates
+          # so delete all of them
+          duplicates.each{|double| double.destroy} # duplicates can now be destroyed
+        end
+      rescue
+      end
     end
   end
 

@@ -15,7 +15,8 @@ module SearchableMedia
     } do
       mapping do
         indexes :id, :type => :integer, :index => :not_analyzed
-        indexes :name, :analyzer => :snowball, :boost => 100.0
+        indexes :tenant_id, :type => :integer, :index => :not_analyzed
+        indexes :name, :analyzer => :snowball
         indexes :created_by, :analyzer => :keyword
         indexes :file_name, :analyzer => :keyword
         indexes :description, :analyzer => :snowball
@@ -31,18 +32,26 @@ module SearchableMedia
       json[:created_by] = user.fullname
       json[:tags]       = tag_list.to_a
       json[:taxon]      = create_taxon
+      json[:tenant_id]  = user.tenant.id
       json
     end
   end
 
   module ClassMethods
-    # TODO: Rewrite to handle filters
-    def search_with_params(params)
-      query = { query_string: { fields: %w[name^100 _all], query: query_massage(params[:q]) } }
+    # TODO: Rewrite to handle facets
+    def search_with_params(params, tenant)
+      query = { multi_match: { fields: %w(name^2 _all), query: query_massage(params[:q]) } }
+      filter = { term: { tenant_id: tenant.id } }
+      bool = { bool: { must: [query], filter: [filter] } }
 
-      bool = { bool: { must: [query], must_not: [], should: [] } }
+      search query: bool
+    end
 
-      search size: 60, query: bool, sort: [{ created_at: { order: :desc } }]
+    def show_all(tenant)
+      filter = { term: { tenant_id: tenant.id } }
+      bool = { bool: { filter: [filter] } }
+
+      search query: bool, sort: [{ created_at: { order: :desc } }]
     end
   end
 end

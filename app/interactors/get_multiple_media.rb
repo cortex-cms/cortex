@@ -5,10 +5,15 @@ class GetMultipleMedia
 
   def call
     media = ::Media
-    media = media.search_with_params(context.params).records if has_search_params?
-    media = media.find_by_tenant_id(context.tenant) if context.tenant
-    media = media.page(context.page).per(context.per_page).order(created_at: :desc)
-    context.media = media
+
+    if has_search_params?
+      media = media.search_with_params(context.params, context.tenant)
+    else
+      media = media.show_all(context.tenant)
+    end
+
+    media = media.page(context.params.page).per(context.params.per_page)
+    context.media = media.records
   end
 
   private

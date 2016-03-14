@@ -14,41 +14,22 @@ module Searchable
         result.index(/\s|\-/).nil? ? "#{result}*" : result
       end
 
-      def or_null(field, q)
-        result = { bool: {
-            must: [],
-            must_not: [],
-            should: [
-                {
-                  terms: {
-                    field => q
-                  }
-                },
-                {
-                  constant_score: {
-                    filter: {
-                      missing: { field: field }
-                    }
-                  }
-                }
-            ]
-        } }
+      def term_search(field, q)
+        result = {
+          term: { field => q }
+        }
       end
 
       def terms_search(field, q)
-        result = { bool: {
-            must: [ { terms: { field => q } } ],
-            must_not: [],
-            should: []
-        } }
+        result = {
+          terms: { field => q }
+        }
       end
 
       def range_search(field, type, q)
-        result = { bool: {
-          must: [ { range: { field => { type => q } } } ],
-          must_not: [],
-          should: []
-        } }
+        result = {
+          range: { field => { type => q } }
+        }
       end
     end
 

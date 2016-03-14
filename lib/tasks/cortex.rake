@@ -1,6 +1,7 @@
 require 'rake'
 require 'net/http'
 require 'csv'
+require 'open-uri'
 
 Bundler.require(:default, Rails.env)
 
@@ -29,6 +30,61 @@ namespace :cortex do
     [Post, Media, Onet::Occupation, Webpage, User].each do |klass|
       klass.__elasticsearch__.create_index! force: true
       klass.import
+    end
+  end
+
+  namespace :snippets do
+    desc 'Remove orphaned snippets'
+    task :deorphan => :environment do
+      Snippet.where([
+          "user_id NOT IN (?) OR document_id NOT IN (?) OR webpage_id NOT IN (?)",
+          User.select("id"),
+          Document.select("id"),
+          Webpage.select("id")
+      ]).destroy_all
+    end
+
+    desc 'Removed unused snippets'
+    task :simplify => :environment do
+      # Now, loop through all the webpages...
+      Webpage.all.each do |webpage|
+        # Download the template...
+        puts "Fetching template for #{webpage.url}"
+        begin
+          template = Nokogiri::HTML open(webpage.url)
+          template_snippets = template.xpath("//snippet").map {|element| element['id']}
+
+          # Find all snippets for this webpage that aren't in the array above and delete them
+          Snippet.joins(:document).where([
+            "webpage_id = (?) AND documents.name NOT IN (?)",
+            webpage.id,
+            template_snippets
+          ]).order(created_at: :desc).destroy_all
+        rescue
+        end
+      end
+    end
+
+    desc 'Remove duplicate snippets'
+    task :dedupe => :environment do
+      # Then, check for duplicates on the name field, sort according to the API and delete all but the first ones
+      grouped = Snippet.joins(:document).all.group_by{|model| [model.document.name, model.webpage_id] }
+
+      grouped.values.each do |duplicates|
+        # the first one we want to keep right?
+        first_one = duplicates.shift # or pop for last one
+        # if there are any more left, they are duplicates
+        # so delete all of them
+        duplicates.each{|double| double.destroy} # duplicates can now be destroyed
+      end
+    end
+
+    desc 'Remove leaked data by deleting duplicates and orphans'
+    task :unleak => :environment do
+      # First, remove all orphaned snippets, where orphaning can occur on user, document or webpage
+      Rake::Task['cortex:deorphan'].execute
+      Rake::Task['cortex:simplify'].execute
+      Rake::Task['cortex:dedupe'].execute
     end
   end
 

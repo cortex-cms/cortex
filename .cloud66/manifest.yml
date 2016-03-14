@@ -19,7 +19,7 @@ staging:
       size: m3.medium
   elasticsearch:
     configuration:
-      version: 2.1.2
+      version: 2.2.0
     server:
       unique_name: search-stg
       vendor: aws
@@ -55,7 +55,7 @@ production:
       size: m3.medium
   elasticsearch:
     configuration:
-      version: 2.1.2
+      version: 2.2.0
     server:
       unique_name: search-prod
       vendor: aws

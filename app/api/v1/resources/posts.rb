@@ -15,6 +15,7 @@ module API
           params do
             use :search
             use :post_metadata
+            use :pagination
           end
           get do
             require_scope! :'view:posts'
@@ -28,8 +29,7 @@ module API
           params do
             use :search
             use :post_metadata
-            optional :page
-            optional :per_page
+            use :pagination
           end
           get 'feed' do
             require_scope! :'view:posts'
@@ -40,7 +40,7 @@ module API
 
             posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
               posts = ::GetPosts.call(params: declared(post_params, include_missing: false), tenant: current_tenant, published: true).posts
-              Entities::Post.represent paginate(posts)
+              Entities::Post.represent set_paginate_headers(posts)
             end
 
             posts_page

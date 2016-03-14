@@ -79,48 +79,50 @@ module SearchablePost
 
   module ClassMethods
     def search_with_params(params, tenant, published = nil)
-      query = {multi_match: { fields: %w(title^2 _all), query: query_massage(params[:q])}}
-
+      q = params[:q]
       categories = params[:categories]
       job_phase = params[:job_phase]
       post_type = params[:post_type]
       industries = params[:industries]
       author = params[:author]
-      bool = {bool: {must: [query], filter: [{ term: {tenant_id: tenant.id}}] }}
 
+      bool = {bool: {must: [], filter: [{ term: {tenant_id: tenant.id}}] }}
+
+      if q
+        bool[:bool][:must] << {multi_match: { fields: %w(title^2 _all), query: query_massage(q)}}
+      end
       if categories
-        bool[:bool][:filter] << self.terms_search('categories', categories.split(','))
+        bool[:bool][:filter] << self.terms_search(:categories, categories.split(','))
       end
       if job_phase
-        bool[:bool][:filter] << self.terms_search('job_phase', job_phase.split(','))
+        bool[:bool][:filter] << self.terms_search(:job_phase, job_phase.split(','))
       end
       if post_type
-        bool[:bool][:filter] << self.terms_search('type', post_type.split(','))
+        bool[:bool][:filter] << self.terms_search(:type, post_type.split(','))
       end
       if industries
-        bool[:bool][:filter] << self.or_null('industries', industries.split(','))
+        bool[:bool][:filter] << self.terms_search(:industries, industries.split(','))
       end
       if author
-        bool[:bool][:filter] << self.or_null('author', [author])
+        bool[:bool][:filter] << self.term_search(:author, author)
       end
       if published
-        bool[:bool][:filter] << self.range_search('published_at', 'lte', DateTime.now)
-        bool[:bool][:filter] << self.terms_search('draft', [false])
+        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
+        bool[:bool][:filter] << self.term_search(:draft, false)
       end
 
       self.search query: bool
     end
 
     def show_all(tenant, published = nil)
-      filters = [{ term: { tenant_id: tenant.id } }]
+      bool = {bool: {filter: [{ term: {tenant_id: tenant.id}}]}}
 
       if published
-        filters << self.range_search('published_at', 'lte', DateTime.now)
-        filters << self.terms_search('draft', [false])
+        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
+        bool[:bool][:filter] << self.term_search(:draft, false)
       end
 
-      bool = { bool: { filter: filters } }
-      search query: bool, sort: [{ created_at: { order: :desc } }]
+      search query: bool, sort: [{ created_at: { order: 'desc' } }]
     end
   end
 end

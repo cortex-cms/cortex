@@ -51,7 +51,7 @@ module SearchableMedia
       filter = { term: { tenant_id: tenant.id } }
       bool = { bool: { filter: [filter] } }
 
-      search query: bool, sort: [{ created_at: { order: :desc } }]
+      search query: bool, sort: [{ created_at: { order: 'desc' } }]
     end
   end
 end

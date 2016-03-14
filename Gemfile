@@ -75,8 +75,10 @@ gem 'gon', '~> 6.0.1'
 gem 'ngmin-rails', '~> 0.4.0'
 gem 'uglifier', '~> 2.7.2'
 
-# Scripting
-gem 'nokogiri'
+group :tasks do
+  # Parsing
+  gem 'nokogiri'
+end
 
 group :test, :development do
   # Environment

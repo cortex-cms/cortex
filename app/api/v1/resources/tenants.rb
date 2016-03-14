@@ -71,9 +71,6 @@ module API
 
           segment '/:id' do
             resource :users do
-              include Grape::Kaminari
-              paginate per_page: 25
-
               desc 'Show all users belonging to a tenant', { entity: Entities::User, nickname: "showAllTenantUsers" }
               params do
                 use :search
@@ -82,8 +79,8 @@ module API
                 authorize! :view, User
                 require_scope! :'view:users'
 
-                @users = User.tenantUsers(params[:id])
-                Entities::User.represent paginate(@users), full: true
+                @users = ::GetUsers.call(params: declared(tenant_params, include_missing: false), tenant_id: params[:id]).users
+                Entities::User.represent set_paginate_headers(@users), full: true
               end
             end
           end

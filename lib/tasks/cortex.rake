@@ -82,9 +82,9 @@ namespace :cortex do
     desc 'Remove leaked data by deleting duplicates and orphans'
     task :unleak => :environment do
       # First, remove all orphaned snippets, where orphaning can occur on user, document or webpage
-      Rake::Task['cortex:deorphan'].execute
-      Rake::Task['cortex:simplify'].execute
-      Rake::Task['cortex:dedupe'].execute
+      Rake::Task['cortex:snippets:deorphan'].execute
+      Rake::Task['cortex:snippets:simplify'].execute
+      Rake::Task['cortex:snippets:dedupe'].execute
     end
   end
 

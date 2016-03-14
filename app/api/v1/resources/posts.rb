@@ -19,9 +19,9 @@ module API
           get do
             require_scope! :'view:posts'
             authorize! :view, ::Post
-            @posts = ::GetPosts.call(params: declared(post_params, include_missing: false), tenant: current_tenant.id).posts
+            @posts = ::GetPosts.call(params: declared(post_params, include_missing: false), tenant: current_tenant).posts
 
-            Entities::Post.represent paginate(@posts)
+            Entities::Post.represent set_paginate_headers(@posts)
           end
 
           desc 'Show published posts', { entity: Entities::Post, nickname: "postFeed" }
@@ -36,11 +36,10 @@ module API
             authorize! :view, ::Post
             last_updated_at = Post.last_updated_at
             params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
-            tenant          = current_tenant.id
-            cache_key       = "feed-#{last_updated_at}-#{tenant}-#{params_hash}"
+            cache_key       = "feed-#{last_updated_at}-#{current_tenant.id}-#{params_hash}"
 
             posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
-              posts = ::GetPosts.call(params: declared(post_params, include_missing: false), tenant: tenant, published: true).posts
+              posts = ::GetPosts.call(params: declared(post_params, include_missing: false), tenant: current_tenant, published: true).posts
               Entities::Post.represent paginate(posts)
             end
 

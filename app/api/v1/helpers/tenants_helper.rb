@@ -9,6 +9,10 @@ module API
         def tenant!
           tenant || not_found!
         end
+
+        def tenant_params
+          clean_params(params)
+        end
       end
     end
   end

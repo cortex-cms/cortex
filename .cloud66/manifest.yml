@@ -18,6 +18,8 @@ staging:
       region: us-east-1
       size: m3.medium
   elasticsearch:
+    configuration:
+      version: 2.2.0
     server:
       unique_name: search-stg
       vendor: aws
@@ -52,6 +54,8 @@ production:
       region: us-east-1
       size: m3.medium
   elasticsearch:
+    configuration:
+      version: 2.2.0
     server:
       unique_name: search-prod
       vendor: aws

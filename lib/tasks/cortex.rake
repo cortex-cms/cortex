@@ -36,46 +36,68 @@ namespace :cortex do
   namespace :snippets do
     desc 'Remove orphaned snippets'
     task :deorphan => :environment do
-      Snippet.where([
+      puts "Orphaned Snippet removal begun.."
+
+      orphaned_snippets = Snippet.where([
           "user_id NOT IN (?) OR document_id NOT IN (?) OR webpage_id NOT IN (?)",
           User.select("id"),
           Document.select("id"),
           Webpage.select("id")
-      ]).destroy_all
+      ])
+
+      orphaned_snippets.each do |orphaned_snippet|
+        orphaned_snippet.document.destroy
+        orphaned_snippet.destroy
+        puts "Destroyed orphaned snippet: '#{orphaned_snippet.document.name}' with ID: '#{orphaned_snippet.id}'"
+      end
     end
 
     desc 'Removed unused snippets'
     task :simplify => :environment do
-      # Now, loop through all the webpages...
+      puts "Unused Snippet removal begun.."
+
       Webpage.all.each do |webpage|
         # Download the template...
         puts "Fetching template for #{webpage.url}"
+
         begin
           template = Nokogiri::HTML open(webpage.url)
           template_snippets = template.xpath("//snippet").map {|element| element['id']}
 
           # Find all snippets for this webpage that aren't in the array above and delete them
-          Snippet.joins(:document).where([
+          unused_snippets = Snippet.joins(:document).where([
             "webpage_id = (?) AND documents.name NOT IN (?)",
             webpage.id,
             template_snippets
-          ]).order(created_at: :desc).destroy_all
-        rescue
+          ]).order(created_at: :desc)
+
+          unused_snippets.each do |unused_snippet|
+            unused_snippet.document.destroy
+            unused_snippet.destroy
+            puts "Destroyed unused snippet: '#{unused_snippet.document.name}' with ID: '#{unused_snippet.id}'"
+          end
+        rescue Exception => e
+          puts "Error processing unused snippet removal for Webpage.\nError message: #{e.message}\nTrace: #{e.backtrace.inspect}"
         end
       end
     end
 
     desc 'Remove duplicate snippets'
     task :dedupe => :environment do
-      # Then, check for duplicates on the name field, sort according to the API and delete all but the first ones
-      grouped = Snippet.joins(:document).all.group_by{|model| [model.document.name, model.webpage_id] }
+      puts "Snippet de-duplication begun.."
 
-      grouped.values.each do |duplicates|
-        # the first one we want to keep right?
-        first_one = duplicates.shift # or pop for last one
-        # if there are any more left, they are duplicates
-        # so delete all of them
-        duplicates.each{|double| double.destroy} # duplicates can now be destroyed
+      Webpage.all.each do |webpage|
+        puts "De-duplicating Snippets for Webpage: #{webpage.url}"
+
+        snippets = webpage.snippets
+        snippets_deduped = snippets.to_a.uniq { |snippet| snippet.document.name } # Use natural sort order to de-dupe Snippets
+        leaked_snippets = snippets - snippets_deduped # Take difference of Snippets minus 'Actual Snippets'
+
+        leaked_snippets.each do |leaked_snippet|
+          leaked_snippet.document.destroy
+          leaked_snippet.destroy
+          puts "Destroyed leaked duplicate snippet: '#{leaked_snippet.document.name}' with ID: '#{leaked_snippet.id}'"
+        end
       end
     end
 

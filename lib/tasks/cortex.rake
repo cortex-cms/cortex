@@ -90,7 +90,7 @@ namespace :cortex do
         puts "De-duplicating Snippets for Webpage: #{webpage.url}"
 
         snippets = webpage.snippets
-        snippets_deduped = snippets.uniq { |snippet| snippet.document.name } # Use natural sort order to de-dupe Snippets
+        snippets_deduped = snippets.to_a.uniq { |snippet| snippet.document.name } # Use natural sort order to de-dupe Snippets
         leaked_snippets = snippets - snippets_deduped # Take difference of Snippets minus 'Actual Snippets'
 
         leaked_snippets.each do |leaked_snippet|

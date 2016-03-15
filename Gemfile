@@ -75,6 +75,11 @@ gem 'gon', '~> 6.0.1'
 gem 'ngmin-rails', '~> 0.4.0'
 gem 'uglifier', '~> 2.7.2'
 
+group :tasks do
+  # Parsing
+  gem 'nokogiri'
+end
+
 group :test, :development do
   # Environment
   gem 'dotenv', '~> 2.1.0'

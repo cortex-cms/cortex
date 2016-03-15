@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include HasGravatar
   include HasFirstnameLastname
+  include SearchableUser
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable

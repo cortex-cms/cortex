@@ -26,7 +26,7 @@ angular.module('cortex.controllers.users.grid', [
       total: 0,
       getData: function ($defer, params) {
         if ($scope.data.tenantTree.selected) {
-          cortex.tenants.usersPaged({page: params.page(), per_page: params.count(), id: $scope.data.tenantTree.selected.id},
+          cortex.tenants.usersPaged({page: params.page(), per_page: params.count(), id: $scope.data.tenantTree.selected.id, q: $scope.data.query},
             function (users, headers, paging) {
               params.total(paging.total);
               $defer.resolve(users);

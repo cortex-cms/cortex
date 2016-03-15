@@ -20,8 +20,8 @@ module API
             authorize! :view, ::Webpage
             require_scope! :'view:webpages'
 
-            @webpages = ::GetWebpages.call(params: declared(webpage_params, include_missing: false), tenant: current_tenant.id).webpages
-            Entities::Webpage.represent paginate(@webpages), full: true
+            @webpages = ::GetWebpages.call(params: declared(webpage_params, include_missing: false), tenant: current_tenant).webpages
+            Entities::Webpage.represent set_paginate_headers(@webpages), full: true
           end
 
           desc 'Show Webpage Snippets as public feed by URL', { entity: Entities::Webpage, nickname: 'showWebpageFeed' }

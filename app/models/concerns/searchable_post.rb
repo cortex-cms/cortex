@@ -6,14 +6,15 @@ module SearchablePost
 
     mapping do
       indexes :id, :type => :integer, :index => :not_analyzed
-      indexes :title, :analyzer => 'snowball'
-      indexes :body, :analyzer => 'snowball'
-      indexes :draft, :type => 'boolean'
-      indexes :short_description, :analyzer => 'snowball'
-      indexes :copyright_owner, :analyzer => 'keyword'
-      indexes :author, :analyzer => 'keyword'
-      indexes :created_at, :type => 'date', :include_in_all => false
-      indexes :published_at, :type => 'date', :include_in_all => false
+      indexes :tenant_id, :type => :integer, :index => :not_analyzed
+      indexes :title, :analyzer => :snowball
+      indexes :body, :analyzer => :snowball
+      indexes :draft, :type => :boolean
+      indexes :short_description, :analyzer => :snowball
+      indexes :copyright_owner, :analyzer => :keyword
+      indexes :author, :analyzer => :keyword
+      indexes :created_at, :type => :date, :include_in_all => false
+      indexes :published_at, :type => :date, :include_in_all => false
       indexes :tag_list, :type => :string, :analyzer => :keyword
       indexes :categories, :analyzer => :keyword
       indexes :job_phase, :analyzer => :keyword
@@ -71,66 +72,57 @@ module SearchablePost
       json[:industries] = industries.collect { |i| i.soc }
       json[:tags] = tag_list.to_a
       json[:author] = author ? author.fullname : custom_author
+      json[:tenant_id]  = user.tenant.id
       json
     end
   end
 
   module ClassMethods
-    def search_with_params(params, published = nil)
-      query = {query_string: {fields: ['title^100', '_all'], query: self.query_massage(params[:q])}}
-
+    def search_with_params(params, tenant, published = nil)
+      q = params[:q]
       categories = params[:categories]
       job_phase = params[:job_phase]
       post_type = params[:post_type]
       industries = params[:industries]
       author = params[:author]
-      bool = {bool: {must: [query], must_not: [], should: []}}
 
-      if categories;
-        bool[:bool][:must] << self.terms_search('categories', categories.split(','))
+      bool = {bool: {must: [], filter: [{ term: {tenant_id: tenant.id}}] }}
+
+      if q
+        bool[:bool][:must] << {multi_match: { fields: %w(title^2 _all), query: query_massage(q)}}
       end
-      if job_phase;
-        bool[:bool][:must] << self.terms_search('job_phase', job_phase.split(','))
+      if categories
+        bool[:bool][:filter] << self.terms_search(:categories, categories.split(','))
       end
-      if post_type;
-        bool[:bool][:must] << self.terms_search('type', post_type.split(','))
+      if job_phase
+        bool[:bool][:filter] << self.terms_search(:job_phase, job_phase.split(','))
       end
-      if industries;
-        bool[:bool][:must] << self.or_null('industries', industries.split(','))
+      if post_type
+        bool[:bool][:filter] << self.terms_search(:type, post_type.split(','))
       end
-      if author;
-        bool[:bool][:must] << self.or_null('author', [author])
+      if industries
+        bool[:bool][:filter] << self.terms_search(:industries, industries.split(','))
       end
-      if published;
-        bool[:bool][:must] << self.range_search('published_at', 'lte', DateTime.now); bool[:bool][:must] << self.terms_search('draft', [false])
+      if author
+        bool[:bool][:filter] << self.term_search(:author, author)
+      end
+      if published
+        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
+        bool[:bool][:filter] << self.term_search(:draft, false)
       end
 
-      self.search query: bool, size: 60
+      self.search query: bool
+    end
+
+    def show_all(tenant, published = nil)
+      bool = {bool: {filter: [{ term: {tenant_id: tenant.id}}]}}
+
+      if published
+        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
+        bool[:bool][:filter] << self.term_search(:draft, false)
+      end
+
+      search query: bool, sort: [{ created_at: { order: 'desc' } }]
     end
   end
 end
-
-# example search_with_params ES query
-# -----------------------------------
-# {
-#   "query": {
-#     "query_string": {"query": "*"}
-#   },
-#   "filter": {
-#     "and": {
-#       "filters": [
-#         {
-#           "terms": {
-#             "categories": ["Assessments"],
-#             "job_phase": ["discovery"]
-#           }
-#         },
-#         {
-#           "range": {
-#             "published_at": {"lte": "2014-05-22T19:47:16.005Z"}
-#           }
-#         }
-#       ]
-#     }
-#   }
-# }

@@ -22,47 +22,42 @@ module SearchablePost
       indexes :industries, :analyzer => :keyword
     end
 
-    def related(published = nil)
-      # Filter the current post from results, this is not necessary with ES 1.2
-      filter_bool = {must_not: {ids: {values: [id]}}}
+    def related(tenant, published = nil)
+      bool = {bool: {should: [], filter: [{not: {ids: {values: [id]}}}, {term: {tenant_id: tenant.id}}]}}
 
       if published
-        filter_bool[:must] = [{range: {published_at: {lte: DateTime.now}}}, {terms: {'draft' => [false]}}]
+        bool[:bool][:filter] << self.class.range_search(:published_at, :lte, DateTime.now.to_s)
+        bool[:bool][:filter] << self.class.term_search(:draft, false)
       end
 
-      mlt_fields = [
-        {
-          job_phase: {
-            like_text: job_phase,
-            min_doc_freq: 1,
-            min_term_freq: 1
-          }
-        },
-        {
-          categories: {
-            like_text: categories.pluck(:name).join(' '),
-            min_doc_freq: 1,
-            min_term_freq: 1
-          }
-        },
-        {
-          tags: {
-            like_text: tag_list.join(' '),
-            min_doc_freq: 1,
-            min_term_freq: 1
-          }
-        }
+      mlt = [{
+               more_like_this: {
+                 fields: [:job_phase],
+                 like: job_phase,
+                 min_doc_freq: 1,
+                 min_term_freq: 1
+               }
+             },
+             {
+               more_like_this: {
+                 fields: [:categories],
+                 like: categories.pluck(:name).join(' '),
+                 min_doc_freq: 1,
+                 min_term_freq: 1
+               }
+             },
+             {
+               more_like_this: {
+                 fields: [:tags],
+                 like: tag_list.join(' '),
+                 min_doc_freq: 1,
+                 min_term_freq: 1
+               }
+             }
       ]
 
-      query_should = mlt_fields.map { |f| {more_like_this_field: f} }
-
-      query = {
-        bool: {
-          should: query_should
-        }
-      }
-
-      Post.search query: {filtered: {query: query, filter: {bool: filter_bool}}}
+      bool[:bool][:should] << mlt
+      Post.search query: bool
     end
 
     def as_indexed_json(options = {})

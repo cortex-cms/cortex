@@ -59,7 +59,7 @@ module API
             not_found! unless post
             authorize! :view, post
 
-            @posts = post.related(true)
+            @posts = post.related(current_tenant, true)
             ids = @posts.results.map {|post| post._source.id}
 
             @posts = Post.find(ids).sort_by{ |post| ids.index post.id }

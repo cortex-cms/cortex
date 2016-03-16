@@ -49,6 +49,7 @@ gem 'hashr', '~> 2.0.0'
 gem 'mime-types', '~> 2.99.1'
 gem 'json'
 gem 'interactor-rails', '~> 2.0'
+gem 'rubyzip', '~> 1.2.0'
 
 # Jobs
 gem 'sidekiq', '~> 4.1.1'
@@ -76,9 +77,6 @@ gem 'uglifier', '~> 2.7.2'
 group :tasks do
   # Parsing
   gem 'nokogiri'
-
-  # Utility
-  gem 'rubyzip', '~> 1.2.0'
 end
 
 group :test, :development do

@@ -1,4 +1,16 @@
 GIT
+  remote: git://github.com/thoughtbot/paperclip
+  revision: e60f00027704298455c039e111d96bcf46e12822
+  branch: master
+  specs:
+    paperclip (4.3.1)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (~> 0.3.0)
+
+GIT
   remote: git://github.com/toastercup/grape-kaminari
   revision: 8d3f48e04c35cd6b85d4707a5b7f7356d305bf8c
   branch: set-only-pagination-headers
@@ -366,7 +378,7 @@ GEM
     metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (2.99.1)
-    mimemagic (0.3.0)
+    mimemagic (0.3.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     mocha (1.1.0)
@@ -385,12 +397,6 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
-    paperclip (4.3.6)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      cocaine (~> 0.5.5)
-      mime-types
-      mimemagic (= 0.3.0)
     paperclip-optimizer (2.0.0)
       image_optim (~> 0.19)
       paperclip (>= 3.4)
@@ -614,7 +620,7 @@ DEPENDENCIES
   ng-rails-csrf (~> 0.1.0)
   ngmin-rails (~> 0.4.0)
   nokogiri
-  paperclip (~> 4.3.6)
+  paperclip!
   paperclip-optimizer (~> 2.0)
   paranoia (~> 2.1)
   pg (~> 0.18.4)

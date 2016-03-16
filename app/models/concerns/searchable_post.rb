@@ -22,8 +22,19 @@ module SearchablePost
       indexes :industries, :analyzer => :keyword
     end
 
+    def as_indexed_json(options = {})
+      json = as_json(only: [:id, :title, :body, :draft, :short_description, :copyright_owner,
+                            :created_at, :published_at, :job_phase, :type])
+      json[:categories] = categories.collect { |c| c.name }
+      json[:industries] = industries.collect { |i| i.soc }
+      json[:tags] = tag_list.to_a
+      json[:author] = author ? author.fullname : custom_author
+      json[:tenant_id] = user.tenant.id
+      json
+    end
+
     def related(tenant, published = nil)
-      bool = {bool: {should: [], filter: [{not: {ids: {values: [id]}}}, {term: {tenant_id: tenant.id}}]}}
+      bool = {bool: {should: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
       if published
         bool[:bool][:filter] << self.class.range_search(:published_at, :lte, DateTime.now.to_s)
@@ -32,43 +43,21 @@ module SearchablePost
 
       mlt = [{
                more_like_this: {
-                 fields: [:job_phase],
-                 like: job_phase,
+                 fields: %w(title short_description job_phase categories tags),
+                 docs: [
+                   {
+                     _id: id
+                   }
+                 ],
                  min_doc_freq: 1,
-                 min_term_freq: 1
-               }
-             },
-             {
-               more_like_this: {
-                 fields: [:categories],
-                 like: categories.pluck(:name).join(' '),
-                 min_doc_freq: 1,
-                 min_term_freq: 1
-               }
-             },
-             {
-               more_like_this: {
-                 fields: [:tags],
-                 like: tag_list.join(' '),
-                 min_doc_freq: 1,
-                 min_term_freq: 1
+                 min_term_freq: 1,
+                 include: false
                }
              }
       ]
 
       bool[:bool][:should] << mlt
-      Post.search query: bool
-    end
-
-    def as_indexed_json(options = {})
-      json = as_json(only: [:id, :title, :body, :draft, :short_description, :copyright_owner,
-                            :created_at, :published_at, :job_phase, :type])
-      json[:categories] = categories.collect { |c| c.name }
-      json[:industries] = industries.collect { |i| i.soc }
-      json[:tags] = tag_list.to_a
-      json[:author] = author ? author.fullname : custom_author
-      json[:tenant_id]  = user.tenant.id
-      json
+      ::Post.search query: bool
     end
   end
 
@@ -81,10 +70,10 @@ module SearchablePost
       industries = params[:industries]
       author = params[:author]
 
-      bool = {bool: {must: [], filter: [{ term: {tenant_id: tenant.id}}] }}
+      bool = {bool: {must: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
       if q
-        bool[:bool][:must] << {multi_match: { fields: %w(title^2 _all), query: query_massage(q)}}
+        bool[:bool][:must] << {multi_match: {fields: %w(title^2 _all), query: query_massage(q)}}
       end
       if categories
         bool[:bool][:filter] << self.terms_search(:categories, categories.split(','))
@@ -110,14 +99,14 @@ module SearchablePost
     end
 
     def show_all(tenant, published = nil)
-      bool = {bool: {filter: [{ term: {tenant_id: tenant.id}}]}}
+      bool = {bool: {filter: [{term: {tenant_id: tenant.id}}]}}
 
       if published
         bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
         bool[:bool][:filter] << self.term_search(:draft, false)
       end
 
-      search query: bool, sort: [{ created_at: { order: 'desc' } }]
+      search query: bool, sort: [{created_at: {order: 'desc'}}]
     end
   end
 end

@@ -28,7 +28,7 @@ gem 'rack-oauth2', '~> 1.3.0'
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.0'
-gem 'paperclip', '~> 4.3.6'
+gem 'paperclip', git: 'git://github.com/thoughtbot/paperclip', branch: 'master'
 gem 'paperclip-optimizer', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 3.5'
 gem 'bcrypt', '~> 3.1.11'

@@ -142,11 +142,19 @@ module Abilities
       end
 
       def webpage_abilities(user, webpage)
-        [:view, :update, :delete]
+        if user.is_admin?
+          [:view, :update, :delete]
+        else
+          []
+        end
       end
 
       def webpage_class_abilities(user)
-        [:view, :create]
+        if user.is_admin?
+          [:view, :create]
+        else
+          []
+        end
       end
 
       def snippet_abilities(user, snippet)

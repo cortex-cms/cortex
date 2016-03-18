@@ -2,6 +2,10 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 
 require 'spec_helper'
+require 'capybara/rails'
+require 'capybara/poltergeist'
+
+Capybara.javascript_driver = :poltergeist
 
 include ActionDispatch::TestProcess
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }

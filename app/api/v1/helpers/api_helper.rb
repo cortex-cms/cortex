@@ -2,7 +2,6 @@ module API
   module V1
     module Helpers
       module APIHelper
-
         def logger
           API.logger
         end
@@ -52,7 +51,7 @@ module API
 
         def lookup_owner(access_token)
           if access_token.resource_owner_id.present?
-            User.find_by id: access_token.resource_owner_id
+            User.find_by_id(access_token.resource_owner_id)
           else
             access_token.application.owner
           end

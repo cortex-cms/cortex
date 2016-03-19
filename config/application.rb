@@ -31,7 +31,7 @@ module Cortex
 
     require 'rack/oauth2'
     config.middleware.use Rack::OAuth2::Server::Resource::Bearer, 'OAuth2' do |request|
-      Doorkeeper.authenticate(request) || request.invalid_token!
+      request.access_token
     end
 
     config.generators do |generator|

@@ -17,13 +17,13 @@ gem 'cortex-exceptions', '~> 0.0.4'
 gem 'grape', '~> 0.15'
 gem 'grape-entity', '~> 0.4.8'
 gem 'grape-swagger', '~> 0.10.4'
-gem 'doorkeeper', '~> 1.4'
 gem 'redis-rails', '~> 4.0'
 
 # Authorization
 gem 'six', '~> 0.2.0'
 gem 'devise', '~> 3.5.6'
 gem 'rack-oauth2', '~> 1.3.0'
+gem 'doorkeeper', '~> 3.1'
 
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
@@ -47,9 +47,9 @@ gem 'excon', '~> 0.48.0'
 gem 'hashie', '~> 3.4.3'
 gem 'hashr', '~> 2.0.0'
 gem 'mime-types', '~> 2.99.1'
-gem 'json'
 gem 'interactor-rails', '~> 2.0'
 gem 'rubyzip', '~> 1.2.0'
+gem 'json'
 
 # Jobs
 gem 'sidekiq', '~> 4.1.1'

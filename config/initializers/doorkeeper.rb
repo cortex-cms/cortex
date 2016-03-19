@@ -58,8 +58,6 @@ Doorkeeper.configure do
   #
   # test_redirect_uri 'urn:ietf:wg:oauth:2.0:oob'
 
-  wildcard_redirect_uri true
-
   # Under some circumstances you might want to have applications auto-approved,
   # so that the user skips the authorization step.
   # For example if dealing with trusted a application.

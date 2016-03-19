@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   def client_skips_authorization?
     # Yeah, replace this with something serious
-    self.email == 'surgeon@cbcortex.com'
+    self.email == 'surgeon@cbcortex.com' || 'surgeon@careerbuilder.com'
   end
 
   def to_json(options={})

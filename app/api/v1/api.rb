@@ -9,7 +9,10 @@ module API
   module V1
     class API < Grape::API
       version 'v1', using: :path
+      default_format :json
+      default_error_formatter :json
       format :json
+      content_type :json, 'application/json'
 
       rescue_from ActiveRecord::RecordInvalid do |ex|
         errors = ex.record.errors.map{ |attr, error| "#{attr} #{error}" }

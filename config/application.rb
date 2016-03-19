@@ -31,12 +31,15 @@ module Cortex
 
     require 'rack/oauth2'
     config.middleware.use Rack::OAuth2::Server::Resource::Bearer, 'OAuth2' do |request|
-      Doorkeeper::AccessToken.authenticate(request.access_token) || request.invalid_token!
+      Doorkeeper.authenticate(request) || request.invalid_token!
     end
 
     config.generators do |generator|
       generator.orm :active_record
     end
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
 
     # Needed until there is a better fix for Paperclip. https://github.com/thoughtbot/paperclip/issues/1924#issuecomment-123927367
     Paperclip.options[:content_type_mappings] = {:csv => 'text/plain'}

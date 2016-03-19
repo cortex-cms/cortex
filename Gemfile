@@ -118,6 +118,7 @@ group :test do
   # Etc
   gem 'codeclimate-test-reporter', '~> 0.4.8', require: false
   gem 'elasticsearch-extensions', '~> 0.0.20'
+  gem 'spring'
 end
 
 group :test, :development, :staging do

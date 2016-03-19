@@ -1,3 +1,5 @@
+require 'doorkeeper/grape/helpers'
+require 'doorkeeper/grape/authorization_decorator'
 require 'cortex/exceptions'
 
 # Load modules in order
@@ -20,6 +22,14 @@ module API
       end
 
       helpers Helpers::APIHelper
+      helpers Doorkeeper::Grape::Helpers
+
+      before do
+        # Check if request uses client authorization grant type
+        if request.env[Rack::OAuth2::Server::Resource::ACCESS_TOKEN]
+          Doorkeeper.authenticate(Doorkeeper::Grape::AuthorizationDecorator.new(request)) || unauthorized!
+        end
+      end
 
       mount Resources::Categories
       mount Resources::Posts

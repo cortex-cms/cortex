@@ -57,8 +57,11 @@ gem 'sidekiq-failures', '~> 0.4.5'
 gem 'sinatra', '~> 1.4.7', require: false
 
 # Pipeline
-gem 'sprockets-rails', '2.3.3', :require => 'sprockets/railtie'
-gem 'sprockets', '2.12.4'
+gem 'sprockets-rails', '3.0.4', :require => 'sprockets/railtie'
+gem 'sprockets', '3.5.2'
+gem 'angular-rails-templates', '~> 1.0.0'
+gem 'ngannotate-rails', git: 'git://github.com/kikonen/ngannotate-rails', branch: 'master' # sprockets-rails related fixes not present in v0.15.4.1
+gem 'uglifier', '~> 2.7.2'
 
 # Templating
 gem 'haml', '~> 4.0.7'
@@ -69,10 +72,7 @@ gem 'font-awesome-sass', '~> 4.5.0'
 
 # JS
 gem 'ng-rails-csrf', '~> 0.1.0'
-gem 'angular-rails-templates', '~> 0.2.0'
 gem 'gon', '~> 6.0.1'
-gem 'ngmin-rails', '~> 0.4.0'
-gem 'uglifier', '~> 2.7.2'
 
 group :tasks do
   # Parsing
@@ -84,10 +84,21 @@ group :test, :development do
   gem 'dotenv', '~> 2.1.0'
   gem 'byebug'
 
+  # Cache/Sidekiq
+  gem 'redis-namespace', '~> 1.5'
+
+  # Pretty
+  gem 'better_errors', '~> 2.1.1'
+  gem 'binding_of_caller', '~> 0.7.2' # Used by Better Errors
+  gem 'pry-rails', '~> 0.3'
+end
+
+group :test do
   # Rspec
   gem 'rspec', '~> 3.4'
   gem 'rspec-rails', '~> 3.4'
   gem 'json_spec', '~> 1.1.4'
+  gem 'rspec-sidekiq', '~> 2.2.0'
 
   # Guard
   gem 'guard-rspec', '~> 4.6.4'
@@ -96,33 +107,18 @@ group :test, :development do
   gem 'mocha', '~> 1.1.0', require: false
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner', '~> 1.5.1'
+  gem 'timecop', '~> 0.8.0'
+  gem 'email_spec'
 
   # Javascript
   gem 'jasmine-rails', '~> 0.12.2'
   gem 'guard-jasmine', '~> 2.0.6'
   gem 'jasmine-core', '~> 2.4'
 
-  # Cache/Sidekiq
-  gem 'redis-namespace', '~> 1.5'
-end
-
-group :development do
-  # Pretty
-  gem 'better_errors', '~> 2.1.1'
-  gem 'binding_of_caller', '~> 0.7.2' # Used by Better Errors
-  gem 'pry-rails', '~> 0.3'
-end
-
-group :test do
+  # Etc
   gem 'codeclimate-test-reporter', '~> 0.4.8', require: false
-  gem 'timecop', '~> 0.8.0'
-  gem 'rspec-sidekiq', '~> 2.2.0'
   gem 'elasticsearch-extensions', '~> 0.0.20'
-  gem 'email_spec'
-end
-
-group :assets do
-  gem 'coffee-rails', '~> 4.1.0'
+  gem 'spring'
 end
 
 group :test, :development, :staging do

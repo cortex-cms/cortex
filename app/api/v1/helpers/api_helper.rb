@@ -1,3 +1,5 @@
+require 'doorkeeper/grape/authorization_decorator'
+
 module API
   module V1
     module Helpers
@@ -27,7 +29,7 @@ module API
         end
 
         def access_token
-          @token_string ||= request.env[Rack::OAuth2::Server::Resource::ACCESS_TOKEN]
+          @token_string ||= doorkeeper_token
         end
 
         def current_user

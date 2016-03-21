@@ -7,14 +7,14 @@
         %span.text-muted Sign In
       .panel-body
         = form_for(:user, :url => session_path(:user),
-                   html: {role: 'login', novalidate: '', name: 'loginForm'}) do |f|
+                   html: {role: 'login', novalidate: '', name: 'loginForm', class: 'loginForm'}) do |f|
           -flash.each do |name, msg|
             -if msg.is_a?(String)
               =content_tag :div, msg, :class => "flash_#{name}"
-          .form-group
+          .form-group#email-group
             = f.text_field :email, class: 'form-control', autofocus: true, placeholder: 'Email', required: '',
                            type: :email, 'ng-model' => 'login.login'
-          .form-group
+          .form-group#password-group
             = f.password_field :password, class: 'form-control', placeholder: 'Password', required: '',
                            'ng-model' => 'login.password'
           .reset-password
@@ -22,4 +22,4 @@
           %label
             = f.check_box :remember_me
             Remember me
-          = f.submit 'Sign In', class: 'btn btn-primary btn-block', disabled: '', 'ng-disabled' => 'loginForm.$invalid'
+          = f.submit 'Sign In', class: 'btn btn-primary btn-block sign_in_button', disabled: '', 'ng-disabled' => 'loginForm.$invalid'

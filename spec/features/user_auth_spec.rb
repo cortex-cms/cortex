@@ -5,7 +5,6 @@ describe "User Authentication", :type => :feature, :js => true do
     before :each do
       tenant = Tenant.create!({name: "test"})
       @user = User.create!({:email => 'user@example.com', :password => 'password12345!', tenant_id: tenant.id, firstname: "Alias", lastname: "Testname", admin: false})
-      
     end
 
     it "Signs the User In" do

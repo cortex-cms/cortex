@@ -4,11 +4,13 @@ module API
   module V1
     module Resources
       class Posts < Grape::API
-        helpers Helpers::SharedParams
-        helpers Helpers::PostsHelper
+        helpers Helpers::SharedParamsHelper
+        helpers Helpers::ParamsHelper
 
         resource :posts do
           include Grape::Kaminari
+          helpers Helpers::PostsHelper
+
           paginate per_page: 25
 
           desc 'Show all posts', { entity: Entities::Post, nickname: "showAllPosts" }
@@ -20,7 +22,7 @@ module API
           get do
             require_scope! :'view:posts'
             authorize! :view, ::Post
-            @posts = ::GetPosts.call(params: declared(post_params, include_missing: false), tenant: current_tenant).posts
+            @posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).posts
 
             Entities::Post.represent set_paginate_headers(@posts)
           end
@@ -39,7 +41,7 @@ module API
             cache_key       = "feed-#{last_updated_at}-#{current_tenant.id}-#{params_hash}"
 
             posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
-              posts = ::GetPosts.call(params: declared(post_params, include_missing: false), tenant: current_tenant, published: true).posts
+              posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
               Entities::Post.represent set_paginate_headers(posts)
             end
 
@@ -59,7 +61,7 @@ module API
             not_found! unless post
             authorize! :view, post
 
-            @posts = ::GetRelatedPosts.call(post: post, params: declared(post_params, include_missing: false), tenant: current_tenant, published: true).posts
+            @posts = ::GetRelatedPosts.call(post: post, params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
             Entities::Post.represent set_paginate_headers(@posts)
           end
 

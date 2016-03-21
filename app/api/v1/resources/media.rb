@@ -4,7 +4,8 @@ module API
   module V1
     module Resources
       class Media < Grape::API
-        helpers Helpers::SharedParams
+        helpers Helpers::SharedParamsHelper
+        helpers Helpers::ParamsHelper
 
         resource :media do
           include Grape::Kaminari
@@ -21,7 +22,7 @@ module API
             authorize! :view, ::Media
             require_scope! :'view:media'
 
-            @media = ::GetMultipleMedia.call(params: declared(media_params, include_missing: false), tenant: current_tenant).media
+            @media = ::GetMultipleMedia.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).media
             Entities::Media.represent set_paginate_headers(@media)
           end
 

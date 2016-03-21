@@ -4,7 +4,7 @@ module API
   module V1
     module Resources
       class Locales < Grape::API
-        helpers Helpers::SharedParams
+        helpers Helpers::ParamsHelper
 
         resource :localizations do
           segment '/:id' do

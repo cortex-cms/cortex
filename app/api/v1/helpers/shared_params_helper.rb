@@ -1,7 +1,7 @@
 module API
   module V1
     module Helpers
-      module SharedParams
+      module SharedParamsHelper
         extend Grape::API::Helpers
 
         params :pagination do

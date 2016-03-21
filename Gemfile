@@ -126,10 +126,6 @@ group :test do
   gem 'poltergeist'
 end
 
-group :assets do
-  gem 'coffee-rails', '~> 4.1.0'
-end
-
 group :test, :development, :staging do
   gem 'fog', '~> 1.37.0'
 end

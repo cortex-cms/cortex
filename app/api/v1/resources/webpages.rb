@@ -5,7 +5,7 @@ module API
   module V1
     module Resources
       class Webpages < Grape::API
-        helpers Helpers::SharedParams
+        helpers Helpers::ParamsHelper
 
         resource :webpages do
           include Grape::Kaminari

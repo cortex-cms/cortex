@@ -4,7 +4,7 @@ module API
   module V1
     module Resources
       class Snippets < Grape::API
-        helpers Helpers::SharedParams
+        helpers Helpers::ParamsHelper
 
         resource :snippets do
           include Grape::Kaminari

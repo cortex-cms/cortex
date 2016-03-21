@@ -5,7 +5,7 @@ module API
     module Resources
       class Applications < Grape::API
         include Grape::Kaminari
-        helpers Helpers::SharedParams
+        helpers Helpers::ParamsHelper
 
         resource :applications do
           helpers Helpers::ApplicationsHelper

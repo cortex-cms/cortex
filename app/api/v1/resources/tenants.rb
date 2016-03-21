@@ -3,13 +3,12 @@ require_relative '../helpers/resource_helper'
 module API
   module V1
     module Resources
-
       class Tenants < Grape::API
-        helpers Helpers::SharedParams
+        helpers Helpers::ParamsHelper
+        helpers Helpers::TenantsHelper
 
         resource :tenants do
           include Grape::Kaminari
-          helpers Helpers::TenantsHelper
 
           paginate per_page: 25
 

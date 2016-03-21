@@ -4,7 +4,7 @@ module API
   module V1
     module Resources
       class Media < Grape::API
-        helpers Helpers::SharedParams
+        helpers Helpers::ParamsHelper
 
         resource :media do
           include Grape::Kaminari

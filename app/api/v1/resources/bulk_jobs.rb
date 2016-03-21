@@ -4,7 +4,7 @@ module API
   module V1
     module Resources
       class BulkJobs < Grape::API
-        helpers Helpers::SharedParams
+        helpers Helpers::ParamsHelper
 
         resource :bulk_jobs do
           include Grape::Kaminari

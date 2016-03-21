@@ -9,10 +9,6 @@ module API
         def user!
           user || not_found!
         end
-
-        def user_params
-          clean_params(params)
-        end
       end
     end
   end

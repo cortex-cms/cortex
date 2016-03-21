@@ -4,8 +4,6 @@ module API
   module V1
     module Resources
       class Documents < Grape::API
-        helpers Helpers::ParamsHelper
-
         resource :documents do
           include Grape::Kaminari
           helpers Helpers::DocumentsHelper

@@ -20,7 +20,7 @@ module API
             authorize! :view, ::Webpage
             require_scope! :'view:webpages'
 
-            @webpages = ::GetWebpages.call(params: declared(webpage_params, include_missing: false), tenant: current_tenant).webpages
+            @webpages = ::GetWebpages.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).webpages
             Entities::Webpage.represent set_paginate_headers(@webpages), full: true
           end
 

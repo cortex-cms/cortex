@@ -4,11 +4,12 @@ module API
   module V1
     module Resources
       class Tenants < Grape::API
+        helpers Helpers::SharedParamsHelper
         helpers Helpers::ParamsHelper
-        helpers Helpers::TenantsHelper
 
         resource :tenants do
           include Grape::Kaminari
+          helpers Helpers::TenantsHelper
 
           paginate per_page: 25
 
@@ -83,7 +84,7 @@ module API
                 authorize! :view, User
                 require_scope! :'view:users'
 
-                @users = ::GetUsers.call(params: declared(user_params, include_missing: false), tenant_id: params[:id]).users
+                @users = ::GetUsers.call(params: declared(clean_params(params), include_missing: false), tenant_id: params[:id]).users
                 Entities::User.represent set_paginate_headers(@users), full: true
               end
             end

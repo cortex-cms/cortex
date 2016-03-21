@@ -4,10 +4,10 @@ module API
   module V1
     module Resources
       class Applications < Grape::API
-        include Grape::Kaminari
         helpers Helpers::ParamsHelper
 
         resource :applications do
+          include Grape::Kaminari
           helpers Helpers::ApplicationsHelper
 
           paginate per_page: 25

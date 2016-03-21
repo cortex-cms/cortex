@@ -51,7 +51,7 @@ module API
 
       def doorkeeper_request
         @doorkeeper_request ||= ActionDispatch::Request.new(env)
-        # Determine which is fastest/best to wrap env with at a later date
+        # TODO: Determine which is fastest/best to wrap env with at a later date
         # @doorkeeper_request ||= Doorkeeper::Grape::AuthorizationDecorator.new(request)
       end
 

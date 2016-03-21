@@ -9,10 +9,6 @@ module API
         def webpage!
           webpage || not_found!
         end
-
-        def webpage_params
-          clean_params(params)
-        end
       end
     end
   end

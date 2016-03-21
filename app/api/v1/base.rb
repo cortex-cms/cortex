@@ -1,5 +1,4 @@
-require 'doorkeeper/grape/helpers'
-require 'doorkeeper/grape/authorization_decorator'
+require_relative '../oauth'
 require 'cortex/exceptions'
 
 # Load modules in order
@@ -9,27 +8,15 @@ Dir["#{Rails.root}/app/api/v1/resources/*.rb"].each {|file| require file}
 
 module API
   module V1
-    class API < Grape::API
-      version 'v1', using: :path
+    class Base < Grape::API
       default_format :json
       default_error_formatter :json
       format :json
       content_type :json, 'application/json'
-
-      rescue_from ActiveRecord::RecordInvalid do |ex|
-        errors = ex.record.errors.map{ |attr, error| "#{attr} #{error}" }
-        rack_response({message: 'Validation failed', errors: errors}.to_json, 422)
-      end
+      version 'v1', using: :path
 
       helpers Helpers::APIHelper
-      helpers Doorkeeper::Grape::Helpers
-
-      before do
-        # Check if request uses client authorization grant type
-        if request.env[Rack::OAuth2::Server::Resource::ACCESS_TOKEN]
-          Doorkeeper.authenticate(Doorkeeper::Grape::AuthorizationDecorator.new(request)) || unauthorized!
-        end
-      end
+      include API::OAuth
 
       mount Resources::Categories
       mount Resources::Posts

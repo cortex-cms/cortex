@@ -4,9 +4,7 @@ module API
   module V1
     module Resources
       class Categories < Grape::API
-
         resource :categories do
-
           desc 'Show all categories', { entity: Entities::Category, nickname: "showAllCategories" }
           params do
             optional :depth, default: 1, type: Integer, desc: "Minimum category depth"

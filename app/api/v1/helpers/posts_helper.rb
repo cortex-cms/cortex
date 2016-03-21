@@ -23,10 +23,6 @@ module API
         def published_post!
           published_post || not_found!
         end
-
-        def post_params
-          clean_params(params)
-        end
       end
     end
   end

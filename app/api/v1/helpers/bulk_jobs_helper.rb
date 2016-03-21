@@ -9,10 +9,6 @@ module API
         def bulk_job!
           bulk_job || not_found!
         end
-
-        def bulk_job_params
-          clean_params(params)
-        end
       end
     end
   end

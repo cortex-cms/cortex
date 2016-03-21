@@ -4,7 +4,7 @@ module API
   module V1
     module Resources
       class Localizations < Grape::API
-        helpers Helpers::SharedParams
+        helpers Helpers::ParamsHelper
 
         resource :localizations do
           include Grape::Kaminari

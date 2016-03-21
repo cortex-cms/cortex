@@ -4,7 +4,6 @@ module API
   module V1
     module Resources
       class Users < Grape::API
-
         resource :users do
           helpers Helpers::UsersHelper
           helpers Helpers::BulkJobsHelper

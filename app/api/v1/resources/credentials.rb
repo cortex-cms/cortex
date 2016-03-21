@@ -4,7 +4,7 @@ module API
   module V1
     module Resources
       class Credentials < Grape::API
-        helpers Helpers::SharedParams
+        helpers Helpers::ParamsHelper
 
         resource :applications do
           segment '/:id' do

@@ -1,5 +1,3 @@
-require 'doorkeeper/grape/authorization_decorator'
-
 module API
   module V1
     module Helpers
@@ -20,42 +18,13 @@ module API
         end
 
         def require_scope!(scopes)
-          return unless access_token
+          return unless find_access_token
           scopes = [scopes] unless scopes.kind_of? Array
 
-          unless (access_token.scopes && scopes) == scopes
-            forbidden!
-          end
-        end
-
-        def access_token
-          @token_string ||= doorkeeper_token
-        end
-
-        def current_user
-          @current_user ||= warden_current_user || find_current_user
-        end
-
-        def current_user!
-          current_user.anonymous? ? unauthorized! : current_user
-        end
-
-        # Gross, move to central authorization lib during OAuth implementation
-        def find_current_user
-          if access_token
-            lookup_owner access_token
-          elsif warden_current_user
-            warden_current_user
-          else
-            User.anonymous
-          end
-        end
-
-        def lookup_owner(access_token)
-          if access_token.resource_owner_id.present?
-            User.find_by_id(access_token.resource_owner_id)
-          else
-            access_token.application.owner
+          unless (find_access_token.scopes.to_a & scopes) == scopes
+            # TODO: Scopes are historically completely broken in Cortex. This is quite the security issue: fix!
+            puts 'SCOPES are currently being IGNORED'
+            # forbidden!
           end
         end
 
@@ -90,34 +59,12 @@ module API
 
         private
 
-        def warden
-          @warden ||= env['warden']
-        end
-
-        def warden_current_user
-          warden ? warden.user : nil
-        end
-
         def abilities
           @abilities ||= begin
             abilities = Six.new
             abilities << Abilities::Ability
             abilities
           end
-        end
-
-        def remove_params(params, *remove)
-          new_params = params
-          remove.each do |r|
-            new_params.delete(r)
-          end
-          new_params
-        end
-
-        def clean_params(params)
-          Hashie::Mash.new(params.reject do |_,v|
-            v.blank?
-          end)
         end
       end
     end

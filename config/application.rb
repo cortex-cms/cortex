@@ -29,11 +29,6 @@ module Cortex
       end
     end
 
-    require 'rack/oauth2'
-    config.middleware.use Rack::OAuth2::Server::Resource::Bearer, 'OAuth2' do |request|
-      request.access_token
-    end
-
     config.generators do |generator|
       generator.orm :active_record
     end

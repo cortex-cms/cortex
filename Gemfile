@@ -100,6 +100,10 @@ group :test do
   gem 'json_spec', '~> 1.1.4'
   gem 'rspec-sidekiq', '~> 2.2.0'
 
+  # Capybara for feature testing, Poltergeist for PhantomJS
+  gem 'capybara'
+  gem 'poltergeist'
+
   # Guard
   gem 'guard-rspec', '~> 4.6.4'
 
@@ -119,11 +123,6 @@ group :test do
   gem 'codeclimate-test-reporter', '~> 0.4.8', require: false
   gem 'elasticsearch-extensions', '~> 0.0.20'
   gem 'spring'
-  gem 'email_spec'
-
-  # Capybara for feature testing, Poltergeist for PhantomJS
-  gem 'capybara'
-  gem 'poltergeist'
 end
 
 group :test, :development, :staging do

@@ -28,7 +28,7 @@ class Media < ActiveRecord::Base
                     },
                     :processors => [:thumbnail, :paperclip_optimizer],
                     :preserve_files => 'true',
-                    :path => ':class/:attachment/:style-:id.:extension',
+                    :path => ':class/:attachment/:style-:id.:extension'
 
   validates_attachment :attachment,
                        :presence => true,

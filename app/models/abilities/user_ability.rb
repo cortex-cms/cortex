@@ -153,7 +153,7 @@ module Abilities
         if user.is_admin?
           [:view, :create]
         else
-          []
+          [:view]
         end
       end
 

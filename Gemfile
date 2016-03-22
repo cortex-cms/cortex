@@ -100,6 +100,10 @@ group :test do
   gem 'json_spec', '~> 1.1.4'
   gem 'rspec-sidekiq', '~> 2.2.0'
 
+  # Capybara for feature testing, Poltergeist for PhantomJS
+  gem 'capybara'
+  gem 'poltergeist'
+
   # Guard
   gem 'guard-rspec', '~> 4.6.4'
 

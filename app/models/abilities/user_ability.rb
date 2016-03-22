@@ -145,7 +145,7 @@ module Abilities
         if user.is_admin?
           [:view, :update, :delete]
         else
-          []
+          [:view]
         end
       end
 
@@ -153,7 +153,7 @@ module Abilities
         if user.is_admin?
           [:view, :create]
         else
-          []
+          [:view]
         end
       end
 

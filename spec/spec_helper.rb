@@ -9,6 +9,7 @@ require 'mocha/api'
 require 'elasticsearch/extensions/test/cluster'
 require 'net/http'
 require "email_spec"
+require 'capybara/rspec'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

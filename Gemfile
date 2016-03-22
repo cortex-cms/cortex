@@ -83,6 +83,7 @@ group :test, :development do
   # Environment
   gem 'dotenv', '~> 2.1.0'
   gem 'byebug'
+  gem 'spring'
 
   # Cache/Sidekiq
   gem 'redis-namespace', '~> 1.5'
@@ -122,7 +123,6 @@ group :test do
   # Etc
   gem 'codeclimate-test-reporter', '~> 0.4.8', require: false
   gem 'elasticsearch-extensions', '~> 0.0.20'
-  gem 'spring'
 end
 
 group :test, :development, :staging do

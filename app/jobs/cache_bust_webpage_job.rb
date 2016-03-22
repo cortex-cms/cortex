@@ -5,6 +5,7 @@ class CacheBustWebpageJob < ActiveJob::Base
 
   def perform(url)
     Excon.get(get_cache_buster_url(url))
+    raise "Error while executing cache buster request\nStatus: #{r.status}\nBody: #{r.body}"
   end
 
   private

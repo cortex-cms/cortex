@@ -99,7 +99,7 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
       post = create(:post, user: user)
       get "/api/v1/posts/feed/#{post.id}"
       expect(response).to be_success
-      expect(response.body).to represent(SPEC_API::Entities::Post, post, { full: true })
+      expect(response.body).to represent(SPEC_API::V1::Entities::Post, post, { full: true })
     end
 
     it 'should not show unpublished posts' do
@@ -115,14 +115,14 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
       post = create(:post, user: user)
       get "/api/v1/posts/#{post.id}"
       expect(response).to be_success
-      expect(response.body).to represent(SPEC_API::Entities::Post, post, { full: true })
+      expect(response.body).to represent(SPEC_API::V1::Entities::Post, post, { full: true })
     end
 
     it 'should return unpublished posts' do
       post = create(:post, draft: true, user: user)
       get "/api/v1/posts/#{post.id}"
       expect(response).to be_success
-      expect(response.body).to represent(SPEC_API::Entities::Post, post, { full: true })
+      expect(response.body).to represent(SPEC_API::V1::Entities::Post, post, { full: true })
     end
   end
 
@@ -133,7 +133,7 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
         valid_post = attributes_for(:post, author_id: author.id)
         expect{ post '/api/v1/posts', valid_post }.to change(Post, :count).by(1)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::Entities::Post, Post.last, { full: true })
+        expect(response.body).to represent(SPEC_API::V1::Entities::Post, Post.last, { full: true })
       end
     end
 
@@ -149,7 +149,7 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
         with_media_post = build(:post, :with_featured_media, author_id: author.id).to_json
         expect{ post '/api/v1/posts', with_media_post, application_json }.to change(Post, :count).by(1)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::Entities::Post, Post.last, { full: true })
+        expect(response.body).to represent(SPEC_API::V1::Entities::Post, Post.last, { full: true })
       end
 
       it 'should include the featured media in associated media' do
@@ -166,7 +166,7 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
 
         expect{ post '/api/v1/posts',  promo_post }.to change(Post, :count).by(1)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::Entities::Post, Post.last, { full: true })
+        expect(response.body).to represent(SPEC_API::V1::Entities::Post, Post.last, { full: true })
       end
       it 'should require featured_url and call_to_action' do
         promo_post = attributes_for(:post, type: 'PromoPost', author_id: author.id)
@@ -184,7 +184,7 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
         post.title += ' updated'
         expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::Entities::Post, post, { full: true })
+        expect(response.body).to represent(SPEC_API::V1::Entities::Post, post, { full: true })
       end
     end
 
@@ -202,7 +202,7 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
         post.destination_url = "http://www.example.com"
         expect{ put "/api/v1/posts/#{post.id}", {destination_url: "http://www.example.com"}.to_json, application_json }.to_not change(Post, :count)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::Entities::Post, post, { full: true })
+        expect(response.body).to represent(SPEC_API::V1::Entities::Post, post, { full: true })
       end
 
       it 'should not update the post with invalid attributes' do
@@ -224,7 +224,7 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
         post.title += ' updated'
         expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::Entities::Post, post, { full: true })
+        expect(response.body).to represent(SPEC_API::V1::Entities::Post, post, { full: true })
       end
 
       it 'should include the featured media in associated media' do

@@ -45,14 +45,14 @@ namespace :cortex do
       if find == nil or replace == nil or tenant == nil
         puts "You need to set env vars for FIND, REPLACE and TENANT to use this"
         next
-      end 
+      end
 
       # Replace text in Snippets and in Posts
       puts "Searching for Snippets with the text '#{find}' in tenant #{tenant}"
-      matching_snippets = Snippet.joins(:user, :document).where(users: { tenant_id: 4 }).where("documents.body LIKE :query", query: "%#{find}%")
+      matching_snippets = Snippet.joins(:document).find_by_tenant_id(tenant).where("documents.body LIKE :query", query: "%#{find}%")
 
       puts "Searching for Posts with the text '#{find}' in tenant #{tenant}"
-      matching_posts = Post.joins(:user).where(users: { tenant_id: 4 }).where("body LIKE :query", query: "%#{find}%")
+      matching_posts = Post.find_by_tenant_id(tenant).where("body LIKE :query", query: "%#{find}%")
 
       puts "This will replace text in #{matching_snippets.count} snippet(s) and #{matching_posts.count} post(s)"
 

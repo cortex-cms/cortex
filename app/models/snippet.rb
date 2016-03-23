@@ -1,4 +1,6 @@
 class Snippet < ActiveRecord::Base
+  include FindByTenant
+  
   acts_as_paranoid
 
   belongs_to :user

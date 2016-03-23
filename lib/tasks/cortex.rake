@@ -49,10 +49,10 @@ namespace :cortex do
 
       # Replace text in Snippets and in Posts
       puts "Searching for Snippets with the text '#{find}' in tenant #{tenant}"
-      matching_snippets = Snippet.joins(:document).find_by_tenant_id(tenant).where("documents.body LIKE :query", query: "%#{find}%")
+      matching_snippets = Snippet.find_by_tenant_id(tenant).find_by_body_text(find)
 
       puts "Searching for Posts with the text '#{find}' in tenant #{tenant}"
-      matching_posts = Post.find_by_tenant_id(tenant).where("body LIKE :query", query: "%#{find}%")
+      matching_posts = Post.find_by_tenant_id(tenant).find_by_body_text(find)
 
       puts "This will replace text in #{matching_snippets.count} snippet(s) and #{matching_posts.count} post(s)"
 
@@ -60,9 +60,6 @@ namespace :cortex do
       confirmation = STDIN.gets.chomp
 
       next unless confirmation == "yes" or confirmation == ""
-
-      # Snippet.first.document.name
-      # Snippet.first.webpage.url
 
       matching_snippets.all.each do |snippet|
         puts "Replacing text in #{snippet.document.name} on #{snippet.webpage.url}"

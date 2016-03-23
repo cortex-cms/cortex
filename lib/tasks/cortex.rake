@@ -36,13 +36,13 @@ namespace :cortex do
   namespace :snippets do
 
     desc 'Find and replace text in snippets'
-    task :replace => :environment do |t, args|
+    task :replace => :environment do
 
       find = ENV['FIND']
       replace = ENV['REPLACE']
       tenant = ENV['TENANT']
 
-      if find == nil or replace == nil or tenant == nil
+      if [find, replace, tenant].include? nil
         puts "You need to set env vars for FIND, REPLACE and TENANT to use this"
         next
       end

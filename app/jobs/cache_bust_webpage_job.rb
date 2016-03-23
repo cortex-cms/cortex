@@ -4,8 +4,8 @@ class CacheBustWebpageJob < ActiveJob::Base
   queue_as :default
 
   def perform(url)
-    Excon.get(get_cache_buster_url(url))
-    raise "Error while executing cache buster request\nStatus: #{r.status}\nBody: #{r.body}"
+    r = Excon.get(get_cache_buster_url(url))
+    raise "Error while executing cache buster request\nStatus: #{r.status}\nBody: #{r.body}" if r.status >= 300
   end
 
   private

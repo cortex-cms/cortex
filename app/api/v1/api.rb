@@ -1,5 +1,3 @@
-require 'cortex/exceptions'
-
 module V1
   class API < Grape::API
     default_format :json

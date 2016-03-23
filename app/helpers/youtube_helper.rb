@@ -1,5 +1,3 @@
-require 'json'
-
 module YoutubeHelper
   def self.fetch_info(video_id)
     video = {}

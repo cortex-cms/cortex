@@ -1,5 +1,3 @@
-require 'nokogiri'
-
 class Post < ActiveRecord::Base
   include SearchablePost
   include FindByTenant

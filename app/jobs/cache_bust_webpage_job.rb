@@ -1,5 +1,3 @@
-require 'uri'
-
 class CacheBustWebpageJob < ActiveJob::Base
   queue_as :default
 

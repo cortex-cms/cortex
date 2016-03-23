@@ -1,4 +1,3 @@
-require 'rack/oauth2'
 #require 'doorkeeper/grape/authorization_decorator'
 
 module Oauth

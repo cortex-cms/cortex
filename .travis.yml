@@ -1,11 +1,14 @@
+sudo: false
 language: ruby
 cache: bundler
 rvm:
 - 2.3.0
 bundler_args: "--without production staging development"
+addons:
+  apt:
+    packages:
+    - jpegoptim
 before_script:
-- sudo apt-get update -qq
-- sudo apt-get install -y jpegoptim
 - psql -c 'create database cortex_test;' -U postgres
 - bundle exec rake db:schema:load db:seed cortex:create_categories
 - sleep 10

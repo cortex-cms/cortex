@@ -1,3 +1,6 @@
+require 'csv'
+require 'zip'
+
 class BulkCreateMediaJob < ActiveJob::Base
   queue_as :default
 

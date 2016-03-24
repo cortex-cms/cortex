@@ -1,5 +1,4 @@
 class Locale < ActiveRecord::Base
-  require 'yaml'
   serialize :data
 
   belongs_to :user

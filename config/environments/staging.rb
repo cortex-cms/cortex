@@ -51,14 +51,6 @@ Cortex::Application.configure do
     }
   end
 
-  silence_warnings do
-    begin
-      require 'pry'
-      IRB = Pry
-    rescue LoadError
-    end
-  end
-
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = {:host => ENV['HOST']}
   config.action_mailer.delivery_method = :smtp

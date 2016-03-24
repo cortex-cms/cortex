@@ -1,5 +1,3 @@
-require 'mime/types'
-
 class Media < ActiveRecord::Base
   include SearchableMedia
   include Taxon

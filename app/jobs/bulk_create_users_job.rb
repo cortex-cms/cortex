@@ -1,5 +1,3 @@
-require 'csv'
-
 class BulkCreateUsersJob < ActiveJob::Base
   queue_as :default
 

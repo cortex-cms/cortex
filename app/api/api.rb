@@ -5,5 +5,5 @@ class API < Grape::API
   end
 
   include Oauth
-  mount V1::API
+  mount ::V1::API
 end

@@ -16,7 +16,7 @@ describe SPEC_API::Resources::Tenants, :type => :request do
     it 'should return the correct tenant' do
       get "/api/v1/tenants/#{tenant.id}"
       expect(response).to be_success
-      expect(response.body).to represent(SPEC_API::V1::Entities::Tenant, tenant)
+      expect(response.body).to represent(SPEC_API::Entities::Tenant, tenant)
     end
   end
 
@@ -26,7 +26,7 @@ describe SPEC_API::Resources::Tenants, :type => :request do
       it 'should create a new tenant' do
         expect{ post '/api/v1/tenants', attributes_for(:tenant) }.to change(Tenant, :count).by(1)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::V1::Entities::Tenant, Tenant.last)
+        expect(response.body).to represent(SPEC_API::Entities::Tenant, Tenant.last)
       end
     end
 
@@ -46,7 +46,7 @@ describe SPEC_API::Resources::Tenants, :type => :request do
         tenant.name += ' updated'
         expect{ put "/api/v1/tenants/#{tenant.id}", tenant.to_json, application_json }.to_not change(Tenant, :count)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::V1::Entities::Tenant, tenant)
+        expect(response.body).to represent(SPEC_API::Entities::Tenant, tenant)
       end
     end
 

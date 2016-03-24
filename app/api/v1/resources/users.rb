@@ -5,10 +5,10 @@ module V1
         helpers Helpers::UsersHelper
         helpers Helpers::BulkJobsHelper
 
-        desc 'Get the current user', { entity: V1::Entities::User, nickname: 'currentUser' }
+        desc 'Get the current user', { entity: ::V1::Entities::User, nickname: 'currentUser' }
         get :me do
           authorize! :view, current_user!
-          present current_user, with: V1::Entities::User, full: true
+          present current_user, with: ::V1::Entities::User, full: true
         end
 
         desc "Fetch a user's author info"
@@ -16,7 +16,7 @@ module V1
           require_scope! :'view:users'
           authorize! :view, user!
 
-          present user.author || not_found!, with: V1::Entities::Author
+          present user.author || not_found!, with: ::V1::Entities::Author
         end
 
         desc "Save a user's author info"
@@ -38,7 +38,7 @@ module V1
           author.update_attributes!(declared(params, {include_missing: false}))
           author.save!
 
-          present author, with: V1::Entities::Author
+          present author, with: ::V1::Entities::Author
         end
 
         desc 'Create a new user'
@@ -58,7 +58,7 @@ module V1
 
           @user = User.create!(declared(params, {include_missing: false}, allowed_params))
 
-          present @user, with: V1::Entities::User, full: true
+          present @user, with: ::V1::Entities::User, full: true
         end
 
         desc "Save a user's info"
@@ -87,7 +87,7 @@ module V1
 
           user.update!(declared(params, {include_missing: false}, allowed_params))
 
-          present user, with: V1::Entities::User, full: true
+          present user, with: ::V1::Entities::User, full: true
         end
 
         desc 'Show a user', {nickname: 'showUser'}
@@ -95,7 +95,7 @@ module V1
           require_scope! :'view:users'
           authorize! :view, user!
 
-          present user, with: V1::Entities::User, full: true
+          present user, with: ::V1::Entities::User, full: true
         end
 
         desc 'Delete a user', {nickname: 'deleteUser'}
@@ -114,7 +114,7 @@ module V1
           end
         end
 
-        desc 'Bulk create users', { entity: V1::Entities::BulkJob, nickname: 'bulkCreateUsers' }
+        desc 'Bulk create users', { entity: ::V1::Entities::BulkJob, nickname: 'bulkCreateUsers' }
         post :bulk_job do
           require_scope! :'modify:users'
           require_scope! :'modify:bulk_jobs'
@@ -123,14 +123,14 @@ module V1
 
           bulk_job_params = params[:bulkJob] || params
 
-          @bulk_job = ::BulkJob.new(declared(bulk_job_params, { include_missing: false }, V1::Entities::BulkJob.documentation.keys))
+          @bulk_job = ::BulkJob.new(declared(bulk_job_params, { include_missing: false }, ::V1::Entities::BulkJob.documentation.keys))
           bulk_job.content_type = 'Users'
           bulk_job.user = current_user!
           bulk_job.save!
 
           BulkCreateUsersJob.perform_later(bulk_job)
 
-          present bulk_job, with: V1::Entities::BulkJob
+          present bulk_job, with: ::V1::Entities::BulkJob
         end
       end
     end

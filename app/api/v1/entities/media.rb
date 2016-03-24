@@ -16,10 +16,10 @@ module V1
       expose :active, documentation: { type: "Boolean", desc: "Media active" }
       expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
 
-      expose :user, with: 'V1::Entities::User', as: :creator, documentation: { type: "User", desc: "Owner" }
+      expose :user, with: '::V1::Entities::User', as: :creator, documentation: { type: "User", desc: "Owner" }
 
       ## Thumbnails
-      expose :attachment, using: 'V1::Entities::MediaThumbnails', as: :thumbs, if: lambda { |media, _| media.can_thumb? }, documentation: { type: "MediaThumbnails", desc: "Thumbnails of the media"}
+      expose :attachment, using: '::V1::Entities::MediaThumbnails', as: :thumbs, if: lambda { |media, _| media.can_thumb? }, documentation: { type: "MediaThumbnails", desc: "Thumbnails of the media"}
 
       ## Youtube Specific
       with_options if: lambda { |media, _| media.content_type == 'youtube' } do

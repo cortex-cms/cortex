@@ -8,7 +8,7 @@ module V1
         helpers Helpers::WebpagesHelper
         paginate per_page: 25
 
-        desc 'Show all webpages', { entity: V1::Entities::Webpage, nickname: 'showAllWebpages' }
+        desc 'Show all webpages', { entity: ::V1::Entities::Webpage, nickname: 'showAllWebpages' }
         params do
           optional :q, type: String
         end
@@ -17,10 +17,10 @@ module V1
           require_scope! :'view:webpages'
 
           @webpages = ::GetWebpages.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).webpages
-          V1::Entities::Webpage.represent set_paginate_headers(@webpages), full: true
+          ::V1::Entities::Webpage.represent set_paginate_headers(@webpages), full: true
         end
 
-        desc 'Show Webpage Snippets as public feed by URL', { entity: V1::Entities::Webpage, nickname: 'showWebpageFeed' }
+        desc 'Show Webpage Snippets as public feed by URL', { entity: ::V1::Entities::Webpage, nickname: 'showWebpageFeed' }
         params do
           requires :url, type: String
         end
@@ -29,38 +29,38 @@ module V1
           @webpage ||= Webpage.find_by_url(params[:url])
           not_found! unless @webpage
           authorize! :view, @webpage
-          present @webpage, with: V1::Entities::Webpage
+          present @webpage, with: ::V1::Entities::Webpage
         end
 
-        desc 'Get webpage', { entity: V1::Entities::Webpage, nickname: 'showWebpage' }
+        desc 'Get webpage', { entity: ::V1::Entities::Webpage, nickname: 'showWebpage' }
         get ':id' do
           require_scope! :'view:webpages'
           authorize! :view, webpage!
 
-          present webpage, with: V1::Entities::Webpage, full: true
+          present webpage, with: ::V1::Entities::Webpage, full: true
         end
 
-        desc 'Create webpage', { entity: V1::Entities::Webpage, params: V1::Entities::Webpage.documentation, nickname: 'createWebpage' }
+        desc 'Create webpage', { entity: ::V1::Entities::Webpage, params: ::V1::Entities::Webpage.documentation, nickname: 'createWebpage' }
         post do
           require_scope! :'modify:webpages'
           authorize! :create, ::Webpage
 
           webpage_params = params[:webpage] || params
 
-          @webpage = ::Webpage.new(declared(webpage_params, { include_missing: false }, V1::Entities::Webpage.documentation.keys))
+          @webpage = ::Webpage.new(declared(webpage_params, { include_missing: false }, ::V1::Entities::Webpage.documentation.keys))
           webpage.user = current_user!
           webpage.save!
 
-          present webpage, with: V1::Entities::Webpage, full: true
+          present webpage, with: ::V1::Entities::Webpage, full: true
         end
 
-        desc 'Update webpage', { entity: V1::Entities::Webpage, params: V1::Entities::Webpage.documentation, nickname: 'updateWebpage' }
+        desc 'Update webpage', { entity: ::V1::Entities::Webpage, params: ::V1::Entities::Webpage.documentation, nickname: 'updateWebpage' }
         put ':id' do
           require_scope! :'modify:webpages'
           authorize! :update, webpage!
 
           webpage_params = params[:webpage] || params
-          allowed_params = remove_params(V1::Entities::Webpage.documentation.keys, :user) + [:snippets_attributes]
+          allowed_params = remove_params(::V1::Entities::Webpage.documentation.keys, :user) + [:snippets_attributes]
           update_params = declared(webpage_params, { include_missing: false }, allowed_params)
           update_params[:snippets_attributes].each {|snippet|
             snippet.user = current_user!
@@ -70,7 +70,7 @@ module V1
           webpage.update!(update_params.to_hash)
           CacheBustWebpageJob.perform_later(webpage.url)
 
-          present webpage, with: V1::Entities::Webpage, full: true
+          present webpage, with: ::V1::Entities::Webpage, full: true
         end
 
         desc 'Delete webpage', { nickname: 'deleteWebpage' }

@@ -11,7 +11,7 @@ module V1
 
         paginate per_page: 25
 
-        desc 'Show all media', { entity: V1::Entities::Media, nickname: 'showAllMedia' }
+        desc 'Show all media', { entity: ::V1::Entities::Media, nickname: 'showAllMedia' }
         params do
           use :search
         end
@@ -20,7 +20,7 @@ module V1
           require_scope! :'view:media'
 
           @media = ::GetMultipleMedia.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).media
-          V1::Entities::Media.represent set_paginate_headers(@media)
+          ::V1::Entities::Media.represent set_paginate_headers(@media)
         end
 
         desc 'Show media tags'
@@ -39,18 +39,18 @@ module V1
             tags = tags.order('count DESC').limit(20)
           end
 
-          present tags, with: V1::Entities::Tag
+          present tags, with: ::V1::Entities::Tag
         end
 
-        desc 'Get media', { entity: V1::Entities::Media, nickname: 'showMedia' }
+        desc 'Get media', { entity: ::V1::Entities::Media, nickname: 'showMedia' }
         get ':id' do
           require_scope! :'view:media'
           authorize! :view, media!
 
-          present media, with: V1::Entities::Media, full: true
+          present media, with: ::V1::Entities::Media, full: true
         end
 
-        desc 'Create media', { entity: V1::Entities::Media, params: V1::Entities::Media.documentation, nickname: 'createMedia' }
+        desc 'Create media', { entity: ::V1::Entities::Media, params: ::V1::Entities::Media.documentation, nickname: 'createMedia' }
         params do
           optional :attachment
         end
@@ -60,17 +60,17 @@ module V1
 
           media_params = params[:media] || params
 
-          @media = ::Media.new(declared(media_params, { include_missing: false }, V1::Entities::Media.documentation.keys))
+          @media = ::Media.new(declared(media_params, { include_missing: false }, ::V1::Entities::Media.documentation.keys))
           media.user = current_user!
           if params[:tag_list]
             media.tag_list = params[:tag_list]
           end
           media.save!
 
-          present media, with: V1::Entities::Media, full: true
+          present media, with: ::V1::Entities::Media, full: true
         end
 
-        desc 'Update media', { entity: V1::Entities::Media, params: V1::Entities::Media.documentation, nickname: 'updateMedia' }
+        desc 'Update media', { entity: ::V1::Entities::Media, params: ::V1::Entities::Media.documentation, nickname: 'updateMedia' }
         params do
           optional :attachment
         end
@@ -87,7 +87,7 @@ module V1
           end
           media.update!(declared(media_params, { include_missing: false }, allowed_params))
 
-          present media, with: V1::Entities::Media, full: true
+          present media, with: ::V1::Entities::Media, full: true
         end
 
         desc 'Delete media', { nickname: 'deleteMedia' }
@@ -107,7 +107,7 @@ module V1
           end
         end
 
-        desc 'Bulk create media', { entity: V1::Entities::BulkJob, nickname: 'bulkCreateMedia' }
+        desc 'Bulk create media', { entity: ::V1::Entities::BulkJob, nickname: 'bulkCreateMedia' }
         params do
           group :bulkJob, type: Hash do
             requires :assets
@@ -121,14 +121,14 @@ module V1
 
           bulk_job_params = params[:bulkJob] || params
 
-          @bulk_job = ::BulkJob.new(declared(bulk_job_params, { include_missing: false }, V1::Entities::BulkJob.documentation.keys))
+          @bulk_job = ::BulkJob.new(declared(bulk_job_params, { include_missing: false }, ::V1::Entities::BulkJob.documentation.keys))
           bulk_job.content_type = 'Media'
           bulk_job.user = current_user!
           bulk_job.save!
 
           BulkCreateMediaJob.perform_later(bulk_job, current_user!)
 
-          present bulk_job, with: V1::Entities::BulkJob
+          present bulk_job, with: ::V1::Entities::BulkJob
         end
       end
     end

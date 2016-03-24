@@ -21,7 +21,7 @@ describe SPEC_API::Resources::Applications, :type => :request do
 
     it 'should return the correct application' do
       get "/api/v1/applications/#{application.id}"
-      expect(response.body).to represent(SPEC_API::V1::Entities::Application, application)
+      expect(response.body).to represent(SPEC_API::Entities::Application, application)
     end
   end
 
@@ -37,7 +37,7 @@ describe SPEC_API::Resources::Applications, :type => :request do
 
       it 'should create a new application' do
         post '/api/v1/applications', attributes_for(:application)
-        expect(response.body).to represent(SPEC_API::V1::Entities::Application, Application.last)
+        expect(response.body).to represent(SPEC_API::Entities::Application, Application.last)
       end
 
       it 'should change the application count by 1' do
@@ -64,7 +64,7 @@ describe SPEC_API::Resources::Applications, :type => :request do
       it 'should update the application' do
         application.name += ' updated'
         put "/api/v1/applications/#{application.id}", application.to_json, application_json
-        expect(response.body).to represent(SPEC_API::V1::Entities::Application, application)
+        expect(response.body).to represent(SPEC_API::Entities::Application, application)
       end
       it 'should be a success' do
         application.name += ' updated'

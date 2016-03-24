@@ -8,7 +8,7 @@ module V1
       expose :created_at, documentation: { type: 'dateTime', desc: 'Created Date'}
       expose :updated_at, documentation: { type: 'dateTime', desc: 'Last Updated Date'}
 
-      expose :user, with: 'V1::Entities::User', as: :creator, documentation: { type: 'User', desc: 'Owner' }
+      expose :user, with: '::V1::Entities::User', as: :creator, documentation: { type: 'User', desc: 'Owner' }
     end
   end
 end

@@ -10,7 +10,7 @@ module V1
 
         paginate per_page: 25
 
-        desc 'Show all posts', { entity: V1::Entities::Post, nickname: "showAllPosts" }
+        desc 'Show all posts', { entity: ::V1::Entities::Post, nickname: "showAllPosts" }
         params do
           use :search
           use :post_metadata
@@ -21,10 +21,10 @@ module V1
           authorize! :view, ::Post
           @posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).posts
 
-          V1::Entities::Post.represent set_paginate_headers(@posts)
+          ::V1::Entities::Post.represent set_paginate_headers(@posts)
         end
 
-        desc 'Show published posts', { entity: V1::Entities::Post, nickname: "postFeed" }
+        desc 'Show published posts', { entity: ::V1::Entities::Post, nickname: "postFeed" }
         params do
           use :search
           use :post_metadata
@@ -39,7 +39,7 @@ module V1
 
           posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
             posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-            V1::Entities::Post.represent set_paginate_headers(posts)
+            ::V1::Entities::Post.represent set_paginate_headers(posts)
           end
 
           posts_page
@@ -47,10 +47,10 @@ module V1
 
         desc 'Show published post authors'
         get 'feed/authors' do
-          present Author.published.distinct, with: V1::Entities::Author
+          present Author.published.distinct, with: ::V1::Entities::Author
         end
 
-        desc 'Show related published posts', { entity: V1::Entities::Post, nickname: "relatedPosts" }
+        desc 'Show related published posts', { entity: ::V1::Entities::Post, nickname: "relatedPosts" }
         paginate per_page: 5
         get 'feed/:id/related' do
           require_scope! :'view:posts'
@@ -59,15 +59,15 @@ module V1
           authorize! :view, post
 
           @posts = ::GetRelatedPosts.call(post: post, params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-          V1::Entities::Post.represent set_paginate_headers(@posts)
+          ::V1::Entities::Post.represent set_paginate_headers(@posts)
         end
 
-        desc 'Show a published post', { entity: V1::Entities::Post, nickname: "showFeedPost" }
+        desc 'Show a published post', { entity: ::V1::Entities::Post, nickname: "showFeedPost" }
         get 'feed/*id' do
           @post = ::GetPost.call(id: params[:id], published: true, tenant: current_tenant.id).post
           not_found! unless @post
           authorize! :view, @post
-          present @post, with: V1::Entities::Post, full: true
+          present @post, with: ::V1::Entities::Post, full: true
         end
 
         desc 'Show post tags'
@@ -86,7 +86,7 @@ module V1
             tags = tags.order('count DESC').limit(20)
           end
 
-          present tags, with: V1::Entities::Tag
+          present tags, with: ::V1::Entities::Tag
         end
 
         desc 'Show all filters/facets for posts', { nickname: "showFilters" }
@@ -96,21 +96,21 @@ module V1
         get 'filters' do
           require_scope! :'view:posts'
           authorize! :view, Post
-          present :industries, ::Onet::Occupation.industries, with: V1::Entities::Occupation
-          present :categories, ::Category.where('depth >= ?', params[:depth]), with: V1::Entities::Category
-          present :job_phases, ::Category.roots, with: V1::Entities::Category, children: true
+          present :industries, ::Onet::Occupation.industries, with: ::V1::Entities::Occupation
+          present :categories, ::Category.where('depth >= ?', params[:depth]), with: ::V1::Entities::Category
+          present :job_phases, ::Category.roots, with: ::V1::Entities::Category, children: true
         end
 
-        desc 'Show a post', { entity: V1::Entities::Post, nickname: "showPost" }
+        desc 'Show a post', { entity: ::V1::Entities::Post, nickname: "showPost" }
         get ':id' do
           require_scope! :'view:posts'
           @post = ::GetPost.call(id: params[:id], tenant: current_tenant.id).post
           not_found! unless @post
           authorize! :view, @post
-          present @post, with: V1::Entities::Post, full: true
+          present @post, with: ::V1::Entities::Post, full: true
         end
 
-        desc 'Create a post', { entity: V1::Entities::Post, params: V1::Entities::Post.documentation, nickname: "createPost" }
+        desc 'Create a post', { entity: ::V1::Entities::Post, params: ::V1::Entities::Post.documentation, nickname: "createPost" }
         params do
           use :post_associations
         end
@@ -118,15 +118,15 @@ module V1
           require_scope! :'modify:posts'
           authorize! :create, Post
 
-          allowed_params = remove_params(V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
+          allowed_params = remove_params(::V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
 
           @post = ::Post.new(declared(params, {include_missing: false}, allowed_params))
           post.user = params[:user] ? User.find(params[:user]) : current_user
           post.save!
-          present post, with: V1::Entities::Post, full: true
+          present post, with: ::V1::Entities::Post, full: true
         end
 
-        desc 'Update a post', { entity: V1::Entities::Post, params: V1::Entities::Post.documentation, nickname: "updatePost" }
+        desc 'Update a post', { entity: ::V1::Entities::Post, params: ::V1::Entities::Post.documentation, nickname: "updatePost" }
         params do
           use :post_associations
         end
@@ -134,7 +134,7 @@ module V1
           require_scope! :'modify:posts'
           authorize! :update, post!
 
-          allowed_params = remove_params(V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
+          allowed_params = remove_params(::V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
 
           if params[:type]
             post.update!({type: params[:type]}) if params[:type]
@@ -145,7 +145,7 @@ module V1
           end
           post.update!(declared(params, {include_missing: false}, allowed_params))
 
-          present post, with: V1::Entities::Post, full: true
+          present post, with: ::V1::Entities::Post, full: true
         end
 
         desc 'Delete a post', { nickname: "deletePost" }

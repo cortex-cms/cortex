@@ -36,7 +36,7 @@ describe SPEC_API::Resources::Document, type: :request do
     it 'should return the correct document' do
       get "/api/v1/documents/#{document.id}"
       expect(response).to be_success
-      expect(response.body).to represent(SPEC_API::V1::Entities::Document, document)
+      expect(response.body).to represent(SPEC_API::Entities::Document, document)
     end
   end
 
@@ -47,7 +47,7 @@ describe SPEC_API::Resources::Document, type: :request do
         pending 'Broken!'
         expect{ post '/api/v1/documents', document: attributes_for(:document) }.to change(Document, :count).by(1)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::V1::Entities::Document, Document.last)
+        expect(response.body).to represent(SPEC_API::Entities::Document, Document.last)
       end
     end
   end
@@ -60,7 +60,7 @@ describe SPEC_API::Resources::Document, type: :request do
         document.name += ' updated'
         expect{ put "/api/v1/documents/#{document.id}", document.to_json, application_json }.to_not change(Document, :count)
         expect(response).to be_success
-        expect(response.body).to represent(SPEC_API::V1::Entities::Document, document)
+        expect(response.body).to represent(SPEC_API::Entities::Document, document)
       end
     end
   end

@@ -10,28 +10,28 @@ module V1
 
         paginate per_page: 25
 
-        desc 'Show all tenants', { entity: V1::Entities::Tenant, nickname: "showAllTenants" }
+        desc 'Show all tenants', { entity: ::V1::Entities::Tenant, nickname: "showAllTenants" }
         get do
           require_scope! :'view:tenants'
           authorize! :view, Tenant
 
-          V1::Entities::Tenant.represent paginate(Tenant.all), children: params[:include_children]
+          ::V1::Entities::Tenant.represent paginate(Tenant.all), children: params[:include_children]
         end
 
-        desc 'Show tenant hierarchy', { entity: V1::Entities::Tenant, nickname: "showTenantHierarchy" }
+        desc 'Show tenant hierarchy', { entity: ::V1::Entities::Tenant, nickname: "showTenantHierarchy" }
         get :hierarchy do
           require_scope! :'view:tenants'
           authorize! :view, Tenant
 
-          present Tenant.roots, using: V1::Entities::Tenant, children: true
+          present Tenant.roots, using: ::V1::Entities::Tenant, children: true
         end
 
-        desc 'Show a tenant', { entity: V1::Entities::Tenant, nickname: "showTenant" }
+        desc 'Show a tenant', { entity: ::V1::Entities::Tenant, nickname: "showTenant" }
         get ':id' do
-          present tenant!, with: V1::Entities::Tenant, children: false
+          present tenant!, with: ::V1::Entities::Tenant, children: false
         end
 
-        desc 'Create a tenant', { entity: V1::Entities::Tenant, params: V1::Entities::Tenant.documentation, nickname: "createTenant" }
+        desc 'Create a tenant', { entity: ::V1::Entities::Tenant, params: ::V1::Entities::Tenant.documentation, nickname: "createTenant" }
         params do
           optional :name, type: String, desc: "Tenant Name"
         end
@@ -39,23 +39,23 @@ module V1
           require_scope! :'modify:tenants'
           authorize! :create, Tenant
 
-          allowed_params = remove_params(V1::Entities::Tenant.documentation.keys, :children)
+          allowed_params = remove_params(::V1::Entities::Tenant.documentation.keys, :children)
 
           @tenant = ::Tenant.new(declared(params, { include_missing: true }, allowed_params))
           tenant.owner = current_user
           tenant.save!
-          present tenant, with: V1::Entities::Tenant
+          present tenant, with: ::V1::Entities::Tenant
         end
 
-        desc 'Update a tenant', { entity: V1::Entities::Tenant, params: V1::Entities::Tenant.documentation, nickname: "updateTenant" }
+        desc 'Update a tenant', { entity: ::V1::Entities::Tenant, params: ::V1::Entities::Tenant.documentation, nickname: "updateTenant" }
         put ':id' do
           require_scope! :'modify:tenants'
           authorize! :update, tenant!
 
-          allowed_params = remove_params(V1::Entities::Tenant.documentation.keys, :children)
+          allowed_params = remove_params(::V1::Entities::Tenant.documentation.keys, :children)
 
           tenant.update!(declared(params, { include_missing: false }, allowed_params))
-          present tenant, with: V1::Entities::Tenant
+          present tenant, with: ::V1::Entities::Tenant
         end
 
         desc 'Delete a tenant', { nickname: "deleteTenant" }
@@ -73,7 +73,7 @@ module V1
 
             paginate per_page: 25
 
-            desc 'Show all users belonging to a tenant', { entity: V1::Entities::User, nickname: "showAllTenantUsers" }
+            desc 'Show all users belonging to a tenant', { entity: ::V1::Entities::User, nickname: "showAllTenantUsers" }
             params do
               use :search
             end
@@ -82,7 +82,7 @@ module V1
               require_scope! :'view:users'
 
               @users = ::GetUsers.call(params: declared(clean_params(params), include_missing: false), tenant_id: params[:id]).users
-              V1::Entities::User.represent set_paginate_headers(@users), full: true
+              ::V1::Entities::User.represent set_paginate_headers(@users), full: true
             end
           end
         end

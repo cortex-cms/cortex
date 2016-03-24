@@ -11,7 +11,7 @@ describe SPEC_API::Resources::Users, :type => :request do
       login_as user
       get '/api/v1/users/me'
       expect(response).to be_success
-      expect(response.body).to represent(SPEC_API::V1::Entities::User, user, { full: true })
+      expect(response.body).to represent(SPEC_API::Entities::User, user, { full: true })
     end
 
     it 'should NOT get the current user if unauthorized' do

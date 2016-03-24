@@ -5,7 +5,7 @@ module V1
       expose :name, documentation: { type: 'String', desc: 'Webpage Name', required: true }
       expose :created_at, documentation: { type: 'dateTime', desc: 'Created Date'}
       expose :updated_at, documentation: { type: 'dateTime', desc: 'Updated Date'}
-      expose :snippets, with: 'V1::Entities::Snippet', documentation: {type: 'Snippet', is_array: true, desc: 'All associated Snippets for this Webpage'}
+      expose :snippets, with: '::V1::Entities::Snippet', documentation: {type: 'Snippet', is_array: true, desc: 'All associated Snippets for this Webpage'}
 
       expose :seo_title, documentation: { type: 'String', desc: "SEO Meta Tag Title" }
       expose :seo_description, documentation: { type: 'String', desc: "SEO Meta Tag Description" }
@@ -17,7 +17,7 @@ module V1
       expose :noimageindex, documentation: { type: 'Boolean', desc: "SEO No Image Index Robots Setting" }
 
       with_options if: { full: true } do
-        expose :user, with: 'V1::Entities::User', documentation: {type: 'User', desc: 'Owner'}
+        expose :user, with: '::V1::Entities::User', documentation: {type: 'User', desc: 'Owner'}
         expose :url, documentation: { type: 'String', desc: 'URL of Webpage' }
       end
     end

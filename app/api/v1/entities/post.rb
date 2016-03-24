@@ -23,10 +23,10 @@ module V1
       expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
       expose :body, documentation: {desc: "Body of the post", type: "String"}
 
-      expose :categories, using: 'V1::Entities::Category', documentation: {type: 'Category', is_array: true, desc: "Categories"}
-      expose :featured_media, using: 'V1::Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Featured Media for this post"}
-      expose :tile_media, using: 'V1::Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Tile Media for this post"}
-      expose :industries, using: 'V1::Entities::Occupation', documentation: {type: 'Industry', is_array: true, desc: "Industries"}
+      expose :categories, using: '::V1::Entities::Category', documentation: {type: 'Category', is_array: true, desc: "Categories"}
+      expose :featured_media, using: '::V1::Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Featured Media for this post"}
+      expose :tile_media, using: '::V1::Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Tile Media for this post"}
+      expose :industries, using: '::V1::Entities::Occupation', documentation: {type: 'Industry', is_array: true, desc: "Industries"}
 
       # This runtime exposure is necessary to correctly resolve the enum value
       expose :display, {documentation: { type: "String", desc: "Post Display Size"}} do |post|
@@ -49,9 +49,9 @@ module V1
       end
 
       with_options if: { full: true } do
-        represent :media, with: 'V1::Entities::Media', full: true, documentation: {type: "Media", is_array: true, desc: "All Media for this post"}
-        expose :user, with: 'V1::Entities::User'
-        expose :author, using: 'V1::Entities::Author'
+        represent :media, with: '::V1::Entities::Media', full: true, documentation: {type: "Media", is_array: true, desc: "All Media for this post"}
+        expose :user, with: '::V1::Entities::User'
+        expose :author, using: '::V1::Entities::Author'
       end
     end
   end

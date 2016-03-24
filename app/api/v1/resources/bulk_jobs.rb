@@ -7,22 +7,22 @@ module V1
 
         paginate per_page: 25
 
-        desc 'Show all bulk jobs', { entity: V1::Entities::BulkJob, nickname: 'showAllBulkJobs' }
+        desc 'Show all bulk jobs', { entity: ::V1::Entities::BulkJob, nickname: 'showAllBulkJobs' }
         get do
           authorize! :view, ::BulkJob
           require_scope! :'view:bulk_jobs'
 
           @bulk_job = ::BulkJob.order(created_at: :desc)
 
-          V1::Entities::BulkJob.represent paginate(@bulk_job)
+          ::V1::Entities::BulkJob.represent paginate(@bulk_job)
         end
 
-        desc 'Get bulk job', { entity: V1::Entities::BulkJob, nickname: 'showBulkJob' }
+        desc 'Get bulk job', { entity: ::V1::Entities::BulkJob, nickname: 'showBulkJob' }
         get ':id' do
           require_scope! :'view:bulk_jobs'
           authorize! :view, bulk_job!
 
-          present bulk_job, with: V1::Entities::BulkJob
+          present bulk_job, with: ::V1::Entities::BulkJob
         end
       end
     end

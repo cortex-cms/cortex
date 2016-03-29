@@ -14,10 +14,12 @@ module YoutubeHelper
     ## The metadata for these fields ^^ is only accessible from the oembed JSON request
     ## The metadata for these fields \/ is only accessible from the v3 API
 
-    video[:duration]            = data['entry']['media$group']['yt$duration']['seconds']
-    video[:description]         = data['entry']['media$group']['media$description']['$t']
-    video[:source_published_at] = DateTime.parse(data['entry']['published']['$t'])
-    video[:source_updated_at]   = DateTime.parse(data['entry']['updated']['$t'])
+    video = Yt::Video.new id:  video_id
+
+    video[:duration]            = video.duration
+    video[:description]         = video.description
+    video[:source_published_at] = DateTime.parse(video.published_at)
+    video[:source_updated_at]   = video[:source_published_at]
 
     video
   end

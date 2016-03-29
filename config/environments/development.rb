@@ -60,6 +60,12 @@ Cortex::Application.configure do
     config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' }
   end
 
+  Yt.configure do |config|
+    # Temporary API Key for testing in Dev - will get deleted once we get a real one
+    config.log_level = :debug
+    config.api_key = 'AIzaSyCrlbkiIM8m44Z1qN4OHWVT9Vl6ZfYEuUA'
+  end
+
   config.action_mailer.default_url_options = {:host => ENV['HOST']}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {

@@ -10,8 +10,9 @@ class YoutubeMediaJob < ActiveJob::Base
     media.title               = info[:title]
     media.authors             = info[:authors]
     media.duration            = info[:duration]
+    media.channel_id          = info[:channel_id]
+    media.channel_title       = info[:channel_title]
     media.source_published_at = info[:published]
-    media.source_updated_at   = info[:updated]
     media.video_description   = info[:description]
 
     # Fetch thumbnail

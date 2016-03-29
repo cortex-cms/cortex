@@ -51,6 +51,9 @@ gem 'interactor-rails', '~> 2.0'
 gem 'rubyzip', '~> 1.2.0'
 gem 'json'
 
+# External Services
+gem 'yt', '~> 0.25.5'
+
 # Jobs
 gem 'sidekiq', '~> 4.1.1'
 gem 'sidekiq-failures', '~> 0.4.5'

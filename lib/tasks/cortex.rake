@@ -151,27 +151,27 @@ namespace :cortex do
       Rake::Task['cortex:snippets:dedupe'].execute
     end
 
-    namespace :media do
-      desc 'Update media URLs in snippets'
-      task :update_urls => do
-        old_url = ENV['OLD_PATH']
-        new_url = ENV['NEW_PATH']
-        tenant = ENV['TENANT']
-
-        if [old_url, new_url, tenant].include? nil
-          puts 'You must add OLD_PATH, NEW_PATH and TENANT as env vars before continuing'
-          next
-        end
-
-        Media.all.each do |media|
-          old_url = media.attachment.arbitrary_url_for old_url
-          new_url = media.attachment.arbitrary_url_for new_url
-
-          puts "About to update all occurences of #{old_url} to #{new_url} in tenant #{tenant}..."
-          system("FIND=#{old_url} REPLACE=#{new_url} TENANT=#{tenant} rake cortex:snippets:replace")
-        end
-      end
-    end
+    # namespace :media do
+    #   desc 'Update media URLs in snippets'
+    #   task :update_urls => :environment do
+    #     old_url = ENV['OLD_PATH']
+    #     new_url = ENV['NEW_PATH']
+    #     tenant = ENV['TENANT']
+    #
+    #     if [old_url, new_url, tenant].include? nil
+    #       puts 'You must add OLD_PATH, NEW_PATH and TENANT as env vars before continuing'
+    #       next
+    #     end
+    #
+    #     Media.all.each do |media|
+    #       old_url = media.attachment.arbitrary_url_for old_url
+    #       new_url = media.attachment.arbitrary_url_for new_url
+    #
+    #       puts "About to update all occurences of #{old_url} to #{new_url} in tenant #{tenant}..."
+    #       system("FIND=#{old_url} REPLACE=#{new_url} TENANT=#{tenant} rake cortex:snippets:replace")
+    #     end
+    #   end
+    # end
   end
 
   namespace :onet do

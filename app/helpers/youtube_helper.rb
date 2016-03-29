@@ -11,7 +11,7 @@ module YoutubeHelper
     info[:authors]             = [info[:channel_title]]
     info[:duration]            = video.duration
     info[:description]         = video.description
-    info[:source_published_at] = DateTime.parse(video.published_at)
+    info[:source_published_at] = DateTime.parse(video.published_at.to_s)
 
     info
   end

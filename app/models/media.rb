@@ -1,3 +1,11 @@
+module PaperclipExtensions
+  module Attachment
+    def arbitrary_url_for(pattern, style_name = :default)
+      Paperclip::Interpolations.interpolate pattern, self, style_name
+    end
+  end
+end
+
 class Media < ActiveRecord::Base
   include SearchableMedia
   include Taxon
@@ -35,6 +43,8 @@ class Media < ActiveRecord::Base
                        :size => {:in => 0..Cortex.config.media.max_size_mb.to_i.megabytes}
 
   validates :type, inclusion: {in: %w(Media Youtube)}
+
+  Paperclip::Attachment.include PaperclipExtensions::Attachment
 
   def consumed?
     Media.consumed.include?(self)

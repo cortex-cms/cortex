@@ -34,6 +34,47 @@ namespace :cortex do
   end
 
   namespace :snippets do
+
+    desc 'Find and replace text in snippets'
+    task :replace => :environment do
+
+      find = ENV['FIND']
+      replace = ENV['REPLACE']
+      tenant = ENV['TENANT']
+
+      if [find, replace, tenant].include? nil
+        puts "You need to set env vars for FIND, REPLACE and TENANT to use this"
+        next
+      end
+
+      # Replace text in Snippets and in Posts
+      puts "Searching for Snippets with the text '#{find}' in tenant #{tenant}"
+      matching_snippets = Snippet.find_by_tenant_id(tenant).find_by_body_text(find)
+
+      puts "Searching for Posts with the text '#{find}' in tenant #{tenant}"
+      matching_posts = Post.find_by_tenant_id(tenant).find_by_body_text(find)
+
+      puts "This will replace text in #{matching_snippets.count} snippet(s) and #{matching_posts.count} post(s)"
+
+      puts "Would you like to continue? (yes)"
+      confirmation = STDIN.gets.chomp
+
+      next unless confirmation == "yes" or confirmation == ""
+
+      matching_snippets.all.each do |snippet|
+        puts "Replacing text in #{snippet.document.name} on #{snippet.webpage.url}"
+        snippet.document.body.gsub! find, replace
+        snippet.document.save
+      end
+
+      matching_posts.all.each do |post|
+        puts "Replacing text in '#{post.title}'"
+        post.body.gsub! find, replace
+        post.save
+      end
+
+    end
+
     desc 'Remove orphaned snippets'
     task :deorphan => :environment do
       puts "Orphaned Snippet removal begun.."
@@ -107,6 +148,28 @@ namespace :cortex do
       Rake::Task['cortex:snippets:deorphan'].execute
       Rake::Task['cortex:snippets:simplify'].execute
       Rake::Task['cortex:snippets:dedupe'].execute
+    end
+
+    namespace :media do
+      desc 'Update media URLs in snippets'
+      task :update_urls => do
+        old_url = ENV['OLD_PATH']
+        new_url = ENV['NEW_PATH']
+        tenant = ENV['TENANT']
+
+        if [old_url, new_url, tenant].include? nil
+          puts 'You must add OLD_PATH, NEW_PATH and TENANT as env vars before continuing'
+          next
+        end
+
+        Media.all.each do |media|
+          old_url = media.attachment.arbitrary_url_for old_url
+          new_url = media.attachment.arbitrary_url_for new_url
+
+          puts "About to update all occurences of #{old_url} to #{new_url} in tenant #{tenant}..."
+          system("FIND=#{old_url} REPLACE=#{new_url} TENANT=#{tenant} rake cortex:snippets:replace")
+        end
+      end
     end
   end
 

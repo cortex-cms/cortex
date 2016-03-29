@@ -90,7 +90,7 @@ Cortex::Application.configure do
   }
 
   Yt.configure do |config|
-    config.api_key = ENV['YOUTUBE_PROD_API_KEY']
+    config.api_key = ENV['YOUTUBE_API_KEY']
   end
 
   config.action_mailer.raise_delivery_errors = true

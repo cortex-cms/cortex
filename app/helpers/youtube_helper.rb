@@ -10,6 +10,10 @@ module YoutubeHelper
     video[:thumbnail]           = data["thumbnail_url"]
     video[:title]               = data["title"]
     video[:authors]             = data["author_name"]
+
+    ## The metadata for these fields ^^ is only accessible from the oembed JSON request
+    ## The metadata for these fields \/ is only accessible from the v3 API
+
     video[:duration]            = data['entry']['media$group']['yt$duration']['seconds']
     video[:description]         = data['entry']['media$group']['media$description']['$t']
     video[:source_published_at] = DateTime.parse(data['entry']['published']['$t'])

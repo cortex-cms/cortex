@@ -17,8 +17,8 @@ angular.module('cortex.controllers.media.grid', [
 
     $scope.data = {};
 
-    var updatePage = function () {
-      $state.go('.', {page: $scope.page.page, perPage: $scope.page.perPage, query: $scope.page.query});
+    var updatePage = function (newPage) {
+      $state.go('.', {page: newPage || $scope.page.page, perPage: $scope.page.perPage, query: $scope.page.query});
     };
 
     $scope.page = {
@@ -40,7 +40,7 @@ angular.module('cortex.controllers.media.grid', [
     };
 
     $scope.$watch('page.query', function () {
-      updatePage();
+      updatePage(1);
     });
 
     $scope.$watch('page.perPage', function () {

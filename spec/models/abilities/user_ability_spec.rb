@@ -16,6 +16,12 @@ describe Abilities::UserAbility, :type => :model do
         abilities = Abilities::UserAbility.allowed(admin, Tenant)
         expect(abilities).to eq([:view, :create])
       end
+
+      it 'should have the ability to view and create webpages' do
+        admin = create(:user, :admin)
+        abilities = Abilities::UserAbility.allowed(admin, Webpage)
+        expect(abilities).to eq([:view, :create])
+      end
     end
 
     context 'user' do
@@ -29,6 +35,12 @@ describe Abilities::UserAbility, :type => :model do
       it 'should NOT have the ability to view or create tenant' do
         user = create(:user)
         abilities = Abilities::UserAbility.allowed(user, Tenant)
+        expect(abilities).to eq([])
+      end
+
+      it 'should NOT have the ability to view or create webpages' do
+        user = create(:user)
+        abilities = Abilities::UserAbility.allowed(user, Webpage)
         expect(abilities).to eq([])
       end
     end

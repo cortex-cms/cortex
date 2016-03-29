@@ -7,7 +7,7 @@ module Cortex
   class Application < Rails::Application
     config.angular_templates.module_name = 'cortex.templates'
     config.i18n.enforce_available_locales = true
-    config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/models/media_types #{config.root}/app/models/post_types #{config.root}/app/models/observers)
+    config.eager_load_paths += %W(#{config.root}/lib #{config.root}/app/models/media_types #{config.root}/app/models/post_types #{config.root}/app/models/observers)
     config.active_record.default_timezone = :utc
     config.active_record.observers = :media_observer, :post_observer, :tenant_observer, :user_observer, :youtube_observer
     config.active_job.queue_adapter = :sidekiq
@@ -29,14 +29,12 @@ module Cortex
       end
     end
 
-    require 'rack/oauth2'
-    config.middleware.use Rack::OAuth2::Server::Resource::Bearer, 'OAuth2' do |request|
-      Doorkeeper::AccessToken.authenticate(request.access_token) || request.invalid_token!
-    end
-
     config.generators do |generator|
       generator.orm :active_record
     end
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
 
     # Needed until there is a better fix for Paperclip. https://github.com/thoughtbot/paperclip/issues/1924#issuecomment-123927367
     Paperclip.options[:content_type_mappings] = {:csv => 'text/plain'}

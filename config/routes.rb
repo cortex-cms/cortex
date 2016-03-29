@@ -1,5 +1,3 @@
-require "#{Rails.root}/app/api/v1/api"
-
 Cortex::Application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root 'home#index'
@@ -22,6 +20,6 @@ Cortex::Application.routes.draw do
   end
 
   # API
-  API::V1::API.logger Rails.logger
-  mount API::V1::API => '/api'
+  ::API.logger Rails.logger
+  mount ::API => '/api'
 end

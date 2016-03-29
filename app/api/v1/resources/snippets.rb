@@ -1,75 +1,69 @@
-require_relative '../helpers/resource_helper'
+module V1
+  module Resources
+    class Snippets < Grape::API
+      resource :snippets do
+        include Grape::Kaminari
+        helpers Helpers::SnippetsHelper
 
-module API
-  module V1
-    module Resources
-      class Snippets < Grape::API
-        helpers Helpers::SharedParams
+        paginate per_page: 25
 
-        resource :snippets do
-          include Grape::Kaminari
-          helpers Helpers::SnippetsHelper
+        desc 'Show all snippets', { entity: V1::Entities::Snippet, nickname: 'showAllSnippet' }
+        get do
+          authorize! :view, ::Snippet
+          require_scope! :'view:snippets'
 
-          paginate per_page: 25
+          @snippet = ::Snippet.order(created_at: :desc)
+          V1::Entities::Snippet.represent paginate(@snippet)
+        end
 
-          desc 'Show all snippets', { entity: Entities::Snippet, nickname: 'showAllSnippet' }
-          get do
-            authorize! :view, ::Snippet
-            require_scope! :'view:snippets'
+        desc 'Get snippet', { entity: V1::Entities::Snippet, nickname: 'showSnippet' }
+        get ':id' do
+          require_scope! :'view:snippets'
+          authorize! :view, snippet!
 
-            @snippet = ::Snippet.order(created_at: :desc)
-            Entities::Snippet.represent paginate(@snippet)
-          end
+          present snippet, with: V1::Entities::Snippet
+        end
 
-          desc 'Get snippet', { entity: Entities::Snippet, nickname: 'showSnippet' }
-          get ':id' do
-            require_scope! :'view:snippets'
-            authorize! :view, snippet!
+        desc 'Create snippet', { entity: V1::Entities::Snippet, params: V1::Entities::Snippet.documentation, nickname: 'createSnippet' }
+        post do
+          require_scope! :'modify:snippets'
+          authorize! :create, ::Snippet
 
-            present snippet, with: Entities::Snippet
-          end
+          snippet_params = params[:snippet] || params
 
-          desc 'Create snippet', { entity: Entities::Snippet, params: Entities::Snippet.documentation, nickname: 'createSnippet' }
-          post do
-            require_scope! :'modify:snippets'
-            authorize! :create, ::Snippet
+          @snippet = ::Snippet.new(declared(snippet_params, { include_missing: false }, V1::Entities::Snippet.documentation.keys))
+          snippet.user = current_user!
+          snippet.save!
 
-            snippet_params = params[:snippet] || params
+          present snippet, with: V1::Entities::Snippet
+        end
 
-            @snippet = ::Snippet.new(declared(snippet_params, { include_missing: false }, Entities::Snippet.documentation.keys))
-            snippet.user = current_user!
-            snippet.save!
+        desc 'Update snippet', { entity: V1::Entities::Snippet, params: V1::Entities::Snippet.documentation, nickname: 'updateSnippet' }
+        put ':id' do
+          require_scope! :'modify:snippets'
+          authorize! :update, snippet!
 
-            present snippet, with: Entities::Snippet
-          end
+          snippet_params = params[:snippet] || params
 
-          desc 'Update snippet', { entity: Entities::Snippet, params: Entities::Snippet.documentation, nickname: 'updateSnippet' }
-          put ':id' do
-            require_scope! :'modify:snippets'
-            authorize! :update, snippet!
+          snippet.update!(declared(snippet_params, { include_missing: false }, V1::Entities::Snippet.documentation.keys))
 
-            snippet_params = params[:snippet] || params
+          present snippet, with: V1::Entities::Snippet
+        end
 
-            snippet.update!(declared(snippet_params, { include_missing: false }, Entities::Snippet.documentation.keys))
+        desc 'Delete snippet', { nickname: 'deleteSnippet' }
+        delete ':id' do
+          require_scope! :'modify:snippets'
+          authorize! :delete, snippet!
 
-            present snippet, with: Entities::Snippet
-          end
-
-          desc 'Delete snippet', { nickname: 'deleteSnippet' }
-          delete ':id' do
-            require_scope! :'modify:snippets'
-            authorize! :delete, snippet!
-
-            begin
-              snippet.destroy
-            rescue Cortex::Exceptions::ResourceConsumed => e
-              error = error!({
-                               error:   'Conflict',
-                               message: e.message,
-                               status:  409
-                             }, 409)
-              error
-            end
+          begin
+            snippet.destroy
+          rescue Cortex::Exceptions::ResourceConsumed => e
+            error = error!({
+                             error:   'Conflict',
+                             message: e.message,
+                             status:  409
+                           }, 409)
+            error
           end
         end
       end

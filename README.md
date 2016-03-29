@@ -303,6 +303,6 @@ Cortex utilizes the Apache 2.0 License. See [LICENSE](LICENSE) for details.
 
 ## Copyright
 
-Copyright (c) 2015 CareerBuilder, LLC.
+Copyright (c) 2016 CareerBuilder, LLC.
 
 [cb-ce-github]: https://github.com/cb-talent-development "Content Enablement on GitHub"

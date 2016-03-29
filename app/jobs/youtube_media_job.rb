@@ -17,7 +17,7 @@ class YoutubeMediaJob < ActiveJob::Base
     # Fetch thumbnail
     r = Excon.get(info[:thumbnail])
 
-    if r.status >= 300; raise "Error while requesting Youtube thumbnail (#{r.status}) r.body" end
+    raise "Error while requesting Youtube thumbnail\nStatus: #{r.status}\nBody: #{r.body}" if r.status >= 300
 
     tmp = Tempfile.new([media.video_id, '.jpg'], Dir.tmpdir, 'wb+')
     tmp.binmode

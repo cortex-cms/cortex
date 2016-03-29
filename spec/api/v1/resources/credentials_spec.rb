@@ -20,7 +20,7 @@ describe SPEC_API::Resources::Credentials, :type => :request do
 
     it 'should return the correct credentials' do
       get "/api/v1/applications/#{credentials.owner.id}/credentials/#{credentials.id}"
-      expect(response.body).to represent(SPEC_API::Entities::Credential, credentials)
+      expect(response.body).to represent(SPEC_API::V1::Entities::Credential, credentials)
     end
   end
 
@@ -41,7 +41,7 @@ describe SPEC_API::Resources::Credentials, :type => :request do
 
       it 'should create a new credential' do
         post "/api/v1/applications/#{application.id}/credentials", attributes_for(:credentials)
-        expect(response.body).to represent(SPEC_API::Entities::Credential, application.credentials.last)
+        expect(response.body).to represent(SPEC_API::V1::Entities::Credential, application.credentials.last)
       end
     end
 
@@ -64,7 +64,7 @@ describe SPEC_API::Resources::Credentials, :type => :request do
       it 'should update the credential' do
         credentials.name += ' updated'
         put "/api/v1/applications/#{credentials.owner.id}/credentials/#{credentials.id}", credentials.to_json, application_json
-        expect(response.body).to represent(SPEC_API::Entities::Credential, credentials)
+        expect(response.body).to represent(SPEC_API::V1::Entities::Credential, credentials)
       end
       it 'should be a success' do
         credentials.name += ' updated'

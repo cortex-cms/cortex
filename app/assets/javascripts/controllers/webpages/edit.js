@@ -13,7 +13,7 @@ angular.module('cortex.controllers.webpages.edit', [
       sendFrameMessage({event: 'load_editor'});
     });
 
-    $window.addEventListener('message', function (event) {
+    var frameEventListener = function (event) {
       switch (event.data.event) {
         case 'cancel_editor':
           cancel();
@@ -27,7 +27,12 @@ angular.module('cortex.controllers.webpages.edit', [
           });
           break;
       }
-    }, false);
+    };
+
+    $window.addEventListener('message', frameEventListener, false);
+    $scope.$on("$destroy", function(){
+      $window.removeEventListener('message', frameEventListener, false);
+    });
 
     // Perhaps this should moved to a directive!
     var sendFrameMessage = function (data) {
@@ -64,13 +69,6 @@ angular.module('cortex.controllers.webpages.edit', [
     };
 
     var getMedias = function (page) {
-      cortex.media.searchPaged({
-        q: page.query,
-        per_page: page.perPage,
-        page: page.page
-      }).$promise.then(function (media) {
-        console.log(media);
-      });
       return cortex.media.searchPaged({
         q: page.query,
         per_page: page.perPage,

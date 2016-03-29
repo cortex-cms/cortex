@@ -1,5 +1,3 @@
-require 'digest/sha1'
-
 class MediaObserver < ActiveRecord::Observer
   def before_save(media)
     extract_dimensions(media)

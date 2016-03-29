@@ -1,5 +1,3 @@
-require 'json'
-
 module YoutubeHelper
   def self.fetch_info(video_id)
     video = {}
@@ -8,7 +6,7 @@ module YoutubeHelper
     # TODO: Switch to v3: https://developers.google.com/youtube/v3/docs/videos/list
     r = Excon.get("https://gdata.youtube.com/feeds/api/videos/#{video_id}?v=2&alt=json")
 
-    if r.status >= 300; raise "Error while requesting Youtube data (#{r.status}) r.body" end
+    raise "Error while requesting Youtube data\nStatus: #{r.status}\nBody: #{r.body}" if r.status >= 300
 
     data                        = JSON.parse(r.body)
     video[:url]                 = "https://www.youtube.com/v/#{video_id}"

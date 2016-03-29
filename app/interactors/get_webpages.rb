@@ -5,10 +5,15 @@ class GetWebpages
 
   def call
     webpages = ::Webpage
-    webpages = webpages.search_with_params(context.params).records if has_search_params?
-    webpages = webpages.find_by_tenant_id(context.tenant) if context.tenant
-    webpages = webpages.page(context.page).per(context.per_page).order(created_at: :desc)
-    context.webpages = webpages
+
+    if has_search_params?
+      webpages = webpages.search_with_params(context.params, context.tenant)
+    else
+      webpages = webpages.show_all(context.tenant)
+    end
+
+    webpages = webpages.page(context.params.page).per(context.params.per_page)
+    context.webpages = webpages.records
   end
 
   private

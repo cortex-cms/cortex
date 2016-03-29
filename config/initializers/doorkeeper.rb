@@ -5,6 +5,7 @@ Doorkeeper.configure do
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
+    session[:user_return_to] = request.fullpath
     current_user || warden.authenticate!(:scope => :user)
   end
 
@@ -57,8 +58,6 @@ Doorkeeper.configure do
   # (Similar behaviour: https://developers.google.com/accounts/docs/OAuth2InstalledApp#choosingredirecturi)
   #
   # test_redirect_uri 'urn:ietf:wg:oauth:2.0:oob'
-
-  wildcard_redirect_uri true
 
   # Under some circumstances you might want to have applications auto-approved,
   # so that the user skips the authorization step.

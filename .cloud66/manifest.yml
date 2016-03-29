@@ -10,18 +10,24 @@ staging:
     extra_packages:
       - jpegoptim
   postgresql:
+    configuration:
+      version: 9.5.1
     server:
       unique_name: db-stg
       vendor: aws
       region: us-east-1
       size: m3.medium
   elasticsearch:
+    configuration:
+      version: 2.2.0
     server:
       unique_name: search-stg
       vendor: aws
       region: us-east-1
       size: m3.medium
   redis:
+    configuration:
+      version: 3.0.7
     server:
       unique_name: cache-stg
       vendor: aws
@@ -40,18 +46,24 @@ production:
     extra_packages:
         - jpegoptim
   postgresql:
+    configuration:
+      version: 9.5.1
     server:
       unique_name: db-prod
       vendor: aws
       region: us-east-1
       size: m3.medium
   elasticsearch:
+    configuration:
+      version: 2.2.0
     server:
       unique_name: search-prod
       vendor: aws
       region: us-east-1
       size: m3.medium
   redis:
+    configuration:
+      version: 3.0.7
     server:
       unique_name: cache-prod
       vendor: aws

@@ -20,15 +20,18 @@ class YoutubeMediaJob < ActiveJob::Base
 
     raise "Error while requesting Youtube thumbnail\nStatus: #{r.status}\nBody: #{r.body}" if r.status >= 300
 
-    tmp = Tempfile.new([media.video_id, '.jpg'], Dir.tmpdir, 'wb+')
-    tmp.binmode
-    tmp.write(r.body)
-    tmp.rewind
-    media.attachment = tmp
-    tmp.close
+    tmp = Tempfile.new([media.video_id, '.jpg'], Dir.tmpdir)
+
+    begin
+      tmp.binmode
+      tmp.write(r.body)
+      tmp.rewind
+      media.attachment = tmp
+    ensure
+      tmp.close
+      tmp.unlink
+    end
 
     media.save!
-
-    true
   end
 end

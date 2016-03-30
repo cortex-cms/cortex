@@ -41,9 +41,6 @@ env:
   - secure: kWX87Atpm82EyyD2EMIhHGZ3ohzR8qDvrEs3Ngwu2Lj1gDgAYvMyMHfcuVwgRmff80ecKYsL/LGFiwHQqO9zF9eizddNYnjS1jF4fS+vsDge0nN/t+5fw3i3jvAA8demU6HOTui9o/NhaBGg48S6OdBJQVuMtJAqFTa2ACXVnq4=
 notifications:
   slack: content-enablement:RrrMy3rTrLeNbbYroapZC3Sf
-  hipchat:
-    rooms:
-      secure: m+nNmj/kN4I40quLaAq0DyykTp88cifiwP1aDGJX4plBUxswWaTSjo+MQF2x8EVZyQlZU8xS9skgjexwbcomyhb08Wrwow3h/zinkxZBoJ9FWA+An7axY55Wq0AYIfd9o4nw9aGtZFXfF6pK7Wx1uTRKwlAuoXqUn9OGe9uG56M=
 deploy:
 - provider: cloud66
   master:

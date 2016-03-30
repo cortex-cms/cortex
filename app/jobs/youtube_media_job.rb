@@ -1,9 +1,7 @@
 class YoutubeMediaJob < ActiveJob::Base
   queue_as :default
 
-  def perform(media_id)
-    media = Media.find(media_id)
-
+  def perform(media)
     info = YoutubeHelper::fetch_info(media.video_id)
 
     media.url                 = info[:url]

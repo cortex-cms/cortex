@@ -38,10 +38,10 @@ describe Abilities::UserAbility, :type => :model do
         expect(abilities).to eq([])
       end
 
-      it 'should NOT have the ability to view or create webpages' do
+      it 'should NOT have the ability to create webpages' do
         user = create(:user)
         abilities = Abilities::UserAbility.allowed(user, Webpage)
-        expect(abilities).to eq([])
+        expect(abilities).to eq([:view])
       end
     end
   end

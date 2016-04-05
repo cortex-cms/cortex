@@ -25,7 +25,6 @@ RSpec.configure do |config|
   config.mock_with :mocha
   config.include Warden::Test::Helpers
   config.include FactoryGirl::Syntax::Methods
-  config.include Helpers
 
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
@@ -68,6 +67,8 @@ end
 RSpec::Sidekiq.configure do |config|
   config.warn_when_jobs_not_processed_by_sidekiq = false
 end
+
+RSpec::Expectations.configuration.warn_about_potential_false_positives = false
 
 def test_elasticsearch
   url = URI('http://localhost:9200/')

@@ -1,11 +1,11 @@
 module V1
   module Resources
     class Localizations < Grape::API
-      helpers Helpers::ParamsHelper
+      helpers ::V1::Helpers::ParamsHelper
 
       resource :localizations do
         include Grape::Kaminari
-        helpers Helpers::LocalizationHelper
+        helpers ::V1::Helpers::LocalizationHelper
 
         paginate per_page: 25
 

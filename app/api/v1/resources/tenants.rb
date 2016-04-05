@@ -1,12 +1,12 @@
 module V1
   module Resources
     class Tenants < Grape::API
-      helpers Helpers::SharedParamsHelper
-      helpers Helpers::ParamsHelper
+      helpers ::V1::Helpers::SharedParamsHelper
+      helpers ::V1::Helpers::ParamsHelper
 
       resource :tenants do
         include Grape::Kaminari
-        helpers Helpers::TenantsHelper
+        helpers ::V1::Helpers::TenantsHelper
 
         paginate per_page: 25
 
@@ -69,7 +69,7 @@ module V1
         segment '/:id' do
           resource :users do
             include Grape::Kaminari
-            helpers Helpers::UsersHelper
+            helpers ::V1::Helpers::UsersHelper
 
             paginate per_page: 25
 

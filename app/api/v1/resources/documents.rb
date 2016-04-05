@@ -3,7 +3,7 @@ module V1
     class Documents < Grape::API
       resource :documents do
         include Grape::Kaminari
-        helpers Helpers::DocumentsHelper
+        helpers ::V1::Helpers::DocumentsHelper
 
         paginate per_page: 25
 

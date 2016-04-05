@@ -1,13 +1,13 @@
 module V1
   module Resources
     class Media < Grape::API
-      helpers Helpers::SharedParamsHelper
-      helpers Helpers::ParamsHelper
+      helpers ::V1::Helpers::SharedParamsHelper
+      helpers ::V1::Helpers::ParamsHelper
 
       resource :media do
         include Grape::Kaminari
-        helpers Helpers::MediaHelper
-        helpers Helpers::BulkJobsHelper
+        helpers ::V1::Helpers::MediaHelper
+        helpers ::V1::Helpers::BulkJobsHelper
 
         paginate per_page: 25
 

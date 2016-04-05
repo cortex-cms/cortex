@@ -2,8 +2,8 @@ module V1
   module Resources
     class Users < Grape::API
       resource :users do
-        helpers Helpers::UsersHelper
-        helpers Helpers::BulkJobsHelper
+        helpers ::V1::Helpers::UsersHelper
+        helpers ::V1::Helpers::BulkJobsHelper
 
         desc 'Get the current user', { entity: ::V1::Entities::User, nickname: 'currentUser' }
         get :me do

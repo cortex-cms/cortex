@@ -3,7 +3,7 @@ module V1
     class BulkJobs < Grape::API
       resource :bulk_jobs do
         include Grape::Kaminari
-        helpers Helpers::BulkJobsHelper
+        helpers ::V1::Helpers::BulkJobsHelper
 
         paginate per_page: 25
 

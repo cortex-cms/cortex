@@ -3,7 +3,7 @@ module V1
     class Snippets < Grape::API
       resource :snippets do
         include Grape::Kaminari
-        helpers Helpers::SnippetsHelper
+        helpers ::V1::Helpers::SnippetsHelper
 
         paginate per_page: 25
 

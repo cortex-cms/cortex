@@ -1,11 +1,11 @@
 module V1
   module Resources
     class Webpages < Grape::API
-      helpers Helpers::ParamsHelper
+      helpers ::V1::Helpers::ParamsHelper
 
       resource :webpages do
         include Grape::Kaminari
-        helpers Helpers::WebpagesHelper
+        helpers ::V1::Helpers::WebpagesHelper
         paginate per_page: 25
 
         desc 'Show all webpages', { entity: ::V1::Entities::Webpage, nickname: 'showAllWebpages' }

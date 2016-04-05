@@ -1,13 +1,13 @@
 module V1
   module Resources
     class Credentials < Grape::API
-      helpers Helpers::ParamsHelper
+      helpers ::V1::Helpers::ParamsHelper
 
       resource :applications do
         segment '/:id' do
           resource :credentials do
             include Grape::Kaminari
-            helpers Helpers::ApplicationsHelper
+            helpers ::V1::Helpers::ApplicationsHelper
 
             paginate per_page: 25
 

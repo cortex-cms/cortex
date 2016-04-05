@@ -1,12 +1,12 @@
 module V1
   module Resources
     class Posts < Grape::API
-      helpers Helpers::SharedParamsHelper
-      helpers Helpers::ParamsHelper
+      helpers ::V1::Helpers::SharedParamsHelper
+      helpers ::V1::Helpers::ParamsHelper
 
       resource :posts do
         include Grape::Kaminari
-        helpers Helpers::PostsHelper
+        helpers ::V1::Helpers::PostsHelper
 
         paginate per_page: 25
 

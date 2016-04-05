@@ -4,6 +4,7 @@ class API < Grape::API
     rack_response({message: 'Validation failed', errors: errors}.to_json, 422)
   end
 
-  include Oauth
+  include ::V1::Auth
+  helpers ::V1::APIHelper
   mount ::V1::API
 end

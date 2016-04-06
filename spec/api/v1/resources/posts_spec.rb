@@ -13,6 +13,12 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
 
   describe 'GET /posts' do
 
+    before(:each) do
+      5.times { create(:post, user: user) }
+      create(:post, title: "Test Post for testing queries.", user: user)
+      Post.import({refresh: true})
+    end
+
     it 'should return all posts' do
       get '/api/v1/posts'
       expect(response).to be_success
@@ -20,7 +26,6 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
     end
 
     it 'should return paginated results' do
-      5.times { create(:post, user: user) }
       get '/api/v1/posts?per_page=2'
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(2)
@@ -28,9 +33,6 @@ describe SPEC_API::Resources::Posts, type: :request, elasticsearch: true do
     end
 
     it 'should allow search on q' do
-      post_1 = create(:post, user: user)
-      post_2 = create(:post, title: "Test Post for testing queries.", user: user)
-      Post.import({refresh: true})
       get '/api/v1/posts?q=queries'
       expect(response).to be_success
       expect(JSON.parse(response.body).count).to eq(1)

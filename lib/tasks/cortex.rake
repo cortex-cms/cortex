@@ -3,10 +3,12 @@ require 'net/http'
 require 'csv'
 require 'aws-sdk'
 require 'open-uri'
+require 'excon'
 
 Bundler.require(:default, Rails.env)
 
 namespace :cortex do
+
   desc 'Add categories from seeds.yml'
   task :create_categories => :environment do
     user = User.find_by_email(SeedData.cortex_tenant.creator.email)

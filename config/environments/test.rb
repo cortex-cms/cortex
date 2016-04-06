@@ -60,4 +60,5 @@ Cortex::Application.configure do
   }
   ActionMailer::Base.default from: ENV['SMTP_SENDER_ADDRESS']
 
+  Paperclip::PaperclipOptimizer.default_options = { skip_missing_workers: true }
 end

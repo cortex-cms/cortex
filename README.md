@@ -1,8 +1,5 @@
 # Cortex
 
-[![Build Status](https://magnum.travis-ci.com/cbdr/cortex.svg?token=sAtZ4frpstZnGHoeyxTz&branch=master)](https://magnum.travis-ci.com/cbdr/cortex)
-[![Code Climate](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/gpa.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/feed)
-
 ## Table of Contents
 
 - [What is Cortex?](#what-is-cortex)

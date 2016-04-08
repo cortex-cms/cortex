@@ -17,6 +17,7 @@ gem 'cortex-exceptions', '~> 0.0.4'
 gem 'grape', '~> 0.15'
 gem 'grape-entity', '~> 0.4.8'
 gem 'grape-swagger', '~> 0.10.4'
+gem 'grape-cache_control', '~> 1.0.1'
 gem 'redis-rails', '~> 4.0'
 
 # Authorization

@@ -3,6 +3,10 @@ module V1
     class Webpages < Grape::API
       helpers Helpers::ParamsHelper
 
+      before do
+        cache_control :public, max_age: 2592000, s_maxage: 2592000
+      end
+
       resource :webpages do
         include Grape::Kaminari
         helpers Helpers::WebpagesHelper

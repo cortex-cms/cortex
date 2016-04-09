@@ -14,7 +14,7 @@ module V1
         end
         get do
           authorize! :view, ::Webpage
-          require_scope! :'view:webpages'
+          require_scope! 'view:webpages'
 
           @webpages = ::GetWebpages.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).webpages
           ::V1::Entities::Webpage.represent set_paginate_headers(@webpages), full: true
@@ -25,7 +25,7 @@ module V1
           requires :url, type: String
         end
         get 'feed' do
-          require_scope! :'view:webpages'
+          require_scope! 'view:webpages'
           @webpage ||= Webpage.find_by_url(params[:url])
           not_found! unless @webpage
           authorize! :view, @webpage
@@ -34,7 +34,7 @@ module V1
 
         desc 'Get webpage', { entity: ::V1::Entities::Webpage, nickname: 'showWebpage' }
         get ':id' do
-          require_scope! :'view:webpages'
+          require_scope! 'view:webpages'
           authorize! :view, webpage!
 
           present webpage, with: ::V1::Entities::Webpage, full: true
@@ -42,7 +42,7 @@ module V1
 
         desc 'Create webpage', { entity: ::V1::Entities::Webpage, params: ::V1::Entities::Webpage.documentation, nickname: 'createWebpage' }
         post do
-          require_scope! :'modify:webpages'
+          require_scope! 'modify:webpages'
           authorize! :create, ::Webpage
 
           webpage_params = params[:webpage] || params
@@ -56,7 +56,7 @@ module V1
 
         desc 'Update webpage', { entity: ::V1::Entities::Webpage, params: ::V1::Entities::Webpage.documentation, nickname: 'updateWebpage' }
         put ':id' do
-          require_scope! :'modify:webpages'
+          require_scope! 'modify:webpages'
           authorize! :update, webpage!
 
           webpage_params = params[:webpage] || params
@@ -75,7 +75,7 @@ module V1
 
         desc 'Delete webpage', { nickname: 'deleteWebpage' }
         delete ':id' do
-          require_scope! :'modify:webpages'
+          require_scope! 'modify:webpages'
           authorize! :delete, webpage!
 
           begin

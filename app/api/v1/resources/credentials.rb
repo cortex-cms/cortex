@@ -13,7 +13,7 @@ module V1
 
             desc 'Show all credentials', {entity: ::V1::Entities::Credential, nickname: 'showAllCredentials'}
             get do
-              require_scope! :'view:application'
+              require_scope! 'view:application'
               authorize! :view, ::Application
 
               @credentials = application!.credentials
@@ -23,7 +23,7 @@ module V1
 
             desc 'Get credential', {entity: ::V1::Entities::Credential, nickname: 'showCredential'}
             get ':credential_id' do
-              require_scope! :'view:application'
+              require_scope! 'view:application'
               authorize! :view, application!
 
               @credential = application!.credentials.find(params[:credential_id])
@@ -33,7 +33,7 @@ module V1
 
             desc 'Delete credential', {nickname: 'deleteCredential'}
             delete ':credential_id' do
-              require_scope! :'modify:application'
+              require_scope! 'modify:application'
               authorize! :delete, application!
 
               @credential = application!.credentials.find(params[:credential_id]).delete
@@ -43,7 +43,7 @@ module V1
 
             desc 'Create a credential', {entity: ::V1::Entities::Credential, params: ::V1::Entities::Credential.documentation, nickname: 'createCredential'}
             post do
-              require_scope! :'modify:application'
+              require_scope! 'modify:application'
               authorize! :create, ::Application
 
               allowed_params = remove_params(::V1::Entities::Credential.documentation.keys, :id, :created_at, :updated_at)
@@ -56,7 +56,7 @@ module V1
 
             desc 'Update a credential', {entity: ::V1::Entities::Credential, params: ::V1::Entities::Credential.documentation, nickname: 'updateCredential'}
             put ':credential_id' do
-              require_scope! :'modify:application'
+              require_scope! 'modify:application'
               authorize! :update, application!
 
               allowed_params = remove_params(::V1::Entities::Credential.documentation.keys, :id, :created_at, :updated_at)

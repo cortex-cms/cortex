@@ -13,7 +13,7 @@ module V1
 
         desc "Fetch a user's author info"
         get ':user_id/author' do
-          require_scope! :'view:users'
+          require_scope! 'view:users'
           authorize! :view, user!
 
           present user.author || not_found!, with: ::V1::Entities::Author
@@ -31,7 +31,7 @@ module V1
           optional :bio
         end
         put ':user_id/author' do
-          require_scope! :'modify:users'
+          require_scope! 'modify:users'
           authorize! :update, user!
 
           author = Author.find_or_create_by(user_id: params[:user_id])
@@ -51,7 +51,7 @@ module V1
           optional :password_confirmation
         end
         post do
-          require_scope! :'modify:users'
+          require_scope! 'modify:users'
           authorize! :create, User
 
           allowed_params = [:password, :password_confirmation, :firstname, :lastname, :email, :tenant_id, :admin]
@@ -72,7 +72,7 @@ module V1
           optional :admin
         end
         put ':user_id' do
-          require_scope! :'modify:users'
+          require_scope! 'modify:users'
           authorize! :update, user!
 
           allowed_params = [:firstname, :lastname]
@@ -92,7 +92,7 @@ module V1
 
         desc 'Show a user', {nickname: 'showUser'}
         get ':user_id' do
-          require_scope! :'view:users'
+          require_scope! 'view:users'
           authorize! :view, user!
 
           present user, with: ::V1::Entities::User, full: true
@@ -100,7 +100,7 @@ module V1
 
         desc 'Delete a user', {nickname: 'deleteUser'}
         delete ':user_id' do
-          require_scope! :'modify:users'
+          require_scope! 'modify:users'
           authorize! :delete, user!
 
           begin
@@ -116,8 +116,8 @@ module V1
 
         desc 'Bulk create users', { entity: ::V1::Entities::BulkJob, nickname: 'bulkCreateUsers' }
         post :bulk_job do
-          require_scope! :'modify:users'
-          require_scope! :'modify:bulk_jobs'
+          require_scope! 'modify:users'
+          require_scope! 'modify:bulk_jobs'
           authorize! :create, ::User
           authorize! :create, ::BulkJob
 

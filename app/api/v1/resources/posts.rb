@@ -17,7 +17,7 @@ module V1
           use :pagination
         end
         get do
-          require_scope! :'view:posts'
+          require_scope! 'view:posts'
           authorize! :view, ::Post
           @posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).posts
 
@@ -31,7 +31,7 @@ module V1
           use :pagination
         end
         get 'feed' do
-          require_scope! :'view:posts'
+          require_scope! 'view:posts'
           authorize! :view, ::Post
           last_updated_at = Post.last_updated_at
           params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
@@ -53,7 +53,7 @@ module V1
         desc 'Show related published posts', { entity: ::V1::Entities::Post, nickname: "relatedPosts" }
         paginate per_page: 5
         get 'feed/:id/related' do
-          require_scope! :'view:posts'
+          require_scope! 'view:posts'
           post = GetPost.call(id: params[:id], published: true).post
           not_found! unless post
           authorize! :view, post
@@ -75,7 +75,7 @@ module V1
           optional :s
         end
         get 'tags' do
-          require_scope! :'view:posts'
+          require_scope! 'view:posts'
           authorize! :view, Post
 
           tags = params[:s] \
@@ -94,7 +94,7 @@ module V1
           optional :depth, default: 1, desc: "Minimum depth of filters"
         end
         get 'filters' do
-          require_scope! :'view:posts'
+          require_scope! 'view:posts'
           authorize! :view, Post
           present :industries, ::Onet::Occupation.industries, with: ::V1::Entities::Occupation
           present :categories, ::Category.where('depth >= ?', params[:depth]), with: ::V1::Entities::Category
@@ -103,7 +103,7 @@ module V1
 
         desc 'Show a post', { entity: ::V1::Entities::Post, nickname: "showPost" }
         get ':id' do
-          require_scope! :'view:posts'
+          require_scope! 'view:posts'
           @post = ::GetPost.call(id: params[:id], tenant: current_tenant.id).post
           not_found! unless @post
           authorize! :view, @post
@@ -115,7 +115,7 @@ module V1
           use :post_associations
         end
         post do
-          require_scope! :'modify:posts'
+          require_scope! 'modify:posts'
           authorize! :create, Post
 
           allowed_params = remove_params(::V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
@@ -131,7 +131,7 @@ module V1
           use :post_associations
         end
         put ':id' do
-          require_scope! :'modify:posts'
+          require_scope! 'modify:posts'
           authorize! :update, post!
 
           allowed_params = remove_params(::V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
@@ -150,7 +150,7 @@ module V1
 
         desc 'Delete a post', { nickname: "deletePost" }
         delete ':id' do
-          require_scope! :'modify:posts'
+          require_scope! 'modify:posts'
           authorize! :delete, post!
 
           post.destroy

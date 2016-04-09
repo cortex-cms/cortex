@@ -11,7 +11,7 @@ module V1
 
         desc 'Show all localizations', { entity: ::V1::Entities::Localization, nickname: 'showAllLocalizations' }
         get do
-          require_scope! :'view:localizations'
+          require_scope! 'view:localizations'
           authorize! :view, ::Localization
 
           @localizations = ::Localization.order(created_at: :desc)
@@ -21,7 +21,7 @@ module V1
 
         desc 'Get localization', { entity: ::V1::Entities::Localization, nickname: 'showLocalization' }
         get ':id' do
-          require_scope! :'view:localizations'
+          require_scope! 'view:localizations'
           authorize! :view, localization!
 
           present localization, with: ::V1::Entities::Localization
@@ -29,7 +29,7 @@ module V1
 
         desc 'Delete localization', { nickname: 'deleteLocalization' }
         delete ':id' do
-          require_scope! :'modify:localizations'
+          require_scope! 'modify:localizations'
           authorize! :delete, localization!
 
           localization.destroy
@@ -37,7 +37,7 @@ module V1
 
         desc 'Create a localization', { entity: ::V1::Entities::Localization, params: ::V1::Entities::Localization.documentation, nickname: 'createLocalization' }
         post do
-          require_scope! :'modify:localizations'
+          require_scope! 'modify:localizations'
           authorize! :create, ::Localization
 
           allowed_params = remove_params(::V1::Entities::Localization.documentation.keys, :id, :created_at, :updated_at, :available_locales, :creator)
@@ -51,7 +51,7 @@ module V1
 
         desc 'Update a localization', { entity: ::V1::Entities::Localization, params: ::V1::Entities::Localization.documentation, nickname: 'updateLocalization' }
         put ':id' do
-          require_scope! :'modify:localizations'
+          require_scope! 'modify:localizations'
           authorize! :update, localization!
 
           allowed_params = remove_params(::V1::Entities::Localization.documentation.keys, :created_at, :updated_at, :available_locales, :creator)

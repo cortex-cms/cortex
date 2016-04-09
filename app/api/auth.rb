@@ -40,9 +40,7 @@ module Auth
       scopes = [scopes] unless scopes.kind_of? Array
 
       unless (find_access_token.scopes.to_a & scopes) == scopes
-        # TODO: Scopes are historically completely broken in Cortex. This is quite the security issue: fix!
-        puts 'SCOPES are currently being IGNORED'
-        # forbidden!
+        forbidden!
       end
     end
 

@@ -11,7 +11,7 @@ module V1
 
         desc 'Show all applications', { entity: ::V1::Entities::Application, nickname: 'showAllApplications' }
         get do
-          require_scope! :'view:applications'
+          require_scope! 'view:applications'
           authorize! :view, ::Application
 
           @applications = ::Application.where(tenant: current_tenant)
@@ -21,7 +21,7 @@ module V1
 
         desc 'Show an application', { entity: ::V1::Entities::Application, nickname: "showApplication" }
         get ':id' do
-          require_scope! :'view:applications'
+          require_scope! 'view:applications'
           present application!, with: ::V1::Entities::Application
         end
 
@@ -30,7 +30,7 @@ module V1
           requires :name, type: String, desc: "Application Name"
         end
         post do
-          require_scope! :'modify:applications'
+          require_scope! 'modify:applications'
           authorize! :create, Application
 
           allowed_params = remove_params(::V1::Entities::Application.documentation.keys, :children)
@@ -43,7 +43,7 @@ module V1
 
         desc 'Update an application', { entity: ::V1::Entities::Application, params: ::V1::Entities::Application.documentation, nickname: "updateApplication" }
         put ':id' do
-          require_scope! :'modify:applications'
+          require_scope! 'modify:applications'
           authorize! :update, application!
 
           allowed_params = remove_params(::V1::Entities::Application.documentation.keys, :children)
@@ -54,7 +54,7 @@ module V1
 
         desc 'Delete an application', { nickname: "deleteApplication" }
         delete ':id' do
-          require_scope! :'modify:applications'
+          require_scope! 'modify:applications'
           authorize! :delete, application!
 
           application.destroy

@@ -1,9 +1,9 @@
-staging:
+development:
   rails:
     configuration:
       ruby_version: 2.3.0
     server:
-      unique_name: web-stg
+      unique_name: web-dev
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -13,7 +13,7 @@ staging:
     configuration:
       version: 9.5.2
     server:
-      unique_name: db-stg
+      unique_name: db-dev
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -21,7 +21,7 @@ staging:
     configuration:
       version: 2.3.1
     server:
-      unique_name: search-stg
+      unique_name: search-dev
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -29,7 +29,7 @@ staging:
     configuration:
       version: 3.0.7
     server:
-      unique_name: cache-stg
+      unique_name: cache-dev
       vendor: aws
       region: us-east-1
       size: m3.medium

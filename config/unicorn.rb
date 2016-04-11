@@ -4,7 +4,7 @@ working_directory rails_root
 timeout 60
 
 # Environmental specific bindings
-if ENV['RAILS_ENV'] == 'development'
+if ENV['RAILS_ENV'] == 'development' && !ENV['DEPLOYED']
   worker_processes 1
   listen "127.0.0.1:#{ENV['PORT'] || 3000}"
   pid_path = "#{rails_root}/tmp/pids/unicorn.pid"

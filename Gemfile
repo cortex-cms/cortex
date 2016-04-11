@@ -129,12 +129,8 @@ group :test do
   gem 'elasticsearch-extensions', '~> 0.0.20'
 end
 
-group :test, :development, :staging do
+group :test, :development do
   gem 'fog', '~> 1.37.0'
-end
-
-group :production do
-  gem 'aws-sdk', '~> 2.2' # Used by Paperclip
 end
 
 group :staging, :production do

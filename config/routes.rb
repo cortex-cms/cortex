@@ -8,7 +8,7 @@ Cortex::Application.routes.draw do
 
   # Authentication
   use_doorkeeper do
-    unless Rails.env.development?
+    unless Rails.env.development? && !ENV['DEPLOYED']
       skip_controllers :applications, :authorized_applications
     end
   end

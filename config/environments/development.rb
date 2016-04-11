@@ -1,6 +1,6 @@
 Cortex::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  Dotenv.load
+  Dotenv.load unless ENV['DEPLOYED']
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -25,7 +25,11 @@ Cortex::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  config.cache_store = :redis_store, ENV['CACHE_URL'], { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' }
+  if ENV['DEPLOYED']
+    config.cache_store = :redis_store, ENV['CACHE_URL']
+  else
+    config.cache_store = :redis_store, ENV['CACHE_URL'], { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' }
+  end
 
   if ENV['S3_BUCKET_NAME'].to_s != ''
     config.paperclip_defaults = {
@@ -37,6 +41,7 @@ Cortex::Application.configure do
       :s3_region => ENV['S3_REGION'],
       :bucket => ENV['S3_BUCKET_NAME'],
       :url => ':s3_alias_url',
+      :path => '/:class/:attachment/:id_partition/:style/:filename',
       :s3_host_alias => ENV['S3_HOST_ALIAS']
     }
   else
@@ -53,11 +58,7 @@ Cortex::Application.configure do
   end
 
   Sidekiq.configure_server do |config|
-    config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' }
-  end
-
-  Sidekiq.configure_client do |config|
-    config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' }
+    config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' } unless ENV['DEPLOYED']
   end
 
   Yt.configure do |config|

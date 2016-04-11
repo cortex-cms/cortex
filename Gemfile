@@ -54,6 +54,7 @@ gem 'json'
 
 # External Services
 gem 'yt', '~> 0.25.5'
+gem 'aws-sdk', '~> 2.2' # Used by Paperclip
 
 # Jobs
 gem 'sidekiq', '~> 4.1.1'

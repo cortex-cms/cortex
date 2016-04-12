@@ -34,6 +34,7 @@ Cortex::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+  config.assets.image_optim = false
 
   config.cache_store = :redis_store, ENV['CACHE_URL'], { :namespace => 'cortex_test' }
 

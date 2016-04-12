@@ -7,8 +7,13 @@ module Cortex
 
   def self.load_config
     c = Hashr.new(Rails.application.config_for(:config))
-    c.media.allowed_media_types = Hashr.new(Rails.application.config_for(:media_types)).allowed
+    c.media.allowed_media_types = Hashr.new(self.load_yaml("#{Rails.root}/config/media_types.yml")).allowed
     c
+  end
+
+  def self.load_yaml(file)
+    # interpolate file with ERB to allow templating (<%= ENV['...'] %>)
+    YAML.load(ERB.new(File.new(file).read).result)
   end
 end
 

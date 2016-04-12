@@ -12,9 +12,9 @@ default: &default
       destination: /tmp/rake_task.sh
       target: rails
       execute: true
-      run_on: all_servers
+      run_on: single_server
       apply_during: all
-      sudo: true
+      sudo: false
 
 development:
   <<: *default

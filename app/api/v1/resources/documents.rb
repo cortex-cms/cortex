@@ -3,14 +3,14 @@ module V1
     class Documents < Grape::API
       resource :documents do
         include Grape::Kaminari
-        helpers ::V1::Helpers::DocumentsHelper
+        helpers Helpers::DocumentsHelper
 
         paginate per_page: 25
 
         desc 'Show all documents', { entity: ::V1::Entities::Document, nickname: 'showAllDocument' }
         get do
           authorize! :view, ::Document
-          require_scope! 'view:documents'
+          require_scope! :'view:documents'
 
           @document = ::Document.order(created_at: :desc)
           ::V1::Entities::Document.represent paginate(@document)
@@ -18,7 +18,7 @@ module V1
 
         desc 'Get document', { entity: ::V1::Entities::Document, nickname: 'showDocument' }
         get ':id' do
-          require_scope! 'view:documents'
+          require_scope! :'view:documents'
           authorize! :view, document!
 
           present document, with: ::V1::Entities::Document
@@ -26,7 +26,7 @@ module V1
 
         desc 'Create document', { entity: ::V1::Entities::Document, params: ::V1::Entities::Document.documentation, nickname: 'createDocument' }
         post do
-          require_scope! 'modify:documents'
+          require_scope! :'modify:documents'
           authorize! :create, ::Document
 
           document_params = params[:document] || params
@@ -40,7 +40,7 @@ module V1
 
         desc 'Update document', { entity: ::V1::Entities::Document, params: ::V1::Entities::Document.documentation, nickname: 'updateDocument' }
         put ':id' do
-          require_scope! 'modify:documents'
+          require_scope! :'modify:documents'
           authorize! :update, document!
 
           document_params = params[:document] || params
@@ -52,7 +52,7 @@ module V1
 
         desc 'Delete document', { nickname: 'deleteDocument' }
         delete ':id' do
-          require_scope! 'modify:documents'
+          require_scope! :'modify:documents'
           authorize! :delete, document!
 
           begin

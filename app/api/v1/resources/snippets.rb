@@ -3,14 +3,14 @@ module V1
     class Snippets < Grape::API
       resource :snippets do
         include Grape::Kaminari
-        helpers ::V1::Helpers::SnippetsHelper
+        helpers Helpers::SnippetsHelper
 
         paginate per_page: 25
 
         desc 'Show all snippets', { entity: ::V1::Entities::Snippet, nickname: 'showAllSnippet' }
         get do
           authorize! :view, ::Snippet
-          require_scope! 'view:snippets'
+          require_scope! :'view:snippets'
 
           @snippet = ::Snippet.order(created_at: :desc)
           ::V1::Entities::Snippet.represent paginate(@snippet)
@@ -18,7 +18,7 @@ module V1
 
         desc 'Get snippet', { entity: ::V1::Entities::Snippet, nickname: 'showSnippet' }
         get ':id' do
-          require_scope! 'view:snippets'
+          require_scope! :'view:snippets'
           authorize! :view, snippet!
 
           present snippet, with: ::V1::Entities::Snippet
@@ -26,7 +26,7 @@ module V1
 
         desc 'Create snippet', { entity: ::V1::Entities::Snippet, params: ::V1::Entities::Snippet.documentation, nickname: 'createSnippet' }
         post do
-          require_scope! 'modify:snippets'
+          require_scope! :'modify:snippets'
           authorize! :create, ::Snippet
 
           snippet_params = params[:snippet] || params
@@ -40,7 +40,7 @@ module V1
 
         desc 'Update snippet', { entity: ::V1::Entities::Snippet, params: ::V1::Entities::Snippet.documentation, nickname: 'updateSnippet' }
         put ':id' do
-          require_scope! 'modify:snippets'
+          require_scope! :'modify:snippets'
           authorize! :update, snippet!
 
           snippet_params = params[:snippet] || params
@@ -52,7 +52,7 @@ module V1
 
         desc 'Delete snippet', { nickname: 'deleteSnippet' }
         delete ':id' do
-          require_scope! 'modify:snippets'
+          require_scope! :'modify:snippets'
           authorize! :delete, snippet!
 
           begin

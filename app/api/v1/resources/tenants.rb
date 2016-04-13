@@ -1,18 +1,18 @@
 module V1
   module Resources
     class Tenants < Grape::API
-      helpers ::V1::Helpers::SharedParamsHelper
-      helpers ::V1::Helpers::ParamsHelper
+      helpers Helpers::SharedParamsHelper
+      helpers Helpers::ParamsHelper
 
       resource :tenants do
         include Grape::Kaminari
-        helpers ::V1::Helpers::TenantsHelper
+        helpers Helpers::TenantsHelper
 
         paginate per_page: 25
 
         desc 'Show all tenants', { entity: ::V1::Entities::Tenant, nickname: "showAllTenants" }
         get do
-          require_scope! 'view:tenants'
+          require_scope! :'view:tenants'
           authorize! :view, Tenant
 
           ::V1::Entities::Tenant.represent paginate(Tenant.all), children: params[:include_children]
@@ -20,7 +20,7 @@ module V1
 
         desc 'Show tenant hierarchy', { entity: ::V1::Entities::Tenant, nickname: "showTenantHierarchy" }
         get :hierarchy do
-          require_scope! 'view:tenants'
+          require_scope! :'view:tenants'
           authorize! :view, Tenant
 
           present Tenant.roots, using: ::V1::Entities::Tenant, children: true
@@ -36,7 +36,7 @@ module V1
           optional :name, type: String, desc: "Tenant Name"
         end
         post do
-          require_scope! 'modify:tenants'
+          require_scope! :'modify:tenants'
           authorize! :create, Tenant
 
           allowed_params = remove_params(::V1::Entities::Tenant.documentation.keys, :children)
@@ -49,7 +49,7 @@ module V1
 
         desc 'Update a tenant', { entity: ::V1::Entities::Tenant, params: ::V1::Entities::Tenant.documentation, nickname: "updateTenant" }
         put ':id' do
-          require_scope! 'modify:tenants'
+          require_scope! :'modify:tenants'
           authorize! :update, tenant!
 
           allowed_params = remove_params(::V1::Entities::Tenant.documentation.keys, :children)
@@ -60,7 +60,7 @@ module V1
 
         desc 'Delete a tenant', { nickname: "deleteTenant" }
         delete ':id' do
-          require_scope! 'modify:tenants'
+          require_scope! :'modify:tenants'
           authorize! :delete, tenant!
 
           tenant.destroy
@@ -69,7 +69,7 @@ module V1
         segment '/:id' do
           resource :users do
             include Grape::Kaminari
-            helpers ::V1::Helpers::UsersHelper
+            helpers Helpers::UsersHelper
 
             paginate per_page: 25
 
@@ -79,7 +79,7 @@ module V1
             end
             get do
               authorize! :view, User
-              require_scope! 'view:users'
+              require_scope! :'view:users'
 
               @users = ::GetUsers.call(params: declared(clean_params(params), include_missing: false), tenant_id: params[:id]).users
               ::V1::Entities::User.represent set_paginate_headers(@users), full: true

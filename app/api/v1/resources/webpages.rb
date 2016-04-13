@@ -72,7 +72,6 @@ module V1
           }
 
           webpage.update!(update_params.to_hash)
-          CacheBustWebpageJob.perform_later(webpage.url)
 
           present webpage, with: ::V1::Entities::Webpage, full: true
         end

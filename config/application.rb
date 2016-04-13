@@ -11,8 +11,8 @@ module Cortex
     config.active_record.default_timezone = :utc
     config.active_record.observers = :media_observer, :post_observer, :tenant_observer, :user_observer, :youtube_observer
     config.active_job.queue_adapter = :sidekiq
-    config.assets.image_optim = false
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+    Rails.env.test? ? config.assets.image_optim = false : nil 
 
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true

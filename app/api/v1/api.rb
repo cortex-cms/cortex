@@ -6,6 +6,8 @@ module V1
     content_type :json, 'application/json'
     version 'v1', using: :path
 
+    helpers ::V1::Helpers::APIHelper
+
     mount ::V1::Resources::Categories
     mount ::V1::Resources::Posts
     mount ::V1::Resources::Media

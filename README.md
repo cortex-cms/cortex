@@ -14,19 +14,22 @@
   - [Server](#server)
 - [Running Test Suite](#running-test-suite)
 - [API](#api)
-  - [Tenants](#tenants)
-  - [Users](#users)
-  - [Media](#media)
-  - [Posts](#posts)
-  - [Categories](#categories)
-  - [Occupations](#occupations)
-  - [Localizations](#localizations)
-  - [Applications](#applications)
-  - [Bulk Jobs](#bulk_jobs)
-  - [Documents](#documents)
-  - [Snippets](#snippets)
-  - [Webpages](#webpages)
+  - [Documentation](#documentation)
+  - [Resources](#resources)
+    - [Tenants](#tenants)
+    - [Users](#users)
+    - [Media](#media)
+    - [Posts](#posts)
+    - [Categories](#categories)
+    - [Occupations](#occupations)
+    - [Localizations](#localizations)
+    - [Applications](#applications)
+    - [Bulk Jobs](#bulk_jobs)
+    - [Documents](#documents)
+    - [Snippets](#snippets)
+    - [Webpages](#webpages)
 - [Consuming Cortex](#consuming-cortex)
+  - [Authorization](#authorization)
   - [Content](#content)
   - [Localizations](#localizations)
   - [Webpages and Snippets](#webpages-and-snippets)
@@ -183,19 +186,13 @@ $ bundle exec rake spec:javascript
 
 ## API
 
-### Swagger
+### Documentation
 
 Cortex's live API documentation is available via Swagger. This contains specific endpoints, parameters, and response models.
 
 SwaggerUI is provided at [http://docs.api.cbcortex.com/](http://docs.api.cbcortex.com).
 
 Swagger Endpoints are available at [http://api.cbcortex.com/api/v1/swagger_doc.json](http://api.cbcortex.com/api/v1/swagger_doc.json).
-
-### Authorization
-
-Cortex's API utilizes OAuth2 for Authentication and Authorization. All grant types are supported. Want to get up and running quickly with OAuth? Use Cortex's [OmniAuth strategy](https://github.com/cb-talent-development/omniauth-cortex).
-
-Review the API resource classes in `app/api/v1/resources` to determine the available scopes.
 
 ### Resources
 
@@ -262,7 +259,13 @@ Webpages group together `snippets`, and correspond to a destination URL, and con
 
 ## Consuming Cortex
 
-To consume data from Cortex, start by setting up authorization. See Cortex's [OmniAuth strategy](https://github.com/cb-talent-development/omniauth-cortex) for more instructions. You'll also need to set up OAuth credentials for your consuming application in the 'Applications' section of the Cortex admin interface.
+### Authorization
+
+Cortex's API utilizes [OAuth2](https://tools.ietf.org/html/rfc6749) for Authentication and Authorization. Client Credentials and Authorization Code [grant types](http://alexbilbie.com/2013/02/a-guide-to-oauth-2-grants/) are supported. Want to get up and running quickly with OAuth? Use Cortex's [Ruby client](https://github.com/cortex-cms/cortex-client-ruby) or [OmniAuth strategy](https://github.com/cb-talent-development/omniauth-cortex) for Client Credentials and Authorization Code grants, respectively.
+
+Review the `optional_scopes` in Cortex's [Doorkeeper config](https://github.com/cbdr/cortex/blob/master/config/initializers/doorkeeper.rb) to determine the available scopes, and the [API Resource classes](https://github.com/cbdr/cortex/tree/master/app/api/v1/resources) to determine where they're required.
+
+Before an application can consume any data, OAuth credentials must be created for the consuming application in the 'Applications' section of the Cortex admin interface.
 
 ### Content
 
@@ -285,6 +288,7 @@ If a consuming or companion application would like to produce Cortex-equivalent 
 * [Advice and Resources](https://github.com/cbdr/advice-and-resources) - Redesigned Workbuzz/Advice & Resources platform utilizing Cortex Posts and Rails. [Live Site](http://advice.careerbuilder.com/)
 * [Employer](https://github.com/cbdr/employer) - Redesigned Employer Marketing platform utilizing Cortex Webpages/Snippets and Rails. [Live Site](http://hiring.careerbuilder.com/)
 * [CB1 Lander Shell](https://github.com/cbdr/cb1-lander-shell) - Platform for hosting lander pages and experiments, utilizing Cortex Posts and Sinatra. [Live Site](http://corporate.careerbuilder.com/)
+* [CareerBuilder.com](https://github.com/cbdr/consumer-main) - The main Consumer Web site for CB.com uses Cortex Posts for the [Privacy](http://www.careerbuilder.com/privacy) and [Terms of Service](http://www.careerbuilder.com/terms) pages.
 
 ## Contributing
 

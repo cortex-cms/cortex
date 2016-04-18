@@ -31,6 +31,11 @@
             <textarea id="seo_description" name="seo_description" class="form-control"
                    ng-model="data.webpage.seo_description" placeholder="Page Description" required></textarea>
           </div>
+          <div class="form-group">
+            <label for="title">Keywords (255 characters max)</label>
+            <input id="seo_keywords" name="seo_keywords" type="text" class="form-control"
+                   ng-model="data.webpage.seo_keywords" placeholder="Page Keywords" required>
+          </div>
           <div class="checkbox">
             <label>
               <input type="checkbox" name="noindex" id="noindex" ng-model="data.webpage.noindex"> Don't Index This Page In Search Engines (<strong>noindex</strong>)

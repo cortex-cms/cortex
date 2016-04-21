@@ -38,6 +38,8 @@ Cortex::Application.configure do
 
   config.cache_store = :redis_store, ENV['CACHE_URL'], { :namespace => 'cortex_test' }
 
+  config.assets.image_optim = false
+
   Fog.mock!
 
   Sidekiq.configure_server do |config|

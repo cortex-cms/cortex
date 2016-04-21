@@ -57,10 +57,6 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.order = 'random'
 
-  # awesome_nested_set has an _extremely_ noisy depreciation warning issue
-  # https://github.com/collectiveidea/awesome_nested_set/issues/220
-  ActiveSupport::Deprecation.silenced = true
-
   config.before :each, elasticsearch: true do
     Elasticsearch::Extensions::Test::Cluster.start(port: 9200) unless Elasticsearch::Extensions::Test::Cluster.running?(on: 9200) || elasticsearch_status
   end
@@ -73,8 +69,6 @@ end
 RSpec::Sidekiq.configure do |config|
   config.warn_when_jobs_not_processed_by_sidekiq = false
 end
-
-RSpec::Expectations.configuration.warn_about_potential_false_positives = false
 
 def test_elasticsearch
   url = URI('http://localhost:9200/')

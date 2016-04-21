@@ -1,14 +1,9 @@
-sudo: required
+sudo: false
 language: ruby
 cache: bundler
 rvm:
   - 2.3.0
 before_install:
-  - wget https://s3.amazonaws.com/cb-content-enablement-misc/resources/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  - tar -xjf phantomjs-2.1.1-linux-x86_64.tar.bz2
-  - sudo rm -rf /usr/local/phantomjs/bin/phantomjs
-  - sudo mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/phantomjs/bin/phantomjs
-
   - mkdir /tmp/elasticsearch
   - wget -O - https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/${ES_VERSION}/elasticsearch-${ES_VERSION}.tar.gz | tar xz --directory=/tmp/elasticsearch --strip-components=1
   - /tmp/elasticsearch/bin/elasticsearch -d -D es.path.data=/tmp -D es.discovery.zen.ping.multicast.enabled=false

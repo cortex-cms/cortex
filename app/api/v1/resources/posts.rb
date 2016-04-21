@@ -4,10 +4,6 @@ module V1
       helpers ::V1::Helpers::SharedParamsHelper
       helpers ::V1::Helpers::ParamsHelper
 
-      before do
-        cache_control :public, max_age: 2592000, s_maxage: 2592000
-      end
-
       resource :posts do
         include Grape::Kaminari
         helpers ::V1::Helpers::PostsHelper

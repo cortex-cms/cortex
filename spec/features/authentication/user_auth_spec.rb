@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "User Authentication", :type => :feature, :js => true do
+xdescribe "User Authentication", :type => :feature, js: true do
   describe 'Signing In' do
     let(:user) { FactoryGirl.create :user }
 

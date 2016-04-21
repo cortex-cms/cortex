@@ -1,9 +1,7 @@
-#require 'doorkeeper/grape/authorization_decorator'
+require 'doorkeeper/grape/authorization_decorator'
 
-module Oauth
+module Auth
   extend ActiveSupport::Concern
-
-  #helpers Doorkeeper::Grape::Helpers
 
   included do
     use Rack::OAuth2::Server::Resource::Bearer, 'OAuth2' do |request|
@@ -27,7 +25,39 @@ module Oauth
       @access_token ||= Doorkeeper.authenticate(doorkeeper_request, Doorkeeper.configuration.access_token_methods)
     end
 
+    def authenticate!
+      unauthorized! unless current_user
+    end
+
+    def authorize!(action, subject)
+      unless abilities.allowed?(current_user, action, subject)
+        # TODO: Un-comment on May 12, date of OAuth Scope Enforcement rollout
+        # forbidden!
+      end
+    end
+
+    def require_scope!(scopes)
+      return unless find_access_token
+      scopes = [scopes] unless scopes.kind_of? Array
+
+      unless (find_access_token.scopes.to_a & scopes) == scopes
+        forbidden!
+      end
+    end
+
+    def can?(object, action, subject)
+      abilities.allowed?(object, action, subject)
+    end
+
     private
+
+    def abilities
+      @abilities ||= begin
+        abilities = Six.new
+        abilities << Abilities::Ability
+        abilities
+      end
+    end
 
     def find_current_user
       if find_access_token
@@ -48,9 +78,7 @@ module Oauth
     end
 
     def doorkeeper_request
-      @doorkeeper_request ||= ActionDispatch::Request.new(env)
-      # TODO: Determine which is fastest/best to wrap env with at a later date
-      # @doorkeeper_request ||= Doorkeeper::Grape::AuthorizationDecorator.new(request)
+      @doorkeeper_request ||= Doorkeeper::Grape::AuthorizationDecorator.new(request)
     end
 
     def warden

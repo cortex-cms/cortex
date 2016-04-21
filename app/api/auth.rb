@@ -31,7 +31,8 @@ module Auth
 
     def authorize!(action, subject)
       unless abilities.allowed?(current_user, action, subject)
-        forbidden!
+        # TODO: Un-comment on May 12, date of OAuth Scope Enforcement rollout
+        # forbidden!
       end
     end
 

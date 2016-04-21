@@ -12,34 +12,39 @@ describe SPEC_API::Resources::Media, type: :request, elasticsearch: true do
 
   describe 'GET /media' do
 
-    it 'returns an empty array if there is no media' do
-      get '/api/v1/media'
-      expect(response).to be_success
-      expect(JSON.parse(response.body)).to eq([])
+    context 'Media does not exist' do
+      it 'returns an empty array' do
+        get '/api/v1/media'
+        expect(response).to be_success
+        expect(JSON.parse(response.body)).to eq([])
+      end
     end
 
-    it 'should return two media items' do
-      2.times { create(:media, user: user) }
-      get '/api/v1/media'
-      expect(response).to be_success
-      expect(JSON.parse(response.body).count).to eq(2)
-    end
+    context 'Media does exist' do
+      before(:each) do
+        5.times { create(:media, user: user) }
+        media_2 = create(:media, name: "RANDOM", user: user)
+        Media.import({refresh: true})
+      end
 
-    it 'should return paginated results' do
-      5.times { create(:media, user: user) }
-      get '/api/v1/media?per_page=2'
-      expect(response).to be_success
-      expect(JSON.parse(response.body).count).to eq(2)
-      expect(response.headers['X-Total']).to eq('5')
-    end
+      it 'should return all media items' do
+        get '/api/v1/media'
+        expect(response).to be_success
+        expect(JSON.parse(response.body).count).to eq(Media.all.count)
+      end
 
-    it 'should allow search on q' do
-      media_1 = create(:media, user: user)
-      media_2 = create(:media, name: "RANDOM", user: user)
-      Media.import({refresh: true})
-      get '/api/v1/media?q=RANDOM'
-      expect(response).to be_success
-      expect(JSON.parse(response.body).count).to eq(1)
+      it 'should return paginated results' do
+        get '/api/v1/media?per_page=2'
+        expect(response).to be_success
+        expect(JSON.parse(response.body).count).to eq(2)
+        expect(response.headers['X-Total']).to eq(Media.all.count.to_s)
+      end
+
+      it 'should allow search on q' do
+        get '/api/v1/media?q=RANDOM'
+        expect(response).to be_success
+        expect(JSON.parse(response.body).count).to eq(1)
+      end
     end
   end
 

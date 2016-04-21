@@ -1,33 +1,39 @@
-sudo: false
+sudo: required
 language: ruby
 cache: bundler
 rvm:
-- 2.3.0
-bundler_args: "--without production staging development"
-addons:
-  apt:
-    packages:
-    - jpegoptim
+  - 2.3.0
 before_install:
-  - mkdir travis-phantomjs
-  - wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  - tar -xvf $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis-phantomjs
-  - export PATH=$PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH
+  - wget https://s3.amazonaws.com/cb-content-enablement-misc/resources/phantomjs-2.1.1-linux-x86_64.tar.bz2
+  - tar -xjf phantomjs-2.1.1-linux-x86_64.tar.bz2
+  - sudo rm -rf /usr/local/phantomjs/bin/phantomjs
+  - sudo mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/phantomjs/bin/phantomjs
+
+  - mkdir /tmp/elasticsearch
+  - wget -O - https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/${ES_VERSION}/elasticsearch-${ES_VERSION}.tar.gz | tar xz --directory=/tmp/elasticsearch --strip-components=1
+  - /tmp/elasticsearch/bin/elasticsearch -d -D es.path.data=/tmp -D es.discovery.zen.ping.multicast.enabled=false
+
+  - gem update --system
+  - gem update bundler
+  - bundle install
+  - gem --version
+  - npm install -g bower
+bundler_args: "--without production staging development"
 before_script:
-- psql -c 'create database cortex_test;' -U postgres
-- bundle exec rake db:schema:load db:seed cortex:create_categories
-- sleep 10
-- bundle exec rake cortex:rebuild_indexes
-- npm install bower -g
-- bundle exec rake bower:install:development
+  - sleep 10
+  - psql -c 'create database cortex_test;' -U postgres
+  - bundle exec rake db:schema:load db:seed cortex:create_categories
+  - bundle exec rake cortex:rebuild_indexes
+  - bundle exec rake bower:install:development
 script:
-- bundle exec rake spec
-- bundle exec rake spec:javascript
+  - bundle exec rspec --format doc
 addons:
   postgresql: '9.4'
+  apt:
+    packages:
+      - jpegoptim
 services:
-- elasticsearch
-- redis-server
+  - redis-server
 env:
   global:
   - APP_SECRET=180d0b7491b1f574801b62853532775a60d58a0cdf1ef2848967618e507e94b72e3d1223c3c2ab8fde641aff237774a72c6c3a5cf541b4baba2ff70fd97d121a
@@ -38,17 +44,19 @@ env:
   - ONET_VERSION=18.1
   - MEDIA_MAX_SIZE_MB=100
   - CORS_ALLOWED_ORIGINS=http://localhost:3001
+  - ES_VERSION=2.3.1
   - secure: kWX87Atpm82EyyD2EMIhHGZ3ohzR8qDvrEs3Ngwu2Lj1gDgAYvMyMHfcuVwgRmff80ecKYsL/LGFiwHQqO9zF9eizddNYnjS1jF4fS+vsDge0nN/t+5fw3i3jvAA8demU6HOTui9o/NhaBGg48S6OdBJQVuMtJAqFTa2ACXVnq4=
 notifications:
   slack: content-enablement:RrrMy3rTrLeNbbYroapZC3Sf
+  email: false
 deploy:
-- provider: cloud66
-  master:
-  redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/907e6160fd192f25a04ce038c7a3cf61
-  on: develop
-  edge: true
-- provider: cloud66
-  master:
-  redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/1df7dd242ecb667ef204b80fd57bd5be
-  on: master
-  edge: true
+  - provider: cloud66
+    master:
+      redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/636db734bafc92081507c7b7e86c0f01
+      on: develop
+      edge: true
+  - provider: cloud66
+    master:
+      redeployment_hook: https://hooks.cloud66.com/stacks/redeploy/78f9fff824b52e6771109239804d0682/9bdf5cb0fdfa117c6bfeea7d17c20e6a
+      on: master
+      edge: true

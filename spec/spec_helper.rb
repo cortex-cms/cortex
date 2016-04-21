@@ -11,6 +11,11 @@ require 'net/http'
 require "email_spec"
 require 'capybara/rspec'
 
+Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 900.seconds)
+end
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -25,7 +30,6 @@ RSpec.configure do |config|
   config.mock_with :mocha
   config.include Warden::Test::Helpers
   config.include FactoryGirl::Syntax::Methods
-  config.include Helpers
 
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
@@ -36,6 +40,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
+    Capybara.current_driver = Capybara.javascript_driver
     DatabaseCleaner.clean_with(:truncation)
     elasticsearch_status = test_elasticsearch
   end
@@ -51,10 +56,6 @@ RSpec.configure do |config|
 
   config.infer_base_class_for_anonymous_controllers = false
   config.order = 'random'
-
-  # awesome_nested_set has an _extremely_ noisy depreciation warning issue
-  # https://github.com/collectiveidea/awesome_nested_set/issues/220
-  ActiveSupport::Deprecation.silenced = true
 
   config.before :each, elasticsearch: true do
     Elasticsearch::Extensions::Test::Cluster.start(port: 9200) unless Elasticsearch::Extensions::Test::Cluster.running?(on: 9200) || elasticsearch_status

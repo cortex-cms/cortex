@@ -51,6 +51,9 @@ pickle-email-*.html
 .env
 /.cloud66/stack.json
 
+# Test Artifacts
+/media
+
 # these should all be checked in to normalise the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
 

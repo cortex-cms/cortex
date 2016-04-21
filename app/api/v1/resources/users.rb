@@ -77,12 +77,15 @@ module V1
 
           allowed_params = [:firstname, :lastname]
 
+          # Extract into permission concerns
           if current_user.is_admin?
             allowed_params += [:email, :admin]
           elsif user == current_user
             forbidden! unless user.valid_password?(params[:current_password])
             allowed_params += [:password, :password_confirmation]
             render_api_error!('Requires both password and password_confirmation fields', 422) unless params[:password] && params[:password_confirmation]
+          else
+            forbidden!
           end
 
           user.update!(declared(params, {include_missing: false}, allowed_params))

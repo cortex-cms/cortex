@@ -50,6 +50,7 @@ gem 'hashr', '~> 2.0.0'
 gem 'mime-types', '~> 2.99.1'
 gem 'interactor-rails', '~> 2.0'
 gem 'rubyzip', '~> 1.2.0'
+gem 'addressable', '~> 2.4.0'
 gem 'json'
 
 # External Services

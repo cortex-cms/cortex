@@ -1,13 +1,13 @@
 module V1
   module Resources
     class Media < Grape::API
-      helpers Helpers::SharedParamsHelper
-      helpers Helpers::ParamsHelper
+      helpers ::V1::Helpers::SharedParamsHelper
+      helpers ::V1::Helpers::ParamsHelper
 
       resource :media do
         include Grape::Kaminari
-        helpers Helpers::MediaHelper
-        helpers Helpers::BulkJobsHelper
+        helpers ::V1::Helpers::MediaHelper
+        helpers ::V1::Helpers::BulkJobsHelper
 
         paginate per_page: 25
 
@@ -17,7 +17,7 @@ module V1
         end
         get do
           authorize! :view, ::Media
-          require_scope! :'view:media'
+          require_scope! 'view:media'
 
           @media = ::GetMultipleMedia.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).media
           ::V1::Entities::Media.represent set_paginate_headers(@media)
@@ -28,7 +28,7 @@ module V1
           optional :s
         end
         get 'tags' do
-          require_scope! :'view:media'
+          require_scope! 'view:media'
           authorize! :view, ::Media
 
           tags = params[:s] \
@@ -44,7 +44,7 @@ module V1
 
         desc 'Get media', { entity: ::V1::Entities::Media, nickname: 'showMedia' }
         get ':id' do
-          require_scope! :'view:media'
+          require_scope! 'view:media'
           authorize! :view, media!
 
           present media, with: ::V1::Entities::Media, full: true
@@ -55,7 +55,7 @@ module V1
           optional :attachment
         end
         post do
-          require_scope! :'modify:media'
+          require_scope! 'modify:media'
           authorize! :create, ::Media
 
           media_params = params[:media] || params
@@ -75,7 +75,7 @@ module V1
           optional :attachment
         end
         put ':id' do
-          require_scope! :'modify:media'
+          require_scope! 'modify:media'
           authorize! :update, media!
 
           media_params = params[:media] || params
@@ -92,7 +92,7 @@ module V1
 
         desc 'Delete media', { nickname: 'deleteMedia' }
         delete ':id' do
-          require_scope! :'modify:media'
+          require_scope! 'modify:media'
           authorize! :delete, media!
 
           begin
@@ -114,8 +114,8 @@ module V1
           end
         end
         post :bulk_job do
-          require_scope! :'modify:media'
-          require_scope! :'modify:bulk_jobs'
+          require_scope! 'modify:media'
+          require_scope! 'modify:bulk_jobs'
           authorize! :create, ::Media
           authorize! :create, ::BulkJob
 

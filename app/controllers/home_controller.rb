@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   layout false, only: [:login]
   def index; end
+  
   def login
     respond_to do |format|
       format.text { render 'login.html.haml' }
@@ -9,6 +10,7 @@ class HomeController < ApplicationController
   end
 
   def password_reset; end
+
   def submit_password_reset
     user = User.where(email: params[:user][:email]).first
     user.send_reset_password_instructions if user.present?

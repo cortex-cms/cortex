@@ -21,6 +21,7 @@ Cortex::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  config.assets.debug = true
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
 
@@ -36,6 +37,8 @@ Cortex::Application.configure do
   config.active_support.deprecation = :stderr
 
   config.cache_store = :redis_store, ENV['CACHE_URL'], { :namespace => 'cortex_test' }
+
+  config.assets.image_optim = false
 
   Fog.mock!
 
@@ -59,5 +62,4 @@ Cortex::Application.configure do
     :enable_starttls_auto => ENV['SMTP_STARTTLS']
   }
   ActionMailer::Base.default from: ENV['SMTP_SENDER_ADDRESS']
-
 end

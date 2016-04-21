@@ -14,9 +14,9 @@ gem 'rails', '~> 4.2.6'
 gem 'cortex-exceptions', '~> 0.0.4'
 
 # API
-gem 'grape', '~> 0.15'
-gem 'grape-entity', '~> 0.4.8'
-gem 'grape-swagger', '~> 0.10.4'
+gem 'grape', '~> 0.14'
+gem 'grape-entity', '~> 0.5.1'
+gem 'grape-swagger', '~> 0.20.1'
 gem 'grape-cache_control', '~> 1.0.1'
 gem 'redis-rails', '~> 4.0'
 
@@ -29,7 +29,7 @@ gem 'doorkeeper', '~> 3.1'
 # ActiveRecord
 gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.0'
-gem 'paperclip', '~> 5.0.0.beta1'
+gem 'paperclip', '~> 5.0.0.beta2'
 gem 'paperclip-optimizer', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 3.5'
 gem 'bcrypt', '~> 3.1.11'

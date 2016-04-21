@@ -9,7 +9,7 @@ class CacheBustWebpageJob < ActiveJob::Base
   private
 
   def get_cache_buster_url(url)
-    root_domain_uri = URI.parse(url)
-    "#{root_domain_uri.scheme}://#{root_domain_uri.host}/cache?path=#{URI.encode(root_domain_uri.path)}"
+    uri = Addressable::URI.parse(url)
+    "#{uri.scheme}://#{uri.authority}/cache?path=#{Addressable::URI.encode(uri.path)}"
   end
 end

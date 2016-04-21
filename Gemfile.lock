@@ -589,6 +589,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 3.5)
+  addressable (~> 2.4.0)
   angular-rails-templates (~> 1.0.0)
   awesome_nested_set (~> 3.0)
   aws-sdk (~> 2.2)

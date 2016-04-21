@@ -19,21 +19,21 @@ ActiveRecord::Schema.define(version: 20160415032630) do
   enable_extension "uuid-ossp"
 
   create_table "applications", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "write",                  default: false
+    t.boolean  "write",      default: false
     t.integer  "tenant_id"
   end
 
   add_index "applications", ["tenant_id"], name: "index_applications_on_tenant_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
-    t.string  "firstname", limit: 255
-    t.string  "lastname",  limit: 255
-    t.string  "email",     limit: 255
+    t.string  "firstname"
+    t.string  "lastname"
+    t.string  "email"
     t.hstore  "sites"
-    t.string  "title",     limit: 255
+    t.string  "title"
     t.text    "bio"
     t.integer "user_id"
   end
@@ -77,50 +77,19 @@ ActiveRecord::Schema.define(version: 20160415032630) do
     t.integer "category_id", null: false
   end
 
-  create_table "document_types", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.integer  "user_id"
-    t.jsonb    "attributes", default: {}, null: false
-    t.string   "name",                    null: false
-    t.string   "implements", default: [],              array: true
-    t.boolean  "abstract",                null: false
-    t.boolean  "stateful",                null: false
-    t.boolean  "tracked",                 null: false
-    t.boolean  "versioned",               null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+  create_table "documents", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "name"
+    t.text     "body"
     t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "document_types", ["attributes"], name: "index_document_types_on_attributes", using: :gin
-  add_index "document_types", ["id"], name: "index_document_types_on_id", using: :btree
-  add_index "document_types", ["name"], name: "index_document_types_on_name", using: :btree
-  add_index "document_types", ["user_id"], name: "index_document_types_on_user_id", using: :btree
-
-  create_table "document_types_documents", id: false, force: :cascade do |t|
-    t.integer "document_types_id"
-    t.integer "documents_id"
-  end
-
-  add_index "document_types_documents", ["document_types_id"], name: "index_document_types_documents_on_document_types_id", using: :btree
-  add_index "document_types_documents", ["documents_id"], name: "index_document_types_documents_on_documents_id", using: :btree
-
-  create_table "documents", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.integer  "user_id"
-    t.jsonb    "attributes", default: {}, null: false
-    t.string   "name",                    null: false
-    t.string   "implements", default: [],              array: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "deleted_at"
-  end
-
-  add_index "documents", ["attributes"], name: "index_documents_on_attributes", using: :gin
-  add_index "documents", ["id"], name: "index_documents_on_id", using: :btree
-  add_index "documents", ["name"], name: "index_documents_on_name", using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "name",            limit: 255, null: false
+    t.string   "name",            null: false
     t.integer  "localization_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -212,17 +181,6 @@ ActiveRecord::Schema.define(version: 20160415032630) do
   add_index "oauth_applications", ["owner_id", "owner_type"], name: "index_oauth_applications_on_owner_id_and_owner_type", using: :btree
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
-  create_table "old_documents", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "name"
-    t.text     "body"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "old_documents", ["user_id"], name: "index_old_documents_on_user_id", using: :btree
-
   create_table "onet_occupations", force: :cascade do |t|
     t.string   "soc",         limit: 255
     t.string   "title",       limit: 255
@@ -256,13 +214,13 @@ ActiveRecord::Schema.define(version: 20160415032630) do
     t.string   "seo_description",     limit: 255
     t.string   "seo_preview",         limit: 255
     t.string   "custom_author",       limit: 255
-    t.string   "slug",                limit: 255,                  null: false
+    t.string   "slug",                                             null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "type",                limit: 255, default: "Post", null: false
+    t.string   "type",                            default: "Post", null: false
     t.integer  "author_id"
     t.boolean  "is_wysiwyg",                      default: true
   end

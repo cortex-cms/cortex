@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Tenants', :type => :feature, js: true, pending: 'All Feature specs are broken on Travis' do
+xdescribe 'Tenants', :type => :feature, js: true do
   let(:admin)  { FactoryGirl.create :user, :admin }
   let(:tenant) { FactoryGirl.create :tenant }
 

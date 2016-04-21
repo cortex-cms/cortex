@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Main Cortex Interface", :type => :feature, js: true, pending: 'All Feature specs are broken on Travis' do
+xdescribe "Main Cortex Interface", :type => :feature, js: true do
   let(:admin) { FactoryGirl.create :user, :admin }
   let(:user)  { FactoryGirl.create :user  }
 

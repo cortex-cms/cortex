@@ -151,12 +151,13 @@ bundle exec rake db:create:all
 $ bundle exec rake db:schema:load
 ```
 
-* Seed database with a top-level tenant, the superuser, Advice & Resources categories, and ONET occupation/industry codes:
+* Seed database with a top-level tenant, the superuser, Advice & Resources categories, and ONET occupation/industry codes, then rebuild the ElasticSearch index:
 
 ```sh
 $ bundle exec rake db:seed
 $ bundle exec rake cortex:create_categories
 $ bundle exec rake cortex:onet:fetch_and_provision
+$ bundle exec rake cortex:rebuild_indexes
 ```
 
 ### Server

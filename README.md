@@ -1,5 +1,9 @@
 # Cortex
 
+[![Build Status](https://travis-ci.com/cbdr/cortex.svg?token=sAtZ4frpstZnGHoeyxTz&branch=master)](https://travis-ci.com/cbdr/cortex)
+[![Code Climate](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/gpa.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/feed)
+[![Test Coverage](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/coverage.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/coverage)
+
 ## Table of Contents
 
 - [What is Cortex?](#what-is-cortex)
@@ -151,12 +155,13 @@ bundle exec rake db:create:all
 $ bundle exec rake db:schema:load
 ```
 
-* Seed database with a top-level tenant, the superuser, Advice & Resources categories, and ONET occupation/industry codes:
+* Seed database with a top-level tenant, the superuser, Advice & Resources categories, and ONET occupation/industry codes, then rebuild the ElasticSearch index:
 
 ```sh
 $ bundle exec rake db:seed
 $ bundle exec rake cortex:create_categories
 $ bundle exec rake cortex:onet:fetch_and_provision
+$ bundle exec rake cortex:rebuild_indexes
 ```
 
 ### Server

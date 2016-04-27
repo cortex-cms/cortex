@@ -32,8 +32,7 @@ module Helpers
 
       def authorize!(action, subject)
         unless abilities.allowed?(current_user, action, subject)
-          # TODO: Un-comment on May 12, date of OAuth Scope Enforcement rollout
-          # forbidden!
+          forbidden!
         end
       end
 
@@ -42,7 +41,8 @@ module Helpers
         scopes = [scopes] unless scopes.kind_of? Array
 
         unless (find_access_token.scopes.to_a & scopes) == scopes
-          forbidden!
+          # TODO: Un-comment on May 12, date of OAuth Scope Enforcement rollout
+          # forbidden!
         end
       end
 

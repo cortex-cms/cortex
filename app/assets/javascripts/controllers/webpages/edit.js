@@ -9,10 +9,6 @@ angular.module('cortex.controllers.webpages.edit', [
     $scope.data = $scope.data || {};
     $scope.data.webpage = cortex.webpages.get({id: $stateParams.webpageId});
 
-    $document.find('#webpage-frame').load(function () {
-      sendFrameMessage({event: 'load_editor'});
-    });
-
     var frameEventListener = function (event) {
       switch (event.data.event) {
         case 'cancel_editor':

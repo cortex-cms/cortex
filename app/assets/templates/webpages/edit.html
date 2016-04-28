@@ -70,5 +70,6 @@
       </div>
     </tab>
   </tabset>
-  <iframe class="webpage-frame" id="webpage-frame" ng-src="{{ data.webpage.url | trustAsResourceUrl }}" disabled></iframe>
+
+  <iframe class="webpage-frame" id="webpage-frame" ng-src="{{ data.webpage.url + '?editing_mode=1' | trustAsResourceUrl }}" disabled></iframe>
 </div>

@@ -34,6 +34,43 @@ namespace :cortex do
     end
   end
 
+  desc 'Find and replace text in snippets'
+  task :replace => :environment do
+
+    find = ENV['FIND']
+    replace = ENV['REPLACE']
+    tenant = ENV['TENANT']
+    model, field = ENV['ATTRIBUTE'].split(":")
+    scope = ENV['SCOPE']
+
+    if [find, replace, tenant, model, field].include? nil
+      puts "You need to set env vars for FIND, REPLACE, ATTRIBUTE (i.e. 'Snippet:title') /or/ SCOPE and TENANT to use this"
+      next
+    end
+
+    puts "Searching for #{model} with the text '#{find}' in tenant #{tenant}"
+
+    if scope
+      matching_objects = Object.const_get(model).find_by_tenant_id(tenant).send(scope.to_sym, find)
+    else
+      matching_objects = Object.const_get(model).find_by_tenant_id(tenant).where("#{field} LIKE ?", "%#{find}%")
+    end
+
+    # puts "This will replace text in #{matching_snippets.count} snippet(s) and #{matching_posts.count} post(s)"
+
+    puts "Would you like to continue? (yes)"
+    confirmation = STDIN.gets.chomp
+
+    next unless confirmation == "yes" or confirmation == ""
+
+    matching_objects.all.each do |object|
+      puts "Replacing text in #{object}"
+      object.send(field).gsub! find, replace
+      object.save
+    end
+
+  end
+
   namespace :snippets do
 
     desc 'Find and replace text in snippets'

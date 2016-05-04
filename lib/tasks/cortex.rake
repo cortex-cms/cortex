@@ -34,7 +34,7 @@ namespace :cortex do
     end
   end
 
-  desc 'Find and replace text in snippets'
+  desc 'Find and replace text in any AR model and attribute'
   task :replace => :environment do
 
     find = ENV['FIND']

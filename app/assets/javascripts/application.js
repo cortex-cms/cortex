@@ -2,6 +2,7 @@
 //= require jquery
 //= require underscore
 //= require moment
+//= require riot-compiler
 //= require bootstrap-sass-official
 //= require angular
 //= require angular-rails-templates

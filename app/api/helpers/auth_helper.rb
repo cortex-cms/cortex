@@ -22,8 +22,8 @@ module Helpers
         current_user.anonymous? ? unauthorized! : current_user
       end
 
-      def find_access_token
-        @access_token ||= Doorkeeper.authenticate(doorkeeper_request, Doorkeeper.configuration.access_token_methods)
+      def find_access_token(doorkeeper = Doorkeeper)
+        @access_token ||= doorkeeper.authenticate(doorkeeper_request, Doorkeeper.configuration.access_token_methods)
       end
 
       def authenticate!

@@ -23,11 +23,11 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
+    mocks.allow_message_expectations_on_nil = true 
   end
 
   elasticsearch_status = false
 
-  config.mock_with :mocha
   config.include Warden::Test::Helpers
   config.include FactoryGirl::Syntax::Methods
 

@@ -23,6 +23,7 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
+    mocks.allow_message_expectations_on_nil = true 
   end
 
   elasticsearch_status = false

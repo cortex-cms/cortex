@@ -1,0 +1,33 @@
+require 'spec_helper'
+
+RSpec.describe TextFieldType, type: :model do
+  context "validation types" do
+    it "has validation types" do
+      expect(TextFieldType::VALIDATION_TYPES).to be_present
+    end
+
+    it "includes length and presence" do
+      expect(TextFieldType::VALIDATION_TYPES).to include(:length)
+      expect(TextFieldType::VALIDATION_TYPES).to include(:presence)
+    end
+
+  end
+
+  context "validations" do 
+    it "can validate presence" do
+      text = ""
+      validations = { presence: true}
+      text_field_type = TextFieldType.new(text, validations)
+      expect(text_field_type.valid?).to eq(false)
+      expect(text_field_type.errors.full_messages).to match_array(["Text must be present"])
+    end
+
+    it "can validate maximum length" do
+      text = "Hello!"
+      validations = { length: 5 }
+      text_field_type = TextFieldType.new(text, validations)
+      expect(text_field_type.valid?).to eq(false)
+      expect(text_field_type.errors.full_messages).to match_array(["Text must be no more than 5 characters"])
+    end
+  end
+end

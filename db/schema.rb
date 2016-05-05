@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415032630) do
+ActiveRecord::Schema.define(version: 20160504210331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,16 @@ ActiveRecord::Schema.define(version: 20160415032630) do
     t.integer "category_id", null: false
   end
 
+  create_table "content_types", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description"
+    t.integer  "creator_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
+
   create_table "documents", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.string   "name"
@@ -87,6 +97,17 @@ ActiveRecord::Schema.define(version: 20160415032630) do
   end
 
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
+
+  create_table "fields", force: :cascade do |t|
+    t.integer  "content_type_id",                 null: false
+    t.string   "field_type",                      null: false
+    t.integer  "order"
+    t.boolean  "required",        default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "fields", ["content_type_id"], name: "index_fields_on_content_type_id", using: :btree
 
   create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name",            limit: 255, null: false

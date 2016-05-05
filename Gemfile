@@ -38,6 +38,7 @@ gem 'elasticsearch-rails', '~> 0.1'
 gem 'paranoia', '~> 2.1'
 gem 'pg', '~> 0.18.4'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
+gem 'ranked-model', '~> 0.4.0'
 
 # Middleware
 gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
@@ -105,6 +106,7 @@ group :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'json_spec', '~> 1.1.4'
   gem 'rspec-sidekiq', '~> 2.2.0'
+  gem 'shoulda-matchers', '~> 3.1.1'
 
   # Capybara for feature testing, Poltergeist for PhantomJS
   gem 'capybara'
@@ -119,6 +121,7 @@ group :test do
   gem 'database_cleaner', '~> 1.5.1'
   gem 'timecop', '~> 0.8.0'
   gem 'email_spec'
+  gem 'faker', '~> 1.6.3'
 
   # Javascript
   gem 'jasmine-rails', '~> 0.12.2'

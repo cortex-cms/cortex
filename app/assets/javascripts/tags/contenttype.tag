@@ -1,3 +1,3 @@
 <contenttype>
-  <p>Here is some { opts.library } shit</p>
+  <p>Here is a { opts.library } tag</p>
 </contenttype>

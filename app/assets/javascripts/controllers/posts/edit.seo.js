@@ -19,4 +19,11 @@ angular.module('cortex.controllers.posts.edit.seo', [
         }
         $scope.data.post.seo_description = $scope.data.post.short_description;
       });
+
+      $scope.addTag = function(tag) {
+        if (_.some($scope.data.post.seo_keyword_list, function(t) { return t.name == tag.name; })) {
+          return;
+        }
+        $scope.data.post.seo_keyword_list.push({name: tag.name, id: tag.id});
+      };
 });

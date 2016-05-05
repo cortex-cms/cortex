@@ -27,7 +27,9 @@ angular.module('cortex.controllers.posts.edit', [
       }, $scope.data.post.category_ids);
       $scope.data.post.primary_category_id = $scope.data.post.category_ids[0];
       $scope.data.post.industry_ids = [$scope.data.post.primary_industry_id];
+      console.log($scope.data.post.tag_list);
       $scope.data.post.tag_list = $scope.data.post.tag_list.map(function(tag) { return tag.name; });
+      console.log($scope.data.post.seo_keyword_list);
       $scope.data.post.seo_keyword_list = $scope.data.post.seo_keyword_list.map(function(seo_keyword) { return seo_keyword.name; });
 
       if ($scope.data.authorIsUser) {

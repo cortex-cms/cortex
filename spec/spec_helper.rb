@@ -27,7 +27,6 @@ RSpec.configure do |config|
 
   elasticsearch_status = false
 
-  config.mock_with :mocha
   config.include Warden::Test::Helpers
   config.include FactoryGirl::Syntax::Methods
 

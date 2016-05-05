@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504210331) do
+ActiveRecord::Schema.define(version: 20160505221616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20160504210331) do
     t.boolean  "required",        default: false, null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.jsonb    "validations",     default: {}
   end
 
   add_index "fields", ["content_type_id"], name: "index_fields_on_content_type_id", using: :btree

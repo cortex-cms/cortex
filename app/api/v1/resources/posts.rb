@@ -143,6 +143,9 @@ module V1
           if params[:tag_list]
             post.tag_list = params[:tag_list]
           end
+          if params[:seo_keyword_list]
+            post.seo_keyword_list = params[:seo_keyword_list]
+          end
           post.update!(declared(params, {include_missing: false}, allowed_params))
 
           present post, with: ::V1::Entities::Post, full: true

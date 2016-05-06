@@ -9,7 +9,7 @@ module V1
 
       expose :seo_title, documentation: { type: 'String', desc: "SEO Meta Tag Title" }
       expose :seo_description, documentation: { type: 'String', desc: "SEO Meta Tag Description" }
-      expose :seo_keywords, documentation: { type: 'String', desc: "SEO Meta Tag Keywords" }
+      expose :seo_keyword_list, documentation: {type: "String", is_array: true, desc: "SEO-specific keywords"}
       expose :noindex, documentation: { type: 'Boolean', desc: "SEO No Index Robots Setting" }
       expose :nofollow, documentation: { type: 'Boolean', desc: "SEO No Follow Robots Setting" }
       expose :noodp, documentation: { type: 'Boolean', desc: "SEO No ODP Setting" }

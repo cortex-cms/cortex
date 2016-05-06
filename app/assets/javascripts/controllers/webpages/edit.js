@@ -51,6 +51,7 @@ angular.module('cortex.controllers.webpages.edit', [
       });
 
       $scope.data.webpage.snippets_attributes = snippets_attributes;
+      $scope.data.webpage.seo_keyword_list = $scope.data.webpage.seo_keyword_list.map(function(seo_keyword) { return seo_keyword.name; });
       $scope.data.webpage.$save().then(
         function () {
           $anchorScroll();

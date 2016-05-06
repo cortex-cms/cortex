@@ -67,6 +67,10 @@ module V1
             snippet[:document_attributes].user = current_user!
           }
 
+          if params[:seo_keyword_list]
+            webpage.seo_keyword_list = params[:seo_keyword_list]
+          end
+
           webpage.update!(update_params.to_hash)
           CacheBustWebpageJob.perform_later(webpage.url)
 

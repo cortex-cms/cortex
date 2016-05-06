@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   scope :find_by_body_text, ->(query) { where("body LIKE :query", query: "%#{query}%") }
 
   acts_as_taggable
+  acts_as_taggable_on :seo_keywords
 
   has_and_belongs_to_many :media, class_name: 'Media'
   has_and_belongs_to_many :categories

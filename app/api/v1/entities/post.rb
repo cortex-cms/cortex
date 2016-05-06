@@ -18,6 +18,7 @@ module V1
       expose :notes, documentation: {type: "String", desc: "Notes about this post"}
       expose :seo_title, documentation: {type: "String", desc: "SEO-specific title for this post"}
       expose :seo_description, documentation: {type: "String", desc: "SEO-specific description for this post"}
+      expose :seo_keyword_list, documentation: {type: "String", is_array: true, desc: "SEO-specific keywords for this post"}
       expose :primary_category_id, documentation: {type: "Integer", desc: "Primary Category ID"}
       expose :primary_industry_id, documentation: {type: "Integer", desc: "Primary Industry ID"}
       expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}

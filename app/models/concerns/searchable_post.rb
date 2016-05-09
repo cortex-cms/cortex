@@ -20,6 +20,7 @@ module SearchablePost
       indexes :job_phase, :analyzer => :keyword
       indexes :type, :analyzer => :keyword
       indexes :industries, :analyzer => :keyword
+      indexes :published, :index => :not_analyzed
     end
 
     def as_indexed_json(options = {})
@@ -30,13 +31,14 @@ module SearchablePost
       json[:tags] = tag_list.to_a
       json[:author] = author ? author.fullname : custom_author
       json[:tenant_id] = user.tenant.id
+      json[:published] = self.published?
       json
     end
 
-    def related(tenant, published = nil)
+    def related(tenant)
       bool = {bool: {should: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
-      published ? SearchablePost.published_filter(bool[:bool][:filter], self) : nil
+      SearchablePost.published_filter(bool[:bool][:filter], self)
 
       mlt = [{
                more_like_this: {
@@ -59,7 +61,7 @@ module SearchablePost
   end
 
   module ClassMethods
-    def search_with_params(params, tenant, published = true)
+    def search_with_params(params, tenant)
       q = params[:q]
       categories = params[:categories]
       job_phase = params[:job_phase]
@@ -67,8 +69,6 @@ module SearchablePost
       industries = params[:industries]
       author = params[:author]
 
-      puts "Search with params"
-      published = true
       bool = {bool: {must: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
       if q
@@ -89,23 +89,19 @@ module SearchablePost
       if author
         bool[:bool][:filter] << self.term_search(:author, author)
       end
-
-      published ? SearchablePost.published_filter(bool[:bool][:filter], self) : nil
+      SearchablePost.published_filter(bool[:bool][:filter], self)
 
       self.search query: bool
     end
 
-    def show_all(tenant, published = nil)
+    def show_all(tenant)
       bool = {bool: {filter: [{term: {tenant_id: tenant.id}}]}}
-
-      published ? SearchablePost.published_filter(bool[:bool][:filter], self) : nil
 
       search query: bool, sort: [{created_at: {order: 'desc'}}]
     end
   end
 
   def self.published_filter(filter, post)
-    filter << post.range_search(:published_at, :lte, DateTime.now.to_s)
-    filter << post.term_search(:draft, false)
+    filter << post.term_search(:published, true)
   end
 end

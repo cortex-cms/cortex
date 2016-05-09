@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20160505221616) do
   create_table "fields", force: :cascade do |t|
     t.integer  "content_type_id",                 null: false
     t.string   "field_type",                      null: false
-    t.integer  "order"
+    t.integer  "order",                           null: false
     t.boolean  "required",        default: false, null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
@@ -303,6 +303,12 @@ ActiveRecord::Schema.define(version: 20160505221616) do
   end
 
   add_index "tenants", ["parent_id"], name: "index_tenants_on_parent_id", using: :btree
+
+  create_table "text_field_types", force: :cascade do |t|
+    t.text     "text",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",      null: false

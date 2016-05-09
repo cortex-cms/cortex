@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe TextFieldType, type: :model do
+  
   context "validation types" do
-    it "has validation types" do
+    it "has the acceptable validation types" do
       expect(TextFieldType::VALIDATION_TYPES).to be_present
     end
 
@@ -10,7 +11,23 @@ RSpec.describe TextFieldType, type: :model do
       expect(TextFieldType::VALIDATION_TYPES).to include(:length)
       expect(TextFieldType::VALIDATION_TYPES).to include(:presence)
     end
+  end
 
+  describe ".acceptable_validations" do
+    it "returns true if the types of validations in the hash passed into it can be performed" do
+      requested_validation = { length: 5 }
+      expect(TextFieldType.acceptable_validations?(requested_validation)).to be true
+    end
+
+    it "returns false if any of the types of validations in the hash cannot be performed" do 
+      requested_validation = { length: 5, bloop: "goop" }
+      expect(TextFieldType.acceptable_validations?(requested_validation)).to be false
+    end
+
+    it "returns false if the options for a validation type are invalid" do
+      requested_validation = { length: "string" }
+      expect(TextFieldType.acceptable_validations?(requested_validation)).to be false
+    end
   end
 
   context "validations" do 

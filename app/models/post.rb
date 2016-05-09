@@ -32,7 +32,11 @@ class Post < ActiveRecord::Base
   validates :type, inclusion: { in: %w(Post ArticlePost InfographicPost PromoPost VideoPost) }
 
   def published?
-    !draft && published_at ? published_at <= DateTime.now : false
+    !(draft && expired?)
+  end
+
+  def expired?
+    published_at ? published_at <= DateTime.now : false
   end
 
   class << self

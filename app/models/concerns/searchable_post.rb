@@ -36,10 +36,7 @@ module SearchablePost
     def related(tenant, published = nil)
       bool = {bool: {should: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
-      if published
-        bool[:bool][:filter] << self.class.range_search(:published_at, :lte, DateTime.now.to_s)
-        bool[:bool][:filter] << self.class.term_search(:draft, false)
-      end
+      published ? SearchablePost.published_filter(bool[:bool][:filter], self) : nil
 
       mlt = [{
                more_like_this: {
@@ -62,7 +59,7 @@ module SearchablePost
   end
 
   module ClassMethods
-    def search_with_params(params, tenant, published = nil)
+    def search_with_params(params, tenant, published = true)
       q = params[:q]
       categories = params[:categories]
       job_phase = params[:job_phase]
@@ -70,6 +67,8 @@ module SearchablePost
       industries = params[:industries]
       author = params[:author]
 
+      puts "Search with params"
+      published = true
       bool = {bool: {must: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
       if q
@@ -90,10 +89,8 @@ module SearchablePost
       if author
         bool[:bool][:filter] << self.term_search(:author, author)
       end
-      if published
-        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
-        bool[:bool][:filter] << self.term_search(:draft, false)
-      end
+
+      published ? SearchablePost.published_filter(bool[:bool][:filter], self) : nil
 
       self.search query: bool
     end
@@ -101,12 +98,14 @@ module SearchablePost
     def show_all(tenant, published = nil)
       bool = {bool: {filter: [{term: {tenant_id: tenant.id}}]}}
 
-      if published
-        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
-        bool[:bool][:filter] << self.term_search(:draft, false)
-      end
+      published ? SearchablePost.published_filter(bool[:bool][:filter], self) : nil
 
       search query: bool, sort: [{created_at: {order: 'desc'}}]
     end
+  end
+
+  def self.published_filter(filter, post)
+    filter << post.range_search(:published_at, :lte, DateTime.now.to_s)
+    filter << post.term_search(:draft, false)
   end
 end

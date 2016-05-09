@@ -20,7 +20,7 @@ module SearchablePost
       indexes :job_phase, :analyzer => :keyword
       indexes :type, :analyzer => :keyword
       indexes :industries, :analyzer => :keyword
-      indexes :published, :index => :not_analyzed
+      indexes :is_published, :type => :boolean
     end
 
     def as_indexed_json(options = {})
@@ -31,7 +31,7 @@ module SearchablePost
       json[:tags] = tag_list.to_a
       json[:author] = author ? author.fullname : custom_author
       json[:tenant_id] = user.tenant.id
-      json[:published] = self.published?
+      json[:is_published] = self.published?
       json
     end
 
@@ -102,6 +102,6 @@ module SearchablePost
   end
 
   def self.published_filter(filter, post)
-    filter << post.term_search(:published, true)
+    filter << post.term_search(:is_published, true)
   end
 end

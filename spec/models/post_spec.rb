@@ -125,4 +125,17 @@ RSpec.describe Post, type: :model do
     end
   end
 
+  describe Post.published do
+    before :all do
+      user = create(:user)
+      @unpublished_post = create(:post, user: user, draft: true)
+      @future_post = create(:post, user: user, published_at: Time.now + 2.days)
+      @expired_post =  create(:post, user: user, expired_at: Time.now - 2.days)
+      @post = create(:post)
+    end
+
+    it { is_expected.not_to include(@unpublished_post, @future_post, @expired_post) }
+    it { is_expected.to include(@post) }
+  end
+
 end

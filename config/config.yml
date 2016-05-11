@@ -1,4 +1,8 @@
 development: &defaults
+  cortex:
+    api:
+      base_url: <%= ENV['CORTEX_API_BASE_URL'] %>
+      version: <%= ENV['CORTEX_API_VERSION'] %>
   extra:
     google_analytics_id: <%= ENV['GOOGLE_ANALYTICS_ID'] %>
   cors:

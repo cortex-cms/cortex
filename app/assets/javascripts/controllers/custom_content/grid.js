@@ -6,5 +6,4 @@ angular.module('cortex.controllers.custom_content.grid', [
 ])
 
   .controller('CustomContentGridCtrl', function($scope, $state) {
-    console.log("In the controller");
   });

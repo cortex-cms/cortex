@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509181322) do
+ActiveRecord::Schema.define(version: 20160511152134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,10 @@ ActiveRecord::Schema.define(version: 20160509181322) do
     t.integer  "content_type_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "content_items", ["deleted_at"], name: "index_content_items_on_deleted_at", using: :btree
 
   create_table "content_types", force: :cascade do |t|
     t.string   "name",        null: false
@@ -94,9 +97,11 @@ ActiveRecord::Schema.define(version: 20160509181322) do
     t.integer  "creator_id",  null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
   end
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
+  add_index "content_types", ["deleted_at"], name: "index_content_types_on_deleted_at", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -115,19 +120,24 @@ ActiveRecord::Schema.define(version: 20160509181322) do
     t.integer  "content_item_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "field_items", ["deleted_at"], name: "index_field_items_on_deleted_at", using: :btree
 
   create_table "fields", force: :cascade do |t|
     t.integer  "content_type_id",                 null: false
     t.string   "field_type",                      null: false
-    t.integer  "order"
+    t.integer  "order",                           null: false
     t.boolean  "required",        default: false, null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.jsonb    "validations",     default: {}
+    t.datetime "deleted_at"
   end
 
   add_index "fields", ["content_type_id"], name: "index_fields_on_content_type_id", using: :btree
+  add_index "fields", ["deleted_at"], name: "index_fields_on_deleted_at", using: :btree
 
   create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name",            limit: 255, null: false
@@ -322,6 +332,12 @@ ActiveRecord::Schema.define(version: 20160509181322) do
   end
 
   add_index "tenants", ["parent_id"], name: "index_tenants_on_parent_id", using: :btree
+
+  create_table "text_field_types", force: :cascade do |t|
+    t.text     "text",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",      null: false

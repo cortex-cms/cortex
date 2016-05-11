@@ -1,4 +1,6 @@
 class Field < ActiveRecord::Base
+  acts_as_paranoid
+  
   include RankedModel
   ranks :order, with_same: :content_type_id
 

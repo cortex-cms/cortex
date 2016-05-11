@@ -1,4 +1,6 @@
 class ContentItem < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :creator, class_name: "User"
   belongs_to :author, class_name: "User"
   belongs_to :content_type

@@ -4,5 +4,6 @@ FactoryGirl.define do
     field_type { FieldType.direct_descendant_names.sample }
     required { false }
     name { Faker::Lorem.word }
+    validations { {} }
   end
 end

@@ -1,6 +1,6 @@
 class Field < ActiveRecord::Base
   acts_as_paranoid
-  
+
   include RankedModel
   ranks :order, with_same: :content_type_id
 
@@ -14,8 +14,9 @@ class Field < ActiveRecord::Base
 
   def acceptable_validations
     if field_type.present?
-      field_type_class = field_type.camelize.constantize
-      errors.add(:validations, "must be for specified type") unless field_type_class.acceptable_validations?(validations)
+      field_type_instance = field_type.camelize.constantize.new
+      field_type_instance.validations = validations
+      errors.add(:validations, "must be for specified type") unless field_type_instance.acceptable_validations?
     end
   end
 

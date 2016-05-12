@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe TextFieldType, type: :model do
-  
   context "validation types" do
     it "has the acceptable validation types" do
       expect(TextFieldType::VALIDATION_TYPES).to be_present
@@ -13,38 +12,29 @@ RSpec.describe TextFieldType, type: :model do
     end
   end
 
-  describe ".acceptable_validations" do
+  describe "#acceptable_validations?" do
+    let(:subject) { TextFieldType.new }
+
     it "returns true if the types of validations in the hash passed into it can be performed" do
-      requested_validation = { length: 5 }
-      expect(TextFieldType.acceptable_validations?(requested_validation)).to be true
+      subject.validations = { presence: true }
+      expect(subject.acceptable_validations?).to be true
     end
 
-    it "returns false if any of the types of validations in the hash cannot be performed" do 
-      requested_validation = { length: 5, bloop: "goop" }
-      expect(TextFieldType.acceptable_validations?(requested_validation)).to be false
+    it "returns false if any of the types of validations in the hash cannot be performed" do
+      subject.validations = { presence: true, bloop: "goop" }
+      expect(subject.acceptable_validations?).to be false
     end
 
-    it "returns false if the options for a validation type are invalid" do
-      requested_validation = { length: "string" }
-      expect(TextFieldType.acceptable_validations?(requested_validation)).to be false
-    end
-  end
+    context "length validations" do
+      it "returns true if the length validation options are allowed" do
+        subject.validations = { length: { minimum: 5, maximum: 10 } }
+        expect(subject.acceptable_validations?).to be true
+      end
 
-  context "validations" do 
-    it "can validate presence" do
-      text = ""
-      validations = { presence: true}
-      text_field_type = TextFieldType.new(text, validations)
-      expect(text_field_type.valid?).to eq(false)
-      expect(text_field_type.errors.full_messages).to match_array(["Text must be present"])
-    end
-
-    it "can validate maximum length" do
-      text = "Hello!"
-      validations = { length: 5 }
-      text_field_type = TextFieldType.new(text, validations)
-      expect(text_field_type.valid?).to eq(false)
-      expect(text_field_type.errors.full_messages).to match_array(["Text must be no more than 5 characters"])
+      it "returns false if the options for length validation are invalid" do
+        subject.validations = { length: "string" }
+        expect(subject.acceptable_validations?).to be false
+      end
     end
   end
 end

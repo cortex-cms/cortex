@@ -6,10 +6,10 @@ RSpec.describe Field, type: :model do
   context "validations" do
     it { is_expected.to validate_presence_of(:field_type) }
     it { is_expected.to validate_presence_of(:content_type) }
-    
+
     it "checks that the field type is valid" do
       subject.field_type = "This_doesnt_exist"
-      subject.valid?
+      expect{ subject.valid? }.to raise_error(NameError)
       expect(subject.errors[:field_type]).to match_array(["must be an available field type"])
     end
 

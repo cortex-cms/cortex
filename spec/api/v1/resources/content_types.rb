@@ -22,7 +22,7 @@ describe SPEC_API::Resources::ContentTypes, type: :request do
 
   describe 'GET /content_types/:content_type_id' do
     let(:content_type) { create(:content_type, name: "Blog post") }
-    let!(:last_name_field) { create(:field, content_type: content_type, name: "Last Name") }
+    let!(:last_name_field) { create(:field, content_type: content_type, name: "Last Name", validations: { length:  }) }
     let!(:first_name_field) { build(:field, name: "First Name") }
     let(:content_type_response) do
       {
@@ -32,12 +32,14 @@ describe SPEC_API::Resources::ContentTypes, type: :request do
           {
             required: first_name_field.required,
             field_type: first_name_field.field_type,
-            name: first_name_field.name
+            name: first_name_field.name,
+            validations: first_name_field.validations
           },
           {
             required: last_name_field.required,
             field_type: last_name_field.field_type,
-            name: last_name_field.name
+            name: last_name_field.name,
+            validations: last_name_field.validations
           }
         ]
       }

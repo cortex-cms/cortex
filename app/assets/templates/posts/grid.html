@@ -22,7 +22,7 @@
     <td data-title="'Categories'">{{ post.categories|tagList }}</td>
     <td data-title="'Created'">{{ post.created_at|date:"y/MM/dd h:mm:ss a" }}</td>
     <td data-title="'Modified'">{{ post.updated_at|date:"y/MM/dd h:mm:ss a" }}</td>
-    <td data-title="'Active'" class="text-center">{{ post.deleted_at == null ? "\u2713" : "" }}</td>
+    <td data-title="'Active'" class="text-center">{{ post.is_published ? "\u2713" : "" }}</td>
     <td data-title="'Tags'">{{ post.tag_list.join(', ') }}</td>
   </tr>
 </table>

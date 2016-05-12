@@ -7,9 +7,9 @@ class GetPosts
     posts = ::Post
 
     if has_search_params?
-      posts = posts.search_with_params(context.params, context.tenant, context.published)
+      posts = posts.search_with_params(context.params, context.tenant)
     else
-      posts = posts.show_all(context.tenant, context.published)
+      posts = posts.show_all(context.tenant)
     end
 
     posts = posts.page(context.params.page).per(context.params.per_page)

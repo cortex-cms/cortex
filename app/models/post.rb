@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   include FindByTenant
 
   default_scope -> { includes(:categories, :media, :industries) }
-  scope :published, -> { where('published_at <= ? and draft = ? and (expired_at >= ? OR expired_at is null)', DateTime.now, false, DateTime.now) }
+  scope :published, -> { scope :published, -> { where('published_at <= ? and draft = ? and (expired_at >= ? OR expired_at is null)', DateTime.now, false, DateTime.now) }
   scope :last_updated_at, -> { order(updated_at: :desc).select('updated_at').first.updated_at }
   scope :find_by_body_text, ->(query) { where("body LIKE :query", query: "%#{query}%") }
 
@@ -32,7 +32,15 @@ class Post < ActiveRecord::Base
   validates :type, inclusion: { in: %w(Post ArticlePost InfographicPost PromoPost VideoPost) }
 
   def published?
-    !draft && published_at ? published_at <= DateTime.now : false
+    !(draft || expired? || pending?)
+  end
+
+  def expired?
+    expired_at ? expired_at <= DateTime.now : false
+  end
+
+  def pending?
+    published_at ? published_at >= DateTime.now : false
   end
 
   class << self

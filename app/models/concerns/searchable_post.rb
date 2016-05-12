@@ -20,6 +20,7 @@ module SearchablePost
       indexes :job_phase, :analyzer => :keyword
       indexes :type, :analyzer => :keyword
       indexes :industries, :analyzer => :keyword
+      indexes :is_published, :type => :boolean
     end
 
     def as_indexed_json(options = {})
@@ -30,16 +31,14 @@ module SearchablePost
       json[:tags] = tag_list.to_a
       json[:author] = author ? author.fullname : custom_author
       json[:tenant_id] = user.tenant.id
+      json[:is_published] = self.published?
       json
     end
 
-    def related(tenant, published = nil)
+    def related(tenant)
       bool = {bool: {should: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
-      if published
-        bool[:bool][:filter] << self.class.range_search(:published_at, :lte, DateTime.now.to_s)
-        bool[:bool][:filter] << self.class.term_search(:draft, false)
-      end
+      SearchablePost.published_filter(bool[:bool][:filter], self)
 
       mlt = [{
                more_like_this: {
@@ -62,7 +61,7 @@ module SearchablePost
   end
 
   module ClassMethods
-    def search_with_params(params, tenant, published = nil)
+    def search_with_params(params, tenant)
       q = params[:q]
       categories = params[:categories]
       job_phase = params[:job_phase]
@@ -90,23 +89,19 @@ module SearchablePost
       if author
         bool[:bool][:filter] << self.term_search(:author, author)
       end
-      if published
-        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
-        bool[:bool][:filter] << self.term_search(:draft, false)
-      end
+      SearchablePost.published_filter(bool[:bool][:filter], self)
 
       self.search query: bool
     end
 
-    def show_all(tenant, published = nil)
+    def show_all(tenant)
       bool = {bool: {filter: [{term: {tenant_id: tenant.id}}]}}
-
-      if published
-        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
-        bool[:bool][:filter] << self.term_search(:draft, false)
-      end
 
       search query: bool, sort: [{created_at: {order: 'desc'}}]
     end
+  end
+
+  def self.published_filter(filter, post)
+    filter << post.term_search(:is_published, true)
   end
 end

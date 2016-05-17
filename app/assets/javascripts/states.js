@@ -44,7 +44,8 @@ angular.module('cortex.states', [
   'cortex.controllers.webpages.new',
   'cortex.controllers.webpages.edit',
 
-  'cortex.controllers.content_types.grid'
+  'cortex.controllers.content_items.grid',
+  'cortex.controllers.content_items.new'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {

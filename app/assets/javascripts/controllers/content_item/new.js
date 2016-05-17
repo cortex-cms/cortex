@@ -1,5 +1,16 @@
-angular.module('cortex.controllers.custom_content.new', [])
+angular.module(
+  'cortex.controllers.content_items.new', 
+  [
+    'cortex.services.cortex',
+    'cortex.filters'
+  ]
+)
 
-  .controller('CustomContentNewCtrl', function($scope, $state) {
-    riot.mount('contenttype', { library: "RiotJS" });
+  .controller('ContentItemsNewCtrl', function($scope, $state) {
+    $scope.someText = "Some text here";
+
+    riot.mount('contenttype', { 
+      library: "RiotJS",
+      someText: "With some text added in the angular controller"
+    });
   });

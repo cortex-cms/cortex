@@ -26,7 +26,7 @@ module V1
         end
         get 'feed' do
           require_scope! 'view:webpages'
-          @webpage ||= Webpage.find_by_url(params[:url])
+          @webpage = ::GetWebpageFeed.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).webpage
           not_found! unless @webpage
           authorize! :view, @webpage
           present @webpage, with: ::V1::Entities::Webpage
@@ -66,6 +66,10 @@ module V1
             snippet.user = current_user!
             snippet[:document_attributes].user = current_user!
           }
+
+          if params[:seo_keyword_list]
+            webpage.seo_keyword_list = params[:seo_keyword_list]
+          end
 
           webpage.update!(update_params.to_hash)
           CacheBustWebpageJob.perform_later(webpage.url)

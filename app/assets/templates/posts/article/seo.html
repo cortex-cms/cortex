@@ -25,3 +25,17 @@
            ng-maxlength="255">
   </div>
 </div>
+
+<div class="keywords tags">
+  <label>Keywords</label>
+
+  <div class="tags-group">
+    <tags-input display-property="name"
+                type="text"
+                add-on-space="true"
+                placeholder="Enter HTML meta keywords for this post"
+                ng-model="data.post.seo_keyword_list"
+                ng-maxlength="255">
+    </tags-input>
+  </div>
+</div>

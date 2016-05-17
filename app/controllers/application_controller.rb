@@ -20,13 +20,13 @@ class ApplicationController < ActionController::Base
 
   def add_gon
     gon.push({
-      :current_user => current_user,
-      :settings => {
-        :cortex_base_url => "#{request.protocol}#{request.host_with_port}/api/v1",
-        :paging => {
-          defaultPerPage: 10
-        }
-      }
-    })
+               current_user: current_user.as_json,
+               settings: {
+                 cortex_base_url: "#{Cortex.config.cortex.api.base_url}api/#{Cortex.config.cortex.api.version}",
+                 paging: {
+                   defaultPerPage: 10
+                 }
+               }
+             })
   end
 end

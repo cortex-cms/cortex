@@ -273,6 +273,7 @@ angular.module('cortex.states', [
           post.author = currentUser.full_name;
           post.copyright_owner = post.copyright_owner || "CareerBuilder, LLC";
           post.tag_list = '';
+          post.seo_keyword_list = '';
           post.published_at = new Date();
           post.display = 'medium';
           post.postCategories = {};

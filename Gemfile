@@ -14,10 +14,9 @@ gem 'rails', '~> 4.2.6'
 gem 'cortex-exceptions', '~> 0.0.4'
 
 # API
-gem 'grape', '~> 0.14'
+gem 'grape', '~> 0.16'
 gem 'grape-entity', '~> 0.5.1'
-gem 'grape-swagger', '~> 0.20.1'
-gem 'redis-rails', '~> 4.0'
+gem 'grape-swagger', '~> 0.20.3'
 
 # Authorization
 gem 'six', '~> 0.2.0'
@@ -25,7 +24,7 @@ gem 'devise', '~> 3.5.6'
 gem 'rack-oauth2', '~> 1.3.0'
 gem 'doorkeeper', '~> 3.1'
 
-# ActiveRecord
+# Data
 gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.0'
 gem 'paperclip', '~> 5.0.0.beta2'
@@ -39,6 +38,7 @@ gem 'paranoia', '~> 2.1'
 gem 'pg', '~> 0.18.4'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 gem 'ranked-model', '~> 0.4.0'
+gem 'redis-rails', '~> 4.0'
 
 # Middleware
 gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'

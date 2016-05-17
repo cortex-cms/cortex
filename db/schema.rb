@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20160511195908) do
   create_table "fields", force: :cascade do |t|
     t.integer  "content_type_id",                 null: false
     t.string   "field_type",                      null: false
-    t.integer  "order",                           null: false
+    t.integer  "order"
     t.boolean  "required",        default: false, null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
@@ -334,12 +334,6 @@ ActiveRecord::Schema.define(version: 20160511195908) do
 
   add_index "tenants", ["parent_id"], name: "index_tenants_on_parent_id", using: :btree
 
-  create_table "text_field_types", force: :cascade do |t|
-    t.text     "text",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",      null: false
     t.datetime "created_at"
@@ -384,7 +378,6 @@ ActiveRecord::Schema.define(version: 20160511195908) do
     t.boolean  "noodp",                  default: false
     t.boolean  "noarchive",              default: false
     t.boolean  "noimageindex",           default: false
-    t.text     "seo_keywords"
   end
 
   add_index "webpages", ["user_id"], name: "index_webpages_on_user_id", using: :btree

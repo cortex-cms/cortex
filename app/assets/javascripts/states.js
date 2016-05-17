@@ -44,8 +44,7 @@ angular.module('cortex.states', [
   'cortex.controllers.webpages.new',
   'cortex.controllers.webpages.edit',
 
-  'cortex.controllers.custom_content.grid',
-  'cortex.controllers.custom_content.new'
+  'cortex.controllers.content_types.grid'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -1019,7 +1018,6 @@ angular.module('cortex.states', [
         ncyBreadcrumbLabel: false
       }
     })
-
     // Tenants
 
     .state('cortex.organizations', {
@@ -1312,23 +1310,23 @@ angular.module('cortex.states', [
       }
     })
 
-    // Custom Content Types
+    // Content Items
 
-    .state('cortex.custom_content', {
-      url: '/custom_content',
-      templateUrl: 'custom_content/grid.html',
-      controller: 'CustomContentGridCtrl',
+    .state('cortex.content_items', {
+      url: '/content_items',
+      templateUrl: 'content_items/grid.html',
+      controller: 'ContentItemsGridCtrl',
       data: {
-        ncyBreadcrumbLabel: 'Custom Content'
+        ncyBreadcrumbLabel: 'Content Item'
       }
     })
 
-    .state('cortex.custom_content.new', {
+    .state('cortex.content_items.new', {
       url: '/new',
-      templateUrl: 'custom_content/new.html',
-      controller: 'CustomContentNewCtrl',
+      templateUrl: 'content_items/new.html',
+      controller: 'ContentItemsNewCtrl',
       data: {
         ncyBreadcrumbLabel: 'New'
       }
-    });
+    })
 });

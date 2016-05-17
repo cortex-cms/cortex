@@ -26,7 +26,7 @@ module V1
         end
         get 'feed' do
           require_scope! 'view:webpages'
-          @webpage ||= Webpage.find_by_url(params[:url])
+          @webpage = ::GetWebpageFeed.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).webpage
           not_found! unless @webpage
           authorize! :view, @webpage
           present @webpage, with: ::V1::Entities::Webpage

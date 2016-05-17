@@ -41,8 +41,7 @@ module Helpers
         scopes = [scopes] unless scopes.kind_of? Array
 
         unless (find_access_token.scopes.to_a & scopes) == scopes
-          # TODO: Un-comment on May 12, date of OAuth Scope Enforcement rollout
-          # forbidden!
+          forbidden!
         end
       end
 

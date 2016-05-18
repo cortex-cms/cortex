@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-xdescribe 'Tenants', :type => :feature, js: true do
+describe 'Tenants', :type => :feature, js: true do
   let(:admin)  { FactoryGirl.create :user, :admin }
   let(:tenant) { FactoryGirl.create :tenant }
 

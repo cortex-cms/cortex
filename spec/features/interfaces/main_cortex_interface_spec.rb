@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-xdescribe "Main Cortex Interface", :type => :feature, js: true do
+describe "Main Cortex Interface", :type => :feature, js: true do
   let(:admin) { FactoryGirl.create :user, :admin }
   let(:user)  { FactoryGirl.create :user  }
 

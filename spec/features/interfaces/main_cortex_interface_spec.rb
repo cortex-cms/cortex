@@ -14,13 +14,13 @@ xdescribe "Main Cortex Interface", :type => :feature, js: true do
       end
 
       describe 'Tenants' do
-        it 'should show Organizations as an option on the top bar' do
+        xit 'should show Organizations as an option on the top bar' do
           expect(page).to have_content 'Tenants'
         end
       end
 
       describe 'Webpages' do
-        it 'should show Webpages as an option on the top bar' do
+        xit 'should show Webpages as an option on the top bar' do
           expect(page).to have_content 'Webpages'
         end
       end

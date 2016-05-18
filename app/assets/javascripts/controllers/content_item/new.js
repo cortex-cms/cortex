@@ -10,6 +10,12 @@ angular.module(
     $scope.someText = "Some text here";
 
     $scope.data.contentType = cortex.content_types.get({id: 1});
+    $scope.data.contentItem = new cortex.content_items();
+
+    $scope.create = function(){
+      debugger;
+      console.log("submitted item");
+    };
 
 
     riot.mount('contenttype', {

@@ -5,7 +5,11 @@ angular.module('cortex.services.cortex', [
 
 .factory('cortex', function($rootScope, $http, cortexResource, paginatedResource, settings) {
 
-  var content_types = cortexResource('/content_types/:id', {id:'@id'}, {
+  var contentItems = cortexResource('/content_items/', {id: '@id'}, {
+    index: { method: 'GET', params: {}, isArray: true }
+  });
+
+  var contentTypes = cortexResource('/content_types/:id', {id:'@id'}, {
     index: { method: 'GET', params: {}, isArray: true }
   });
 
@@ -96,6 +100,7 @@ angular.module('cortex.services.cortex', [
     credentials:   credentials,
     bulk_jobs:     bulkJobs,
     webpages:      webpages,
-    content_types: content_types
+    content_types: contentTypes,
+    content_items: contentItems
   };
 });

@@ -7,6 +7,6 @@ angular.module('cortex.controllers.content_items.grid', [
 
   .controller('ContentItemsGridCtrl', function($scope, $state, cortex) {
     $scope.data = {
-      content_types: cortex.content_types.index()
+      contentItems: cortex.content_items.index()
     };
   });

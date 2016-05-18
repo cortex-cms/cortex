@@ -3,9 +3,9 @@
   <div ng-repeat="field in data.contentType.fields">
     <div ng-switch on="field.field_type">
       <div ng-switch-when="text_field_type">
-        {{field.name}}<input type="text" ng-model="content_item.name"/>
+        {{field.name}}<input type="text" ng-model="data.contentItem.name"/>
       </div>
     </div>
   </div>
-  <input type="submit" ng-click="create(content_item)" value="Save" />
+  <input type="submit" ng-click="create()" value="Save" />
 </form>

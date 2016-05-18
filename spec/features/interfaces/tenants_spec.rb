@@ -15,13 +15,13 @@ xdescribe 'Tenants', :type => :feature, js: true do
     end
 
     describe 'Index' do
-      it 'should display the names of all Tenants in buttons' do
+      xit 'should display the names of all Tenants in buttons' do
         expect(page).to have_css('button', text: tenant.name)
       end
     end
 
     describe 'Create Tenant Button' do
-      it 'should have a button to create a Tenant' do
+      xit 'should have a button to create a Tenant' do
         expect(page).to have_css('button', text: 'Create Organization')
       end
 
@@ -36,7 +36,7 @@ xdescribe 'Tenants', :type => :feature, js: true do
         visit '/#/organizations//tenants/new'
       end
 
-      it 'should have instructions' do
+      xit 'should have instructions' do
         expect(page).to have_text('INSTRUCTIONS')
       end
 

@@ -11,6 +11,9 @@ sudo service elasticsearch start
 echo "sleep 10"
 sleep 10
 
+echo "ES Version Check"
+curl -XGET 'http://localhost:9200'
+
 echo "bundle exec rake cortex:rebuild_indexes"
 bundle exec rake cortex:rebuild_indexes
 

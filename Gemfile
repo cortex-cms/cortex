@@ -117,11 +117,9 @@ group :test do
 
   # Mocking/Faking
   gem 'mocha', '~> 1.1.0', require: false
-  gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner', '~> 1.5.1'
   gem 'timecop', '~> 0.8.0'
   gem 'email_spec'
-  gem 'faker', '~> 1.6.3'
 
   # Javascript
   gem 'jasmine-rails', '~> 0.12.2'
@@ -134,6 +132,8 @@ group :test do
 end
 
 group :test, :development do
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'faker', '~> 1.6.3'
   gem 'fog', '~> 1.37.0'
 end
 

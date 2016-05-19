@@ -2,7 +2,7 @@ class Webpage < ActiveRecord::Base
   include FindByTenant
   include SearchableWebpage
 
-  scope :find_by_protocol_agnostic_url, ->(suffix) { where('url LIKE :suffix', query: "%#{suffix}") }
+  scope :find_by_protocol_agnostic_url, ->(suffix) { where('url LIKE :suffix', suffix: "%#{suffix}") }
 
   acts_as_paranoid
   acts_as_taggable_on :seo_keywords

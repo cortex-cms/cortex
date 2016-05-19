@@ -4,7 +4,7 @@ class GetWebpageFeed
   def call
     webpage = ::Webpage
     webpage = webpage.find_by_tenant_id(context.tenant) if context.tenant
-    webpage = webpage.find_by_protocol_agnostic_url(protocol_agnostic_url(context.params.url))
+    webpage = webpage.find_by_protocol_agnostic_url(protocol_agnostic_url(context.params.url)).first
     context.webpage = webpage
   end
 

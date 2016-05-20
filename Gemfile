@@ -121,7 +121,6 @@ group :test do
   gem 'email_spec'
 
   # Javascript
-  gem 'jasmine-rails', '~> 0.12.2'
   gem 'guard-jasmine', '~> 2.0.6'
   gem 'jasmine-core', '~> 2.4'
 
@@ -132,6 +131,9 @@ end
 
 group :test, :development do
   gem 'fog', '~> 1.37.0'
+  gem 'phantomjs', '~> 1.9.8'
+  gem 'jasmine-rails', '~> 0.12.2'
+  gem 'git_reflow'
 end
 
 group :staging, :production do

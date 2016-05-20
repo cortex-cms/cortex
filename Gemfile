@@ -133,6 +133,7 @@ group :test, :development do
   gem 'fog', '~> 1.37.0'
   gem 'phantomjs', '~> 1.9.8'
   gem 'jasmine-rails', '~> 0.12.2'
+  gem 'git_reflow'
 end
 
 group :staging, :production do

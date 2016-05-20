@@ -1,4 +1,4 @@
-// = require jquery
+// = require application
 // = require angular-mocks
 // = require sinonjs
 // = require sinon-ng

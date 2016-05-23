@@ -23,5 +23,6 @@ RSpec.describe Field, type: :model do
 
   context "associations" do
     it { is_expected.to belong_to(:content_type) }
+    it { is_expected.to belong_to(:content_item) }
   end
 end

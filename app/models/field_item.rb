@@ -3,5 +3,6 @@ class FieldItem < ActiveRecord::Base
   belongs_to :field
   belongs_to :content_item
 
-  validates :content_item_id, :field_id, presence: true
+  validates :field_id, presence: true
+  validates :content_item_id, presence: true, on: :update
 end

@@ -85,6 +85,7 @@ namespace :cortex do
         next
       end
 
+
       # Replace text in Snippets and in Posts
       puts "Searching for Snippets with the text '#{find}' in tenant #{tenant}"
       matching_snippets = Snippet.find_by_tenant_id(tenant).find_by_body_text(find)

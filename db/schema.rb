@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511195908) do
+ActiveRecord::Schema.define(version: 20160524151718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,12 +115,12 @@ ActiveRecord::Schema.define(version: 20160511195908) do
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "field_items", force: :cascade do |t|
-    t.text     "text"
     t.integer  "field_id"
     t.integer  "content_item_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.datetime "deleted_at"
+    t.jsonb    "data"
   end
 
   add_index "field_items", ["deleted_at"], name: "index_field_items_on_deleted_at", using: :btree

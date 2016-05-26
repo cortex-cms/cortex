@@ -4,10 +4,12 @@ module V1
       resource :content_items do
         desc "Create a content item", { entity: ::V1::Entities::ContentItem, params: ::V1::Entities::ContentItem.documentation, nickname: "createContentItem" }
         params do
-          requires :publish_state, type: String, desc: "publish state of content item"
+          requires :content_type_id, type: Integer, desc: "content type of content item"
         end
         post do
-          @content_item = ::ContentItem.new(params)
+          require_scope! 'create:content_items'
+          authorize! :create, ::ContentItem
+          @content_item = ::ContentItem.new(params.merge(author_id: current_user.id, creator_id: current_user.id))
 
           if @content_item.save
             present @content_item, with: ::V1::Entities::ContentItem, full: true

@@ -9,13 +9,15 @@ class Field < ActiveRecord::Base
   validate :acceptable_validations
 
   belongs_to :content_type
+  has_many :field_items
+  has_many :content_items, through: :field_items
 
   private
 
   def acceptable_validations
     if field_type.present?
-      field_type_instance = field_type.camelize.constantize.new
-      field_type_instance.validations = validations
+      field_type_class = FieldType.get_constant(field_type)
+      field_type_instance = field_type_class.new("", validations)
       errors.add(:validations, "must be for specified type") unless field_type_instance.acceptable_validations?
     end
   end

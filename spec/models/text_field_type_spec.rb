@@ -12,6 +12,18 @@ RSpec.describe TextFieldType, type: :model do
     end
   end
 
+  describe "#initialize" do
+    let(:subject) { TextFieldType.new({ "text" => "Some Text" }, { "length" => { "maximum" => 5 } }) }
+
+    it "saves the text from the data hash passed into it" do
+      expect(subject.text).to eq("Some Text")
+    end
+
+    it "symbolizes and saves the validations hash passed into it" do
+      expect(subject.validations).to eq({ length: { maximum: 5 } })
+    end
+  end
+
   describe "#acceptable_validations?" do
     let(:subject) { TextFieldType.new }
 
@@ -35,6 +47,20 @@ RSpec.describe TextFieldType, type: :model do
         subject.validations = { length: "string" }
         expect(subject.acceptable_validations?).to be false
       end
+    end
+  end
+
+  context "validating text attribute" do
+    context "when presence validation is set" do
+
+    end
+
+    context "when length validation is set" do
+
+    end
+
+    context "when length and presence are set" do
+      
     end
   end
 end

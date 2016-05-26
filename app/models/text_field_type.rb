@@ -9,9 +9,9 @@ class TextFieldType < FieldType
   validates :text, presence: true, if: :validate_presence?
   validate :text_length, if: :validate_length?
 
-  def initialize(text="", validations={})
-    @text = text
-    @validations = validations
+  def initialize(data={text: ""}, validations={})
+    @text = data.symbolize_keys[:text]
+    @validations = validations.deep_symbolize_keys
   end
 
   def acceptable_validations?

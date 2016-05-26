@@ -98,6 +98,8 @@ group :test, :development do
   gem 'better_errors', '~> 2.1.1'
   gem 'binding_of_caller', '~> 0.7.2' # Used by Better Errors
   gem 'pry-rails', '~> 0.3'
+  gem 'pry-nav'
+  gem 'pry-doc'
 end
 
 group :test do

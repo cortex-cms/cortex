@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :field do
     content_type
-    field_type { FieldType.direct_descendant_names.sample }
+    field_type { "text_field_type" }
     required { false }
     name { Faker::Lorem.word }
     validations { {} }

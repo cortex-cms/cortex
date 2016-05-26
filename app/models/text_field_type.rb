@@ -50,7 +50,7 @@ class TextFieldType < FieldType
   end
 
   def text_length
-    validator = LengthValidator.new(validations.merge(attributes: [:text]))
+    validator = LengthValidator.new(validations[:length].merge(attributes: [:text]))
     validator.validate_each(self, :text, text)
   end
 

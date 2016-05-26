@@ -15,7 +15,7 @@ module V1
             present @content_item, with: ::V1::Entities::ContentItem, full: true
           else
             status 400
-            { error: "Missing attributes on content item and/or field items"}
+            { error: @content_item.errors.full_messages.join("\n") }
           end
         end
       end

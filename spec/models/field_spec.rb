@@ -3,7 +3,13 @@ require 'spec_helper'
 RSpec.describe Field, type: :model do
   subject { build(:field) }
 
-  xcontext "validations" do
+  context "associations" do
+    it { is_expected.to belong_to(:content_type) }
+    it { is_expected.to have_many(:field_items) }
+    it { is_expected.to have_many(:content_items).through(:field_items) }
+  end
+
+  context "validations" do
     it { is_expected.to validate_presence_of(:field_type) }
     it { is_expected.to validate_presence_of(:content_type) }
 
@@ -19,11 +25,5 @@ RSpec.describe Field, type: :model do
       subject.valid?
       expect(subject.errors[:validations]).to match_array(["must be for specified type"])
     end
-  end
-
-  context "associations" do
-    it { is_expected.to belong_to(:content_type) }
-    it { is_expected.to have_many(:field_items) }
-    it { is_expected.to have_many(:content_items).through(:field_items) }
   end
 end

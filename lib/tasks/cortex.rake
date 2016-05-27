@@ -244,10 +244,10 @@ namespace :cortex do
         unless media.attachment_file_name.blank?
           object_key = media.attachment.arbitrary_url_for old_url
 
-          s3 = Aws::S3::Client.new(region: ENV['S3_REGION'])
+          s3 = Aws::S3::Client.new(region: ENV['S3_REGION'], access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
 
           begin
-            s3.get_object({ bucket:'cb-talent-development-cortex-prod', key: object_key }, target: media.attachment_file_name)
+            s3.get_object({ bucket:ENV['S3_BUCKET_NAME'], key: object_key }, target: media.attachment_file_name)
 
             file = File.new media.attachment_file_name
 

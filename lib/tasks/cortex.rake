@@ -233,11 +233,16 @@ namespace :cortex do
   namespace :media do
     desc 'Manage Cortex media'
     task :update_url => :environment do
+
+      old_url = ENV['OLD_PATH']
+      unless old_url
+        puts 'OLD_PATH must be set'
+      end
+
+
       Media.find_each do |media|
         unless media.attachment_file_name.blank?
-          object_id = "%05d" % media.id
-          object_key = "media/attachments/00#{object_id.first}/00#{object_id[1]}/#{object_id[2..4]}/original/#{media.attachment_file_name}"
-          puts object_key
+          object_key = media.attachment.arbitrary_url_for old_url
 
           s3 = Aws::S3::Client.new
 

@@ -119,11 +119,11 @@ namespace :cortex do
       puts "Orphaned Snippet removal begun.."
 
       orphaned_snippets = Snippet.where([
-          "user_id NOT IN (?) OR document_id NOT IN (?) OR webpage_id NOT IN (?)",
-          User.select("id"),
-          Document.select("id"),
-          Webpage.select("id")
-      ])
+                                          "user_id NOT IN (?) OR document_id NOT IN (?) OR webpage_id NOT IN (?)",
+                                          User.select("id"),
+                                          Document.select("id"),
+                                          Webpage.select("id")
+                                        ])
 
       orphaned_snippets.each do |orphaned_snippet|
         orphaned_snippet.document.destroy
@@ -146,10 +146,10 @@ namespace :cortex do
 
           # Find all snippets for this webpage that aren't in the array above and delete them
           unused_snippets = Snippet.joins(:document).where([
-            "webpage_id = (?) AND documents.name NOT IN (?)",
-            webpage.id,
-            template_snippets
-          ]).order(created_at: :desc)
+                                                             "webpage_id = (?) AND documents.name NOT IN (?)",
+                                                             webpage.id,
+                                                             template_snippets
+                                                           ]).order(created_at: :desc)
 
           unused_snippets.each do |unused_snippet|
             unused_snippet.document.destroy
@@ -188,28 +188,6 @@ namespace :cortex do
       Rake::Task['cortex:snippets:simplify'].execute
       Rake::Task['cortex:snippets:dedupe'].execute
     end
-
-    # namespace :media do
-    #   desc 'Update media URLs in snippets'
-    #   task :update_urls => :environment do
-    #     old_url = ENV['OLD_PATH']
-    #     new_url = ENV['NEW_PATH']
-    #     tenant = ENV['TENANT']
-    #
-    #     if [old_url, new_url, tenant].include? nil
-    #       puts 'You must add OLD_PATH, NEW_PATH and TENANT as env vars before continuing'
-    #       next
-    #     end
-    #
-    #     Media.all.each do |media|
-    #       old_url = media.attachment.arbitrary_url_for old_url
-    #       new_url = media.attachment.arbitrary_url_for new_url
-    #
-    #       puts "About to update all occurences of #{old_url} to #{new_url} in tenant #{tenant}..."
-    #       system("FIND=#{old_url} REPLACE=#{new_url} TENANT=#{tenant} rake cortex:snippets:replace")
-    #     end
-    #   end
-    # end
   end
 
   namespace :onet do
@@ -233,12 +211,10 @@ namespace :cortex do
   namespace :media do
     desc 'Manage Cortex media'
     task :update_url => :environment do
-
       old_url = ENV['OLD_PATH']
       unless old_url
         puts 'OLD_PATH must be set'
       end
-
 
       Media.find_each do |media|
         unless media.attachment_file_name.blank?
@@ -255,13 +231,13 @@ namespace :cortex do
             image = file
             media.attachment = image
             media.save
-            # if there are multiple styles, you want to recreate them :
+            # if there are multiple styles, you want to recreate them:
             media.attachment.reprocess!
 
             file.close
             File.delete media.attachment_file_name
           rescue => ex
-            puts "An error of type #{ex.class} happened, message is #{ex.message}"
+            puts "An error of type #{ex.class} occurred, message is #{ex.message}"
           end
         end
       end

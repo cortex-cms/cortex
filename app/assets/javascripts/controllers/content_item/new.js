@@ -28,8 +28,8 @@ angular.module(
         function() {
           flash.success = 'Saved content item information';
         },
-        function(){
-          flash.error = 'Error while saving content item information';
+        function(reason){
+          flash.error = 'Error while saving content item information: ' + reason.data.error;
         }
       )
     };

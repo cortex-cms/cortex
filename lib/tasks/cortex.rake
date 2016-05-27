@@ -119,11 +119,11 @@ namespace :cortex do
       puts "Orphaned Snippet removal begun.."
 
       orphaned_snippets = Snippet.where([
-          "user_id NOT IN (?) OR document_id NOT IN (?) OR webpage_id NOT IN (?)",
-          User.select("id"),
-          Document.select("id"),
-          Webpage.select("id")
-      ])
+                                          "user_id NOT IN (?) OR document_id NOT IN (?) OR webpage_id NOT IN (?)",
+                                          User.select("id"),
+                                          Document.select("id"),
+                                          Webpage.select("id")
+                                        ])
 
       orphaned_snippets.each do |orphaned_snippet|
         orphaned_snippet.document.destroy
@@ -146,10 +146,10 @@ namespace :cortex do
 
           # Find all snippets for this webpage that aren't in the array above and delete them
           unused_snippets = Snippet.joins(:document).where([
-            "webpage_id = (?) AND documents.name NOT IN (?)",
-            webpage.id,
-            template_snippets
-          ]).order(created_at: :desc)
+                                                             "webpage_id = (?) AND documents.name NOT IN (?)",
+                                                             webpage.id,
+                                                             template_snippets
+                                                           ]).order(created_at: :desc)
 
           unused_snippets.each do |unused_snippet|
             unused_snippet.document.destroy

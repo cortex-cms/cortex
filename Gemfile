@@ -84,6 +84,9 @@ gem 'jquery-rails', '~> 4.1.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'gon', '~> 6.0.1'
 
+# View Helpers
+gem 'breadcrumbs_on_rails', '~> 2.3.1'
+
 group :tasks do
   # Parsing
   gem 'nokogiri'

@@ -16,6 +16,7 @@
         <li ng-if="currentUser.admin" ng-class="{ active: $state.includes('cortex.webpages') }"><a class="navbar-item" ui-sref="cortex.webpages.manage">Webpages</a></li>
         <li ng-class="{ active: $state.includes('cortex.localizations') }"><a class="navbar-item" ui-sref="cortex.localizations.manage">Localizations</a></li>
         <li ng-class="{ active: $state.includes('cortex.bulk_jobs') }"><a class="navbar-item" ui-sref="cortex.bulk_jobs.manage">Bulk Jobs</a></li>
+        <li ng-class="{ active: $state.includes('cortex.content_items') }"><a class="navbar-item" ui-sref="cortex.content_items">Content Items</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-items-admin small navbar-right">
         <li ng-if="currentUser.admin" ng-class="{ active: $state.includes('cortex.users.facets') || $state.includes('cortex.users.edit') || $state.includes('cortex.users.new') }"><a class="navbar-item" ui-sref="cortex.users.facets.grid">Users</a></li>

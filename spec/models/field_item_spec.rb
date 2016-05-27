@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe FieldItem, type: :model do
-  subject { build(:field_item) } 
+  subject { build(:field_item) }
 
   context "validations" do
     it { is_expected.to validate_presence_of(:field_id) }
@@ -11,7 +11,7 @@ RSpec.describe FieldItem, type: :model do
       field = create(:field, field_type: "text_field_type", validations: { length: { minimum: 5 } })
       subject = build(:field_item, field: field, data: { text: "text" })
       expect(subject.valid?).to be false
-      expect(subject.errors.full_messages.first).to eq("Data must be valid")
+      expect(subject.errors.full_messages.first).to match(/is too short [(]minimum is 5 characters[)]/)
     end
   end
 

@@ -14,12 +14,18 @@ class FieldItem < ActiveRecord::Base
   end
 
   def field_item_content_is_valid
-    errors.add(:data, "must be valid") unless field_item_validates
+    add_specific_errors unless field_item_validates
   end
 
   def field_item_validates
     field_type_class = FieldType.get_subtype_constant(field.field_type)
-    field_type_instance = field_type_class.new(data, field.validations)
-    field_type_instance.valid?
+    @field_type_instance = field_type_class.new(data, field.validations)
+    @field_type_instance.valid?
+  end
+
+  def add_specific_errors
+    @field_type_instance.errors.each do |k, v|
+      errors.add(field.name.to_sym, v)
+    end
   end
 end

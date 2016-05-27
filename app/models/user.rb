@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class User < ActiveRecord::Base
   include HasGravatar
   include HasFirstnameLastname
@@ -42,6 +44,10 @@ class User < ActiveRecord::Base
     options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname admin)
     options[:methods] ||= %w(fullname)
     super(options)
+  end
+
+  def gravatar
+    "//www.gravatar.com/avatar/#{Digest::MD5.hexdigest email}"
   end
 
   class << self

@@ -20,7 +20,7 @@ gem 'grape-swagger', '~> 0.20.3'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 3.5.6'
+gem 'devise', '~> 4.1.1'
 gem 'rack-oauth2', '~> 1.3.0'
 gem 'doorkeeper', '~> 3.1'
 
@@ -43,27 +43,27 @@ gem 'redis-rails', '~> 4.0'
 gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'
 
 # Utility
-gem 'excon', '~> 0.48.0'
-gem 'hashie', '~> 3.4.3'
+gem 'excon', '~> 0.49.0'
+gem 'hashie', '~> 3.4.4'
 gem 'hashr', '~> 2.0.0'
-gem 'mime-types', '~> 2.99.1'
+gem 'mime-types', '~> 3.1.0'
 gem 'interactor-rails', '~> 2.0'
 gem 'rubyzip', '~> 1.2.0'
 gem 'addressable', '~> 2.4.0'
 gem 'json'
 
 # External Services
-gem 'yt', '~> 0.25.5'
-gem 'aws-sdk', '~> 2.2' # Used by Paperclip
+gem 'yt', '~> 0.25.37'
+gem 'aws-sdk', '~> 2.3' # Used by Paperclip
 
 # Jobs
-gem 'sidekiq', '~> 4.1.1'
+gem 'sidekiq', '~> 4.1.2'
 gem 'sidekiq-failures', '~> 0.4.5'
 gem 'sinatra', '~> 1.4.7', require: false
 
 # Pipeline
 gem 'sprockets-rails', '3.0.4', :require => 'sprockets/railtie'
-gem 'sprockets', '3.5.2'
+gem 'sprockets', '3.6.0'
 gem 'angular-rails-templates', '~> 1.0.0'
 gem 'ngannotate-rails', git: 'git://github.com/kikonen/ngannotate-rails', branch: 'master' # sprockets-rails related fixes not present in v0.15.4.1
 gem 'uglifier', '~> 2.7.2'
@@ -73,9 +73,10 @@ gem 'haml', '~> 4.0.7'
 
 # Style
 gem 'sass-rails', '~> 5.0'
-gem 'font-awesome-sass', '~> 4.5.0'
+gem 'font-awesome-sass', '~> 4.6.2'
 
-# JS
+# JavaScript
+gem 'jquery-rails', '~> 4.1.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'gon', '~> 6.0.1'
 
@@ -87,16 +88,18 @@ end
 group :test, :development do
   # Environment
   gem 'dotenv', '~> 2.1.0'
-  gem 'byebug'
   gem 'spring'
 
   # Cache/Sidekiq
   gem 'redis-namespace', '~> 1.5'
 
-  # Pretty
-  gem 'better_errors', '~> 2.1.1'
-  gem 'binding_of_caller', '~> 0.7.2' # Used by Better Errors
-  gem 'pry-rails', '~> 0.3'
+  # Debug
+  gem 'byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
+  gem 'pry-nav'
+  gem 'pry-doc'
 end
 
 group :test do

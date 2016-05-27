@@ -88,6 +88,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bower-rails (0.10.0)
+    breadcrumbs_on_rails (2.3.1)
     builder (3.2.2)
     byebug (9.0.4)
     capybara (2.7.1)
@@ -662,6 +663,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bower-rails (~> 0.10.0)
+  breadcrumbs_on_rails (~> 2.3.1)
   byebug
   capybara
   codeclimate-test-reporter (~> 0.4.8)

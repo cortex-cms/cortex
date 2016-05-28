@@ -1,47 +1,47 @@
 @import "font-awesome-sprockets";
 @import 'font-awesome';
 
-@import 'variables';
-@import 'mixins';
+@import 'legacy/variables';
+@import 'legacy/mixins';
 
 // Vendor
-@import 'vendor/abn-tree';
-@import 'vendor/redactor/redactor';
+@import 'legacy/vendor/abn-tree';
+@import 'legacy/vendor/redactor/redactor';
 
 // Twitter Bootstrap and overridden styles
-@import 'bootstrap-cortex';
+@import 'legacy/bootstrap-cortex';
 
 // Application-wide styling
-@import 'cortex';
+@import 'legacy/cortex';
 
 // Directives
-@import 'directives/file-selector';
-@import 'directives/youtube-selector';
+@import 'legacy/directives/file-selector';
+@import 'legacy/directives/youtube-selector';
 
 // States
-@import 'states/locales.edit';
-@import 'states/localizations.edit';
-@import 'states/media.edit';
-@import 'states/media.grid';
-@import 'states/media.manage';
-@import 'states/media.new';
-@import 'states/media.bulk';
-@import 'states/posts.edit';
-@import 'states/posts.edit.classify';
-@import 'states/posts.edit.display';
-@import 'states/posts.edit.info';
-@import 'states/posts.edit.seo';
-@import 'states/posts.manage';
-@import 'states/tenant.manage';
-@import 'states/users.edit';
-@import 'states/users.facets';
-@import 'states/users.profile';
-@import 'states/users.bulk';
-@import 'states/credentials.new';
-@import 'states/credentials.edit';
-@import 'states/webpages.manage';
-@import 'states/webpages.new';
-@import 'states/webpages.edit';
+@import 'legacy/states/locales.edit';
+@import 'legacy/states/localizations.edit';
+@import 'legacy/states/media.edit';
+@import 'legacy/states/media.grid';
+@import 'legacy/states/media.manage';
+@import 'legacy/states/media.new';
+@import 'legacy/states/media.bulk';
+@import 'legacy/states/posts.edit';
+@import 'legacy/states/posts.edit.classify';
+@import 'legacy/states/posts.edit.display';
+@import 'legacy/states/posts.edit.info';
+@import 'legacy/states/posts.edit.seo';
+@import 'legacy/states/posts.manage';
+@import 'legacy/states/tenant.manage';
+@import 'legacy/states/users.edit';
+@import 'legacy/states/users.facets';
+@import 'legacy/states/users.profile';
+@import 'legacy/states/users.bulk';
+@import 'legacy/states/credentials.new';
+@import 'legacy/states/credentials.edit';
+@import 'legacy/states/webpages.manage';
+@import 'legacy/states/webpages.new';
+@import 'legacy/states/webpages.edit';
 
 @import 'ng-tags-input/ng-tags-input';
 

@@ -1,4 +1,3 @@
-// Maintained by bower-rails
 //= require jquery
 //= require underscore
 //= require moment
@@ -23,17 +22,17 @@
 //= require angular-bootstrap-toggle-switch
 //= require angular-validation-match
 
-//= require_tree ../templates
+//= require_tree ../legacy_templates
 
-//= require_tree ./controllers
-//= require_tree ./directives
-//= require_tree ./services
-//= require_tree ./vendor
+//= require_tree ./legacy/controllers
+//= require_tree ./legacy/directives
+//= require_tree ./legacy/services
+//= require_tree ./legacy/vendor
 
-//= require cortex
-//= require filters
-//= require resources
-//= require session
-//= require settings
-//= require states
-//= require util
+//= require legacy/cortex
+//= require legacy/filters
+//= require legacy/resources
+//= require legacy/session
+//= require legacy/settings
+//= require legacy/states
+//= require legacy/util

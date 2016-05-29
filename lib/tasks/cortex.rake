@@ -225,17 +225,17 @@ namespace :cortex do
           begin
             s3.get_object({ bucket:ENV['S3_BUCKET_NAME'], key: object_key }, target: media.attachment_file_name)
 
-            image = Tempfile.new media.attachment_file_name
-            begin
-              puts "Re-saving image attachment #{media.id} - #{media.attachment_file_name}"
-              media.attachment = image
-              media.save
-              # if there are multiple styles, you want to recreate them:
-              media.attachment.reprocess!
-            ensure
-              image.close
-              image.unlink
-            end
+            file = File.new media.attachment_file_name
+
+            puts "Re-saving image attachment #{media.id} - #{media.attachment_file_name}"
+            image = file
+            media.attachment = image
+            media.save
+            # if there are multiple styles, you want to recreate them:
+            media.attachment.reprocess!
+
+            file.close
+            File.delete media.attachment_file_name
           rescue => ex
             puts "An error of type #{ex.class} occurred, message is #{ex.message}"
           end

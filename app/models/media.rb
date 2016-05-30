@@ -1,6 +1,6 @@
 module PaperclipExtensions
   module Attachment
-    def arbitrary_url_for(pattern, style_name = :default)
+    def arbitrary_url_for(pattern, style_name = :original)
       Paperclip::Interpolations.interpolate pattern, self, style_name
     end
   end

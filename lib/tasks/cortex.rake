@@ -221,7 +221,7 @@ namespace :cortex do
           object_key = media.attachment.arbitrary_url_for args[:old_path]
 
           begin
-            image = s3.get_object({bucket: ENV['S3_BUCKET_NAME'], key: object_key})
+            image = s3.get_object({bucket: ENV['S3_BUCKET_NAME'], key: object_key}).body
             puts "Re-saving image attachment #{media.id} - #{media.attachment_file_name}"
             media.attachment = image
             media.save

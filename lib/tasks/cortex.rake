@@ -209,35 +209,26 @@ namespace :cortex do
   end
 
   namespace :media do
-    desc 'Manage Cortex media'
-    task :update_url => :environment do
-      old_url = ENV['OLD_PATH']
-      unless old_url
-        puts 'OLD_PATH must be set'
+    desc 'Update existing Media assets on S3 with new URL structure. Specify new structure in model, then pass old_path with the previous structure, i.e.: ":class/:attachment/:style-:id.:extension"'
+    task :update_url, [:old_path] => :environment do |t, args|
+      s3 = Aws::S3::Client.new(region: ENV['S3_REGION'], access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
+      unless args[:old_path]
+        puts '"old_path" argument must be set'
       end
 
       Media.find_each do |media|
         unless media.attachment_file_name.blank?
-          object_key = media.attachment.arbitrary_url_for old_url
-
-          s3 = Aws::S3::Client.new(region: ENV['S3_REGION'], access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
+          object_key = media.attachment.arbitrary_url_for args[:old_path]
 
           begin
-            s3.get_object({ bucket:ENV['S3_BUCKET_NAME'], key: object_key }, target: media.attachment_file_name)
-
-            image = Tempfile.new media.attachment_file_name
-            begin
-              puts "Re-saving image attachment #{media.id} - #{media.attachment_file_name}"
-              media.attachment = image
-              media.save
-              # if there are multiple styles, you want to recreate them:
-              media.attachment.reprocess!
-            ensure
-              image.close
-              image.unlink
-            end
+            image = s3.get_object({bucket: ENV['S3_BUCKET_NAME'], key: object_key})
+            puts "Re-saving image attachment #{media.id} - #{media.attachment_file_name}"
+            media.attachment = image
+            media.save
+            # if there are multiple styles (thumbnail, etc), recreate them:
+            media.attachment.reprocess!
           rescue => ex
-            puts "An error of type #{ex.class} occurred, message is #{ex.message}"
+            puts "An error of type #{ex.class} occurred, message is: '#{ex.message}'"
           end
         end
       end

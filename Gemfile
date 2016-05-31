@@ -74,6 +74,7 @@ gem 'haml', '~> 4.0.7'
 
 # Style
 gem 'sass-rails', '~> 5.0'
+gem 'bourbon', '~> 5.0.0.beta.5'
 gem 'font-awesome-sass', '~> 4.6.2'
 gem 'material_design_lite-sass', '~> 1.1.3'
 

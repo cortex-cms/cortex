@@ -1,0 +1,11 @@
+!!! 5
+%html
+  %head
+    %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
+    %meta{charset: 'utf-8'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0'}
+    %title Cortex Administration | Login
+    = favicon_link_tag 'favicon.ico'
+    = csrf_meta_tags
+  %body
+    = yield

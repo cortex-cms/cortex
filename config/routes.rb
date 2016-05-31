@@ -17,7 +17,7 @@ Cortex::Application.routes.draw do
       skip_controllers :applications, :authorized_applications
     end
   end
-  devise_for :users
+  devise_for :users, controllers: {sessions: 'authentication/sessions'}
 
   # Sidekiq Admin
   authenticate :user, lambda { |u| u.is_admin? } do

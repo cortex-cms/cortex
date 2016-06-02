@@ -18,6 +18,15 @@ module V1
             { error: @content_item.errors.full_messages.join("\n") }
           end
         end
+
+        desc 'Show all content items', { entity: ::V1::Entities::ContentItem, nickname: "showAllContentItems" }
+        get do
+          require_scope! 'view:content_items'
+          authorize! :view, ::ContentItem
+          @content_items = ::ContentItem.all
+
+          present @content_items, with: ::V1::Entities::ContentItem, field_items: true
+        end
       end
     end
   end

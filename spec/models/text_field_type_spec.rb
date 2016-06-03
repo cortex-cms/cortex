@@ -13,7 +13,7 @@ RSpec.describe TextFieldType, type: :model do
   end
 
   describe "#initialize" do
-    let(:subject) { TextFieldType.new({ "text" => "Some Text" }, { "length" => { "maximum" => 5 } }) }
+    let(:subject) { TextFieldType.new("text"=> "Some Text", "validations"=> { "length" => { "maximum" => 5 } }) }
 
     it "saves the text from the data hash passed into it" do
       expect(subject.text).to eq("Some Text")
@@ -28,23 +28,23 @@ RSpec.describe TextFieldType, type: :model do
     let(:subject) { TextFieldType.new }
 
     it "returns true if the types of validations in the hash passed into it can be performed" do
-      subject.validations = { presence: true }
+      subject.validations = { "presence" => true }
       expect(subject.acceptable_validations?).to be true
     end
 
     it "returns false if any of the types of validations in the hash cannot be performed" do
-      subject.validations = { presence: true, bloop: "goop" }
+      subject.validations = { "presence"=> true, "bloop"=> "goop" }
       expect(subject.acceptable_validations?).to be false
     end
 
     context "length validations" do
       it "returns true if the length validation options are allowed" do
-        subject.validations = { length: { minimum: 5, maximum: 10 } }
+        subject.validations = { "length"=> { "minimum"=> 5, "maximum"=> 10 } }
         expect(subject.acceptable_validations?).to be true
       end
 
       it "returns false if the options for length validation are invalid" do
-        subject.validations = { length: "string" }
+        subject.validations = { "length"=> "string" }
         expect(subject.acceptable_validations?).to be false
       end
     end
@@ -60,7 +60,7 @@ RSpec.describe TextFieldType, type: :model do
     end
 
     context "when length and presence are set" do
-      
+
     end
   end
 end

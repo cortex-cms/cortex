@@ -4,14 +4,18 @@ class TextFieldType < FieldType
     presence: :valid_presence_validation?
   }.freeze
 
-  attr_accessor :text, :validations
+  attr_accessor :data, :text
+  attr_reader :validations
 
   validates :text, presence: true, if: :validate_presence?
   validate :text_length, if: :validate_length?
 
-  def initialize(data={text: ""}, validations={})
-    @text = data.symbolize_keys[:text]
-    @validations = validations.deep_symbolize_keys
+  def validations=(validations_hash)
+    @validations = validations_hash.deep_symbolize_keys
+  end
+
+  def data=(data_hash)
+    @text = data_hash[:text]
   end
 
   def acceptable_validations?
@@ -22,7 +26,7 @@ class TextFieldType < FieldType
 
   def valid_types?
     validations.all? do |type, options|
-      VALIDATION_TYPES.include?(type.to_sym)
+      VALIDATION_TYPES.include?(type)
     end
   end
 
@@ -42,7 +46,7 @@ class TextFieldType < FieldType
   end
 
   def valid_presence_validation?
-    true
+    @validations.key? :presence
   end
 
   def text_present
@@ -55,10 +59,10 @@ class TextFieldType < FieldType
   end
 
   def validate_presence?
-    return @validations.include?(:presence)
+    @validations.key? :presence
   end
 
   def validate_length?
-    return @validations.include?(:length)
+    @validations.key? :length
   end
 end

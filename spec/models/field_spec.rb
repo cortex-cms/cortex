@@ -11,7 +11,11 @@ RSpec.describe Field, type: :model do
 
   context "validations" do
     it { is_expected.to validate_presence_of(:field_type) }
-    it { is_expected.to validate_presence_of(:content_type) }
+
+    context "content_type" do
+      subject { build(:field, field_type: nil) }
+      it { is_expected.to validate_presence_of(:content_type) }
+    end
 
     it "checks that the field type is valid" do
       subject.field_type = "This_doesnt_exist"

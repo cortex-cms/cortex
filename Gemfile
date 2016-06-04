@@ -74,6 +74,7 @@ gem 'haml', '~> 4.0.7'
 
 # Style
 gem 'sass-rails', '~> 5.0'
+gem 'bourbon', '~> 5.0.0.beta.5'
 gem 'font-awesome-sass', '~> 4.6.2'
 gem 'material_design_lite-sass', '~> 1.1.3'
 
@@ -83,6 +84,9 @@ gem 'jquery-turbolinks'
 gem 'jquery-rails', '~> 4.1.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'gon', '~> 6.0.1'
+
+# View Helpers
+gem 'breadcrumbs_on_rails', '~> 2.3.1'
 
 group :tasks do
   # Parsing

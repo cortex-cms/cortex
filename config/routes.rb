@@ -1,15 +1,12 @@
 Cortex::Application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root 'dashboards#index'
-  get 'legacy', to: 'legacy#index'
+  get 'legacy', to: 'legacy#index', as: :legacy_root
 
   scope '/admin' do
     resources :dashboards
     resources :medias
   end
-
-  get 'login/reset_password', to: 'home#password_reset'
-  post 'login/reset_password', to: 'home#submit_password_reset'
 
   # Authentication
   use_doorkeeper do
@@ -17,7 +14,7 @@ Cortex::Application.routes.draw do
       skip_controllers :applications, :authorized_applications
     end
   end
-  devise_for :users
+  devise_for :users, controllers: {sessions: 'authentication/sessions'}
 
   # Sidekiq Admin
   authenticate :user, lambda { |u| u.is_admin? } do

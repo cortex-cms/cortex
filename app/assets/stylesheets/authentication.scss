@@ -1,0 +1,21 @@
+@import 'material';
+@import 'bourbon';
+
+.section__featured-media {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+main {
+  margin-top: -35vh;
+}
+
+.ribbon {
+  width: 100%;
+  height: 40vh;
+  background-color: rgb(96, 96, 96);
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}

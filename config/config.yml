@@ -1,5 +1,7 @@
 development: &defaults
   cortex:
+    news_feed:
+      tenant: <%= ENV['CORTEX_NEWS_FEED_TENANT'] %>
     api:
       base_url: <%= ENV['CORTEX_API_BASE_URL'] %>
       version: <%= ENV['CORTEX_API_VERSION'] %>

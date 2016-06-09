@@ -9,6 +9,7 @@ if ENV['RAILS_ENV'] == 'development' && !ENV['DEPLOYED']
   listen "127.0.0.1:#{ENV['PORT'] || 3000}"
   pid_path = "#{rails_root}/tmp/pids/unicorn.pid"
   listen "#{rails_root}/tmp/sockets/unicorn.sock", :backlog => 64
+  timeout 10000
 else
   worker_processes 2
   listen "/tmp/web_server.sock", :backlog => 64

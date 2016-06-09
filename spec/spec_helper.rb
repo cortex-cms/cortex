@@ -11,6 +11,10 @@ require 'net/http'
 require "email_spec"
 require 'capybara/rspec'
 
+Dir[Rails.root.join("spec/support/**/*_support.rb")].each { |f| require f }
+
+ActiveRecord::Migration.maintain_test_schema!
+
 Capybara.javascript_driver = :poltergeist
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 900.seconds)

@@ -17,6 +17,8 @@ module Abilities
           elsif subject == Document; abilities += document_class_abilities(user);
           elsif subject == Webpage; abilities += webpage_class_abilities(user);
           elsif subject == Snippet; abilities += snippet_class_abilities(user);
+          elsif subject == ContentType; abilities += content_type_class_abilities(user);
+          elsif subject == ContentItem; abilities += content_item_class_abilities(user);
           end
         else
           if subject.kind_of? User; abilities += user_abilities(user, subject)
@@ -30,6 +32,8 @@ module Abilities
           elsif subject.kind_of? Document; abilities += document_abilities(user, subject)
           elsif subject.kind_of? Webpage; abilities += webpage_abilities(user, subject)
           elsif subject.kind_of? Snippet; abilities += snippet_abilities(user, subject)
+          elsif subject.kind_of? ContentType; abilities += content_type_abilities(user, subject)
+          elsif subject.kind_of? ContentItem; abilities += content_item_abilities(user, subject)
           end
         end
 
@@ -162,6 +166,22 @@ module Abilities
       end
 
       def snippet_class_abilities(user)
+        [:view, :create]
+      end
+
+      def content_type_abilities(user, snippet)
+        [:view]
+      end
+
+      def content_type_class_abilities(user)
+        [:view]
+      end
+
+      def content_item_abilities(user, snippet)
+        [:view, :create]
+      end
+
+      def content_item_class_abilities(user)
         [:view, :create]
       end
     end

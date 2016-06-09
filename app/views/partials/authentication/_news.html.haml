@@ -1,0 +1,11 @@
+- @news_feed_posts.each do |post|
+  %section.section--center.mdl-grid.mdl-grid--no-spacing.mdl-shadow--2dp
+    - if post.tile_media_id?
+      %header.section__featured-media.mdl-cell.mdl-cell--3-col-desktop.mdl-cell--2-col-tablet.mdl-cell--4-col-phone{style: "background-image: url(#{post.tile_media.url})"}
+    .mdl-card.mdl-cell.mdl-cell--9-col-desktop.mdl-cell--6-col-tablet.mdl-cell--4-col-phone
+      .mdl-card__supporting-text
+        %h4
+          = post.title
+        = post.body.html_safe
+      .mdl-card__actions
+        %a.mdl-button{:href => "#"} Read more

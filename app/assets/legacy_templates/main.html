@@ -1,0 +1,40 @@
+<header class="navbar navbar-default navbar-admin navbar-static-top navbar-inverse">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars nav-button"></i>
+      </button>
+
+      <a class="navbar-brand" href="#">Cortex</a>
+    </div>
+
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-items-admin small">
+        <li ng-if="currentUser.admin" ng-class="{ active: $state.includes('cortex.organizations') }"><a class="navbar-item" ui-sref="cortex.organizations.manage">Tenants</a></li>
+        <li ng-class="{ active: $state.includes('cortex.media') }"><a class="navbar-item" ui-sref="cortex.media.manage.components">Media</a></li>
+        <li ng-class="{ active: $state.includes('cortex.posts') }"><a class="navbar-item" ui-sref="cortex.posts.manage.components">Posts</a></li>
+        <li ng-if="currentUser.admin" ng-class="{ active: $state.includes('cortex.webpages') }"><a class="navbar-item" ui-sref="cortex.webpages.manage">Webpages</a></li>
+        <li ng-class="{ active: $state.includes('cortex.localizations') }"><a class="navbar-item" ui-sref="cortex.localizations.manage">Localizations</a></li>
+        <li ng-class="{ active: $state.includes('cortex.bulk_jobs') }"><a class="navbar-item" ui-sref="cortex.bulk_jobs.manage">Bulk Jobs</a></li>
+        <li ng-class="{ active: $state.includes('cortex.content_items') }"><a class="navbar-item" ui-sref="cortex.content_items">Content Items</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-items-admin small navbar-right">
+        <li ng-if="currentUser.admin" ng-class="{ active: $state.includes('cortex.users.facets') || $state.includes('cortex.users.edit') || $state.includes('cortex.users.new') }"><a class="navbar-item" ui-sref="cortex.users.facets.grid">Users</a></li>
+        <li ng-if="currentUser.admin" ng-class="{ active: $state.includes('cortex.applications') }"><a class="navbar-item" ui-sref="cortex.applications.manage">Applications</a></li>
+        <li ng-class="{ active: $state.includes('cortex.users.profile') }"><a class="navbar-item" ui-sref="cortex.users.profile({userId: currentUser.id})">Profile</a></li>
+        <li><a class="navbar-item" ng-click="logout()">Log Out</a></li>
+      </ul>
+    </nav>
+</header>
+
+<div ncy-breadcrumb></div>
+
+<main>
+  <div flash-alert active-class="in alert" class="alert-box fade-slow">
+    <span class="alert-message">{{flash.message}}</span>
+  </div>
+
+  <div ui-view></div>
+</main>
+
+<footer></footer>

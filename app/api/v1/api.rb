@@ -20,6 +20,8 @@ module V1
     mount ::V1::Resources::Documents
     mount ::V1::Resources::Snippets
     mount ::V1::Resources::Webpages
+    mount ::V1::Resources::ContentTypes
+    mount ::V1::Resources::ContentItems
 
     add_swagger_documentation(base_path: '/api', hide_format: true, api_version: 'v1',
                               models: [::V1::Entities::Post, ::V1::Entities::Category, ::V1::Entities::Media,
@@ -27,6 +29,6 @@ module V1
                                        ::V1::Entities::Localization, ::V1::Entities::Locale,
                                        ::V1::Entities::Application, ::V1::Entities::Credential,
                                        ::V1::Entities::BulkJob, ::V1::Entities::Document, ::V1::Entities::Snippet,
-                                       ::V1::Entities::Webpage])
+                                       ::V1::Entities::Webpage, ::V1::Entities::ContentType, ::V1::Entities::ContentItem])
   end
 end

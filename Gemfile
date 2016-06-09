@@ -37,6 +37,7 @@ gem 'elasticsearch-rails', '~> 0.1'
 gem 'paranoia', '~> 2.1'
 gem 'pg', '~> 0.18.4'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
+gem 'ranked-model', '~> 0.4.0'
 gem 'redis-rails', '~> 4.0'
 
 # Middleware
@@ -73,12 +74,19 @@ gem 'haml', '~> 4.0.7'
 
 # Style
 gem 'sass-rails', '~> 5.0'
+gem 'bourbon', '~> 5.0.0.beta.5'
 gem 'font-awesome-sass', '~> 4.6.2'
+gem 'material_design_lite-sass', '~> 1.1.3'
 
 # JavaScript
+gem 'turbolinks', '~> 5.0.0beta2'
+gem 'jquery-turbolinks'
 gem 'jquery-rails', '~> 4.1.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'gon', '~> 6.0.1'
+
+# View Helpers
+gem 'breadcrumbs_on_rails', '~> 2.3.1'
 
 group :tasks do
   # Parsing
@@ -108,6 +116,7 @@ group :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'json_spec', '~> 1.1.4'
   gem 'rspec-sidekiq', '~> 2.2.0'
+  gem 'shoulda-matchers', '~> 3.1.1'
 
   # Capybara for feature testing, Poltergeist for PhantomJS
   gem 'capybara'
@@ -118,7 +127,6 @@ group :test do
 
   # Mocking/Faking
   gem 'mocha', '~> 1.1.0', require: false
-  gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner', '~> 1.5.1'
   gem 'timecop', '~> 0.8.0'
   gem 'email_spec'
@@ -133,6 +141,8 @@ group :test do
 end
 
 group :test, :development do
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'faker', '~> 1.6.3'
   gem 'fog', '~> 1.37.0'
   gem 'phantomjs', '~> 1.9.8'
   gem 'jasmine-rails', '~> 0.12.2'

@@ -6,11 +6,11 @@ describe 'Tenants', :type => :feature, js: true do
 
   context 'When Logged in' do
     before(:each) do
-      visit '/users/sign_in'
+      visit '/'
       within('#legacy-panel') do
         fill_in 'Email', :with => admin.email
         fill_in 'Password', :with => admin.password
-        click_button 'Sign In'
+        click_button 'Log in'
       end
 
       visit '/legacy/#/organizations/'

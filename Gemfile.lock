@@ -158,10 +158,10 @@ GEM
     excon (0.49.0)
     execjs (2.7.0)
     exifr (1.2.4)
-    factory_girl (4.5.0)
+    factory_girl (4.7.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.5.0)
-      factory_girl (~> 4.5.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
     faker (1.6.3)
       i18n (~> 0.5)
@@ -172,19 +172,22 @@ GEM
     ffi (1.9.10)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
-    fog (1.37.0)
+    fog (1.38.0)
       fog-aliyun (>= 0.1.0)
       fog-atmos
       fog-aws (>= 0.6.0)
       fog-brightbox (~> 0.4)
+      fog-cloudatcost (~> 0.1.0)
       fog-core (~> 1.32)
       fog-dynect (~> 0.0.2)
       fog-ecloud (~> 0.1)
       fog-google (<= 0.1.0)
       fog-json
       fog-local
+      fog-openstack
       fog-powerdns (>= 0.1.1)
       fog-profitbricks
+      fog-rackspace
       fog-radosgw (>= 0.0.2)
       fog-riakcs
       fog-sakuracloud (>= 0.0.4)
@@ -215,6 +218,11 @@ GEM
       fog-core (~> 1.22)
       fog-json
       inflecto (~> 0.0.2)
+    fog-cloudatcost (0.1.2)
+      fog-core (~> 1.36)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
     fog-core (1.40.0)
       builder
       excon (~> 0.49)
@@ -235,6 +243,10 @@ GEM
       multi_json (~> 1.10)
     fog-local (0.3.0)
       fog-core (~> 1.27)
+    fog-openstack (0.1.6)
+      fog-core (>= 1.39)
+      fog-json (>= 1.0)
+      ipaddress (>= 0.8)
     fog-powerdns (0.1.1)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
@@ -243,6 +255,11 @@ GEM
       fog-core
       fog-xml
       nokogiri
+    fog-rackspace (0.1.1)
+      fog-core (>= 1.35)
+      fog-json (>= 1.0)
+      fog-xml (>= 0.1)
+      ipaddress (>= 0.8)
     fog-radosgw (0.0.5)
       fog-core (>= 1.21.0)
       fog-json
@@ -420,7 +437,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.1)
-    mini_portile2 (2.0.0)
+    mini_portile2 (2.1.0)
     minitest (5.9.0)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
@@ -432,8 +449,9 @@ GEM
     nenv (0.3.0)
     newrelic_rpm (3.15.2.317)
     ng-rails-csrf (0.1.0)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     notiffany (0.1.0)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -456,7 +474,8 @@ GEM
     paranoia (2.1.5)
       activerecord (~> 4.0)
     pg (0.18.4)
-    phantomjs (1.9.8.0)
+    phantomjs (2.1.1.0)
+    pkg-config (1.1.7)
     poltergeist (1.9.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -681,9 +700,9 @@ DEPENDENCIES
   elasticsearch-rails (~> 0.1)
   email_spec
   excon (~> 0.49.0)
-  factory_girl_rails (~> 4.5.0)
+  factory_girl_rails (~> 4.7.0)
   faker (~> 1.6.3)
-  fog (~> 1.37.0)
+  fog (~> 1.38.0)
   font-awesome-sass (~> 4.6.2)
   git_reflow
   gon (~> 6.0.1)
@@ -699,7 +718,7 @@ DEPENDENCIES
   hashr (~> 2.0.0)
   interactor-rails (~> 2.0)
   jasmine-core (~> 2.4)
-  jasmine-rails (~> 0.12.2)
+  jasmine-rails (~> 0.12.4)
   jquery-rails (~> 4.1.1)
   jquery-turbolinks
   json
@@ -715,7 +734,7 @@ DEPENDENCIES
   paperclip-optimizer (~> 2.0)
   paranoia (~> 2.1)
   pg (~> 0.18.4)
-  phantomjs (~> 1.9.8)
+  phantomjs (~> 2.1.1)
   poltergeist
   pry-doc
   pry-nav
@@ -746,5 +765,8 @@ DEPENDENCIES
   unicorn-rails (~> 2.2.0)
   yt (~> 0.25.37)
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.12.3
+   1.12.5

@@ -7,10 +7,12 @@ describe "Main Cortex Interface", :type => :feature, js: true do
   context 'User is an Admin' do
     context 'When Logged in' do
       before(:each) do
-        visit '/#/login'
-        fill_in 'user_email', :with => admin.email
-        fill_in 'user_password', :with => admin.password
-        click_button 'Sign In'
+        visit '/'
+        within('#legacy-panel') do
+          fill_in 'Email', :with => admin.email
+          fill_in 'Password', :with => admin.password
+          click_button 'Log in'
+        end
       end
 
       describe 'Tenants' do
@@ -30,10 +32,12 @@ describe "Main Cortex Interface", :type => :feature, js: true do
   context 'User is not an Admin' do
     context 'When Logged in' do
       before(:each) do
-        visit '/#/login'
-        fill_in 'user_email', :with => user.email
-        fill_in 'user_password', :with => user.password
-        click_button 'Sign In'
+        visit '/'
+        within('#legacy-panel') do
+          fill_in 'Email', :with => user.email
+          fill_in 'Password', :with => user.password
+          click_button 'Log in'
+        end
       end
 
       describe 'Tenants' do
@@ -42,8 +46,8 @@ describe "Main Cortex Interface", :type => :feature, js: true do
         end
 
         it 'should redirect back to previous page if navigated to' do
-          back_path_url = current_path
-          visit '/#/organizations/'
+          back_path_url = current_path + '/'
+          visit '/legacy/#/organizations/'
           expect(current_path).to eq(back_path_url)
         end
       end
@@ -54,8 +58,8 @@ describe "Main Cortex Interface", :type => :feature, js: true do
         end
 
         it 'should redirect back to previous page if navigated to' do
-          back_path_url = current_path
-          visit '/#/webpages/'
+          back_path_url = current_path + '/'
+          visit '/legacy/#/webpages/'
           expect(current_path).to eq(back_path_url)
         end
       end

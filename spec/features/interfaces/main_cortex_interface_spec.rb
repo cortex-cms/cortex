@@ -7,11 +7,11 @@ describe "Main Cortex Interface", :type => :feature, js: true do
   context 'User is an Admin' do
     context 'When Logged in' do
       before(:each) do
-        visit '/users/sign_in'
+        visit '/'
         within('#legacy-panel') do
           fill_in 'Email', :with => admin.email
           fill_in 'Password', :with => admin.password
-          click_button 'Sign In'
+          click_button 'Log in'
         end
       end
 
@@ -32,11 +32,11 @@ describe "Main Cortex Interface", :type => :feature, js: true do
   context 'User is not an Admin' do
     context 'When Logged in' do
       before(:each) do
-        visit '/users/sign_in'
+        visit '/'
         within('#legacy-panel') do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => user.password
-          click_button 'Sign In'
+          click_button 'Log in'
         end
       end
 
@@ -58,7 +58,7 @@ describe "Main Cortex Interface", :type => :feature, js: true do
         end
 
         it 'should redirect back to previous page if navigated to' do
-          back_path_url = current_path
+          back_path_url = current_path + '/'
           visit '/legacy/#/webpages/'
           expect(current_path).to eq(back_path_url)
         end

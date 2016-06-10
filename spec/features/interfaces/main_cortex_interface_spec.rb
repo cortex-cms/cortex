@@ -8,9 +8,11 @@ describe "Main Cortex Interface", :type => :feature, js: true do
     context 'When Logged in' do
       before(:each) do
         visit '/users/sign_in'
-        fill_in 'Email', :with => admin.email
-        fill_in 'Password', :with => admin.password
-        click_button 'Sign In'
+        within('#legacy-panel') do
+          fill_in 'Email', :with => admin.email
+          fill_in 'Password', :with => admin.password
+          click_button 'Sign In'
+        end
       end
 
       describe 'Tenants' do
@@ -31,9 +33,11 @@ describe "Main Cortex Interface", :type => :feature, js: true do
     context 'When Logged in' do
       before(:each) do
         visit '/users/sign_in'
-        fill_in 'Email', :with => user.email
-        fill_in 'Password', :with => user.password
-        click_button 'Sign In'
+        within('#legacy-panel') do
+          fill_in 'Email', :with => user.email
+          fill_in 'Password', :with => user.password
+          click_button 'Sign In'
+        end
       end
 
       describe 'Tenants' do

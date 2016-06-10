@@ -6,9 +6,11 @@ xdescribe "User Authentication", :type => :feature, js: true do
 
     it "Signs the User In" do
       visit '/users/sign_in'
-      fill_in 'Email', :with => user.email
-      fill_in 'Password', :with => user.password
-      click_button 'Sign In'
+      within('#legacy-panel') do
+        fill_in 'Email', :with => user.email
+        fill_in 'Password', :with => user.password
+        click_button 'Sign In'
+      end
       expect(page).to have_content 'Home'
     end
   end

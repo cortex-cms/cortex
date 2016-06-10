@@ -6,12 +6,12 @@ describe 'Tenants', :type => :feature, js: true do
 
   context 'When Logged in' do
     before(:each) do
-      visit '/#/login'
-      fill_in 'user_email', :with => admin.email
-      fill_in 'user_password', :with => admin.password
+      visit '/users/sign_in'
+      fill_in 'Email', :with => admin.email
+      fill_in 'Password', :with => admin.password
       click_button 'Sign In'
 
-      visit '/#/organizations/'
+      visit '/legacy/#/organizations/'
     end
 
     describe 'Index' do
@@ -27,13 +27,13 @@ describe 'Tenants', :type => :feature, js: true do
 
       xit 'should link to the new tenant form' do
         page.find(".org-btn").click
-        expect(current_path).to eq('/#/organizations//tenants/new')
+        expect(current_path).to eq('/legacy/#/organizations//tenants/new')
       end
     end
 
     describe 'New Tenant' do
       before(:each) do
-        visit '/#/organizations//tenants/new'
+        visit '/legacy/#/organizations//tenants/new'
       end
 
       xit 'should have instructions' do

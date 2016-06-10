@@ -5,9 +5,9 @@ xdescribe "User Authentication", :type => :feature, js: true do
     let(:user) { FactoryGirl.create :user }
 
     it "Signs the User In" do
-      visit '/#/login'
-      fill_in 'user_email', :with => user.email
-      fill_in 'user_password', :with => user.password
+      visit '/users/sign_in'
+      fill_in 'Email', :with => user.email
+      fill_in 'Password', :with => user.password
       click_button 'Sign In'
       expect(page).to have_content 'Home'
     end

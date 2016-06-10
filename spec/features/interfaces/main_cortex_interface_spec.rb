@@ -7,9 +7,9 @@ describe "Main Cortex Interface", :type => :feature, js: true do
   context 'User is an Admin' do
     context 'When Logged in' do
       before(:each) do
-        visit '/#/login'
-        fill_in 'user_email', :with => admin.email
-        fill_in 'user_password', :with => admin.password
+        visit '/users/sign_in'
+        fill_in 'Email', :with => admin.email
+        fill_in 'Password', :with => admin.password
         click_button 'Sign In'
       end
 
@@ -30,9 +30,9 @@ describe "Main Cortex Interface", :type => :feature, js: true do
   context 'User is not an Admin' do
     context 'When Logged in' do
       before(:each) do
-        visit '/#/login'
-        fill_in 'user_email', :with => user.email
-        fill_in 'user_password', :with => user.password
+        visit '/users/sign_in'
+        fill_in 'Email', :with => user.email
+        fill_in 'Password', :with => user.password
         click_button 'Sign In'
       end
 
@@ -43,7 +43,7 @@ describe "Main Cortex Interface", :type => :feature, js: true do
 
         it 'should redirect back to previous page if navigated to' do
           back_path_url = current_path
-          visit '/#/organizations/'
+          visit '/legacy/#/organizations/'
           expect(current_path).to eq(back_path_url)
         end
       end
@@ -55,7 +55,7 @@ describe "Main Cortex Interface", :type => :feature, js: true do
 
         it 'should redirect back to previous page if navigated to' do
           back_path_url = current_path
-          visit '/#/webpages/'
+          visit '/legacy/#/webpages/'
           expect(current_path).to eq(back_path_url)
         end
       end

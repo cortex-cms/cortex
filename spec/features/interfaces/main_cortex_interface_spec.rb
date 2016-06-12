@@ -46,7 +46,7 @@ describe "Main Cortex Interface", :type => :feature, js: true do
         end
 
         it 'should redirect back to previous page if navigated to' do
-          back_path_url = current_path
+          back_path_url = current_path + '/'
           visit '/legacy/#/organizations/'
           expect(current_path).to eq(back_path_url)
         end

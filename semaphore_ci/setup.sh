@@ -16,5 +16,5 @@ bundle exec rake db:setup
 echo "bundle exec rake db:schema:load db:seed cortex:create_categories"
 bundle exec rake db:schema:load db:seed cortex:create_categories
 
-echo "bundle exec rake bower:install:development"
-bundle exec rake bower:install:development
+echo "bundle exec rake bower:install:deployment"
+bundle exec rake bower:install:deployment

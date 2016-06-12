@@ -144,7 +144,7 @@ group :test, :development do
   gem 'factory_girl_rails', '~> 4.7.0'
   gem 'faker', '~> 1.6.3'
   gem 'fog', '~> 1.38.0'
-  gem 'phantomjs', '~> 2.1.1'
+  gem 'phantomjs', '~> 1.9.8'
   gem 'jasmine-rails', '~> 0.12.4'
   gem 'git_reflow'
 end

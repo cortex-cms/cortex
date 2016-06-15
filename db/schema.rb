@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524151718) do
+ActiveRecord::Schema.define(version: 20160615194511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,6 +275,12 @@ ActiveRecord::Schema.define(version: 20160524151718) do
     t.string   "type",                limit: 255, default: "Post", null: false
     t.integer  "author_id"
     t.boolean  "is_wysiwyg",                      default: true
+    t.boolean  "noindex",                         default: false
+    t.boolean  "nofollow",                        default: false
+    t.boolean  "nosnippet",                       default: false
+    t.boolean  "noodp",                           default: false
+    t.boolean  "noarchive",                       default: false
+    t.boolean  "noimageindex",                    default: false
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree

@@ -20,7 +20,7 @@ class Field < ActiveRecord::Base
 
   def acceptable_validations
     field_type_class = FieldType.get_subtype_constant(field_type)
-    field_type_instance = field_type_class.new(text: {}, validations: validations)
+    field_type_instance = field_type_class.new(data: {}, validations: validations)
     errors.add(:validations, "must be for specified type") unless field_type_instance.acceptable_validations?
   end
 

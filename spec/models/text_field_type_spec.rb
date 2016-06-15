@@ -13,7 +13,7 @@ RSpec.describe TextFieldType, type: :model do
   end
 
   describe "#initialize" do
-    let(:subject) { TextFieldType.new("text"=> "Some Text", "validations"=> { "length" => { "maximum" => 5 } }) }
+    let(:subject) { TextFieldType.new("data" => { "text"=> "Some Text" }, "validations"=> { "length" => { "maximum" => 5 } }) }
 
     it "saves the text from the data hash passed into it" do
       expect(subject.text).to eq("Some Text")

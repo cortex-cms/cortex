@@ -5,27 +5,24 @@ class FileFieldType < FieldType
     content_type: :valid_content_type_validation?
   }.freeze
 
+  attr_accessor :document_file_name,
+                :document_content_type,
+                :document_file_size,
+                :document_updated_at
+
+  attr_reader :data, :validations
+
   has_attached_file :document
   do_not_validate_attachment_file_type :document
 
   validates :document, attachment_presence: true, if: :validate_presence?
-
-
-  attr_accessor :document,
-                :document_file_name,
-                :document_content_type,
-                :document_file_size,
-                :document_updated_at,
-                :id
-
-  attr_reader :validations
 
   def validations=(validations_hash)
     @validations = validations_hash.deep_symbolize_keys
   end
 
   def data=(data_hash)
-    @document = data_hash.deep_symbolize_keys[:document]
+    self.document = data_hash.deep_symbolize_keys[:document]
   end
 
   def acceptable_validations?
@@ -46,13 +43,11 @@ class FileFieldType < FieldType
     end
   end
 
-  def valid_presence_validation?
-    @validations.key? :presence
-  end
-
   def validate_presence?
     @validations.key? :presence
   end
+
+  alias_method :valid_presence_validation?, :validate_presence?
 
   def valid_size_validation?
     begin

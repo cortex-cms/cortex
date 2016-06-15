@@ -15,7 +15,7 @@ class TextFieldType < FieldType
   end
 
   def data=(data_hash)
-    @text = data_hash[:text]
+    @text = data_hash.deep_symbolize_keys[:text]
   end
 
   def acceptable_validations?

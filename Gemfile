@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 
+gem "rails-erd"
+
 # Dependency Management
 gem 'bower-rails', '~> 0.10.0'
 

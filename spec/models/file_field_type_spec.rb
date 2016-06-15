@@ -15,14 +15,22 @@ RSpec.describe FileFieldType, type: :model do
 
   describe "#initialize" do
     let(:file) { File.new(Rails.root.join("spec", "fixtures", "test_image_179kb.jpg")) }
-    let(:subject) { FileFieldType.new( data: { "document"=> file }, "validations"=> { "size"=> { "less_than"=> 1.megabyte } }) }
+    let(:subject) do
+      FileFieldType.new(
+        "data" => { "document"=> file },
+        "validations"=> {
+          "presence"=> true,
+          "size"=> { "less_than"=> 1.megabyte }
+        }
+      )
+    end
 
     it "saves the file passed into it" do
       expect(subject.document_file_name).to eq("test_image_179kb.jpg")
     end
 
     it "symbolizes and saves the validations hash passed into it" do
-      expect(subject.validations).to eq({ size: { less_than: 1.megabyte } })
+      expect(subject.validations).to eq({ presence: true, size: { less_than: 1.megabyte } })
     end
   end
 

@@ -54,6 +54,13 @@ module V1
         expose :user, with: '::V1::Entities::User'
         expose :author, using: '::V1::Entities::Author'
       end
+
+      expose :noindex, documentation: { type: 'Boolean', desc: "SEO No Index Robots Setting" }
+      expose :nofollow, documentation: { type: 'Boolean', desc: "SEO No Follow Robots Setting" }
+      expose :noodp, documentation: { type: 'Boolean', desc: "SEO No ODP Setting" }
+      expose :nosnippet, documentation: { type: 'Boolean', desc: "SEO No Snippet Robots Setting" }
+      expose :noarchive, documentation: { type: 'Boolean', desc: "SEO No Archive Setting" }
+      expose :noimageindex, documentation: { type: 'Boolean', desc: "SEO No Image Index Robots Setting" }
     end
   end
 end

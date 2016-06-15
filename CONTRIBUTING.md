@@ -19,7 +19,7 @@ git clone git@github.com:your-username/cortex.git
 feature changes or fixes. If you end up making many small commits during debug or development that belong to the same
 chunk of functionality, squash those commits before creating a pull request.
 
-* Add tests for your change. Once again, ensure all tests pass
+* Add tests for your change. Once again, ensure all tests pass.
 
 * Push to a branch on your fork and [submit a pull request][pr]. Your PR must adhere to the following conventions:
   * For CareerBuilder team members, if the PR relates to a JIRA card, use the following naming convention:
@@ -32,19 +32,22 @@ chunk of functionality, squash those commits before creating a pull request.
   * Names should be dense, yet informative. For example, `Testing` is not an appropriate PR name, nor is
   `For update_url task, must use the body method to actually retrieve the stream from the S3 GetObjectOutput`.
   PR names are more high-level than commit messages.
-  * PRs should be tagged appropriately (i.e. enhancement, bug, etc). Tags should be preferred over including things
+  * PRs should be tagged appropriately (i.e. `enhancement`, `bug`, etc). Tags should be preferred over including things
   like 'bug' in the PR name.
+  * PR Descriptions should be a clearly-separated, bulleted list summarizing what's contained in the commits, as well as
+   any relevant notes or considerations for developers or ops. It should also detail any potential follow-up issues.
   * If working with a versioned library, open source users should not include version bumps or changelog updates in
   their PRs.
 
-From here, it's up to the Cortex maintenance team (<employersitecontentproducts@cb.com>). We operate in 2-week sprint
-lifecycles, but we'll try to get to your request or contribution sooner. We may suggest further improvements or
-alternatives, or the community at large may have input.
+From here, it's up to the Cortex maintenance team (<employersitecontentproducts@cb.com>) to review your Pull Request.
+We operate in 2-week sprint lifecycles, but we'll try to get to your request or contribution sooner. We may suggest
+further improvements or alternatives, or the community at large may have input.
 
 Some things that will increase the chances that your pull request will be accepted:
 
 * Write [good tests][tests]
 * Write [good commit messages][commit]
+* Be consistent
 * If applicable, suggest additional options or alternatives, follow-up issues or potential future improvements
 
 [issue]: https://github.com/cbdr/cortex/issues

@@ -1,0 +1,11 @@
+-#= link_to new_custom_content_path, id: "view-source", class: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" do
+  -#%i.material-icons add
+%ul
+  - @content_types.each do |type|
+    %li
+      = link_to type.name, new_content_type_content_item_path(type)
+
+
+/custom-content - lists all of them with links to create new content itom
+/custom-content/{content_type_id} - lists all of the content items for that content type
+/custom-content/{content_type_id}/content_items/new - new content item of that content type

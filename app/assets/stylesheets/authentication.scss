@@ -1,6 +1,10 @@
 @import 'material';
 @import 'bourbon';
 
+.news section:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
 .section__featured-media {
   background-size: cover;
   background-repeat: no-repeat;

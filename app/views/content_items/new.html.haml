@@ -1,10 +1,11 @@
 = form_for [@content_type, @content_item] do |f|
-  = f.hidden_field :author_id, current_user.id
-  = f.hidden_field :creator_id, current_user.id
-  - @content_type.fields.each do |field|
-    = fields_for :field_item do |field_item_form|
-      = field_item_form.label "#{field.name.downcase}[data]", field.name
+  = f.hidden_field :author_id, value: current_user.id
+  = f.hidden_field :creator_id, value: current_user.id
+  = f.hidden_field :content_type_id, value: @content_type.id
+  - @content_type.fields.each do |fields|
+    = f.fields_for :field_items do |field_item_form|
+      = field_item_form.label "data", field.name
       - if field.field_type == "text_field_type"
-        = hidden_field_tag "field_item[#{field.name.downcase}][field_id]", field.id
-        = field_item_form.text_field "#{field.name.downcase}[data]"
+        = field_item_form.hidden_field "field_id", value: field.id
+        = field_item_form.text_field "data"
   = f.submit "Submit"

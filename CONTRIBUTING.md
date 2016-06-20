@@ -39,7 +39,7 @@ chunk of functionality, squash those commits before creating a pull request.
   * If working with a versioned library, open source users should not include version bumps or changelog updates in
   their PRs.
 
-From here, it's up to the Cortex maintenance team (<employersitecontentproducts@cb.com>) to review your Pull Request.
+From here, it's up to the Cortex maintenance team (<employersitecontentproducts@cb.com>) to review your pull request.
 We operate in 2-week sprint lifecycles, but we'll try to get to your request or contribution sooner. We may suggest
 further improvements or alternatives, or the community at large may have input.
 

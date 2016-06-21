@@ -23,11 +23,11 @@ class ContentItemsController < ApplicationController
       :author_id,
       :creator_id,
       :content_type_id,
-      field_items: field_items_params
+      field_items_attributes: field_items_attributes_params
     )
   end
 
-  def field_items_params
+  def field_items_attributes_params
     [
       :field_id,
       :data

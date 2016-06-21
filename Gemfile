@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 
-gem "rails-erd"
-
 # Dependency Management
 gem 'bower-rails', '~> 0.10.0'
 
@@ -110,6 +108,9 @@ group :test, :development do
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'pry-doc'
+
+  # Documentation
+  gem "rails-erd"
 end
 
 group :test do

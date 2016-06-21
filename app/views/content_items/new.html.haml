@@ -7,5 +7,5 @@
       = field_item_form.label :data, field.name
       - if field.field_type == "text_field_type"
         = field_item_form.hidden_field :field_id, value: field.id
-        = field_item_form.text_field :data, value: ''
+        = field_item_form.text_field "data[title]", value: ''
   = f.submit "Submit"

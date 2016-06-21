@@ -11,5 +11,6 @@ RSpec.describe ContentType, type: :model do
   context "associations" do
     it { is_expected.to belong_to(:creator).class_name("User") }
     it { is_expected.to have_many(:fields) }
+    it { is_expected.to have_many(:content_items) }
   end
 end

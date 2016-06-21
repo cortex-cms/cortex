@@ -12,10 +12,10 @@ angular.module(
     $scope.someText = "Some text here";
 
     $scope.data.contentType = cortex.content_types.get({id: contentTypeId});
-    $scope.data.contentType.$promise.then(function(thingy) {
+    $scope.data.contentType.$promise.then(function(contentType) {
       $scope.data.contentItem = new cortex.content_items({
-        content_type_id: thingy.id,
-        field_items_attributes: _.map(thingy.fields, function(field){
+        content_type_id: contentType.id,
+        field_items_attributes: _.map(contentType.fields, function(field){
           return {field_id: field.id};
         })
       });

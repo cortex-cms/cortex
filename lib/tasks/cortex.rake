@@ -84,8 +84,12 @@ namespace :cortex do
 
       puts "There are #{matching_snippets.count} matching snippet(s)"
 
+      puts 'Display snippet values? (yes)'
+      confirmation = STDIN.gets.chomp
+
       matching_snippets.all.each do |snippet|
         puts "Found text in snippet with name: '#{snippet.document.name}' and ID: '#{snippet.id}' on Webpage URL: #{snippet.webpage.url}"
+        puts "Value: #{snippet.document.body}" if confirmation == 'yes' or confirmation == ''
       end
     end
 

@@ -9,4 +9,21 @@ module Tree
 
     ids
   end
+
+  def self.recursively_gather_names(tree_array, ids, names=[])
+    tree_array.each do |hash_val|
+      if ids.empty?
+        return names
+      elsif ids.include?(hash_val[:id])
+        names << hash_val[:name]
+        ids.delete(hash_val[:id])
+      end
+
+      if hash_val[:children].any?
+        Tree.recursively_gather_names(hash_val[:children], ids, names)
+      end
+    end
+
+    names
+  end
 end

@@ -108,6 +108,9 @@ group :test, :development do
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'pry-doc'
+
+  # Documentation
+  gem "rails-erd"
 end
 
 group :test do

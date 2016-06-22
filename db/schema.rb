@@ -131,6 +131,11 @@ ActiveRecord::Schema.define(version: 20160615194511) do
 
   add_index "field_items", ["deleted_at"], name: "index_field_items_on_deleted_at", using: :btree
 
+  create_table "field_types", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fields", force: :cascade do |t|
     t.integer  "content_type_id",                 null: false
     t.string   "field_type",                      null: false

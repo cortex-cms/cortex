@@ -1,5 +1,4 @@
-class FieldType
-  include ActiveModel::Validations
+class FieldType < ActiveRecord::Base
   include ActiveSupport::DescendantsTracker
 
   def self.direct_descendant_names

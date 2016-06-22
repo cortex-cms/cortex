@@ -72,6 +72,26 @@ namespace :cortex do
   end
 
   namespace :snippets do
+    desc 'Find text in snippets'
+    task :find, [:text, :tenant_id] => :environment do |t, args|
+      if [args[:text], args[:tenant_id]].include? nil
+        puts "You need to pass parameters for 'text' and 'tenant' to use this"
+        next
+      end
+
+      puts "Searching for Snippets with the text '#{args[:text]}' in tenant #{args[:tenant_id]}"
+      matching_snippets = Snippet.find_by_tenant_id(args[:tenant_id]).find_by_body_text(args[:text])
+
+      puts "There are #{matching_snippets.count} matching snippet(s)"
+
+      puts 'Display snippet values? (yes)'
+      confirmation = STDIN.gets.chomp
+
+      matching_snippets.all.each do |snippet|
+        puts "Found text in snippet with name: '#{snippet.document.name}' and ID: '#{snippet.id}' on Webpage URL: #{snippet.webpage.url}"
+        puts "Value: #{snippet.document.body}" if confirmation == 'yes' or confirmation == ''
+      end
+    end
 
     desc 'Find and replace text in snippets'
     task :replace => :environment do

@@ -8,6 +8,10 @@ Cortex::Application.routes.draw do
     resources :medias
   end
 
+  resources :content_types do
+    resources :content_items
+  end
+
   # Authentication
   use_doorkeeper do
     unless Rails.env.development? && !ENV['DEPLOYED']

@@ -5,6 +5,7 @@ class ContentItemsController < ApplicationController
   end
 
   def create
+    binding.pry
     @content_type = ContentType.find(params[:content_type_id])
     @content_item = ContentItem.new(content_item_params)
     if @content_item.save

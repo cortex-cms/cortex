@@ -7,11 +7,6 @@ class FieldItem < ActiveRecord::Base
   validates :content_item_id, presence: true, on: :update
   validate :field_item_content_is_valid, if: :field_is_present
 
-  def initialize(arguments)
-    binding.pry
-    super(arguments)
-  end
-
   private
 
   def field_is_present

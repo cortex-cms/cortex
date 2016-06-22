@@ -19,6 +19,7 @@ class FieldItem < ActiveRecord::Base
 
   def field_item_validates
     field_type_class = FieldType.get_subtype_constant(field.field_type)
+    binding.pry
     @field_type_instance = field_type_class.new(data: data, validations: field.validations)
     @field_type_instance.valid?
   end

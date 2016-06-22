@@ -29,7 +29,7 @@ class TreeFieldType < FieldType
 
   def value_is_allowed?
     @values.each do |value|
-      if Tree.recursive_search(@metadata[:allowed_values]).include?(value)
+      if Tree.gather_ids(@metadata[:allowed_values]).include?(value)
         true
       else
         errors.add(:value, "must be allowed.")

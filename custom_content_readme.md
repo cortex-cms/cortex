@@ -87,8 +87,8 @@ Typically for Text Field Types, the metadata will allow the User creating the fi
 
 ```
 ct.fields.new(
-    name: "Title", 
-    field_type: "text_field_type", 
+    name: "Title",
+    field_type: "text_field_type",
     order_position: 1,
     metadata: { placeholder: "This is the title" }
 )
@@ -129,8 +129,7 @@ And the data representation of this tree:
 ```ruby
 {
   :allowed_values => [
-    {
-      :name => "Rickon Stark", :id => 1, :children => [
+    { :name => "Rickon Stark", :id => 1, :children => [
         { :name => "Brandon Stark", :id => 2, :children => [] },
         { :name => "Eddard Stark", :id => 3, :children => [
           	{ :name => "Robb Stark", :id => 6, :children => [] },
@@ -150,5 +149,3 @@ And the data representation of this tree:
   ]
 }
 ```
-
-

@@ -120,7 +120,7 @@ And the data representation of this list:
 
 __Hierarchical Data__
 
-A good example of actual Tree based data structures would be a family tree, below we have a family tree of House Stark form popular ficton to illustrate:
+A good example of actual Tree based data structures would be a family tree, below we have a family tree of House Stark from popular ficton to illustrate:
 
 ![House Stark Image](https://cloud.githubusercontent.com/assets/8419757/16248101/b4135118-37d2-11e6-815c-e42262c47e63.png)
 

@@ -22,6 +22,18 @@ class TextFieldType < FieldType
     valid_types? && valid_options?
   end
 
+  def as_indexed_json(options = {})
+    json = as_json(only: [:id])
+    json[:text] = data[:text]
+    json
+  end
+
+  def type_mappings
+    [
+      :text, :type => :string, :index => :snowball
+    ]
+  end
+
   private
 
   def valid_types?

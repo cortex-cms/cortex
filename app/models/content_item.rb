@@ -13,9 +13,14 @@ class ContentItem < ActiveRecord::Base
 
   validates :creator_id, :author_id, :content_type_id, presence: true
 
-  after_save :update_indexes
+  after_update :update_indexes
 
   def update_indexes
-    raise 'not implemented yet!'
+    __elasticsearch__.client.index(
+      { index: content_type.items_index_name,
+        type: content_type.items_index_name,
+        id: id,
+        body: '??????' }
+    )
   end
 end

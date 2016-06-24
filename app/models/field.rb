@@ -12,8 +12,12 @@ class Field < ActiveRecord::Base
   validate :acceptable_field_type, if: :field_type_is_present
   validate :acceptable_validations, if: :field_type_is_present
 
-  def field_type_instance
-    field_type.camelize.constantize.new
+  def field_type_instance(options={})
+    field_type.camelize.constantize.new(options)
+  end
+
+  def mapping
+    field_type_instance(field_name: name).mapping
   end
 
   private

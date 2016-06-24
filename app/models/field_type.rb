@@ -10,7 +10,7 @@ class FieldType < ActiveRecord::Base
     descendant_name.camelize.constantize
   end
 
-  def self.mappings
+  def mappings
     DEFAULT_MAPPINGS + type_mappings
   end
 

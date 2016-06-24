@@ -15,16 +15,14 @@ class ContentType < ActiveRecord::Base
   accepts_nested_attributes_for :fields
 
   def items_index_name
-    "content_item_#{name.underscore}_items"
+    "content_type_#{name.underscore}_items"
   end
 
   def items_mappings
     mappings = Elasticsearch::Model::Indexing::Mappings.new(items_index_name, {})
 
     fields.each do |field|
-      field.field_type_instance.mappings.each do |mapping|
-        mappings.indexes mapping
-      end
+      mappings.indexes field.mapping[:name], :type => field.mapping[:type], :analyzer => field.mapping[:analyzer]
     end
 
     mappings

@@ -15,12 +15,22 @@ class ContentItem < ActiveRecord::Base
 
   after_update :update_indexes
 
+  def as_indexed_json(options = {})
+    json = as_json(only: [:id, :name])
+
+    field_items.each do |field_item|
+      json.merge!(field_item.field.field_type_instance(field_name: field_item.field.name).as_indexed_json(field_item.data))
+    end
+    
+    json
+  end
+
   def update_indexes
     __elasticsearch__.client.index(
       { index: content_type.items_index_name,
         type: content_type.items_index_name,
         id: id,
-        body: '??????' }
+        body: as_indexed_json }
     )
   end
 end

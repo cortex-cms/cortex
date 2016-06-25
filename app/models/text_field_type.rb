@@ -22,9 +22,9 @@ class TextFieldType < FieldType
     valid_types? && valid_options?
   end
 
-  def as_indexed_json(options = {})
+  def as_indexed_json(data, options = {})
     json = as_json(only: [:id])
-    json[mapping_field_name] = data[:text]
+    json[mapping_field_name] = data['text']
     json
   end
 

@@ -6,7 +6,7 @@ class ContentType < ActiveRecord::Base
 
   acts_as_paranoid
   validates :name, :creator, presence: true
-  after_save :rebuild_items_index
+  after_save :rebuild_content_items_index
 
   belongs_to :creator, class_name: "User"
   has_many :fields, -> { order(order: :asc) }
@@ -14,12 +14,12 @@ class ContentType < ActiveRecord::Base
 
   accepts_nested_attributes_for :fields
 
-  def items_index_name
-    "content_type_#{name.underscore}_items"
+  def content_items_index_name
+    "#{Rails.env}_content_type_#{name.underscore}_content_items"
   end
 
-  def items_mappings
-    mappings = Elasticsearch::Model::Indexing::Mappings.new(items_index_name, {})
+  def content_items_mappings
+    mappings = Elasticsearch::Model::Indexing::Mappings.new(content_items_index_name, {})
 
     fields.each do |field|
       mappings.indexes field.mapping[:name], :type => field.mapping[:type], :analyzer => field.mapping[:analyzer]
@@ -28,21 +28,21 @@ class ContentType < ActiveRecord::Base
     mappings
   end
 
-  def items_settings
+  def content_items_settings
     {}
   end
 
-  def rebuild_items_index
-    create_items_index({force: true})
+  def rebuild_content_items_index
+    create_content_items_index({force: true})
   end
 
-  def create_items_index(options={})
+  def create_content_items_index(options={})
     client = __elasticsearch__.client
-    client.indices.delete index: items_index_name rescue nil if options[:force]
+    client.indices.delete index: content_items_index_name rescue nil if options[:force]
 
-    client.indices.create index: items_index_name,
+    client.indices.create index: content_items_index_name,
                           body: {
-                            settings: items_settings.to_hash,
-                            mappings: items_mappings.to_hash }
+                            settings: content_items_settings.to_hash,
+                            mappings: content_items_mappings.to_hash}
   end
 end

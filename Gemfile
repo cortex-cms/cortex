@@ -96,7 +96,6 @@ end
 group :test, :development do
   # Environment
   gem 'dotenv', '~> 2.1.0'
-  gem 'spring'
 
   # Cache/Sidekiq
   gem 'redis-namespace', '~> 1.5'

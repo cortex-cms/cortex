@@ -4,7 +4,7 @@ class TextFieldType < FieldType
     presence: :valid_presence_validation?
   }.freeze
 
-  attr_accessor :data, :text
+  attr_accessor :data, :text, :field_name
   attr_reader :validations
 
   validates :text, presence: true, if: :validate_presence?
@@ -22,7 +22,21 @@ class TextFieldType < FieldType
     valid_types? && valid_options?
   end
 
+  def field_item_as_indexed_json_for_field_type(field_item, options = {})
+    json = {}
+    json[mapping_field_name] = field_item.data['text']
+    json
+  end
+
+  def mapping
+    {name: mapping_field_name, type: :string, analyzer: :snowball}
+  end
+
   private
+
+  def mapping_field_name
+    "#{field_name.downcase}_text"
+  end
 
   def valid_types?
     validations.all? do |type, options|

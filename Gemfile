@@ -23,6 +23,8 @@ gem 'six', '~> 0.2.0'
 gem 'devise', '~> 4.1.1'
 gem 'rack-oauth2', '~> 1.3.0'
 gem 'doorkeeper', '~> 3.1'
+gem 'rolify', '~> 5.1'
+gem 'pundit', '~> 1.1'
 
 # Data
 gem 'rails-observers', '~> 0.1.2'
@@ -39,7 +41,6 @@ gem 'pg', '~> 0.18.4'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 gem 'ranked-model', '~> 0.4.0'
 gem 'redis-rails', '~> 4.0'
-gem 'rolify', '~> 5.1'
 
 # Middleware
 gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'

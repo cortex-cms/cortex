@@ -11,6 +11,7 @@ class ContentType < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
   has_many :fields, -> { order(order: :asc) }
   has_many :content_items
+  has_many :permissions, as: :resource
 
   accepts_nested_attributes_for :fields
 

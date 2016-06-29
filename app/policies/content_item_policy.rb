@@ -8,40 +8,44 @@ class ContentItemPolicy
   end
 
   def index?
-    user_is_admin? || @user.has_permission?(@content_type, "Index")
+    has_permission?("Index")
   end
 
   def show?
-    user_is_admin? || @user.has_permission?(@content_type, "Show")
+    has_permission?("Show")
   end
 
   def create?
-    user_is_admin? || @user.has_permission?(@content_type, "Create")
+    has_permission?("Create")
   end
 
   def new?
-    user_is_admin? || @user.has_permission?(@content_type, "New")
+    has_permission?("New")
   end
 
   def update?
-    user_is_admin? || @user.has_permission?(@content_type, "Update")
+    has_permission?("Update")
   end
 
   def edit?
-    user_is_admin? || @user.has_permission?(@content_type, "Edit")
+    has_permission?("Edit")
   end
 
   def destroy?
-    user_is_admin? || @user.has_permission?(@content_type, "Destroy")
+    has_permission?("Destroy")
   end
 
   def can_publish?
-    user_is_admin? || @user.has_permission(@content_type, "Publish")
+    has_permission?("Publish")
   end
 
   private
 
-  def user_is_admin?
-    @user.has_role?(:admin)
+  def user_is_superadmin?
+    @user.has_role?(:superadmin)
+  end
+
+  def has_permission?(permission)
+    user_is_superadmin? || @user.has_permission?(@content_type, permission)
   end
 end

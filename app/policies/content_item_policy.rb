@@ -35,9 +35,17 @@ class ContentItemPolicy
     user_is_admin? || @user.has_permission?(@content_type, "Destroy")
   end
 
+  def can_publish?
+    user_is_admin? || @user.has_permission(@content_type, "Publish")
+  end
+
   private
 
   def user_is_admin?
     @user.has_role?(:admin)
+  end
+
+  def user_is_publisher?
+    @user.has_role?(:publisher)
   end
 end

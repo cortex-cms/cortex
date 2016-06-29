@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629192305) do
+ActiveRecord::Schema.define(version: 20160629203601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20160629192305) do
     t.boolean  "taggable_with_tags?",     default: false
     t.boolean  "taggable_with_keywords?", default: false
     t.jsonb    "tag_data"
+    t.boolean  "is_published"
   end
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
@@ -260,6 +261,7 @@ ActiveRecord::Schema.define(version: 20160629192305) do
     t.string   "resource_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "resource_id"
   end
 
   create_table "posts", force: :cascade do |t|

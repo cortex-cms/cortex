@@ -44,8 +44,4 @@ class ContentItemPolicy
   def user_is_admin?
     @user.has_role?(:admin)
   end
-
-  def user_is_publisher?
-    @user.has_role?(:publisher)
-  end
 end

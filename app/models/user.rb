@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
     self.id == nil
   end
 
+  def has_permission?(content_type, permission)
+    permissions.select { |perm| perm.resource_type == ct.class.to_s && perm.name == permission }.any?
+  end
+
   def is_admin?
     self.admin
   end

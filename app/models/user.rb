@@ -1,6 +1,7 @@
 require 'digest/md5'
 
 class User < ActiveRecord::Base
+  rolify
   include HasGravatar
   include HasFirstnameLastname
   include SearchableUser

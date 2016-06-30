@@ -7,15 +7,15 @@ class ContentTypePolicy
   end
 
   def index?
-    user_is_admin?
+    @user.is_admin? || @user.is_superadmin?
   end
 
   def show?
-    user_is_admin?
+    @user.is_admin? || @user.is_superadmin?
   end
 
   def create?
-    user_is_admin?
+    @user.is_admin? || @user.is_superadmin?
   end
 
   def new?
@@ -23,7 +23,7 @@ class ContentTypePolicy
   end
 
   def update?
-    user_is_admin?
+    @user.is_admin? || @user.is_superadmin?
   end
 
   def edit?
@@ -31,12 +31,6 @@ class ContentTypePolicy
   end
 
   def destroy?
-    user_is_admin?
-  end
-
-  private
-
-  def user_is_admin?
-    @user.has_role?(:admin)
+    @user.is_admin? || @user.is_superadmin?
   end
 end

@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   end
 
   def has_permission?(resource, permission)
-    return true if @user.is_superadmin
+    return true if @user.is_superadmin?
 
     resource_class = resource.class
     allowed_perms = allowed_permissions(resource_class, permission)

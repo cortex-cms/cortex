@@ -14,6 +14,11 @@ class ContentType < ActiveRecord::Base
 
   accepts_nested_attributes_for :fields
 
+  # TODO: Extract to a module
+  def self.permissions
+    Permission.select { |perm| perm.resource_type = self }
+  end
+
   def content_items_index_name
     "#{Rails.env}_content_type_#{name.underscore}_content_items"
   end

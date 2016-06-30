@@ -5,7 +5,7 @@ class Permission < ActiveRecord::Base
   validates :name, :resource_type, presence: true
 
   def resource
-    resource_type
+    resource_type.constantize
   end
-  
+
 end

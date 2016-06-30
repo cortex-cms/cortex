@@ -42,6 +42,6 @@ class ContentItemPolicy
   private
 
   def has_permission?(permission)
-    @user.is_superadmin? || @user.has_permission?(@content_type, permission)
+    @user.has_permission?(@content_type, permission)
   end
 end

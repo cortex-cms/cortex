@@ -1,6 +1,27 @@
 require 'spec_helper'
 
 describe ContentItemPolicy do
+  context 'User is a Superadmin' do
+    subject { ContentItemPolicy.new(superadmin, content_item) }
+    let(:content_type) { create(:content_type) }
+    let(:content_item) { create(:content_item) }
+    let(:superadmin) { create(:user) }
+    let(:role) { Role.create(name: "superadmin") }
+
+    before do
+      superadmin.roles << role
+    end
+
+    it { should permit(:show) }
+    it { should permit(:index) }
+    it { should permit(:create) }
+    it { should permit(:new) }
+    it { should permit(:update) }
+    it { should permit(:edit) }
+    it { should permit(:destroy) }
+    it { should permit(:can_publish) }
+  end
+
   context 'User is an Admin' do
     subject { ContentItemPolicy.new(admin, content_item) }
     let(:content_type) { create(:content_type) }

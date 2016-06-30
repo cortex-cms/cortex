@@ -1,7 +1,6 @@
 require 'digest/md5'
 
 class User < ActiveRecord::Base
-  rolify
   include HasGravatar
   include HasFirstnameLastname
   include SearchableUser
@@ -9,6 +8,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable
   acts_as_tagger
+  rolify
 
   belongs_to :tenant
   has_one    :author
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   def has_permission?(resource, permission)
     resource_class = resource.class
-    allowed_perms = permissions.select { |perm| perm.resource_type == resource_class.to_s && perm.name == permission }
+    allowed_perms = allowed_permissions(resource_class, permission)
 
     if resource_class == ContentType
       allowed_perms.select { |perm| perm.resource_id == resource.id }.any?
@@ -62,6 +62,12 @@ class User < ActiveRecord::Base
 
   def gravatar
     "//www.gravatar.com/avatar/#{Digest::MD5.hexdigest email}"
+  end
+
+  private
+
+  def allowed_permissions(resource_class, permission)
+    permissions.select { |perm| perm.resource_type == resource_class.to_s && perm.name == permission }
   end
 
   class << self

@@ -1,5 +1,5 @@
 class FieldType < ActiveRecord::Base
-  include ActiveSupport::DescendantsTracker
+  extend ActiveSupport::DescendantsTracker
   DEFAULT_MAPPINGS = [].freeze
 
   def self.direct_descendant_names

@@ -4,8 +4,10 @@
   = f.hidden_field :content_type_id, value: @content_type.id
   - @content_type.fields.each do |field|
     = f.fields_for 'field_items', field do |field_item_form|
-      = field_item_form.label :data, field.name
       - if field.field_type == "text_field_type"
+        = field_item_form.label :data, field.name
         = field_item_form.hidden_field :field_id, value: field.id
         = field_item_form.text_field "data[text]", value: ''
+      - if field.field_type == "boolean_field_type"
+        = cell('cortex/field_types/core/boolean/boolean_cell', form: field_item_form, field: field, value: false).()
   = f.submit "Submit"

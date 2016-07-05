@@ -71,8 +71,11 @@ gem 'angular-rails-templates', '~> 1.0.0'
 gem 'ngannotate-rails', git: 'git://github.com/kikonen/ngannotate-rails', branch: 'master' # sprockets-rails related fixes not present in v0.15.4.1
 gem 'uglifier', '~> 2.7.2'
 
-# Templating
+# View
 gem 'haml', '~> 4.0.7'
+gem 'cells-rails', '~> 0.0.6'
+gem 'cells-hamlit', '~> 0.2.0'
+gem 'breadcrumbs_on_rails', '~> 2.3.1'
 
 # Style
 gem 'sass-rails', '~> 5.0'
@@ -86,9 +89,6 @@ gem 'jquery-turbolinks'
 gem 'jquery-rails', '~> 4.1.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'gon', '~> 6.0.1'
-
-# View Helpers
-gem 'breadcrumbs_on_rails', '~> 2.3.1'
 
 group :tasks do
   # Parsing

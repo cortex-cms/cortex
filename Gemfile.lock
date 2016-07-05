@@ -101,6 +101,15 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    cells (4.1.1)
+      tilt (>= 1.4, < 3)
+      uber (>= 0.0.9)
+    cells-hamlit (0.2.0)
+      cells (~> 4.0)
+      hamlit
+    cells-rails (0.0.6)
+      actionpack (>= 3.0)
+      cells (>= 4.1)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.2.0)
@@ -364,6 +373,10 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     haml (4.0.7)
+      tilt
+    hamlit (2.5.0)
+      temple (~> 0.7.6)
+      thor
       tilt
     hashie (3.4.4)
     hashie-forbidden_attributes (0.1.1)
@@ -645,6 +658,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    temple (0.7.7)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.4)
@@ -655,6 +669,7 @@ GEM
     turbolinks-source (5.0.0.beta5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uber (0.0.15)
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -698,6 +713,8 @@ DEPENDENCIES
   breadcrumbs_on_rails (~> 2.3.1)
   byebug
   capybara
+  cells-hamlit (~> 0.2.0)
+  cells-rails (~> 0.0.6)
   codeclimate-test-reporter (~> 0.4.8)
   cortex-exceptions (~> 0.0.4)
   database_cleaner (~> 1.5.1)

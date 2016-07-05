@@ -2,11 +2,7 @@ module Cortex
   module FieldTypes
     module Core
       module Boolean
-        class BooleanCell < Cell::ViewModel
-          property :form
-          property :field
-          property :value
-
+        class BooleanCell < FieldCell
           def checkbox
             render
           end
@@ -17,12 +13,8 @@ module Cortex
 
           private
 
-          def render_label
-            form.label :data, field.name
-          end
-
           def render_checkbox
-            form.check_box 'data[value]', value
+            @options[:form].check_box 'data[value]', value: @options[:default_value]
           end
 
           def render_switch

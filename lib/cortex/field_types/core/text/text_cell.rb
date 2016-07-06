@@ -21,7 +21,7 @@ module Cortex
           end
 
           def render_multiline_input
-            @options[:form].text_area_tag 'data[text]', value: @options[:default_value], cols: cols, rows: rows
+            @options[:form].text_area_tag 'data[text]', value: @options[:default_value], cols: @options[:cols], rows: @options[:rows]
           end
         end
       end

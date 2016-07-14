@@ -13,8 +13,16 @@ module Cortex
 
           private
 
+          def value
+            if data
+              data['text'] || @options[:default_value]
+            else
+              @options[:default_value]
+            end
+          end
+
           def render_input
-            @options[:form].text_field 'data[text]', value: @options[:default_value]
+            @options[:form].text_field 'data[text]', value: value, placeholder: @options[:placeholder]
           end
 
           def render_multiline_input

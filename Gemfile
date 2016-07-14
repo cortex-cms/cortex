@@ -72,9 +72,9 @@ gem 'ngannotate-rails', git: 'git://github.com/kikonen/ngannotate-rails', branch
 gem 'uglifier', '~> 2.7.2'
 
 # View
-gem 'haml', '~> 4.0.7'
+gem 'haml', '~> 4.1.0.beta'
 gem 'cells-rails', '~> 0.0.6'
-gem 'cells-hamlit', '~> 0.2.0'
+gem 'cells-haml', '~> 0.0.10'
 gem 'breadcrumbs_on_rails', '~> 2.3.1'
 
 # Style

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718153235) do
+ActiveRecord::Schema.define(version: 20160718155015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,14 @@ ActiveRecord::Schema.define(version: 20160718153235) do
     t.integer "category_id", null: false
   end
 
+  create_table "content_decorators", force: :cascade do |t|
+    t.integer  "decorator_id"
+    t.integer  "contentable_id"
+    t.string   "contentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "content_items", force: :cascade do |t|
     t.string   "publish_state"
     t.datetime "published_at"
@@ -116,12 +124,10 @@ ActiveRecord::Schema.define(version: 20160718153235) do
   end
 
   create_table "decorators", force: :cascade do |t|
-    t.string   "decorator_type"
-    t.jsonb    "decorator_data"
-    t.integer  "viewable_id"
-    t.string   "viewable_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "name"
+    t.jsonb    "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "documents", force: :cascade do |t|

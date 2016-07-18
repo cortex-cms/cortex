@@ -1,6 +1,6 @@
-class CreateContentDecorators < ActiveRecord::Migration
+class CreateContentableDecorators < ActiveRecord::Migration
   def change
-    create_table :content_decorators do |t|
+    create_table :contentable_decorators do |t|
       t.references :decorator
       t.references :contentable, polymorphic: true
 

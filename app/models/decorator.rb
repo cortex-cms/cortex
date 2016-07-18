@@ -1,8 +1,8 @@
 class Decorator < ActiveRecord::Base
-  has_many :content_decorators
+  has_many :contentable_decorators
 
   validates :type, :data, presence: true
-  validate :view_type_is_allowed
+  validate :type_is_allowed
 
   def type_is_allowed
     unless ["Index", "Form Wizard"].include?(type)

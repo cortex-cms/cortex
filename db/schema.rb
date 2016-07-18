@@ -77,14 +77,6 @@ ActiveRecord::Schema.define(version: 20160718155015) do
     t.integer "category_id", null: false
   end
 
-  create_table "content_decorators", force: :cascade do |t|
-    t.integer  "decorator_id"
-    t.integer  "contentable_id"
-    t.string   "contentable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
   create_table "content_items", force: :cascade do |t|
     t.string   "publish_state"
     t.datetime "published_at"
@@ -116,6 +108,14 @@ ActiveRecord::Schema.define(version: 20160718155015) do
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
   add_index "content_types", ["deleted_at"], name: "index_content_types_on_deleted_at", using: :btree
+
+  create_table "contentable_decorators", force: :cascade do |t|
+    t.integer  "decorator_id"
+    t.integer  "contentable_id"
+    t.string   "contentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "contracts", force: :cascade do |t|
     t.string   "name"

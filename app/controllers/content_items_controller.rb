@@ -2,7 +2,7 @@ class ContentItemsController < AdminController
   include ContentItemHelper
 
   def index
-    @content_items = content_type.content_items.all
+    @content_items_grid = initialize_grid(content_type.content_items)
 
     add_breadcrumb content_type.name.pluralize
   end

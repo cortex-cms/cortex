@@ -1,6 +1,10 @@
 @import 'material';
 @import 'bourbon';
-@import "wice_grid"; // TODO: Remove once we style Wice with Material Design
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap'; // TODO: Remove once we style Wice with Material Design
+@import 'wice_grid'; // TODO: Remove once we style Wice with Material Design
+@import "font-awesome-sprockets"; // TODO: Remove once we style Wice with Material Design
+@import "font-awesome"; // TODO: Remove once we style Wice with Material Design
+@import 'jquery-ui/datepicker'; // TODO: Remove once we style Wice with Material Design
 
 @import 'base';
 @import 'demo';

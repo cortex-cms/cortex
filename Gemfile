@@ -76,6 +76,7 @@ gem 'haml', '~> 4.1.0.beta'
 gem 'cells-rails', '~> 0.0.6'
 gem 'cells-haml', '~> 0.0.10'
 gem 'breadcrumbs_on_rails', '~> 2.3.1'
+gem 'wice_grid', '~> 3.6.2'
 
 # Style
 gem 'sass-rails', '~> 5.0'

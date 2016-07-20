@@ -36,7 +36,7 @@ class Media < ActiveRecord::Base
                     :preserve_files => 'true',
                     # :path => ':class/:attachment/:style-:id.:extension'
                     :path => ':class/:attachment/careerbuilder-:style-:id.:extension',
-                    :s3_headers => { 'Cache-Control' => 'public, max-age=315576000' }.merge(PAPERCLIP_STORAGE_OPTIONS)
+                    :s3_headers => { 'Cache-Control' => 'public, max-age=315576000' }
 
   validates_attachment :attachment,
                        :presence => true,

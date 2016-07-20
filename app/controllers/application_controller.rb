@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :default_headers
   before_action :configure_permitted_parameters, if: :devise_controller?
   respond_to :html, :json
+  add_flash_types :success, :warning, :danger, :info
 
   protected
 

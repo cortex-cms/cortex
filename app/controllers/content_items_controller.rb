@@ -1,6 +1,6 @@
 class ContentItemsController < AdminController
   include ContentItemHelper
-  
+
   def index
     @content_items = content_type.content_items.all
 
@@ -19,6 +19,18 @@ class ContentItemsController < AdminController
 
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
     add_breadcrumb "Edit #{@content_item.id}"
+  end
+
+  def update
+    @content_item = content_type.content_items.find_by_id(params[:id])
+
+    if @content_item.update(content_item_params)
+      flash[:success] = "ContentItem updated"
+    else
+      flash[:warning] = "ContentItem failed to update!"
+    end
+
+    render 'edit'
   end
 
   def create

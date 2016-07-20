@@ -1,6 +1,5 @@
 module ContentItemHelper
-  def content_type2
-    binding.pry
+  def content_type
     @content_type ||= ContentType.find_by_id(params[:content_type_id])
   end
 

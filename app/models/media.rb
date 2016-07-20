@@ -35,7 +35,8 @@ class Media < ActiveRecord::Base
                     :processors => [:thumbnail, :paperclip_optimizer],
                     :preserve_files => 'true',
                     # :path => ':class/:attachment/:style-:id.:extension'
-                    :path => ':class/:attachment/careerbuilder-:style-:id.:extension'
+                    :path => ':class/:attachment/careerbuilder-:style-:id.:extension',
+                    :s3_headers => { 'Cache-Control' => 'public, max-age=315576000' }.merge(PAPERCLIP_STORAGE_OPTIONS)
 
   validates_attachment :attachment,
                        :presence => true,

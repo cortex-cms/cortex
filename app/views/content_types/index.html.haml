@@ -1,7 +1,2 @@
 = link_to new_content_type_path, id: "view-source", class: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" do
   %i.material-icons add
-
-%ul
-  - @content_types.each do |content_type|
-    %li
-      = link_to content_type.name, edit_content_type_path(content_type)

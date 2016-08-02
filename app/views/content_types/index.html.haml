@@ -4,4 +4,4 @@
 %ul
   - @content_types.each do |content_type|
     %li
-      = link_to content_type.name, edit_content_type_path(content_type)
+      = link_to content_type.name, new_content_type_content_item_path(content_type.id)

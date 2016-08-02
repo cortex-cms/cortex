@@ -18,7 +18,7 @@ Paperclip::PaperclipOptimizer.default_options = {
   pngout: false,
   pngquant: {
     allow_lossy: true,
-    quality: !ruby/range 33..50,
+    quality: 33..50,
     speed: 3
   },
   svgo: false

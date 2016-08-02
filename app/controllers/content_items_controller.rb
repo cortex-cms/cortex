@@ -30,18 +30,18 @@ class ContentItemsController < AdminController
       flash[:warning] = "ContentItem failed to update!"
     end
 
-    render :index
+    redirect_to content_type_content_items_path
   end
 
   def create
     @content_item = ContentItem.new(content_item_params)
 
     if @content_item.save
-      flash[:success] = "ContentItem updated"
+      flash[:success] = "ContentItem created"
+      redirect_to content_type_content_items_path
     else
-      flash[:warning] = "ContentItem failed to update!"
+      flash[:warning] = "ContentItem failed to create!"
+      render :new
     end
-
-    render :index
   end
 end

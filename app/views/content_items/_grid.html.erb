@@ -1,4 +1,4 @@
-<%= grid(@content_items_grid) do |g|
+<%= grid(@content_items_grid, hide_submit_button: true) do |g|
   g.column name: 'ID', attribute: 'id'
   g.column name: 'Created At', attribute: 'created_at'
   g.column name: 'Updated At', attribute: 'updated_at'

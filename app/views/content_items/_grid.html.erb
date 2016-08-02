@@ -1,0 +1,9 @@
+<%= grid(@content_items_grid, hide_submit_button: true) do |g|
+  g.column name: 'ID', attribute: 'id'
+  g.column name: 'Created At', attribute: 'created_at'
+  g.column name: 'Updated At', attribute: 'updated_at'
+  g.column name: 'Author', attribute: 'email', assoc: :author
+  g.column do |content_item|
+    link_to "Edit #{content_item.id}", edit_content_type_content_item_path(content_type, content_item)
+  end
+end -%>

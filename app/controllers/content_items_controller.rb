@@ -2,7 +2,7 @@ class ContentItemsController < AdminController
   include ContentItemHelper
 
   def index
-    @content_items = content_type.content_items.all
+    @content_items_grid = initialize_grid(content_type.content_items)
 
     add_breadcrumb content_type.name.pluralize
   end
@@ -30,15 +30,17 @@ class ContentItemsController < AdminController
       flash[:warning] = "ContentItem failed to update!"
     end
 
-    render 'edit'
+    redirect_to content_type_content_items_path
   end
 
   def create
     @content_item = ContentItem.new(content_item_params)
 
     if @content_item.save
-      redirect_to content_types_path(content_type)
+      flash[:success] = "ContentItem created"
+      redirect_to content_type_content_items_path
     else
+      flash[:warning] = "ContentItem failed to create!"
       render :new
     end
   end

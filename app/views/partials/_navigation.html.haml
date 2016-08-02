@@ -2,6 +2,9 @@
   = link_to dashboards_path, class: 'mdl-navigation__link' do
     %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> dashboard
     Dashboard
+  = link_to content_types_path, class: 'mdl-navigation__link' do
+    %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> build
+    Create Content
   = link_to medias_path, class: 'mdl-navigation__link' do
     %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> collections
     Media
@@ -20,9 +23,6 @@
   = link_to dashboards_path, class: 'mdl-navigation__link' do
     %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> dns
     Applications
-  = link_to content_types_path, class: 'mdl-navigation__link' do
-    %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> collections
-    Content Types
   = cell(:content_type, collection: ContentType.all).(:nav)
   .mdl-layout-spacer
   = link_to dashboards_path, class: 'mdl-navigation__link' do

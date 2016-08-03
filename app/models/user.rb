@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable
   acts_as_tagger
+  rolify
 
   belongs_to :tenant
   has_one    :author
@@ -16,6 +17,8 @@ class User < ActiveRecord::Base
   has_many   :posts, through: :authors
   has_many   :localizations
   has_many   :locales
+  has_many   :role_permissions, through: :roles
+  has_many   :permissions, through: :role_permissions
 
   validates_presence_of :email, :tenant, :firstname, :lastname
 
@@ -29,6 +32,19 @@ class User < ActiveRecord::Base
 
   def anonymous?
     self.id == nil
+  end
+
+  def has_permission?(resource, permission)
+    return true if self.is_superadmin?
+
+    resource_class = resource.class
+    allowed_perms = allowed_permissions(resource_class, permission)
+
+    if resource_class == ContentType
+      allowed_perms.select { |perm| perm.resource_id == resource.id }.any?
+    else
+      allowed_perms.any?
+    end
   end
 
   def is_admin?
@@ -48,6 +64,12 @@ class User < ActiveRecord::Base
 
   def gravatar
     "//www.gravatar.com/avatar/#{Digest::MD5.hexdigest email}"
+  end
+
+  private
+
+  def allowed_permissions(resource_class, permission)
+    permissions.select { |perm| perm.resource_type == resource_class.to_s && perm.name == permission }
   end
 
   class << self

@@ -41,6 +41,6 @@
     "angular-debaser": "~> 0.3.2"
   },
   "resolutions": {
-    "angular": "1.2.29"
+    "angular": "1.2.30"
   }
 }

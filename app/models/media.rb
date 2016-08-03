@@ -25,6 +25,7 @@ class Media < ActiveRecord::Base
 
   has_attached_file :attachment,
                     :styles => {
+                      :original => {geometry: '9999x9999>'},
                       :large => {geometry: '1800x1800>', format: :jpg},
                       :medium => {geometry: '800x800>', format: :jpg},
                       :default => {geometry: '300x300>', format: :jpg},
@@ -35,7 +36,8 @@ class Media < ActiveRecord::Base
                     :processors => [:thumbnail, :paperclip_optimizer],
                     :preserve_files => 'true',
                     # :path => ':class/:attachment/:style-:id.:extension'
-                    :path => ':class/:attachment/careerbuilder-:style-:id.:extension'
+                    :path => ':class/:attachment/careerbuilder-:style-:id.:extension',
+                    :s3_headers => { 'Cache-Control' => 'public, max-age=315576000' }
 
   validates_attachment :attachment,
                        :presence => true,

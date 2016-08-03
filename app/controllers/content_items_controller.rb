@@ -1,36 +1,47 @@
-class ContentItemsController < ApplicationController
+class ContentItemsController < AdminController
+  include ContentItemHelper
+
+  def index
+    @content_items_grid = initialize_grid(content_type.content_items)
+
+    add_breadcrumb content_type.name.pluralize
+  end
 
   def new
-    @content_type = ContentType.find(params[:content_type_id])
-    @content_item = @content_type.content_items.new
+    @content_item = content_type.content_items.new
+
+    add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
+    add_breadcrumb 'New'
+  end
+
+  def edit
+    @content_item = content_type.content_items.find_by_id(params[:id])
+
+    add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
+    add_breadcrumb "Edit #{@content_item.id}"
+  end
+
+  def update
+    @content_item = content_type.content_items.find_by_id(params[:id])
+
+    if @content_item.update(content_item_params)
+      flash[:success] = "ContentItem updated"
+    else
+      flash[:warning] = "ContentItem failed to update!"
+    end
+
+    redirect_to content_type_content_items_path
   end
 
   def create
-    binding.pry
     @content_item = ContentItem.new(content_item_params)
+
     if @content_item.save
-      redirect_to content_types_path(content_type_id: params[:content_type_id])
+      flash[:success] = "ContentItem created"
+      redirect_to content_type_content_items_path
     else
-      @content_type = ContentType.find(params[:content_type_id])
+      flash[:warning] = "ContentItem failed to create!"
       render :new
     end
-  end
-
-  private
-
-  def content_item_params
-    params.require(:content_item).permit(
-      :author_id,
-      :creator_id,
-      :content_type_id,
-      field_items: field_items_params
-    )
-  end
-
-  def field_items_params
-    [
-      :field_id,
-      :data
-    ]
   end
 end

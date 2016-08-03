@@ -23,12 +23,15 @@ gem 'six', '~> 0.2.0'
 gem 'devise', '~> 4.1.1'
 gem 'rack-oauth2', '~> 1.3.0'
 gem 'doorkeeper', '~> 3.1'
+gem 'rolify', '~> 5.1'
+gem 'pundit', '~> 1.1'
 
 # Data
 gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.0'
 gem 'paperclip', '~> 5.0.0.beta2'
 gem 'paperclip-optimizer', '~> 2.0'
+gem 'image_optim_pack', '~> 0.3.0'
 gem 'acts-as-taggable-on', '~> 3.5'
 gem 'bcrypt', '~> 3.1.11'
 gem 'grape-kaminari', git: 'git://github.com/toastercup/grape-kaminari', branch: 'set-only-pagination-headers'
@@ -69,8 +72,13 @@ gem 'angular-rails-templates', '~> 1.0.0'
 gem 'ngannotate-rails', git: 'git://github.com/kikonen/ngannotate-rails', branch: 'master' # sprockets-rails related fixes not present in v0.15.4.1
 gem 'uglifier', '~> 2.7.2'
 
-# Templating
-gem 'haml', '~> 4.0.7'
+# View
+gem 'haml', '~> 4.1.0.beta'
+gem 'cells-rails', '~> 0.0.6'
+gem 'cells-haml', '~> 0.0.10'
+gem 'breadcrumbs_on_rails', '~> 2.3.1'
+gem 'wice_grid', '~> 3.6.2'
+gem 'jquery-ui-rails', '~> 5.0.5'
 
 # Style
 gem 'sass-rails', '~> 5.0'
@@ -85,9 +93,6 @@ gem 'jquery-rails', '~> 4.1.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'gon', '~> 6.0.1'
 
-# View Helpers
-gem 'breadcrumbs_on_rails', '~> 2.3.1'
-
 group :tasks do
   # Parsing
   gem 'nokogiri'
@@ -96,7 +101,6 @@ end
 group :test, :development do
   # Environment
   gem 'dotenv', '~> 2.1.0'
-  gem 'spring'
 
   # Cache/Sidekiq
   gem 'redis-namespace', '~> 1.5'

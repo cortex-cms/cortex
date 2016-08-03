@@ -25,6 +25,7 @@ class Media < ActiveRecord::Base
 
   has_attached_file :attachment,
                     :styles => {
+                      :original => {geometry: '9999x9999>'},
                       :large => {geometry: '1800x1800>', format: :jpg},
                       :medium => {geometry: '800x800>', format: :jpg},
                       :default => {geometry: '300x300>', format: :jpg},

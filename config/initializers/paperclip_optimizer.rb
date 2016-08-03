@@ -1,6 +1,7 @@
 Paperclip::PaperclipOptimizer.default_options = {
   allow_lossy: true,
-  skip_missing_workers: true,
+  skip_missing_workers: false,
+  verbose: true,
   jpegoptim: {
     allow_lossy: true,
     strip: :all,

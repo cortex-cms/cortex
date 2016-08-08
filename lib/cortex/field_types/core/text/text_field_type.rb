@@ -5,7 +5,7 @@ class TextFieldType < FieldType
   }.freeze
 
   attr_accessor :data, :text, :field_name
-  attr_reader :validations
+  attr_reader :validations, :metadata
 
   validates :text, presence: true, if: :validate_presence?
   validate :text_length, if: :validate_length?
@@ -16,6 +16,10 @@ class TextFieldType < FieldType
 
   def data=(data_hash)
     @text = data_hash.deep_symbolize_keys[:text]
+  end
+
+  def metadata=(metadata_hash)
+    @metadata = metadata_hash.deep_symbolize_keys
   end
 
   def acceptable_validations?

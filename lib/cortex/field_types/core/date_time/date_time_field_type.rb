@@ -32,7 +32,7 @@ class DateTimeFieldType < FieldType
   end
 
   def mapping
-    {name: mapping_field_name, type: :date, analyzer: :snowball}
+    {name: mapping_field_name, type: :string, analyzer: :snowball}
   end
 
   private

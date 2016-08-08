@@ -11,4 +11,5 @@
         %li.mdl-menu__item
           = current_user.tenant.name
         %li.mdl-menu__item
+          %i.material-icons> power_settings_new
           = link_to 'Logout', destroy_user_session_path, method: :delete

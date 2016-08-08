@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808150800) do
+ActiveRecord::Schema.define(version: 20160718155015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -377,7 +377,7 @@ ActiveRecord::Schema.define(version: 20160808150800) do
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "tenants", force: :cascade do |t|
-    t.string   "name",          limit: 50,                      null: false
+    t.string   "name",          limit: 50,  null: false
     t.string   "subdomain",     limit: 50
     t.integer  "parent_id"
     t.integer  "lft"
@@ -394,7 +394,6 @@ ActiveRecord::Schema.define(version: 20160808150800) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "icon",                      default: "palette"
   end
 
   add_index "tenants", ["parent_id"], name: "index_tenants_on_parent_id", using: :btree

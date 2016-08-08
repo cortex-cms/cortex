@@ -3,6 +3,9 @@ module Cortex
     module Core
       module Text
         class TextCell < FieldCell
+          property :cols
+          property :rows
+
           def input
             render
           end
@@ -26,7 +29,7 @@ module Cortex
           end
 
           def render_multiline_input
-            raise 'not implemented'
+            @options[:form].text_area_tag 'data[text]', value: @options[:default_value], cols: @options[:cols], rows: @options[:rows]
           end
         end
       end

@@ -19,21 +19,21 @@ ActiveRecord::Schema.define(version: 20160629203601) do
   enable_extension "uuid-ossp"
 
   create_table "applications", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "write",      default: false
+    t.boolean  "write",                  default: false
     t.integer  "tenant_id"
   end
 
   add_index "applications", ["tenant_id"], name: "index_applications_on_tenant_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
-    t.string  "firstname"
-    t.string  "lastname"
-    t.string  "email"
+    t.string  "firstname", limit: 255
+    t.string  "lastname",  limit: 255
+    t.string  "email",     limit: 255
     t.hstore  "sites"
-    t.string  "title"
+    t.string  "title",     limit: 255
     t.text    "bio"
     t.integer "user_id"
   end
@@ -84,24 +84,21 @@ ActiveRecord::Schema.define(version: 20160629203601) do
     t.integer  "author_id"
     t.integer  "creator_id"
     t.integer  "content_type_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.datetime "deleted_at"
+    t.boolean  "is_published",    default: false
   end
 
   add_index "content_items", ["deleted_at"], name: "index_content_items_on_deleted_at", using: :btree
 
   create_table "content_types", force: :cascade do |t|
-    t.string   "name",                                    null: false
+    t.string   "name",        null: false
     t.text     "description"
-    t.integer  "creator_id",                              null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "creator_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.datetime "deleted_at"
-    t.boolean  "taggable_with_tags?",     default: false
-    t.boolean  "taggable_with_keywords?", default: false
-    t.jsonb    "tag_data"
-    t.boolean  "is_published"
   end
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
@@ -151,7 +148,7 @@ ActiveRecord::Schema.define(version: 20160629203601) do
   add_index "fields", ["deleted_at"], name: "index_fields_on_deleted_at", using: :btree
 
   create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "name",            null: false
+    t.string   "name",            limit: 255, null: false
     t.integer  "localization_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -284,13 +281,13 @@ ActiveRecord::Schema.define(version: 20160629203601) do
     t.string   "seo_description",     limit: 255
     t.string   "seo_preview",         limit: 255
     t.string   "custom_author",       limit: 255
-    t.string   "slug",                                             null: false
+    t.string   "slug",                limit: 255,                  null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "type",                            default: "Post", null: false
+    t.string   "type",                limit: 255, default: "Post", null: false
     t.integer  "author_id"
     t.boolean  "is_wysiwyg",                      default: true
     t.boolean  "noindex",                         default: false
@@ -314,12 +311,13 @@ ActiveRecord::Schema.define(version: 20160629203601) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "resource_id"
     t.string   "resource_type"
-    t.string   "resource_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "snippets", force: :cascade do |t|
@@ -401,8 +399,10 @@ ActiveRecord::Schema.define(version: 20160629203601) do
   add_index "users", ["tenant_id"], name: "index_users_on_tenant_id", using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
@@ -426,7 +426,6 @@ ActiveRecord::Schema.define(version: 20160629203601) do
     t.boolean  "noodp",                  default: false
     t.boolean  "noarchive",              default: false
     t.boolean  "noimageindex",           default: false
-    t.text     "seo_keywords"
   end
 
   add_index "webpages", ["user_id"], name: "index_webpages_on_user_id", using: :btree

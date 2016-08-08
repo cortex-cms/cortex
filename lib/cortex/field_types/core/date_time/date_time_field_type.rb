@@ -25,14 +25,20 @@ class DateTimeFieldType < FieldType
     valid_types? && valid_options?
   end
 
+  def field_item_as_indexed_json_for_field_type(field_item, options = {})
+    json = {}
+    json[mapping_field_name] = field_item.data['date_time']
+    json
+  end
+
   def mapping
-    {name: mapping_field_name, type: :string, analyzer: :snowball}
+    {name: mapping_field_name, type: :date, analyzer: :snowball}
   end
 
   private
 
   def mapping_field_name
-    "#{field_name.downcase}_text"
+    "#{field_name.downcase.gsub(' ', '_')}_date_time"
   end
 
   def timestamp_is_allowed?

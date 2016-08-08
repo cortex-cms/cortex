@@ -1,9 +1,9 @@
 class DateTimeFieldType < FieldType
   VALIDATION_TYPES = {
     presence: :valid_presence_validation?
-  }.freeze?
+  }.freeze
 
-  attr_accessor :data, :timestamp
+  attr_accessor :data, :timestamp, :field_name
   attr_reader :validations, :metadata
 
   validates :timestamp, presence: true, if: :validate_presence?
@@ -14,7 +14,7 @@ class DateTimeFieldType < FieldType
   end
 
   def data=(data_hash)
-    @values = data_hash.deep_symbolize_keys[:values]
+    @values = data_hash.deep_symbolize_keys[:timestamp]
   end
 
   def metadata=(metadata_hash)
@@ -25,7 +25,15 @@ class DateTimeFieldType < FieldType
     valid_types? && valid_options?
   end
 
+  def mapping
+    {name: mapping_field_name, type: :string, analyzer: :snowball}
+  end
+
   private
+
+  def mapping_field_name
+    "#{field_name.downcase}_text"
+  end
 
   def timestamp_is_allowed?
     begin

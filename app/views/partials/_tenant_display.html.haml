@@ -1,0 +1,12 @@
+%footer
+  %nav.demo-navigation.mdl-navigation
+    %span{class: 'mdl-navigation__link'}
+      %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> palette
+      = current_user.tenant.name
+      .mdl-layout-spacer
+      %button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
+        %i.material-icons{:role => "presentation"} arrow_drop_down
+        %span.visuallyhidden Accounts
+      %ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect{:for => "accbtn"}
+        %li.mdl-menu__item
+          = current_user.tenant.name

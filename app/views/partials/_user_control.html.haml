@@ -3,13 +3,13 @@
     .demo-avatar-dropdown
       %span
         = current_user.fullname
-      .mdl-layout-spacer
-      %button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
-        %i.material-icons{:role => "presentation"} arrow_drop_down
-        %span.visuallyhidden Accounts
-      %ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect{:for => "accbtn"}
-        %li.mdl-menu__item
-          = current_user.tenant.name
-        %li.mdl-menu__item
-          %i.material-icons> power_settings_new
-          = link_to 'Logout', destroy_user_session_path, method: :delete
+      -# .mdl-layout-spacer
+      -# %button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
+      -#   %i.material-icons{:role => "presentation"} arrow_drop_down
+      -#   %span.visuallyhidden Accounts
+      -# %ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect{:for => "accbtn"}
+      -#   %li.mdl-menu__item
+      -#     = current_user.tenant.name
+      -#   %li.mdl-menu__item
+      -#     %i.material-icons> power_settings_new
+    = link_to 'Logout', destroy_user_session_path, method: :delete

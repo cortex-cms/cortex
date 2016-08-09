@@ -6,3 +6,6 @@ require 'cortex/field_types/core/boolean/boolean_cell'
 
 require 'cortex/field_types/core/date_time/date_time_field_type'
 require 'cortex/field_types/core/date_time/date_time_cell'
+
+require 'cortex/field_types/core/user/user_field_type'
+require 'cortex/field_types/core/user/user_cell'

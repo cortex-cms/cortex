@@ -3,10 +3,10 @@ class UserFieldType < FieldType
     presence: :valid_presence_validation?
   }.freeze
 
-  attr_accessor :data, :id, :field_name
+  attr_accessor :data, :user_id, :field_name
   attr_reader :validations, :metadata
 
-  validates :id, presence: true, if: :validate_presence?
+  validates :user_id, presence: true, if: :validate_presence?
   validate :valid_user_id?
 
   def validations=(validations_hash)
@@ -14,7 +14,7 @@ class UserFieldType < FieldType
   end
 
   def data=(data_hash)
-    @id = data_hash.deep_symbolize_keys[:id]
+    @user_id = data_hash.deep_symbolize_keys[:user_id]
   end
 
   def metadata=(metadata_hash)
@@ -45,7 +45,7 @@ class UserFieldType < FieldType
     return true if id.nil?
     begin
       binding.pry
-      User.find(id)
+      User.find(user_id)
       true
     rescue ActiveRecord::RecordNotFound
       errors.add(:user_id, 'id must be for a valid User')

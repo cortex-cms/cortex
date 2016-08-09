@@ -14,5 +14,7 @@ namespace :employer_blog do
     blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 2, validations: { presence: true, length: { minimum: 25 } })
 
     blog.fields.new(name: 'Slug', field_type: 'text_field_type', order_position: 3, validations: { presence: true })
+
+    blog.fields.new(name: 'Publish Date', field_type: 'date_time_field_type', order_position: 4)
   end
 end

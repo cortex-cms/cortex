@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many   :locales
   has_many   :role_permissions, through: :roles
   has_many   :permissions, through: :role_permissions
+  has_many   :content_items
 
   validates_presence_of :email, :tenant, :firstname, :lastname
 

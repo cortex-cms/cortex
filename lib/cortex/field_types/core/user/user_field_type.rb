@@ -42,6 +42,7 @@ class UserFieldType < FieldType
   end
 
   def valid_user_id?
+    return true if id.nil?
     begin
       binding.pry
       User.find(id)

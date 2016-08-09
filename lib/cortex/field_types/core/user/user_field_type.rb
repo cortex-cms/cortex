@@ -14,7 +14,7 @@ class UserFieldType < FieldType
   end
 
   def data=(data_hash)
-    @values = data_hash.deep_symbolize_keys[:id]
+    @id = data_hash.deep_symbolize_keys[:id]
   end
 
   def metadata=(metadata_hash)
@@ -43,10 +43,11 @@ class UserFieldType < FieldType
 
   def valid_user_id?
     begin
+      binding.pry
       User.find(id)
       true
-    rescue ArgumentError
-      errors.add(:user_id, 'must be for a valid User')
+    rescue ActiveRecord::RecordNotFound
+      errors.add(:user_id, 'id must be for a valid User')
       false
     end
   end

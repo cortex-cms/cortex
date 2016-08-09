@@ -14,7 +14,7 @@ class DateTimeFieldType < FieldType
   end
 
   def data=(data_hash)
-    @values = data_hash.deep_symbolize_keys[:timestamp]
+    @timestamp = data_hash.deep_symbolize_keys[:timestamp]
   end
 
   def metadata=(metadata_hash)

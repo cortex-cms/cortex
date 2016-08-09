@@ -9,13 +9,13 @@ namespace :employer_blog do
     })
     blog.save
 
-    blog.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 1, validations: { presence: true, length: { maximum: 25, minimum: 5 } }).save
+    blog.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 1, validations: { presence: true, length: { maximum: 25, minimum: 5 } })
 
-    blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 2, validations: { presence: true, length: { minimum: 100 } }).save
+    blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 2, validations: { presence: true, length: { minimum: 100 } })
 
-    blog.fields.new(name: 'Description', field_type: 'text_field_type', order_position: 3, validations: { presence: true, length: { minimum: 60, maximum: 120 } }).save
+    blog.fields.new(name: 'Description', field_type: 'text_field_type', order_position: 3, validations: { presence: true, length: { minimum: 60, maximum: 120 } })
 
-    blog.fields.new(name: 'Slug', field_type: 'text_field_type', order_position: 4, validations: { presence: true, length: { maximum: 25, minimum: 5 } }).save
+    blog.fields.new(name: 'Slug', field_type: 'text_field_type', order_position: 4, validations: { presence: true, length: { maximum: 25, minimum: 5 } })
 
     blog.fields.new(name: 'Author', field_type: 'user_field_type', order_position: 5, validations: { presence: true })
 

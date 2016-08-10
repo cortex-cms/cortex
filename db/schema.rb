@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809222541) do
+ActiveRecord::Schema.define(version: 20160810160258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,21 +89,21 @@ ActiveRecord::Schema.define(version: 20160809222541) do
     t.datetime "expired_at"
     t.integer  "creator_id"
     t.integer  "content_type_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.datetime "deleted_at"
-    t.boolean  "is_published",    default: false
+    t.integer  "last_updated_by_id"
     t.integer  "updated_by_id"
   end
 
   add_index "content_items", ["deleted_at"], name: "index_content_items_on_deleted_at", using: :btree
 
   create_table "content_types", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",                                    null: false
     t.text     "description"
-    t.integer  "creator_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "creator_id",                              null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.datetime "deleted_at"
     t.integer  "contract_id"
   end
@@ -341,13 +341,12 @@ ActiveRecord::Schema.define(version: 20160809222541) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
-    t.integer  "resource_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "resource_type"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "resource_id"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "snippets", force: :cascade do |t|
@@ -431,10 +430,8 @@ ActiveRecord::Schema.define(version: 20160809222541) do
   add_index "users", ["tenant_id"], name: "index_users_on_tenant_id", using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "role_id"
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
@@ -458,6 +455,7 @@ ActiveRecord::Schema.define(version: 20160809222541) do
     t.boolean  "noodp",                  default: false
     t.boolean  "noarchive",              default: false
     t.boolean  "noimageindex",           default: false
+    t.text     "seo_keywords"
   end
 
   add_index "webpages", ["user_id"], name: "index_webpages_on_user_id", using: :btree

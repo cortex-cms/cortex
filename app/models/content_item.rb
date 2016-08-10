@@ -5,16 +5,22 @@ class ContentItem < ActiveRecord::Base
   acts_as_paranoid
 
   belongs_to :creator, class_name: "User"
-  belongs_to :author, class_name: "User"
   belongs_to :updated_by, class_name: "User"
   belongs_to :content_type
   has_many :field_items, -> { joins(:field).order("fields.order ASC") }, dependent: :destroy
 
   accepts_nested_attributes_for :field_items
 
-  validates :creator_id, :author_id, :content_type_id, presence: true
+  validates :creator_id, :content_type_id, presence: true
 
   after_save :index
+  after_save :update_tag_lists
+
+  def self.taggable_fields
+    taggable_on_array = Field.select { |f| f.field_type == "tag_field_type" }.map { |f| f.name.downcase.gsub(" ", "_") }
+  end
+
+  acts_as_taggable_on taggable_fields
 
   def as_indexed_json(options = {})
     json = as_json
@@ -35,5 +41,9 @@ class ContentItem < ActiveRecord::Base
        id: id,
        body: as_indexed_json}
     )
+  end
+
+  def update_tag_lists
+    field_items.select { |fi| fi.field.field_type == "tag_field_type" }.map { |fi| [fi.field.name, fi.data["tag_list"] ] }.each { |tags| self.send("#{tags[0].downcase.gsub(' ', '_').singularize}_list=", tags[1]) }
   end
 end

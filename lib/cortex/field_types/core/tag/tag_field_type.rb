@@ -1,6 +1,4 @@
 class TagFieldType < FieldType
-  acts_as_taggable
-
   VALIDATION_TYPES = {
     presence: :valid_presence_validation?
   }.freeze
@@ -15,7 +13,7 @@ class TagFieldType < FieldType
   end
 
   def data=(data_hash)
-    @user_id = data_hash.deep_symbolize_keys[:tag_list]
+    @tag_list = data_hash.deep_symbolize_keys[:tag_list]
   end
 
   def metadata=(metadata_hash)

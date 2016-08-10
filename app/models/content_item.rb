@@ -43,7 +43,15 @@ class ContentItem < ActiveRecord::Base
     )
   end
 
+  def field_items_by_type(type)
+    field_items.select { |fi| fi.field.field_type == "#{type}_field_type" }
+  end
+
   def update_tag_lists
-    field_items.select { |fi| fi.field.field_type == "tag_field_type" }.map { |fi| [fi.field.name, fi.data["tag_list"] ] }.each { |tags| self.send("#{tags[0].downcase.gsub(' ', '_').singularize}_list=", tags[1]) }
+    tag_data = field_items_by_type("tag").map { |fi| [fi.field.name, fi.data["tag_list"] ] }
+
+    tag_data.each do |tags|
+      ContentItemTagUpdater.update_tags(self, tags)
+    end
   end
 end

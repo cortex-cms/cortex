@@ -1,9 +1,9 @@
 namespace :employer_blog do
-  task :seed do
+  task seed: :environment do
     desc 'Seed Employer Blog ContentType and Fields'
 
     blog = ContentType.new({
-      name: "Employer Blog",
+      name: "EmployerBlog",
       description: "Blog for Employer",
       creator_id: 1
     })
@@ -26,7 +26,7 @@ namespace :employer_blog do
     blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', order_position: 8, validations: {})
 
     # TODO: Add metadata to Categories following completion of Tree Story
-    blog.fields.new(name: 'Categories', field_type: 'tree_field_type', order_position: 9, validations: { presence: true }, metadata: {})
+    # blog.fields.new(name: 'Categories', field_type: 'tree_field_type', order_position: 9, validations: { presence: true }, metadata: {})
 
     blog.fields.new(name: 'SEO Title', field_type: 'text_field_type', order_position: 10, validations: { presence: true, length: { maximum: 50, minimum: 30 } })
 
@@ -34,16 +34,18 @@ namespace :employer_blog do
 
     blog.fields.new(name: 'SEO Keywords', field_type: 'tag_field_type', order_position: 12, validations: {})
 
-    blog.fields.new(name: 'No Index', field_type: 'boolean_field_type', order_position: 13, validations: {})
+    blog.fields.new(name: 'No Index', field_type: 'boolean_field_type', order_position: 13)
 
-    blog.fields.new(name: 'No Follow', field_type: 'boolean_field_type', order_position: 14, validations: {})
+    blog.fields.new(name: 'No Follow', field_type: 'boolean_field_type', order_position: 14)
 
-    blog.fields.new(name: 'No Snippet', field_type: 'boolean_field_type', order_position: 15, validations: {})
+    blog.fields.new(name: 'No Snippet', field_type: 'boolean_field_type', order_position: 15)
 
-    blog.fields.new(name: 'No ODP', field_type: 'boolean_field_type', order_position: 16, validations: {})
+    blog.fields.new(name: 'No ODP', field_type: 'boolean_field_type', order_position: 16)
 
-    blog.fields.new(name: 'No Archive', field_type: 'boolean_field_type', order_position: 17, validations: {})
+    blog.fields.new(name: 'No Archive', field_type: 'boolean_field_type', order_position: 17)
 
-    blog.fields.new(name: 'No Image Index', field_type: 'boolean_field_type', order_position: 18, validations: {})
+    blog.fields.new(name: 'No Image Index', field_type: 'boolean_field_type', order_position: 18)
+
+    blog.save
   end
 end

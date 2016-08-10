@@ -24,19 +24,26 @@ class ContentItemService < CortexService
   def transact_and_refresh
     ActiveRecord::Base.transaction do
       yield
-      update_history
+      update_search
     end
   end
 
-  def update_history
-    update_last_updated_by
-  end
-
-  def update_last_updated_by
-    @content_item.update!(updated_by: current_user)
+  def update_search
+    # TODO: implement ES index updates
+    true
   end
 
   def content_item_attributes
-    content_item_params || {creator: creator, content_type: content_type, field_items: field_items}
+    attributes = content_item_params || {creator: creator, content_type: content_type, field_items: field_items}
+    attributes.merge! latest_history_patch
+  end
+
+  def latest_history_patch
+    history_patch = {}
+    history_patch.merge! last_updated_by
+  end
+
+  def last_updated_by
+    {updated_by: current_user}
   end
 end

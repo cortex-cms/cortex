@@ -15,6 +15,7 @@ module SearchablePost
       indexes :author, :analyzer => :keyword
       indexes :created_at, :type => :date, :include_in_all => false
       indexes :published_at, :type => :date, :include_in_all => false
+      indexes :expired_at, :type => :date, :include_in_all => false
       indexes :tag_list, :type => :string, :analyzer => :keyword
       indexes :categories, :analyzer => :keyword
       indexes :job_phase, :analyzer => :keyword
@@ -25,7 +26,7 @@ module SearchablePost
 
     def as_indexed_json(options = {})
       json = as_json(only: [:id, :title, :body, :draft, :short_description, :copyright_owner,
-                            :created_at, :published_at, :job_phase, :type])
+                            :created_at, :published_at, :expired_at, :job_phase, :type])
       json[:categories] = categories.collect { |c| c.name }
       json[:industries] = industries.collect { |i| i.soc }
       json[:tags] = tag_list.to_a
@@ -102,16 +103,16 @@ module SearchablePost
       bool = {bool: {filter: [{term: {tenant_id: tenant.id}}]}}
 
       if published
-        published_filter(self, bool[:bool][:filter])
+        self.published_filter(self, bool[:bool][:filter])
       end
 
       search query: bool, sort: [{created_at: {order: 'desc'}}]
     end
-  end
 
-  def self.published_filter(model, filter)
-    filter << model.range_search(:published_at, :lte, DateTime.now.to_s)
-    filter << model.range_search(:expired_at, :gte, DateTime.now.to_s)
-    filter << model.term_search(:draft, false)
+    def published_filter(model, filter)
+      filter << model.term_search(:draft, false)
+      filter << model.range_search(:published_at, :lte, DateTime.now.to_s)
+      filter << model.range_search(:expired_at, :gte, DateTime.now.to_s)
+    end
   end
 end

@@ -44,14 +44,14 @@ class ContentItem < ActiveRecord::Base
   end
 
   def field_items_by_type(type)
-    field_items.select { |fi| fi.field.field_type == "#{type}_field_type" }
+    field_items.select { |field_item| field_item.field.field_type == "#{type}_field_type" }
   end
 
   def update_tag_lists
-    tag_data = field_items_by_type("tag").map { |fi| [fi.field.name, fi.data["tag_list"] ] }
+    tag_data = field_items_by_type("tag").map { |field_item| [field_item.field.name, field_item.data["tag_list"] ] }
 
     tag_data.each do |tags|
-      ContentItemTagUpdater.update_tags(self, tags)
+      ContentItemService.update_tags(self, tags)
     end
   end
 end

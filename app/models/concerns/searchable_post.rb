@@ -35,10 +35,12 @@ module SearchablePost
       json
     end
 
-    def related(tenant)
+    def related(tenant, published = nil)
       bool = {bool: {should: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
-      SearchablePost.published_filter(bool[:bool][:filter], self)
+      if published
+        published_filter(self, bool[:bool][:filter])
+      end
 
       mlt = [{
                more_like_this: {
@@ -61,7 +63,7 @@ module SearchablePost
   end
 
   module ClassMethods
-    def search_with_params(params, tenant)
+    def search_with_params(params, tenant, published = nil)
       q = params[:q]
       categories = params[:categories]
       job_phase = params[:job_phase]
@@ -89,19 +91,27 @@ module SearchablePost
       if author
         bool[:bool][:filter] << self.term_search(:author, author)
       end
-      SearchablePost.published_filter(bool[:bool][:filter], self)
+      if published
+        published_filter(self, bool[:bool][:filter])
+      end
 
       self.search query: bool
     end
 
-    def show_all(tenant)
+    def show_all(tenant, published = nil)
       bool = {bool: {filter: [{term: {tenant_id: tenant.id}}]}}
+
+      if published
+        published_filter(self, bool[:bool][:filter])
+      end
 
       search query: bool, sort: [{created_at: {order: 'desc'}}]
     end
   end
 
-  def self.published_filter(filter, post)
-    filter << post.term_search(:is_published, true)
+  def self.published_filter(model, filter)
+    filter << model.range_search(:published_at, :lte, DateTime.now.to_s)
+    filter << model.range_search(:expired_at, :gte, DateTime.now.to_s)
+    filter << model.term_search(:draft, false)
   end
 end

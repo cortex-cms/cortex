@@ -137,8 +137,6 @@ module V1
 
           allowed_params = remove_params(::V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories, :is_published) + [:category_ids, :industry_ids, :author_id]
 
-          p allowed_params
-
           if params[:type]
             post.update!({type: params[:type]}) if params[:type]
             reload_post

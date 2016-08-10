@@ -34,6 +34,10 @@ module V1
         post.display
       end
 
+      expose :is_published, documentation: { type: "Boolean", desc: "If this post if active and published"} do |post|
+        post.published?
+      end
+
       expose :custom_author, documentation: {desc: "Author's name", type: "String", required: true} do |post, options|
         if post.author
           post.author.fullname

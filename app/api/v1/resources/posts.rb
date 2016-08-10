@@ -118,7 +118,8 @@ module V1
           require_scope! 'modify:posts'
           authorize! :create, Post
 
-          allowed_params = remove_params(::V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
+          allowed_params = remove_params(::V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories, :is_published) + [:category_ids, :industry_ids, :author_id]
+
 
           @post = ::Post.new(declared(params, {include_missing: false}, allowed_params))
           post.user = params[:user] ? User.find(params[:user]) : current_user
@@ -134,7 +135,7 @@ module V1
           require_scope! 'modify:posts'
           authorize! :update, post!
 
-          allowed_params = remove_params(::V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories) + [:category_ids, :industry_ids, :author_id]
+          allowed_params = remove_params(::V1::Entities::Post.documentation.keys, :featured_media, :tile_media, :media, :industries, :categories, :is_published) + [:category_ids, :industry_ids, :author_id]
 
           if params[:type]
             post.update!({type: params[:type]}) if params[:type]

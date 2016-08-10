@@ -20,6 +20,7 @@ module SearchablePost
       indexes :job_phase, :analyzer => :keyword
       indexes :type, :analyzer => :keyword
       indexes :industries, :analyzer => :keyword
+      indexes :is_published, :type => :boolean
     end
 
     def as_indexed_json(options = {})
@@ -30,6 +31,7 @@ module SearchablePost
       json[:tags] = tag_list.to_a
       json[:author] = author ? author.fullname : custom_author
       json[:tenant_id] = user.tenant.id
+      json[:is_published] = self.published?
       json
     end
 
@@ -37,8 +39,7 @@ module SearchablePost
       bool = {bool: {should: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
       if published
-        bool[:bool][:filter] << self.class.range_search(:published_at, :lte, DateTime.now.to_s)
-        bool[:bool][:filter] << self.class.term_search(:draft, false)
+        published_filter(self, bool[:bool][:filter])
       end
 
       mlt = [{
@@ -91,8 +92,7 @@ module SearchablePost
         bool[:bool][:filter] << self.term_search(:author, author)
       end
       if published
-        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
-        bool[:bool][:filter] << self.term_search(:draft, false)
+        published_filter(self, bool[:bool][:filter])
       end
 
       self.search query: bool
@@ -102,11 +102,16 @@ module SearchablePost
       bool = {bool: {filter: [{term: {tenant_id: tenant.id}}]}}
 
       if published
-        bool[:bool][:filter] << self.range_search(:published_at, :lte, DateTime.now.to_s)
-        bool[:bool][:filter] << self.term_search(:draft, false)
+        published_filter(self, bool[:bool][:filter])
       end
 
       search query: bool, sort: [{created_at: {order: 'desc'}}]
     end
+  end
+
+  def self.published_filter(model, filter)
+    filter << model.range_search(:published_at, :lte, DateTime.now.to_s)
+    filter << model.range_search(:expired_at, :gte, DateTime.now.to_s)
+    filter << model.term_search(:draft, false)
   end
 end

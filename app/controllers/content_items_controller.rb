@@ -9,7 +9,7 @@ class ContentItemsController < AdminController
 
   def new
     @content_item = content_type.content_items.new
-    content_type.fields.each do | field |
+    content_type.fields.each do |field|
       @content_item.field_items << FieldItem.new(field: field)
     end
 

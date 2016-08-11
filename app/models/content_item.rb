@@ -8,7 +8,7 @@ class ContentItem < ActiveRecord::Base
   belongs_to :author, class_name: "User"
   belongs_to :updated_by, class_name: "User"
   belongs_to :content_type
-  has_many :field_items, -> { joins(:field).order("fields.order ASC") }, dependent: :destroy
+  has_many :field_items, -> { joins(:field).order("fields.order ASC") }, dependent: :destroy, autosave: true
 
   accepts_nested_attributes_for :field_items
 
@@ -29,11 +29,11 @@ class ContentItem < ActiveRecord::Base
   end
 
   def index
-    __elasticsearch__.client.index(
-      {index: content_type.content_items_index_name,
-       type: self.class.name.underscore,
-       id: id,
-       body: as_indexed_json}
-    )
+    # __elasticsearch__.client.index(
+    #   {index: content_type.content_items_index_name,
+    #    type: self.class.name.underscore,
+    #    id: id,
+    #    body: as_indexed_json}
+    # )
   end
 end

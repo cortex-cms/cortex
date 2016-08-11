@@ -34,9 +34,17 @@ class ContentItemsController < AdminController
   end
 
   def create
-    @content_item = ContentItemService.new(content_item_params: content_item_params, current_user: current_user)
+    @content_item = ContentItem.new
+    params["content_item"]["field_items_attributes"].to_hash.each do |key, value|
+      value.delete("id")
+      @content_item.field_items << FieldItem.new(value)
+    end
 
-    if @content_item.create
+    params["content_item"].delete("field_items_attributes")
+
+    @content_item.attributes = params["content_item"].to_hash
+
+    if @content_item.save!
       flash[:success] = "ContentItem created"
       redirect_to content_type_content_items_path
     else

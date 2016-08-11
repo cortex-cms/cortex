@@ -7,7 +7,9 @@ class ContentItemService < CortexService
 
   def create
     transact_and_refresh do
-      @content_item = ContentItem.create!(content_item_attributes)
+      ci = ContentItem.new(content_item_params)
+      byebug
+      @content_item = ContentItem.create!(content_item_params)
     end
   end
 

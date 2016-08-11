@@ -17,8 +17,8 @@ module Cortex
             end
           end
 
-          def render_select_options
-            @options[:form].select 'data[user_id]', options_for_select: user_data_for_select, selected: {}
+          def render_select
+            @options[:form].select 'data[user_id]', user_data_for_select, {selected: value}
           end
 
           def user_data_for_select

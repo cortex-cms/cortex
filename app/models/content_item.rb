@@ -31,7 +31,7 @@ class ContentItem < ActiveRecord::Base
   def index
     __elasticsearch__.client.index(
       {index: content_type.content_items_index_name,
-       type: self.class.name.underscore,
+       type: self.class.name.parameterize('_'),
        id: id,
        body: as_indexed_json}
     )

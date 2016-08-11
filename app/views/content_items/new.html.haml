@@ -13,7 +13,7 @@
       - if field.field_type == "date_time_field_type"
         = cell('cortex/field_types/core/date_time/date_time', FieldItem.new(field: field), form: field_item_form, default_value: '').(:datepicker)
       - if field.field_type == "tag_field_type"
-        = cell('cortex/field_types/core/tag/tag', FieldItem.new(field: field), form: field_item_form, default_value: '').(:tag_picker)
+        = cell('cortex/field_types/core/tag/tag', FieldItem.new(field: field), form: field_item_form, default_value: []).(:tag_picker)
       - if field.field_type == "user_field_type"
         = cell('cortex/field_types/core/user/user', FieldItem.new(field: field), form: field_item_form, default_value: 1).(:dropdown)
   = f.submit "Submit"

@@ -8,6 +8,16 @@ module Cortex
             render
           end
 
+          private
+
+          def value
+            if data
+              data['tag_list'] || @options[:default_value]
+            else
+              @options[:default_value]
+            end
+          end
+
         end
       end
     end

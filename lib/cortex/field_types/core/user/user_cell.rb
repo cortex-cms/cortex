@@ -3,7 +3,6 @@ module Cortex
     module Core
       module User
         class UserCell < FieldCell
-
           def dropdown
             render
           end
@@ -19,13 +18,12 @@ module Cortex
           end
 
           def render_select_options
-            options = ""
-            @options[:user_data].each do |user_info|
-              options += "<option value='#{user_info[1]}'>#{user_info[0]}</option>"
-            end
-            options.html_safe
+            @options[:form].select 'data[user_id]', options_for_select: user_data_for_select, selected: {}
           end
 
+          def user_data_for_select
+            @options[:user_data].map{ |user| [user.fullname, user.id] }
+          end
         end
       end
     end

@@ -20,7 +20,8 @@ class ContentType < ActiveRecord::Base
   end
 
   def content_items_index_name
-    "#{Rails.env}_content_type_#{name.underscore}_content_items"
+    content_type_name_sanitized = name.parameterize('_')
+    "#{Rails.env}_content_type_#{content_type_name_sanitized}_content_items"
   end
 
   def content_items_mappings

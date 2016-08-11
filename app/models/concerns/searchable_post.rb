@@ -110,9 +110,10 @@ module SearchablePost
     end
 
     def published_filter(model, filter)
-      filter << model.term_search(:draft, false)
-      filter << model.range_search(:published_at, :lte, DateTime.now.to_s)
-      filter << model.range_search(:expired_at, :gte, DateTime.now.to_s)
+      # Bring in documents based on Draft status, Published date met, or either: Expired date not yet met, or Expired date null
+      filter << {bool: {should: [model.term_search(:draft, false)]}}
+      filter << {bool: {should: [model.range_search(:published_at, :lte, DateTime.now.to_s)]}}
+      filter << {bool: {should: [model.range_search(:expired_at, :gte, DateTime.now.to_s), {missing: { field: :expired_at }}]}}
     end
   end
 end

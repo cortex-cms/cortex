@@ -6,11 +6,11 @@ class FieldCell < Cell::ViewModel
 
   private
 
-  def render_label # Where does this common logic go?
+  def render_label
     @options[:form].label :data, field.name
   end
 
-  def render_field_id # Where does this common logic go?
+  def render_field_id
     @options[:form].hidden_field :field_id, value: field.id
   end
 end

@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 20160809222541) do
     t.string   "publish_state"
     t.datetime "published_at"
     t.datetime "expired_at"
-    t.integer  "author_id"
     t.integer  "creator_id"
     t.integer  "content_type_id"
     t.datetime "created_at",                      null: false
@@ -106,10 +105,32 @@ ActiveRecord::Schema.define(version: 20160809222541) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.datetime "deleted_at"
+    t.integer  "contract_id"
   end
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
   add_index "content_types", ["deleted_at"], name: "index_content_types_on_deleted_at", using: :btree
+
+  create_table "contentable_decorators", force: :cascade do |t|
+    t.integer  "decorator_id"
+    t.integer  "contentable_id"
+    t.string   "contentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "decorators", force: :cascade do |t|
+    t.string   "name"
+    t.jsonb    "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "documents", force: :cascade do |t|
     t.integer  "user_id",    null: false

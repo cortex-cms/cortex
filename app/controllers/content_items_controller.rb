@@ -9,6 +9,7 @@ class ContentItemsController < AdminController
 
   def new
     @content_item = content_type.content_items.new
+    @wizard = WizardDecoratorService.new(content_item: @content_item)
 
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
     add_breadcrumb 'New'

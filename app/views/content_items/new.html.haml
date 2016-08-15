@@ -2,10 +2,13 @@
   = f.hidden_field :author_id, value: current_user.id
   = f.hidden_field :creator_id, value: current_user.id
   = f.hidden_field :content_type_id, value: @content_type.id
-  - @content_type.fields.each do |field|
+
+  - @content_type.fields.each_with_index do |field, index|
     = f.fields_for 'field_items', field do |field_item_form|
       - if field.field_type == "text_field_type"
         = cell('cortex/field_types/core/text/text', FieldItem.new(field: field), form: field_item_form, default_value: '').(:input)
       - if field.field_type == "boolean_field_type"
         = cell('cortex/field_types/core/boolean/boolean', FieldItem.new(field: field), form: field_item_form, default_value: false).(:checkbox)
+      - if field.field_type == "tree_field_type"
+        = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index).(:tree)
   = f.submit "Submit"

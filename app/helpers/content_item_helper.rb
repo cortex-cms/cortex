@@ -23,15 +23,18 @@ module ContentItemHelper
   end
 
   def permit_recursive_params(params)
-    params.map do |key, value|
-      next if key == 'id' # TODO: This must go away.
+    if params.respond_to? :map
+      params.map do |key, value|
+        # next if key == 'id' # TODO: This must go away.
+        # next if key == 'tree'
 
-      if value.is_a?(Array)
-        {key => [permit_recursive_params(value.first)]}
-      elsif value.is_a?(Hash) || value.is_a?(ActionController::Parameters)
-        {key => permit_recursive_params(value)}
-      else
-        key
+        if value.is_a?(Array)
+          {key => [permit_recursive_params(value.first)]}
+        elsif value.is_a?(Hash) || value.is_a?(ActionController::Parameters)
+          {key => permit_recursive_params(value)}
+        else
+          key
+        end
       end
     end
   end

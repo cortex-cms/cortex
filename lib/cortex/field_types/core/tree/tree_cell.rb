@@ -7,10 +7,6 @@ module Cortex
             render
           end
 
-          def checked
-            true
-          end
-
           private
 
           def form

@@ -25,7 +25,7 @@ module ContentItemHelper
   def permit_recursive_params(params)
     if params.respond_to? :map
       params.map do |key, value|
-        next if key == 'id' # TODO: This must go away.
+        # next if key == 'id' # TODO: This must go away.
         # next if key == 'tree'
 
         if value.is_a?(Array)

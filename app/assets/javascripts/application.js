@@ -8,5 +8,6 @@
 //= require jquery-ui/datepicker
 
 //= require base
+//= require forms
 
 //= require turbolinks

@@ -17,22 +17,37 @@ module ContentItemHelper
       value
     end
 
-    field_items_attributes_as_array.map do |field_items_attribute|
-      permit_recursive_params(field_items_attribute)
-    end
+    permitted_keys = {}
+    field_items_attributes_as_array.each {|hash| hash.keys.each {|key| permitted_keys [key.to_s] = [] } }
+
+    permit_attribute_params(field_items_attributes_as_array, permitted_keys)
   end
 
-  def permit_recursive_params(params)
-    params.map do |key, value|
-      next if key == 'id' # TODO: This must go away.
-
-      if value.is_a?(Array)
-        {key => [permit_recursive_params(value.first)]}
-      elsif value.is_a?(Hash) || value.is_a?(ActionController::Parameters)
-        {key => permit_recursive_params(value)}
-      else
-        key
+  def permit_attribute_params(param_array, permitted_keys)
+    param_array.each do |param_hash|
+      permitted_keys.keys.each do |key|
+        if param_hash[key].is_a?(Hash)
+          permitted_keys[key] << param_hash[key].keys
+        end
+        permitted_keys[key].flatten!
       end
     end
+
+    sanitize_parameters(permitted_keys)
   end
+
+  def sanitize_parameters(permitted_keys)
+    strong_params_array = []
+
+    permitted_keys.each_pair do |key, value|
+      if value.empty?
+        strong_params_array << key
+      else
+        strong_params_array << {key => value}
+      end
+    end
+
+    strong_params_array
+  end
+
 end

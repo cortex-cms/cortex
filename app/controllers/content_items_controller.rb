@@ -37,6 +37,7 @@ class ContentItemsController < AdminController
   end
 
   def create
+    p content_item_params
     @content_item = ContentItemService.new(content_item_params: content_item_params, current_user: current_user)
 
     if @content_item.create

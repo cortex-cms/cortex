@@ -42,7 +42,7 @@ gem 'pg', '~> 0.18.4'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 gem 'ranked-model', '~> 0.4.0'
 gem 'redis-rails', '~> 4.0'
-gem 'pomona'
+gem 'pomona', '~> 0.6.0'
 
 # Middleware
 gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'

@@ -43,7 +43,7 @@ class DateTimeFieldType < FieldType
 
   def timestamp_is_allowed?
     begin
-      Date.parse(timestamp)
+      DateTime.parse(@timestamp)
       true
     rescue ArgumentError
       errors.add(:timestamp, 'must be a valid date')

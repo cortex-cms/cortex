@@ -7,9 +7,14 @@ class ContentItemService < CortexService
 
   def create
     transact_and_refresh do
-      ci = ContentItem.new(content_item_params)
-      byebug
-      @content_item = ContentItem.create!(content_item_params)
+      @content_item = ContentItem.new
+      content_item_params["content_item"]["field_items_attributes"].to_hash.each do |key, value|
+        value.delete("id")
+        @content_item.field_items << FieldItem.new(value)
+      end
+      content_item_params["content_item"].delete("field_items_attributes")
+      @content_item.attributes = content_item_params["content_item"].to_hash
+      @content_item.save
     end
   end
 

@@ -776,7 +776,7 @@ DEPENDENCIES
   pg (~> 0.18.4)
   phantomjs (~> 1.9.8)
   poltergeist
-  pomona
+  pomona (~> 0.6.0)
   pry-doc
   pry-nav
   pry-rails

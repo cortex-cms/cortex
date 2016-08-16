@@ -18,6 +18,10 @@ module Cortex
             end
           end
 
+          def render_tag_field
+            @options[:form].text_field 'data[tag_list]', value: value, placeholder: @options[:placeholder],  'data-role'=>'tagsinput'
+          end
+
         end
       end
     end

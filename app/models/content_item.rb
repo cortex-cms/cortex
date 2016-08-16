@@ -17,11 +17,12 @@ class ContentItem < ActiveRecord::Base
   after_save :update_tag_lists
 
   def self.taggable_fields
-    taggable_on_array = Field.select { |field_item| field_item.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.downcase.parameterize('_') }
+    taggable_on_array = Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.downcase.parameterize('_') }
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.
-  # Due to hoisting - it cannot access the method unless the method appears before it in this file.
+  # Due to lack of hoisting - it cannot access the method unless the method appears before it in this
+  # file.
 
   acts_as_taggable_on taggable_fields
 
@@ -47,7 +48,7 @@ class ContentItem < ActiveRecord::Base
   end
 
   def tag_field_items
-    field_items.select { |field_item| field_item.field_type_instance.is_a?(TagFieldType) }
+    field_items.select { |field_item| field_item.field.field_type_instance.is_a?(TagFieldType) }
   end
 
   def update_tag_lists

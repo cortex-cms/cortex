@@ -20,6 +20,9 @@ class ContentItem < ActiveRecord::Base
     taggable_on_array = Field.select { |f| f.field_type_instance.is_a?(TagFieldType) }.map { |f| f.name.downcase.gsub(" ", "_") }
   end
 
+  # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.
+  # Due to hoisting - it cannot access the method unless the method appears before it in this file.
+
   acts_as_taggable_on taggable_fields
 
   def as_indexed_json(options = {})

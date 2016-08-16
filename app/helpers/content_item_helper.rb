@@ -37,17 +37,13 @@ module ContentItemHelper
   end
 
   def sanitize_parameters(permitted_keys)
-    strong_params_array = []
-
-    permitted_keys.each_pair do |key, value|
+    permittered_keys.map do |key, value|
       if value.empty?
-        strong_params_array << key
+        key
       else
-        strong_params_array << {key => value}
+        { key => value }
       end
     end
-
-    strong_params_array
   end
 
 end

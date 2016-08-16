@@ -38,7 +38,7 @@ class BooleanFieldType < FieldType
   private
 
   def mapping_field_name
-    "#{field_name.downcase.gsub(' ', '_')}_boolean"
+    "#{field_name.downcase.parameterize('_')}_boolean"
   end
 
   def value_is_allowed?

@@ -17,7 +17,7 @@ class ContentItem < ActiveRecord::Base
   after_save :update_tag_lists
 
   def self.taggable_fields
-    taggable_on_array = Field.select { |f| f.field_type_instance.is_a?(TagFieldType) }.map { |f| f.name.downcase.gsub(" ", "_") }
+    taggable_on_array = Field.select { |f| f.field_type_instance.is_a?(TagFieldType) }.map { |f| f.name.downcase.parameterize('_') }
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

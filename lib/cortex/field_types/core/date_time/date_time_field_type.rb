@@ -38,7 +38,7 @@ class DateTimeFieldType < FieldType
   private
 
   def mapping_field_name
-    "#{field_name.downcase.gsub(' ', '_')}_date_time"
+    "#{field_name.downcase.parameterize('_')}_date_time"
   end
 
   def timestamp_is_allowed?

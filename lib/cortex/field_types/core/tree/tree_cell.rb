@@ -3,6 +3,8 @@ module Cortex
     module Core
       module Tree
         class TreeCell < FieldCell
+          property :field
+
           def tree
             render
           end
@@ -18,7 +20,7 @@ module Cortex
           end
 
           def categories
-            CategoryTree.build.values_at([:category, :category_id])
+            CategoryTree.build(options[:tree]).values_at([:category, :category_id])
           end
 
           def index

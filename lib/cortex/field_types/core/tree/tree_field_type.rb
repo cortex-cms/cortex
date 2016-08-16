@@ -23,8 +23,7 @@ class TreeFieldType < FieldType
   end
 
   def acceptable_validations?
-    byebug
-    no_more_than_two
+    true
   end
 
   private

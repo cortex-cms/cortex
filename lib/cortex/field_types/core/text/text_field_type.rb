@@ -39,7 +39,7 @@ class TextFieldType < FieldType
   private
 
   def mapping_field_name
-    "#{field_name.downcase}_text"
+    "#{field_name.parameterize('_')}_text"
   end
 
   def valid_types?

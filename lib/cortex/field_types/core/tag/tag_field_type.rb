@@ -37,7 +37,7 @@ class TagFieldType < FieldType
   private
 
   def mapping_field_name
-    "#{field_name.downcase.parameterize('_')}_tag"
+    "#{field_name.parameterize('_')}_tag"
   end
 
   def valid_types?

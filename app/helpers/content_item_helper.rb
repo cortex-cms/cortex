@@ -37,7 +37,7 @@ module ContentItemHelper
   end
 
   def sanitize_parameters(permitted_keys)
-    permittered_keys.map do |key, value|
+    permitted_keys.map do |key, value|
       if value.empty?
         key
       else

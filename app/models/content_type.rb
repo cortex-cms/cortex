@@ -5,12 +5,16 @@ class ContentType < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   acts_as_paranoid
-  validates :name, :creator, presence: true
+  validates :name, :creator, :contract_id, presence: true
   after_save :rebuild_content_items_index
 
   belongs_to :creator, class_name: "User"
+  belongs_to :contract
+
   has_many :fields, -> { order(order: :asc) }
   has_many :content_items
+  has_many :contentable_decorators, as: :contentable
+  has_many :decorators, through: :contentable_decorators
 
   accepts_nested_attributes_for :fields
 

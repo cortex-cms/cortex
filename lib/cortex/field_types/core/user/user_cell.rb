@@ -10,11 +10,7 @@ module Cortex
           private
 
           def value
-            if data
-              data['user_id'] || @options[:default_value]
-            else
-              @options[:default_value]
-            end
+            data&.[]('user_id') || @options[:default_value]
           end
 
           def render_select

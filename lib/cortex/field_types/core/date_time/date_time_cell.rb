@@ -11,11 +11,7 @@ module Cortex
           private
 
           def value
-            if data
-              data['timestamp'] || @options[:default_value]
-            else
-              @options[:default_value]
-            end
+            data&.[]('timestamp') || @options[:default_value]
           end
 
           def render_datepicker

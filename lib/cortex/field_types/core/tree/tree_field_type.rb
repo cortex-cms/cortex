@@ -9,11 +9,17 @@ class TreeFieldType < FieldType
   validate :no_more_than_two
 
   def data=(data_hash)
-    @tree = data_hash.deep_symbolize_keys[:tree]
+    if data_hash.nil?
+      @data = {"tree"=>[]}
+      @tree = []
+    else
+      @tree = data_hash.deep_symbolize_keys[:tree]
+    end
   end
 
   def field_item_as_indexed_json_for_field_type(field_item, options = {})
     json = {}
+    field_item.data ||= {"tree" =>[]}
     json[mapping_field_name] = field_item.data['tree'].to_json
     json
   end

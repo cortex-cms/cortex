@@ -15,7 +15,7 @@
         - elsif field.name == "Audience"
           = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.audience_data).(:tree)
         - elsif field.name == "Onet Code"
-          = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.audience_data).(:tree)
+          = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.onet_data).(:tree)
         - elsif field.name == "Persona"
           = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.persona_data).(:tree)
         - elsif field.name == "Verticals"

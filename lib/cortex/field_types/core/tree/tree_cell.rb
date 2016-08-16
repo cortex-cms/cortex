@@ -2,7 +2,7 @@ module Cortex
   module FieldTypes
     module Core
       module Tree
-        class TreeCell < FieldCell
+        class Tree::TreeCell < FieldCell
           property :field
 
           def tree

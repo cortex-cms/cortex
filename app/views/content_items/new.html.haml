@@ -1,3 +1,5 @@
+- require Rails.root.join('lib/cortex/field_types/core/tree/tree_cell.rb') # I know, I know, this is terrible, but it's just until I get autoloading working
+
 = form_for [@content_type, @content_item] do |f|
   = f.hidden_field :author_id, value: current_user.id
   = f.hidden_field :creator_id, value: current_user.id

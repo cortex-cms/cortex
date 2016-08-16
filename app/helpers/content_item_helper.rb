@@ -18,7 +18,7 @@ module ContentItemHelper
     end
 
     permitted_keys = {}
-    field_items_attributes_as_array.each {|hash| hash.keys.each {|key| permitted_keys [key.to_s] = [] } }
+    field_items_attributes_as_array.each {|hash| hash.each_key {|key| permitted_keys [key.to_s] = [] } }
 
     permit_attribute_params(field_items_attributes_as_array, permitted_keys)
   end

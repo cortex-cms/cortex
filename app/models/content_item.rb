@@ -51,7 +51,7 @@ class ContentItem < ActiveRecord::Base
   end
 
   def update_tag_lists
-    tag_data = tag_field_items.map { |field_item| [field_item.field.name, field_item.data["tag_list"] ] }
+    tag_data = tag_field_items.map { |field_item| {tag_name: field_item.field.name, tag_list: field_item.data["tag_list"]} }
 
     tag_data.each do |tags|
       ContentItemService.update_tags(self, tags)

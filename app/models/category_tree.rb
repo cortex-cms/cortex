@@ -9,7 +9,7 @@ class CategoryTree
   end
 
   def self.onet_data
-    Onet::Occupation.first(10).map.with_index do |onet_code, i|
+    Onet::Occupation.industries.map.with_index do |onet_code, i|
       {category: onet_code.title, category_id: i}
     end
   end

@@ -9,7 +9,7 @@
       - if field_item.field.field_type == "boolean_field_type"
         = cell('cortex/field_types/core/boolean/boolean', field_item, form: field_item_form, default_value: false).(:checkbox)
 
-      - if field.field_type == "tree_field_type"
+      - if field_item.field.field_type == "tree_field_type"
         = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index).(:tree)
 
       - if field_item.field.field_type == "date_time_field_type"

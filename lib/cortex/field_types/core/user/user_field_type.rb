@@ -43,12 +43,9 @@ class UserFieldType < FieldType
 
   def valid_user_id?
     return true if id.nil?
-    begin
-      binding.pry
-      User.find(user_id)
-      true
-    rescue ActiveRecord::RecordNotFound
-      errors.add(:user_id, 'id must be for a valid User')
+
+    unless User.exists?(id)
+      errors.add(:user_id, "Must be for a Valid User")
       false
     end
   end

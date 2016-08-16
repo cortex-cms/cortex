@@ -7,4 +7,10 @@
 @import 'jquery-ui/datepicker'; // TODO: Remove once we style Wice with Material Design
 
 @import 'base';
+@import 'helpers';
+
+@import 'components/card';
+@import 'components/form';
+@import 'components/header';
+
 @import 'demo';

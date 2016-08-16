@@ -1,5 +1,4 @@
 = form_for [@content_type, @content_item] do |f|
-  = f.hidden_field :author_id, value: current_user.id
   = f.hidden_field :creator_id, value: current_user.id
   = f.hidden_field :content_type_id, value: @content_type.id
   - @content_item.field_items.each do |field_item|

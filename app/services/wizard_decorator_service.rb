@@ -1,23 +1,6 @@
 class WizardDecoratorService < CortexService
   attribute :content_item, ContentItem
 
-  def parsed
-    steps = steps
-    steps.each do |step|
-
-    end
-  end
-
-  def steps
-    data[:steps]
-  end
-
-  def columns(step)
-  end
-
-  def fields(column)
-  end
-
   def data
     # @content_item.content_type.wizard_decorator.data
     {
@@ -25,6 +8,7 @@ class WizardDecoratorService < CortexService
         {
           "name": "Write",
           "heading": "First thing's first..",
+          "description": "Author your post using Cortex's WYSIWYG editor.",
           "columns": [
             {
               "heading": "Writing Panel Sections's Optional Heading",
@@ -36,7 +20,7 @@ class WizardDecoratorService < CortexService
               },
               "fields": [
                 {
-                  "id": 1,
+                  "id": 43,
                   "label": {
                     "display": {
                       "classes": [
@@ -59,14 +43,15 @@ class WizardDecoratorService < CortexService
         },
         {
           "name": "Details",
-          "heading": "Let's talk about your post.. (optional)",
+          "heading": "Let's talk about your post..",
+          "description": "Provide details and metadata that will enhance search or inform end-users.",
           "columns": [
             {
               "heading": "Publishing (Optional Heading)",
               "grid_width": 6,
               "fields": [
                 {
-                  "id": 2
+                  "id": 44
                 }
               ]
             },
@@ -74,10 +59,10 @@ class WizardDecoratorService < CortexService
               "grid_width": 6,
               "fields": [
                 {
-                  "id": 3
+                  "id": 43
                 },
                 {
-                  "id": 4
+                  "id": 44
                 }
               ]
             }

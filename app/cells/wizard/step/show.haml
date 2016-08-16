@@ -1,5 +1,18 @@
-%h1
-  = name
-%h2
-  = heading
-= columns
+.mdl-grid.mdl-grid--no-spacing
+  .mdl-cell.mdl-cell--3-col.mdl-cell--12-col-tablet.mdl-cell--12-col-phone.mdl-color--grey-100
+    .p-40.p-r-20.p-20--small
+      .mdl-color-text--blue-grey-400
+        %h3
+          %i.material-icons.f-left.m-r-5 mode_edit
+          = name
+        %p
+          = description
+  .mdl-cell.mdl-cell--9-col.mdl-cell--12-col-tablet.mdl-cell--12-col-phone.no-p-l
+    .p-20.card-holder
+      .mdl-card.mdl-shadow--2dp
+        .mdl-card__title
+          %h2.mdl-card__title-text
+            = heading
+        .p-30.p-20--small
+          .mdl-grid
+            = cell('wizard/column', collection: columns).()

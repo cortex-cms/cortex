@@ -1,20 +1,15 @@
 module Wizard
   class StepCell < Cell::ViewModel
+    include ActionView::RecordIdentifier
+    include ActionView::Helpers::FormHelper
+
     property :name
     property :heading
+    property :description
     property :columns
 
     def show
       render
-    end
-
-    private
-
-    def render_columns
-    end
-
-    def render_heading
-      heading
     end
   end
 end

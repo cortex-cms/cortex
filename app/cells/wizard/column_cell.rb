@@ -11,12 +11,8 @@ module Wizard
 
     private
 
-    def render_heading
-      heading
-    end
-
-    def render_container
-      grid_width
+    def grid_class
+      "mdl-cell--#{grid_width}-col"
     end
   end
 end

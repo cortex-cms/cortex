@@ -32,6 +32,5 @@ module Searchable
         }
       end
     end
-
   end
 end

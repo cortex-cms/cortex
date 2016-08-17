@@ -20,7 +20,7 @@ class WizardDecoratorService < CortexService
               },
               "fields": [
                 {
-                  "id": 43,
+                  "id": 159,
                   "label": {
                     "display": {
                       "classes": [
@@ -51,7 +51,7 @@ class WizardDecoratorService < CortexService
               "grid_width": 6,
               "fields": [
                 {
-                  "id": 44
+                  "id": 160
                 }
               ]
             },
@@ -59,10 +59,10 @@ class WizardDecoratorService < CortexService
               "grid_width": 6,
               "fields": [
                 {
-                  "id": 43
+                  "id": 161
                 },
                 {
-                  "id": 44
+                  "id": 162
                 }
               ]
             }

@@ -1,23 +1,8 @@
-= form_for [@content_type, @content_item] do |f|
-  = f.hidden_field :creator_id, value: current_user.id
-  = f.hidden_field :content_type_id, value: @content_type.id
-  - @content_item.field_items.each do |field_item|
-    = f.fields_for 'field_items', field_item do |field_item_form|
-      - if field_item.field.field_type == "text_field_type"
-        = cell('cortex/field_types/core/text/text', field_item, form: field_item_form, default_value: '').(:input)
-
-      - if field_item.field.field_type == "boolean_field_type"
-        = cell('cortex/field_types/core/boolean/boolean', field_item, form: field_item_form, default_value: false).(:checkbox)
-
-      - if field_item.field.field_type == "tree_field_type"
-        = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index).(:tree)
-
-      - if field_item.field.field_type == "date_time_field_type"
-        = cell('cortex/field_types/core/date_time/date_time', field_item, form: field_item_form, default_value: '').(:datepicker)
-
-      - if field_item.field.field_type == "tag_field_type"
-        = cell('cortex/field_types/core/tag/tag', field_item, form: field_item_form, default_value: []).(:tag_picker)
-
-      - if field_item.field.field_type == "user_field_type"
-        = cell('cortex/field_types/core/user/user', field_item, form: field_item_form, default_value: User.all.first.id, user_data: User.all).(:dropdown)
-  = f.submit "Submit"
+%section
+  .mdl-color--grey.header.relative.clear
+    .p-20
+      %h3.mdl-color-text--white.m-t-20.m-b-5
+        = "#{@content_type.name} Creation"
+      %h4.mdl-color-text--white.m-b-20.no-m-t.w100
+        = @content_type.description
+  = render "form"

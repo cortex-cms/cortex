@@ -5,7 +5,6 @@ module ContentItemHelper
 
   def content_item_params
     params.require(:content_item).permit(
-      :author_id,
       :creator_id,
       :content_type_id,
       field_items_attributes: field_items_attributes_params

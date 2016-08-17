@@ -12,6 +12,7 @@ class ContentItemsController < AdminController
     content_type.fields.each do |field|
       @content_item.field_items << FieldItem.new(field: field)
     end
+    @wizard = WizardDecoratorService.new(content_item: @content_item)
 
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
     add_breadcrumb 'New'

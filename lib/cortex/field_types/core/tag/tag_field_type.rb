@@ -13,7 +13,8 @@ class TagFieldType < FieldType
   end
 
   def data=(data_hash)
-    @tag_list = data_hash.deep_symbolize_keys[:tag_list].split(",")
+    @tag_list = data_hash.deep_symbolize_keys[:tag_list]
+    @tag_list.nil? ? nil : (@tag_list = @tag_list.split(","))
   end
 
   def metadata=(metadata_hash)

@@ -21,7 +21,11 @@ class BooleanFieldType < FieldType
   end
 
   def mapping
-    { name: mapping_field_name, type: :boolean }
+    { name: mapping_field_name, type: :string, analyzer: :snowball }
+  end
+
+  def acceptable_validations?
+    true
   end
 
   private

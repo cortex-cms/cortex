@@ -20,7 +20,25 @@ class WizardDecoratorService < CortexService
               },
               "fields": [
                 {
-                  "id": 159,
+                  "id": @content_item.field_items[0].field_id,
+                  "label": {
+                    "display": {
+                      "classes": [
+                        "bold",
+                        "upcase"
+                      ]
+                    }
+                  },
+                  "input": {
+                    "display": {
+                      "classes": [
+                        "red"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": @content_item.field_items[1].field_id,
                   "label": {
                     "display": {
                       "classes": [
@@ -51,7 +69,13 @@ class WizardDecoratorService < CortexService
               "grid_width": 6,
               "fields": [
                 {
-                  "id": 160
+                  "id": @content_item.field_items[6].field_id
+                },
+                {
+                  "id": @content_item.field_items[7].field_id
+                },
+                {
+                  "id": @content_item.field_items[5].field_id
                 }
               ]
             },
@@ -59,10 +83,58 @@ class WizardDecoratorService < CortexService
               "grid_width": 6,
               "fields": [
                 {
-                  "id": 161
+                  "id": @content_item.field_items[2].field_id
                 },
                 {
-                  "id": 162
+                  "id": @content_item.field_items[3].field_id
+                },
+                {
+                  "id": @content_item.field_items[4].field_id
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Search",
+          "heading": "How can others find your post..",
+          "description": "Provide SEO metadata to help your post get found by your Users!",
+          "columns": [
+            {
+              "heading": "Publishing (Optional Heading)",
+              "grid_width": 6,
+              "fields": [
+                {
+                  "id": @content_item.field_items[8].field_id
+                },
+                {
+                  "id": @content_item.field_items[10].field_id
+                },
+                {
+                  "id": @content_item.field_items[9].field_id
+                }
+              ]
+            },
+            {
+              "grid_width": 6,
+              "fields": [
+                {
+                  "id": @content_item.field_items[11].field_id
+                },
+                {
+                  "id": @content_item.field_items[12].field_id
+                },
+                {
+                  "id": @content_item.field_items[13].field_id
+                },
+                {
+                  "id": @content_item.field_items[14].field_id
+                },
+                {
+                  "id": @content_item.field_items[15].field_id
+                },
+                {
+                  "id": @content_item.field_items[16].field_id
                 }
               ]
             }

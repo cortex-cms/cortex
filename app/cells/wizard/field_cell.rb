@@ -10,6 +10,12 @@ module Wizard
 
     private
 
+    def field_item
+      context[:content_item].field_items.find do |field_item|
+        field_item.field_id = id
+      end
+    end
+
     def field
       ::Field.find_by_id(id)
     end

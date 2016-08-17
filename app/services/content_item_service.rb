@@ -12,7 +12,7 @@ class ContentItemService < CortexService
   end
 
   def update
-    @content_item = content_items.find_by_id(id)
+    @content_item = ContentItem.find(id)
 
     transact_and_refresh do
       @content_item.update(content_item_attributes)

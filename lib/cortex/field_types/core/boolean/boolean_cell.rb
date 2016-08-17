@@ -13,8 +13,16 @@ module Cortex
 
           private
 
+          def value
+            if data
+              data['value'] == 'true' ? true : false
+            else
+              false
+            end
+          end
+
           def render_checkbox
-            @options[:form].check_box 'data[value]', value: @options[:default_value]
+            @options[:form].check_box 'data[value]', { checked: value }, 'true', 'false'
           end
 
           def render_switch

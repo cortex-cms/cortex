@@ -1,8 +1,10 @@
 class BooleanFieldType < FieldType
   attr_accessor :data, :value, :field_name
-  attr_reader :metadata
+  attr_reader :validations, :metadata
 
-  validate :value_is_allowed?
+  def validations=(validations_hash)
+    @validations = {}
+  end
 
   def data=(data_hash)
     @value = data_hash.deep_symbolize_keys[:value]
@@ -19,21 +21,16 @@ class BooleanFieldType < FieldType
   end
 
   def mapping
-    { name: mapping_field_name, type: :boolean }
+    { name: mapping_field_name, type: :string, analyzer: :snowball }
+  end
+
+  def acceptable_validations?
+    true
   end
 
   private
 
   def mapping_field_name
     "#{field_name.parameterize('_')}_boolean"
-  end
-
-  def value_is_allowed?
-    if [true, false].include?(value)
-      true
-    else
-      errors.add(:value, "must be True or False")
-      false
-    end
   end
 end

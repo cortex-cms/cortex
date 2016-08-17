@@ -19,6 +19,17 @@ class ContentItemService < CortexService
     end
   end
 
+  # This method will set the tag list (whatever it may be named) to the array of tag_data
+  def self.update_tags(content_item, tag_data)
+    # First we get the name of the list, as determined by the field with '=' at the end
+    # ex: seo_keyword_list=
+    tag_list_name = "#{tag_data[:tag_name].singularize.parameterize('_')}_list="
+    tag_array = tag_data[:tag_list]
+
+    # We then execute the tag_list_name= as a method using #send, which sets it to the tag_array values
+    content_item.send(tag_list_name, tag_array)
+  end
+
   private
 
   def transact_and_refresh

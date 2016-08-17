@@ -14,11 +14,7 @@ module Cortex
           private
 
           def value
-            if data
-              data['text'] || @options[:default_value]
-            else
-              @options[:default_value]
-            end
+            data&.[]('text') || @options[:default_value]
           end
 
           def render_input

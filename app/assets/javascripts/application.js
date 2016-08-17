@@ -6,7 +6,9 @@
 //= require material
 //= require wice_grid
 //= require jquery-ui/datepicker
+//= require bootstrap-tagsinput
 
 //= require base
+//= require forms
 
 //= require turbolinks

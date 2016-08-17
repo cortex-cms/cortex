@@ -36,6 +36,24 @@ class WizardDecoratorService < CortexService
                       ]
                     }
                   }
+                },
+                {
+                  "id": 160,
+                  "label": {
+                    "display": {
+                      "classes": [
+                        "bold",
+                        "upcase"
+                      ]
+                    }
+                  },
+                  "input": {
+                    "display": {
+                      "classes": [
+                        "red"
+                      ]
+                    }
+                  }
                 }
               ]
             }
@@ -51,7 +69,13 @@ class WizardDecoratorService < CortexService
               "grid_width": 6,
               "fields": [
                 {
-                  "id": 160
+                  "id": 165
+                },
+                {
+                  "id": 166
+                },
+                {
+                  "id": 164
                 }
               ]
             },
@@ -63,6 +87,54 @@ class WizardDecoratorService < CortexService
                 },
                 {
                   "id": 162
+                },
+                {
+                  "id": 163
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Search",
+          "heading": "How can others find your post..",
+          "description": "Provide SEO metadata to help your post get found by your Users!",
+          "columns": [
+            {
+              "heading": "Publishing (Optional Heading)",
+              "grid_width": 6,
+              "fields": [
+                {
+                  "id": 167
+                },
+                {
+                  "id": 169
+                },
+                {
+                  "id": 168
+                }
+              ]
+            },
+            {
+              "grid_width": 6,
+              "fields": [
+                {
+                  "id": 170
+                },
+                {
+                  "id": 171
+                },
+                {
+                  "id": 172
+                },
+                {
+                  "id": 173
+                },
+                {
+                  "id": 174
+                },
+                {
+                  "id": 175
                 }
               ]
             }

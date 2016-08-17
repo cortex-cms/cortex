@@ -13,8 +13,12 @@ module Cortex
 
           private
 
+          def value
+            data&.[]('value') || @options[:default_value]
+          end
+
           def render_checkbox
-            @options[:form].check_box 'data[value]', value: @options[:default_value]
+            @options[:form].check_box 'data[value]', { checked: value }, checked_value: true, unchecked_value: false
           end
 
           def render_switch

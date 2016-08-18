@@ -5,12 +5,16 @@ class ContentType < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   acts_as_paranoid
-  validates :name, :creator, presence: true
+  validates :name, :creator, :contract_id, presence: true
   after_save :rebuild_content_items_index
 
   belongs_to :creator, class_name: "User"
+  belongs_to :contract
+
   has_many :fields, -> { order(order: :asc) }
   has_many :content_items
+  has_many :contentable_decorators, as: :contentable
+  has_many :decorators, through: :contentable_decorators
 
   accepts_nested_attributes_for :fields
 
@@ -20,7 +24,8 @@ class ContentType < ActiveRecord::Base
   end
 
   def content_items_index_name
-    "#{Rails.env}_content_type_#{name.underscore}_content_items"
+    content_type_name_sanitized = name.parameterize('_')
+    "#{Rails.env}_content_type_#{content_type_name_sanitized}_content_items"
   end
 
   def content_items_mappings

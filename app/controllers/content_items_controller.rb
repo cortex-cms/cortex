@@ -9,6 +9,10 @@ class ContentItemsController < AdminController
 
   def new
     @content_item = content_type.content_items.new
+    content_type.fields.each do |field|
+      @content_item.field_items << FieldItem.new(field: field)
+    end
+    @wizard = WizardDecoratorService.new(content_item: @content_item)
 
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
     add_breadcrumb 'New'
@@ -16,6 +20,7 @@ class ContentItemsController < AdminController
 
   def edit
     @content_item = content_type.content_items.find_by_id(params[:id])
+    @wizard = WizardDecoratorService.new(content_item: @content_item)
 
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
     add_breadcrumb "Edit #{@content_item.id}"

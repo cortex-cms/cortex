@@ -31,7 +31,15 @@ module Searchable
           range: { field => { type => q } }
         }
       end
-    end
 
+      def published_filter
+        # Bring in documents based on Draft status, Published date met, or either: Expired date not yet met, or Expired date null
+        [
+          {bool: {should: [term_search(:draft, false)]}},
+          {bool: {should: [range_search(:published_at, :lte, DateTime.now.to_s)]}},
+          {bool: {should: [range_search(:expired_at, :gte, DateTime.now.to_s), {missing: { field: :expired_at }}]}}
+        ]
+      end
+    end
   end
 end

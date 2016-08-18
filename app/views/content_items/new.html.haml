@@ -1,27 +1,9 @@
-- require Rails.root.join('lib/cortex/field_types/core/tree/tree_cell.rb') # I know, I know, this is terrible, but it's just until I get autoloading working
 
-= form_for [@content_type, @content_item] do |f|
-  = f.hidden_field :author_id, value: current_user.id
-  = f.hidden_field :creator_id, value: current_user.id
-  = f.hidden_field :content_type_id, value: @content_type.id
-
-  - @content_type.fields.each_with_index do |field, index|
-    = f.fields_for 'field_items', field do |field_item_form|
-      - if field.field_type == "text_field_type"
-        = cell('cortex/field_types/core/text/text', FieldItem.new(field: field), form: field_item_form, default_value: '').(:input)
-      - if field.field_type == "boolean_field_type"
-        = cell('cortex/field_types/core/boolean/boolean', FieldItem.new(field: field), form: field_item_form, default_value: false).(:checkbox)
-      - if field.field_type == "tree_field_type"
-        - if field.name == "Categories"
-          = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.category_data).(:tree)
-        - elsif field.name == "Audience"
-          = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.audience_data).(:tree)
-        - elsif field.name == "Onet Code"
-          = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.onet_data).(:tree)
-        - elsif field.name == "Persona"
-          = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.persona_data).(:tree)
-        - elsif field.name == "Verticals"
-          = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.vertical_data).(:tree)
-        - elsif field.name == "Research"
-          = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index, tree: CategoryTree.research_data).(:tree)
-  = f.submit "Submit"
+%section
+  .mdl-color--grey.header.relative.clear
+    .p-20
+      %h3.mdl-color-text--white.m-t-20.m-b-5
+        = "#{@content_type.name} Creation"
+      %h4.mdl-color-text--white.m-b-20.no-m-t.w100
+        = @content_type.description
+  = render "form"

@@ -81,7 +81,6 @@ ActiveRecord::Schema.define(version: 20160809222541) do
     t.string   "publish_state"
     t.datetime "published_at"
     t.datetime "expired_at"
-    t.integer  "author_id"
     t.integer  "creator_id"
     t.integer  "content_type_id"
     t.datetime "created_at",                      null: false
@@ -100,10 +99,36 @@ ActiveRecord::Schema.define(version: 20160809222541) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.datetime "deleted_at"
+    t.boolean  "taggable_with_tags?",     default: false
+    t.boolean  "taggable_with_keywords?", default: false
+    t.jsonb    "tag_data"
+    t.boolean  "is_published"
+    t.integer  "contract_id"
   end
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
   add_index "content_types", ["deleted_at"], name: "index_content_types_on_deleted_at", using: :btree
+
+  create_table "contentable_decorators", force: :cascade do |t|
+    t.integer  "decorator_id"
+    t.integer  "contentable_id"
+    t.string   "contentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "decorators", force: :cascade do |t|
+    t.string   "name"
+    t.jsonb    "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "documents", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -119,10 +144,10 @@ ActiveRecord::Schema.define(version: 20160809222541) do
   create_table "field_items", force: :cascade do |t|
     t.integer  "field_id"
     t.integer  "content_item_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
-    t.jsonb    "data"
+    t.jsonb    "data",            default: {}
   end
 
   add_index "field_items", ["deleted_at"], name: "index_field_items_on_deleted_at", using: :btree
@@ -282,13 +307,13 @@ ActiveRecord::Schema.define(version: 20160809222541) do
     t.string   "seo_description",     limit: 255
     t.string   "seo_preview",         limit: 255
     t.string   "custom_author",       limit: 255
-    t.string   "slug",                limit: 255,                  null: false
+    t.string   "slug",                                             null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "type",                limit: 255, default: "Post", null: false
+    t.string   "type",                            default: "Post", null: false
     t.integer  "author_id"
     t.boolean  "is_wysiwyg",                      default: true
     t.boolean  "noindex",                         default: false
@@ -348,6 +373,7 @@ ActiveRecord::Schema.define(version: 20160809222541) do
   create_table "tags", force: :cascade do |t|
     t.string  "name",           limit: 255
     t.integer "taggings_count",             default: 0
+    t.integer "tenant_id",                  default: 1
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree

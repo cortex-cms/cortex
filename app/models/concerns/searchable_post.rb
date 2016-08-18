@@ -15,6 +15,7 @@ module SearchablePost
       indexes :author, :analyzer => :keyword
       indexes :created_at, :type => :date, :include_in_all => false
       indexes :published_at, :type => :date, :include_in_all => false
+      indexes :expired_at, :type => :date, :include_in_all => false
       indexes :tag_list, :type => :string, :analyzer => :keyword
       indexes :categories, :analyzer => :keyword
       indexes :job_phase, :analyzer => :keyword
@@ -25,7 +26,7 @@ module SearchablePost
 
     def as_indexed_json(options = {})
       json = as_json(only: [:id, :title, :body, :draft, :short_description, :copyright_owner,
-                            :created_at, :published_at, :job_phase, :type])
+                            :created_at, :published_at, :expired_at, :job_phase, :type])
       json[:categories] = categories.collect { |c| c.name }
       json[:industries] = industries.collect { |i| i.soc }
       json[:tags] = tag_list.to_a
@@ -39,7 +40,7 @@ module SearchablePost
       bool = {bool: {should: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
       if published
-        published_filter(self, bool[:bool][:filter])
+        bool[:bool][:filter] << ::Post.published_filter
       end
 
       mlt = [{
@@ -62,7 +63,7 @@ module SearchablePost
     end
   end
 
-  module ClassMethods
+  class_methods do
     def search_with_params(params, tenant, published = nil)
       q = params[:q]
       categories = params[:categories]
@@ -77,41 +78,35 @@ module SearchablePost
         bool[:bool][:must] << {multi_match: {fields: %w(title^2 _all), query: query_massage(q)}}
       end
       if categories
-        bool[:bool][:filter] << self.terms_search(:categories, categories.split(','))
+        bool[:bool][:filter] << terms_search(:categories, categories.split(','))
       end
       if job_phase
-        bool[:bool][:filter] << self.terms_search(:job_phase, job_phase.split(','))
+        bool[:bool][:filter] << terms_search(:job_phase, job_phase.split(','))
       end
       if post_type
-        bool[:bool][:filter] << self.terms_search(:type, post_type.split(','))
+        bool[:bool][:filter] << terms_search(:type, post_type.split(','))
       end
       if industries
-        bool[:bool][:filter] << self.terms_search(:industries, industries.split(','))
+        bool[:bool][:filter] << terms_search(:industries, industries.split(','))
       end
       if author
-        bool[:bool][:filter] << self.term_search(:author, author)
+        bool[:bool][:filter] << term_search(:author, author)
       end
       if published
-        published_filter(self, bool[:bool][:filter])
+        bool[:bool][:filter] << published_filter
       end
 
-      self.search query: bool
+      search query: bool
     end
 
     def show_all(tenant, published = nil)
       bool = {bool: {filter: [{term: {tenant_id: tenant.id}}]}}
 
       if published
-        published_filter(self, bool[:bool][:filter])
+        bool[:bool][:filter] << published_filter
       end
 
       search query: bool, sort: [{created_at: {order: 'desc'}}]
     end
-  end
-
-  def self.published_filter(model, filter)
-    filter << model.range_search(:published_at, :lte, DateTime.now.to_s)
-    filter << model.range_search(:expired_at, :gte, DateTime.now.to_s)
-    filter << model.term_search(:draft, false)
   end
 end

@@ -1,3 +1,5 @@
+
+require 'cortex/field_types/core/*'
 require 'cortex/field_types/core/text/text_field_type'
 require 'cortex/field_types/core/text/text_cell'
 

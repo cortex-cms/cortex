@@ -41,7 +41,7 @@ class TreeFieldType < FieldType
   def no_more_than_two
     tree ||= []
     if tree.count > 2
-      errors.add(:expiration_date, "can't have more than two")
+      errors.add(:tree, "can't have more than two")
     end
   end
 end

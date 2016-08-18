@@ -19,21 +19,21 @@ ActiveRecord::Schema.define(version: 20160809222541) do
   enable_extension "uuid-ossp"
 
   create_table "applications", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "write",      default: false
+    t.boolean  "write",                  default: false
     t.integer  "tenant_id"
   end
 
   add_index "applications", ["tenant_id"], name: "index_applications_on_tenant_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
-    t.string  "firstname"
-    t.string  "lastname"
-    t.string  "email"
+    t.string  "firstname", limit: 255
+    t.string  "lastname",  limit: 255
+    t.string  "email",     limit: 255
     t.hstore  "sites"
-    t.string  "title"
+    t.string  "title",     limit: 255
     t.text    "bio"
     t.integer "user_id"
   end
@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 20160809222541) do
   add_index "fields", ["deleted_at"], name: "index_fields_on_deleted_at", using: :btree
 
   create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "name",            null: false
+    t.string   "name",            limit: 255, null: false
     t.integer  "localization_id"
     t.integer  "user_id"
     t.datetime "created_at"

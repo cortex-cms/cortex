@@ -26,8 +26,7 @@ namespace :employer_blog do
 
     blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', order_position: 8, validations: {})
 
-    # TODO: Add metadata to Categories following completion of Tree Story
-    # blog.fields.new(name: 'Categories', field_type: 'tree_field_type', order_position: 9, validations: { presence: true }, metadata: {})
+    blog.fields.new(name: 'Categories', field_type: 'tree_field_type', order_position: 5, validations: {}).save
 
     blog.fields.new(name: 'SEO Title', field_type: 'text_field_type', order_position: 10, validations: { presence: true })
 

@@ -2,9 +2,7 @@ module Cortex
   module FieldTypes
     module Core
       module Tree
-        class Tree::TreeCell < FieldCell
-          property :field
-
+        class TreeCell < FieldCell
           def tree
             render
           end

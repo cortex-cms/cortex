@@ -46,6 +46,7 @@ staging:
 
 production:
   <<: *default
+  after_rails:
     - source: /.cloud66/scripts/rebuild_indexes.sh
       destination: /tmp/rebuild_indexes.sh
       target: rails

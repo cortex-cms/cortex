@@ -1,16 +1,16 @@
+Bundler.require(:default, Rails.env)
+
 namespace :cortex do
   namespace :custom_content_core do
     namespace :db do
+      desc 'Seeds Cortex with Core Custom Content Seed Data'
       task reseed: :environment do
-        desc 'Sets up Metacortex with Seed Data'
-
         Rake::Task['cortex:custom_content_core:db:clear'].execute
         Rake::Task['employer:blog:seed'].execute
       end
 
+      desc 'Clear Existing Custom Content Data From DB'
       task clear: :environment do
-        desc 'Clear Custom Content From DB'
-
         puts "Clearing ContentTypes..."
         ContentType.destroy_all
         puts "Clearing Fields..."

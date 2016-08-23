@@ -1,8 +1,9 @@
+Bundler.require(:default, Rails.env)
+
 namespace :employer do
   namespace :blog do
+    desc 'Seed Employer Blog ContentType and Fields'
     task seed: :environment do
-      desc 'Seed Employer Blog ContentType and Fields'
-
       puts "Creating EmployerBlog ContentType..."
       blog = ContentType.new({
         name: "EmployerBlog",

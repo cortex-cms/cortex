@@ -52,5 +52,154 @@ namespace :employer_blog do
     blog.fields.new(name: 'No Image Index', field_type: 'boolean_field_type', order_position: 18)
 
     blog.save
+
+    wizard_hash = {
+      "steps": [
+        {
+          "name": "Write",
+          "heading": "First thing's first..",
+          "description": "Author your post using Cortex's WYSIWYG editor.",
+          "columns": [
+            {
+              "heading": "Writing Panel Sections's Optional Heading",
+              "grid_width": 12,
+              "display": {
+                "classes": [
+                  "text--right"
+                ]
+              },
+              "fields": [
+                {
+                  "id": blog.fields[0].id,
+                  "label": {
+                    "display": {
+                      "classes": [
+                        "bold",
+                        "upcase"
+                      ]
+                    }
+                  },
+                  "input": {
+                    "display": {
+                      "classes": [
+                        "red"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": blog.fields[1].id,
+                  "label": {
+                    "display": {
+                      "classes": [
+                        "bold",
+                        "upcase"
+                      ]
+                    }
+                  },
+                  "input": {
+                    "display": {
+                      "classes": [
+                        "red"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Details",
+          "heading": "Let's talk about your post..",
+          "description": "Provide details and metadata that will enhance search or inform end-users.",
+          "columns": [
+            {
+              "heading": "Publishing (Optional Heading)",
+              "grid_width": 6,
+              "fields": [
+                {
+                  "id": blog.fields[6].id
+                },
+                {
+                  "id": blog.fields[7].id
+                },
+                {
+                  "id": blog.fields[5].id
+                }
+              ]
+            },
+            {
+              "grid_width": 6,
+              "fields": [
+                {
+                  "id": blog.fields[2].id
+                },
+                {
+                  "id": blog.fields[3].id
+                },
+                {
+                  "id": blog.fields[4].id
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Search",
+          "heading": "How can others find your post..",
+          "description": "Provide SEO metadata to help your post get found by your Users!",
+          "columns": [
+            {
+              "heading": "Publishing (Optional Heading)",
+              "grid_width": 6,
+              "fields": [
+                {
+                  "id": blog.fields[8].id
+                },
+                {
+                  "id": blog.fields[10].id
+                },
+                {
+                  "id": blog.fields[9].id
+                }
+              ]
+            },
+            {
+              "grid_width": 6,
+              "fields": [
+                {
+                  "id": blog.fields[11].id
+                },
+                {
+                  "id": blog.fields[12].id
+                },
+                {
+                  "id": blog.fields[13].id
+                },
+                {
+                  "id": blog.fields[14].id
+                },
+                {
+                  "id": blog.fields[15].id
+                },
+                {
+                  "id": blog.fields[16].id
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+    blog_wizard_decorator = Decorator.new(name: "Wizard", data: wizard_hash)
+    blog_wizard_decorator.save
+
+    ContentableDecorator.create({
+      decorator_id: blog_wizard_decorator.id,
+      contentable_id: blog.id,
+      contentable_type: 'ContentType'
+    })
   end
 end

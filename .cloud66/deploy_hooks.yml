@@ -7,8 +7,11 @@ default: &default
       sudo: true
       target: any
       execute: true
+
+development:
+  <<: *default
   after_rails:
-    - source: /.cloud66/scripts/rake_task.sh
+    - source: /.cloud66/scripts/rake_tasks.sh
       destination: /tmp/rake_task.sh
       target: rails
       execute: true
@@ -16,11 +19,24 @@ default: &default
       apply_during: all
       sudo: false
 
-development:
-  <<: *default
-
 staging:
   <<: *default
+  after_rails:
+    - source: /.cloud66/scripts/rake_tasks.sh
+      destination: /tmp/rake_task.sh
+      target: rails
+      execute: true
+      run_on: single_server
+      apply_during: all
+      sudo: false
 
 production:
   <<: *default
+  after_rails:
+    - source: /.cloud66/scripts/prod_tasks.sh
+      destination: /tmp/rake_task.sh
+      target: rails
+      execute: true
+      run_on: single_server
+      apply_during: all
+      sudo: false

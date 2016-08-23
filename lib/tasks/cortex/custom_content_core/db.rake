@@ -5,7 +5,7 @@ namespace :cortex do
         desc 'Sets up Metacortex with Seed Data'
 
         Rake::Task['cortex:custom_content_core:db:clear'].execute
-        Rake::Task['cortex:employer:blog:seed'].execute
+        Rake::Task['employer:blog:seed'].execute
       end
 
       task clear: :environment do

@@ -27,11 +27,6 @@ namespace :employer_blog do
     blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', order_position: 8, validations: {})
 
     blog.fields.new(name: 'Categories', field_type: 'tree_field_type', order_position: 5, validations: {}).save
-    blog.fields.new(name: 'Audience', field_type: 'tree_field_type', order_position: 6, validations: {}).save
-    blog.fields.new(name: 'Onet Code', field_type: 'tree_field_type', order_position: 7, validations: {}).save
-    blog.fields.new(name: 'Persona', field_type: 'tree_field_type', order_position: 8, validations: {}).save
-    blog.fields.new(name: 'Verticals', field_type: 'tree_field_type', order_position: 9, validations: {}).save
-    blog.fields.new(name: 'Research', field_type: 'tree_field_type', order_position: 10, validations: {}).save
 
     blog.fields.new(name: 'SEO Title', field_type: 'text_field_type', order_position: 10, validations: { presence: true })
 

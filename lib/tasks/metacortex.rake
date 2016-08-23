@@ -3,8 +3,10 @@ namespace :metacortex do
     task setup: :environment do
       desc 'Sets up Metacortex with Seed Data'
 
-      system( 'rake metacortex:db:clear' )
-      system( 'rake metacortex:employer_blog:seed' )
+      unless Rails.env.production?
+        system( 'rake metacortex:db:clear' )
+        system( 'rake metacortex:employer_blog:seed' )
+      end
     end
 
     task clear: :environment do

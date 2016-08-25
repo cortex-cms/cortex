@@ -222,7 +222,7 @@ namespace :employer do
             "cells": [
               {
                 "field": {
-                  "id": "274"
+                  "id": blog.fields[0].id
                 },
                 "display": {
                   "classes": [
@@ -233,7 +233,7 @@ namespace :employer do
               },
               {
                 "field": {
-                  "id": "277"
+                  "id": blog.fields[3].id
                 }
               },
               {
@@ -248,7 +248,7 @@ namespace :employer do
             "cells": [
               {
                 "field": {
-                  "id": "279"
+                  "id": blog.fields[5].id
                 },
                 "display": {
                   "classes": [

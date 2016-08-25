@@ -6,6 +6,7 @@ namespace :cortex do
       desc 'Seeds Cortex with Core Custom Content Seed Data'
       task reseed: :environment do
         Rake::Task['cortex:custom_content_core:db:clear'].execute
+        Rake::Task['cortex:custom_content_core:media:seed'].execute
         Rake::Task['employer:blog:seed'].execute
       end
 

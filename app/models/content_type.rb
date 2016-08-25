@@ -32,6 +32,10 @@ class ContentType < ActiveRecord::Base
     decorators.find_by_name("Wizard")
   end
 
+  def index_decorator
+    decorators.find_by_name("Index")
+  end
+
   def content_items_mappings
     mappings = Elasticsearch::Model::Indexing::Mappings.new(content_items_index_name, {})
 

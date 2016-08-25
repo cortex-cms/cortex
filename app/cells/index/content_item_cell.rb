@@ -17,7 +17,7 @@ module Index
       link_to "Edit #{content_item.id}", edit_content_type_content_item_path(content_type.id, content_item.id)
     end
 
-    def render_column(field, display)
+    def render_column(field)
       if field.has_key?(:id)
         @options[:content_item].field_items.find { |fi| fi.field_id == field[:id].to_i }.data.values[0]
       elsif field.has_key?(:method)
@@ -25,6 +25,10 @@ module Index
       else
         ""
       end
+    end
+
+    def display_classes(display)
+      display[:classes].join(" ") unless display.nil?
     end
   end
 end

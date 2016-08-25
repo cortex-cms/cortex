@@ -20,6 +20,14 @@ class ContentItem < ActiveRecord::Base
     taggable_on_array = Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.parameterize('_') }
   end
 
+  def author_image
+    "<img src='https://robohash.org/#{rand(1000..10000)}.png' height='100' width='100'/>".html_safe
+  end
+
+  def publish_state
+    "Published"
+  end
+
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.
   # Due to lack of hoisting - it cannot access the method unless the method appears before it in this
   # file.

@@ -1,0 +1,7 @@
+%thead
+  %tr
+    - @options[:data][:columns].each do |column|
+      %th{ class: 'mdl-data-table__cell--non-numeric' }
+        = render_table_header(column)
+    %th{ class: 'mdl-data-table__cell--non-numeric' }
+      Edit

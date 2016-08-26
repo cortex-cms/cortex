@@ -205,7 +205,7 @@ namespace :employer do
       "columns":
         [
           {
-            "name": "Title",
+            "name": "Author",
             "cells": [{
               "field": {
                 "method": "author_image"

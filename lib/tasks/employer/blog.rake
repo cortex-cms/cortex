@@ -199,6 +199,77 @@ namespace :employer do
         contentable_id: blog.id,
         contentable_type: 'ContentType'
       })
+
+      puts "Creating Index Decorators..."
+      index_hash = {
+      "columns":
+        [
+          {
+            "name": "Title",
+            "cells": [{
+              "field": {
+                "method": "author_image"
+              },
+              "display": {
+                "classes": [
+                  "circular"
+                ]
+              }
+            }]
+          },
+          {
+            "name": "Post Details",
+            "cells": [
+              {
+                "field": {
+                  "id": blog.fields[0].id
+                },
+                "display": {
+                  "classes": [
+                    "bold",
+                    "upcase"
+                  ]
+                }
+              },
+              {
+                "field": {
+                  "id": blog.fields[3].id
+                }
+              },
+              {
+                "field": {
+                  "method": "publish_state"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Tags",
+            "cells": [
+              {
+                "field": {
+                  "id": blog.fields[5].id
+                },
+                "display": {
+                  "classes": [
+                    "tag",
+                    "rounded"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+
+      blog_index_decorator = Decorator.new(name: "Index", data: index_hash)
+      blog_index_decorator.save
+
+      ContentableDecorator.create({
+        decorator_id: blog_index_decorator.id,
+        contentable_id: blog.id,
+        contentable_type: 'ContentType'
+      })
     end
   end
 end

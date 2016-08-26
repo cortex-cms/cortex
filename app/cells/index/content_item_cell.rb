@@ -17,7 +17,7 @@ module Index
       link_to "<i class='material-icons'>create</i>".html_safe, edit_content_type_content_item_path(content_type.id, content_item.id), class: 'mdl-button mdl-js-button mdl-button--icon'
     end
 
-    def render_column(field)
+    def render_table_data(field)
       if field.has_key?(:id)
         @options[:content_item].field_items.find { |fi| fi.field_id == field[:id].to_i }.data.values[0]
       elsif field.has_key?(:method)

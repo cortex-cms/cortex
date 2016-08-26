@@ -1,4 +1,4 @@
 - @options[:cells].each do |field_cell|
   %span{ class: display_classes(field_cell[:display]) }
-    = render_column(field_cell[:field])
+    = render_table_data(field_cell[:field])
     %br

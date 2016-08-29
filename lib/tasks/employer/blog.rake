@@ -16,7 +16,7 @@ namespace :employer do
       puts "Creating Fields..."
       blog.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 1, validations: { presence: true })
 
-      blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 2, validations: { presence: true })
+      blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 2, validations: { presence: true }, metadata: { wysiwyg: true, parse_widgets: true })
 
       blog.fields.new(name: 'Description', field_type: 'text_field_type', order_position: 3, validations: { presence: true })
 
@@ -97,9 +97,7 @@ namespace :employer do
                     },
                     "input": {
                       "display": {
-                        "classes": [
-                          "red"
-                        ]
+                        "height": "800px"
                       }
                     }
                   }

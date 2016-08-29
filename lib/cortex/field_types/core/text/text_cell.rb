@@ -32,7 +32,7 @@ module Cortex
           end
 
           def render_multiline_input
-            raise 'not implemented'
+            @options[:form].text_area_tag 'data[text]', value: value # , cols: @options[:cols], rows: @options[:rows]
           end
         end
       end

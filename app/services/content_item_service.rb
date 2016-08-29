@@ -1,4 +1,6 @@
 class ContentItemService < CortexService
+  include WidgetParsersHelper
+
   attribute :id, Integer
   attribute :content_item_params, Object
   attribute :current_user, User
@@ -14,7 +16,6 @@ class ContentItemService < CortexService
       end
       content_item_params["content_item"].delete("field_items_attributes")
       @content_item.attributes = content_item_params["content_item"].to_hash
-      @content_item.save
     end
   end
 
@@ -42,7 +43,17 @@ class ContentItemService < CortexService
   def transact_and_refresh
     ActiveRecord::Base.transaction do
       yield
+      parse_field_items!
+      @content_item.save
       update_search
+    end
+  end
+
+  def parse_field_items!
+    @content_item.field_items.each do |field_item|
+      if field_item.field.metadata && field_item.field.metadata['parse_widgets']
+        parse_widgets!(field_item)
+      end
     end
   end
 

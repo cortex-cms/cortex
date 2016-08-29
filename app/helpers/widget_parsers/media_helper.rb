@@ -1,42 +1,33 @@
 module WidgetParsers
   module MediaHelper
     def self.parse(body)
-      @body = body
+      body_document = document_for(body)
 
-      widgets.each do |widget|
-        widget.content = render_widget_content widget
+      widget_nodes_for(body_document).each do |widget_node|
+        widget_node.content = render_widget_content widget_node
       end
 
-      widgets.to_html
+      body_document.to_html
     end
 
-    def self.body_html
-      Nokogiri::HTML::DocumentFragment.parse @body
+    def self.document_for(html)
+      Nokogiri::HTML::DocumentFragment.parse html
     end
 
-    def self.widgets
-      body_html.css 'media'
+    def self.widget_nodes_for(document)
+      document.css 'media'
     end
 
     def self.render_widget_content(widget)
-      id = widget['id']
-      scale = widget['scale']
-      width = widget['width']
-      height = widget['height']
-
       Nokogiri::HTML::Builder.new do |doc|
-        if scale
-          doc.img(
-            src: Media.find_by_id(id).url,
-            scale: scale
-          )
+        element = {src: Media.find_by_id(widget['id']).url}
+        if widget['scale']
+          element.merge!({scale: widget['scale']})
         else
-          doc.img(
-            src: Media.find_by_id(id).url,
-            width: width,
-            height: height
-          )
+          element.merge!({width: widget['width'], height: widget['height']})
         end
+
+        doc.img(element)
       end.doc.root
     end
   end

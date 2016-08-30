@@ -16,7 +16,7 @@ namespace :employer do
       puts "Creating Fields..."
       blog.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 1, validations: { presence: true })
 
-      blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 2, validations: { presence: true }, metadata: { wysiwyg: true, parse_widgets: true })
+      blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 2, validations: {}, metadata: { wysiwyg: true, parse_widgets: true })
 
       blog.fields.new(name: 'Description', field_type: 'text_field_type', order_position: 3, validations: { presence: true })
 
@@ -30,9 +30,9 @@ namespace :employer do
 
       blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', order_position: 8, validations: {})
 
-      blog.fields.new(name: 'SEO Title', field_type: 'text_field_type', order_position: 10, validations: { presence: true })
+      blog.fields.new(name: 'SEO Title', field_type: 'text_field_type', order_position: 10, validations: {})
 
-      blog.fields.new(name: 'SEO Description', field_type: 'text_field_type', order_position: 11, validations: { presence: true })
+      blog.fields.new(name: 'SEO Description', field_type: 'text_field_type', order_position: 11, validations: {})
 
       blog.fields.new(name: 'SEO Keywords', field_type: 'tag_field_type', order_position: 12, validations: {})
 

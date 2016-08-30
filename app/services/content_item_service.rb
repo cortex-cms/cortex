@@ -44,8 +44,8 @@ class ContentItemService < CortexService
     ActiveRecord::Base.transaction do
       yield
       parse_field_items!
-      @content_item.save
-      update_search
+      @content_item.save!
+      update_search!
     end
   end
 
@@ -57,7 +57,7 @@ class ContentItemService < CortexService
     end
   end
 
-  def update_search
+  def update_search!
     # TODO: implement ES index updates
     true
   end

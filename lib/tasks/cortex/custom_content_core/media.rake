@@ -9,6 +9,7 @@ namespace :cortex do
         media = ContentType.new({
           name: "Media",
           description: "Media for Cortex",
+          icon: "collections",
           creator_id: 1,
           contract_id: 1
         })
@@ -16,15 +17,10 @@ namespace :cortex do
 
         puts "Creating Fields..."
         media.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 1, validations: { presence: true })
-
         media.fields.new(name: 'Description', field_type: 'text_field_type', order_position: 2, validations: { presence: true })
-
         media.fields.new(name: 'Tags', field_type: 'tag_field_type', order_position: 3, validations: {})
-
         media.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', order_position: 4, validations: {})
-
         media.fields.new(name: 'Alt Tag', field_type: 'text_field_type', order_position: 5, validations: {})
-
         media.save
 
         puts "Creating Wizard Decorators..."
@@ -76,6 +72,85 @@ namespace :cortex do
 
         ContentableDecorator.create({
           decorator_id: media_wizard_decorator.id,
+          contentable_id: media.id,
+          contentable_type: 'ContentType'
+        })
+
+        puts "Creating Index Decorators..."
+        index_hash = {
+        "columns":
+          [
+            {
+              "name": "Thumbnail",
+              "cells": [{
+                "field": {
+                  "method": "author_image"
+                },
+                "display": {
+                  "classes": [
+                    "circular"
+                  ]
+                }
+              }]
+            },
+            {
+              "name": "Creator",
+              "cells": [{
+                "field": {
+                  "method": "author_image"
+                },
+                "display": {
+                  "classes": [
+                    "circular"
+                  ]
+                }
+              }]
+            },
+            {
+              "name": "Details",
+              "cells": [
+                {
+                  "field": {
+                    "id": media.fields[0].id
+                  },
+                  "display": {
+                    "classes": [
+                      "bold",
+                      "upcase"
+                    ]
+                  }
+                },
+                {
+                  "field": {
+                    "id": media.fields[1].id
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Tags",
+              "cells": [
+                {
+                  "field": {
+                    "id": media.fields[2].id
+                  },
+                  "display": {
+                    "classes": [
+                      "tag",
+                      "rounded"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+
+        media_index_decorator = Decorator.new(name: "Index", data: index_hash)
+        media_index_decorator.save
+
+        ContentableDecorator.create({
+          decorator_id: media_index_decorator.id,
           contentable_id: media.id,
           contentable_type: 'ContentType'
         })

@@ -4,9 +4,9 @@ namespace :employer do
   namespace :blog do
     desc 'Seed Employer Blog ContentType and Fields'
     task seed: :environment do
-      puts "Creating EmployerBlog ContentType..."
+      puts "Creating Employer Blog ContentType..."
       blog = ContentType.new({
-        name: "EmployerBlog",
+        name: "Employer Blog",
         description: "Blog for Employer",
         creator_id: 1,
         contract_id: 1

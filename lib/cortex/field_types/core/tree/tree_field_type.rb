@@ -1,47 +1,61 @@
 class TreeFieldType < FieldType
   VALIDATION_TYPES = {
-    length: :no_more_than_two
+    presence: :valid_presence_validation?
   }.freeze
 
-  attr_accessor :data, :tree, :field_name, :validations
-  attr_reader :validations
+  attr_accessor :data, :values
+  attr_reader :validations, :metadata
 
-  validate :no_more_than_two
+  validates :values, presence: true, if: :validate_presence?
+  validate :value_is_allowed?
+
+  def validations=(validations_hash)
+    @validations = validations_hash.deep_symbolize_keys
+  end
 
   def data=(data_hash)
-    if data_hash.nil?
-      @data = {"tree"=>[]}
-      @tree = []
-    else
-      @tree = data_hash.deep_symbolize_keys[:tree]
-    end
+    @values = data_hash.deep_symbolize_keys[:values]
   end
 
-  def field_item_as_indexed_json_for_field_type(field_item, options = {})
-    json = {}
-    field_item.data ||= {"tree" =>[]}
-    json[mapping_field_name] = field_item.data['tree'].to_json
-    json
-  end
-
-  def mapping
-    {name: mapping_field_name, type: :string, analyzer: :snowball}
+  def metadata=(metadata_hash)
+    @metadata = metadata_hash.deep_symbolize_keys
   end
 
   def acceptable_validations?
-    true
+    valid_types? && valid_options?
   end
 
   private
 
-  def mapping_field_name
-    "#{field_name.downcase}_tree"
-  end
-
-  def no_more_than_two
-    tree ||= []
-    if tree.count > 2
-      errors.add(:tree, "can't have more than two")
+  def value_is_allowed?
+    @values.each do |value|
+      if Tree.gather_ids(@metadata[:allowed_values]).include?(value)
+        true
+      else
+        errors.add(:value, "must be allowed.")
+        false
+      end
     end
   end
+
+  def valid_types?
+    validations.all? do |type, options|
+      VALIDATION_TYPES.include?(type)
+    end
+  end
+
+  def valid_options?
+    validations.all? do |type, options|
+      self.send(VALIDATION_TYPES[type])
+    end
+  end
+
+  def valid_presence_validation?
+    @validations.key? :presence
+  end
+
+  def validate_presence?
+    @validations.key? :presence
+  end
+
 end

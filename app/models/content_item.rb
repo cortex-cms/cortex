@@ -7,7 +7,7 @@ class ContentItem < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
   belongs_to :updated_by, class_name: "User"
   belongs_to :content_type
-  has_many :field_items, -> { joins(:field).order("fields.order ASC") }, dependent: :destroy, autosave: true
+  has_many :field_items, -> { joins(:field).order("fields.order ASC") }, dependent: :destroy
 
   accepts_nested_attributes_for :field_items
 

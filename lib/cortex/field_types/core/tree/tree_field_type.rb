@@ -3,7 +3,7 @@ class TreeFieldType < FieldType
     presence: :valid_presence_validation?
   }.freeze
 
-  attr_accessor :data, :values
+  attr_accessor :data, :values, :field_name
   attr_reader :validations, :metadata
 
   validates :values, presence: true, if: :validate_presence?
@@ -25,7 +25,21 @@ class TreeFieldType < FieldType
     valid_types? && valid_options?
   end
 
+  def field_item_as_indexed_json_for_field_type(field_item, options = {})
+    json = {}
+    json[mapping_field_name] = field_item.data['tree']
+    json
+  end
+
+  def mapping
+    { name: mapping_field_name, type: :string, analyzer: :snowball }
+  end
+
   private
+
+  def mapping_field_name
+    "#{field_name.parameterize('_')}_tree"
+  end
 
   def value_is_allowed?
     @values.each do |value|

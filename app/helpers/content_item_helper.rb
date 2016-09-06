@@ -5,7 +5,6 @@ module ContentItemHelper
 
   def content_item_params
     params.require(:content_item).permit(
-      :author_id,
       :creator_id,
       :content_type_id,
       field_items_attributes: field_items_attributes_params
@@ -17,22 +16,33 @@ module ContentItemHelper
       value
     end
 
-    field_items_attributes_as_array.map do |field_items_attribute|
-      permit_recursive_params(field_items_attribute)
-    end
+    permitted_keys = {}
+    field_items_attributes_as_array.each {|hash| hash.each_key {|key| permitted_keys [key.to_s] = [] } }
+
+    permit_attribute_params(field_items_attributes_as_array, permitted_keys)
   end
 
-  def permit_recursive_params(params)
-    params.map do |key, value|
-      next if key == 'id' # TODO: This must go away.
+  def permit_attribute_params(param_array, permitted_keys)
+    param_array.each do |param_hash|
+      permitted_keys.keys.each do |key|
+        if param_hash[key].is_a?(Hash)
+          permitted_keys[key] << param_hash[key].keys
+        end
+        permitted_keys[key].flatten!
+      end
+    end
 
-      if value.is_a?(Array)
-        {key => [permit_recursive_params(value.first)]}
-      elsif value.is_a?(Hash) || value.is_a?(ActionController::Parameters)
-        {key => permit_recursive_params(value)}
-      else
+    sanitize_parameters(permitted_keys)
+  end
+
+  def sanitize_parameters(permitted_keys)
+    permitted_keys.map do |key, value|
+      if value.empty?
         key
+      else
+        { key => value }
       end
     end
   end
+
 end

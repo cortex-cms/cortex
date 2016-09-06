@@ -2,13 +2,17 @@ class ContentItemsController < AdminController
   include ContentItemHelper
 
   def index
-    @content_items_grid = initialize_grid(content_type.content_items)
+    @index = IndexDecoratorService.new(content_type: content_type)
 
     add_breadcrumb content_type.name.pluralize
   end
 
   def new
     @content_item = content_type.content_items.new
+    content_type.fields.each do |field|
+      @content_item.field_items << FieldItem.new(field: field)
+    end
+    @wizard = WizardDecoratorService.new(content_item: @content_item)
 
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
     add_breadcrumb 'New'
@@ -16,6 +20,7 @@ class ContentItemsController < AdminController
 
   def edit
     @content_item = content_type.content_items.find_by_id(params[:id])
+    @wizard = WizardDecoratorService.new(content_item: @content_item)
 
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
     add_breadcrumb "Edit #{@content_item.id}"
@@ -34,7 +39,7 @@ class ContentItemsController < AdminController
   end
 
   def create
-    @content_item = ContentItemService.new(content_item_params: content_item_params, current_user: current_user)
+    @content_item = ContentItemService.new(id: params[:id], content_item_params: params, current_user: current_user)
 
     if @content_item.create
       flash[:success] = "ContentItem created"

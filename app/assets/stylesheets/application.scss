@@ -5,6 +5,13 @@
 @import "font-awesome-sprockets"; // TODO: Remove once we style Wice with Material Design
 @import "font-awesome"; // TODO: Remove once we style Wice with Material Design
 @import 'jquery-ui/datepicker'; // TODO: Remove once we style Wice with Material Design
+@import 'bootstrap-tagsinput.scss'; // TODO: Remove once we find a permanent library for tags
 
 @import 'base';
+@import 'helpers';
+
+@import 'components/card';
+@import 'components/form';
+@import 'components/header';
+
 @import 'demo';

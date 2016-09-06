@@ -7,20 +7,50 @@ default: &default
       sudo: true
       target: any
       execute: true
+
+development:
+  <<: *default
   after_rails:
-    - source: /.cloud66/scripts/rake_task.sh
-      destination: /tmp/rake_task.sh
+    - source: /.cloud66/scripts/reseed_custom_content.sh
+      destination: /tmp/reseed_custom_content.sh
+      target: rails
+      execute: true
+      run_on: single_server
+      apply_during: all
+      sudo: false
+    - source: /.cloud66/scripts/rebuild_indexes.sh
+      destination: /tmp/rebuild_indexes.sh
       target: rails
       execute: true
       run_on: single_server
       apply_during: all
       sudo: false
 
-development:
-  <<: *default
-
 staging:
   <<: *default
+  after_rails:
+    - source: /.cloud66/scripts/reseed_custom_content.sh
+      destination: /tmp/reseed_custom_content.sh
+      target: rails
+      execute: true
+      run_on: single_server
+      apply_during: all
+      sudo: false
+    - source: /.cloud66/scripts/rebuild_indexes.sh
+      destination: /tmp/rebuild_indexes.sh
+      target: rails
+      execute: true
+      run_on: single_server
+      apply_during: all
+      sudo: false
 
 production:
   <<: *default
+  after_rails:
+    - source: /.cloud66/scripts/rebuild_indexes.sh
+      destination: /tmp/rebuild_indexes.sh
+      target: rails
+      execute: true
+      run_on: single_server
+      apply_during: all
+      sudo: false

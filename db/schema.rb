@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809222541) do
+ActiveRecord::Schema.define(version: 20160906210044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,13 +99,14 @@ ActiveRecord::Schema.define(version: 20160809222541) do
   add_index "content_items", ["deleted_at"], name: "index_content_items_on_deleted_at", using: :btree
 
   create_table "content_types", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",                         null: false
     t.text     "description"
-    t.integer  "creator_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "creator_id",                   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
     t.integer  "contract_id"
+    t.string   "icon",        default: "help", null: false
   end
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
@@ -146,10 +147,10 @@ ActiveRecord::Schema.define(version: 20160809222541) do
   create_table "field_items", force: :cascade do |t|
     t.integer  "field_id"
     t.integer  "content_item_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
-    t.jsonb    "data"
+    t.jsonb    "data",            default: {}
   end
 
   add_index "field_items", ["deleted_at"], name: "index_field_items_on_deleted_at", using: :btree
@@ -328,7 +329,7 @@ ActiveRecord::Schema.define(version: 20160809222541) do
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
-  add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+  add_index "posts", ["slug"], name: "index_posts_on_slug", using: :btree
   add_index "posts", ["type"], name: "index_posts_on_type", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 

@@ -4,7 +4,7 @@
   - if field_item.field.field_type == "boolean_field_type"
     = cell('cortex/field_types/core/boolean/boolean', field_item, form: field_item_form, field_name: field_item.field.name, default_value: false).(:checkbox)
   - if field_item.field.field_type == "tree_field_type"
-    = # cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form, index: index).(:tree)
+    = cell('cortex/field_types/core/tree/tree', FieldItem.new(field: field), form: field_item_form).(:tree)
   - if field_item.field.field_type == "date_time_field_type"
     = cell('cortex/field_types/core/date_time/date_time', field_item, form: field_item_form, default_value: '').(:datepicker)
   - if field_item.field.field_type == "tag_field_type"

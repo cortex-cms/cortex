@@ -22,9 +22,10 @@ class Post < ActiveRecord::Base
   belongs_to :primary_category, class_name: 'Category'
   belongs_to :primary_industry, class_name: '::Onet::Occupation'
 
-  validate :primary_category_must_be_in_categories, :primary_industry_must_be_in_industries
+  validate :unique_slug?, :primary_category_must_be_in_categories, :primary_industry_must_be_in_industries
   validates :title, presence: true, length: { minimum: 1, maximum: 255 }
   validates :type, :job_phase, :display, presence: true, allow_nil: false
+  validates :slug, presence: true, length: { minimum: 1, maximum: 255 }
 
   enum job_phase: ['Discovery', 'Find the Job', 'Get the Job', 'On the Job']
   enum display: [:large, :medium, :small]
@@ -54,6 +55,12 @@ class Post < ActiveRecord::Base
   end
 
   private
+
+  def unique_slug?
+    if Post.find_by_user_tenant(user).where.not(id: id).exists?(slug: slug)
+      errors.add :slug, 'has already been taken in this tenant'
+    end
+  end
 
   def primary_category_must_be_in_categories
     unless categories.to_a.empty? || categories.collect{ |c| c.id}.include?(primary_category_id)

@@ -11,18 +11,18 @@ class TreeFieldType < FieldType
   validates :values, presence: true, if: :validate_presence?
   validate  :minimum, if: :validate_minimum?
   validate  :maximum, if: :validate_maximum?
-  validate  :value_is_allowed?
 
   def validations=(validations_hash)
     @validations = validations_hash.deep_symbolize_keys
   end
 
   def data=(data_hash)
-    @values = data_hash.deep_symbolize_keys[:values]
+    values = data_hash.deep_symbolize_keys[:values]
+    @values = values.select { |kv| values[kv] == "1" }.keys unless values.nil?
   end
 
   def metadata=(metadata_hash)
-    @metadata = metadata_hash.deep_symbolize_keys
+    @metadata = metadata_hash.deep_symbolize_keys.extend(Hashie::Extensions::DeepLocate)
   end
 
   def acceptable_validations?
@@ -43,17 +43,6 @@ class TreeFieldType < FieldType
 
   def mapping_field_name
     "#{field_name.parameterize('_')}_tree"
-  end
-
-  def value_is_allowed?
-    @values.each do |value|
-      if Tree.gather_ids(@metadata[:allowed_values]).include?(value)
-        true
-      else
-        errors.add(:value, "must be allowed.")
-        false
-      end
-    end
   end
 
   def minimum

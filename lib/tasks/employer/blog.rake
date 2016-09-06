@@ -8,7 +8,7 @@ namespace :employer do
       blog = ContentType.new({
         name: "Employer Blog",
         description: "Blog for Employer",
-        icon: "description",
+        icon: "extension",
         creator_id: 1,
         contract_id: 1
       })
@@ -208,6 +208,40 @@ namespace :employer do
                   },
                   {
                     "id": blog.fields[16].id
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Categorize",
+            "heading": "Sort Into Categories..",
+            "description": "Select the categories that best describe your post.",
+            "columns": [
+              {
+                "heading": "Writing Panel Sections's Optional Heading",
+                "grid_width": 12,
+                "display": {
+                  "classes": [
+                    "text--right"
+                  ]
+                },
+                "fields": [
+                  {
+                    "id": blog.fields[-1].id,
+                    "label": {
+                      "display": {
+                        "classes": [
+                          "bold",
+                          "upcase"
+                        ]
+                      }
+                    },
+                    "input": {
+                      "display": {
+                        "height": "800px"
+                      }
+                    }
                   }
                 ]
               }

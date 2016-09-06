@@ -1,13 +1,17 @@
 class TreeFieldType < FieldType
   VALIDATION_TYPES = {
-    presence: :valid_presence_validation?
+    presence: :valid_presence_validation?,
+    maximum: :valid_maximum_validation?,
+    minimum: :valid_minimum_validation?
   }.freeze
 
   attr_accessor :data, :values, :field_name
   attr_reader :validations, :metadata
 
   validates :values, presence: true, if: :validate_presence?
-  validate :value_is_allowed?
+  validate  :minimum, if: :validate_minimum?
+  validate  :maximum, if: :validate_maximum?
+  validate  :value_is_allowed?
 
   def validations=(validations_hash)
     @validations = validations_hash.deep_symbolize_keys
@@ -52,6 +56,24 @@ class TreeFieldType < FieldType
     end
   end
 
+  def minimum
+    if @values.length >= @validations[:maximum]
+      true
+    else
+      errors.add(:minimum, "You have selected too few values.")
+      false
+    end
+  end
+
+  def maximum
+    if @values.length <= @validations[:maximum]
+      true
+    else
+      errors.add(:maximum, "You have selected too many values.")
+      false
+    end
+  end
+
   def valid_types?
     validations.all? do |type, options|
       VALIDATION_TYPES.include?(type)
@@ -68,8 +90,24 @@ class TreeFieldType < FieldType
     @validations.key? :presence
   end
 
+  def valid_maximum_validation?
+    @validations.key? :maximum
+  end
+
+  def valid_minimum_validation?
+    @validations.key? :minimum
+  end
+
   def validate_presence?
     @validations.key? :presence
+  end
+
+  def validate_minimum?
+    @validations.key? :minimum
+  end
+
+  def validate_maximum?
+    @validations.key? :maximum
   end
 
 end

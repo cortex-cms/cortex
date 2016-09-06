@@ -73,7 +73,7 @@ namespace :employer do
       category_tree.add_node({ name: "Talent Sourcing" }) #36
       category_tree.add_node({ name: "Workplace Insight" }) #37
       category_tree.add_node({ name: "Grandchild" }, 34)
-      blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: { allowed_values: category_tree }, order_position: 19)
+      blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: { allowed_values: category_tree }, order_position: 19, validations: { maximum: 2 })
 
       puts "Saving Employer Blog..."
       blog.save

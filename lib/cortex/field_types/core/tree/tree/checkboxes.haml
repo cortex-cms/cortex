@@ -1,3 +1,6 @@
+%h4
+  = render_label
+
 - @options[:metadata]["data"]["tree_array"].each do |node|
   = render_field_id
   = cell('cortex/field_types/core/tree/checkbox', node: node, form: @options[:form]).(:checkbox)

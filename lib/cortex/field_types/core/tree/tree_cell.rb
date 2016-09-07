@@ -10,11 +10,6 @@ module Cortex
           def dropdown
             render
           end
-
-          private
-
-          
-
         end
       end
     end

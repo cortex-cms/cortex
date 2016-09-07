@@ -6,6 +6,16 @@ module Cortex
           def checkbox
             render
           end
+
+          private
+
+          def value
+            if @model[:data] == {}
+              false
+            else
+              @model[:data]["values"].include?(@model[:node]['id'].to_s) ? true : false
+            end
+          end
         end
       end
     end

@@ -75,6 +75,9 @@ namespace :employer do
       blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: { allowed_values: category_tree }, order_position: 19, validations: { maximum: 2 })
 
       puts "Saving Employer Blog..."
+
+      # Add Other Categorization Types Here
+
       blog.save
 
       puts "Creating Wizard Decorators..."
@@ -219,29 +222,31 @@ namespace :employer do
             "description": "Select the categories that best describe your post.",
             "columns": [
               {
-                "heading": "Writing Panel Sections's Optional Heading",
-                "grid_width": 12,
-                "display": {
-                  "classes": [
-                    "text--right"
-                  ]
-                },
+                "heading": "Publishing (Optional Heading)",
+                "grid_width": 6,
                 "fields": [
                   {
-                    "id": blog.fields[-1].id,
-                    "label": {
-                      "display": {
-                        "classes": [
-                          "bold",
-                          "upcase"
-                        ]
-                      }
-                    },
-                    "input": {
-                      "display": {
-                        "height": "800px"
-                      }
-                    }
+                    "id": blog.fields[-6].id
+                  }
+                ]
+              },
+              {
+                "grid_width": 6,
+                "fields": [
+                  {
+                    "id": blog.fields[-5].id
+                  },
+                  {
+                    "id": blog.fields[-4].id
+                  },
+                  {
+                    "id": blog.fields[-3].id
+                  },
+                  {
+                    "id": blog.fields[-2].id
+                  },
+                  {
+                    "id": blog.fields[-1].id
                   }
                 ]
               }

@@ -17,7 +17,6 @@ class TreeFieldType < FieldType
   end
 
   def data=(data_hash)
-    binding.pry
     @values = data_hash.deep_symbolize_keys[:values].keys
   end
 

@@ -18,7 +18,12 @@ class TreeFieldType < FieldType
 
   def data=(data_hash)
     values = data_hash.deep_symbolize_keys[:values]
-    @values = values.keys unless values.nil?
+
+    if values.is_a?(Hash)
+      @values = values.keys
+    else
+      @values = [values]
+    end
   end
 
   def metadata=(metadata_hash)
@@ -47,7 +52,7 @@ class TreeFieldType < FieldType
 
   def minimum
     unless @values.nil?
-      if @values.length >= @validations[:maximum]
+      if @values.length >= @validations[:minimum]
         true
       else
         errors.add(:minimum, "You have selected too few values.")

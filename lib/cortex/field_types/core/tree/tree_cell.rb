@@ -10,6 +10,24 @@ module Cortex
           def dropdown
             render
           end
+
+          private
+
+          def value
+            data&.[]('values') || @options[:default_value]
+          end
+
+          def render_select
+            @options[:form].select 'data[values]', metadata_values, {selected: value}
+          end
+
+          def metadata_values
+            p @options[:metadata]
+
+            @options[:metadata]["data"]["tree_array"].map do |value|
+              [value["node"]["name"], value["id"]]
+            end
+          end
         end
       end
     end

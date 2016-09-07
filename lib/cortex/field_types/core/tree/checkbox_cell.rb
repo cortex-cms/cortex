@@ -10,7 +10,7 @@ module Cortex
           private
 
           def value
-            if @model[:data] == {}
+            if @model[:data].blank?
               false
             else
               @model[:data]["values"].include?(@model[:node]['id'].to_s) ? true : false

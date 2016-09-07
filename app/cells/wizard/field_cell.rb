@@ -11,10 +11,6 @@ module Wizard
 
     private
 
-    def check_format
-      display_format
-    end
-
     def field_item
       context[:content_item].field_items.select { |field_item| field_item.field_id == id }[0]
     end

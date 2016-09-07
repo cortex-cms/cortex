@@ -8,7 +8,7 @@
     = cell('cortex/field_types/core/boolean/boolean', field_item, form: field_item_form, field_name: field_item.field.name, default_value: false).(:checkbox)
 
   - if field_item.field.field_type == "tree_field_type"
-    - if check_format == "dropdown"
+    - if display_format == "dropdown"
       = cell('cortex/field_types/core/tree/tree', field_item, form: field_item_form, metadata: field_item.field.metadata["allowed_values"], field: field).(:dropdown)
     - else
       = cell('cortex/field_types/core/tree/tree', field_item, form: field_item_form, metadata: field_item.field.metadata["allowed_values"], field: field).(:checkboxes)

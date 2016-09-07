@@ -27,6 +27,8 @@ class ContentItemsController < AdminController
   end
 
   def update
+    binding.pry
+
     @content_item = ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user)
 
     if @content_item.update

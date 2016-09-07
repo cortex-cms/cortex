@@ -1,5 +1,5 @@
 %label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect{ for: @model[:node]["id"] }
-  = @model[:form].check_box "data[values][#{@model[:node]['id']}]", { checked: value, class: 'mdl-checkbox__input', id: @model[:node]["id"] }
+  = @model[:form].check_box "data[values][#{@model[:node]['id']}]", { checked: value, class: 'mdl-checkbox__input', id: @model[:node]["id"] }, 1, nil
   = @model[:form].label :data, @model[:child].to_s + " " + @model[:node]["node"]["name"], class: 'mdl-checkbox__label'
 
 - if @model[:node]["children"].any?

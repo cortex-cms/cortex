@@ -17,8 +17,8 @@ class TreeFieldType < FieldType
   end
 
   def data=(data_hash)
-    values = data_hash.deep_symbolize_keys[:values]
-    @values = values.select { |kv| values[kv] == "1" }.keys unless values.nil?
+    binding.pry
+    @values = data_hash.deep_symbolize_keys[:values].keys
   end
 
   def metadata=(metadata_hash)

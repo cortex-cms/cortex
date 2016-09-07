@@ -4,6 +4,92 @@ namespace :employer do
   namespace :blog do
     desc 'Seed Employer Blog ContentType and Fields'
     task seed: :environment do
+      def audience_tree
+        tree = Tree.new
+        tree.add_node({ name: "Job Seeker" })
+        tree.add_node({ name: "Employer" })
+
+        tree
+      end
+
+      def vertical_tree
+        tree = Tree.new
+        tree.add_node({ name: "Small Business" })
+        tree.add_node({ name: "Recruiting and Staffing" })
+        tree.add_node({ name: "Health Care" })
+
+        tree
+      end
+
+      def research_tree
+        tree = Tree.new
+        tree.add_node({ name: "CB Research" })
+        tree.add_node({ name: "Third Party Research" })
+
+        tree
+      end
+
+      def category_tree
+        tree = Tree.new
+        tree.add_node({ name: "Candidate Experience" }) #1
+        tree.add_node({ name: "CareerBuilder Solutions" }) #2
+        tree.add_node({ name: "Data and Analytics" }) #3
+        tree.add_node({ name: "Events" }) #4
+        tree.add_node({ name: "Health Care" }) #5
+        tree.add_node({ name: "Hiring Strategy" }) #6
+        tree.add_node({ name: "Leadership" }) #7
+        tree.add_node({ name: "News and Trends" }) #8
+        tree.add_node({ name: "Other Stuff" }) #9
+        tree.add_node({ name: "Recruitment Techniques" }) #10
+        tree.add_node({ name: "Recruitment Technology" }) #11
+        tree.add_node({ name: "Reports" }) #12
+        tree.add_node({ name: "BLS Reports" }, 12) #13
+        tree.add_node({ name: "Economy" }, 12) #14
+        tree.add_node({ name: "Forecasts" }, 12) #15
+        tree.add_node({ name: "Infographics" }, 12) #16
+        tree.add_node({ name: "Survey Results" }, 12) #17
+        tree.add_node({ name: "Small Business" }) #18
+        tree.add_node({ name: "Staffing & Recruiting" }) #19
+        tree.add_node({ name: "Talent Acquisition" }) #20
+        tree.add_node({ name: "Employment Branding" }, 20) #21
+        tree.add_node({ name: "Generational Hiring" }, 20) #22
+        tree.add_node({ name: "HR Software" }, 20) #23
+        tree.add_node({ name: "Job Postings" }, 20) #24
+        tree.add_node({ name: "Mobile" }, 20) #25
+        tree.add_node({ name: "Selection" }, 20) #26
+        tree.add_node({ name: "Workforce Data" }, 20) #27
+        tree.add_node({ name: "Talent Advisor" }) #28
+        tree.add_node({ name: "Talent Factor" }) #29
+        tree.add_node({ name: "Talent Management" }) #30
+        tree.add_node({ name: "Benefits" }, 30) #31
+        tree.add_node({ name: "Diversity in the Workplace" }, 30) #32
+        tree.add_node({ name: "Onboarding" }, 30) #33
+        tree.add_node({ name: "Retention" }, 30) #34
+        tree.add_node({ name: "Talent Development" }, 30) #35
+        tree.add_node({ name: "Talent Sourcing" }) #36
+        tree.add_node({ name: "Workplace Insight" }) #37
+
+        tree
+      end
+
+      def persona_tree
+        tree = Tree.new
+        tree.add_node({ name: "Persona 1" })
+        tree.add_node({ name: "Persona 2" })
+
+        tree
+      end
+
+      def onet_tree
+        tree = Tree.new
+
+        Onet::Occupation.industries.each do |onet_code|
+          tree.add_node({ name: onet_code.title })
+        end
+
+        tree
+      end
+
       puts "Creating Employer Blog ContentType..."
       blog = ContentType.new({
         name: "Employer Blog",
@@ -32,52 +118,14 @@ namespace :employer do
       blog.fields.new(name: 'No ODP', field_type: 'boolean_field_type', order_position: 16)
       blog.fields.new(name: 'No Archive', field_type: 'boolean_field_type', order_position: 17)
       blog.fields.new(name: 'No Image Index', field_type: 'boolean_field_type', order_position: 18)
-
-      puts "Building Category Tree..."
-      category_tree = Tree.new
-      category_tree.add_node({ name: "Candidate Experience" }) #1
-      category_tree.add_node({ name: "CareerBuilder Solutions" }) #2
-      category_tree.add_node({ name: "Data and Analytics" }) #3
-      category_tree.add_node({ name: "Events" }) #4
-      category_tree.add_node({ name: "Health Care" }) #5
-      category_tree.add_node({ name: "Hiring Strategy" }) #6
-      category_tree.add_node({ name: "Leadership" }) #7
-      category_tree.add_node({ name: "News and Trends" }) #8
-      category_tree.add_node({ name: "Other Stuff" }) #9
-      category_tree.add_node({ name: "Recruitment Techniques" }) #10
-      category_tree.add_node({ name: "Recruitment Technology" }) #11
-      category_tree.add_node({ name: "Reports" }) #12
-      category_tree.add_node({ name: "BLS Reports" }, 12) #13
-      category_tree.add_node({ name: "Economy" }, 12) #14
-      category_tree.add_node({ name: "Forecasts" }, 12) #15
-      category_tree.add_node({ name: "Infographics" }, 12) #16
-      category_tree.add_node({ name: "Survey Results" }, 12) #17
-      category_tree.add_node({ name: "Small Business" }) #18
-      category_tree.add_node({ name: "Staffing & Recruiting" }) #19
-      category_tree.add_node({ name: "Talent Acquisition" }) #20
-      category_tree.add_node({ name: "Employment Branding" }, 20) #21
-      category_tree.add_node({ name: "Generational Hiring" }, 20) #22
-      category_tree.add_node({ name: "HR Software" }, 20) #23
-      category_tree.add_node({ name: "Job Postings" }, 20) #24
-      category_tree.add_node({ name: "Mobile" }, 20) #25
-      category_tree.add_node({ name: "Selection" }, 20) #26
-      category_tree.add_node({ name: "Workforce Data" }, 20) #27
-      category_tree.add_node({ name: "Talent Advisor" }) #28
-      category_tree.add_node({ name: "Talent Factor" }) #29
-      category_tree.add_node({ name: "Talent Management" }) #30
-      category_tree.add_node({ name: "Benefits" }, 30) #31
-      category_tree.add_node({ name: "Diversity in the Workplace" }, 30) #32
-      category_tree.add_node({ name: "Onboarding" }, 30) #33
-      category_tree.add_node({ name: "Retention" }, 30) #34
-      category_tree.add_node({ name: "Talent Development" }, 30) #35
-      category_tree.add_node({ name: "Talent Sourcing" }) #36
-      category_tree.add_node({ name: "Workplace Insight" }) #37
       blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: { allowed_values: category_tree }, order_position: 19, validations: { maximum: 2 })
+      blog.fields.new(name: 'Audience', field_type: 'tree_field_type', metadata: { allowed_values: audience_tree }, order_position: 20, validations: { maximum: 1, minimum: 1 })
+      blog.fields.new(name: 'Verticals', field_type: 'tree_field_type', metadata: { allowed_values: vertical_tree }, order_position: 21, validations: { minimum: 1 })
+      blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: { allowed_values: research_tree }, order_position: 22, validations: { minimum: 1 })
+      blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: { allowed_values: persona_tree }, order_position: 23, validations: {})
+      blog.fields.new(name: 'Onet Code', field_type: 'tree_field_type', metadata: { allowed_values: onet_tree }, order_position: 24, validations: {})
 
       puts "Saving Employer Blog..."
-
-      # Add Other Categorization Types Here
-
       blog.save
 
       puts "Creating Wizard Decorators..."
@@ -234,19 +282,24 @@ namespace :employer do
                 "grid_width": 6,
                 "fields": [
                   {
-                    "id": blog.fields[-5].id
+                    "id": blog.fields[-5].id,
+                    "display_format": "dropdown"
                   },
                   {
-                    "id": blog.fields[-4].id
+                    "id": blog.fields[-4].id,
+                    "display_format": "dropdown"
                   },
                   {
-                    "id": blog.fields[-3].id
+                    "id": blog.fields[-3].id,
+                    "display_format": "dropdown"
                   },
                   {
-                    "id": blog.fields[-2].id
+                    "id": blog.fields[-2].id,
+                    "display_format": "dropdown"
                   },
                   {
-                    "id": blog.fields[-1].id
+                    "id": blog.fields[-1].id,
+                    "display_format": "dropdown"
                   }
                 ]
               }

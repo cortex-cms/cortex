@@ -46,21 +46,27 @@ class TreeFieldType < FieldType
   end
 
   def minimum
-    if @values.length >= @validations[:maximum]
-      true
-    else
-      errors.add(:minimum, "You have selected too few values.")
-      false
-    end
+    # unless @values.nil?
+    #   if @values.length >= @validations[:maximum]
+    #     true
+    #   else
+    #     errors.add(:minimum, "You have selected too few values.")
+    #     false
+    #   end
+    # end
+    true
   end
 
   def maximum
-    if @values.length <= @validations[:maximum]
-      true
-    else
-      errors.add(:maximum, "You have selected too many values.")
-      false
-    end
+    # unless @values.nil?
+    #   if @values.length <= @validations[:maximum]
+    #     true
+    #   else
+    #     errors.add(:maximum, "You have selected too many values.")
+    #     false
+    #   end
+    # end
+    true
   end
 
   def valid_types?

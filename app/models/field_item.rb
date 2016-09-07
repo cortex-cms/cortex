@@ -3,15 +3,6 @@ class FieldItem < ActiveRecord::Base
   belongs_to :field
   belongs_to :content_item
 
-  # after_validation :serialize_tree_values
-  #
-  # def serialize_tree_values
-  #   if field.field_type == "tree_field_type"
-  #     values = self.data["values"]
-  #     self.data = { values: values.select { |kv| values[kv] == "1" }.keys.map { |k| k.to_s } }
-  #   end
-  # end
-
   validates :field_id, presence: true
   validates :content_item_id, presence: true, on: :update
   validate :field_item_content_is_valid, if: :field_is_present

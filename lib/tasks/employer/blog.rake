@@ -80,11 +80,21 @@ namespace :employer do
         tree
       end
 
+      def seed_industries
+        puts 'Seeding Industries (Job Families)..'
+
+      end
+
       def onet_tree
         tree = Tree.new
 
+        industries_seed = SeedData.onet_industries
+
+        industries_seed.each do |industry|
+          tree.add_node({ name: industry[:title] })
+        end
+
         Onet::Occupation.industries.each do |onet_code|
-          tree.add_node({ name: onet_code.title })
         end
 
         tree

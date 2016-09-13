@@ -13,8 +13,12 @@ module Cortex
             if @model[:data].blank?
               false
             else
-              @model[:data]["values"].include?(@model[:node]['id'].to_s) ? true : false
+              @model[:data]["values"].include?(node_id) ? true : false
             end
+          end
+
+          def node_id
+            @model[:node]['id'].to_s
           end
 
           def child_identifier

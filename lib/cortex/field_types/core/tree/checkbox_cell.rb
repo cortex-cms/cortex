@@ -16,6 +16,14 @@ module Cortex
               @model[:data]["values"].include?(@model[:node]['id'].to_s) ? true : false
             end
           end
+
+          def child_identifier
+            @model[:child].to_s + " " + "->"
+          end
+
+          def display_lineage
+            @model[:child].to_s + " " + @model[:node]["node"]["name"]
+          end
         end
       end
     end

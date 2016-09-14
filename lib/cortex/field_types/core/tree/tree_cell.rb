@@ -22,8 +22,6 @@ module Cortex
           end
 
           def metadata_values
-            p @options[:metadata]
-
             @options[:metadata]["data"]["tree_array"].map do |value|
               [value["node"]["name"], value["id"]]
             end

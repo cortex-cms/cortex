@@ -104,7 +104,7 @@ namespace :employer do
       blog = ContentType.new({
         name: "Employer Blog",
         description: "Blog for Employer",
-        icon: "extension",
+        icon: "description",
         creator_id: 1,
         contract_id: 1
       })

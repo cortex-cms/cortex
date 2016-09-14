@@ -3,6 +3,7 @@ module Wizard
     property :id
     property :label
     property :input
+    property :display_format
 
     def show
       render

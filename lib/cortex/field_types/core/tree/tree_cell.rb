@@ -3,28 +3,29 @@ module Cortex
     module Core
       module Tree
         class TreeCell < FieldCell
-          def tree
+          def checkboxes
+            render
+          end
+
+          def dropdown
             render
           end
 
           private
 
-          def form
-            @options[:form]
+          def value
+            data&.[]('values') || @options[:default_value]
           end
 
-          def nodes
-            model.data.values_at([:category])
+          def render_select
+            @options[:form].select 'data[values]', metadata_values, {selected: value}
           end
 
-          def categories
-            CategoryTree.build(options[:tree]).values_at([:category, :category_id])
+          def metadata_values
+            @options[:metadata]["data"]["tree_array"].map do |value|
+              [value["node"]["name"], value["id"]]
+            end
           end
-
-          def index
-            options[:index]
-          end
-
         end
       end
     end

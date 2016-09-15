@@ -1,6 +1,4 @@
-class FieldCell < Cell::ViewModel
-  self.view_paths << 'lib'
-
+class FieldTypeCell < Cell::ViewModel
   property :field
   property :data
 

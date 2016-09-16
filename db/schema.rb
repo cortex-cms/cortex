@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906210044) do
+ActiveRecord::Schema.define(version: 20160916145740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,18 +93,16 @@ ActiveRecord::Schema.define(version: 20160906210044) do
   add_index "content_items", ["deleted_at"], name: "index_content_items_on_deleted_at", using: :btree
 
   create_table "content_types", force: :cascade do |t|
-    t.string   "name",                                     null: false
+    t.string   "name",                         null: false
     t.text     "description"
-    t.integer  "creator_id",                               null: false
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "creator_id",                   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
-    t.boolean  "taggable_with_tags?",     default: false
-    t.boolean  "taggable_with_keywords?", default: false
     t.jsonb    "tag_data"
-    t.boolean  "is_published"
     t.integer  "contract_id"
-    t.string   "icon",                    default: "help", null: false
+    t.string   "icon",        default: "help", null: false
+    t.boolean  "publishable"
   end
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree

@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20160916145740) do
     t.jsonb    "tag_data"
     t.integer  "contract_id"
     t.string   "icon",        default: "help", null: false
-    t.boolean  "publishable"
+    t.boolean  "publishable", default: false
   end
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree

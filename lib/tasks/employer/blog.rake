@@ -284,7 +284,8 @@ namespace :employer do
                 "grid_width": 6,
                 "fields": [
                   {
-                    "id": blog.fields[-6].id
+                    "id": blog.fields[-6].id,
+                    "display_format": "checkboxes"
                   }
                 ]
               },

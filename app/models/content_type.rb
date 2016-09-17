@@ -25,7 +25,7 @@ class ContentType < ActiveRecord::Base
 
   def content_items_index_name
     content_type_name_sanitized = name.parameterize('_')
-    "#{Rails.env}_content_type_#{content_type_name_sanitized}_content_items"
+    "#{Rails.env}_content_type_#{content_type_name_sanitized}_#{id}_content_items"
   end
 
   def wizard_decorator

@@ -8,6 +8,7 @@ class ContentItem < ActiveRecord::Base
   belongs_to :updated_by, class_name: "User"
   belongs_to :content_type
   has_many :field_items, -> { joins(:field).order("fields.order ASC") }, dependent: :destroy, autosave: true
+  has_one :publish_state
 
   accepts_nested_attributes_for :field_items
 
@@ -27,10 +28,6 @@ class ContentItem < ActiveRecord::Base
 
   def author_image
     "<img src='https://robohash.org/#{rand(1000..10000)}.png' height='100' width='100'/>".html_safe
-  end
-
-  def publish_state
-    "Published"
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

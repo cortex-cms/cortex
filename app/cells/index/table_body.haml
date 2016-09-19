@@ -5,4 +5,4 @@
         %td{ class: 'mdl-data-table__cell--non-numeric' }
           = cell('index/content_item', nil, { cells: column[:cells], content_item: content_item }).(:column)
       %td{ class: 'mdl-data-table__cell--non-numeric' }
-        = cell('index/content_item', nil, content_item: content_item).(:edit)
+        = cell('buttons', content_item).(:edit_button)

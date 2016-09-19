@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916145740) do
+ActiveRecord::Schema.define(version: 20160919153329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,9 +78,6 @@ ActiveRecord::Schema.define(version: 20160916145740) do
   end
 
   create_table "content_items", force: :cascade do |t|
-    t.string   "publish_state"
-    t.datetime "published_at"
-    t.datetime "expired_at"
     t.integer  "creator_id"
     t.integer  "content_type_id"
     t.datetime "created_at",         null: false

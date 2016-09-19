@@ -4,5 +4,13 @@
   = cell('wizard', @wizard, context: { content_item: @content_item, form: form }).()
   .mdl-grid
     .mdl-cell.mdl-cell--12-col
-      = form.submit 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+      - if @content_type.publishable
+        - case @content_item.publish_state.try(:state)
+        - when 'Published'
+          = form.submit 'Update Post', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+        - else
+          = form.submit 'Save as Draft', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+          = form.submit 'Publish', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+      - else
+        = form.submit 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
       = link_to 'Cancel', content_type_content_items_path(@content_type), class: 'mdl-button mdl-js-button mdl-js-ripple-effect'

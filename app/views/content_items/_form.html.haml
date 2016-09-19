@@ -9,8 +9,8 @@
         - when 'Published'
           = form.submit 'Update Post', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
         - else
-          = form.submit 'Save as Draft', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
-          = form.submit 'Publish', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+          = form.submit 'Save as Draft', name: 'content_item[publish_state_attributes[state]]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+          = form.submit 'Publish', name: 'content_item[publish_state_attributes[state]]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
       - else
         = form.submit 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
       = link_to 'Cancel', content_type_content_items_path(@content_type), class: 'mdl-button mdl-js-button mdl-js-ripple-effect'

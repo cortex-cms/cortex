@@ -7,10 +7,11 @@
       - if @content_type.publishable
         - case @content_item.publish_state.try(:state)
         - when 'Published'
-          = form.submit 'Update Post', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+          = form.submit "Update #{@content_type.name} Post", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
         - else
-          = form.submit 'Save as Draft', name: 'content_item[publish_state_attributes[state]]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
-          = form.submit 'Publish', name: 'content_item[publish_state_attributes[state]]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+          // TODO: Figure out how to separate Button text from button value / workaround
+          = form.submit 'Save as Draft', value: 'Draft', name: 'content_item[publish_state_attributes[state]]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+          = form.submit 'Publish', value: 'Published', name: 'content_item[publish_state_attributes[state]]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
       - else
         = form.submit 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
       = link_to 'Cancel', content_type_content_items_path(@content_type), class: 'mdl-button mdl-js-button mdl-js-ripple-effect'

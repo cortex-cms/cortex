@@ -106,7 +106,8 @@ namespace :employer do
         description: "Blog for Employer",
         icon: "description",
         creator_id: 1,
-        contract_id: 1
+        contract_id: 1,
+        publishable: true
       })
       blog.save
 

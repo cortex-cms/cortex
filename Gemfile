@@ -5,7 +5,7 @@ ruby '2.3.1'
 gem 'bower-rails', '~> 0.10.0'
 
 # Server
-gem 'unicorn-rails', '~> 2.2.0'
+gem 'unicorn', '~> 5.1.0'
 
 # Rails
 gem 'rails', '~> 4.2.6'

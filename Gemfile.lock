@@ -697,9 +697,6 @@ GEM
     unicorn (5.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
-    unicorn-rails (2.2.0)
-      rack
-      unicorn
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -821,7 +818,7 @@ DEPENDENCIES
   timecop (~> 0.8.0)
   turbolinks (~> 5.0.0beta2)
   uglifier (~> 2.7.2)
-  unicorn-rails (~> 2.2.0)
+  unicorn (~> 5.1.0)
   virtus (~> 1.0.5)
   wice_grid (~> 3.6.2)
   yt (~> 0.25.37)

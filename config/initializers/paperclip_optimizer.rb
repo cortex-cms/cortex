@@ -5,7 +5,7 @@ Paperclip::PaperclipOptimizer.default_options = {
   jpegoptim: {
     allow_lossy: true,
     strip: :all,
-    max_quality: 60
+    max_quality: 90
   },
   advpng: false,
   gifsicle: {

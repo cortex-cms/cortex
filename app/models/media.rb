@@ -25,7 +25,6 @@ class Media < ActiveRecord::Base
 
   has_attached_file :attachment,
                     :styles => {
-                      :original => {geometry: '9999x9999>'},
                       :large => {geometry: '1800x1800>', format: :jpg},
                       :medium => {geometry: '800x800>', format: :jpg},
                       :default => {geometry: '300x300>', format: :jpg},
@@ -33,7 +32,7 @@ class Media < ActiveRecord::Base
                       :micro => {geometry: '50x50>', format: :jpg},
                       :ar_post => {geometry: '1140x', format: :jpg}
                     },
-                    :processors => [:thumbnail],
+                    :processors => [:thumbnail, :paperclip_optimizer],
                     :preserve_files => 'true',
                     # :path => ':class/:attachment/:style-:id.:extension'
                     :path => ':class/:attachment/careerbuilder-:style-:id.:extension',

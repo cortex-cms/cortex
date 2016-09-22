@@ -142,6 +142,11 @@ GEM
     concurrent-ruby (1.0.2)
     connection_pool (2.2.0)
     cortex-exceptions (0.0.4)
+    cortex-field_types-core (0.1.1)
+      cells (~> 4.1)
+      cells-haml (~> 0.0.10)
+      cells-rails (~> 0.0.6)
+      rails (~> 4.2.6)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
@@ -511,7 +516,7 @@ GEM
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
-    pomona (0.6.0)
+    pomona (0.7.0)
     progress (3.1.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -739,6 +744,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.6)
   codeclimate-test-reporter (~> 0.4.8)
   cortex-exceptions (~> 0.0.4)
+  cortex-field_types-core (~> 0.1.1)
   database_cleaner (~> 1.5.1)
   devise (~> 4.1.1)
   doorkeeper (~> 3.1)
@@ -786,7 +792,7 @@ DEPENDENCIES
   pg (~> 0.18.4)
   phantomjs (~> 1.9.8)
   poltergeist
-  pomona (~> 0.6.0)
+  pomona (~> 0.7)
   pry-doc
   pry-nav
   pry-rails

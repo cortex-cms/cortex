@@ -33,7 +33,7 @@ class Media < ActiveRecord::Base
                       :micro => {geometry: '50x50>', format: :jpg},
                       :ar_post => {geometry: '1140x', format: :jpg}
                     },
-                    :processors => [:thumbnail, :paperclip_optimizer],
+                    :processors => [:thumbnail],
                     :preserve_files => 'true',
                     # :path => ':class/:attachment/:style-:id.:extension'
                     :path => ':class/:attachment/careerbuilder-:style-:id.:extension',

@@ -12,6 +12,7 @@ gem 'rails', '~> 4.2.6'
 
 # Cortex-specific
 gem 'cortex-exceptions', '~> 0.0.4'
+gem 'cortex-field_types-core', '~> 0.1.1'
 
 # API
 gem 'grape', '~> 0.16'
@@ -42,7 +43,7 @@ gem 'pg', '~> 0.18.4'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 gem 'ranked-model', '~> 0.4.0'
 gem 'redis-rails', '~> 4.0'
-gem 'pomona', '~> 0.6.0'
+gem 'pomona', '~> 0.7'
 
 # Middleware
 gem 'rack-cors', '~> 0.4.0', require: 'rack/cors'

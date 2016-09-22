@@ -17,7 +17,7 @@ module ContentItemHelper
     end
 
     permitted_keys = {}
-    field_items_attributes_as_array.each {|hash| hash.each_key {|key| permitted_keys [key.to_s] = [] } }
+    field_items_attributes_as_array.each { |hash| hash.each_key { |key| permitted_keys[key.to_s] = [] } }
 
     permit_attribute_params(field_items_attributes_as_array, permitted_keys)
   end
@@ -26,13 +26,21 @@ module ContentItemHelper
     param_array.each do |param_hash|
       permitted_keys.keys.each do |key|
         if param_hash[key].is_a?(Hash)
-          permitted_keys[key] << param_hash[key].keys
+          permitted_keys[key] << permit_param(param_hash[key])
         end
         permitted_keys[key].flatten!
       end
     end
-
+    
     sanitize_parameters(permitted_keys)
+  end
+
+  def permit_param(param)
+    if param.values[0].is_a?(Hash)
+      { param.keys[0].to_sym => param.values[0].keys }
+    else
+      param.keys[0]
+    end
   end
 
   def sanitize_parameters(permitted_keys)
@@ -40,7 +48,7 @@ module ContentItemHelper
       if value.empty?
         key
       else
-        { key => value }
+        { key => value.uniq }
       end
     end
   end

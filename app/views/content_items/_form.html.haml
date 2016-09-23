@@ -1,4 +1,4 @@
-= form_for [@content_type, @content_item] do |form|
+= form_for [@content_type, @content_item], html: { multipart: true } do |form|
   = form.hidden_field :creator_id, value: current_user.id
   = form.hidden_field :content_type_id, value: @content_type.id
   = cell('wizard', @wizard, context: { content_item: @content_item, form: form }).()

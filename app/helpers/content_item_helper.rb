@@ -31,7 +31,7 @@ module ContentItemHelper
         permitted_keys[key].flatten!
       end
     end
-    
+
     sanitize_parameters(permitted_keys)
   end
 

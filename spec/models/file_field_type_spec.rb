@@ -14,7 +14,7 @@ RSpec.describe FileFieldType, type: :model do
   end
 
   describe "#initialize" do
-    let(:file) { File.new(Rails.root.join("spec", "fixtures", "test_image_179kb.jpg")) }
+    let(:asset) { File.new(Rails.root.join("spec", "fixtures", "test_image_179kb.jpg")) }
     let(:subject) do
       FileFieldType.new(
         "data" => { "document"=> file },

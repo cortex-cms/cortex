@@ -117,6 +117,8 @@ group :test, :development do
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'pry-doc'
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
 
   # Documentation
   gem "rails-erd"

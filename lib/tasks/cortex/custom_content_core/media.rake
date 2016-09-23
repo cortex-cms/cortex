@@ -16,11 +16,12 @@ namespace :cortex do
         media.save
 
         puts "Creating Fields..."
-        media.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 1, validations: { presence: true })
-        media.fields.new(name: 'Description', field_type: 'text_field_type', order_position: 2, validations: { presence: true })
-        media.fields.new(name: 'Tags', field_type: 'tag_field_type', order_position: 3, validations: {})
-        media.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', order_position: 4, validations: {})
-        media.fields.new(name: 'Alt Tag', field_type: 'text_field_type', order_position: 5, validations: {})
+        media.fields.new(name: 'Asset', field_type: 'asset_field_type', order_position: 1, validations: { presence: true })
+        media.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 2, validations: { presence: true })
+        media.fields.new(name: 'Description', field_type: 'text_field_type', order_position: 3, validations: { presence: true })
+        media.fields.new(name: 'Tags', field_type: 'tag_field_type', order_position: 4, validations: {})
+        media.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', order_position: 5, validations: {})
+        media.fields.new(name: 'Alt Tag', field_type: 'text_field_type', order_position: 6, validations: {})
         media.save
 
         puts "Creating Wizard Decorators..."
@@ -33,7 +34,11 @@ namespace :cortex do
               "columns": [
                 {
                   "grid_width": 12,
-                  "fields": []
+                  "fields": [
+                    {
+                      "id": media.fields[0].id
+                    }
+                  ]
                 }
               ]
             },
@@ -46,9 +51,6 @@ namespace :cortex do
                   "grid_width": 12,
                   "fields": [
                     {
-                      "id": media.fields[0].id
-                    },
-                    {
                       "id": media.fields[1].id
                     },
                     {
@@ -59,6 +61,9 @@ namespace :cortex do
                     },
                     {
                       "id": media.fields[4].id
+                    },
+                    {
+                      "id": media.fields[5].id
                     }
                   ]
                 }

@@ -111,8 +111,8 @@ namespace :employer do
       blog.save
 
       puts "Creating Fields..."
-      blog.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 1, validations: { presence: true })
-      blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 2, validations: {}, metadata: { wysiwyg: true, parse_widgets: true })
+      blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 1, validations: {}, metadata: { wysiwyg: true, parse_widgets: true })
+      blog.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 2, validations: { presence: true })
       blog.fields.new(name: 'Description', field_type: 'text_field_type', order_position: 3, validations: { presence: true })
       blog.fields.new(name: 'Slug', field_type: 'text_field_type', order_position: 4, validations: { presence: true })
       blog.fields.new(name: 'Author', field_type: 'user_field_type', order_position: 5, validations: { presence: true })
@@ -157,35 +157,12 @@ namespace :employer do
                 "fields": [
                   {
                     "id": blog.fields[0].id,
-                    "label": {
-                      "display": {
-                        "classes": [
-                          "bold",
-                          "upcase"
-                        ]
-                      }
-                    },
+                    "render_method": "wysiwyg",
                     "input": {
                       "display": {
-                        "classes": [
-                          "red"
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "id": blog.fields[1].id,
-                    "label": {
-                      "display": {
-                        "classes": [
-                          "bold",
-                          "upcase"
-                        ]
-                      }
-                    },
-                    "input": {
-                      "display": {
-                        "height": "800px"
+                        "styles": {
+                          "height": "500px"
+                        }
                       }
                     }
                   }
@@ -202,6 +179,9 @@ namespace :employer do
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
                 "fields": [
+                  {
+                    "id": blog.fields[1].id
+                  },
                   {
                     "id": blog.fields[6].id
                   },
@@ -285,7 +265,7 @@ namespace :employer do
                 "fields": [
                   {
                     "id": blog.fields[-6].id,
-                    "display_format": "checkboxes"
+                    "render_method": "checkboxes"
                   }
                 ]
               },
@@ -294,23 +274,23 @@ namespace :employer do
                 "fields": [
                   {
                     "id": blog.fields[-5].id,
-                    "display_format": "dropdown"
+                    "render_method": "dropdown"
                   },
                   {
                     "id": blog.fields[-4].id,
-                    "display_format": "dropdown"
+                    "render_method": "dropdown"
                   },
                   {
                     "id": blog.fields[-3].id,
-                    "display_format": "dropdown"
+                    "render_method": "dropdown"
                   },
                   {
                     "id": blog.fields[-2].id,
-                    "display_format": "dropdown"
+                    "render_method": "dropdown"
                   },
                   {
                     "id": blog.fields[-1].id,
-                    "display_format": "dropdown"
+                    "render_method": "dropdown"
                   }
                 ]
               }

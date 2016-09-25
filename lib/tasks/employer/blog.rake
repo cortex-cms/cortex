@@ -330,7 +330,7 @@ namespace :employer do
             "cells": [
               {
                 "field": {
-                  "id": blog.fields[0].id
+                  "id": blog.fields[1].id
                 },
                 "display": {
                   "classes": [

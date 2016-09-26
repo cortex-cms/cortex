@@ -1,6 +1,16 @@
 class ContentItem < ActiveRecord::Base
+  include ActiveModel::Transitions
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
+
+  state_machine :initial => :draft do
+    state :draft
+    state :published
+    
+    event :published, :timestamp => true do
+      transitions :to => :published, :from => [:draft]
+    end
+  end
 
   acts_as_paranoid
 
@@ -29,7 +39,7 @@ class ContentItem < ActiveRecord::Base
   end
 
   def publish_state
-    ""
+    state.titleize
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

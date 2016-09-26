@@ -3,22 +3,10 @@
     %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> dashboard
     Dashboard
   = cell(:content_type, collection: ContentType.all).(:nav)
-  = link_to dashboards_path, class: 'mdl-navigation__link' do
-    %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> web
-    Webpages
-  = link_to dashboards_path, class: 'mdl-navigation__link' do
-    %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> language
-    Localizations
-  = link_to dashboards_path, class: 'mdl-navigation__link' do
-    %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> done_all
-    Bulk Jobs
-  = link_to dashboards_path, class: 'mdl-navigation__link' do
-    %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> dns
-    Applications
   = link_to content_types_path, class: 'mdl-navigation__link' do
     %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> code
     Content Types
   .mdl-layout-spacer
-  = link_to dashboards_path, class: 'mdl-navigation__link' do
+  = link_to 'https://github.com/cbdr/cortex', class: 'mdl-navigation__link', target: '_blank' do
     %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"} help_outline
     %span.visuallyhidden Help

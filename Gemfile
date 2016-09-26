@@ -8,11 +8,11 @@ gem 'bower-rails', '~> 0.11.0'
 gem 'unicorn', '~> 5.1.0'
 
 # Rails
-gem 'rails', '~> 4.2.7'
+gem 'rails', '~> 5.0.0'
 
 # Cortex-specific
 gem 'cortex-exceptions', '~> 0.0.4'
-gem 'cortex-field_types-core', '~> 0.2.2'
+gem 'cortex-field_types-core', path: '/home/atharp/Repos/cortex-field_types-core'
 
 # API
 gem 'grape', '~> 0.17'
@@ -28,7 +28,6 @@ gem 'rolify', '~> 5.1'
 gem 'pundit', '~> 1.1'
 
 # Data
-gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.1'
 gem 'paperclip', '~> 5.1.0'
 gem 'paperclip-optimizer', '~> 2.0'
@@ -38,7 +37,7 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'grape-kaminari', git: 'git://github.com/toastercup/grape-kaminari', branch: 'set-only-pagination-headers'
 gem 'elasticsearch-model', '~> 0.1'
 gem 'elasticsearch-rails', '~> 0.1'
-gem 'paranoia', '~> 2.1'
+gem 'paranoia', '~> 2.2.0.pre'
 gem 'pg', '~> 0.19.0'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 gem 'ranked-model', '~> 0.4.0'
@@ -66,7 +65,6 @@ gem 'aws-sdk', '~> 2.6' # Used by Paperclip
 # Jobs
 gem 'sidekiq', '~> 4.2.1'
 gem 'sidekiq-failures', '~> 0.4.5'
-gem 'sinatra', '~> 1.4.7', require: false
 
 # Pipeline
 gem 'sprockets-rails', '3.2.0', :require => 'sprockets/railtie'
@@ -125,44 +123,43 @@ end
 
 group :test do
   # Rspec
-  gem 'rspec', '~> 3.4'
-  gem 'rspec-rails', '~> 3.4'
-  gem 'json_spec', '~> 1.1.4'
-  gem 'rspec-sidekiq', '~> 2.2.0'
-  gem 'shoulda-matchers', '~> 3.1.1'
+  gem 'rspec', '~> 3.5'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'json_spec', '~> 1.1'
+  gem 'rspec-sidekiq', '~> 2.2'
+  gem 'shoulda-matchers', '~> 3.1'
 
   # Capybara for feature testing, Poltergeist for PhantomJS
   gem 'capybara'
   gem 'poltergeist'
 
   # Guard
-  gem 'guard-rspec', '~> 4.6.4'
+  gem 'guard-rspec', '~> 4.7'
 
   # Mocking/Faking
-  gem 'mocha', '~> 1.1.0', require: false
-  gem 'database_cleaner', '~> 1.5.1'
-  gem 'timecop', '~> 0.8.0'
+  gem 'mocha', '~> 1.1', require: false
+  gem 'database_cleaner', '~> 1.5'
+  gem 'timecop', '~> 0.8'
   gem 'email_spec'
 
   # Javascript
-  gem 'guard-jasmine', '~> 2.0.6'
-  gem 'jasmine-core', '~> 2.4'
+  gem 'guard-jasmine', '~> 2.1'
+  gem 'jasmine-core', '~> 2.5'
 
   # Etc
-  gem 'codeclimate-test-reporter', '~> 0.4.8', require: false
-  gem 'elasticsearch-extensions', '~> 0.0.20'
+  gem 'codeclimate-test-reporter', '~> 0.6', require: false
+  gem 'elasticsearch-extensions', '~> 0.0.22'
 end
 
 group :test, :development do
-  gem 'factory_girl_rails', '~> 4.7.0'
-  gem 'faker', '~> 1.6.3'
+  gem 'factory_girl_rails', '~> 4.7'
+  gem 'faker', '~> 1.6'
   gem 'fog', '~> 1.38.0'
-  gem 'phantomjs', '~> 1.9.8'
-  gem 'jasmine-rails', '~> 0.12.4'
-  gem 'git_reflow'
+  gem 'phantomjs', '~> 2.1.1'
+  gem 'jasmine-rails', '~> 0.14'
 end
 
 group :staging, :production do
   # Monitoring
-  gem 'newrelic_rpm', '~> 3.15.0'
+  gem 'newrelic_rpm', '~> 3.16'
 end

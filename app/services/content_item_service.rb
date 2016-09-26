@@ -14,6 +14,7 @@ class ContentItemService < CortexService
         value.delete("id")
         @content_item.field_items << FieldItem.new(value)
       end
+
       content_item_params.delete("field_items_attributes")
       @content_item.attributes = content_item_params.to_hash
     end

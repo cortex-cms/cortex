@@ -1,6 +1,17 @@
 class ContentItem < ActiveRecord::Base
+  include ActiveModel::Transitions
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
+
+  state_machine :initial => :default do
+    state :draft
+    state :published
+    state :default #the default state that is given to an object - this should only ever exist on ContentItems where the ContentType is not publishable
+    
+    event :published, :timestamp => true do
+      transitions :to => :published, :from => [:draft]
+    end
+  end
 
   acts_as_paranoid
 
@@ -20,17 +31,16 @@ class ContentItem < ActiveRecord::Base
     taggable_on_array = Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.parameterize('_') }
   end
 
-  # The following two methods (#author_image and #publish_state) are currently faked
+  # The following method (#author_image) is currently faked
   # author_image is faked pending being able to reference the specific User object (ex:
   # content_item.author.user_image)
-  # publish_state is faked pending the story revolving around being able to publish ContentItems
 
   def author_image
-    "<img src='https://robohash.org/#{rand(1000..10000)}.png' height='100' width='100'/>".html_safe
+    "<img src='https://robohash.org/#{id}.png' height='100' width='100'/>".html_safe
   end
 
   def publish_state
-    "Published"
+    state.titleize
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

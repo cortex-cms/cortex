@@ -7,7 +7,8 @@ module ContentItemHelper
     params.require(:content_item).permit(
       :creator_id,
       :content_type_id,
-      field_items_attributes: field_items_attributes_params
+      :state,
+      field_items_attributes: field_items_attributes_params,
     )
   end
 

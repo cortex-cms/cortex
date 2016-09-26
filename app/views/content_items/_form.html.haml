@@ -5,7 +5,12 @@
   .mdl-grid
     .mdl-cell.mdl-cell--12-col
       - if @content_type.publishable
-        = cell('buttons', @content_item, context: { form: form }).(:publish_state_buttons)
+        - case @content_item.state
+        - when 'published'
+          = form.submit "Update #{@content_type.name} Post", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+        - else
+          = form.submit 'Save as Draft', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+          = form.button 'Publish', value: 'published', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
       - else
         = form.submit 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
       = link_to 'Cancel', content_type_content_items_path(@content_type), class: 'mdl-button mdl-js-button mdl-js-ripple-effect'

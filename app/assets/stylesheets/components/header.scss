@@ -1,3 +1,42 @@
 .header {
   min-height:180px;
 }
+
+.search-bar {
+  margin-right: 20px;
+
+  .mdl-textfield__input {
+    border-bottom: 0;
+  }
+
+  .mdl-textfield__label {
+    top: 23px;
+  }
+}
+
+.user-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-block__text {
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.user-block__greeting {
+  font-size: 85%;
+}
+
+.user-block__logout {
+  font-size: 75%;
+}
+
+.user-block__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 20px;
+}

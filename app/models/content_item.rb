@@ -3,9 +3,10 @@ class ContentItem < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  state_machine :initial => :draft do
+  state_machine :initial => :default do
     state :draft
     state :published
+    state :default #the default state that is given to an object - this should only ever exist on ContentItems where the ContentType is not publishable
     
     event :published, :timestamp => true do
       transitions :to => :published, :from => [:draft]

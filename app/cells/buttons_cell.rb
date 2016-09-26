@@ -14,7 +14,7 @@ class ButtonsCell < Cell::ViewModel
   end
 
   def content_item
-    @model
+    model
   end
 
   def content_type

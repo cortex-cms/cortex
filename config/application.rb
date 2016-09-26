@@ -11,6 +11,7 @@ module Cortex
     config.eager_load_paths += %W(#{config.root}/lib #{config.root}/lib/helpers #{config.root}/app/models/media_types #{config.root}/app/models/post_types #{config.root}/app/models/observers)
 
     config.active_record.default_timezone = :utc
+    config.active_record.observers = :media_observer, :post_observer, :tenant_observer, :user_observer, :youtube_observer
     config.active_job.queue_adapter = :sidekiq
     config.assets.image_optim = false
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')

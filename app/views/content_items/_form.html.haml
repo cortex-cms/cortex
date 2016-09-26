@@ -9,7 +9,7 @@
         - when 'published'
           = form.submit "Update #{@content_type.name} Post", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
         - else
-          = form.submit 'Save as Draft', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
+          = form.button 'Save as Draft', value: 'draft', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
           = form.button 'Publish', value: 'published', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
       - else
         = form.submit 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'

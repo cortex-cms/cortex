@@ -8,11 +8,11 @@ gem 'bower-rails', '~> 0.11.0'
 gem 'unicorn', '~> 5.1.0'
 
 # Rails
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 4.2.7'
 
 # Cortex-specific
 gem 'cortex-exceptions', '~> 0.0.4'
-gem 'cortex-field_types-core', path: '/home/atharp/Repos/cortex-field_types-core'
+gem 'cortex-field_types-core', '~> 0.2.2'
 
 # API
 gem 'grape', '~> 0.17'
@@ -28,6 +28,7 @@ gem 'rolify', '~> 5.1'
 gem 'pundit', '~> 1.1'
 
 # Data
+gem 'rails-observers', '~> 0.1.2'
 gem 'awesome_nested_set', '~> 3.1'
 gem 'paperclip', '~> 5.1.0'
 gem 'paperclip-optimizer', '~> 2.0'
@@ -37,7 +38,7 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'grape-kaminari', git: 'git://github.com/toastercup/grape-kaminari', branch: 'set-only-pagination-headers'
 gem 'elasticsearch-model', '~> 0.1'
 gem 'elasticsearch-rails', '~> 0.1'
-gem 'paranoia', '~> 2.2.0.pre'
+gem 'paranoia', '~> 2.1'
 gem 'pg', '~> 0.19.0'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
 gem 'ranked-model', '~> 0.4.0'
@@ -65,6 +66,7 @@ gem 'aws-sdk', '~> 2.6' # Used by Paperclip
 # Jobs
 gem 'sidekiq', '~> 4.2.1'
 gem 'sidekiq-failures', '~> 0.4.5'
+gem 'sinatra', '~> 1.4.7', require: false
 
 # Pipeline
 gem 'sprockets-rails', '3.2.0', :require => 'sprockets/railtie'

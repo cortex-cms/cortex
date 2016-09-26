@@ -1,5 +1,5 @@
-- case content_item.publish_state
-- when 'Published'
+- case content_item.state
+- when 'published'
   = cell('buttons/published', content_item, content_type: content_type).()
 - else
   = cell('buttons/draft', content_item).()

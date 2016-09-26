@@ -1,4 +1,4 @@
-- case content_item.publish_state.try(:state)
+- case content_item.publish_state
 - when 'Published'
   = cell('buttons/published', content_item, content_type: content_type).()
 - else

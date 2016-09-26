@@ -347,7 +347,7 @@ namespace :employer do
               },
               {
                 "field": {
-                  "method": "get_publish_state"
+                  "method": "publish_state"
                 }
               }
             ]

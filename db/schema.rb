@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919153734) do
+ActiveRecord::Schema.define(version: 20160919153329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -323,13 +323,6 @@ ActiveRecord::Schema.define(version: 20160919153734) do
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
   add_index "posts", ["slug"], name: "index_posts_on_slug", using: :btree
   add_index "posts", ["type"], name: "index_posts_on_type", using: :btree
-
-  create_table "publish_states", force: :cascade do |t|
-    t.integer  "content_item_id"
-    t.string   "state"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
   create_table "role_permissions", force: :cascade do |t|
     t.integer  "role_id"

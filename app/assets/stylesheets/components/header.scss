@@ -40,3 +40,9 @@
   border-radius: 50%;
   margin-left: 20px;
 }
+
+// Overrides
+
+.mdl-textfield--expandable .mdl-button--icon {
+  top: initial;
+}

@@ -14,3 +14,5 @@ Rails.application.config.assets.precompile += %w( authentication.js )
 
 Rails.application.config.assets.precompile += %w( legacy_application.scss )
 Rails.application.config.assets.precompile += %w( legacy_application.js )
+
+Rails.application.config.assets.precompile += %w( ckeditor/* )

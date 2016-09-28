@@ -3,10 +3,12 @@
     %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> dashboard
     Dashboard
   = cell(:content_type, collection: ContentType.all).(:nav)
-  = link_to content_types_path, class: 'mdl-navigation__link' do
-    %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> code
-    Content Types
+  - if current_user.admin
+    = link_to content_types_path, class: 'mdl-navigation__link' do
+      %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"}> code
+      Content Types
   .mdl-layout-spacer
-  = link_to 'https://github.com/cbdr/cortex', class: 'mdl-navigation__link', target: '_blank' do
-    %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"} help_outline
-    %span.visuallyhidden Help
+  .hidden
+    = link_to 'https://github.com/cbdr/cortex', class: 'mdl-navigation__link', target: '_blank' do
+      %i.mdl-color-text--blue-grey-400.material-icons{:role => "presentation"} help_outline
+      %span.visuallyhidden Help

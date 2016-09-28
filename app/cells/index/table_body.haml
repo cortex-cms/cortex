@@ -5,4 +5,6 @@
         %td{ class: 'mdl-data-table__cell--non-numeric' }
           = cell('index/content_item', nil, { cells: column[:cells], content_item: content_item }).(:column)
       %td{ class: 'mdl-data-table__cell--non-numeric' }
-        = cell('index/content_item', nil, content_item: content_item).(:edit)
+        = link_to edit_content_type_content_item_path(@options[:content_type].id, content_item.id), class: 'mdl-button mdl-js-button mdl-button--icon' do
+          %i{ class: 'material-icons' }
+            create

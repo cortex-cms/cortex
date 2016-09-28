@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906210044) do
+ActiveRecord::Schema.define(version: 20160926180119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,33 +78,28 @@ ActiveRecord::Schema.define(version: 20160906210044) do
   end
 
   create_table "content_items", force: :cascade do |t|
-    t.string   "publish_state"
-    t.datetime "published_at"
-    t.datetime "expired_at"
     t.integer  "creator_id"
     t.integer  "content_type_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.datetime "deleted_at"
-    t.integer  "last_updated_by_id"
+    t.boolean  "is_published",    default: false
     t.integer  "updated_by_id"
+    t.string   "state"
   end
 
   add_index "content_items", ["deleted_at"], name: "index_content_items_on_deleted_at", using: :btree
 
   create_table "content_types", force: :cascade do |t|
-    t.string   "name",                                     null: false
+    t.string   "name",                         null: false
     t.text     "description"
-    t.integer  "creator_id",                               null: false
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "creator_id",                   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
-    t.boolean  "taggable_with_tags?",     default: false
-    t.boolean  "taggable_with_keywords?", default: false
-    t.jsonb    "tag_data"
-    t.boolean  "is_published"
     t.integer  "contract_id"
-    t.string   "icon",                    default: "help", null: false
+    t.string   "icon",        default: "help", null: false
+    t.boolean  "publishable", default: false
   end
 
   add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
@@ -338,12 +333,13 @@ ActiveRecord::Schema.define(version: 20160906210044) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "resource_id"
     t.string   "resource_type"
-    t.string   "resource_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "snippets", force: :cascade do |t|
@@ -373,7 +369,6 @@ ActiveRecord::Schema.define(version: 20160906210044) do
   create_table "tags", force: :cascade do |t|
     t.string  "name",           limit: 255
     t.integer "taggings_count",             default: 0
-    t.integer "tenant_id",                  default: 1
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
@@ -426,8 +421,10 @@ ActiveRecord::Schema.define(version: 20160906210044) do
   add_index "users", ["tenant_id"], name: "index_users_on_tenant_id", using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree

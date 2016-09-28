@@ -4,9 +4,10 @@
 //= require underscore
 //= require riot-compiler
 //= require material
-//= require wice_grid
 //= require jquery-ui/datepicker
 //= require bootstrap-tagsinput
+
+//= require cortex-field_types-core/application
 
 //= require base
 //= require forms

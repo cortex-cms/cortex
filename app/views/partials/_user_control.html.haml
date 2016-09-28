@@ -1,15 +1,7 @@
-%header.demo-drawer-header
-  %img.demo-avatar{:src => current_user.gravatar}
-    .demo-avatar-dropdown
-      %span
-        = current_user.fullname
-      .mdl-layout-spacer
-      %button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
-        %i.material-icons{:role => "presentation"} arrow_drop_down
-        %span.visuallyhidden Accounts
-      %ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect{:for => "accbtn"}
-        %li.mdl-menu__item
-          = current_user.tenant.name
-        %li.mdl-menu__item
-          %i.material-icons> power_settings_new
-          = link_to 'Logout', destroy_user_session_path, method: :delete
+%div.user-block
+  %div.user-block__text
+    %span.user-block__greeting
+      Hello, #{current_user.firstname}
+    %span.user-block__logout
+      = link_to 'Logout', destroy_user_session_path, method: :delete
+  %img.user-block__avatar{:src => current_user.gravatar}

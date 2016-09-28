@@ -1,13 +1,24 @@
 = context[:form].fields_for 'field_items', field_item do |field_item_form|
   - if field_item.field.field_type_instance.class == TextFieldType
-    = cell(FieldTypes::Core::TextCell, field_item, form: field_item_form).(:input)
+    - if render_method
+      = cell(FieldTypes::Core::TextCell, field_item, form: field_item_form, input_options: input, label_options: label).(render_method)
+    - else
+      = cell(FieldTypes::Core::TextCell, field_item, form: field_item_form, input_options: input, label_options: label).(:input)
+
   - if field_item.field.field_type_instance.class == BooleanFieldType
-    = cell(FieldTypes::Core::BooleanCell, field_item, form: field_item_form, field_name: field_item.field.name, default_value: false).(:checkbox)
+    = cell(FieldTypes::Core::BooleanCell, field_item, form: field_item_form, field_name: field_item.field.name, default_value: false, input_options: input, label_options: label).(:checkbox)
+
   - if field_item.field.field_type_instance.class == TreeFieldType
-    = cell(FieldTypes::Core::TreeCell, field_item, form: field_item_form, metadata: field_item.field.metadata["allowed_values"], field: field).(display_format)
+    = cell(FieldTypes::Core::TreeCell, field_item, form: field_item_form, metadata: field_item.field.metadata["allowed_values"], field: field, input_options: input, label_options: label).(render_method)
+
   - if field_item.field.field_type_instance.class == DateTimeFieldType
-    = cell(FieldTypes::Core::DateTimeCell, field_item, form: field_item_form, default_value: '').(:datepicker)
+    = cell(FieldTypes::Core::DateTimeCell, field_item, form: field_item_form, default_value: '', input_options: input, label_options: label).(:datepicker)
+
   - if field_item.field.field_type_instance.class == TagFieldType
-    = cell(FieldTypes::Core::TagCell, field_item, form: field_item_form, default_value: []).(:tag_picker)
+    = cell(FieldTypes::Core::TagCell, field_item, form: field_item_form, default_value: [], input_options: input, label_options: label).(:tag_picker)
+
   - if field_item.field.field_type_instance.class == UserFieldType
-    = cell(FieldTypes::Core::UserCell, field_item, form: field_item_form, default_value: User.all.first.id, user_data: User.all).(:dropdown)
+    = cell(FieldTypes::Core::UserCell, field_item, form: field_item_form, default_value: User.all.first.id, user_data: User.all, input_options: input, label_options: label).(:dropdown)
+
+  - if field_item.field.field_type_instance.class == AssetFieldType
+    = cell(FieldTypes::Core::AssetCell, field_item, form: field_item_form, input_options: input, label_options: label).(:input)

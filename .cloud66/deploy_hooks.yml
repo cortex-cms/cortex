@@ -11,8 +11,8 @@ default: &default
 development:
   <<: *default
   after_rails:
-    - source: /.cloud66/scripts/reseed_custom_content.sh
-      destination: /tmp/reseed_custom_content.sh
+    - source: /.cloud66/scripts/reseed_core_plugin.sh
+      destination: /tmp/reseed_core_plugin.sh
       target: rails
       execute: true
       run_on: single_server
@@ -29,8 +29,8 @@ development:
 staging:
   <<: *default
   after_rails:
-    - source: /.cloud66/scripts/reseed_custom_content.sh
-      destination: /tmp/reseed_custom_content.sh
+    - source: /.cloud66/scripts/reseed_core_plugin.sh
+      destination: /tmp/reseed_core_plugin.sh
       target: rails
       execute: true
       run_on: single_server

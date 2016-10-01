@@ -43,3 +43,16 @@
   background-color: $employer-color;
   color: $color-grey-dark;
 }
+
+// Collapsing
+
+.collapsable-sidebar {
+  .demo-drawer.mdl-layout__drawer {
+    width: 70px;
+
+    &:hover {
+      width: 240px;
+      transition: width 0.25s ease;
+    }
+  }
+}

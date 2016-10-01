@@ -10,11 +10,13 @@
     = stylesheet_link_tag :application
     = csrf_meta_tags
   %body
-    .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
-      = render 'partials/topbar'
+    .layout__container.demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer{class: ('.internal-view' unless current_page? root_path)}
       = render 'partials/sidebar'
-      %main.mdl-layout__content
-        = yield
+      .topbar-content__wrapper.mdl-layout--fixed-header
+        = render 'partials/topbar'
+        %main.mdl-layout__content
+          = yield
+
     = javascript_include_tag :application
     = render 'layouts/google_analytics' if extra_config.google_analytics_id?
     = render 'partials/flash'

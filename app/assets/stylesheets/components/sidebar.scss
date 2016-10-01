@@ -46,7 +46,11 @@
 
 // Collapsing
 
-.collapsable-sidebar {
+.internal-view {
+  // .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  //   padding-left: 20px;
+  // } // TODO change padding for all views
+
   .demo-drawer.mdl-layout__drawer {
     width: 70px;
 

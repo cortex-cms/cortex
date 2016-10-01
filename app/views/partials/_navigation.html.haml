@@ -1,7 +1,8 @@
 %nav.demo-navigation.mdl-navigation
   = link_to dashboards_path, class: 'mdl-navigation__link' do
     %i.material-icons{:role => "presentation"}> dashboard
-    Dashboard
+    %span.nav__item-name
+      Dashboard
   = cell(:content_type, collection: ContentType.all).(:nav)
   .mdl-layout-spacer
   .hidden

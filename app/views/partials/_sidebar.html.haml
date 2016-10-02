@@ -1,8 +1,7 @@
-.mdl-layout__drawer
-  // TODO removed .demo-drawer, does that break things? and can I remove .demo-drawer-header
-  %header.sidebar__beader.demo-drawer-header
-    %h1
-      = image_tag 'logo.svg', class: 'logo'
-      Cortex
+.layout__sidebar.mdl-layout__drawer
+  // TODO removed .demo-drawer and .demo-drawer-header, does that break things
+  %header.sidebar__header
+    = image_tag 'logo.svg', class: 'sidebar__brand-logo'
+    %h1.sidebar__brand-name Cortex
   = render 'partials/navigation'
   = render 'partials/tenant_display'

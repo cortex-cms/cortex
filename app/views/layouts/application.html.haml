@@ -10,9 +10,11 @@
     = stylesheet_link_tag :application
     = csrf_meta_tags
   %body
-    .layout__container.demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer{class: ('.internal-view' unless current_page? root_path)}
+    .layout__container.mdl-js-layout.mdl-layout--fixed-drawer{class: ('.internal-view' unless current_page? root_path)}
+      // TODO Removed .demo-layout.mdl-layout. Does that break things?
+
       = render 'partials/sidebar'
-      .topbar-content__wrapper.mdl-layout--fixed-header
+      .layout__topbar-content__wrapper.mdl-layout--fixed-header
         = render 'partials/topbar'
         %main.mdl-layout__content
           = yield

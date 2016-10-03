@@ -8,11 +8,11 @@
         - case @content_item.state
         - when 'published'
           = form.submit "Update #{@content_type.name} Post", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
-        - when 'prepublished'
+        - when 'scheduled'
           = form.button 'Publish Now', value: 'published', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
           = form.button 'Save as Draft', value: 'draft', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
         - else
-          = form.button 'Schedule for Publish', value: 'prepublished', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
+          = form.button 'Schedule for Publish', value: 'scheduled', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
           = form.button 'Save as Draft', value: 'draft', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
           = form.button 'Publish', value: 'published', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
       - else

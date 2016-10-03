@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'api_v1_helper'
 
-describe SPEC_API::Resources::Media, type: :request, elasticsearch: true do
+describe SPEC_API::Resources::Media, type: :request do
 
   let(:user) { create(:user, :admin) }
 

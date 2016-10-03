@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 
@@ -27,7 +30,7 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
-    mocks.allow_message_expectations_on_nil = true 
+    mocks.allow_message_expectations_on_nil = true
   end
 
   elasticsearch_status = false

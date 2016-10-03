@@ -5,11 +5,16 @@ class ContentItem < ActiveRecord::Base
 
   state_machine :initial => :default do
     state :draft
+    state :scheduled
     state :published
     state :default #the default state that is given to an object - this should only ever exist on ContentItems where the ContentType is not publishable
-    
-    event :published, :timestamp => true do
-      transitions :to => :published, :from => [:draft]
+
+    event :publish do
+      transitions :to => :published, :from => [:draft, :scheduled]
+    end
+
+    event :draft do
+      transitions :to => :draft, :from => [:default, :published, :scheduled]
     end
   end
 

@@ -1,8 +1,8 @@
-require 'simplecov'
-SimpleCov.start
-
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
+
+require 'simplecov'
+SimpleCov.start
 
 require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
@@ -46,6 +46,7 @@ RSpec.configure do |config|
   config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: /spec\/api/
 
   config.before(:suite) do
+    Rails.application.eager_load!
     DatabaseCleaner.strategy = :transaction
     Capybara.current_driver = Capybara.javascript_driver
     DatabaseCleaner.clean_with(:truncation)

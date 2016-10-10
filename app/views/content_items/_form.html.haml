@@ -9,12 +9,12 @@
         - when 'published'
           = form.submit "Update #{@content_type.name} Post", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
         - when 'scheduled'
-          = form.button 'Publish Now', value: 'published', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
+          = form.button 'Publish Now', value: 'publish', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
           = form.button 'Save as Draft', value: 'draft', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
         - else
-          = form.button 'Schedule for Publish', value: 'scheduled', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
+          = form.button 'Schedule for Publish', value: 'schedule', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
           = form.button 'Save as Draft', value: 'draft', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
-          = form.button 'Publish', value: 'published', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
+          = form.button 'Publish', value: 'publish', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect', type: 'submit'
       - else
         = form.submit 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'
       = link_to 'Cancel', content_type_content_items_path(@content_type), class: 'mdl-button mdl-js-button mdl-js-ripple-effect'

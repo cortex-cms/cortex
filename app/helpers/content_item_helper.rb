@@ -7,9 +7,17 @@ module ContentItemHelper
     params.require(:content_item).permit(
       :creator_id,
       :content_type_id,
-      :state,
       field_items_attributes: field_items_attributes_params,
     )
+  end
+
+  def execute_state_change(content_item)
+    state = params[:content_item][:state]
+    
+    if content_item.can_transition?(state)
+      state_method = "#{state}!"
+      content_item.send(state_method)
+    end
   end
 
   def field_items_attributes_params

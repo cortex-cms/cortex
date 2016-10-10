@@ -68,7 +68,6 @@ gem 'aws-sdk', '~> 2.6' # Used by Paperclip
 gem 'sidekiq', '~> 4.2.1'
 gem 'sidekiq-failures', '~> 0.4.5'
 gem 'sinatra', '~> 1.4.7', require: false
-gem 'whenever', :require => false
 
 # Pipeline
 gem 'sprockets-rails', '3.2.0', :require => 'sprockets/railtie'

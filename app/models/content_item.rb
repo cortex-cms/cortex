@@ -5,12 +5,16 @@ class ContentItem < ActiveRecord::Base
 
   state_machine :initial => :default do
     state :draft
-    state :scheduled
+    state :scheduled, :enter => lambda { |content_item| content_item.schedule_publish }
     state :published
     state :default #the default state that is given to an object - this should only ever exist on ContentItems where the ContentType is not publishable
 
     event :publish do
       transitions :to => :published, :from => [:draft, :scheduled]
+    end
+
+    event :schedule do
+      transitions :to => :scheduled, :from => [:draft]
     end
 
     event :draft do
@@ -46,6 +50,11 @@ class ContentItem < ActiveRecord::Base
 
   def publish_state
     state.titleize
+  end
+
+  def schedule_publish
+    timestamp = field_items.find { |field_item| field_item.field.name == "Publish Date" }.data["timestamp"]
+    PublishContentItemJob.set(wait_until: DateTime.parse(timestamp)).perform_later(id)
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

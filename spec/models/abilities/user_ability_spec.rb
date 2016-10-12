@@ -244,7 +244,7 @@ describe Abilities::UserAbility, :type => :model do
         end
       end
 
-      context 'Subject is a Media' do
+      xcontext 'Subject is a Media' do
         let (:subject) { create(:media) }
 
         it 'should be able to view, update, and delete' do

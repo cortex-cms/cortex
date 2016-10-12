@@ -27,7 +27,7 @@ class ContentItemsController < AdminController
   end
 
   def update
-    @content_item = ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user, state: params[:content_item][:state])
+    send_to_service
 
     if @content_item.update
       flash[:success] = "ContentItem updated"
@@ -39,7 +39,7 @@ class ContentItemsController < AdminController
   end
 
   def create
-    @content_item = ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user, state: params[:content_item][:state])
+    send_to_service
 
     if @content_item.create
       flash[:success] = "ContentItem created"

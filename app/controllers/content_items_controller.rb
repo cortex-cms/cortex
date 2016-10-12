@@ -27,7 +27,7 @@ class ContentItemsController < AdminController
   end
 
   def update
-    send_to_service
+    content_item_service
 
     if @content_item.update
       flash[:success] = "ContentItem updated"
@@ -39,7 +39,7 @@ class ContentItemsController < AdminController
   end
 
   def create
-    send_to_service
+    content_item_service
 
     if @content_item.create
       flash[:success] = "ContentItem created"

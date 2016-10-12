@@ -1,8 +1,7 @@
 class PublishContentItemJob < ActiveJob::Base
   queue_as :default
 
-  def perform(content_item_id)
-    content_item = ContentItem.find(content_item_id)
+  def perform(content_item)
     content_item.publish!
   end
 end

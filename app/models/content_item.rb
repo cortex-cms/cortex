@@ -54,7 +54,7 @@ class ContentItem < ActiveRecord::Base
 
   def schedule_publish
     timestamp = field_items.find { |field_item| field_item.field.name == "Publish Date" }.data["timestamp"]
-    PublishContentItemJob.set(wait_until: DateTime.parse(timestamp)).perform_later(id)
+    PublishContentItemJob.set(wait_until: DateTime.parse(timestamp)).perform_later(self)
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

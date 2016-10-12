@@ -147,7 +147,7 @@ describe SPEC_API::Resources::Posts, type: :request do
     end
 
     context 'with featured media' do
-      it 'should create a new post' do
+      xit 'should create a new post' do
         with_media_post = build(:post, :with_featured_media, author_id: author.id).to_json
         expect{ post '/api/v1/posts', with_media_post, application_json }.to change(Post, :count).by(1)
         expect(response).to be_success
@@ -221,7 +221,7 @@ describe SPEC_API::Resources::Posts, type: :request do
     end
 
     context 'with featured media' do
-      it 'should update the post' do
+      xit 'should update the post' do
         post = create(:post, :with_featured_media, user: user)
         post.title += ' updated'
         expect{ put "/api/v1/posts/#{post.id}",  post.to_json, application_json }.to_not change(Post, :count)

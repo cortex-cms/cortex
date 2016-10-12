@@ -11,15 +11,6 @@ module ContentItemHelper
     )
   end
 
-  def execute_state_change(content_item)
-    state = params[:content_item][:state]
-    
-    if content_item.can_transition?(state)
-      state_method = "#{state}!"
-      content_item.send(state_method)
-    end
-  end
-
   def field_items_attributes_params
     field_items_attributes_as_array = params["content_item"]["field_items_attributes"].map do |key, value|
       value

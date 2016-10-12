@@ -6,6 +6,7 @@ class ContentItemService < CortexService
   attribute :current_user, User
   attribute :creator, User
   attribute :field_items, Array[FieldItem]
+  attribute :state, String
 
   def create
     transact_and_refresh do
@@ -17,6 +18,7 @@ class ContentItemService < CortexService
 
       content_item_params.delete("field_items_attributes")
       @content_item.attributes = content_item_params.to_hash
+      execute_state_change(@content_item)
     end
   end
 
@@ -25,6 +27,7 @@ class ContentItemService < CortexService
 
     transact_and_refresh do
       @content_item.update(content_item_attributes)
+      execute_state_change(@content_item)
     end
   end
 
@@ -75,5 +78,12 @@ class ContentItemService < CortexService
 
   def last_updated_by
     {updated_by: current_user}
+  end
+
+  def execute_state_change(content_item)
+    if content_item.can_transition?(state)
+      state_method = "#{state}!"
+      content_item.send(state_method)
+    end
   end
 end

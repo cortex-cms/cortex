@@ -27,9 +27,7 @@ class ContentItemsController < AdminController
   end
 
   def update
-    @content_item = ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user)
-
-    if @content_item.update
+    if content_item.update
       flash[:success] = "ContentItem updated"
     else
       flash[:warning] = "ContentItem failed to update! Reason: #{@content_item.errors.full_messages}"
@@ -39,9 +37,7 @@ class ContentItemsController < AdminController
   end
 
   def create
-    @content_item = ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user)
-
-    if @content_item.create
+    if content_item.create
       flash[:success] = "ContentItem created"
       redirect_to content_type_content_items_path
     else

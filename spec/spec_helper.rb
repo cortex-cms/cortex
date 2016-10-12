@@ -1,6 +1,9 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 
+require 'simplecov'
+SimpleCov.start
+
 require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
@@ -27,7 +30,7 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
-    mocks.allow_message_expectations_on_nil = true 
+    mocks.allow_message_expectations_on_nil = true
   end
 
   elasticsearch_status = false
@@ -43,6 +46,8 @@ RSpec.configure do |config|
   config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: /spec\/api/
 
   config.before(:suite) do
+    # Eager load the application for increased accuracy in Code Coverage tools
+    Rails.application.eager_load!
     DatabaseCleaner.strategy = :transaction
     Capybara.current_driver = Capybara.javascript_driver
     DatabaseCleaner.clean_with(:truncation)
@@ -63,10 +68,6 @@ RSpec.configure do |config|
 
   config.before :each, elasticsearch: true do
     Elasticsearch::Extensions::Test::Cluster.start(port: 9200) unless Elasticsearch::Extensions::Test::Cluster.running?(on: 9200) || elasticsearch_status
-  end
-
-  config.after :suite do
-    Elasticsearch::Extensions::Test::Cluster.stop(port: 9200) if Elasticsearch::Extensions::Test::Cluster.running? on: 9200
   end
 end
 

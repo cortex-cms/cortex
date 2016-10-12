@@ -30,7 +30,7 @@ class ContentItemsController < AdminController
     @content_item = ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user)
 
     if @content_item.update
-      execute_state_change(ContentItem.last)
+      execute_state_change(ContentItem.find(params[:id]))
       flash[:success] = "ContentItem updated"
     else
       flash[:warning] = "ContentItem failed to update! Reason: #{@content_item.errors.full_messages}"

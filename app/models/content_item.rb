@@ -45,7 +45,7 @@ class ContentItem < ActiveRecord::Base
   # content_item.author.user_image)
 
   def author_image
-    "<img src='https://robohash.org/#{id}.png' height='100' width='100'/>".html_safe
+    "<img src='#{creator.gravatar}' height='50px' />".html_safe
   end
 
   def publish_state

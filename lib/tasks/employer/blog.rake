@@ -315,6 +315,7 @@ namespace :employer do
         [
           {
             "name": "Author",
+            "grid_width": 2,
             "cells": [{
               "field": {
                 "method": "author_image"

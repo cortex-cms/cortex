@@ -5,7 +5,7 @@ class ContentType < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   acts_as_paranoid
-  validates :name, :creator, :contract_id, presence: true
+  validates :name, :creator, presence: true
   after_save :rebuild_content_items_index
 
   belongs_to :creator, class_name: "User"

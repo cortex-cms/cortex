@@ -16,7 +16,7 @@ class ApplyUuidsToCustomContentTables < ActiveRecord::Migration
       t.datetime :created_at, null: false
       t.datetime :updated_at, null: false
       t.datetime :deleted_at
-      t.integer :contract_id
+      t.uuid :contract_id
       t.string :icon, default: 'help', null: false
       t.boolean :publishable, default: false
 
@@ -28,7 +28,7 @@ class ApplyUuidsToCustomContentTables < ActiveRecord::Migration
 
     create_table :fields, id: false do |t|
       t.uuid :id, primary_key: true, default: 'uuid_generate_v4()'
-      t.integer :content_type_id, null: false
+      t.uuid :content_type_id, null: false
       t.string :field_type, null: false
       t.integer :order
       t.boolean :required, default: false, null: false
@@ -47,8 +47,8 @@ class ApplyUuidsToCustomContentTables < ActiveRecord::Migration
 
     create_table :content_items, id: false do |t|
       t.uuid :id, primary_key: true, default: 'uuid_generate_v4()'
-      t.integer  :creator_id
-      t.integer  :content_type_id
+      t.uuid  :creator_id
+      t.uuid  :content_type_id
       t.datetime :created_at, null: false
       t.datetime :updated_at, null: false
       t.datetime :deleted_at
@@ -65,8 +65,8 @@ class ApplyUuidsToCustomContentTables < ActiveRecord::Migration
 
     create_table :field_items, id: false do |t|
       t.uuid :id, primary_key: true, default: 'uuid_generate_v4()'
-      t.integer  :field_id
-      t.integer  :content_item_id
+      t.uuid  :field_id
+      t.uuid  :content_item_id
       t.datetime :created_at, null: false
       t.datetime :updated_at, null: false
       t.datetime :deleted_at
@@ -101,8 +101,8 @@ class ApplyUuidsToCustomContentTables < ActiveRecord::Migration
 
     create_table :contentable_decorators, id: false do |t|
       t.uuid :id, primary_key: true, default: 'uuid_generate_v4()'
-      t.integer :decorator_id
-      t.integer :contentable_id
+      t.uuid :decorator_id
+      t.uuid :contentable_id
       t.string :contentable_type
 
       t.timestamps null: false

@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20161017205729) do
   add_index "content_items", ["id"], name: "index_content_items_on_id", using: :btree
 
   create_table "content_types", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
     t.text     "description"
     t.integer  "creator_id",                   null: false
     t.datetime "created_at",                   null: false

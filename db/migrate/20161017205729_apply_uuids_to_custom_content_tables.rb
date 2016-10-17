@@ -10,6 +10,7 @@ class ApplyUuidsToCustomContentTables < ActiveRecord::Migration
 
     create_table :content_types, id: false do |t|
       t.uuid :id, primary_key: true, default: 'uuid_generate_v4()'
+      t.string :name
       t.text :description
       t.integer :creator_id, null: false
       t.datetime :created_at, null: false

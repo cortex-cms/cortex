@@ -69,6 +69,10 @@ RSpec.configure do |config|
   config.before :each, elasticsearch: true do
     Elasticsearch::Extensions::Test::Cluster.start(port: 9200) unless Elasticsearch::Extensions::Test::Cluster.running?(on: 9200) || elasticsearch_status
   end
+
+  config.after :suite do
+    Elasticsearch::Extensions::Test::Cluster.stop(port: 9200) if Elasticsearch::Extensions::Test::Cluster.running? on: 9200
+  end
 end
 
 RSpec::Sidekiq.configure do |config|

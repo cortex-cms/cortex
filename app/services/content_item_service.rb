@@ -1,7 +1,7 @@
 class ContentItemService < CortexService
   include WidgetParsersHelper
 
-  attribute :id, Integer
+  attribute :id, String
   attribute :content_item_params, Object
   attribute :current_user, User
   attribute :creator, User

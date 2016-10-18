@@ -47,7 +47,7 @@ class ApplyUuidsToCustomContentTables < ActiveRecord::Migration
 
     create_table :content_items, id: false do |t|
       t.uuid :id, primary_key: true, default: 'uuid_generate_v4()'
-      t.integer  :creator_id
+      t.uuid  :creator_id
       t.uuid  :content_type_id
       t.datetime :created_at, null: false
       t.datetime :updated_at, null: false

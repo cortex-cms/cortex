@@ -19,8 +19,6 @@ class ContentItemService < CortexService
       content_item_params.delete("field_items_attributes")
       @content_item.attributes = content_item_params.to_hash
     end
-
-    execute_state_change(@content_item)
   end
 
   def update
@@ -29,8 +27,6 @@ class ContentItemService < CortexService
     transact_and_refresh do
       @content_item.update(content_item_attributes)
     end
-    
-    execute_state_change(@content_item)
   end
 
   # This method will set the tag list (whatever it may be named) to the array of tag_data
@@ -50,6 +46,7 @@ class ContentItemService < CortexService
     ActiveRecord::Base.transaction do
       yield
       parse_field_items!
+      execute_state_change(@content_item)
       @content_item.save!
       update_search!
     end
@@ -83,8 +80,8 @@ class ContentItemService < CortexService
   end
 
   def execute_state_change(content_item)
-    if content_item.can_transition?(state)
-      state_method = "#{state}!"
+    if state && content_item.can_transition?(state)
+      state_method = "#{state}"
       content_item.send(state_method)
     end
   end

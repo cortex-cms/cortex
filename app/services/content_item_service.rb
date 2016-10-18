@@ -46,8 +46,8 @@ class ContentItemService < CortexService
     ActiveRecord::Base.transaction do
       yield
       parse_field_items!
-      execute_state_change(@content_item)
       @content_item.save!
+      execute_state_change(@content_item)
       update_search!
     end
   end
@@ -80,8 +80,8 @@ class ContentItemService < CortexService
   end
 
   def execute_state_change(content_item)
-    if state && content_item.can_transition?(state)
-      state_method = "#{state}"
+    if content_item.can_transition?(state)
+      state_method = "#{state}!"
       content_item.send(state_method)
     end
   end

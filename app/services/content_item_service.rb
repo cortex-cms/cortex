@@ -19,8 +19,6 @@ class ContentItemService < CortexService
       content_item_params.delete("field_items_attributes")
       @content_item.attributes = content_item_params.to_hash
     end
-
-    execute_state_change(@content_item)
   end
 
   def update
@@ -29,8 +27,6 @@ class ContentItemService < CortexService
     transact_and_refresh do
       @content_item.update(content_item_attributes)
     end
-    
-    execute_state_change(@content_item)
   end
 
   # This method will set the tag list (whatever it may be named) to the array of tag_data
@@ -51,6 +47,7 @@ class ContentItemService < CortexService
       yield
       parse_field_items!
       @content_item.save!
+      execute_state_change(@content_item)
       update_search!
     end
   end

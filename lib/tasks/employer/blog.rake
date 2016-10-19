@@ -166,6 +166,9 @@ namespace :employer do
                         }
                       }
                     }
+                  },
+                  {
+                    "method": "test_method_thingy"
                   }
                 ]
               }

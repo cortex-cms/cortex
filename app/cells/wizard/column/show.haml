@@ -1,2 +1,6 @@
 %div{class: ['mdl-cell', grid_class]}
-  = cell('wizard/field', collection: fields).()
+  - fields.each do |field|
+    - if field.keys.include?("id")
+      = cell('wizard/field', field)
+    - elsif field.keys.include?("method")
+      = "Method is currently unimplemented"

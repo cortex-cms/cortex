@@ -1,5 +1,5 @@
 //= require jquery
-//= require jquery.turbolinks
+// require jquery.turbolinks # temporarily disabled
 //= require jquery_ujs
 //= require underscore
 //= require riot-compiler
@@ -12,4 +12,4 @@
 //= require base
 //= require forms
 
-//= require turbolinks
+// require turbolinks # temporarily disabled

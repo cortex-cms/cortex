@@ -27,7 +27,7 @@ class ContentItem < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
   belongs_to :updated_by, class_name: "User"
   belongs_to :content_type
-  has_many :field_items, -> { joins(:field).order("fields.order ASC") }, dependent: :destroy, autosave: true
+  has_many :field_items, dependent: :destroy, autosave: true
 
   accepts_nested_attributes_for :field_items
 
@@ -37,7 +37,7 @@ class ContentItem < ActiveRecord::Base
   after_save :update_tag_lists
 
   def self.taggable_fields
-    taggable_on_array = Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.parameterize('_') }
+    Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.parameterize('_') }
   end
 
   # The following method (#author_image) is currently faked

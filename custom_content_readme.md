@@ -16,9 +16,9 @@
 Custom content types enable administrators and developers to compose content structures out of predetermined FieldTypes and with appropriate validations.
 
 ### Vocabulary
-<dt>ContentType</dt> <dd>An ordered collection of Fields which represents a category of content that you want on your site</dd>
+<dt>ContentType</dt> <dd>A collection of Fields which represents a category of content that you want on your site</dd>
 
-<dt>Field</dt> <dd>The association between a ContentType and a FieldType. It tells the ContentType which FieldType to use, the validations you want to run on the content when saving this Field, and the order in which the Field is displayed</dd>
+<dt>Field</dt> <dd>The association between a ContentType and a FieldType. It tells the ContentType which FieldType to use, the validations you want to run on the content when saving this Field, and any relevant metadata for the field.</dd>
 
 <dt>FieldType</dt> <dd>Describes the characteristics of some piece of data that can be used to compose a ContentType. For example, if a ContentType needs a string of text, that would be a TextFieldType, a pdf would be a DocumentFileFieldType, and so on.</dd>
 
@@ -37,13 +37,13 @@ So, in AwesomeBlogPost you would specify that the Field named "Title" is a TextF
 ```
 ct = ContentType.new(name: "AwesomeBlogPost", description: "The kind of blog post that goes on my Awesome Site", creator_id: 1)
 
-ct.fields.new(name: "Title", field_type: "text_field_type", order_position: 1, validations: { presence: true, length: { maximum: 50 } }, metadata: { placeholder: "This is the title" })
+ct.fields.new(name: "Title", field_type: "text_field_type", validations: { presence: true, length: { maximum: 50 } }, metadata: { placeholder: "This is the title" })
 
-ct.fields.new(name: "Body", field_type: "text_field_type", order_position: 2, validations: { length: {maximum: 1000 } })
+ct.fields.new(name: "Body", field_type: "text_field_type", validations: { length: {maximum: 1000 } })
 
-ct.fields.new(name: "Video", field_type: "youtube_field_type", order_position: 3, validations: {})
+ct.fields.new(name: "Video", field_type: "youtube_field_type" })
 
-ct.fields.new(name: "Image", field_type: "image_file_field_type", order_position: 4, validations: content_type: { content_type: "image/jpeg" }, size: { less_than: 1.megabyte })
+ct.fields.new(name: "Image", field_type: "image_file_field_type", validations: content_type: { content_type: "image/jpeg" }, size: { less_than: 1.megabyte })
 
 ct.save
 ```
@@ -89,7 +89,6 @@ Typically for Text Field Types, the metadata will allow the User creating the fi
 ct.fields.new(
     name: "Title",
     field_type: "text_field_type",
-    order_position: 1,
     metadata: { placeholder: "This is the title" }
 )
 ```

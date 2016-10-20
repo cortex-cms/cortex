@@ -80,7 +80,7 @@ class ContentItemService < CortexService
   end
 
   def execute_state_change(content_item)
-    if content_item.can_transition?(state)
+    if state && content_item.can_transition?(state)
       state_method = "#{state}!"
       content_item.send(state_method)
     end

@@ -11,6 +11,7 @@
 /vendor/bundle
 /vendor/assets
 
+/public/asset_field_types/
 /public/assets/
 /public/media/
 /public/youtubes/

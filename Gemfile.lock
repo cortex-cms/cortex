@@ -543,8 +543,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.17.0)
     rake (11.3.0)
-    ranked-model (0.4.0)
-      activerecord (>= 3.1.12)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -754,7 +752,6 @@ DEPENDENCIES
   rails (~> 4.2.7)
   rails-erd
   rails-observers (~> 0.1.2)
-  ranked-model (~> 0.4.0)
   redis-namespace (~> 1.5)
   redis-rails (~> 5.0)
   rolify (~> 5.1)

@@ -11,7 +11,7 @@ class ContentType < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
   belongs_to :contract
 
-  has_many :fields, -> { order(order: :asc) }
+  has_many :fields
   has_many :content_items
   has_many :contentable_decorators, as: :contentable
   has_many :decorators, through: :contentable_decorators

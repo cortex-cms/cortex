@@ -158,7 +158,7 @@ namespace :employer do
                 "elements": [
                   {
                     "cell": {
-                      "class_name": "Plugins::Demo::DemoCell",
+                      "class_name": "plugins/demo/demo",
                       "render_method": "show"
                     }
                   },

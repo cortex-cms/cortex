@@ -3,6 +3,6 @@
     - if element.keys.include?("id")
       = cell('wizard/field', element)
     - elsif element.keys.include?("cell")
-      = cell(element[:cell][:class_name].constantize).(element[:cell][:render_method])
+      = cell(element[:cell][:class_name]).(element[:cell][:render_method])
     - elsif element.keys.include?("method")
       = "Method is currently unimplemented"

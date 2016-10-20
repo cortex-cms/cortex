@@ -1,4 +1,4 @@
 %footer
   %nav.demo-navigation.mdl-navigation
     %div{class: 'mdl-navigation__link tenant__item'}
-      = cell(:tenant, current_user.tenant).(:current)
+      = cell(:tenant, Tenant.find_by_name('Corporate') || current_user.tenant).(:current)

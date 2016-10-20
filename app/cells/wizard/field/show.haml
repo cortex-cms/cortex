@@ -1,3 +1,5 @@
+= cell(Plugins::Demo::DemoCell).()
+
 = context[:form].fields_for 'field_items', field_item do |field_item_form|
   - if field_item.field.field_type_instance.class == TextFieldType
     - if render_method

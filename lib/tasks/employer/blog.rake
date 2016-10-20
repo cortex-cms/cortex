@@ -337,6 +337,17 @@ namespace :employer do
             }]
           },
           {
+            "name": "Cell Thingy",
+            "cells": [{
+              "field": {
+                "cell": {
+                  "class_name": "plugins/demo/demo",
+                  "render_method": "show"
+                }
+              }
+            }]
+          }
+          {
             "name": "Post Details",
             "cells": [
               {

@@ -346,7 +346,7 @@ namespace :employer do
                 }
               }
             }]
-          }
+          },
           {
             "name": "Post Details",
             "cells": [

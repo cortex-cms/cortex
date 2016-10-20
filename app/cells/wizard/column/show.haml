@@ -1,6 +1,8 @@
 %div{class: ['mdl-cell', grid_class]}
-  - fields.each do |field|
-    - if field.keys.include?("id")
-      = cell('wizard/field', field)
-    - elsif field.keys.include?("method")
+  - elements.each do |element|
+    - if element.keys.include?("id")
+      = cell('wizard/field', element)
+    - elsif element.keys.include?("cell")
+      = cell(element[:cell][:class_name].constantize).(element[:cell][:render_method])
+    - elsif element.keys.include?("method")
       = "Method is currently unimplemented"

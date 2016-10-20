@@ -155,7 +155,13 @@ namespace :employer do
                     "text--right"
                   ]
                 },
-                "fields": [
+                "elements": [
+                  {
+                    "cell": {
+                      "class_name": "Plugins::Demo::DemoCell",
+                      "render_method": "show"
+                    }
+                  },
                   {
                     "id": blog.fields[0].id,
                     "render_method": "wysiwyg",
@@ -182,7 +188,7 @@ namespace :employer do
               {
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[1].id
                   },
@@ -199,7 +205,7 @@ namespace :employer do
               },
               {
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[2].id
                   },
@@ -221,7 +227,7 @@ namespace :employer do
               {
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[8].id
                   },
@@ -235,7 +241,7 @@ namespace :employer do
               },
               {
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[11].id
                   },
@@ -266,7 +272,7 @@ namespace :employer do
               {
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[-6].id,
                     "render_method": "checkboxes"
@@ -275,7 +281,7 @@ namespace :employer do
               },
               {
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[-5].id,
                     "render_method": "dropdown"

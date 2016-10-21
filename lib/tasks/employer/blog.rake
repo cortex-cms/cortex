@@ -154,12 +154,18 @@ namespace :employer do
                   "classes": [
                     "text--right"
                   ]
-                },
+                 },
                 "elements": [
                   {
-                    "cell": {
+                    "plugin": {
                       "class_name": "plugins/demo/demo",
-                      "render_method": "show"
+                      "render_method": "marquee",
+                      "data": {
+                        "field_id": blog.fields[1].id
+                      },
+                      "display": {
+                        "id": ["random", "list", "of", "ids"]
+                      }
                     }
                   },
                   {
@@ -333,17 +339,6 @@ namespace :employer do
                 "classes": [
                   "circular"
                 ]
-              }
-            }]
-          },
-          {
-            "name": "Cell Thingy",
-            "cells": [{
-              "field": {
-                "cell": {
-                  "class_name": "plugins/demo/demo",
-                  "render_method": "show"
-                }
               }
             }]
           },

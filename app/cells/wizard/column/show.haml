@@ -2,7 +2,8 @@
   - elements.each do |element|
     - if element.keys.include?("id")
       = cell('wizard/field', element)
-    - elsif element.keys.include?("cell")
-      = cell(element[:cell][:class_name]).(element[:cell][:render_method])
+    - elsif element.keys.include?("plugin")
+      - p element[:plugin]
+      = cell('wizard/plugin', nil, plugin_info: element[:plugin]).()
     - elsif element.keys.include?("method")
       = "Method is currently unimplemented"

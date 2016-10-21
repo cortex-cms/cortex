@@ -59,9 +59,6 @@ namespace :plugin do
                         }
                       }
                     }
-                  },
-                  {
-                    "method": "test_method_thingy"
                   }
                 ]
               }

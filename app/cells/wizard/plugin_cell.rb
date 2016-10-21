@@ -20,7 +20,7 @@ module Wizard
     end
 
     def plugin_cell_information
-      cell(plugin_info[:class_name], plugin_field_item, display: display).(plugin_info[:render_method])
+      cell(plugin_info[:class_name], plugin_field_item, display: display).(plugin_info[:render_method].to_sym)
     end
   end
 end

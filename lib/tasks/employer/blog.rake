@@ -180,7 +180,7 @@ namespace :employer do
                     }
                   },
                   {
-                    "method": "test_method_thingy"
+                    "method": "test_method"
                   }
                 ]
               }
@@ -395,6 +395,8 @@ namespace :employer do
         contentable_id: blog.id,
         contentable_type: 'ContentType'
       })
+
+      Rake::Task['plugin:demo:seed'].execute
     end
   end
 end

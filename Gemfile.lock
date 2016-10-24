@@ -705,7 +705,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.6)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (~> 0.0.4)
-  cortex-plugins-core (~> 0.4.2)
+  cortex-plugins-core (= 0.4.2)
   cortex-plugins-demo!
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)

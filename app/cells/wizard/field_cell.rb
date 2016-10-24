@@ -1,5 +1,5 @@
 module Wizard
-  class FieldCell < Cell::ViewModel
+  class FieldCell < FieldCell
     property :id
     property :label
     property :input

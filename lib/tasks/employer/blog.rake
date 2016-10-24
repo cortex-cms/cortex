@@ -154,8 +154,20 @@ namespace :employer do
                   "classes": [
                     "text--right"
                   ]
-                },
-                "fields": [
+                 },
+                "elements": [
+                  {
+                    "plugin": {
+                      "class_name": "plugins/demo/demo",
+                      "render_method": "marquee",
+                      "data": {
+                        "field_id": blog.fields[1].id
+                      },
+                      "display": {
+                        "id": ["random", "list", "of", "ids"]
+                      }
+                    }
+                  },
                   {
                     "id": blog.fields[0].id,
                     "render_method": "wysiwyg",
@@ -166,6 +178,9 @@ namespace :employer do
                         }
                       }
                     }
+                  },
+                  {
+                    "method": "test_method"
                   }
                 ]
               }
@@ -179,7 +194,7 @@ namespace :employer do
               {
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[1].id
                   },
@@ -196,7 +211,7 @@ namespace :employer do
               },
               {
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[2].id
                   },
@@ -218,7 +233,7 @@ namespace :employer do
               {
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[8].id
                   },
@@ -232,7 +247,7 @@ namespace :employer do
               },
               {
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[11].id
                   },
@@ -263,7 +278,7 @@ namespace :employer do
               {
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[-6].id,
                     "render_method": "checkboxes"
@@ -272,7 +287,7 @@ namespace :employer do
               },
               {
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[-5].id,
                     "render_method": "dropdown"
@@ -380,6 +395,8 @@ namespace :employer do
         contentable_id: blog.id,
         contentable_type: 'ContentType'
       })
+
+      Rake::Task['plugin:demo:seed'].execute
     end
   end
 end

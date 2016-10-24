@@ -12,8 +12,8 @@ gem 'rails', '~> 4.2.7'
 
 # Cortex-specific
 gem 'cortex-exceptions', '~> 0.0.4'
-gem 'cortex-plugins-core', '~> 0.4.1'
-
+#gem 'cortex-plugins-core', '~> 0.4.1'
+gem 'cortex-plugins-core', path: "/Users/phalloran/cortex-plugins-core"
 # API
 gem 'grape', '~> 0.17'
 gem 'grape-entity', '~> 0.5.1'

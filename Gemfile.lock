@@ -16,6 +16,17 @@ GIT
       grape
       kaminari
 
+PATH
+  remote: ../cortex-plugins-core
+  specs:
+    cortex-plugins-core (0.4.1)
+      cells (~> 4.1)
+      cells-haml (~> 0.0.10)
+      cells-rails (~> 0.0.6)
+      ckeditor (~> 4.2.0)
+      mimemagic (~> 0.3.2)
+      rails (>= 4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -127,13 +138,6 @@ GEM
     concurrent-ruby (1.0.2)
     connection_pool (2.2.0)
     cortex-exceptions (0.0.4)
-    cortex-plugins-core (0.4.1)
-      cells (~> 4.1)
-      cells-haml (~> 0.0.10)
-      cells-rails (~> 0.0.6)
-      ckeditor (~> 4.2.0)
-      mimemagic (~> 0.3.2)
-      rails (>= 4)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
@@ -694,7 +698,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.6)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (~> 0.0.4)
-  cortex-plugins-core (~> 0.4.1)
+  cortex-plugins-core!
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)
   doorkeeper (~> 4.2)
@@ -780,4 +784,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.5
+   1.13.5

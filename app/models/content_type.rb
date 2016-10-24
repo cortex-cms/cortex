@@ -40,7 +40,7 @@ class ContentType < ActiveRecord::Base
     mappings = Elasticsearch::Model::Indexing::Mappings.new(content_items_index_name, {})
 
     fields.each do |field|
-      mappings.indexes field.mapping[:name], :type => field.mapping[:type], :analyzer => field.mapping[:analyzer]
+      mappings.indexes field.mapping[:name], field_mappings(field)
     end
 
     mappings
@@ -63,4 +63,13 @@ class ContentType < ActiveRecord::Base
                             settings: content_items_settings.to_hash,
                             mappings: content_items_mappings.to_hash}
   end
+
+  private
+
+  def field_mappings(field)
+    mappings = {type: field.mapping[:type]}
+    mappings[:analyzer] = field.mapping[:analyzer] if field.mapping[:analyzer]
+    mappings
+  end
+
 end

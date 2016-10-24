@@ -5,11 +5,20 @@ class ContentItem < ActiveRecord::Base
 
   state_machine :initial => :default do
     state :draft
+    state :scheduled, :enter => lambda { |content_item| content_item.schedule_publish }
     state :published
     state :default #the default state that is given to an object - this should only ever exist on ContentItems where the ContentType is not publishable
-    
-    event :published, :timestamp => true do
-      transitions :to => :published, :from => [:draft]
+
+    event :publish do
+      transitions :to => :published, :from => [:default, :draft, :scheduled]
+    end
+
+    event :schedule do
+      transitions :to => :scheduled, :from => [:default, :draft]
+    end
+
+    event :draft do
+      transitions :to => :draft, :from => [:default, :published, :scheduled]
     end
   end
 
@@ -18,7 +27,7 @@ class ContentItem < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
   belongs_to :updated_by, class_name: "User"
   belongs_to :content_type
-  has_many :field_items, -> { joins(:field).order("fields.order ASC") }, dependent: :destroy, autosave: true
+  has_many :field_items, dependent: :destroy, autosave: true
 
   accepts_nested_attributes_for :field_items
 
@@ -28,7 +37,7 @@ class ContentItem < ActiveRecord::Base
   after_save :update_tag_lists
 
   def self.taggable_fields
-    taggable_on_array = Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.parameterize('_') }
+    Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.parameterize('_') }
   end
 
   # The following method (#author_image) is currently faked
@@ -36,11 +45,16 @@ class ContentItem < ActiveRecord::Base
   # content_item.author.user_image)
 
   def author_image
-    "<img src='https://robohash.org/#{id}.png' height='100' width='100'/>".html_safe
+    "<img src='#{creator.gravatar}' height='50px' />".html_safe
   end
 
   def publish_state
     state.titleize
+  end
+
+  def schedule_publish
+    timestamp = field_items.find { |field_item| field_item.field.name == "Publish Date" }.data["timestamp"]
+    PublishContentItemJob.set(wait_until: DateTime.parse(timestamp)).perform_later(self)
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

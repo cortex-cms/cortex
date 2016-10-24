@@ -3,11 +3,14 @@ module ContentItemHelper
     @content_type ||= ContentType.find_by_id(params[:content_type_id])
   end
 
+  def content_item
+    @content_item ||= ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user, state: params[:content_item][:state])
+  end
+
   def content_item_params
     params.require(:content_item).permit(
       :creator_id,
       :content_type_id,
-      :state,
       field_items_attributes: field_items_attributes_params,
     )
   end

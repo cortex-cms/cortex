@@ -1,4 +1,5 @@
 $(function() {
+  // If we restore Turbolinks, all of this should be wrapped in turbolinks:load
   $(".datepicker").datepicker({
     dateFormat: "dd/mm/yy"
   });

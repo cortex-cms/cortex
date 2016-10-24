@@ -112,29 +112,29 @@ namespace :employer do
       blog.save
 
       puts "Creating Fields..."
-      blog.fields.new(name: 'Body', field_type: 'text_field_type', order_position: 1, validations: {}, metadata: { wysiwyg: true, parse_widgets: true })
-      blog.fields.new(name: 'Title', field_type: 'text_field_type', order_position: 2, validations: { presence: true })
-      blog.fields.new(name: 'Description', field_type: 'text_field_type', order_position: 3, validations: { presence: true })
-      blog.fields.new(name: 'Slug', field_type: 'text_field_type', order_position: 4, validations: { presence: true })
-      blog.fields.new(name: 'Author', field_type: 'user_field_type', order_position: 5, validations: { presence: true })
-      blog.fields.new(name: 'Tags', field_type: 'tag_field_type', order_position: 6, validations: {})
-      blog.fields.new(name: 'Publish Date', field_type: 'date_time_field_type', order_position: 7, validations: {})
-      blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', order_position: 8, validations: {})
-      blog.fields.new(name: 'SEO Title', field_type: 'text_field_type', order_position: 10, validations: {})
-      blog.fields.new(name: 'SEO Description', field_type: 'text_field_type', order_position: 11, validations: {})
-      blog.fields.new(name: 'SEO Keywords', field_type: 'tag_field_type', order_position: 12, validations: {})
-      blog.fields.new(name: 'No Index', field_type: 'boolean_field_type', order_position: 13)
-      blog.fields.new(name: 'No Follow', field_type: 'boolean_field_type', order_position: 14)
-      blog.fields.new(name: 'No Snippet', field_type: 'boolean_field_type', order_position: 15)
-      blog.fields.new(name: 'No ODP', field_type: 'boolean_field_type', order_position: 16)
-      blog.fields.new(name: 'No Archive', field_type: 'boolean_field_type', order_position: 17)
-      blog.fields.new(name: 'No Image Index', field_type: 'boolean_field_type', order_position: 18)
-      blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: { allowed_values: category_tree }, order_position: 19, validations: { maximum: 2 })
-      blog.fields.new(name: 'Audience', field_type: 'tree_field_type', metadata: { allowed_values: audience_tree }, order_position: 20, validations: { maximum: 1, minimum: 1 })
-      blog.fields.new(name: 'Verticals', field_type: 'tree_field_type', metadata: { allowed_values: vertical_tree }, order_position: 21, validations: { minimum: 1 })
-      blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: { allowed_values: research_tree }, order_position: 22, validations: { minimum: 1 })
-      blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: { allowed_values: persona_tree }, order_position: 23, validations: {})
-      blog.fields.new(name: 'Onet Code', field_type: 'tree_field_type', metadata: { allowed_values: onet_tree }, order_position: 24, validations: {})
+      blog.fields.new(name: 'Body', field_type: 'text_field_type', metadata: { wysiwyg: true, parse_widgets: true })
+      blog.fields.new(name: 'Title', field_type: 'text_field_type', validations: { presence: true })
+      blog.fields.new(name: 'Description', field_type: 'text_field_type', validations: { presence: true })
+      blog.fields.new(name: 'Slug', field_type: 'text_field_type', validations: { presence: true })
+      blog.fields.new(name: 'Author', field_type: 'user_field_type', validations: { presence: true })
+      blog.fields.new(name: 'Tags', field_type: 'tag_field_type')
+      blog.fields.new(name: 'Publish Date', field_type: 'date_time_field_type')
+      blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type')
+      blog.fields.new(name: 'SEO Title', field_type: 'text_field_type')
+      blog.fields.new(name: 'SEO Description', field_type: 'text_field_type')
+      blog.fields.new(name: 'SEO Keywords', field_type: 'tag_field_type')
+      blog.fields.new(name: 'No Index', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No Follow', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No Snippet', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No ODP', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No Archive', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No Image Index', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: { allowed_values: category_tree }, validations: { maximum: 2 })
+      blog.fields.new(name: 'Audience', field_type: 'tree_field_type', metadata: { allowed_values: audience_tree }, validations: { maximum: 1, minimum: 1 })
+      blog.fields.new(name: 'Verticals', field_type: 'tree_field_type', metadata: { allowed_values: vertical_tree }, validations: { minimum: 1 })
+      blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: { allowed_values: research_tree }, validations: { minimum: 1 })
+      blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: { allowed_values: persona_tree })
+      blog.fields.new(name: 'Onet Code', field_type: 'tree_field_type', metadata: { allowed_values: onet_tree })
 
       puts "Saving Employer Blog..."
       blog.save
@@ -154,8 +154,20 @@ namespace :employer do
                   "classes": [
                     "text--right"
                   ]
-                },
-                "fields": [
+                 },
+                "elements": [
+                  {
+                    "plugin": {
+                      "class_name": "plugins/demo/demo",
+                      "render_method": "marquee",
+                      "data": {
+                        "field_id": blog.fields[1].id
+                      },
+                      "display": {
+                        "id": ["random", "list", "of", "ids"]
+                      }
+                    }
+                  },
                   {
                     "id": blog.fields[0].id,
                     "render_method": "wysiwyg",
@@ -166,6 +178,9 @@ namespace :employer do
                         }
                       }
                     }
+                  },
+                  {
+                    "method": "test_method"
                   }
                 ]
               }
@@ -179,7 +194,7 @@ namespace :employer do
               {
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[1].id
                   },
@@ -196,7 +211,7 @@ namespace :employer do
               },
               {
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[2].id
                   },
@@ -218,7 +233,7 @@ namespace :employer do
               {
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[8].id
                   },
@@ -232,7 +247,7 @@ namespace :employer do
               },
               {
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[11].id
                   },
@@ -263,7 +278,7 @@ namespace :employer do
               {
                 "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[-6].id,
                     "render_method": "checkboxes"
@@ -272,7 +287,7 @@ namespace :employer do
               },
               {
                 "grid_width": 6,
-                "fields": [
+                "elements": [
                   {
                     "id": blog.fields[-5].id,
                     "render_method": "dropdown"
@@ -315,6 +330,7 @@ namespace :employer do
         [
           {
             "name": "Author",
+            "grid_width": 2,
             "cells": [{
               "field": {
                 "method": "author_image"
@@ -379,6 +395,8 @@ namespace :employer do
         contentable_id: blog.id,
         contentable_type: 'ContentType'
       })
+
+      Rake::Task['plugin:demo:seed'].execute
     end
   end
 end

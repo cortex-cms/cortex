@@ -1,11 +1,12 @@
 class ContentItemService < CortexService
   include WidgetParsersHelper
 
-  attribute :id, Integer
+  attribute :id, String
   attribute :content_item_params, Object
   attribute :current_user, User
   attribute :creator, User
   attribute :field_items, Array[FieldItem]
+  attribute :state, String
 
   def create
     transact_and_refresh do
@@ -46,6 +47,7 @@ class ContentItemService < CortexService
       yield
       parse_field_items!
       @content_item.save!
+      execute_state_change(@content_item)
       update_search!
     end
   end
@@ -75,5 +77,12 @@ class ContentItemService < CortexService
 
   def last_updated_by
     {updated_by: current_user}
+  end
+
+  def execute_state_change(content_item)
+    if state && content_item.can_transition?(state)
+      state_method = "#{state}!"
+      content_item.send(state_method)
+    end
   end
 end

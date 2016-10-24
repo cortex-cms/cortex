@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926180119) do
+ActiveRecord::Schema.define(version: 20161020162755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,54 +77,65 @@ ActiveRecord::Schema.define(version: 20160926180119) do
     t.integer "category_id", null: false
   end
 
-  create_table "content_items", force: :cascade do |t|
-    t.integer  "creator_id"
-    t.integer  "content_type_id"
+  create_table "content_items", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "content_type_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.datetime "deleted_at"
     t.boolean  "is_published",    default: false
     t.integer  "updated_by_id"
     t.string   "state"
+    t.datetime "publish_date"
+    t.integer  "creator_id",                      null: false
   end
 
   add_index "content_items", ["deleted_at"], name: "index_content_items_on_deleted_at", using: :btree
+  add_index "content_items", ["id"], name: "index_content_items_on_id", using: :btree
 
-  create_table "content_types", force: :cascade do |t|
-    t.string   "name",                         null: false
+  create_table "content_types", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
     t.text     "description"
     t.integer  "creator_id",                   null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
-    t.integer  "contract_id"
+    t.uuid     "contract_id"
     t.string   "icon",        default: "help", null: false
     t.boolean  "publishable", default: false
   end
 
-  add_index "content_types", ["creator_id"], name: "index_content_types_on_creator_id", using: :btree
   add_index "content_types", ["deleted_at"], name: "index_content_types_on_deleted_at", using: :btree
+  add_index "content_types", ["id"], name: "index_content_types_on_id", using: :btree
 
-  create_table "contentable_decorators", force: :cascade do |t|
-    t.integer  "decorator_id"
-    t.integer  "contentable_id"
+  create_table "contentable_decorators", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "decorator_id"
+    t.uuid     "contentable_id"
     t.string   "contentable_type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
 
-  create_table "contracts", force: :cascade do |t|
+  add_index "contentable_decorators", ["contentable_id"], name: "index_contentable_decorators_on_contentable_id", using: :btree
+  add_index "contentable_decorators", ["contentable_type"], name: "index_contentable_decorators_on_contentable_type", using: :btree
+  add_index "contentable_decorators", ["decorator_id"], name: "index_contentable_decorators_on_decorator_id", using: :btree
+  add_index "contentable_decorators", ["id"], name: "index_contentable_decorators_on_id", using: :btree
+
+  create_table "contracts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "decorators", force: :cascade do |t|
+  add_index "contracts", ["id"], name: "index_contracts_on_id", using: :btree
+
+  create_table "decorators", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.jsonb    "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "decorators", ["id"], name: "index_decorators_on_id", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -137,26 +148,28 @@ ActiveRecord::Schema.define(version: 20160926180119) do
 
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
-  create_table "field_items", force: :cascade do |t|
-    t.integer  "field_id"
-    t.integer  "content_item_id"
+  create_table "field_items", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "field_id"
+    t.uuid     "content_item_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
     t.jsonb    "data",            default: {}
   end
 
+  add_index "field_items", ["content_item_id"], name: "index_field_items_on_content_item_id", using: :btree
   add_index "field_items", ["deleted_at"], name: "index_field_items_on_deleted_at", using: :btree
+  add_index "field_items", ["field_id"], name: "index_field_items_on_field_id", using: :btree
+  add_index "field_items", ["id"], name: "index_field_items_on_id", using: :btree
 
   create_table "field_types", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "fields", force: :cascade do |t|
-    t.integer  "content_type_id",                 null: false
+  create_table "fields", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "content_type_id",                 null: false
     t.string   "field_type",                      null: false
-    t.integer  "order"
     t.boolean  "required",        default: false, null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
@@ -166,8 +179,8 @@ ActiveRecord::Schema.define(version: 20160926180119) do
     t.jsonb    "metadata"
   end
 
-  add_index "fields", ["content_type_id"], name: "index_fields_on_content_type_id", using: :btree
   add_index "fields", ["deleted_at"], name: "index_fields_on_deleted_at", using: :btree
+  add_index "fields", ["id"], name: "index_fields_on_id", using: :btree
 
   create_table "locales", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name",            null: false
@@ -333,13 +346,12 @@ ActiveRecord::Schema.define(version: 20160926180119) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
-    t.integer  "resource_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "resource_type"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "resource_id"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "snippets", force: :cascade do |t|
@@ -369,6 +381,7 @@ ActiveRecord::Schema.define(version: 20160926180119) do
   create_table "tags", force: :cascade do |t|
     t.string  "name",           limit: 255
     t.integer "taggings_count",             default: 0
+    t.integer "tenant_id",                  default: 1
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
@@ -421,10 +434,8 @@ ActiveRecord::Schema.define(version: 20160926180119) do
   add_index "users", ["tenant_id"], name: "index_users_on_tenant_id", using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "role_id"
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree

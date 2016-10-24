@@ -46,7 +46,7 @@ describe SPEC_API::Resources::ContentTypes, type: :request do
     end
 
     before do
-      first_name_field.update(content_type: content_type, order_position: :first)
+      first_name_field.update(content_type: content_type)
     end
 
     it "returns the fields for the specified content type" do

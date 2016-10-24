@@ -1,4 +1,4 @@
-class FieldTypeCell < Cell::ViewModel
+class FieldCell < Cell::ViewModel
   property :field
   property :data
 

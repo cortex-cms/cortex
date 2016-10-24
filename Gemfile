@@ -12,7 +12,8 @@ gem 'rails', '~> 4.2.7'
 
 # Cortex-specific
 gem 'cortex-exceptions', '~> 0.0.4'
-gem 'cortex-field_types-core', '~> 0.2.3'
+gem 'cortex-plugins-core', '= 0.4.3'
+gem 'cortex-plugins-demo', git: 'git://github.com/cortex-cms/cortex-plugins-demo'
 
 # API
 gem 'grape', '~> 0.17'
@@ -41,7 +42,6 @@ gem 'elasticsearch-rails', '~> 0.1'
 gem 'paranoia', '~> 2.1'
 gem 'pg', '~> 0.19.0'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
-gem 'ranked-model', '~> 0.4.0'
 gem 'redis-rails', '~> 5.0'
 gem 'pomona', '~> 0.7'
 gem "transitions", '~> 1.2', :require => ["transitions", "active_model/transitions"]

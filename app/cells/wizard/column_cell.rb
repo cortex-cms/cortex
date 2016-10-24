@@ -3,7 +3,7 @@ module Wizard
     property :heading
     property :grid_width
     property :display
-    property :fields
+    property :elements
 
     def show
       render

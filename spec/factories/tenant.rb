@@ -5,4 +5,8 @@ FactoryGirl.define do
 
     initialize_with { new(name: name, subdomain: subdomain) }
   end
+
+  trait :second_tenant do
+    id 300
+  end
 end

@@ -15,10 +15,17 @@ class FieldItem < ActiveRecord::Base
 
   private
 
+  def field_type_instance_params(data_hash)
+    # Carefully construct a params object so we don't trigger our fragile setters when a value is nil
+    params = {metadata: field.metadata, validations: field.validations}
+    params.data = data_hash.merge({existing_data: data}) if data_hash
+    params
+  end
+
   def field_type_instance(data_hash = nil)
     field_type_class = FieldType.get_subtype_constant(field.field_type)
     # data_before_typecast will give us a non-mutilated hash with Objects intact, just in case validations get called first
-    @field_type_instance ||= field_type_class.new(metadata: field.metadata, validations: field.validations, data: data_hash.merge({ existing_data: data }) || data_before_type_cast)
+    @field_type_instance ||= field_type_class.new(field_type_instance_params(data_hash))
     @field_type_instance if @field_type_instance.save!
   end
 

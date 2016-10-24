@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/cortex-cms/cortex-plugins-demo
-  revision: 4b675c7d04a78b227407e37d67d1621df43d3aac
+  revision: f383f3969b8aea43cd9236745b2579496561743f
   specs:
     cortex-plugins-demo (1.4.2)
       cells (~> 4.1)

@@ -18,7 +18,7 @@ class FieldItem < ActiveRecord::Base
   def field_type_instance_params(data_hash)
     # Carefully construct a params object so we don't trigger our fragile setters when a value is nil
     params = {metadata: field.metadata, validations: field.validations}
-    params.data = data_hash.merge({existing_data: data}) if data_hash
+    params[:data] = data_hash.merge({existing_data: data}) if data_hash
     params
   end
 

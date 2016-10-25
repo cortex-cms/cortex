@@ -8,7 +8,7 @@ module Cortex
     config.angular_templates.module_name = 'cortex.templates'
     config.i18n.enforce_available_locales = true
 
-    config.eager_load_paths += %W(#{config.root}/lib #{config.root}/lib/helpers #{config.root}/app/models/media_types #{config.root}/app/models/post_types #{config.root}/app/models/observers)
+    config.eager_load_paths += %W(#{config.root}/lib #{config.root}/lib/helpers #{config.root}/lib/breadcrumbs #{config.root}/app/models/media_types #{config.root}/app/models/post_types #{config.root}/app/models/observers)
 
     config.active_record.default_timezone = :utc
     config.active_record.observers = :media_observer, :post_observer, :tenant_observer, :user_observer, :youtube_observer

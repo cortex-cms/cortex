@@ -1,7 +1,7 @@
 module ApplicationHelper
   def title
     title = 'Cortex Administration'
-    title += " | #{render_breadcrumbs}" if render_breadcrumbs
+    title += " | #{render_breadcrumbs builder: TitleBuilder}" if render_breadcrumbs
     title
   end
 

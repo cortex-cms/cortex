@@ -136,6 +136,7 @@ namespace :employer do
       blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
       blog.fields.new(name: 'Onet Code', field_type: 'tree_field_type', metadata: {allowed_values: onet_tree})
 
+
       puts "Saving Employer Blog..."
       blog.save
 

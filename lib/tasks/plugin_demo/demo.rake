@@ -43,7 +43,7 @@ namespace :plugin do
                       "class_name": "plugins/demo/demo",
                       "render_method": "marquee",
                       "data": {
-                        "field_id": demo.fields[0].id
+                        "field_id": demo.fields.find_by_name('Title').id
                       },
                       "display": {
                         "id": ["random", "list", "of", "ids"]
@@ -51,7 +51,7 @@ namespace :plugin do
                     }
                   },
                   {
-                    "id": demo.fields[0].id,
+                    "id": demo.fields.find_by_name('Title').id,
                     "input": {
                       "display": {
                         "styles": {
@@ -89,7 +89,7 @@ namespace :plugin do
                   "class_name": "plugins/demo/demo",
                   "render_method": "marquee",
                   "data": {
-                    "field_id": demo.fields[0].id
+                    "field_id": demo.fields.find_by_name('Title').id
                   },
                   "display": {
                     "id": ["random", "list", "of", "ids"]

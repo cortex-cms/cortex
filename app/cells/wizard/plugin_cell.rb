@@ -19,7 +19,7 @@ module Wizard
       @options[:plugin_info]
     end
 
-    def plugin_cell_information
+    def cell_information
       cell(plugin_info[:class_name], field_item, display: display).(plugin_info[:render_method].to_sym)
     end
   end

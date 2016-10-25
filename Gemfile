@@ -12,7 +12,7 @@ gem 'rails', '~> 4.2.7'
 
 # Cortex-specific
 gem 'cortex-exceptions', '~> 0.0.4'
-gem 'cortex-plugins-core', '= 0.4.3'
+gem 'cortex-plugins-core', '= 0.4.4'
 gem 'cortex-plugins-demo', git: 'git://github.com/cortex-cms/cortex-plugins-demo'
 
 # API

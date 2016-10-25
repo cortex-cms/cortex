@@ -1,4 +1,4 @@
-Bundler.require(:default, Rails.env)
+ Bundler.require(:default, Rails.env)
 
 namespace :employer do
   namespace :blog do
@@ -136,6 +136,8 @@ namespace :employer do
       blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: { allowed_values: persona_tree })
       blog.fields.new(name: 'Onet Code', field_type: 'tree_field_type', metadata: { allowed_values: onet_tree })
 
+
+
       puts "Saving Employer Blog..."
       blog.save
 
@@ -157,7 +159,7 @@ namespace :employer do
                 },
                 "fields": [
                   {
-                    "id": blog.fields[0].id,
+                    "id": blog.fields.find_by_name('Body').id,
                     "render_method": "wysiwyg",
                     "input": {
                       "display": {
@@ -181,16 +183,16 @@ namespace :employer do
                 "grid_width": 6,
                 "fields": [
                   {
-                    "id": blog.fields[1].id
+                    "id": blog.fields.find_by_name('Title').id
                   },
                   {
-                    "id": blog.fields[6].id
+                    "id": blog.fields.find_by_name('Publish Date').id
+                  },
+                  { 
+                    "id": blog.fields.find_by_name('Expiration Date').id
                   },
                   {
-                    "id": blog.fields[7].id
-                  },
-                  {
-                    "id": blog.fields[5].id
+                    "id": blog.fields.find_by_name('Tags').id
                   }
                 ]
               },
@@ -198,13 +200,13 @@ namespace :employer do
                 "grid_width": 6,
                 "fields": [
                   {
-                    "id": blog.fields[2].id
+                    "id":  blog.fields.find_by_name('Description').id
                   },
                   {
-                    "id": blog.fields[3].id
+                    "id":  blog.fields.find_by_name('Slug').id
                   },
-                  {
-                    "id": blog.fields[4].id
+                  {   
+                    "id": blog.fields.find_by_name('Author').id
                   }
                 ]
               }
@@ -220,13 +222,13 @@ namespace :employer do
                 "grid_width": 6,
                 "fields": [
                   {
-                    "id": blog.fields[8].id
+                    "id": blog.fields.find_by_name('SEO Title').id
                   },
                   {
-                    "id": blog.fields[10].id
+                    "id": blog.fields.find_by_name('SEO Keywords').id
                   },
                   {
-                    "id": blog.fields[9].id
+                    "id": blog.fields.find_by_name('SEO Description').id
                   }
                 ]
               },
@@ -234,22 +236,22 @@ namespace :employer do
                 "grid_width": 6,
                 "fields": [
                   {
-                    "id": blog.fields[11].id
+                    "id": blog.fields.find_by_name('No Index').id
                   },
                   {
-                    "id": blog.fields[12].id
+                    "id": blog.fields.find_by_name('No Follow').id
                   },
                   {
-                    "id": blog.fields[13].id
+                    "id": blog.fields.find_by_name('No Snippet').id
                   },
                   {
-                    "id": blog.fields[14].id
+                    "id": blog.fields.find_by_name('No ODP').id
                   },
                   {
-                    "id": blog.fields[15].id
+                    "id": blog.fields.find_by_name('No Archive').id
                   },
                   {
-                    "id": blog.fields[16].id
+                    "id": blog.fields.find_by_name('No Image Index').id
                   }
                 ]
               }
@@ -265,7 +267,7 @@ namespace :employer do
                 "grid_width": 6,
                 "fields": [
                   {
-                    "id": blog.fields[-6].id,
+                    "id": blog.fields.find_by_name('Categories').id,
                     "render_method": "checkboxes"
                   }
                 ]
@@ -274,23 +276,23 @@ namespace :employer do
                 "grid_width": 6,
                 "fields": [
                   {
-                    "id": blog.fields[-5].id,
+                    "id": blog.fields.find_by_name('Audience').id,
                     "render_method": "dropdown"
                   },
                   {
-                    "id": blog.fields[-4].id,
+                    "id": blog.fields.find_by_name('Verticals').id,
                     "render_method": "dropdown"
                   },
                   {
-                    "id": blog.fields[-3].id,
+                    "id": blog.fields.find_by_name('Research').id,
                     "render_method": "dropdown"
                   },
                   {
-                    "id": blog.fields[-2].id,
+                    "id": blog.fields.find_by_name('Persona').id,
                     "render_method": "dropdown"
                   },
                   {
-                    "id": blog.fields[-1].id,
+                    "id": blog.fields.find_by_name('Onet Code').id,
                     "render_method": "dropdown"
                   }
                 ]
@@ -332,7 +334,7 @@ namespace :employer do
             "cells": [
               {
                 "field": {
-                  "id": blog.fields[1].id
+                  "id": blog.fields.find_by_name('Title').id
                 },
                 "display": {
                   "classes": [
@@ -343,7 +345,7 @@ namespace :employer do
               },
               {
                 "field": {
-                  "id": blog.fields[3].id
+                  "id": blog.fields.find_by_name('Slug').id
                 }
               },
               {
@@ -358,7 +360,7 @@ namespace :employer do
             "cells": [
               {
                 "field": {
-                  "id": blog.fields[5].id
+                  "id": blog.fields.find_by_name('Tags').id
                 },
                 "display": {
                   "classes": [

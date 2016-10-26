@@ -16,7 +16,7 @@ module Index
       elsif field.has_key?(:method)
         @options[:content_item].send(field[:method])
       elsif field.has_key?(:plugin)
-        cell(field[:plugin][:class_name], plugin_field_item(field), display: field[:plugin][:display]).(field[:plugin][:render_method])
+        cell(field[:plugin][:class_name], plugin_field_item(field), display: field[:plugin][:display], config: field[:plugin][:config]).(field[:plugin][:render_method])
       else
         ""
       end

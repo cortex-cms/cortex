@@ -137,7 +137,7 @@ GEM
     concurrent-ruby (1.0.2)
     connection_pool (2.2.0)
     cortex-exceptions (0.0.4)
-    cortex-plugins-core (0.4.5)
+    cortex-plugins-core (0.4.6)
       cells (~> 4.1)
       cells-haml (~> 0.0.10)
       cells-rails (~> 0.0.6)
@@ -705,7 +705,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.6)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (~> 0.0.4)
-  cortex-plugins-core (= 0.4.5)
+  cortex-plugins-core (= 0.4.6)
   cortex-plugins-demo!
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)

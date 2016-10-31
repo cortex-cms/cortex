@@ -57,6 +57,10 @@ class ContentItem < ActiveRecord::Base
     PublishContentItemJob.set(wait_until: DateTime.parse(timestamp)).perform_later(self)
   end
 
+  def link_base_url
+    "https://robohash.org/#{id}.png"
+  end
+
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.
   # Due to lack of hoisting - it cannot access the method unless the method appears before it in this
   # file.

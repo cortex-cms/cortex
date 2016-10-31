@@ -475,6 +475,7 @@ namespace :employer do
         "link": "https://hiring.careerbuilder.com",
         "language": "en",
         "items": {
+          "link_base_url": { "method": "link_base_url" },
           "title": { "field": blog.fields.find_by_name('Title').id },
           "tags": { "field": blog.fields.find_by_name('Tags').id },
           "thumbnail": {

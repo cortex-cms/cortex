@@ -1,10 +1,10 @@
 module RssHelper
-  def content_type
+  def rss_content_type
     @content_type = ContentType.find_by_name(params[:content_type_name]) || ContentType.new
   end
 
   def rss_decorator
-    @rss_decorator ||= Hashie::Mash.new(content_type.rss_decorator.data)
+    @rss_decorator ||= rss_content_type.rss_decorator.data
   end
 
   def field_value(content_item, field_id)

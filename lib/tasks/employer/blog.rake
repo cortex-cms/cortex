@@ -391,6 +391,7 @@ namespace :employer do
                   "plugin": {
                     "class_name": "plugins/core/asset_info",
                     "render_method": "index",
+                    "config": {"thumbnail_style"=>"mini"},
                     "data": {
                       "field_id": blog.fields.find_by_name('Asset').id
                     }
@@ -484,14 +485,7 @@ namespace :employer do
               "render_method": "index"
             }
           },
-          "ticker": {
-            "plugin": {
-              "data": { "field_id": blog.fields.find_by_name('Title').id },
-              "display"=>{"id"=>["random", "list", "of", "ids"]},
-              "class_name": "plugins/demo/demo",
-              "render_method": "marquee"
-            }
-          }
+          "publish_state": { "method": "publish_state" }
         },
         "show_items": {
           "title": { "field": blog.fields.find_by_name('Title').id },
@@ -504,14 +498,7 @@ namespace :employer do
               "render_method": "index"
             }
           },
-          "ticker": {
-            "plugin": {
-              "data": { "field_id": blog.fields.find_by_name('Title').id },
-              "display"=>{"id"=>["random", "list", "of", "ids"]},
-              "class_name": "plugins/demo/demo",
-              "render_method": "marquee"
-            }
-          }
+          "publish_state": { "method": "publish_state" }
         }
       }
 

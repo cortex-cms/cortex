@@ -1,6 +1,5 @@
 class Rss::V2::RssController < ApplicationController
   include RssHelper
-
   before_action :perform_common_tasks
 
   def index

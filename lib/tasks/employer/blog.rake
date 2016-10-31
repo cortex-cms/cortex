@@ -408,9 +408,12 @@ namespace :employer do
           "title": blog.fields.find_by_name('Title').id,
           "body": blog.fields.find_by_name('Body').id,
           "tags": blog.fields.find_by_name('Tags').id,
-          "header_image": "",#blog.fields.find_by_name('Tags').id
-          "thumbnail": ""
-        ]
+          "header_image": "",#blog.fields.find_by_name('HeaderImageOrSomething').id
+          "thumbnail": ""#blog.fields.find_by_name('Thumbnail-IDK').id
+        ],
+        "config": {
+          "summarize": "true"
+        }
       }
 
       blog_rss_decorator = Decorator.new(name: "Rss", data: rss_hash)

@@ -14,5 +14,6 @@ class Rss::V2::RssController < ApplicationController
   def perform_common_tasks
     @content_items = content_type.content_items
     @rss_decorator = Hashie::Mash.new(content_type.rss_decorator.data)
+    @config = @rss_decorator.extract!("config")
   end
 end

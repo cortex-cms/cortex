@@ -10,7 +10,7 @@ xml.rss :version => "2.0" do
     @content_items.each_with_index do |content_item|
       xml.item do
         @rss_decorator['index_items'].each_pair do |key, value|
-
+          xml.tag! key, parse_data(key, value, content_item)
         end
       end
     end

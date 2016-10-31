@@ -111,6 +111,8 @@ namespace :employer do
                              })
       blog.save
 
+      allowed_asset_content_types = %w(svg ico png jpg gif bmp)
+
       puts "Creating Fields..."
       blog.fields.new(name: 'Body', field_type: 'text_field_type', metadata: {wysiwyg: true, parse_widgets: true})
       blog.fields.new(name: 'Title', field_type: 'text_field_type', validations: {presence: true})
@@ -118,6 +120,30 @@ namespace :employer do
       blog.fields.new(name: 'Slug', field_type: 'text_field_type', validations: {presence: true})
       blog.fields.new(name: 'Author', field_type: 'user_field_type', validations: {presence: true})
       blog.fields.new(name: 'Tags', field_type: 'tag_field_type')
+      blog.fields.new(name: 'Asset', field_type: 'asset_field_type',
+                         validations:
+                           {
+                             presence: true,
+                             allowed_extensions: allowed_asset_content_types,
+                             size: {
+                               less_than: 50.megabytes
+                             }
+                           },
+                         metadata:
+                           {
+                             styles: {
+                               large: {geometry: '1800x1800>', format: :jpg},
+                               medium: {geometry: '800x800>', format: :jpg},
+                               default: {geometry: '300x300>', format: :jpg},
+                               mini: {geometry: '100x100>', format: :jpg},
+                               micro: {geometry: '50x50>', format: :jpg},
+                               post_tile: {geometry: '1140x', format: :jpg}
+                             },
+                             processors: [:thumbnail, :paperclip_optimizer],
+                             preserve_files: true,
+                             path: ':class/employer/careerbuilder-:style-:id.:extension',
+                             s3_headers: {'Cache-Control': 'public, max-age=315576000'}
+                           })
       blog.fields.new(name: 'Publish Date', field_type: 'date_time_field_type')
       blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type')
       blog.fields.new(name: 'SEO Title', field_type: 'text_field_type')
@@ -187,6 +213,7 @@ namespace :employer do
               }
             ]
           },
+
           {
             "name": "Details",
             "heading": "Let's talk about your post..",
@@ -312,6 +339,33 @@ namespace :employer do
                 ]
               }
             ]
+          },
+          {
+            "name": "Image",
+            "heading": "Choose a Featured Image",
+            "description": "It's an Image!",
+            "columns": [
+              {
+                "heading": "Upload an image",
+                "grid_width": 6,
+                "elements": [
+                  {
+                    "id": blog.fields.find_by_name('Asset').id
+                  }
+                ]
+              },
+              {
+                "grid_width": 6,
+                "elements": [
+                  {
+                    "plugin": {
+                      "data": {"field_id": blog.fields.find_by_name('Asset').id },
+                      "class_name": "plugins/core/asset_info",
+                      "render_method"=>"show"}
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -329,6 +383,21 @@ namespace :employer do
       index_hash = {
         "columns":
           [
+            {
+              "name": "Thumbnail",
+              "grid_width": 2,
+              "cells": [{
+                "field": {
+                  "plugin": {
+                    "class_name": "plugins/core/asset_info",
+                    "render_method": "index",
+                    "data": {
+                      "field_id": blog.fields.find_by_name('Asset').id
+                    }
+                  }
+                }
+              }]
+            },
             {
               "name": "Author",
               "grid_width": 2,
@@ -404,15 +473,45 @@ namespace :employer do
         "description": "Posts for the Employer Blog - Woo",
         "link": "https://hiring.careerbuilder.com",
         "language": "en",
-        "items": [
-          "title": blog.fields.find_by_name('Title').id,
-          "body": blog.fields.find_by_name('Body').id,
-          "tags": blog.fields.find_by_name('Tags').id,
-          "header_image": "",#blog.fields.find_by_name('HeaderImageOrSomething').id
-          "thumbnail": ""#blog.fields.find_by_name('Thumbnail-IDK').id
-        ],
-        "config": {
-          "summarize": "true"
+        "index_items": {
+          "title": { "field": blog.fields.find_by_name('Title').id },
+          "tags": { "field": blog.fields.find_by_name('Tags').id },
+          "thumbnail": {
+            "plugin": {
+              "data": { "field_id": blog.fields.find_by_name('Asset').id },
+              "config": {"thumbnail_style"=>"mini"},
+              "class_name": "plugins/core/asset_info",
+              "render_method": "index"
+            }
+          },
+          "ticker": {
+            "plugin": {
+              "data": { "field_id": blog.fields.find_by_name('Title').id },
+              "display"=>{"id"=>["random", "list", "of", "ids"]},
+              "class_name": "plugins/demo/demo",
+              "render_method": "marquee"
+            }
+          }
+        },
+        "show_items": {
+          "title": { "field": blog.fields.find_by_name('Title').id },
+          "tags": { "field": blog.fields.find_by_name('Tags').id },
+          "thumbnail": {
+            "plugin": {
+              "data": { "field_id": blog.fields.find_by_name('Asset').id },
+              "config": {"thumbnail_style"=>"mini"},
+              "class_name": "plugins/core/asset_info",
+              "render_method": "index"
+            }
+          },
+          "ticker": {
+            "plugin": {
+              "data": { "field_id": blog.fields.find_by_name('Title').id },
+              "display"=>{"id"=>["random", "list", "of", "ids"]},
+              "class_name": "plugins/demo/demo",
+              "render_method": "marquee"
+            }
+          }
         }
       }
 

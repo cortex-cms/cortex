@@ -1,18 +1,11 @@
-class Rss::V2::RssController < ApplicationController
-  include RssHelper
-  before_action :perform_common_tasks
+module Rss
+  module V2
+    class RssController < ApplicationController
+      include RssHelper
 
-  def index
-    @content_items = rss_content_type.content_items
-  end
-
-  def show
-    @content_item = ContentItem.find(params[:id])
-  end
-
-  private
-
-  def perform_common_tasks
-    @rss_decorator = Hashie::Mash.new(rss_content_type.rss_decorator.data)
+      def index
+        @content_items = rss_content_type.content_items
+      end
+    end
   end
 end

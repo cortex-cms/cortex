@@ -474,20 +474,7 @@ namespace :employer do
         "description": "Posts for the Employer Blog - Woo",
         "link": "https://hiring.careerbuilder.com",
         "language": "en",
-        "index_items": {
-          "title": { "field": blog.fields.find_by_name('Title').id },
-          "tags": { "field": blog.fields.find_by_name('Tags').id },
-          "thumbnail": {
-            "plugin": {
-              "data": { "field_id": blog.fields.find_by_name('Asset').id },
-              "config": {"thumbnail_style"=>"mini"},
-              "class_name": "plugins/core/asset_info",
-              "render_method": "index"
-            }
-          },
-          "publish_state": { "method": "publish_state" }
-        },
-        "show_items": {
+        "items": {
           "title": { "field": blog.fields.find_by_name('Title').id },
           "tags": { "field": blog.fields.find_by_name('Tags').id },
           "thumbnail": {

@@ -11,7 +11,7 @@ xml << Rails.cache.fetch("rss/v2/#{content_type.name}/index_feed", expires_in: 1
       @content_items.each_with_index do |content_item|
         xml.item do
           @rss_decorator['items'].each_pair do |key, value|
-            xml.tag! key, parse_data(key, value, content_item)
+            xml.tag! key, get_tag_data(value, content_item)
           end
         end
       end

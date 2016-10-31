@@ -6,6 +6,7 @@ class ContentType < ActiveRecord::Base
 
   acts_as_paranoid
   validates :name, :creator, presence: true
+  validates :name, uniqueness: true
   after_save :rebuild_content_items_index
 
   belongs_to :creator, class_name: "User"
@@ -25,7 +26,7 @@ class ContentType < ActiveRecord::Base
 
   def content_items_index_name
     content_type_name_sanitized = name.parameterize('_')
-    "#{Rails.env}_content_type_#{content_type_name_sanitized}_#{id}_content_items"
+    "#{Rails.env}_content_type_#{content_type_name_sanitized}_content_items"
   end
 
   def wizard_decorator

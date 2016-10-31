@@ -14,8 +14,8 @@ Cortex::Application.routes.draw do
 
   scope :rss do
     scope :v2 do
-      get ':name' => 'rss#index', as: 'rss_index', defaults: { format: 'rss' }
-      get ':name/:id' => 'rss#show', as: 'rss_show', defaults: { format: 'rss' }
+      get ':content_type_name' => 'rss/v2/rss#index', as: 'rss_index', defaults: { format: 'rss' }
+      get ':content_type_name/:id' => 'rss/v2/rss#show', as: 'rss_show', defaults: { format: 'rss' }
     end
   end
 

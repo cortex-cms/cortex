@@ -397,6 +397,31 @@ namespace :employer do
                                     contentable_type: 'ContentType'
                                   })
 
+      puts "Creating RSS Decorators..."
+      rss_hash = {
+        "title": "Employer Blog Posts",
+        "author": "CareerBuilder",
+        "description": "Posts for the Employer Blog - Woo",
+        "link": "https://hiring.careerbuilder.com",
+        "language": "en",
+        "items": [
+          "title": blog.fields.find_by_name('Title').id,
+          "body": blog.fields.find_by_name('Body').id,
+          "tags": blog.fields.find_by_name('Tags').id,
+          "header_image": "",#blog.fields.find_by_name('Tags').id
+          "thumbnail": ""
+        ]
+      }
+
+      blog_rss_decorator = Decorator.new(name: "Rss", data: rss_hash)
+      blog_rss_decorator.save
+
+      ContentableDecorator.create({
+                                    decorator_id: blog_rss_decorator.id,
+                                    contentable_id: blog.id,
+                                    contentable_type: 'ContentType'
+                                  })
+
       Rake::Task['plugin:demo:seed'].execute
     end
   end

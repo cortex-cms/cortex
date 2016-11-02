@@ -417,7 +417,11 @@ namespace :employer do
                   },
           "description": { "field": blog.fields.find_by_name('Description').id },
           "pubDate": { "field": blog.fields.find_by_name('Publish Date').id },
-          "guid": { "method": { "name": "id" } }
+          "guid": { "method": { "name": "id" } },
+          "content": { "field": blog.fields.find_by_name('Body').id,
+                       "encoded": "true"
+                     },
+          "categories": { "field": blog.fields.find_by_name('Tags').id }
         }
       }
 

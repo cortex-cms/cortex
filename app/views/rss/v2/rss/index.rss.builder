@@ -12,10 +12,16 @@ Rails.cache.fetch("rss-v2-#{content_type.name}", expires_in: 1.hours, race_condi
         end
       end
 
-      @content_items.each_with_index do |content_item|
+      @content_items.each_with_index do |rss_content_item|
         xml.item do
           rss_decorator['items'].each_pair do |key, value|
-            xml.tag! key, get_tag_data(value, content_item)
+            if value.keys.include?("encoded")
+              xml.tag! "#{key}:encoded" do
+                xml.cdata! get_tag_data(value, rss_content_item)
+              end
+            else
+              xml.tag! key, get_tag_data(value, rss_content_item)
+            end
           end
         end
       end

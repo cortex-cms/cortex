@@ -58,7 +58,7 @@ class ContentItem < ActiveRecord::Base
   end
 
   def rss_url(base_url, slug_field_id)
-    puts "#{base_url} floop-flop #{slug_field_id}"
+    "#{base_url}#{slug_field_id}"
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

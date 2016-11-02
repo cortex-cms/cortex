@@ -18,7 +18,7 @@ module RssHelper
   end
 
   def method_value(content_item, method)
-    content_item.send(method).to_s
+    content_item(method["name"], *method["args"])
   end
 
   def get_tag_data(tag_data_hash, content_item)

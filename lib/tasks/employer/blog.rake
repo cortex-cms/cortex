@@ -470,23 +470,21 @@ namespace :employer do
       puts "Creating RSS Decorators..."
       rss_hash = {
         "title": "Employer Blog Posts",
+        "description": "Blog Posts for Employer - For Uberflip",
         "author": "CareerBuilder",
         "description": "Posts for the Employer Blog - Woo",
-        "link": "https://hiring.careerbuilder.com",
-        "language": "en",
+        "link": "https://resources.careerbuilder.com/blog_articles/",
+        "language": "en-us",
         "items": {
-          "link_base_url": { "method": "link_base_url" },
           "title": { "field": blog.fields.find_by_name('Title').id },
-          "tags": { "field": blog.fields.find_by_name('Tags').id },
-          "thumbnail": {
-            "plugin": {
-              "data": { "field_id": blog.fields.find_by_name('Asset').id },
-              "config": {"thumbnail_style"=>"mini"},
-              "class_name": "plugins/core/asset_info",
-              "render_method": "index"
-            }
-          },
-          "publish_state": { "method": "publish_state" }
+          "link": { "method": {
+                      "name": "rss_url",
+                      "args": ["https://resources.careerbuilder.com/blog_articles/", blog.fields.find_by_name("Slug").id]
+                    }
+                  },
+          "description": { "field": blog.fields.find_by_name('Description').id },
+          "pubDate": { "field": blog.fields.find_by_name('Publish Date').id },
+          "guid": { "method": { "name": "id" } }
         }
       }
 

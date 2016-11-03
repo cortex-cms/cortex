@@ -64,7 +64,9 @@ class ContentItem < ActiveRecord::Base
 
   def user_email(user_field_id)
     user_id = field_items.find_by_field_id(user_field_id).data.values.join
-    User.find_by_id(user_id).try(:email)
+    user_email = User.find_by_id(user_id).try(:email)
+    user_fullname = User.find_by_id(user_id).try(:fullname)
+    "#{user_email} (#{user_fullname})"
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

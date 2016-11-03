@@ -28,11 +28,7 @@ module RssHelper
       field_item_data(tag_data_hash["field"], rss_content_item)
     elsif tag_data_hash.keys.include?("method")
       method_data(tag_data_hash["method"], rss_content_item)
-    else
-      ""
     end
-
-    
   end
 
   private

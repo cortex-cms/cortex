@@ -187,6 +187,7 @@ namespace :employer do
               }
             ]
           },
+
           {
             "name": "Details",
             "heading": "Let's talk about your post..",
@@ -393,6 +394,53 @@ namespace :employer do
 
       ContentableDecorator.create({
                                     decorator_id: blog_index_decorator.id,
+                                    contentable_id: blog.id,
+                                    contentable_type: 'ContentType'
+                                  })
+
+      puts "Creating RSS Decorators..."
+      rss_hash = {
+        "channel": {
+          "title": { "string": "Employer Blog" },
+          "link": { "string": "https://hiring.careerbuilder.com/promotions/" },
+          "description": { "string": "A Blog for Employers" },
+          "category:1": { "string": "Employers" },
+          "category:2": { "string": "Blog" },
+          "docs": { "string": "https://admin.cbcortex.com/rss/v2/docs" },
+          "ttl": { "string": "30" },
+          "not_in_spec": { "string": "Should Not Be Included" }
+        },
+        "item": {
+          "title": { "field": blog.fields.find_by_name('Title').id },
+          "link": { "method": {
+                      "name": "rss_url",
+                      "args": ["https://hiring.careerbuilder.com/promotions/", blog.fields.find_by_name('Slug').id]
+                   }
+            },
+          "description": { "field": blog.fields.find_by_name('Description').id },
+          "content": { "field": blog.fields.find_by_name('Body').id, "encode": true },
+          "author": { "method": {
+                        "name": "user_email",
+                        "args": [blog.fields.find_by_name('Author').id]
+                      }
+          },
+          "category:1": { "field": blog.fields.find_by_name('Tags').id, "multiple": "," },
+          # "category": { "field": blog.fields.find_by_name('Categories').id, "multiple": true }, Data not persisting, pending bugfix
+          "guid": { "attributes": {
+                      "isPermaLink": false
+                    },
+                    "method": { "name": "id" }
+                  },
+          "pubDate": { "field": blog.fields.find_by_name('Publish Date').id },
+          "other_thing_that's_not_in_spec": { "string": "Should not appear in RSS Feed for Items" }
+        }
+      }
+
+      blog_rss_decorator = Decorator.new(name: "Rss", data: rss_hash)
+      blog_rss_decorator.save
+
+      ContentableDecorator.create({
+                                    decorator_id: blog_rss_decorator.id,
                                     contentable_id: blog.id,
                                     contentable_type: 'ContentType'
                                   })

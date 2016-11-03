@@ -407,7 +407,7 @@ namespace :employer do
           "category:1": { "string": "Employers" },
           "category:2": { "string": "Blog" },
           "docs": { "string": "https://admin.cbcortex.com/rss/v2/docs" },
-          "ttl": { "string": "60" },
+          "ttl": { "string": "30" },
           "not_in_spec": { "string": "Should Not Be Included" }
         },
         "item": {
@@ -417,21 +417,20 @@ namespace :employer do
                       "args": ["https://hiring.careerbuilder.com/promotions/", blog.fields.find_by_name('Slug').id]
                    }
             },
-          "description": { "field": blog.fields.find_by_name('Description').id, "encode": true },
+          "description": { "field": blog.fields.find_by_name('Description').id },
           "content": { "field": blog.fields.find_by_name('Body').id, "encode": true },
           "author": { "method": {
-                      "name": "user_email",
-                      "args": [blog.fields.find_by_name('Author').id]
-                    }
+                        "name": "user_email",
+                        "args": [blog.fields.find_by_name('Author').id]
+                      }
           },
           "category:1": { "field": blog.fields.find_by_name('Tags').id, "multiple": "," },
           # "category": { "field": blog.fields.find_by_name('Categories').id, "multiple": true }, Data not persisting, pending bugfix
-          "category:2": { "method": {
-                          "name": "user_email",
-                          "args": [blog.fields.find_by_name('Author').id]
-                        }
-          },
-          "guid": { "method": { "name": "id" } },
+          "guid": { "attributes": {
+                      "isPermaLink": false
+                    },
+                    "method": { "name": "id" }
+                  },
           "pubDate": { "field": blog.fields.find_by_name('Publish Date').id },
           "other_thing_that's_not_in_spec": { "string": "Should not appear in RSS Feed for Items" }
         }

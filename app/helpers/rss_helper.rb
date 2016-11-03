@@ -9,27 +9,37 @@ module RssHelper
     @rss_decorator ||= rss_content_type.rss_decorator.data
   end
 
-  def field_value(content_item, field_id)
-    field_item = content_item.field_items.find_by_field_id(field_id)
-    field_item.data.values.join unless field_item.nil?
+  def channel_spec
+    @channel_spec ||= CortexRssSpec::Channel.feed
   end
 
-  def plugin_value(content_item, tag_data_hash)
-    field_item = content_item.field_items.find_by_field_id(tag_data_hash['data']['field_id'])
-    cell(tag_data_hash['class_name'], field_item, display: tag_data_hash['display'], config: tag_data_hash['config']).(tag_data_hash['render_method'])
+  def item_spec
+    @item_spec ||= CortexRssSpec::Item.feed
   end
 
-  def method_value(content_item, method)
-    content_item.send(method["name"], *method["args"])
+  def key_name(key)
+    key.split(":").first
   end
 
-  def get_tag_data(tag_data_hash, content_item)
-    if tag_data_hash.keys.include?("field")
-      field_value(content_item, tag_data_hash["field"])
-    elsif tag_data_hash.include?("plugin")
-      plugin_value(content_item, tag_data_hash["plugin"])
-    elsif tag_data_hash.include?("method")
-      method_value(content_item, tag_data_hash["method"])
+  def tag_data(tag_data_hash, rss_content_item)
+    if tag_data_hash.keys.include?("string")
+      tag_data_hash["string"]
+    elsif tag_data_hash.keys.include?("field")
+      field_item_data(tag_data_hash["field"], rss_content_item)
+    elsif tag_data_hash.keys.include?("method")
+      method_data(tag_data_hash["method"], rss_content_item)
+    else
+      ""
     end
+  end
+
+  private
+
+  def field_item_data(field_id, rss_content_item)
+    rss_content_item.field_items.find_by_field_id(field_id).data.values.join
+  end
+
+  def method_data(method_hash, rss_content_item)
+    rss_content_item.send(method_hash["name"], *method_hash["args"])
   end
 end

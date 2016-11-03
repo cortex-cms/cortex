@@ -111,8 +111,6 @@ namespace :employer do
                              })
       blog.save
 
-      allowed_asset_content_types = %w(svg ico png jpg gif bmp)
-
       puts "Creating Fields..."
       blog.fields.new(name: 'Body', field_type: 'text_field_type', metadata: {wysiwyg: true, parse_widgets: true})
       blog.fields.new(name: 'Title', field_type: 'text_field_type', validations: {presence: true})
@@ -402,26 +400,39 @@ namespace :employer do
 
       puts "Creating RSS Decorators..."
       rss_hash = {
-        "title": "Employer Blog Posts",
-        "description": "Blog Posts for Employer - For Uberflip",
-        "author": "CareerBuilder",
-        "description": "Posts for the Employer Blog",
-        "link": "https://resources.careerbuilder.com/blog_articles/",
-        "language": "en-us",
-        "items": {
+        "channel": {
+          "title": { "string": "Employer Blog" },
+          "link": { "string": "https://hiring.careerbuilder.com/promotions/" },
+          "description": { "string": "A Blog for Employers" },
+          "category:1": { "string": "Employers" },
+          "category:2": { "string": "Blog" },
+          "docs": { "string": "https://admin.cbcortex.com/rss/v2/docs" },
+          "ttl": { "string": "60" },
+          "not_in_spec": { "string": "Should Not Be Included" }
+        },
+        "item": {
           "title": { "field": blog.fields.find_by_name('Title').id },
           "link": { "method": {
                       "name": "rss_url",
-                      "args": ["https://resources.careerbuilder.com/blog_articles/", blog.fields.find_by_name("Slug").id]
-                    }
-                  },
+                      "args": ["https://hiring.careerbuilder.com/promotions/", blog.fields.find_by_name('Slug').id]
+                   }
+            },
           "description": { "field": blog.fields.find_by_name('Description').id },
-          "pubDate": { "field": blog.fields.find_by_name('Publish Date').id },
+          "author": { "method": {
+                      "name": "user_email",
+                      "args": [blog.fields.find_by_name('Author').id]
+                    }
+          },
+          "category:1": { "field": blog.fields.find_by_name('Tags').id },
+          # "category": { "field": blog.fields.find_by_name('Categories').id, "multiple": "true" }, Data not persisting, pending bugfix
+          "category:2": { "method": {
+                          "name": "user_email",
+                          "args": [blog.fields.find_by_name('Author').id]
+                        }
+          },
           "guid": { "method": { "name": "id" } },
-          "content": { "field": blog.fields.find_by_name('Body').id,
-                       "encoded": "true"
-                     },
-          "categories": { "field": blog.fields.find_by_name('Tags').id }
+          "pubDate": { "field": blog.fields.find_by_name('Publish Date').id },
+          "other_thing_that's_not_in_spec": { "string": "Should not appear in RSS Feed for Items" }
         }
       }
 

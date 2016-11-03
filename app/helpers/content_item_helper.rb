@@ -4,7 +4,6 @@ module ContentItemHelper
   end
 
   def content_item
-    binding.pry
     @content_item ||= ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user, state: params[:content_item][:state])
   end
 

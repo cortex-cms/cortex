@@ -31,6 +31,8 @@ module RssHelper
     else
       ""
     end
+
+    
   end
 
   private

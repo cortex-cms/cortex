@@ -417,13 +417,13 @@ namespace :employer do
                       "args": ["https://hiring.careerbuilder.com/promotions/", blog.fields.find_by_name('Slug').id]
                    }
             },
-          "description": { "field": blog.fields.find_by_name('Description').id },
+          "description": { "field": blog.fields.find_by_name('Description').id, "encode": "true" },
           "author": { "method": {
                       "name": "user_email",
                       "args": [blog.fields.find_by_name('Author').id]
                     }
           },
-          "category:1": { "field": blog.fields.find_by_name('Tags').id },
+          "category:1": { "field": blog.fields.find_by_name('Tags').id, "multiple": "," },
           # "category": { "field": blog.fields.find_by_name('Categories').id, "multiple": "true" }, Data not persisting, pending bugfix
           "category:2": { "method": {
                           "name": "user_email",

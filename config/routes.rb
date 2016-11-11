@@ -12,6 +12,12 @@ Cortex::Application.routes.draw do
     resources :content_items
   end
 
+  scope :rss do
+    scope :v2 do
+      get ':content_type_name' => 'rss/v2/rss#index', as: 'rss_index', defaults: { format: 'rss' }
+    end
+  end
+
   # Authentication
   use_doorkeeper do
     unless Rails.env.development? && !ENV['DEPLOYED']

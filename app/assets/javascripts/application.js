@@ -6,6 +6,7 @@
 //= require material
 //= require jquery-ui/datepicker
 //= require bootstrap-tagsinput
+//= require clipboard
 
 //= require cortex-field_types-core/application
 

@@ -3,6 +3,6 @@
     - if element.keys.include?("id")
       = cell(Wizard::FieldCell, element).()
     - elsif element.keys.include?("plugin")
-      = cell('wizard/plugin', nil, plugin_info: element[:plugin]).()
+      = cell(Wizard::PluginCell, nil, plugin_info: element[:plugin]).()
     - elsif element.keys.include?("method")
       = "Method is currently unimplemented"

@@ -57,6 +57,18 @@ class ContentItem < ActiveRecord::Base
     PublishContentItemJob.set(wait_until: DateTime.parse(timestamp)).perform_later(self)
   end
 
+  def rss_url(base_url, slug_field_id)
+    slug = field_items.find_by_field_id(slug_field_id).data.values.join
+    "#{base_url}#{slug}"
+  end
+
+  def user_email(user_field_id)
+    user_id = field_items.find_by_field_id(user_field_id).data.values.join
+    user_email = User.find_by_id(user_id).try(:email)
+    user_fullname = User.find_by_id(user_id).try(:fullname)
+    "#{user_email} (#{user_fullname})"
+  end
+
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.
   # Due to lack of hoisting - it cannot access the method unless the method appears before it in this
   # file.

@@ -6,6 +6,7 @@ class ContentType < ActiveRecord::Base
 
   acts_as_paranoid
   validates :name, :creator, presence: true
+  validates :name, uniqueness: true
   after_save :rebuild_content_items_index
 
   belongs_to :creator, class_name: "User"
@@ -25,7 +26,7 @@ class ContentType < ActiveRecord::Base
 
   def content_items_index_name
     content_type_name_sanitized = name.parameterize('_')
-    "#{Rails.env}_content_type_#{content_type_name_sanitized}_#{id}_content_items"
+    "#{Rails.env}_content_type_#{content_type_name_sanitized}_content_items"
   end
 
   def wizard_decorator
@@ -36,11 +37,15 @@ class ContentType < ActiveRecord::Base
     decorators.find_by_name("Index")
   end
 
+  def rss_decorator
+    decorators.find_by_name("Rss")
+  end
+
   def content_items_mappings
     mappings = Elasticsearch::Model::Indexing::Mappings.new(content_items_index_name, {})
 
     fields.each do |field|
-      mappings.indexes field.mapping[:name], :type => field.mapping[:type], :analyzer => field.mapping[:analyzer]
+      mappings.indexes field.mapping[:name], field_mappings(field)
     end
 
     mappings
@@ -63,4 +68,13 @@ class ContentType < ActiveRecord::Base
                             settings: content_items_settings.to_hash,
                             mappings: content_items_mappings.to_hash}
   end
+
+  private
+
+  def field_mappings(field)
+    mappings = {type: field.mapping[:type]}
+    mappings[:analyzer] = field.mapping[:analyzer] if field.mapping[:analyzer]
+    mappings
+  end
+
 end

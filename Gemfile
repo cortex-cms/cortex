@@ -76,6 +76,9 @@ gem 'angular-rails-templates', '~> 1.0.2'
 gem 'ngannotate-rails', '~> 1.2.2'
 gem 'uglifier', '~> 3.0.3'
 
+# Performance
+gem 'bootscale', require: false
+
 # View
 gem 'haml', '~> 4.1.0.beta'
 gem 'cells', git: 'git://github.com/samstickland/cells', branch: 'collection_fix' # remove explicit 'cells' dependency when collection_fix is merged in. See: https://github.com/apotonick/cells/pull/415

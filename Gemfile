@@ -5,7 +5,7 @@ ruby '2.3.1'
 gem 'bower-rails', '~> 0.11.0'
 
 # Server
-gem 'unicorn', '~> 5.2.0'
+gem 'puma', '~> 3.6'
 
 # Rails
 gem 'rails', '~> 5.0.0'
@@ -75,6 +75,9 @@ gem 'sprockets', '3.7.0'
 gem 'angular-rails-templates', '~> 1.0.2'
 gem 'ngannotate-rails', '~> 1.2.2'
 gem 'uglifier', '~> 3.0.3'
+
+# Performance
+gem 'bootscale', require: false
 
 # View
 gem 'haml', '~> 4.1.0.beta'

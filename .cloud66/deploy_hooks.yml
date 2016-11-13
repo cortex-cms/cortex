@@ -1,12 +1,18 @@
 default: &default
   first_thing:
     - snippet: cloud66/node
-      target: any
+      target: rails
       execute: true
+      apply_during: build_only
     - command: npm install -g bower
       sudo: true
-      target: any
+      target: rails
       execute: true
+      apply_during: build_only
+  after_rails:
+    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
+      target: rails
+      apply_during: all
 
 development:
   <<: *default
@@ -17,14 +23,15 @@ development:
       execute: true
       run_on: single_server
       apply_during: all
-      sudo: false
     - source: /.cloud66/scripts/rebuild_indexes.sh
       destination: /tmp/rebuild_indexes.sh
       target: rails
       execute: true
       run_on: single_server
       apply_during: all
-      sudo: false
+    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
+      target: rails
+      apply_during: all
 
 staging:
   <<: *default
@@ -35,14 +42,15 @@ staging:
       execute: true
       run_on: single_server
       apply_during: all
-      sudo: false
     - source: /.cloud66/scripts/rebuild_indexes.sh
       destination: /tmp/rebuild_indexes.sh
       target: rails
       execute: true
       run_on: single_server
       apply_during: all
-      sudo: false
+    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
+      target: rails
+      apply_during: all
 
 production:
   <<: *default
@@ -53,4 +61,6 @@ production:
       execute: true
       run_on: single_server
       apply_during: all
-      sudo: false
+    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
+      target: rails
+      apply_during: all

@@ -15,7 +15,7 @@ Cortex::Application.configure do
   config.action_controller.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
-  #config.active_support.deprecation = :log
+  config.active_support.deprecation = :log
 
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
@@ -24,6 +24,9 @@ Cortex::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  config.assets.quiet = true
+
+  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   if ENV['DEPLOYED']
     config.cache_store = :redis_store, ENV['CACHE_URL']

@@ -13,6 +13,7 @@ default: &default
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails
       apply_during: all
+      sudo: true
 
 development:
   <<: *default
@@ -32,6 +33,7 @@ development:
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails
       apply_during: all
+      sudo: true
 
 staging:
   <<: *default
@@ -51,6 +53,7 @@ staging:
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails
       apply_during: all
+      sudo: true
 
 production:
   <<: *default
@@ -64,3 +67,4 @@ production:
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails
       apply_during: all
+      sudo: true

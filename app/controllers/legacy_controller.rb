@@ -11,7 +11,7 @@ class LegacyController < ApplicationController
     gon.push({
                current_user: current_user.as_json,
                settings: {
-                 cortex_base_url: "#{Cortex.config.cortex.api.base_url}api/#{Cortex.config.cortex.api.version}",
+                 cortex_base_url: "#{root_url}api/v1",
                  paging: {
                    defaultPerPage: 10
                  }

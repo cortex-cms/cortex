@@ -30,7 +30,7 @@ gem 'pundit', '~> 1.1'
 
 # Data
 gem 'rails-observers', git: 'git://github.com/rails/rails-observers'
-gem 'awesome_nested_set', '~> 3.1'
+gem 'awesome_nested_set', git: 'git://github.com/cortex-cms/awesome_nested_set'
 gem 'paperclip', '~> 5.1.0'
 gem 'paperclip-optimizer', '~> 2.0'
 gem 'image_optim_pack', '~> 0.3.0'
@@ -108,7 +108,7 @@ end
 
 group :test, :development do
   # Environment
-  gem 'dotenv'
+  gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
   # Cache/Sidekiq
   gem 'redis-namespace'

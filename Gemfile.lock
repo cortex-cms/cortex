@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/cortex-cms/awesome_nested_set
+  revision: d3bad27fa959788e403becc411f6db9d1aac1dfb
+  specs:
+    awesome_nested_set (3.1.2)
+      activerecord (>= 4.0.0, < 5.1)
+
+GIT
   remote: git://github.com/cortex-cms/cortex-plugins-demo
   revision: 676926ab244a125a14e8ec6628ef0e46a3ad784b
   specs:
@@ -87,8 +94,6 @@ GEM
     attr_required (1.0.1)
     autoprefixer-rails (6.5.3)
       execjs
-    awesome_nested_set (3.1.1)
-      activerecord (>= 4.0.0, < 5.1)
     aws-sdk (2.6.19)
       aws-sdk-resources (= 2.6.19)
     aws-sdk-core (2.6.19)
@@ -170,6 +175,9 @@ GEM
     doorkeeper (4.2.0)
       railties (>= 4.2)
     dotenv (2.1.1)
+    dotenv-rails (2.1.1)
+      dotenv (= 2.1.1)
+      railties (>= 4.0, < 5.1)
     elasticsearch (5.0.0)
       elasticsearch-api (= 5.0.0)
       elasticsearch-transport (= 5.0.0)
@@ -695,7 +703,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 4.0)
   addressable (~> 2.5.0)
   angular-rails-templates (~> 1.0.2)
-  awesome_nested_set (~> 3.1)
+  awesome_nested_set!
   aws-sdk (~> 2.6)
   bcrypt (~> 3.1.11)
   better_errors
@@ -717,7 +725,7 @@ DEPENDENCIES
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)
   doorkeeper (~> 4.2)
-  dotenv
+  dotenv-rails
   elasticsearch-extensions (~> 0.0.22)
   elasticsearch-model (~> 0.1)
   elasticsearch-rails (~> 0.1)

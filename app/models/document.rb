@@ -1,4 +1,4 @@
-class Document < ActiveRecord::Base
+class Document < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :user

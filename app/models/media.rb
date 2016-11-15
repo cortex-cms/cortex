@@ -6,7 +6,7 @@ module PaperclipExtensions
   end
 end
 
-class Media < ActiveRecord::Base
+class Media < ApplicationRecord
   include SearchableMedia
   include Taxon
   include FindByTenant

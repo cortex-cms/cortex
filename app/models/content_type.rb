@@ -1,6 +1,6 @@
 require 'elasticsearch/model/indexing'
 
-class ContentType < ActiveRecord::Base
+class ContentType < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 

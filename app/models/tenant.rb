@@ -1,4 +1,4 @@
-class Tenant < ActiveRecord::Base
+class Tenant < ApplicationRecord
   default_scope { where(deleted_at: nil) }
 
   acts_as_nested_set

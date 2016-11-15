@@ -46,8 +46,6 @@ RSpec.configure do |config|
   config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: /spec\/api/
 
   config.before(:suite) do
-    # Eager load the application for increased accuracy in Code Coverage tools
-    Rails.application.eager_load!
     DatabaseCleaner.strategy = :transaction
     Capybara.current_driver = Capybara.javascript_driver
     DatabaseCleaner.clean_with(:truncation)

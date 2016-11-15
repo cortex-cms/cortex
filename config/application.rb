@@ -33,10 +33,6 @@ module Cortex
       end
     end
 
-    config.generators do |generator|
-      generator.orm :active_record
-    end
-
     # Needed until there is a better fix for Paperclip. https://github.com/thoughtbot/paperclip/issues/1924#issuecomment-123927367
     Paperclip.options[:content_type_mappings] = {:csv => 'text/plain'}
   end

@@ -1,4 +1,4 @@
-class BulkJob < ActiveRecord::Base
+class BulkJob < ApplicationRecord
   belongs_to :user
 
   serialize :log

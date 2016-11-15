@@ -1,4 +1,4 @@
-class Localization < ActiveRecord::Base
+class Localization < ApplicationRecord
   has_many :locales, dependent: :destroy
   belongs_to :user
 

@@ -1,6 +1,6 @@
 require 'digest/md5'
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include HasGravatar
   include HasFirstnameLastname
   include SearchableUser
@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_one    :author
   has_many   :media
   has_many   :tenants
+  has_many   :posts
   has_many   :posts, through: :authors
   has_many   :localizations
   has_many   :locales

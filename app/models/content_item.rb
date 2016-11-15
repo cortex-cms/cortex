@@ -1,4 +1,4 @@
-class ContentItem < ActiveRecord::Base
+class ContentItem < ApplicationRecord
   include ActiveModel::Transitions
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks

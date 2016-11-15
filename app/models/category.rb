@@ -1,4 +1,4 @@
-class Category < ActiveRecord::Base
+class Category < ApplicationRecord
   acts_as_nested_set
   scope :job_phases, -> { where(depth: 0) }
   scope :categories, -> { where(depth: 1) }

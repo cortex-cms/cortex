@@ -25,8 +25,8 @@ sleep 5
 echo "ES Version Check"
 curl -XGET 'http://localhost:9200'
 
-echo "bundle exec rake db:drop db:create db:migrate db:seed"
-bundle exec rake db:drop db:create db:migrate db:seed
+echo "bundle exec rake db:setup"
+bundle exec rake db:setup
 
 echo "bundle exec rake cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed"
 bundle exec rake cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed

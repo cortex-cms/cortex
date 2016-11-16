@@ -136,9 +136,9 @@ namespace :employer do
                   {
                     "id": blog.fields.find_by_name('Tags').id
                   },
-                  {
-                    "id": blog.fields.find_by_name('Expiration Date').id
-                  },
+                  # {
+                  #   "id": blog.fields.find_by_name('Expiration Date').id
+                  # },
                   {
                     "id": blog.fields.find_by_name('Publish Date').id
                   }

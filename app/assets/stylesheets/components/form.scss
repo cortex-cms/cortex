@@ -11,6 +11,16 @@ form {
   }
 }
 
+.mdl-button--success {
+  background-color: #00C957;
+  color: white;
+
+  &:hover {
+    background-color: #00C957;
+    color: white;
+  }
+}
+
 div.bootstrap-tagsinput input {
   width: 100% !important;
 }

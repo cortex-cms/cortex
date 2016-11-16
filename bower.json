@@ -31,7 +31,7 @@
     "bootstrap-switch": "~> 3.3.2",
     "angular-bootstrap-toggle-switch": "~> 0.5.5",
     "angular-validation-match": "< 1.4",
-
+    "jqueryui-timepicker-addon": "~> 1.5",
     "riot": "~2.6.4",
     "clipboard": "~1.5.15"
   },

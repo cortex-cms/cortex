@@ -5,6 +5,7 @@
 //= require riot-compiler
 //= require material
 //= require jquery-ui/datepicker
+//= require jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon
 //= require bootstrap-tagsinput
 //= require clipboard
 

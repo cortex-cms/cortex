@@ -4,7 +4,7 @@ $(function() {
     dateFormat: "dd/mm/yy"
   });
 
-  $(".datepicker").on("click", function(ev){
+  $(".datepicker").on("focus", function(ev){
     if ($(this).val() == "") {
       $(this).closest('div').addClass('is-dirty');
     }

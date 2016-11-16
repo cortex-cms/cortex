@@ -4,23 +4,6 @@ namespace :employer do
   namespace :blog do
     desc 'Seed Employer Blog ContentType and Fields'
     task seed: :environment do
-      def audience_tree
-        tree = Tree.new
-        tree.add_node({name: "Job Seeker"})
-        tree.add_node({name: "Employer"})
-
-        tree
-      end
-
-      def vertical_tree
-        tree = Tree.new
-        tree.add_node({name: "Small Business"})
-        tree.add_node({name: "Recruiting and Staffing"})
-        tree.add_node({name: "Health Care"})
-
-        tree
-      end
-
       def research_tree
         tree = Tree.new
         tree.add_node({name: "CB Research"})
@@ -31,58 +14,27 @@ namespace :employer do
 
       def category_tree
         tree = Tree.new
-        tree.add_node({name: "Candidate Experience"}) #1
-        tree.add_node({name: "CareerBuilder Solutions"}) #2
-        tree.add_node({name: "Data and Analytics"}) #3
-        tree.add_node({name: "Events"}) #4
-        tree.add_node({name: "Health Care"}) #5
-        tree.add_node({name: "Hiring Strategy"}) #6
-        tree.add_node({name: "Leadership"}) #7
-        tree.add_node({name: "News and Trends"}) #8
-        tree.add_node({name: "Other Stuff"}) #9
-        tree.add_node({name: "Recruitment Techniques"}) #10
-        tree.add_node({name: "Recruitment Technology"}) #11
-        tree.add_node({name: "Reports"}) #12
-        tree.add_node({name: "BLS Reports"}, 12) #13
-        tree.add_node({name: "Economy"}, 12) #14
-        tree.add_node({name: "Forecasts"}, 12) #15
-        tree.add_node({name: "Infographics"}, 12) #16
-        tree.add_node({name: "Survey Results"}, 12) #17
-        tree.add_node({name: "Small Business"}) #18
-        tree.add_node({name: "Staffing & Recruiting"}) #19
-        tree.add_node({name: "Talent Acquisition"}) #20
-        tree.add_node({name: "Employment Branding"}, 20) #21
-        tree.add_node({name: "Generational Hiring"}, 20) #22
-        tree.add_node({name: "HR Software"}, 20) #23
-        tree.add_node({name: "Job Postings"}, 20) #24
-        tree.add_node({name: "Mobile"}, 20) #25
-        tree.add_node({name: "Selection"}, 20) #26
-        tree.add_node({name: "Workforce Data"}, 20) #27
-        tree.add_node({name: "Talent Advisor"}) #28
-        tree.add_node({name: "Talent Factor"}) #29
-        tree.add_node({name: "Talent Management"}) #30
-        tree.add_node({name: "Benefits"}, 30) #31
-        tree.add_node({name: "Diversity in the Workplace"}, 30) #32
-        tree.add_node({name: "Onboarding"}, 30) #33
-        tree.add_node({name: "Retention"}, 30) #34
-        tree.add_node({name: "Talent Development"}, 30) #35
-        tree.add_node({name: "Talent Sourcing"}) #36
-        tree.add_node({name: "Workplace Insight"}) #37
+        tree.add_node({ name: "Candidate Experience" })
+        tree.add_node({ name: "Recruitment Techniques" })
+        tree.add_node({ name: "Talent Sourcing" })
+        tree.add_node({ name: "Hiring Strategy" })
+        tree.add_node({ name: "Data and Analytics" })
+        tree.add_node({ name: "Recruitment Technology" })
+        tree.add_node({ name: "Workplace Insights" })
+        tree.add_node({ name: "News and Trends" })
 
         tree
       end
 
       def persona_tree
         tree = Tree.new
-        tree.add_node({name: "Persona 1"})
-        tree.add_node({name: "Persona 2"})
+        tree.add_node({name: "Recruiters"})
+        tree.add_node({name: "Sourcers"})
+        tree.add_node({name: "Managers/Directors"})
+        tree.add_node({name: "C-Level"})
+        tree.add_node({name: "General Audience"})
 
         tree
-      end
-
-      def seed_industries
-        puts 'Seeding Industries (Job Families)..'
-
       end
 
       def onet_tree
@@ -130,12 +82,8 @@ namespace :employer do
       blog.fields.new(name: 'No Archive', field_type: 'boolean_field_type')
       blog.fields.new(name: 'No Image Index', field_type: 'boolean_field_type')
       blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2})
-      blog.fields.new(name: 'Audience', field_type: 'tree_field_type', metadata: {allowed_values: audience_tree}, validations: {maximum: 1, minimum: 1})
-      blog.fields.new(name: 'Verticals', field_type: 'tree_field_type', metadata: {allowed_values: vertical_tree}, validations: {minimum: 1})
       blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
       blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
-      blog.fields.new(name: 'Onet Code', field_type: 'tree_field_type', metadata: {allowed_values: onet_tree})
-
 
       puts "Saving Employer Blog..."
       blog.save
@@ -158,16 +106,7 @@ namespace :employer do
                 },
                 "elements": [
                   {
-                    "plugin": {
-                      "class_name": "plugins/demo/demo",
-                      "render_method": "marquee",
-                      "data": {
-                        "field_id": blog.fields.find_by_name('Title').id,
-                      },
-                      "display": {
-                        "id": ["random", "list", "of", "ids"]
-                      }
-                    }
+                    "id": blog.fields.find_by_name('Title').id
                   },
                   {
                     "id": blog.fields.find_by_name('Body').id,
@@ -179,9 +118,6 @@ namespace :employer do
                         }
                       }
                     }
-                  },
-                  {
-                    "method": "test_method"
                   }
                 ]
               }
@@ -198,16 +134,13 @@ namespace :employer do
                 "grid_width": 6,
                 "elements": [
                   {
-                    "id": blog.fields.find_by_name('Title').id
-                  },
-                  {
-                    "id": blog.fields.find_by_name('Publish Date').id
+                    "id": blog.fields.find_by_name('Tags').id
                   },
                   {
                     "id": blog.fields.find_by_name('Expiration Date').id
                   },
                   {
-                    "id": blog.fields.find_by_name('Tags').id
+                    "id": blog.fields.find_by_name('Publish Date').id
                   }
                 ]
               },
@@ -222,6 +155,41 @@ namespace :employer do
                   },
                   {
                     "id": blog.fields.find_by_name('Author').id
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Categorize",
+            "heading": "Sort Into Categories..",
+            "description": "Select the categories that best describe your post.",
+            "columns": [
+              {
+                "heading": "Publishing (Optional Heading)",
+                "grid_width": 4,
+                "elements": [
+                  {
+                    "id": blog.fields.find_by_name('Categories').id,
+                    "render_method": "checkboxes"
+                  }
+                ]
+              },
+              {
+                "grid_width": 4,
+                "elements": [
+                  {
+                    "id": blog.fields.find_by_name('Persona').id,
+                    "render_method": "dropdown"
+                  }
+                ]
+              },
+              {
+                "grid_width": 4,
+                "elements": [
+                  {
+                    "id": blog.fields.find_by_name('Research').id,
+                    "render_method": "dropdown"
                   }
                 ]
               }
@@ -267,48 +235,6 @@ namespace :employer do
                   },
                   {
                     "id": blog.fields.find_by_name('No Image Index').id
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "Categorize",
-            "heading": "Sort Into Categories..",
-            "description": "Select the categories that best describe your post.",
-            "columns": [
-              {
-                "heading": "Publishing (Optional Heading)",
-                "grid_width": 6,
-                "elements": [
-                  {
-                    "id": blog.fields.find_by_name('Categories').id,
-                    "render_method": "checkboxes"
-                  }
-                ]
-              },
-              {
-                "grid_width": 6,
-                "elements": [
-                  {
-                    "id": blog.fields.find_by_name('Audience').id,
-                    "render_method": "dropdown"
-                  },
-                  {
-                    "id": blog.fields.find_by_name('Verticals').id,
-                    "render_method": "dropdown"
-                  },
-                  {
-                    "id": blog.fields.find_by_name('Research').id,
-                    "render_method": "dropdown"
-                  },
-                  {
-                    "id": blog.fields.find_by_name('Persona').id,
-                    "render_method": "dropdown"
-                  },
-                  {
-                    "id": blog.fields.find_by_name('Onet Code').id,
-                    "render_method": "dropdown"
                   }
                 ]
               }

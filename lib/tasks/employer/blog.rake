@@ -8,6 +8,7 @@ namespace :employer do
         tree = Tree.new
         tree.add_node({name: "CB Research"})
         tree.add_node({name: "Third Party Research"})
+        tree.add_node({name: "N/A"})
 
         tree
       end
@@ -208,10 +209,10 @@ namespace :employer do
                     "id": blog.fields.find_by_name('SEO Title').id
                   },
                   {
-                    "id": blog.fields.find_by_name('SEO Keywords').id
+                    "id": blog.fields.find_by_name('SEO Description').id
                   },
                   {
-                    "id": blog.fields.find_by_name('SEO Description').id
+                    "id": blog.fields.find_by_name('SEO Keywords').id
                   }
                 ]
               },

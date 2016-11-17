@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :post, class: ArticlePost do
+  factory :post, class: 'ArticlePost' do
     sequence(:title)    { |n| "post#{n}" }
     sequence(:slug)     { |n| "post-#{n}" }
     short_description   'This is a short description of the post that is long enough'

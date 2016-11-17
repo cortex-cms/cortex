@@ -172,7 +172,7 @@ $ bundle exec rails s
 $ bundle exec sidekiq -q default -q mailers
 ```
 
-The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `surgeon@cbcortex.com` with password `welcome1`.
+The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `surgeon@cortexcms.org` with password `welcome1`.
 
 ### Deployment
 

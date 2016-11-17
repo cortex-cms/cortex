@@ -406,7 +406,7 @@ namespace :employer do
           "description": { "string": "A Blog for Employers" },
           "category:1": { "string": "Employers" },
           "category:2": { "string": "Blog" },
-          "docs": { "string": "https://admin.cbcortex.com/rss/v2/docs" },
+          "docs": { "string": "https://api.cbcortex.com/rss/v2/docs" },
           "ttl": { "string": "30" },
           "not_in_spec": { "string": "Should Not Be Included" }
         },

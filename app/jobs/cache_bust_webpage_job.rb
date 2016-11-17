@@ -1,4 +1,4 @@
-class CacheBustWebpageJob < ActiveJob::Base
+class CacheBustWebpageJob < ApplicationJob
   queue_as :default
 
   def perform(url)

@@ -24,8 +24,6 @@ class User < ApplicationRecord
 
   validates_presence_of :email, :tenant, :firstname, :lastname
 
-  scope :tenantUsers, -> (tenant_id) { where(tenant_id: tenant_id) }
-
   def referenced?
     [Media, Post, Locale, Localization, BulkJob].find do |resource|
       true if resource.where(user: self).count > 0
@@ -51,11 +49,6 @@ class User < ApplicationRecord
 
   def is_admin?
     self.admin
-  end
-
-  def client_skips_authorization?
-    # Yeah, replace this with something serious
-    self.email == 'surgeon@cbcortex.com' || 'surgeon@careerbuilder.com'
   end
 
   def to_json(options={})

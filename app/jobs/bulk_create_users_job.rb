@@ -1,6 +1,6 @@
 require 'csv'
 
-class BulkCreateUsersJob < ActiveJob::Base
+class BulkCreateUsersJob < ApplicationJob
   queue_as :default
 
   def perform(bulk_job)

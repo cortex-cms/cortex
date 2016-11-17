@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'api_v1_helper'
 
-describe SPEC_API::Resources::Document, type: :request do
+describe SPEC_API::Resources::Documents, type: :request do
 
   let(:user) { create(:user, :admin) }
 

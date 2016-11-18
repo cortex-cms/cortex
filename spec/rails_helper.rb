@@ -8,7 +8,6 @@ require 'rspec/rails'
 require 'api_v1_helper'
 
 require 'mocha/api'
-require 'elasticsearch/extensions/test/cluster'
 require 'net/http'
 require 'email_spec'
 require 'capybara/rspec'
@@ -56,8 +55,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  elasticsearch_status = false
-
   config.include Warden::Test::Helpers
   config.include FactoryGirl::Syntax::Methods
 
@@ -72,7 +69,6 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     Capybara.current_driver = Capybara.javascript_driver
     DatabaseCleaner.clean_with(:truncation)
-    elasticsearch_status = test_elasticsearch
   end
 
   config.before(:each) do
@@ -86,14 +82,6 @@ RSpec.configure do |config|
 
   config.infer_base_class_for_anonymous_controllers = false
   config.order = 'random'
-
-  config.before :each, elasticsearch: true do
-    Elasticsearch::Extensions::Test::Cluster.start(port: 9200) unless Elasticsearch::Extensions::Test::Cluster.running?(on: 9200) || elasticsearch_status
-  end
-
-  config.after :suite do
-    Elasticsearch::Extensions::Test::Cluster.stop(port: 9200) if Elasticsearch::Extensions::Test::Cluster.running? on: 9200 || elasticsearch_status
-  end
 
   RSpec::Sidekiq.configure do |config|
     config.warn_when_jobs_not_processed_by_sidekiq = false

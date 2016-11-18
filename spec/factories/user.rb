@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :user do
-    sequence(:email) { |n| "user#{n}@careerbuilder.com" }
+    sequence(:email) { |n| "user#{n}@cortexcms.org" }
     sequence(:lastname) { |n| "user#{n}" }
-    admin     false
     firstname 'test'
+    admin     false
     password  'password'
     tenant
 

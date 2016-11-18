@@ -144,7 +144,7 @@ $ npm install -g bower && bundle exec rake bower:install:development
 * Create databases:
 
 ```sh
-bundle exec rake db:create:all
+$ bundle exec rake db:create
 ```
 
 * Initialize the schema:
@@ -197,7 +197,8 @@ This will configure various things, such as [dotenv](https://github.com/bkeepers
 Initialize the test database:
 
 ```sh
-$ bundle exec rake db:schema:load db:seed cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed cortex:rebuild_indexes
+$ bundle exec rake db:schema:load db:seed cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed
+$ bundle exec rake cortex:rebuild_indexes
 ```
 
 To run Ruby and JS specs, utilize:

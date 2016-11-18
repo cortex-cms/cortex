@@ -1,6 +1,3 @@
-require 'spec_helper'
-require 'api_v1_helper'
-
 describe SPEC_API::Resources::Users, :type => :request do
   describe 'GET /users/me' do
     let(:user) { create(:user) }

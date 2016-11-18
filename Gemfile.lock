@@ -784,7 +784,6 @@ DEPENDENCIES
   redis-namespace
   redis-rails (~> 5.0)
   rolify (~> 5.1)
-  rspec (~> 3.5)
   rspec-rails (~> 3.5)
   rspec-sidekiq (~> 2.2)
   rubyzip (~> 1.2.0)
@@ -792,6 +791,7 @@ DEPENDENCIES
   shoulda-matchers (~> 3.1)
   sidekiq (~> 4.2.5)
   sidekiq-failures (~> 0.4.5)
+  simplecov (~> 0.12)
   sinatra (~> 2.0.0.beta)
   six (~> 0.2.0)
   sprockets (= 3.7.0)
@@ -807,4 +807,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.5
+   1.13.6

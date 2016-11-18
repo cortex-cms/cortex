@@ -129,11 +129,14 @@ end
 
 group :test do
   # Rspec
-  gem 'rspec', '~> 3.5'
   gem 'rspec-rails', '~> 3.5'
   gem 'json_spec', '~> 1.1'
   gem 'rspec-sidekiq', '~> 2.2'
   gem 'shoulda-matchers', '~> 3.1'
+
+  # Coverage
+  gem 'simplecov', '~> 0.12', require: false
+  gem 'codeclimate-test-reporter', '~> 0.6', require: false
 
   # Capybara for feature testing, Poltergeist for PhantomJS
   gem 'capybara'
@@ -152,8 +155,7 @@ group :test do
   gem 'guard-jasmine', '~> 2.1'
   gem 'jasmine-core', '~> 2.5'
 
-  # Etc
-  gem 'codeclimate-test-reporter', '~> 0.6', require: false
+  # Data
   gem 'elasticsearch-extensions', '~> 0.0.22'
 end
 

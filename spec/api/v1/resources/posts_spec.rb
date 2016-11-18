@@ -1,6 +1,3 @@
-require 'spec_helper'
-require 'api_v1_helper'
-
 describe SPEC_API::Resources::Posts, type: :request do
 
   let(:user) { create(:user, :admin) }

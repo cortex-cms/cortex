@@ -1,24 +1,14 @@
-Dir[Rails.root.join("spec/support/**/*_support.rb")].each { |f| require f }
-
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'rails' do
+  add_filter do |source_file|
+    source_file.filename.include?("_spec.rb")
+  end
+end
 
 require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
-require 'rspec/rails'
-require 'mocha/api'
-require 'elasticsearch/extensions/test/cluster'
-require 'net/http'
-require "email_spec"
-require 'capybara/rspec'
-
-ActiveRecord::Migration.maintain_test_schema!
-
-Capybara.javascript_driver = :poltergeist
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 900.seconds)
-end
+require 'rails_helper'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -29,49 +19,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
     mocks.allow_message_expectations_on_nil = true
   end
-
-  elasticsearch_status = false
-
-  config.include Warden::Test::Helpers
-  config.include FactoryGirl::Syntax::Methods
-
-  config.include EmailSpec::Helpers
-  config.include EmailSpec::Matchers
-
-  config.include Devise::TestHelpers, :type => :controller
-
-  config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: /spec\/api/
-
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    Capybara.current_driver = Capybara.javascript_driver
-    DatabaseCleaner.clean_with(:truncation)
-    elasticsearch_status = test_elasticsearch
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-    Warden.test_reset!
-  end
-
-  config.infer_base_class_for_anonymous_controllers = false
-  config.order = 'random'
-
-  config.before :each, elasticsearch: true do
-    Elasticsearch::Extensions::Test::Cluster.start(port: 9200) unless Elasticsearch::Extensions::Test::Cluster.running?(on: 9200) || elasticsearch_status
-  end
-
-  config.after :suite do
-    Elasticsearch::Extensions::Test::Cluster.stop(port: 9200) if Elasticsearch::Extensions::Test::Cluster.running? on: 9200
-  end
-end
-
-RSpec::Sidekiq.configure do |config|
-  config.warn_when_jobs_not_processed_by_sidekiq = false
 end
 
 def test_elasticsearch

@@ -1,5 +1,4 @@
-ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+Dir[Rails.root.join("spec/support/**/*_support.rb")].each { |f| require f }
 
 require 'simplecov'
 SimpleCov.start
@@ -13,8 +12,6 @@ require 'elasticsearch/extensions/test/cluster'
 require 'net/http'
 require "email_spec"
 require 'capybara/rspec'
-
-Dir[Rails.root.join("spec/support/**/*_support.rb")].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 

@@ -85,8 +85,6 @@ gem 'cells', git: 'https://github.com/samstickland/cells.git', branch: 'collecti
 gem 'cells-rails', '~> 0.0.6'
 gem 'cells-haml', '~> 0.0.10'
 gem 'breadcrumbs_on_rails', '~> 3.0.1'
-gem 'jquery-ui-rails', '~> 5.0.5'
-gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
 
 # Style
 gem 'sass-rails', '~> 5.0'
@@ -95,11 +93,13 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'material_design_lite-sass', '~> 1.2.1'
 
 # JavaScript
-gem 'turbolinks', '~> 5.0.1'
-gem 'jquery-turbolinks', '~> 2.1'
-gem 'jquery-rails', '~> 4.2.1'
-gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'gon', '~> 6.1.0'
+gem 'turbolinks', '~> 5.0.1'
+gem 'jquery-rails', '~> 4.2.1'
+gem 'jquery-turbolinks', '~> 2.1'
+gem 'jquery-ui-rails', '~> 5.0.5'
+gem 'ng-rails-csrf', '~> 0.1.0'
+gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
 
 group :tasks do
   # Parsing

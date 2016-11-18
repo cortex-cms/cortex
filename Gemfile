@@ -13,7 +13,7 @@ gem 'rails', '~> 5.0.0'
 # Cortex-specific
 gem 'cortex-exceptions', '~> 0.0.4'
 gem 'cortex-plugins-core', '= 0.4.6'
-gem 'cortex-plugins-demo', git: 'git://github.com/cortex-cms/cortex-plugins-demo'
+gem 'cortex-plugins-demo', git: 'https://github.com/cortex-cms/cortex-plugins-demo.git'
 
 # API
 gem 'grape', '~> 0.17'
@@ -29,14 +29,14 @@ gem 'rolify', '~> 5.1'
 gem 'pundit', '~> 1.1'
 
 # Data
-gem 'rails-observers', git: 'git://github.com/rails/rails-observers'
-gem 'awesome_nested_set', git: 'git://github.com/cortex-cms/awesome_nested_set'
+gem 'rails-observers', git: 'https://github.com/rails/rails-observers.git'
+gem 'awesome_nested_set', git: 'https://github.com/cortex-cms/awesome_nested_set.git'
 gem 'paperclip', '~> 5.1.0'
 gem 'paperclip-optimizer', '~> 2.0'
 gem 'image_optim_pack', '~> 0.3.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bcrypt', '~> 3.1.11'
-gem 'grape-kaminari', git: 'git://github.com/toastercup/grape-kaminari', branch: 'set-only-pagination-headers'
+gem 'grape-kaminari', git: 'https://github.com/toastercup/grape-kaminari.git', branch: 'set-only-pagination-headers'
 gem 'elasticsearch-model', '~> 0.1'
 gem 'elasticsearch-rails', '~> 0.1'
 gem 'paranoia', '~> 2.2'
@@ -81,7 +81,7 @@ gem 'bootscale', require: false
 
 # View
 gem 'haml', '~> 4.1.0.beta'
-gem 'cells', git: 'git://github.com/samstickland/cells', branch: 'collection_fix' # remove explicit 'cells' dependency when collection_fix is merged in. See: https://github.com/apotonick/cells/pull/415
+gem 'cells', git: 'https://github.com/samstickland/cells.git', branch: 'collection_fix' # remove explicit 'cells' dependency when collection_fix is merged in. See: https://github.com/apotonick/cells/pull/415
 gem 'cells-rails', '~> 0.0.6'
 gem 'cells-haml', '~> 0.0.10'
 gem 'breadcrumbs_on_rails', '~> 3.0.1'

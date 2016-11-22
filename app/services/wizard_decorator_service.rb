@@ -1,4 +1,4 @@
-class WizardDecoratorService < CortexService
+class WizardDecoratorService < ApplicationService
   attribute :content_item, ContentItem
 
   def data

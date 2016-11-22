@@ -1,4 +1,4 @@
-class Author < ActiveRecord::Base
+class Author < ApplicationRecord
   include HasGravatar
   include HasFirstnameLastname
 

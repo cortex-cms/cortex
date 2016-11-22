@@ -1,5 +1,5 @@
 module Onet
-  class Occupation < ActiveRecord::Base
+  class Occupation < ApplicationRecord
     include SearchableOnetOccupation
 
     has_one :post

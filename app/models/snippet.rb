@@ -1,4 +1,4 @@
-class Snippet < ActiveRecord::Base
+class Snippet < ApplicationRecord
   include FindByTenant
 
   scope :find_by_body_text, ->(query) { joins(:document).where("documents.body LIKE :query", query: "%#{query}%") }

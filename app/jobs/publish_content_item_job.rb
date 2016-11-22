@@ -1,4 +1,4 @@
-class PublishContentItemJob < ActiveJob::Base
+class PublishContentItemJob < ApplicationJob
   queue_as :default
 
   def perform(content_item)

@@ -11,6 +11,36 @@ form {
   }
 }
 
+.mdl-button--success {
+  background-color: #54a1a1;
+  color: white;
+
+  &:hover {
+    background-color: #54a1a1;
+    color: white;
+  }
+
+  &:active {
+    background-color: #63c0b9;
+    color: white;
+  }
+}
+
+.mdl-button--cb {
+  background-color: none;
+  color: #54a1a1;
+
+  &:hover {
+    background-color: none;
+    color: #54a1a1;
+  }
+
+  &:active {
+    background-color: #dddddd;
+    color: #54a1a1;
+  }
+}
+
 div.bootstrap-tagsinput input {
   width: 100% !important;
 }

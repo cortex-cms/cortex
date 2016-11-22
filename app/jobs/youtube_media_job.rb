@@ -1,4 +1,4 @@
-class YoutubeMediaJob < ActiveJob::Base
+class YoutubeMediaJob < ApplicationJob
   queue_as :default
 
   def perform(media)

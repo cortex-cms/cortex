@@ -1,4 +1,4 @@
-class FieldItem < ActiveRecord::Base
+class FieldItem < ApplicationRecord
   acts_as_paranoid
   belongs_to :field
   belongs_to :content_item

@@ -57,8 +57,8 @@ Copy and rename the example `.env.example` file as `.env` and modify it to match
 For a rudimentary setup, these variables should be configured:
 
 * Use `$ rake secret` to generate `APP_SECRET` and `DEVISE_SECRET`
-* Use `$ pwd` inside your cloned app directory to generate `APP_PATH`. Unicorn's config uses this as its working directory.
 * If the superuser isn't used for the app databases, the `DATABASE_USERNAME` and `DATABASE_PASSWORD` should be set accordingly.
+* Set `HOST` to the local Web server's root URL to properly configure Fog (local asset storage)
 
 ### Dependencies
 
@@ -144,7 +144,7 @@ $ npm install -g bower && bundle exec rake bower:install:development
 * Create databases:
 
 ```sh
-bundle exec rake db:create:all
+$ bundle exec rake db:create
 ```
 
 * Initialize the schema:
@@ -153,25 +153,26 @@ bundle exec rake db:create:all
 $ bundle exec rake db:schema:load
 ```
 
-* Seed database with a top-level tenant, the superuser, Advice & Resources categories, and ONET occupation/industry codes, then rebuild the ElasticSearch index:
+* Seed database with a top-level tenant, the superuser, Advice & Resources categories, ONET occupation/industry codes, and Custom Content data, then rebuild the ElasticSearch index:
 
 ```sh
 $ bundle exec rake db:seed
 $ bundle exec rake cortex:create_categories
 $ bundle exec rake cortex:onet:fetch_and_provision
+$ bundle exec rake cortex:core:db:reseed
 $ bundle exec rake cortex:rebuild_indexes
 ```
 
 ### Server
 
-Start Cortex and Sidekiq:
+Start Cortex and (optionally) Sidekiq:
 
 ```sh
 $ bundle exec rails s
 $ bundle exec sidekiq -q default -q mailers
 ```
 
-The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `surgeon@cbcortex.com` with password `welcome1`.
+The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `surgeon@cortexcms.org` with password `welcome1`.
 
 ### Deployment
 
@@ -189,14 +190,15 @@ Additionally, deploying the `development` environment as a non-local server will
 DEPLOYED=true
 ```
 
-This will configure various things, such as [dotenv](https://github.com/bkeepers/dotenv) and [unicorn](https://unicorn.bogomips.org/), to behave normally in a deployed scenario.
+This will configure various things, such as [dotenv](https://github.com/bkeepers/dotenv) to behave normally in a deployed scenario.
 
 ## Running Test Suite
 
 Initialize the test database:
 
 ```sh
-$ bundle exec rake db:schema:load db:seed cortex:create_categories cortex:onet:fetch_and_provision
+$ bundle exec rake db:schema:load db:seed cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed
+$ bundle exec rake cortex:rebuild_indexes
 ```
 
 To run Ruby and JS specs, utilize:
@@ -320,7 +322,7 @@ Review [CONTRIBUTING](CONTRIBUTING.md) for complete instructions before you subm
 
 ## License
 
-Cortex utilizes the Apache 2.0 License. See [LICENSE](LICENSE) for details.
+Cortex utilizes the Apache 2.0 License. See [LICENSE](LICENSE.md) for details.
 
 ## Copyright
 

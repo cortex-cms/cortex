@@ -1,6 +1,9 @@
-- if flash[:notice]
-  .notice= flash[:notice]
-- if flash[:success]
-  .success= flash[:success]
-- if flash[:warning]
-  .warning= flash[:warning]
+- flash.each do |key, value|
+  .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
+    .mdl-snackbar__text
+      = value
+    %button.mdl-snackbar__action{:type => "button"}
+  :javascript
+    setTimeout(function(){
+      $('.mdl-js-snackbar').toggleClass('mdl-snackbar--active');
+    }, 2000);

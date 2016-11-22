@@ -1,4 +1,4 @@
-class Webpage < ActiveRecord::Base
+class Webpage < ApplicationRecord
   include FindByTenant
   include SearchableWebpage
 

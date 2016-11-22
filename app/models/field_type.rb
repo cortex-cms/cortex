@@ -1,4 +1,4 @@
-class FieldType < ActiveRecord::Base
+class FieldType < ApplicationRecord
   extend ActiveSupport::DescendantsTracker
   DEFAULT_MAPPINGS = [].freeze
 

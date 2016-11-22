@@ -1,4 +1,4 @@
-class Locale < ActiveRecord::Base
+class Locale < ApplicationRecord
   serialize :data
 
   belongs_to :user

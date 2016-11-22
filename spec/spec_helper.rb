@@ -20,13 +20,3 @@ RSpec.configure do |config|
     mocks.allow_message_expectations_on_nil = true
   end
 end
-
-def test_elasticsearch
-  url = URI('http://localhost:9200/')
-  begin
-    res = Net::HTTP.get_response(url)
-    res.is_a?(Net::HTTPSuccess)
-  rescue
-    false
-  end
-end

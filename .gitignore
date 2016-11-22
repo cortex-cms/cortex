@@ -41,7 +41,6 @@
 *.sassc
 .sass-cache
 capybara-*.html
-.rspec
 .powrc
 /public/system
 /coverage/

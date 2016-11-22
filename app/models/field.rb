@@ -1,4 +1,4 @@
-class Field < ActiveRecord::Base
+class Field < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :content_type

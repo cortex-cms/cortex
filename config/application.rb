@@ -33,8 +33,9 @@ module Cortex
       end
     end
 
+    # Generators should use UUID PKs by default
     config.generators do |generator|
-      generator.orm :active_record
+      generator.orm :active_record, primary_key_type: :uuid
     end
 
     # Needed until there is a better fix for Paperclip. https://github.com/thoughtbot/paperclip/issues/1924#issuecomment-123927367

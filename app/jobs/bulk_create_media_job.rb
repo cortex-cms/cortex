@@ -1,7 +1,7 @@
 require 'csv'
 require 'zip'
 
-class BulkCreateMediaJob < ActiveJob::Base
+class BulkCreateMediaJob < ApplicationJob
   queue_as :default
 
   def perform(bulk_job, current_user)

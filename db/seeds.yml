@@ -1,7 +1,7 @@
 defaults: &defaults
   cortex_tenant:
     name: 'cortex'
-    creator: {email: 'surgeon@cbcortex.com', firstname: 'Cortex', lastname: 'Admin', password: 'welcome1'}
+    creator: {email: 'admin@cortexcms.org', firstname: 'Cortex', lastname: 'Admin', password: 'welcome1'}
   categories:
     - name: Discovery
       children:

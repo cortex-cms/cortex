@@ -1,6 +1,6 @@
 require 'digest/md5'
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include HasGravatar
   include HasFirstnameLastname
   include SearchableUser
@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_one    :author
   has_many   :media
   has_many   :tenants
+  has_many   :posts
   has_many   :posts, through: :authors
   has_many   :localizations
   has_many   :locales
@@ -22,8 +23,6 @@ class User < ActiveRecord::Base
   has_many   :content_items
 
   validates_presence_of :email, :tenant, :firstname, :lastname
-
-  scope :tenantUsers, -> (tenant_id) { where(tenant_id: tenant_id) }
 
   def referenced?
     [Media, Post, Locale, Localization, BulkJob].find do |resource|
@@ -50,11 +49,6 @@ class User < ActiveRecord::Base
 
   def is_admin?
     self.admin
-  end
-
-  def client_skips_authorization?
-    # Yeah, replace this with something serious
-    self.email == 'surgeon@cbcortex.com' || 'surgeon@careerbuilder.com'
   end
 
   def to_json(options={})

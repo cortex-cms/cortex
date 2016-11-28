@@ -29,11 +29,11 @@ namespace :employer do
 
       def persona_tree
         tree = Tree.new
+        tree.add_node({name: "General Audience"})
         tree.add_node({name: "Recruiters"})
         tree.add_node({name: "Sourcers"})
         tree.add_node({name: "Managers/Directors"})
         tree.add_node({name: "C-Level"})
-        tree.add_node({name: "General Audience"})
 
         tree
       end

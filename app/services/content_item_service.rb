@@ -1,4 +1,4 @@
-class ContentItemService < CortexService
+class ContentItemService < ApplicationService
   include WidgetParsersHelper
 
   attribute :id, String

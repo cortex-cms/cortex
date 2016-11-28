@@ -1,4 +1,4 @@
-class IndexDecoratorService < CortexService
+class IndexDecoratorService < ApplicationService
   attribute :content_type, ContentType
 
   def data

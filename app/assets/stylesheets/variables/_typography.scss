@@ -1,0 +1,22 @@
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  src: url(asset_path('Montserrat-Regular.otf')) format("opentype");
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  src: url(asset_path('Montserrat-SemiBold.otf')) format("opentype");
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: lighter;
+  src: url(asset_path('Montserrat-Light.otf')) format("opentype");
+}
+
+$cortex-font-stack: Montserrat, sans-serif;

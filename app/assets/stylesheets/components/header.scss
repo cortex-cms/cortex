@@ -46,3 +46,8 @@
 .mdl-textfield--expandable .mdl-button--icon {
   top: initial;
 }
+
+.mdl-layout-title,
+.mdl-layout-title a {
+  @extend .text-style-1;
+}

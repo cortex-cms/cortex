@@ -23,67 +23,68 @@ $cortex-font-stack: Montserrat, sans-serif;
 $base-font-size: 1em;
 
 .display-text { // Cortex Logo
-  color: $grey-dark;
+  color: $color-grey-dark;
   font-family: $cortex-font-stack;
   font-weight: normal;
   font-size: 2.1775em;
 }
 
 h1,
-.text-size-1 { // Bread Crumbs and Page Headers
-  color: $teal;
+.text-style-1 { // Bread Crumbs and Page Headers
+  color: $color-teal;
   font-family: $cortex-font-stack;
   font-weight: bold;
   font-size: 1.17em;
+  text-decoration: none;
 }
 
 h2,
-.text-size-2 { // Side Nav
-  color: $grey;
+.text-style-2 { // Side Nav
+  color: $color-grey;
   font-family: $cortex-font-stack;
   font-weight: lighter;
   font-size: 1.17em;
 }
 
 h3,
-.text-size-3 { // Side Nav Selected
-  color: $grey;
+.text-style-3 { // Side Nav Selected
+  color: $color-grey;
   font-family: $cortex-font-stack;
   font-weight: bold;
   font-size: 1.17em;
 }
 
 h4,
-.text-size-4 { // Section Headers, Dropdowns, Button Text
-  color: $grey-dark;
+.text-style-4 { // Section Headers, Dropdowns, Button Text
+  color: $color-grey-dark;
   font-family: $cortex-font-stack;
   font-size: 0.83em;
 }
 
 h5,
-.text-size-5 { // Field Text
-  color: $grey;
+.text-style-5 { // Field Text
+  color: $color-grey;
   font-family: $cortex-font-stack;
   font-weight: lighter;
   font-size: $base-font-size;
 }
 
 h6,
-.text-size-6 { // Field Text Filled
-  color: $anchor-blue-light;
+.text-style-6 { // Field Text Filled
+  color: $color-anchor-blue-light;
   font-family: $cortex-font-stack;
   font-size: $base-font-size;
 }
 
-.text-size-7 { // Help Notes
-  color: $anchor-blue-light;
+.text-style-7 { // Help Notes
+  color: $color-anchor-blue-light;
   font-family: $cortex-font-stack;
   font-weight: lighter;
   font-size: 0.67em;
 }
 
 p {
-  color: $grey-dark;
+  color: $color-grey-dark;
   font-family: $cortex-font-stack;
   font-size: $base-font-size;
 }

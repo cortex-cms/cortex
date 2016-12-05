@@ -7,6 +7,7 @@
 }
 
 .demo-drawer-header h1 {
+  @extend .display-text;
   display: flex;
   align-items: center;
   color: white;
@@ -20,6 +21,18 @@
 
 // Overrides
 
+.mdl-layout__drawer {
+  background-color: $color-grey-dark;
+}
+
 .mdl-layout__drawer .mdl-navigation {
   padding-top: 0;
+}
+
+.mdl-navigation__link {
+  @extend .text-style-2;
+
+  &.active {
+    @extend .text-style-3;
+  }
 }

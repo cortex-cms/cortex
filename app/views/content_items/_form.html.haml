@@ -7,7 +7,7 @@
       - if @content_type.publishable
         - case @content_item.state
         - when 'published'
-          = form.submit "Update #{@content_type.name} Post", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--success mdl-js-ripple-effect'
+          = form.submit "Update Post", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--success mdl-js-ripple-effect'
           = form.button 'Save as Draft', value: 'draft', name: 'content_item[state]', class: 'mdl-button mdl-js-button mdl-button--cb mdl-js-ripple-effect', type: 'submit'
         - when 'scheduled'
           = form.button 'Schedule Post', value: 'schedule',  name: 'content_item[state]', class: 'mdl-button mdl-js-button  mdl-button--cb mdl-js-ripple-effect', type: 'submit'

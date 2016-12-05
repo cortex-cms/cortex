@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.3.3'
 
 # Dependency Management
 gem 'bower-rails', '~> 0.11.0'

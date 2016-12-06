@@ -29,7 +29,7 @@ gem 'rolify', '~> 5.1'
 gem 'pundit', '~> 1.1'
 
 # Data
-gem 'rails-observers', git: 'https://github.com/rails/rails-observers.git'
+gem 'rails-observers', git: 'https://github.com/triloch/rails-observers.git'
 gem 'awesome_nested_set', git: 'https://github.com/cortex-cms/awesome_nested_set.git'
 gem 'paperclip', '~> 5.1.0'
 gem 'paperclip-optimizer', '~> 2.0'

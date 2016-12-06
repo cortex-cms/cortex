@@ -2,6 +2,11 @@
   min-height:180px;
 }
 
+.mdl-layout__header {
+  background-color: $color-grey-light;
+  color: $color-grey-dark;
+}
+
 .search-bar {
   margin-right: 20px;
 

@@ -26,10 +26,6 @@ $white_89: rgba(255, 255, 255, 0.89);
     display: flex !important;
     flex-direction: row;
     align-items: center;
-    &:hover {
-      background-color: $color_robins_egg_blue_approx;
-      color: $color_limed_spruce_approx;
-    }
   }
 }
 
@@ -66,11 +62,6 @@ $white_89: rgba(255, 255, 255, 0.89);
 
 .demo-navigation {
   flex-grow: 1;
-  .mdl-navigation__link .material-icons {
-    font-size: 24px;
-    color: $white_56;
-    margin-right: 32px;
-  }
 }
 
 .demo-content {

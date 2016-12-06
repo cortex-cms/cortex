@@ -46,7 +46,7 @@ h1,
 }
 
 h2,
-.text-style-2 { // Side Nav
+.text-style-2 {
   color: $color-grey;
   font-family: $cortex-font-stack;
   font-weight: lighter;
@@ -54,7 +54,7 @@ h2,
 }
 
 h3,
-.text-style-3 { // Side Nav Selected
+.text-style-3 {
   color: $color-grey;
   font-family: $cortex-font-stack;
   font-weight: bold;
@@ -88,6 +88,18 @@ h6,
   font-family: $cortex-font-stack;
   font-weight: lighter;
   font-size: 0.67rem;
+}
+
+%sidebar-nav { // Side Nav
+  color: $color-grey;
+  font-family: $cortex-font-stack;
+  font-weight: lighter;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+
+  &.active { // Side Nav Selected
+    font-weight: bold;
+  }
 }
 
 p {

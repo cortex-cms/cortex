@@ -29,10 +29,17 @@
   padding-top: 0;
 }
 
-.mdl-navigation__link {
-  @extend .text-style-2;
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  @extend %sidebar-nav;
 
-  &.active {
-    @extend .text-style-3;
+  .material-icons {
+    margin-right: 32px;
+    font-size: 24px;
+    color: inherit;
   }
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
+  background-color: $employer-color;
+  color: $color-grey-dark;
 }

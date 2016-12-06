@@ -1,9 +1,3 @@
-echo "gem update --system"
-gem update --system
-
-echo "gem update bundler"
-gem update bundler
-
 echo "bundle config build.nokogiri --use-system-libraries"
 bundle config build.nokogiri --use-system-libraries
 
@@ -33,3 +27,6 @@ bundle exec rake cortex:create_categories cortex:onet:fetch_and_provision cortex
 
 echo "bundle exec rake cortex:rebuild_indexes"
 bundle exec rake cortex:rebuild_indexes
+
+echo "change-phantomjs-version 2.1.1"
+change-phantomjs-version 2.1.1

@@ -9,6 +9,13 @@
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
+  src: url(asset_path('Montserrat-Medium.otf')) format("opentype");
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bolder;
   src: url(asset_path('Montserrat-SemiBold.otf')) format("opentype");
 }
 
@@ -20,13 +27,13 @@
 }
 
 $cortex-font-stack: Montserrat, sans-serif;
-$base-font-size: 1em;
+$base-font-size: 1rem;
 
 .display-text { // Cortex Logo
   color: $color-grey-dark;
   font-family: $cortex-font-stack;
   font-weight: normal;
-  font-size: 2.1775em;
+  font-size: 2.1775rem;
 }
 
 h1,
@@ -34,7 +41,7 @@ h1,
   color: $color-teal;
   font-family: $cortex-font-stack;
   font-weight: bold;
-  font-size: 1.17em;
+  font-size: 1.17rem;
   text-decoration: none;
 }
 
@@ -43,7 +50,7 @@ h2,
   color: $color-grey;
   font-family: $cortex-font-stack;
   font-weight: lighter;
-  font-size: 1.17em;
+  font-size: 1.17rem;
 }
 
 h3,
@@ -51,7 +58,7 @@ h3,
   color: $color-grey;
   font-family: $cortex-font-stack;
   font-weight: bold;
-  font-size: 1.17em;
+  font-size: 1.17rem;
 }
 
 h4,
@@ -80,7 +87,7 @@ h6,
   color: $color-anchor-blue-light;
   font-family: $cortex-font-stack;
   font-weight: lighter;
-  font-size: 0.67em;
+  font-size: 0.67rem;
 }
 
 p {

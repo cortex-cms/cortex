@@ -54,3 +54,12 @@ html, body {
     background-color: $color-grey-light;
   }
 }
+
+.mdl-button--fab.mdl-button--colored {
+  background-color: $color-orange;
+  border: solid 1px $color-orange-dark;
+
+  &:hover {
+    background-color: $color-orange;
+  }
+}

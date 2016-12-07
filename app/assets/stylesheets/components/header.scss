@@ -37,6 +37,10 @@
 
 .user-block__logout {
   font-size: 75%;
+
+  a {
+    color: $color-orange;
+  }
 }
 
 .user-block__avatar {

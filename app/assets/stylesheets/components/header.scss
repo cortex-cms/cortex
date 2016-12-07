@@ -1,9 +1,10 @@
-.header {
-  min-height:180px;
+.wizard__header {
+  min-height:20px;
+  background-color: $color-grey-light;
 }
 
 .mdl-layout__header {
-  background-color: $color-grey-light;
+  background-color: $color-white;
   color: $color-grey-dark;
 }
 

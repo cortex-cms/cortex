@@ -8,18 +8,6 @@
   color: $color-grey-dark;
 }
 
-.search-bar {
-  margin-right: 20px;
-
-  .mdl-textfield__input {
-    border-bottom: 0;
-  }
-
-  .mdl-textfield__label {
-    top: 23px;
-  }
-}
-
 .user-block {
   display: flex;
   justify-content: space-between;

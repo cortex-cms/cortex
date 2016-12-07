@@ -35,13 +35,13 @@ form.new_user .mdl-button {
   float: none;
 }
 
-.login__header {
+.authentication__header {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.login__header-text {
+.authentication__header-text {
   @extend %display-text;
   color: white;
 }

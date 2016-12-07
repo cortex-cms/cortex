@@ -1,5 +1,4 @@
-@import 'material';
-@import 'bourbon';
+@import 'application';
 
 .news section:not(:last-of-type) {
   margin-bottom: 16px;
@@ -18,8 +17,12 @@ main {
 .ribbon {
   width: 100%;
   height: 40vh;
-  background-color: rgb(96, 96, 96);
+  background-color: $color-grey-dark;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+form.new_user .mdl-button {
+  float: none;
 }

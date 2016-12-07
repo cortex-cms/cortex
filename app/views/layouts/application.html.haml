@@ -13,7 +13,7 @@
     .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
       = render 'partials/topbar'
       = render 'partials/sidebar'
-      %main.mdl-layout__content.mdl-color--grey-100
+      %main.mdl-layout__content
         = yield
     = javascript_include_tag :application
     = render 'layouts/google_analytics' if extra_config.google_analytics_id?

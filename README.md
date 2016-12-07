@@ -169,7 +169,7 @@ Start Cortex and (optionally) Sidekiq:
 
 ```sh
 $ bundle exec rails s
-$ bundle exec sidekiq -q default -q mailers
+$ bundle exec sidekiq --config ./config/sidekiq.yml
 ```
 
 The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `admin@cortexcms.org` with password `welcome1`.

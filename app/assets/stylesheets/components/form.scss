@@ -1,3 +1,11 @@
+.wizard__step__name {
+  @include wizard-step-heading;
+}
+
+.wizard__step__description {
+  @include wizard-step-description;
+}
+
 // Overrides
 
 .mdl-textfield {

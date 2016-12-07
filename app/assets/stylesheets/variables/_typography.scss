@@ -65,7 +65,7 @@ h4,
 .text-style-4 { // Section Headers, Dropdowns, Button Text
   color: $color-grey-dark;
   font-family: $cortex-font-stack;
-  font-size: 0.83em;
+  font-size: 0.83rem;
 }
 
 h5,
@@ -100,6 +100,17 @@ h6,
   &.active { // Side Nav Selected
     font-weight: bold;
   }
+}
+
+@mixin wizard-step-heading { // Headline in create view
+  color: $color-grey-dark;
+  font-family: $cortex-font-stack;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+@mixin wizard-step-description { // Description in create view, assumes p tag
+  color: $color-anchor-blue-light;
 }
 
 p {

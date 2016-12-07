@@ -1,5 +1,7 @@
-.demo-drawer.mdl-layout__drawer.mdl-color--blue-grey-900.mdl-color-text--blue-grey-50
-  %header.demo-drawer-header.mdl-color--blue-grey-800
-    %h1 Cortex
+.demo-drawer.mdl-layout__drawer
+  %header.demo-drawer-header
+    %h1
+      = image_tag 'logo.svg', class: 'logo'
+      Cortex
   = render 'partials/navigation'
   = render 'partials/tenant_display'

@@ -1,6 +1,7 @@
-.mdl-grid
-  .mdl-cell.mdl-cell--4-col
-    = render 'partials/authentication/login_tabs'
-  - if @news_feed_posts
-    .mdl-cell.mdl-cell--8-col.news
-      = render 'partials/authentication/news'
+.mdl-color-text--grey-800.mdl-cell.mdl-cell--4-col.mdl-cell--12-col-tablet
+  .mdl-grid.mdl-card
+    .mdl-cell.mdl-cell--12-col
+      = render 'partials/authentication/login_tabs'
+- unless @news_feed_posts.blank?
+  .news.mdl-color-text--grey-800.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
+    = render 'partials/authentication/news'

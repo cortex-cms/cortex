@@ -1,5 +1,11 @@
-.header {
-  min-height:180px;
+.wizard__header {
+  min-height:20px;
+  background-color: $color-grey-light;
+}
+
+.mdl-layout__header {
+  background-color: $color-white;
+  color: $color-grey-dark;
 }
 
 .search-bar {
@@ -32,6 +38,10 @@
 
 .user-block__logout {
   font-size: 75%;
+
+  a {
+    color: $color-orange;
+  }
 }
 
 .user-block__avatar {
@@ -45,4 +55,9 @@
 
 .mdl-textfield--expandable .mdl-button--icon {
   top: initial;
+}
+
+.mdl-layout-title,
+.mdl-layout-title a {
+  @extend .text-style-1;
 }

@@ -2,8 +2,44 @@
   box-shadow: 0 -1px 5px 2px rgba(0,0,0,0.5);
 }
 
+.demo-drawer-header {
+  @include clearfix;
+}
+
+.demo-drawer-header h1 {
+  @extend .display-text;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.logo {
+  max-height: 60px;
+  max-width: 60px;
+  float: left;
+}
+
 // Overrides
+
+.mdl-layout__drawer {
+  background-color: $color-grey-dark;
+}
 
 .mdl-layout__drawer .mdl-navigation {
   padding-top: 0;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  @extend %sidebar-nav;
+
+  .material-icons {
+    margin-right: 32px;
+    font-size: 24px;
+    color: inherit;
+  }
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
+  background-color: $employer-color;
+  color: $color-grey-dark;
 }

@@ -16,3 +16,5 @@
         .mdl-grid.authentication__content
           = yield
     = javascript_include_tag :authentication
+    %span.flash--invert
+      = render 'partials/flash'

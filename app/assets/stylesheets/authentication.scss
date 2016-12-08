@@ -45,3 +45,11 @@ form.new_user .mdl-button {
   @extend %display-text;
   color: white;
 }
+
+.newsfeed__title {
+  @extend .mdl-layout-title;
+
+  line-height: 48px;
+  margin-top: auto;
+  margin-bottom: auto;
+}

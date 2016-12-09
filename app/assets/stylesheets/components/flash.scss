@@ -1,0 +1,11 @@
+.flash--invert {
+  .mdl-snackbar {
+    background-color: $color-white;
+    border: 1px solid $color-grey-dark;
+    border-bottom: none;
+  }
+
+  .mdl-snackbar__text {
+    color: $color-grey-dark;
+  }
+}

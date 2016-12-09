@@ -1,0 +1,13 @@
+.mdl-color-text--grey-800.mdl-cell.mdl-cell--4-col.mdl-cell--12-col-tablet
+  .mdl-grid.mdl-card
+    .mdl-cell.mdl-cell--12-col
+      %h2 Forgot your password?
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = devise_error_messages!
+        .field
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true
+        .actions
+          = f.submit "Send me reset password instructions"
+      = render "devise/shared/links"

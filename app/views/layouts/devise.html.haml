@@ -8,13 +8,12 @@
     = favicon_link_tag 'favicon.ico'
     = stylesheet_link_tag :authentication
     = csrf_meta_tags
-  %body.mdl-color-text--grey-700.mdl-base
-    .mdl-layout.mdl-js-layout
-      = render 'partials/authentication/header'
-      .ribbon
-      %main.mdl-layout__content.mdl-layout__content--login
-        .mdl-grid
-          .mdl-cell.mdl-cell--1-col.mdl-cell--hide-tablet.mdl-cell--hide-phone
-          .mdl-color--white.mdl-shadow--4dp.content.mdl-color-text--grey-800.mdl-cell.mdl-cell--10-col
-            = yield
+  %body.mdl-base
+    .mdl-layout.mdl-js-layout.authentication
+      %main.mdl-layout__content.mdl-layout__content--authentication
+        = render 'partials/authentication/header'
+        .mdl-grid.authentication__content
+          = yield
     = javascript_include_tag :authentication
+    %span.flash--invert
+      = render 'partials/flash'

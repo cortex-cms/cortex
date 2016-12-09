@@ -1,0 +1,11 @@
+.mdl-layout__content {
+  background-color: $color-grey-light;
+}
+
+.mdl-layout__content.mdl-layout__content--authentication {
+  background-color: $color-grey-dark;
+}
+
+.mdl-data-table th {
+  @extend .text-style-4;
+}

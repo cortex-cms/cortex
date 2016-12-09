@@ -1,9 +1,10 @@
 - flash.each do |key, value|
-  .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
-    .mdl-snackbar__text
-      = value
-    %button.mdl-snackbar__action{:type => "button"}
-  :javascript
-    setTimeout(function(){
-      $('.mdl-js-snackbar').toggleClass('mdl-snackbar--active');
-    }, 2000);
+  - unless value == 'You need to sign in or sign up before continuing.'
+    .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
+      .mdl-snackbar__text
+        = value
+      %button.mdl-snackbar__action{:type => "button"}
+    :javascript
+      setTimeout(function(){
+        $('.mdl-js-snackbar').toggleClass('mdl-snackbar--active');
+      }, 2000);

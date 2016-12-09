@@ -5,10 +5,15 @@
 @import "jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.css";
 @import 'bootstrap-tagsinput.scss';
 
+@import 'variables/colors';
+@import 'variables/typography';
+
 @import 'base';
 @import 'helpers';
 
 @import 'components/card';
+@import 'components/content';
+@import 'components/flash';
 @import 'components/form';
 @import 'components/header';
 @import 'components/sidebar';

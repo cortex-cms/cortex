@@ -17,7 +17,8 @@ module V1
           require_scope! 'view:webpages'
 
           @webpages = ::GetWebpages.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).webpages
-          ::V1::Entities::Webpage.represent set_paginate_headers(@webpages), full: true
+          set_paginate_headers(@webpages)
+          ::V1::Entities::Webpage.represent @webpages, full: true
         end
 
         desc 'Show Webpage Snippets as public feed by URL', { entity: ::V1::Entities::Webpage, nickname: 'showWebpageFeed' }

@@ -71,6 +71,11 @@ $sidebar-width-min: 85px;
   color: $color-grey-dark;
 }
 
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link.tenant__item {
+  background-color: $employer-color;
+  color: $color-white;
+}
+
 // Collapsing
 
 .internal-view {

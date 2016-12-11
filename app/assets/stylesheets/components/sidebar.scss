@@ -1,8 +1,13 @@
-$sidebar-width-max: 300px;
+$sidebar-width-max: 230px;
 $sidebar-width-min: 85px;
 
 .tenant__item {
-  box-shadow: 0 -1px 5px 2px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.tenant__item .material-icons {
+  position: absolute;
+  right: 10px;
 }
 
 .layout__sidebar { // Styles copied from .mdl-layout__drawer minus absolute positioning
@@ -57,10 +62,10 @@ $sidebar-width-min: 85px;
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
   @extend %sidebar-nav;
-  padding-left: 30px;
+  padding-left: 20px;
 
   .material-icons {
-    margin-right: 32px;
+    margin-right: 10px;
     font-size: 24px;
     color: inherit;
   }
@@ -88,19 +93,24 @@ $sidebar-width-min: 85px;
   align-items: center;
 
   &:after {
-    @extend .material-icons;
+    font-family: 'Material Icons';
     content: '\e5cb';
   }
 }
 
-.internal-view {
+.sidebar--collapsed {
 
   .nav__item-name {
     display: none;
   }
 
-  .mdl-navigation__link {
+  .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
     min-width: 200px;
+    padding-left: 30px;
+  }
+
+  .tenant__item .material-icons {
+    position: static;
   }
 
   .sidebar__toggle-button:after {
@@ -115,8 +125,16 @@ $sidebar-width-min: 85px;
     &:hover {
       width: $sidebar-width-max;
 
+      .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+        padding-left: 20px;
+      }
       .nav__item-name {
         display: inline-block;
+      }
+
+      .tenant__item .material-icons {
+        position: absolute;
+        right: 45px;
       }
 
       .sidebar__toggle-button:after {

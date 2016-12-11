@@ -1,3 +1,6 @@
+$sidebar-width-max: 300px;
+$sidebar-width-min: 85px;
+
 .tenant__item {
   box-shadow: 0 -1px 5px 2px rgba(0,0,0,0.5);
 }
@@ -7,7 +10,7 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  width: 240px;
+  width: $sidebar-width-max;
   height: 100%;
   max-height: 100%;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -54,6 +57,7 @@
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
   @extend %sidebar-nav;
+  padding-left: 30px;
 
   .material-icons {
     margin-right: 32px;
@@ -70,12 +74,25 @@
 // Collapsing
 
 .internal-view {
+
+  .nav__item-name {
+    display: none;
+  }
+
+  .mdl-navigation__link {
+    min-width: 200px;
+  }
+
   .layout__sidebar {
-    width: 70px;
+    width: $sidebar-width-min;
 
     &:hover {
-      width: 240px;
+      width: $sidebar-width-max;
       transition: width 0.25s ease;
+
+      .nav__item-name {
+        display: inline-block;
+      }
     }
   }
 }

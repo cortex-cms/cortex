@@ -78,6 +78,21 @@ $sidebar-width-min: 85px;
 
 // Collapsing
 
+.sidebar__toggle-button {
+  height: 1em;
+  color: $color-teal-light;
+  background-color: $color-teal-dark;
+  padding: 0.25em 0.5em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  &:after {
+    @extend .material-icons;
+    content: '\e5cb';
+  }
+}
+
 .internal-view {
 
   .nav__item-name {
@@ -88,15 +103,24 @@ $sidebar-width-min: 85px;
     min-width: 200px;
   }
 
+  .sidebar__toggle-button:after {
+    content: '\e5cc';
+    transition: transform 500ms linear;
+  }
+
   .layout__sidebar {
     width: $sidebar-width-min;
+    transition: width 0.25s ease;
 
     &:hover {
       width: $sidebar-width-max;
-      transition: width 0.25s ease;
 
       .nav__item-name {
         display: inline-block;
+      }
+
+      .sidebar__toggle-button:after {
+        transform: rotate(-540deg);
       }
     }
   }

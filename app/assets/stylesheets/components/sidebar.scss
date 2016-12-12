@@ -1,5 +1,6 @@
-$sidebar-width-max: 230px;
-$sidebar-width-min: 85px;
+$sidebar-width-full: 230px;
+$sidebar-width-collapsed: 85px;
+$sidebar-link-width: $sidebar-width-full - 60px; // link padding = 60px
 $sidebar-collapse-transition: width 0.25s ease;
 $sidebar-toggle-button-transition: transform 500ms linear;
 
@@ -17,7 +18,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  width: $sidebar-width-max;
+  width: $sidebar-width-full;
   height: 100%;
   max-height: 100%;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -28,13 +29,14 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   will-change: transform;
   transition: $sidebar-collapse-transition, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  overflow: visible;
+  overflow-x: hidden;
   overflow-y: auto;
   z-index: 5;
 }
 
 .sidebar__header {
-  padding: 10px;
+  padding: 24px 10px;
+  min-width: $sidebar-width-full;
 }
 
 .sidebar__root-link {
@@ -51,7 +53,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 .sidebar__brand-name {
   @extend %display-text;
   color: white;
-  margin-left: 15px;
+  margin: 0 15px;
   text-decoration: none;
 }
 
@@ -67,7 +69,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
   @extend %sidebar-nav;
-  min-width: $sidebar-width-max - 60px;
+  min-width: $sidebar-link-width;
   padding-left: 20px;
   transition: padding-left 0.25s ease;
 
@@ -110,7 +112,8 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 @media only screen and (min-width: 1024px) {
 .sidebar--collapsed {
 
-  .nav__item-name {
+  .nav__item-name,
+  .sidebar__brand-name {
     display: none;
   }
 
@@ -128,7 +131,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   }
 
   .layout__sidebar {
-    width: $sidebar-width-min;
+    width: $sidebar-width-collapsed;
     transition: $sidebar-collapse-transition;
   }
 }

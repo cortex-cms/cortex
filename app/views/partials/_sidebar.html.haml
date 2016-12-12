@@ -1,7 +1,8 @@
 .layout__sidebar.mdl-layout__drawer
   %header.sidebar__header
-    = image_tag 'logo.svg', class: 'sidebar__brand-logo'
-    %h1.sidebar__brand-name Cortex
+    = link_to root_path, class: 'sidebar__root-link' do
+      = image_tag 'logo.svg', class: 'sidebar__brand-logo'
+      %h1.sidebar__brand-name Cortex
   = render 'partials/navigation'
   = render 'partials/tenant_display'
   .sidebar__toggle-button#sidebar__toggle-button

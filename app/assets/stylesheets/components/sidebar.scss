@@ -34,9 +34,13 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 }
 
 .sidebar__header {
+  padding: 10px;
+}
+
+.sidebar__root-link {
   display: flex;
   align-items: center;
-  padding: 10px;
+  text-decoration: none;
 }
 
 .sidebar__brand-logo {
@@ -48,6 +52,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   @extend %display-text;
   color: white;
   margin-left: 15px;
+  text-decoration: none;
 }
 
 // Overrides

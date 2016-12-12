@@ -12,7 +12,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   right: 10px;
 }
 
-.layout__sidebar { // Styles copied from .mdl-layout__drawer minus absolute positioning
+.layout__sidebar { // Styles copied from .mdl-layout__drawer with some clean up
   @include clearfix;
   display: flex;
   flex-direction: column;

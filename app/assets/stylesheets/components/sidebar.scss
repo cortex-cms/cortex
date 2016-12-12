@@ -1,6 +1,6 @@
-$sidebar-width-full: 230px;
+$sidebar-width-expanded: 230px;
 $sidebar-width-collapsed: 85px;
-$sidebar-link-width: $sidebar-width-full - 60px; // link padding = 60px
+$sidebar-link-width: $sidebar-width-expanded - 60px; // link padding = 60px
 $sidebar-collapse-transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 $sidebar-toggle-button-transition: transform 500ms linear;
 
@@ -14,7 +14,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 }
 
 .layout__sidebar { // Styles copied from .mdl-layout__drawer with some clean up
-  width: $sidebar-width-full;
+  width: $sidebar-width-expanded;
   transition: $sidebar-collapse-transition;
   position: relative;
   overflow-x: hidden;
@@ -22,7 +22,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 
 .sidebar__header {
   padding: 24px 10px;
-  min-width: $sidebar-width-full;
+  min-width: $sidebar-width-expanded;
 }
 
 .sidebar__root-link {
@@ -132,6 +132,6 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 
   .layout__sidebar.is-visible {
     display: flex;
-    min-width: $sidebar-width-full;
+    min-width: $sidebar-width-expanded;
   }
 }

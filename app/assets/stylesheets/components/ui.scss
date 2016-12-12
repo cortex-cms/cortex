@@ -1,0 +1,65 @@
+
+.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after, // Active tab
+.mdl-switch.is-checked .mdl-switch__thumb, // Toggle slider
+.mdl-textfield__label:after, // Active textfield
+.mdl-switch__ripple-container .mdl-ripple, // Button ripple effect
+.mdl-tabs__tab .mdl-tabs__ripple-container .mdl-ripple { // Tab ripple effect
+  background-color: $employer-color;
+}
+
+.mdl-switch.is-checked .mdl-switch__track { // Toggle slider background
+    background-color: rgba($employer-color, 0.5);
+}
+
+.mdl-textfield__input {
+  @extend .text-style-6;
+
+  &:placeholder {
+    @extend .text-style-5;
+  }
+}
+
+.mdl-button {
+  @extend .text-style-4;
+  color: $employer-color-dark;
+  background-color: transparent;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $color-grey-lightest;
+  }
+
+  &:disabled {
+    color: $color-anchor-blue-light;
+  }
+}
+
+.mdl-button--raised.mdl-button--colored {
+  color: white;
+  background-color: $employer-color-dark;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $employer-color;
+  }
+
+  &:disabled {
+    color: $color-anchor-blue-light;
+    background-color: $color-grey-lightest;
+  }
+}
+
+.mdl-button--fab.mdl-button--colored {
+  background-color: $color-orange;
+  border: solid 1px $color-orange-dark;
+
+  &:hover {
+    background-color: $color-orange;
+  }
+}
+
+.mdl-checkbox {
+  height: auto;
+}

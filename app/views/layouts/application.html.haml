@@ -10,11 +10,13 @@
     = stylesheet_link_tag :application
     = csrf_meta_tags
   %body
-    .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
-      = render 'partials/topbar'
+    .layout__container.mdl-js-layout.mdl-layout--fixed-drawer{class: ('sidebar--collapsed' unless current_page? root_path)}
       = render 'partials/sidebar'
-      %main.mdl-layout__content
-        = yield
+      .layout__topbar-content__container.mdl-layout--fixed-header
+        = render 'partials/topbar'
+        %main.mdl-layout__content.layout__main-content
+          = yield
+
     = javascript_include_tag :application
     = render 'layouts/google_analytics' if extra_config.google_analytics_id?
     = render 'partials/flash'

@@ -1,4 +1,5 @@
-= link_to content_type_content_items_path(model), class: 'mdl-navigation__link' do
+= link_to content_type_content_items_path(model), class: "mdl-navigation__link #{'active' if current_page?(content_type_content_items_path(model))}" do
   %i.material-icons{:role => "presentation"}>
     = icon
-  = name
+  %span.nav__item-name
+    = name

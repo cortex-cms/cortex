@@ -1,15 +1,15 @@
-%dialog.mdl-dialog#mediaInsert{ 'data-type': 'insert' , style: 'width: 70%;margin: 0;top: 120px;right: 6%;left: auto;padding: 0px;overflow: hidden;box-sizing: border-box;' }
-  .mdl-dialog__content#displayOptions{ style: 'padding: 0px;' }
-    = cell("index", media_index, content_type: media_content_type).(:index)
+%dialog.mdl-dialog#mediaInsert{ 'data-type': 'insert'  }
+  .mdl-dialog__content
+    = cell('index', media_index, content_type: media_content_type).(:index)
   .mdl-dialog__actions.mdl-dialog__actions
     .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
-%dialog.mdl-dialog#mediaFeatured{ 'data-type': 'featured' , style: 'width: 70%;margin: 0;top: 120px;right: 6%;left: auto;padding: 0px;overflow: hidden;box-sizing: border-box;' }
-  .mdl-dialog__content#displayOptions{ style: 'padding: 0px;' }
-    = cell("index", media_index, content_type: media_content_type).(:index)
+%dialog.mdl-dialog#mediaFeatured{ 'data-type': 'featured' }
+  .mdl-dialog__content
+    = cell('index', media_index, content_type: media_content_type).(:index)
   .mdl-dialog__actions.mdl-dialog__actions
     .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
-%dialog.mdl-dialog#mediaTile{ 'data-type': 'tile' , style: 'width: 70%;margin: 0;top: 120px;right: 6%;left: auto;padding: 0px;overflow: hidden;box-sizing: border-box;' }
-  .mdl-dialog__content#displayOptions{ style: 'padding: 0px;' }
-    = cell("index", media_index, content_type: media_content_type).(:index)
+%dialog.mdl-dialog#mediaTile{ 'data-type': 'tile' }
+  .mdl-dialog__content
+    = cell('index', media_index, content_type: media_content_type).(:index)
   .mdl-dialog__actions.mdl-dialog__actions
     .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE

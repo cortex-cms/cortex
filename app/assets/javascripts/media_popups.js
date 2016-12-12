@@ -10,7 +10,7 @@ if (!window.DOM_HELPER) {
     }
     return jsArray
   }
-};
+}
 
 window.setModals = function () {
 
@@ -38,9 +38,9 @@ window.setModals = function () {
       modalHolder[modal.dataset.type].close();
     }
     return modalHolder
-  }, {});
+  }, {})
   window.MODALS = modals
 }
 window.onload = function(){
    window.setModals()
-};
+}

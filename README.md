@@ -172,7 +172,7 @@ $ bundle exec rails s
 $ bundle exec sidekiq --config ./config/sidekiq.yml
 ```
 
-The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `surgeon@cortexcms.org` with password `welcome1`.
+The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `admin@cortexcms.org` with password `welcome1`.
 
 ### Deployment
 
@@ -197,15 +197,15 @@ This will configure various things, such as [dotenv](https://github.com/bkeepers
 Initialize the test database:
 
 ```sh
-$ bundle exec rake db:schema:load db:seed cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed
-$ bundle exec rake cortex:rebuild_indexes
+$ RAILS_ENV=test bundle exec rake db:schema:load db:seed cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed
+$ RAILS_ENV=test bundle exec rake cortex:rebuild_indexes
 ```
 
 To run Ruby and JS specs, utilize:
 
 ```sh
-$ bundle exec rake spec
-$ bundle exec rake spec:javascript
+$ RAILS_ENV=test bundle exec rake spec
+$ RAILS_ENV=test bundle exec rake spec:javascript
 ```
 
 ## API

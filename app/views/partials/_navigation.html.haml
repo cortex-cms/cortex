@@ -3,10 +3,6 @@
     %i.material-icons{:role => "presentation"}> dashboard
     Dashboard
   = cell(:content_type, collection: ContentType.all).(:nav)
-  #- if current_user.admin
-  #  = link_to content_types_path, class: 'mdl-navigation__link' do
-  #    %i.material-icons{:role => "presentation"}> code
-  #    Content Types
   .mdl-layout-spacer
   .hidden
     = link_to 'https://github.com/cbdr/cortex', class: 'mdl-navigation__link', target: '_blank' do

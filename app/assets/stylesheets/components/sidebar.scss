@@ -84,6 +84,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  cursor: pointer;
 
   &:after {
     content: '\e5cb';

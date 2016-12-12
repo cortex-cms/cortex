@@ -24,32 +24,32 @@ form {
 }
 
 .mdl-button--success {
-  background-color: #54a1a1;
+  background-color: $color-teal-dark;
   color: white;
 
   &:hover {
-    background-color: #54a1a1;
+    background-color: $color-teal-dark;
     color: white;
   }
 
   &:active {
-    background-color: #63c0b9;
+    background-color: $color-teal;
     color: white;
   }
 }
 
 .mdl-button--cb {
   background-color: none;
-  color: #54a1a1;
+  color: $color-teal-dark;
 
   &:hover {
     background-color: none;
-    color: #54a1a1;
+    color: $color-teal-dark;
   }
 
   &:active {
-    background-color: #dddddd;
-    color: #54a1a1;
+    background-color: $color-grey-lightest;
+    color: $color-teal-dark;
   }
 }
 

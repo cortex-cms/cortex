@@ -133,3 +133,15 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   }
 }
 }
+
+@media only screen and (max-width: 1024px) {
+  .layout__sidebar,
+  .sidebar__toggle-button {
+    display: none;
+  }
+
+  .layout__sidebar.is-visible {
+    display: flex;
+    min-width: $sidebar-width-full;
+  }
+}

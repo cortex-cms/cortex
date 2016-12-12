@@ -1,5 +1,7 @@
 $sidebar-width-max: 230px;
 $sidebar-width-min: 85px;
+$sidebar-collapse-transition: width 0.25s ease;
+$sidebar-toggle-button-transition: transform 500ms linear;
 
 .tenant__item {
   position: relative;
@@ -24,9 +26,7 @@ $sidebar-width-min: 85px;
   transform: translateX(-250px);
   transform-style: preserve-3d;
   will-change: transform;
-  transition-duration: 0.2s;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-property: transform;
+  transition: $sidebar-collapse-transition, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: visible;
   overflow-y: auto;
@@ -62,7 +62,9 @@ $sidebar-width-min: 85px;
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
   @extend %sidebar-nav;
+  min-width: $sidebar-width-max - 60px;
   padding-left: 20px;
+  transition: padding-left 0.25s ease;
 
   .material-icons {
     margin-right: 10px;
@@ -81,8 +83,6 @@ $sidebar-width-min: 85px;
   color: $color-white;
 }
 
-// Collapsing
-
 .sidebar__toggle-button {
   height: 1em;
   color: $color-teal-light;
@@ -93,55 +93,38 @@ $sidebar-width-min: 85px;
   align-items: center;
 
   &:after {
-    font-family: 'Material Icons';
     content: '\e5cb';
+    font-family: 'Material Icons';
+    transform: rotate(0deg);
+    transition: $sidebar-toggle-button-transition;
   }
 }
 
+// Collapsing
+
 @media only screen and (min-width: 1024px) {
-  .sidebar--collapsed {
+.sidebar--collapsed {
 
-    .nav__item-name {
-      display: none;
-    }
-
-    .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
-      min-width: 200px;
-      padding-left: 30px;
-    }
-
-    .tenant__item .material-icons {
-      position: static;
-    }
-
-    .sidebar__toggle-button:after {
-      content: '\e5cc';
-      transition: transform 500ms linear;
-    }
-
-    .layout__sidebar {
-      width: $sidebar-width-min;
-      transition: width 0.25s ease;
-
-      &:hover {
-        width: $sidebar-width-max;
-
-        .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
-          padding-left: 20px;
-        }
-        .nav__item-name {
-          display: inline-block;
-        }
-
-        .tenant__item .material-icons {
-          position: absolute;
-          right: 45px;
-        }
-
-        .sidebar__toggle-button:after {
-          transform: rotate(-540deg);
-        }
-      }
-    }
+  .nav__item-name {
+    display: none;
   }
+
+  .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    padding-left: 30px;
+  }
+
+  .tenant__item .material-icons {
+    position: static;
+  }
+
+  .sidebar__toggle-button:after {
+    transform: rotate(-540deg);
+    transition: $sidebar-toggle-button-transition;
+  }
+
+  .layout__sidebar {
+    width: $sidebar-width-min;
+    transition: $sidebar-collapse-transition;
+  }
+}
 }

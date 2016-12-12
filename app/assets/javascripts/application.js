@@ -14,4 +14,5 @@
 //= require base
 //= require forms
 //= require media_popups
+
 // require turbolinks # temporarily disabled

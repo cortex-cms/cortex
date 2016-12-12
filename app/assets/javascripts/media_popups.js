@@ -1,26 +1,22 @@
-//helper functions for DOM traversal and converting NodeList to iterable Array
+// helper functions for DOM traversal and converting NodeList to iterable Array
 if (!window.DOM_HELPER) {
-  window.DOM_HELPER = {};
-  window.DOM_HELPER.getAll = function(selector, node) {
+  window.DOM_HELPER = {}
+  window.DOM_HELPER.getAll = function (selector, node) {
     var domNode = node ? node : document;
-    var domElemList = domNode.querySelectorAll(selector);
-    if (!domElemList.length) {
-      console.log("could not find elements with selector: " + selector);
-      return false;
-    }
-    var jsArray = [];
+    var domElemList = domNode.querySelectorAll(selector)
+    var jsArray = []
     for (var i = 0; i < domElemList.length; i++) {
-      jsArray.push(domElemList[i]);
+      jsArray.push(domElemList[i])
     }
-    return jsArray;
-  };
+    return jsArray
+  }
 };
 
-window.setModals = function() {
+window.setModals = function () {
 
-  var modals = DOM_HELPER.getAll('.mdl-dialog').reduce(function(modalHolder, modal, i) {
+  var modals = window.DOM_HELPER.getAll('.mdl-dialog').reduce(function(modalHolder, modal, i) {
     if (!modal.showModal) {
-      dialogPolyfill.registerDialog(modal);
+      dialogPolyfill.registerDialog(modal)
     }
 
     modalHolder[modal.dataset.type] = {
@@ -32,7 +28,7 @@ window.setModals = function() {
       },
       close: function() {
         if (!this.isOpen) {
-          return;
+          return
         }
         modal.close();
         this.isOpen = false;
@@ -41,7 +37,10 @@ window.setModals = function() {
     modal.querySelector('.close').onclick = function() {
       modalHolder[modal.dataset.type].close();
     }
-    return modalHolder;
+    return modalHolder
   }, {});
-  window.MODALS = modals;
+  window.MODALS = modals
 }
+window.onload = function(){
+   window.setModals()
+};

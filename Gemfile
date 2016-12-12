@@ -11,9 +11,8 @@ gem 'puma', '~> 3.6'
 gem 'rails', '~> 5.0.0'
 
 # Cortex-specific
-gem 'cortex-exceptions', '~> 0.0.4'
+gem 'cortex-exceptions', '= 0.0.4'
 gem 'cortex-plugins-core', '= 0.4.6'
-gem 'cortex-plugins-demo', git: 'https://github.com/cortex-cms/cortex-plugins-demo.git'
 
 # API
 gem 'grape', '~> 0.17'

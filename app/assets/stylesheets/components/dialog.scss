@@ -1,3 +1,17 @@
+.dialog-div {
+  position: fixed;
+  background: #fff;
+}
+
+.dialog-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.0980392);
+}
+
 .mdl-dialog {
   width: 70%;
   margin: 0;

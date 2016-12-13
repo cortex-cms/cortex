@@ -1,15 +1,18 @@
-%dialog.mdl-dialog#mediaInsert{ 'data-type': 'insert'  }
-  .mdl-dialog__content
-    = cell('index', media_index, content_type: media_content_type).(:index)
-  .mdl-dialog__actions.mdl-dialog__actions
-    .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
-%dialog.mdl-dialog#mediaFeatured{ 'data-type': 'featured' }
-  .mdl-dialog__content
-    = cell('index', media_index, content_type: media_content_type).(:index)
-  .mdl-dialog__actions.mdl-dialog__actions
-    .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
-%dialog.mdl-dialog#mediaTile{ 'data-type': 'tile' }
-  .mdl-dialog__content
-    = cell('index', media_index, content_type: media_content_type).(:index)
-  .mdl-dialog__actions.mdl-dialog__actions
-    .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
+.dialog-backdrop.hidden{ 'data-type': 'insert'}
+  %div.dialog-div.mdl-dialog#mediaInsert
+    .mdl-dialog__content
+      = cell('index', media_index, content_type: media_content_type).(:index)
+    .mdl-dialog__actions.mdl-dialog__actions
+      .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
+.dialog-backdrop.hidden{ 'data-type': 'featured' }
+  %div.dialog-div.mdl-dialog#mediaFeatured
+    .mdl-dialog__content
+      = cell('index', media_index, content_type: media_content_type).(:index)
+    .mdl-dialog__actions.mdl-dialog__actions
+      .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
+.dialog-backdrop.hidden{ 'data-type': 'tile' }
+  %div.dialog-div.mdl-dialog#mediaTile
+    .mdl-dialog__content
+      = cell('index', media_index, content_type: media_content_type).(:index)
+    .mdl-dialog__actions.mdl-dialog__actions
+      .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE

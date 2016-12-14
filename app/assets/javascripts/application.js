@@ -1,19 +1,19 @@
-//=  require jquery3
+//= require jquery3
 // require jquery.turbolinks # temporarily disabled
-//  require jquery_ujs
+//= require jquery_ujs
 //= require underscore
-//  require riot-compiler
+//= require riot-compiler
 //= require material
-//=  require jquery-ui/datepicker
-//=  require jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon
-//  require bootstrap-tagsinput
+//= require jquery-ui/datepicker
+//= require jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon
+//= require bootstrap-tagsinput
 //= require clipboard
 
 //= require cortex-field_types-core/application
 
-//= require forms
 //= require base
+//= require forms
 //= require media_popups
 //= require sidebar-toggle
 
-//= require turbolinks
+// require turbolinks # temporarily disabled

@@ -17,13 +17,14 @@ class FieldItem < ApplicationRecord
 
   def field_type_instance_params(data_hash)
     # Carefully construct a params object so we don't trigger our fragile setters when a value is nil
-    params = {metadata: field.metadata.merge(asset_check(data_hash)), validations: field.validations }
+    params = {metadata: field.metadata.merge(asset_check(data_hash)), validations: field.validations}
     params[:data] = data_hash if data_hash
     params
   end
 
   def asset_check(data_hash)
-   data_hash["asset"] ? {existing_data: data, content_type:  data_hash["asset"].content_type} : {existing_data: data}
+    return {existing_data: data} unless data_hash["asset"]
+    {existing_data: data, content_type:  data_hash["asset"].content_type}
   end
 
   def field_type_instance(data_hash = nil)
@@ -46,7 +47,7 @@ class FieldItem < ApplicationRecord
   end
 
   def add_specific_errors
-    field_type_instance.errors.each do |k, v|
+    field_type_instance.errors.each do |_k, v|
       errors.add(field.name.to_sym, v)
     end
   end

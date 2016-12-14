@@ -14,26 +14,24 @@ if (!window.DOM_HELPER) {
 
 window.setModals = function () {
 
-  var modals = window.DOM_HELPER.getAll('.mdl-dialog').reduce(function(modalHolder, modal, i) {
-    if (!modal.showModal) {
-      dialogPolyfill.registerDialog(modal)
-    }
+  var modals = window.DOM_HELPER.getAll('.dialog-backdrop').reduce(function(modalHolder, modal, i) {
 
     modalHolder[modal.dataset.type] = {
       elem: modal,
       isOpen: false,
       open: function() {
-        modal.showModal();
+        modal.classList.remove('hidden');
         this.isOpen = true;
       },
       close: function() {
         if (!this.isOpen) {
           return
         }
-        modal.close();
+        modal.classList.add('hidden');
         this.isOpen = false;
       }
     }
+
     modal.querySelector('.close').onclick = function() {
       modalHolder[modal.dataset.type].close();
     }

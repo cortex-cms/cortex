@@ -85,7 +85,7 @@ namespace :employer do
       blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2, minimum: 1})
       blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
       blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
-      blog.fields.new(name: 'Featured Image', field_type: 'content_item_field_type', render_method: 'popup')
+      blog.fields.new(name: 'Featured Image', field_type: 'content_item_field_type')
 
       puts "Saving Employer Blog..."
       blog.save

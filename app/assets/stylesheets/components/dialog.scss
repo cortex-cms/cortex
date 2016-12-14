@@ -43,3 +43,33 @@
 .mdl-dialog__content {
   padding: 0;
 }
+
+.content_item_button {
+  border: 1px solid #BBB;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  background-color: white;
+  color: #747D8E;
+
+  &:active {
+    background-color: #DDD;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.logo {
+  font-size: 56px;
+}
+
+.button_content {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.content_item_button-text {
+  font-size: 12px;
+}

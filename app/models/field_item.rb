@@ -17,9 +17,13 @@ class FieldItem < ApplicationRecord
 
   def field_type_instance_params(data_hash)
     # Carefully construct a params object so we don't trigger our fragile setters when a value is nil
-    params = {metadata: field.metadata.merge({existing_data: data}), validations: field.validations}
+    params = {metadata: field.metadata.merge(asset_check(data_hash)), validations: field.validations }
     params[:data] = data_hash if data_hash
     params
+  end
+
+  def asset_check(data_hash)
+   data_hash["asset"] ? {existing_data: data, content_type:  data_hash["asset"].content_type} : {existing_data: data}
   end
 
   def field_type_instance(data_hash = nil)

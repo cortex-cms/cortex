@@ -39,6 +39,6 @@ window.setModals = function () {
   }, {})
   window.MODALS = modals
 }
-window.onload = function(){
-   window.setModals()
-}
+// window.onload = function(){
+//    window.setModals()
+// }

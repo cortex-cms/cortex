@@ -55,6 +55,10 @@
   &:active {
     background-color: #DDD;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .text-center {

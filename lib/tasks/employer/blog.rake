@@ -85,6 +85,7 @@ namespace :employer do
       blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2, minimum: 1})
       blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
       blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
+      blog.fields.new(name: 'Featured Image', field_type: 'content_item_field_type', render_method: 'popup')
 
       puts "Saving Employer Blog..."
       blog.save
@@ -137,9 +138,6 @@ namespace :employer do
                   {
                     "id": blog.fields.find_by_name('Tags').id
                   },
-                  # {
-                  #   "id": blog.fields.find_by_name('Expiration Date').id
-                  # },
                   {
                     "id": blog.fields.find_by_name('Publish Date').id
                   }
@@ -191,6 +189,23 @@ namespace :employer do
                   {
                     "id": blog.fields.find_by_name('Research').id,
                     "render_method": "dropdown"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Add Featured Image",
+            "heading": "..",
+            "description": "Add an image to feature with this Blog Post.",
+            "columns": [
+              {
+                "heading": "Image (Optional Heading)",
+                "grid_width": 12,
+                "elements": [
+                  {
+                    "id": blog.fields.find_by_name('Featured Image').id,
+                    "render_method": "popup"
                   }
                 ]
               }

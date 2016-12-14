@@ -16,10 +16,10 @@ GIT
 
 GIT
   remote: https://github.com/toastercup/grape-kaminari.git
-  revision: 8d3f48e04c35cd6b85d4707a5b7f7356d305bf8c
-  branch: set-only-pagination-headers
+  revision: b45cee1b217ccb4e2c1dcf2a5143f12980d6e04a
+  branch: set-paginate-headers-extraction
   specs:
-    grape-kaminari (0.1.8)
+    grape-kaminari (0.1.9)
       grape
       kaminari
 
@@ -459,7 +459,7 @@ GEM
     mocha (1.2.1)
       metaclass (~> 0.0.1)
     multi_json (1.12.1)
-    multi_xml (0.5.5)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     mustermann (1.0.0.beta2)
     mustermann19 (0.4.4)

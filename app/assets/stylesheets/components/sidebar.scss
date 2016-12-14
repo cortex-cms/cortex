@@ -1,22 +1,46 @@
+$sidebar-width-expanded: 230px;
+$sidebar-width-collapsed: 85px;
+$sidebar-link-width: $sidebar-width-expanded - 60px; // link padding = 60px
+$sidebar-collapse-transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+$sidebar-toggle-button-transition: transform 500ms linear;
+
 .tenant__item {
-  box-shadow: 0 -1px 5px 2px rgba(0,0,0,0.5);
+  position: relative;
 }
 
-.demo-drawer-header {
-  @include clearfix;
+.tenant__item .material-icons {
+  position: absolute;
+  right: 10px;
 }
 
-.demo-drawer-header h1 {
-  @extend %display-text;
+.layout__sidebar { // Styles copied from .mdl-layout__drawer with some clean up
+  width: $sidebar-width-expanded;
+  transition: $sidebar-collapse-transition;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.sidebar__header {
+  padding: 24px 10px;
+  min-width: $sidebar-width-expanded;
+}
+
+.sidebar__root-link {
   display: flex;
   align-items: center;
-  color: white;
+  text-decoration: none;
 }
 
-.logo {
+.sidebar__brand-logo {
   max-height: 60px;
   max-width: 60px;
-  float: left;
+}
+
+.sidebar__brand-name {
+  @extend %display-text;
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
 }
 
 // Overrides
@@ -31,9 +55,12 @@
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
   @extend %sidebar-nav;
+  min-width: $sidebar-link-width;
+  padding-left: 20px;
+  transition: padding-left 0.25s ease;
 
   .material-icons {
-    margin-right: 32px;
+    margin-right: 10px;
     font-size: 24px;
     color: inherit;
   }
@@ -42,4 +69,69 @@
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
   background-color: $employer-color;
   color: $color-grey-dark;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link.tenant__item {
+  background-color: $employer-color;
+  color: $color-white;
+}
+
+.sidebar__toggle-button {
+  height: 1em;
+  color: $color-teal-light;
+  background-color: $color-teal-dark;
+  padding: 0.25em 0.5em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+
+  &:after {
+    content: '\e5cb';
+    font-family: 'Material Icons';
+    transform: rotate(0deg);
+    transition: $sidebar-toggle-button-transition;
+  }
+}
+
+// Collapsing
+
+@media only screen and (min-width: 1024px) {
+.sidebar--collapsed {
+
+  .nav__item-name,
+  .sidebar__brand-name {
+    display: none;
+  }
+
+  .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    padding-left: 30px;
+  }
+
+  .tenant__item .material-icons {
+    position: static;
+  }
+
+  .sidebar__toggle-button:after {
+    transform: rotate(-540deg);
+    transition: $sidebar-toggle-button-transition;
+  }
+
+  .layout__sidebar {
+    width: $sidebar-width-collapsed;
+    transition: $sidebar-collapse-transition;
+  }
+}
+}
+
+@media only screen and (max-width: 1024px) {
+  .layout__sidebar,
+  .sidebar__toggle-button {
+    display: none;
+  }
+
+  .layout__sidebar.is-visible {
+    display: flex;
+    min-width: $sidebar-width-expanded;
+  }
 }

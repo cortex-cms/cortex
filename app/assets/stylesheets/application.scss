@@ -10,13 +10,15 @@
 
 @import 'base';
 @import 'helpers';
+@import 'layout';
 
 @import 'components/card';
 @import 'components/content';
+@import 'components/dialog';
 @import 'components/flash';
 @import 'components/form';
 @import 'components/header';
 @import 'components/sidebar';
+@import 'components/ui';
 
 @import 'demo';
-@import 'cortex-plugins-demo/application';

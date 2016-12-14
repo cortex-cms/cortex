@@ -371,8 +371,6 @@ namespace :employer do
                                     contentable_id: blog.id,
                                     contentable_type: 'ContentType'
                                   })
-
-      Rake::Task['plugin:demo:seed'].execute
     end
   end
 end

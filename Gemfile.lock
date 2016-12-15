@@ -6,6 +6,19 @@ GIT
       activerecord (>= 4.0.0, < 5.1)
 
 GIT
+  remote: https://github.com/cortex-cms/cortex-plugins-core.git
+  revision: 889b620a1260f9b4412293812017c1f07e69f7cc
+  branch: topic/COR-526-Popup-Button
+  specs:
+    cortex-plugins-core (0.4.6)
+      cells (~> 4.1)
+      cells-haml (~> 0.0.10)
+      cells-rails (~> 0.0.6)
+      ckeditor (~> 4.2.0)
+      mimemagic (~> 0.3.2)
+      rails (>= 4)
+
+GIT
   remote: https://github.com/samstickland/cells.git
   revision: e5634e25b472d41913030eb82463b015f429f2ca
   branch: collection_fix
@@ -127,7 +140,7 @@ GEM
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.2.0)
-    ckeditor (4.2.0)
+    ckeditor (4.2.1)
       cocaine
       orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
@@ -143,13 +156,6 @@ GEM
     concurrent-ruby (1.0.2)
     connection_pool (2.2.0)
     cortex-exceptions (0.0.4)
-    cortex-plugins-core (0.4.6)
-      cells (~> 4.1)
-      cells-haml (~> 0.0.10)
-      cells-rails (~> 0.0.6)
-      ckeditor (~> 4.2.0)
-      mimemagic (~> 0.3.2)
-      rails (>= 4)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
@@ -710,7 +716,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.6)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (= 0.0.4)
-  cortex-plugins-core (= 0.4.6)
+  cortex-plugins-core!
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)
   doorkeeper (~> 4.2)

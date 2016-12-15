@@ -1,6 +1,6 @@
 .dialog-div {
   position: fixed;
-  background: #fff;
+  background: $color-white;
 }
 
 .dialog-backdrop {
@@ -37,9 +37,36 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: white;
+  background: $color-white;
 }
 
 .mdl-dialog__content {
   padding: 0;
+}
+
+.content_item_button {
+  border: 1px solid $color-grey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  background-color: $color-white;
+  color: $color-anchor-blue-light;
+  text-align: center;
+
+  &:active {
+    background-color: $color-grey-lightest;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button_content {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.content_item_button-text {
+  @extend .text-style-7;
 }

@@ -42,3 +42,8 @@ window.setModals = function () {
 window.onload = function(){
    window.setModals()
 }
+
+$(".popup--open").on("click", function(ev){
+  ev.preventDefault();
+  window.MODALS.featured.open();
+})

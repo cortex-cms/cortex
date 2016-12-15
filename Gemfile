@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.0'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', git: 'https://github.com/cortex-cms/cortex-plugins-core.git', branch: 'topic/COR-526-Popup-Button'
+gem 'cortex-plugins-core', '= 0.4.6'
 
 # API
 gem 'grape', '~> 0.17'

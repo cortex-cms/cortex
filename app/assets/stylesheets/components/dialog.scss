@@ -68,5 +68,5 @@
 }
 
 .content_item_button-text {
-  font-size: 12px;
+  @extend .text-style-7;
 }

@@ -63,3 +63,10 @@
 .mdl-checkbox {
   height: auto;
 }
+
+.ui-datepicker td span,
+.ui-datepicker td a,
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+  color: $color-teal;
+}

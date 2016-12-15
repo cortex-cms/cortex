@@ -196,7 +196,6 @@ namespace :employer do
           },
           {
             "name": "Add Featured Image",
-            "heading": "..",
             "description": "Add an image to feature with this Blog Post.",
             "columns": [
               {

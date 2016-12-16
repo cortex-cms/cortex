@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/toastercup/grape-kaminari.git
-  revision: 6ac75af4a5aa30f030bad6c71fe40aa6fc368f49
+  revision: 661388050eaa97f70006b74fe300e19760b8a132
   branch: set-paginate-headers-extraction
   specs:
     grape-kaminari (0.1.9)

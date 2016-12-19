@@ -30,6 +30,7 @@ gem 'pundit', '~> 1.1'
 # Data
 gem 'rails-observers', git: 'https://github.com/triloch/rails-observers.git'
 gem 'awesome_nested_set', git: 'https://github.com/cortex-cms/awesome_nested_set.git'
+gem 'jsonb_accessor', '1.0.0.beta.2'
 gem 'paperclip', '~> 5.1.0'
 gem 'paperclip-optimizer', '~> 2.0'
 gem 'image_optim_pack', '~> 0.3.0'

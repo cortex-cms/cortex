@@ -3,5 +3,9 @@
     - @options[:data][:columns].each do |column|
       %th{ class: 'mdl-data-table__cell--non-numeric' }
         = render_table_header(column)
-    %th{ class: 'mdl-data-table__cell--non-numeric' }
-      Edit
+    - if @options[:popup]
+      %th{ class: 'mdl-data-table__cell--non-numeric' }
+        Select
+    - else
+      %th{ class: 'mdl-data-table__cell--non-numeric' }
+        Edit

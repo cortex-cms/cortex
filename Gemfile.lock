@@ -1,4 +1,16 @@
 GIT
+  remote: /Users/elyoung/Code/CareerBuilder/cortex-plugins/cortex-plugins-core
+  revision: b5cc9cfb108239ba45375887731b60e8c48e7f56
+  specs:
+    cortex-plugins-core (0.4.8)
+      cells (~> 4.1)
+      cells-haml (~> 0.0.10)
+      cells-rails (~> 0.0.6)
+      ckeditor (= 4.2.0)
+      mimemagic (~> 0.3.2)
+      rails (>= 4)
+
+GIT
   remote: https://github.com/cortex-cms/awesome_nested_set.git
   revision: d3bad27fa959788e403becc411f6db9d1aac1dfb
   specs:
@@ -140,7 +152,7 @@ GEM
     coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    concurrent-ruby (1.0.2)
+    concurrent-ruby (1.0.3)
     connection_pool (2.2.0)
     cortex-exceptions (0.0.4)
     cortex-plugins-core (0.4.8)
@@ -710,7 +722,11 @@ DEPENDENCIES
   cells-rails (~> 0.0.6)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (= 0.0.4)
+<<<<<<< aa00515394ec5b3fee5590ff26262e5e85b521fb
   cortex-plugins-core (= 0.4.8)
+=======
+  cortex-plugins-core!
+>>>>>>> Update Core Plugin to 0.4.8
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)
   doorkeeper (~> 4.2)

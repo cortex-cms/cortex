@@ -64,9 +64,34 @@
   height: auto;
 }
 
+.ui-datepicker {
+  background-color: $color-white;
+  border-radius: 3px;
+  padding: 5px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
 .ui-datepicker td span,
 .ui-datepicker td a,
 .ui-datepicker .ui-datepicker-prev span,
 .ui-datepicker .ui-datepicker-next span {
   color: $color-teal;
+}
+
+.ui-datepicker td span,
+.ui-datepicker td a {
+  text-align: center;
+}
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+  top: 7px;
+  width: auto;
+  height: auto;
+}
+
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+  position: static;
+  margin: 0;
 }

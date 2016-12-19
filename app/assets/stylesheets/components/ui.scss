@@ -95,3 +95,11 @@
   position: static;
   margin: 0;
 }
+
+.ui-datepicker td[data-handler='selectDay']:hover {
+  background-color: $color-teal-dark;
+
+  a {
+    color: $color-white;
+  }
+}

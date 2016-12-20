@@ -11,13 +11,11 @@
     background-color: rgba($employer-color, 0.5);
 }
 
-.mdl-textfield__input {
-  @extend .text-style-6;
-
-  &:placeholder {
-    @extend .text-style-5;
-  }
+.mdl-checkbox {
+  height: auto;
 }
+
+// Buttons
 
 .mdl-button {
   @extend .text-style-4;
@@ -60,9 +58,37 @@
   }
 }
 
-.mdl-checkbox {
-  height: auto;
+.mdl-button--success {
+  background-color: $color-teal-dark;
+  color: white;
+
+  &:hover {
+    background-color: $color-teal-dark;
+    color: white;
+  }
+
+  &:active {
+    background-color: $color-teal;
+    color: white;
+  }
 }
+
+.mdl-button--cb {
+  background-color: none;
+  color: $color-teal-dark;
+
+  &:hover {
+    background-color: none;
+    color: $color-teal-dark;
+  }
+
+  &:active {
+    background-color: $color-grey-lightest;
+    color: $color-teal-dark;
+  }
+}
+
+// Date Time Picker
 
 .ui-datepicker {
   background-color: $color-white;

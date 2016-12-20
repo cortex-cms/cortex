@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116183859) do
+ActiveRecord::Schema.define(version: 20161220214213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,19 +58,14 @@ ActiveRecord::Schema.define(version: 20161116183859) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "user_id",    null: false
+    t.string   "name",       limit: 255
+    t.integer  "user_id",                null: false
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["depth"], name: "index_categories_on_depth", using: :btree
-    t.index ["lft"], name: "index_categories_on_lft", using: :btree
-    t.index ["parent_id"], name: "index_categories_on_parent_id", using: :btree
-    t.index ["rgt"], name: "index_categories_on_rgt", using: :btree
-    t.index ["user_id"], name: "index_categories_on_user_id", using: :btree
   end
 
   create_table "categories_posts", id: false, force: :cascade do |t|
@@ -156,7 +151,7 @@ ActiveRecord::Schema.define(version: 20161116183859) do
     t.index ["id"], name: "index_field_items_on_id", using: :btree
   end
 
-  create_table "field_types", force: :cascade do |t|
+  create_table "field_types", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -197,24 +192,23 @@ ActiveRecord::Schema.define(version: 20161116183859) do
   end
 
   create_table "media", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",                    limit: 255
     t.integer  "user_id"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
+    t.string   "attachment_file_name",    limit: 255
+    t.string   "attachment_content_type", limit: 255
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.string   "dimensions"
+    t.string   "dimensions",              limit: 255
     t.text     "description"
-    t.string   "alt"
+    t.string   "alt",                     limit: 255
     t.boolean  "active"
     t.datetime "deactive_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "digest"
+    t.string   "digest",                  limit: 255
     t.datetime "deleted_at"
     t.hstore   "meta"
-    t.string   "type",                    default: "Media", null: false
-    t.index ["name"], name: "index_media_on_name", using: :btree
+    t.string   "type",                    limit: 255, default: "Media", null: false
     t.index ["user_id"], name: "index_media_on_user_id", using: :btree
   end
 
@@ -224,48 +218,48 @@ ActiveRecord::Schema.define(version: 20161116183859) do
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
-    t.integer  "resource_owner_id", null: false
-    t.integer  "application_id",    null: false
-    t.string   "token",             null: false
-    t.integer  "expires_in",        null: false
-    t.text     "redirect_uri",      null: false
-    t.datetime "created_at",        null: false
+    t.integer  "resource_owner_id",             null: false
+    t.integer  "application_id",                null: false
+    t.string   "token",             limit: 255, null: false
+    t.integer  "expires_in",                    null: false
+    t.text     "redirect_uri",                  null: false
+    t.datetime "created_at",                    null: false
     t.datetime "revoked_at"
-    t.string   "scopes"
+    t.string   "scopes",            limit: 255
     t.index ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
     t.integer  "resource_owner_id"
     t.integer  "application_id"
-    t.string   "token",             null: false
-    t.string   "refresh_token"
+    t.string   "token",             limit: 255, null: false
+    t.string   "refresh_token",     limit: 255
     t.integer  "expires_in"
     t.datetime "revoked_at"
-    t.datetime "created_at",        null: false
-    t.string   "scopes"
+    t.datetime "created_at",                    null: false
+    t.string   "scopes",            limit: 255
     t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
     t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
     t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
   end
 
   create_table "oauth_applications", force: :cascade do |t|
-    t.string   "name",                      null: false
-    t.string   "uid",                       null: false
-    t.string   "secret",                    null: false
-    t.text     "redirect_uri",              null: false
+    t.string   "name",         limit: 255,              null: false
+    t.string   "uid",          limit: 255,              null: false
+    t.string   "secret",       limit: 255,              null: false
+    t.text     "redirect_uri",                          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
-    t.string   "owner_type"
-    t.string   "scopes",       default: "", null: false
+    t.string   "owner_type",   limit: 255
+    t.string   "scopes",                   default: "", null: false
     t.index ["owner_id", "owner_type"], name: "index_oauth_applications_on_owner_id_and_owner_type", using: :btree
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
   end
 
   create_table "onet_occupations", force: :cascade do |t|
-    t.string   "soc"
-    t.string   "title"
+    t.string   "soc",         limit: 255
+    t.string   "title",       limit: 255
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -285,44 +279,43 @@ ActiveRecord::Schema.define(version: 20161116183859) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "user_id",                              null: false
-    t.string   "title"
+    t.integer  "user_id",                                          null: false
+    t.string   "title",               limit: 255
     t.datetime "published_at"
     t.datetime "expired_at"
     t.datetime "deleted_at"
-    t.boolean  "draft",               default: true,   null: false
-    t.integer  "comment_count",       default: 0,      null: false
+    t.boolean  "draft",                           default: true,   null: false
+    t.integer  "comment_count",                   default: 0,      null: false
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "short_description"
-    t.integer  "job_phase",                            null: false
-    t.integer  "display",                              null: false
+    t.string   "short_description",   limit: 255
+    t.integer  "job_phase",                                        null: false
+    t.integer  "display",                                          null: false
     t.text     "notes"
-    t.string   "copyright_owner"
-    t.string   "seo_title"
-    t.string   "seo_description"
-    t.string   "seo_preview"
-    t.string   "custom_author"
-    t.string   "slug",                                 null: false
+    t.string   "copyright_owner",     limit: 255
+    t.string   "seo_title",           limit: 255
+    t.string   "seo_description",     limit: 255
+    t.string   "seo_preview",         limit: 255
+    t.string   "custom_author",       limit: 255
+    t.string   "slug",                                             null: false
     t.integer  "featured_media_id"
     t.integer  "primary_industry_id"
     t.integer  "primary_category_id"
     t.integer  "tile_media_id"
     t.hstore   "meta"
-    t.string   "type",                default: "Post", null: false
+    t.string   "type",                            default: "Post", null: false
     t.integer  "author_id"
-    t.boolean  "is_wysiwyg",          default: true
-    t.boolean  "noindex",             default: false
-    t.boolean  "nofollow",            default: false
-    t.boolean  "nosnippet",           default: false
-    t.boolean  "noodp",               default: false
-    t.boolean  "noarchive",           default: false
-    t.boolean  "noimageindex",        default: false
+    t.boolean  "is_wysiwyg",                      default: true
+    t.boolean  "noindex",                         default: false
+    t.boolean  "nofollow",                        default: false
+    t.boolean  "nosnippet",                       default: false
+    t.boolean  "noodp",                           default: false
+    t.boolean  "noarchive",                       default: false
+    t.boolean  "noimageindex",                    default: false
     t.index ["author_id"], name: "index_posts_on_author_id", using: :btree
     t.index ["slug"], name: "index_posts_on_slug", using: :btree
     t.index ["type"], name: "index_posts_on_type", using: :btree
-    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
   create_table "role_permissions", force: :cascade do |t|
@@ -334,11 +327,10 @@ ActiveRecord::Schema.define(version: 20161116183859) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "resource_type"
-    t.integer  "resource_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+    t.string   "resource_id"
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
@@ -354,10 +346,10 @@ ActiveRecord::Schema.define(version: 20161116183859) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
-    t.string   "taggable_type"
     t.integer  "taggable_id"
-    t.string   "tagger_type"
+    t.string   "taggable_type", limit: 255
     t.integer  "tagger_id"
+    t.string   "tagger_type",   limit: 255
     t.string   "context",       limit: 128
     t.datetime "created_at"
     t.index ["context"], name: "index_taggings_on_context", using: :btree
@@ -372,8 +364,9 @@ ActiveRecord::Schema.define(version: 20161116183859) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string  "name"
-    t.integer "taggings_count", default: 0
+    t.string  "name",           limit: 255
+    t.integer "taggings_count",             default: 0
+    t.integer "tenant_id",                  default: 1
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
@@ -388,47 +381,43 @@ ActiveRecord::Schema.define(version: 20161116183859) do
     t.string   "contact_email", limit: 200
     t.string   "contact_phone", limit: 20
     t.datetime "deleted_at"
-    t.string   "contract"
-    t.string   "did"
+    t.string   "contract",      limit: 255
+    t.string   "did",           limit: 255
     t.datetime "active_at"
     t.datetime "deactive_at"
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["did"], name: "index_tenants_on_did", using: :btree
-    t.index ["owner_id"], name: "index_tenants_on_owner_id", using: :btree
     t.index ["parent_id"], name: "index_tenants_on_parent_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                             default: "",      null: false
+    t.string   "email",                  limit: 255, default: "",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "tenant_id",                                           null: false
-    t.string   "encrypted_password",                default: "",      null: false
-    t.string   "reset_password_token"
+    t.integer  "tenant_id",                                            null: false
+    t.string   "encrypted_password",     limit: 255, default: "",      null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,       null: false
+    t.integer  "sign_in_count",                      default: 0,       null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "firstname",                                           null: false
-    t.string   "lastname"
-    t.string   "locale",                 limit: 30, default: "en_US", null: false
-    t.string   "timezone",               limit: 30, default: "EST",   null: false
-    t.boolean  "admin",                             default: false,   null: false
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "firstname",              limit: 255,                   null: false
+    t.string   "lastname",               limit: 255
+    t.string   "locale",                 limit: 30,  default: "en_US", null: false
+    t.string   "timezone",               limit: 30,  default: "EST",   null: false
+    t.boolean  "admin",                              default: false,   null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["tenant_id"], name: "index_users_on_tenant_id", using: :btree
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
 
@@ -451,6 +440,7 @@ ActiveRecord::Schema.define(version: 20161116183859) do
     t.boolean  "noodp",                  default: false
     t.boolean  "noarchive",              default: false
     t.boolean  "noimageindex",           default: false
+    t.text     "seo_keywords"
     t.index ["user_id"], name: "index_webpages_on_user_id", using: :btree
   end
 

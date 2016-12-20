@@ -41,7 +41,6 @@ exclude_paths:
 - vendor/
 - app/interactors/
 - app/api/
-- app/assets/javascripts/riot-compiler.js
 - app/assets/javascripts/legacy/
 - app/assets/javascripts/legacy_application.js
 - app/assets/legacy_templates/
@@ -73,3 +72,4 @@ exclude_paths:
 - app/jobs/youtube_media_job.rb
 - app/jobs/youtube_media_job.rb
 - lib/tasks/cortex.rake
+- lib/assets/javascripts/riot-compiler.js

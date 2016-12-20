@@ -1,6 +1,6 @@
 $(function() {
   // If we restore Turbolinks, all of this should be wrapped in turbolinks:load
-  $(".datepicker").datepicker({
+  $(".datepicker").datetimepicker({
     dateFormat: "dd/mm/yy",
     onSelect: function (date) {
       if ($(".new_publish_state_button").length > 0) {

@@ -47,6 +47,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 
 .mdl-layout__drawer {
   background-color: $color-grey-dark;
+  border-right: none;
 }
 
 .mdl-layout__drawer .mdl-navigation {

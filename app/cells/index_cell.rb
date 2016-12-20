@@ -18,4 +18,8 @@ class IndexCell < Cell::ViewModel
   def render_table_header(column_data)
     column_data[:name]
   end
+
+  def content_item_title(content_item)
+    content_item.field_items.find { |field_item| field_item.field.name == "Title" }.data["text"]
+  end
 end

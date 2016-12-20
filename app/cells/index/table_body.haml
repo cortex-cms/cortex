@@ -6,7 +6,7 @@
           = cell('index/content_item', nil, { cells: column[:cells], content_item: content_item }).(:column)
       - if @options[:popup]
         %td{ class: 'mdl-data-table__cell--non-numeric' }
-          = link_to edit_content_type_content_item_path(@options[:content_type].id, content_item.id), class: 'mdl-button mdl-js-button mdl-button--icon' do
+          %a{ href: "#", data: { id: content_item.id, title: content_item_title(content_item) }, class: 'media-select mdl-button mdl-js-button mdl-button--icon' }
             %i{ class: 'material-icons' }
               add
       - else

@@ -18,6 +18,9 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   transition: $sidebar-collapse-transition;
   position: relative;
   overflow-x: hidden;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
 }
 
 .sidebar__header {

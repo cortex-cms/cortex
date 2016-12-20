@@ -10,6 +10,11 @@
   @include wizard-step-description;
 }
 
+.new_content_item .wizard__step:last-of-type .wizard__instruction-panel .p-40,
+.new_content_item .wizard__step:last-of-type .card-holder.p-20 {
+  padding-bottom: 0;
+}
+
 // Overrides
 
 .mdl-textfield {

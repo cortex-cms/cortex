@@ -10,7 +10,7 @@ $(function() {
   });
 
   $(".datepicker").on("focusout", function(ev){
-    if ($(this).val() == "") {
+    if ($(this).val() === "") {
       $(this).closest('div').addClass('is-dirty');
     }
   });

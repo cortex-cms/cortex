@@ -6,7 +6,6 @@ class FieldItem < ApplicationRecord
   validates :field_id, presence: true
   validates :content_item_id, presence: true, on: :update
   validate :field_item_content_is_valid, if: :field_is_present
-  validate :slug_field_is_unique, if: :validate_slug?
 
   def data=(data_hash)
     # Reset @field_type_instance so that massaged data can be re-generated every time @data is set, not just on init
@@ -40,18 +39,6 @@ class FieldItem < ApplicationRecord
 
   def field_item_validates
     field_type_instance.valid?
-  end
-
-  def slug_field_is_unique
-    errors.add(:base, 'Slug Must be unique') unless slug_is_taken
-  end
-
-  def slug_is_taken
-    FieldItem.jsonb_contains(:data, text: field_type_instance.text).empty?
-  end
-
-  def validate_slug?
-    self.field.name == 'Slug'
   end
 
   def add_specific_errors

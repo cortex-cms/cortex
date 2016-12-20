@@ -31,8 +31,6 @@ module WidgetParsers
       end.doc.root
     end
 
-    private
-
     def self.content_item_element(id)
       asset_field_item = ContentItem.find(id).field_items.find { |field_item| field_item.field.field_type == "asset_field_type" }
       url = asset_field_item.data["asset"]["url"]

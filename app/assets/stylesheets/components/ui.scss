@@ -3,16 +3,22 @@
 .mdl-switch.is-checked .mdl-switch__thumb, // Toggle slider
 .mdl-textfield__label:after, // Active textfield
 .mdl-switch__ripple-container .mdl-ripple, // Button ripple effect
-.mdl-tabs__tab .mdl-tabs__ripple-container .mdl-ripple { // Tab ripple effect
+.mdl-tabs__tab .mdl-tabs__ripple-container .mdl-ripple, // Tab ripple effect
+.mdl-checkbox__ripple-container .mdl-ripple, // Checkbox ripple effect
+.mdl-checkbox.is-checked .mdl-checkbox__tick-outline { // Ticked checkbox
   background-color: $employer-color;
 }
 
 .mdl-switch.is-checked .mdl-switch__track { // Toggle slider background
-    background-color: rgba($employer-color, 0.5);
+  background-color: rgba($employer-color, 0.5);
 }
 
 .mdl-checkbox {
   height: auto;
+}
+
+.mdl-checkbox.is-checked .mdl-checkbox__box-outline {
+  border-color: $employer-color-dark;
 }
 
 // Buttons

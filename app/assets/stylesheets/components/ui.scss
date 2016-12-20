@@ -17,7 +17,8 @@
 
 // Buttons
 
-.mdl-button {
+.mdl-button,
+.mdl-button--cb {
   @extend .text-style-4;
   color: $employer-color-dark;
   background-color: transparent;
@@ -33,6 +34,7 @@
   }
 }
 
+.mdl-button--success,
 .mdl-button--raised.mdl-button--colored {
   color: white;
   background-color: $employer-color-dark;
@@ -55,36 +57,6 @@
 
   &:hover {
     background-color: $color-orange;
-  }
-}
-
-.mdl-button--success {
-  background-color: $color-teal-dark;
-  color: white;
-
-  &:hover {
-    background-color: $color-teal-dark;
-    color: white;
-  }
-
-  &:active {
-    background-color: $color-teal;
-    color: white;
-  }
-}
-
-.mdl-button--cb {
-  background-color: none;
-  color: $color-teal-dark;
-
-  &:hover {
-    background-color: none;
-    color: $color-teal-dark;
-  }
-
-  &:active {
-    background-color: $color-grey-lightest;
-    color: $color-teal-dark;
   }
 }
 

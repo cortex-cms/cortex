@@ -136,10 +136,13 @@ namespace :employer do
                 "grid_width": 6,
                 "elements": [
                   {
-                    "id": blog.fields.find_by_name('Tags').id
+                    "id": blog.fields.find_by_name('Description').id
                   },
                   {
                     "id": blog.fields.find_by_name('Publish Date').id
+                  },
+                  {
+                    "id": blog.fields.find_by_name('Author').id
                   }
                 ]
               },
@@ -147,13 +150,10 @@ namespace :employer do
                 "grid_width": 6,
                 "elements": [
                   {
-                    "id": blog.fields.find_by_name('Description').id
+                    "id": blog.fields.find_by_name('Tags').id
                   },
                   {
                     "id": blog.fields.find_by_name('Slug').id
-                  },
-                  {
-                    "id": blog.fields.find_by_name('Author').id
                   }
                 ]
               }

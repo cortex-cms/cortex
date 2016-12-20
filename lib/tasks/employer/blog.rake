@@ -216,7 +216,6 @@ namespace :employer do
             "description": "Provide SEO metadata to help your post get found by your Users!",
             "columns": [
               {
-                "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
                 "elements": [
                   {

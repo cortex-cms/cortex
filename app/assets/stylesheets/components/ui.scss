@@ -28,10 +28,13 @@
   &:focus {
     background-color: $color-grey-lightest;
   }
-
-  &:disabled {
-    color: $color-anchor-blue-light;
-  }
+}
+.mdl-button:disabled,
+.mdl-button--cb:disabled,
+.mdl-button[disabled][disabled],
+.mdl-button.mdl-button--disabled.mdl-button--disabled {
+  color: $color-anchor-blue-light;
+  background-color: transparent;
 }
 
 .mdl-button--success,
@@ -44,11 +47,14 @@
   &:focus {
     background-color: $employer-color;
   }
+}
 
-  &:disabled {
-    color: $color-anchor-blue-light;
-    background-color: $color-grey-lightest;
-  }
+.mdl-button--success:disabled,
+.mdl-button--raised.mdl-button--colored:disabled,
+.mdl-button--raised[disabled][disabled],
+.mdl-button--raised.mdl-button--disabled.mdl-button--disabled {
+  color: $color-anchor-blue-light;
+  background-color: $color-grey-lightest;
 }
 
 .mdl-button--fab.mdl-button--colored {

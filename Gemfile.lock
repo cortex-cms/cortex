@@ -140,7 +140,7 @@ GEM
     coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    concurrent-ruby (1.0.2)
+    concurrent-ruby (1.0.3)
     connection_pool (2.2.0)
     cortex-exceptions (0.0.4)
     cortex-plugins-core (0.4.8)

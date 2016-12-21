@@ -17,6 +17,9 @@ module V1
       expose :noarchive, documentation: { type: 'Boolean', desc: "SEO No Archive Setting" }
       expose :noimageindex, documentation: { type: 'Boolean', desc: "SEO No Image Index Robots Setting" }
 
+      expose :dynamic_yield_sku, documentation: { type: 'String', desc: "Dynamic Yield Webpage SKU/ID" }
+      expose :dynamic_yield_category, documentation: { type: 'String', desc: "Dynamic Yield Webpage Category" }
+
       with_options if: { full: true } do
         expose :user, with: '::V1::Entities::User', documentation: {type: 'User', desc: 'Owner'}
         expose :url, documentation: { type: 'String', desc: 'URL of Webpage' }

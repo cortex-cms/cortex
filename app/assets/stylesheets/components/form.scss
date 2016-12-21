@@ -40,12 +40,22 @@ form {
   }
 }
 
+// Tags
+
 div.bootstrap-tagsinput input {
   width: 100% !important;
 }
+.cortex-bootstrap .label {
+  border-radius: 0.75em;
+  font-weight: normal;
+}
 
-.cortex-bootstrap .label-info { // Tag color
-  background-color: $employer-color;
+.cortex-bootstrap .label-info {
+  background-color: $color-grey;
+}
+
+.bootstrap-tagsinput .tag {
+  text-transform: uppercase;
 }
 
 // Extras

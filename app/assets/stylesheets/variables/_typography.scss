@@ -36,6 +36,10 @@ $base-font-size: 1rem;
   font-size: 2.1775rem;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.5;
+}
+
 h1,
 .text-style-1 { // Bread Crumbs and Page Headers
   color: $color-teal;

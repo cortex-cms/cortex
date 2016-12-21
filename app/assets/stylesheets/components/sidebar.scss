@@ -21,6 +21,8 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: auto;
+  box-shadow: 1px 0px 5px 1px rgba(0,0,0,.5);
+  overflow-y: hidden;
 }
 
 .sidebar__header {
@@ -55,6 +57,8 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 
 .mdl-layout__drawer .mdl-navigation {
   padding-top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {

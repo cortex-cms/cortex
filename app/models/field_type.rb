@@ -3,7 +3,7 @@ class FieldType < ApplicationRecord
   DEFAULT_MAPPINGS = [].freeze
 
   attr_accessor :field_name
-  attr_reader :data, :validations, :metadata
+  attr_reader :data, :field_info, :validations, :metadata
 
   def self.direct_descendant_names
     direct_descendants.map{ |descendant| descendant.name.underscore }
@@ -15,6 +15,10 @@ class FieldType < ApplicationRecord
 
   def validations=(validations_hash)
     @validations = validations_hash.deep_symbolize_keys if validations_hash
+  end
+
+  def field_info=(field)
+    @field_info = field
   end
 
   def metadata=(metadata_hash)

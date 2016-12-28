@@ -17,7 +17,7 @@ class FieldItem < ApplicationRecord
 
   def field_type_instance_params(data_hash)
     # Carefully construct a params object so we don't trigger our fragile setters when a value is nil
-    params = {metadata: field.metadata.merge(modify_params(data_hash)), validations: field.validations}
+    params = {metadata: field.metadata.merge({existing_data: data, field_data: data_hash}), field_info: field, validations: field.validations}
     params[:data] = data_hash if data_hash
     params
   end
@@ -31,11 +31,6 @@ class FieldItem < ApplicationRecord
 
   def field_is_present
     field.present?
-  end
-
-  def modify_params(data_hash)
-    return {existing_data: data} unless data_hash["asset"]
-    {existing_data: data, content_type:  data_hash["asset"].content_type}
   end
 
   def field_item_content_is_valid

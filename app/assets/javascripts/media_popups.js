@@ -50,9 +50,8 @@ $(".popup--open").on("click", function(ev){
 
 $(".media-select").on("click", function(ev){
   ev.preventDefault();
-  
+
   var id = $(this).data().id;
   var title = $(this).data().title;
-
   media_select_defer.resolve({'id': id, 'title': title})
 })

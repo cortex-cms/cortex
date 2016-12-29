@@ -21,7 +21,7 @@ module V1
           authorize! :view, ::Post
           @posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).posts
           set_paginate_headers(@posts)
-          ::V1::Entities::Post.represent @posts.to_a
+          ::V1::Entities::Post.represent @posts
         end
 
         desc 'Show published posts', { entity: ::V1::Entities::Post, nickname: "postFeed" }

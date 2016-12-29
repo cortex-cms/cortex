@@ -72,7 +72,6 @@ module SearchablePost
       post_type = params[:post_type]
       industries = params[:industries]
       author = params[:author]
-      sort = []
 
       bool = {bool: {must: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
@@ -98,7 +97,7 @@ module SearchablePost
         bool[:bool][:filter] << published_filter
       end
 
-      search query: bool, sort: {is_sticky: {order: 'desc'}}
+      search query: bool
     end
 
     def show_all(tenant, published = nil)
@@ -107,8 +106,8 @@ module SearchablePost
       if published
         bool[:bool][:filter] << published_filter
       end
-      
-      search query: bool, sort: [{is_sticky: {order: 'desc'}}]
+
+      search query: bool, sort: [{is_sticky: {order: 'desc'}, created_at: {order: 'desc'}}]
     end
   end
 end

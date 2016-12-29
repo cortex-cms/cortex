@@ -22,11 +22,12 @@ module SearchablePost
       indexes :type, :analyzer => :keyword
       indexes :industries, :analyzer => :keyword
       indexes :is_published, :type => :boolean
+      indexes :is_sticky, :type => :boolean
     end
 
     def as_indexed_json(options = {})
       json = as_json(only: [:id, :title, :body, :draft, :short_description, :copyright_owner,
-                            :created_at, :published_at, :expired_at, :job_phase, :type])
+                            :created_at, :published_at, :expired_at, :job_phase, :type, :is_sticky])
       json[:categories] = categories.collect { |c| c.name }
       json[:industries] = industries.collect { |i| i.soc }
       json[:tags] = tag_list.to_a
@@ -71,6 +72,7 @@ module SearchablePost
       post_type = params[:post_type]
       industries = params[:industries]
       author = params[:author]
+      sort = []
 
       bool = {bool: {must: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
@@ -96,7 +98,7 @@ module SearchablePost
         bool[:bool][:filter] << published_filter
       end
 
-      search query: bool
+      search query: bool, sort: {is_sticky: {order: 'desc'}}
     end
 
     def show_all(tenant, published = nil)
@@ -105,8 +107,8 @@ module SearchablePost
       if published
         bool[:bool][:filter] << published_filter
       end
-
-      search query: bool, sort: [{created_at: {order: 'desc'}}]
+      
+      search query: bool, sort: [{is_sticky: {order: 'desc'}}]
     end
   end
 end

@@ -5,7 +5,7 @@ class GetPosts
 
   def call
     posts = ::Post
-    
+
     if has_search_params?
       posts = posts.search_with_params(context.params, context.tenant, context.published)
     else

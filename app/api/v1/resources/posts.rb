@@ -20,7 +20,6 @@ module V1
           require_scope! 'view:posts'
           authorize! :view, ::Post
           @posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).posts
-
           set_paginate_headers(@posts)
           ::V1::Entities::Post.represent @posts
         end
@@ -41,7 +40,7 @@ module V1
           posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
             posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
             set_paginate_headers(posts)
-            ::V1::Entities::Post.represent posts
+            ::V1::Entities::Post.represent posts.to_a
           end
 
           posts_page

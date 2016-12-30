@@ -65,6 +65,7 @@ module V1
       expose :nosnippet, documentation: { type: 'Boolean', desc: "SEO No Snippet Robots Setting" }
       expose :noarchive, documentation: { type: 'Boolean', desc: "SEO No Archive Setting" }
       expose :noimageindex, documentation: { type: 'Boolean', desc: "SEO No Image Index Robots Setting" }
+      expose :is_sticky, documentation: { type: 'Boolean', desc: "Is this Post Sticky?" }
     end
   end
 end

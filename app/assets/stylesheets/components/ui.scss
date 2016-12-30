@@ -1,0 +1,115 @@
+
+.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after, // Active tab
+.mdl-switch.is-checked .mdl-switch__thumb, // Toggle slider
+.mdl-textfield__label:after, // Active textfield
+.mdl-switch__ripple-container .mdl-ripple, // Button ripple effect
+.mdl-tabs__tab .mdl-tabs__ripple-container .mdl-ripple, // Tab ripple effect
+.mdl-checkbox__ripple-container .mdl-ripple, // Checkbox ripple effect
+.mdl-checkbox.is-checked .mdl-checkbox__tick-outline { // Ticked checkbox
+  background-color: $employer-color;
+}
+
+.mdl-switch.is-checked .mdl-switch__track { // Toggle slider background
+  background-color: rgba($employer-color, 0.5);
+}
+
+.mdl-checkbox {
+  height: auto;
+}
+
+.mdl-checkbox.is-checked .mdl-checkbox__box-outline {
+  border-color: $employer-color-dark;
+}
+
+// Buttons
+
+.mdl-button,
+.mdl-button--cb {
+  @extend .text-style-4;
+  color: $employer-color-dark;
+  background-color: transparent;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $color-grey-lightest;
+  }
+}
+.mdl-button:disabled,
+.mdl-button--cb:disabled,
+.mdl-button[disabled][disabled],
+.mdl-button.mdl-button--disabled.mdl-button--disabled {
+  color: $color-anchor-blue-light;
+  background-color: transparent;
+}
+
+.mdl-button--success,
+.mdl-button--raised.mdl-button--colored {
+  color: white;
+  background-color: $employer-color-dark;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $employer-color;
+  }
+}
+
+.mdl-button--success:disabled,
+.mdl-button--raised.mdl-button--colored:disabled,
+.mdl-button--raised[disabled][disabled],
+.mdl-button--raised.mdl-button--disabled.mdl-button--disabled {
+  color: $color-anchor-blue-light;
+  background-color: $color-grey-lightest;
+}
+
+.mdl-button--fab.mdl-button--colored {
+  background-color: $color-orange;
+  border: solid 1px $color-orange-dark;
+
+  &:hover {
+    background-color: $color-orange;
+  }
+}
+
+// Date Time Picker
+
+.ui-datepicker {
+  background-color: $color-white;
+  border-radius: 3px;
+  padding: 5px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ui-datepicker td span,
+.ui-datepicker td a,
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+  color: $color-teal;
+}
+
+.ui-datepicker td span,
+.ui-datepicker td a {
+  text-align: center;
+}
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+  top: 7px;
+  width: auto;
+  height: auto;
+}
+
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+  position: static;
+  margin: 0;
+}
+
+.ui-datepicker td[data-handler='selectDay']:hover {
+  background-color: $color-teal-dark;
+
+  a {
+    color: $color-white;
+  }
+}

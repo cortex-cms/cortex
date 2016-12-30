@@ -33,6 +33,10 @@ form.new_user .mdl-button {
   justify-content: center;
 }
 
+.authentication__header .logo {
+  max-width: 60px;
+}
+
 .authentication__header-text {
   @extend %display-text;
   color: white;

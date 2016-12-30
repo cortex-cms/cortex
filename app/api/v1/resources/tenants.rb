@@ -82,7 +82,8 @@ module V1
               require_scope! 'view:users'
 
               @users = ::GetUsers.call(params: declared(clean_params(params), include_missing: false), tenant_id: params[:id]).users
-              ::V1::Entities::User.represent set_paginate_headers(@users), full: true
+              set_paginate_headers(@users)
+              ::V1::Entities::User.represent @users, full: true
             end
           end
         end

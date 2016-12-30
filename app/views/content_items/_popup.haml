@@ -1,0 +1,19 @@
+.media_insertion_popup
+  .dialog-backdrop.hidden{ 'data-type': 'insert'}
+    %div.dialog-div.mdl-dialog#mediaInsert
+      .mdl-dialog__content.mdl-dialog-media
+        = cell('index', media_index, content_type: media_content_type, popup: true).(:index)
+      .mdl-dialog__actions.mdl-dialog__actions.modal-footer
+        .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
+  .dialog-backdrop.hidden{ 'data-type': 'featured' }
+    %div.dialog-div.mdl-dialog#mediaFeatured
+      .mdl-dialog__content.mdl-dialog-media
+        = cell('index', media_index, content_type: media_content_type, popup: true).(:index)
+      .mdl-dialog__actions.mdl-dialog__actions.modal-footer
+        .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
+  .dialog-backdrop.hidden{ 'data-type': 'tile' }
+    %div.dialog-div.mdl-dialog#mediaTile
+      .mdl-dialog__content.mdl-dialog-media
+        = cell('index', media_index, content_type: media_content_type, popup: true).(:index)
+      .mdl-dialog__actions.mdl-dialog__actions.modal-footer
+        .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE

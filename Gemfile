@@ -11,9 +11,8 @@ gem 'puma', '~> 3.6'
 gem 'rails', '~> 5.0.0'
 
 # Cortex-specific
-gem 'cortex-exceptions', '~> 0.0.4'
-gem 'cortex-plugins-core', '= 0.4.6'
-gem 'cortex-plugins-demo', git: 'https://github.com/cortex-cms/cortex-plugins-demo.git'
+gem 'cortex-exceptions', '= 0.0.4'
+gem 'cortex-plugins-core', '= 0.5.0'
 
 # API
 gem 'grape', '~> 0.17'
@@ -36,7 +35,7 @@ gem 'paperclip-optimizer', '~> 2.0'
 gem 'image_optim_pack', '~> 0.3.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bcrypt', '~> 3.1.11'
-gem 'grape-kaminari', git: 'https://github.com/toastercup/grape-kaminari.git', branch: 'set-only-pagination-headers'
+gem 'grape-kaminari', git: 'https://github.com/toastercup/grape-kaminari.git', branch: 'set-paginate-headers-extraction'
 gem 'elasticsearch-model', '~> 0.1'
 gem 'elasticsearch-rails', '~> 0.1'
 gem 'paranoia', '~> 2.2'

@@ -10,6 +10,15 @@
   @include wizard-step-description;
 }
 
+.new_content_item .wizard__step:last-of-type .wizard__instruction-panel .p-40,
+.new_content_item .wizard__step:last-of-type .card-holder.p-20 {
+  padding-bottom: 0;
+}
+
+.new_content_item footer .mdl-button {
+  margin: 0 3px;
+}
+
 // Overrides
 
 .mdl-textfield {
@@ -23,46 +32,30 @@ form {
   }
 }
 
-.mdl-button--success {
-  background-color: #54a1a1;
-  color: white;
+.mdl-textfield__input {
+  @extend .text-style-6;
 
-  &:hover {
-    background-color: #54a1a1;
-    color: white;
-  }
-
-  &:active {
-    background-color: #63c0b9;
-    color: white;
+  &:placeholder {
+    @extend .text-style-5;
   }
 }
 
-.mdl-button--cb {
-  background-color: none;
-  color: #54a1a1;
-
-  &:hover {
-    background-color: none;
-    color: #54a1a1;
-  }
-
-  &:active {
-    background-color: #dddddd;
-    color: #54a1a1;
-  }
-}
+// Tags
 
 div.bootstrap-tagsinput input {
   width: 100% !important;
 }
+.cortex-bootstrap .label {
+  border-radius: 0.75em;
+  font-weight: normal;
+}
 
-.ui-datepicker {
-  background-color: #FEFEFE;
-  border-radius: 3px;
-  padding: 5px;
-  padding-right: 10px;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+.cortex-bootstrap .label-info {
+  background-color: $color-grey;
+}
+
+.bootstrap-tagsinput .tag {
+  text-transform: uppercase;
 }
 
 // Extras

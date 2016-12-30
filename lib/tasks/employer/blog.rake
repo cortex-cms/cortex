@@ -85,6 +85,7 @@ namespace :employer do
       blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2, minimum: 1})
       blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
       blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
+      blog.fields.new(name: 'Featured Image', field_type: 'content_item_field_type')
 
       puts "Saving Employer Blog..."
       blog.save
@@ -135,13 +136,13 @@ namespace :employer do
                 "grid_width": 6,
                 "elements": [
                   {
-                    "id": blog.fields.find_by_name('Tags').id
+                    "id": blog.fields.find_by_name('Description').id
                   },
-                  # {
-                  #   "id": blog.fields.find_by_name('Expiration Date').id
-                  # },
                   {
                     "id": blog.fields.find_by_name('Publish Date').id
+                  },
+                  {
+                    "id": blog.fields.find_by_name('Author').id
                   }
                 ]
               },
@@ -149,13 +150,10 @@ namespace :employer do
                 "grid_width": 6,
                 "elements": [
                   {
-                    "id": blog.fields.find_by_name('Description').id
+                    "id": blog.fields.find_by_name('Tags').id
                   },
                   {
                     "id": blog.fields.find_by_name('Slug').id
-                  },
-                  {
-                    "id": blog.fields.find_by_name('Author').id
                   }
                 ]
               }
@@ -197,12 +195,27 @@ namespace :employer do
             ]
           },
           {
+            "name": "Add Featured Image",
+            "description": "Add an image to feature with this Blog Post.",
+            "columns": [
+              {
+                "heading": "Image (Optional Heading)",
+                "grid_width": 12,
+                "elements": [
+                  {
+                    "id": blog.fields.find_by_name('Featured Image').id,
+                    "render_method": "popup"
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "name": "Search",
             "heading": "How can others find your post..",
             "description": "Provide SEO metadata to help your post get found by your Users!",
             "columns": [
               {
-                "heading": "Publishing (Optional Heading)",
                 "grid_width": 6,
                 "elements": [
                   {
@@ -371,8 +384,6 @@ namespace :employer do
                                     contentable_id: blog.id,
                                     contentable_type: 'ContentType'
                                   })
-
-      Rake::Task['plugin:demo:seed'].execute
     end
   end
 end

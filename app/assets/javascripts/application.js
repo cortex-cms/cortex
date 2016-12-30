@@ -13,5 +13,7 @@
 
 //= require base
 //= require forms
+//= require media_popups
+//= require sidebar-toggle
 
 // require turbolinks # temporarily disabled

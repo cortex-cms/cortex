@@ -1,5 +1,6 @@
 class ContentItemsController < AdminController
   include ContentItemHelper
+  include PopupHelper
 
   def index
     @index = IndexDecoratorService.new(content_type: content_type)

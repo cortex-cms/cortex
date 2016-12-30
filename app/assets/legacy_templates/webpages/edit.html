@@ -79,6 +79,23 @@
         </form>
       </div>
     </tab>
+    <tab>
+      <tab-heading><i class="fa fa-book"></i> Dynamic Yield</span></tab-heading>
+      <div>
+        <form novalidate name="webpageForm">
+          <div class="form-group">
+            <label for="dynamic_yield_sku">SKU/ID</label>
+            <input id="dynamic_yield_sku" name="dynamic_yield_sku" type="text" class="form-control"
+                   ng-model="data.webpage.dynamic_yield_sku" placeholder="SKU/ID, such as 'FMRDBSPP'">
+          </div>
+          <div class="form-group">
+            <label for="dynamic_yield_category">Category</label>
+            <input id="dynamic_yield_category" name="dynamic_yield_category" type="text" class="form-control"
+                   ng-model="data.webpage.dynamic_yield_category" placeholder="Category, such as 'PRODUCT'">
+          </div>
+        </form>
+      </div>
+    </tab>
   </tabset>
 
   <iframe class="webpage-frame" id="webpage-frame" ng-src="{{ data.webpage.url + '?editing_mode=1' | trustAsResourceUrl }}" disabled></iframe>

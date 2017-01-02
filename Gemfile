@@ -80,7 +80,7 @@ gem 'bootscale', require: false
 
 # View
 gem 'haml', '~> 4.1.0.beta'
-gem 'cells', git: 'https://github.com/samstickland/cells.git', branch: 'collection_fix' # remove explicit 'cells' dependency when collection_fix is merged in. See: https://github.com/apotonick/cells/pull/415
+gem 'cells', '~> 4.1.5'
 gem 'cells-rails', '~> 0.0.6'
 gem 'cells-haml', '~> 0.0.10'
 gem 'breadcrumbs_on_rails', '~> 3.0.1'

@@ -6,15 +6,6 @@ GIT
       activerecord (>= 4.0.0, < 5.1)
 
 GIT
-  remote: https://github.com/samstickland/cells.git
-  revision: e5634e25b472d41913030eb82463b015f429f2ca
-  branch: collection_fix
-  specs:
-    cells (4.1.1)
-      tilt (>= 1.4, < 3)
-      uber (>= 0.0.9)
-
-GIT
   remote: https://github.com/toastercup/grape-kaminari.git
   revision: 661388050eaa97f70006b74fe300e19760b8a132
   branch: set-paginate-headers-extraction
@@ -118,6 +109,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    cells (4.1.5)
+      tilt (>= 1.4, < 3)
+      uber (>= 0.1.0, < 0.2.0)
     cells-haml (0.0.10)
       cells (>= 4.0.1, <= 6.0.0)
       haml (>= 4.1.0.beta.1)
@@ -705,7 +699,7 @@ DEPENDENCIES
   breadcrumbs_on_rails (~> 3.0.1)
   byebug
   capybara
-  cells!
+  cells (~> 4.1.5)
   cells-haml (~> 0.0.10)
   cells-rails (~> 0.0.6)
   codeclimate-test-reporter (~> 0.6)

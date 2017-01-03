@@ -42,10 +42,7 @@ angular.module('cortex.states', [
 
   'cortex.controllers.webpages.grid',
   'cortex.controllers.webpages.new',
-  'cortex.controllers.webpages.edit',
-
-  'cortex.controllers.content_items.grid',
-  'cortex.controllers.content_items.new'
+  'cortex.controllers.webpages.edit'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -1309,26 +1306,6 @@ angular.module('cortex.states', [
       templateUrl: 'webpages/edit.html',
       data: {
         ncyBreadcrumbLabel: 'Edit'
-      }
-    })
-
-    // Content Items
-
-    .state('cortex.content_items', {
-      url: '/content_items',
-      templateUrl: 'content_items/grid.html',
-      controller: 'ContentItemsGridCtrl',
-      data: {
-        ncyBreadcrumbLabel: 'Content Item'
-      }
-    })
-
-    .state('cortex.content_items.new', {
-      url: '/new',
-      templateUrl: 'content_items/new.html',
-      controller: 'ContentItemsNewCtrl',
-      data: {
-        ncyBreadcrumbLabel: 'New'
       }
     })
 });

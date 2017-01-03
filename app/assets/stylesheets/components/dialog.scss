@@ -48,6 +48,7 @@
 .content-item-button {
   display: flex;
   justify-content: center;
+  align-items: center;
 
   border: 1px solid $color-grey;
   margin-top: 10px;
@@ -56,6 +57,7 @@
   background-color: $color-white;
   color: $color-anchor-blue-light;
   text-align: center;
+  min-height: 100px;
 
   &:active {
     background-color: $color-grey-lightest;
@@ -68,14 +70,10 @@
 
 .content-item-button__select {
   flex-basis: 50%;
-  padding-top: 30px;
-  padding-bottom: 20px;
 }
 
 .content-item-button__selection {
   flex-basis: 50%;
-  padding-top: 30px;
-  padding-bottom: 20px;
   border-left: 1px solid $color-grey;
 
   img {

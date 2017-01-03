@@ -335,8 +335,8 @@ ActiveRecord::Schema.define(version: 20161228215134) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
-    t.integer  "resource_id"
     t.string   "resource_type"
+    t.integer  "resource_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
@@ -355,10 +355,10 @@ ActiveRecord::Schema.define(version: 20161228215134) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
-    t.integer  "taggable_id"
     t.string   "taggable_type"
-    t.integer  "tagger_id"
+    t.integer  "taggable_id"
     t.string   "tagger_type"
+    t.integer  "tagger_id"
     t.string   "context",       limit: 128
     t.datetime "created_at"
     t.index ["context"], name: "index_taggings_on_context", using: :btree

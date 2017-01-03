@@ -45,7 +45,11 @@
   padding: 0;
 }
 
-.content_item_button {
+.content-item-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border: 1px solid $color-grey;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -53,6 +57,7 @@
   background-color: $color-white;
   color: $color-anchor-blue-light;
   text-align: center;
+  min-height: 100px;
 
   &:active {
     background-color: $color-grey-lightest;
@@ -63,11 +68,23 @@
   }
 }
 
-.button_content {
-  padding-top: 30px;
-  padding-bottom: 20px;
+.content-item-button__select {
+  flex-basis: 50%;
 }
 
-.content_item_button-text {
+.content-item-button__selection {
+  flex-basis: 50%;
+  border-left: 1px solid $color-grey;
+
+  img {
+    margin-bottom: 5px;
+  }
+}
+
+.content-item-button__select__text {
+  @extend .text-style-7;
+}
+
+.content-item-button__selection__text {
   @extend .text-style-7;
 }

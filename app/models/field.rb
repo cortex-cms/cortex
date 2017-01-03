@@ -7,6 +7,9 @@ class Field < ApplicationRecord
 
   validates :content_type, :field_type, presence: true
   validate :acceptable_field_type
+  validates_uniqueness_of :name,
+                          scope: :content_type_id,
+                          message: 'should be unique within a ContentType'
 
   def field_type_instance(options={})
     field_type.camelize.constantize.new(options)

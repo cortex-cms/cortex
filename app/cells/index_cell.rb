@@ -20,6 +20,10 @@ class IndexCell < Cell::ViewModel
   end
 
   def content_item_title(content_item)
-    content_item.field_items.find { |field_item| field_item.field.name == "Title" }.data["text"]
+    content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text']
+  end
+
+  def content_item_thumb_url(content_item)
+    content_item.field_items.find { |field_item| field_item.field.name == 'Asset' }.data['asset']['style_urls']['mini']
   end
 end

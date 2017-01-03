@@ -1,6 +1,15 @@
 class FieldCell < Cell::ViewModel
-  property :field
+  property :id
   property :data
+  property :field
+  property :content_item
+  property :created_at
+  property :updated_at
+  property :deleted_at
+
+  def association
+    raise 'association renderer not implemented'
+  end
 
   private
 

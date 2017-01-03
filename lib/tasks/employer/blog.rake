@@ -65,7 +65,7 @@ namespace :employer do
       blog.save
 
       puts "Creating Fields..."
-      blog.fields.new(name: 'Body', field_type: 'text_field_type', metadata: {wysiwyg: true, parse_widgets: true})
+      blog.fields.new(name: 'Body', field_type: 'text_field_type', metadata: {parse_widgets: true})
       blog.fields.new(name: 'Title', field_type: 'text_field_type', validations: {presence: true})
       blog.fields.new(name: 'Description', field_type: 'text_field_type', validations: {presence: true})
       blog.fields.new(name: 'Slug', field_type: 'text_field_type', validations: {presence: true, uniqueness: true})
@@ -85,7 +85,10 @@ namespace :employer do
       blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2, minimum: 1})
       blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
       blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
-      blog.fields.new(name: 'Featured Image', field_type: 'content_item_field_type')
+      blog.fields.new(name: 'Featured Image', field_type: 'content_item_field_type',
+                      metadata: {
+                        field_name: 'Asset'
+                      })
 
       puts "Saving Employer Blog..."
       blog.save

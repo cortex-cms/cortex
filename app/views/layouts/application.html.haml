@@ -17,6 +17,6 @@
         %main.mdl-layout__content.layout__main-content
           = yield
 
-    = javascript_include_tag :application
+    = javascript_include_tag :application, {'data-turbolinks-eval': false}
     = render 'layouts/google_analytics' if extra_config.google_analytics_id?
     = render 'partials/flash'

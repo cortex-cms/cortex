@@ -6,6 +6,20 @@ GIT
       activerecord (>= 4.0.0, < 5.1)
 
 GIT
+  remote: https://github.com/cortex-cms/cortex-plugins-core.git
+  revision: d711cfc4a02334c8276ae0c11246acc5c7c7b5eb
+  branch: fix-ckeditor-on-development-server
+  specs:
+    cortex-plugins-core (0.6.0)
+      cells (~> 4.1)
+      cells-haml (~> 0.0.10)
+      cells-rails (~> 0.0.6)
+      ckeditor (~> 4.2.2)
+      jsonb_accessor (~> 1.0.0.beta)
+      mimemagic (~> 0.3.2)
+      rails (>= 4)
+
+GIT
   remote: https://github.com/toastercup/grape-kaminari.git
   revision: 661388050eaa97f70006b74fe300e19760b8a132
   branch: set-paginate-headers-extraction
@@ -75,13 +89,13 @@ GEM
     attr_required (1.0.1)
     autoprefixer-rails (6.6.1)
       execjs
-    aws-sdk (2.6.43)
-      aws-sdk-resources (= 2.6.43)
-    aws-sdk-core (2.6.43)
+    aws-sdk (2.6.44)
+      aws-sdk-resources (= 2.6.44)
+    aws-sdk-core (2.6.44)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.6.43)
-      aws-sdk-core (= 2.6.43)
+    aws-sdk-resources (2.6.44)
+      aws-sdk-core (= 2.6.44)
     aws-sigv4 (1.0.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -123,7 +137,7 @@ GEM
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.2.0)
-    ckeditor (4.2.0)
+    ckeditor (4.2.2)
       cocaine
       orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
@@ -139,14 +153,6 @@ GEM
     concurrent-ruby (1.0.4)
     connection_pool (2.2.1)
     cortex-exceptions (0.0.4)
-    cortex-plugins-core (0.6.0)
-      cells (~> 4.1)
-      cells-haml (~> 0.0.10)
-      cells-rails (~> 0.0.6)
-      ckeditor (= 4.2.0)
-      jsonb_accessor (~> 1.0.0.beta)
-      mimemagic (~> 0.3.2)
-      rails (>= 4)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
@@ -471,7 +477,7 @@ GEM
       execjs
       rails (>= 3.1)
     nio4r (1.2.1)
-    nokogiri (1.7.0)
+    nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -706,7 +712,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.6)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (= 0.0.4)
-  cortex-plugins-core (= 0.6.0)
+  cortex-plugins-core!
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)
   doorkeeper (~> 4.2)

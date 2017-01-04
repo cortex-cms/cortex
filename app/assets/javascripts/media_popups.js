@@ -1,21 +1,20 @@
 // helper functions for DOM traversal and converting NodeList to iterable Array
 if (!window.DOM_HELPER) {
-  window.DOM_HELPER = {}
+  window.DOM_HELPER = {};
   window.DOM_HELPER.getAll = function (selector, node) {
     var domNode = node ? node : document;
-    var domElemList = domNode.querySelectorAll(selector)
-    var jsArray = []
+    var domElemList = domNode.querySelectorAll(selector);
+    var jsArray = [];
     for (var i = 0; i < domElemList.length; i++) {
-      jsArray.push(domElemList[i])
+      jsArray.push(domElemList[i]);
     }
-    return jsArray
+
+    return jsArray;
   }
 }
 
 window.setModals = function () {
-
   var modals = window.DOM_HELPER.getAll('.dialog-backdrop').reduce(function(modalHolder, modal, i) {
-
     modalHolder[modal.dataset.type] = {
       elem: modal,
       isOpen: false,
@@ -30,29 +29,31 @@ window.setModals = function () {
         modal.classList.add('hidden');
         this.isOpen = false;
       }
-    }
+    };
 
     modal.querySelector('.close').onclick = function() {
       modalHolder[modal.dataset.type].close();
-    }
+    };
     return modalHolder
-  }, {})
+  }, {});
+
   window.MODALS = modals
-}
-window.onload = function(){
-   window.setModals()
-}
+};
+
+window.onload = function() {
+   window.setModals();
+};
 
 $(".popup--open").on("click", function(ev){
   ev.preventDefault();
   window.MODALS.featured.open();
-})
+});
 
-$(".media-select").on("click", function(ev){
+$(".media-select--wysiwyg").on("click", function(ev){
   ev.preventDefault();
-  
+
   var id = $(this).data().id;
   var title = $(this).data().title;
 
-  media_select_defer.resolve({'id': id, 'title': title})
-})
+  media_select_defer.resolve({'id': id, 'title': title});
+});

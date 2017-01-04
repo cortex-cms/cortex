@@ -4,6 +4,10 @@
   background-color: $color-grey-dark;
 }
 
+.mdl-layout__content--authentication {
+  background-color: $color-grey-dark;
+}
+
 .authentication__content {
   display: flex;
   justify-content: center;
@@ -13,14 +17,14 @@
   margin-bottom: 16px;
 }
 
+.news .mdl-card {
+  min-height: unset;
+}
+
 .section__featured-media {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-}
-
-main {
-  margin-top: 16px;
 }
 
 form.new_user .mdl-button {
@@ -31,6 +35,7 @@ form.new_user .mdl-button {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 16px;
 }
 
 .authentication__header .logo {

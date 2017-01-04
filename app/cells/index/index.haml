@@ -1,7 +1,3 @@
 %table{ class: 'mdl-data-table mdl-js-data-table', style: 'width: 100%;' }
-  - if @options[:popup]
-    = cell('index', @index, data: data, popup: @options[:popup]).(:table_headers)
-    = cell('index', @index, { data: data, content_type: @options[:content_type], popup: @options[:popup] }).(:table_body)
-  - else
-    = cell('index', @index, data: data).(:table_headers)
-    = cell('index', @index, { data: data, content_type: @options[:content_type] }).(:table_body)
+  = cell('index', @index, data: data).(:table_headers)
+  = cell('index', @index, data: data).(:table_body)

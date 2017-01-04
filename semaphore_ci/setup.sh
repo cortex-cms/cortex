@@ -1,3 +1,9 @@
+echo "gem update --system"
+gem update --system
+
+echo "gem update bundler"
+gem update bundler
+
 echo "bundle config build.nokogiri --use-system-libraries"
 bundle config build.nokogiri --use-system-libraries
 

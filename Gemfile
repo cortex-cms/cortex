@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.3'
+ruby '2.4.0'
 
 # Dependency Management
 gem 'bower-rails', '~> 0.11.0'
@@ -8,16 +8,17 @@ gem 'bower-rails', '~> 0.11.0'
 gem 'puma', '~> 3.6'
 
 # Rails
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.0.1'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', path: '/Users/phalloran/cortex-plugins-core' #'= 0.5.0'
+gem 'cortex-plugins-core', '= 0.6.0'
+
 
 # API
 gem 'grape', '~> 0.17'
-gem 'grape-entity', '~> 0.5.1'
-gem 'grape-swagger', '~> 0.25.0'
+gem 'grape-entity', '~> 0.6.0'
+gem 'grape-swagger', '~> 0.25.3'
 
 # Authorization
 gem 'six', '~> 0.2.0'
@@ -32,7 +33,7 @@ gem 'rails-observers', git: 'https://github.com/triloch/rails-observers.git'
 gem 'awesome_nested_set', git: 'https://github.com/cortex-cms/awesome_nested_set.git'
 gem 'paperclip', '~> 5.1.0'
 gem 'paperclip-optimizer', '~> 2.0'
-gem 'image_optim_pack', '~> 0.3.0'
+gem 'image_optim_pack', '~> 0.3.1'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bcrypt', '~> 3.1.11'
 gem 'grape-kaminari', git: 'https://github.com/toastercup/grape-kaminari.git', branch: 'set-paginate-headers-extraction'
@@ -64,23 +65,23 @@ gem 'yt', '~> 0.28.1'
 gem 'aws-sdk', '~> 2.6' # Used by Paperclip
 
 # Jobs
-gem 'sidekiq', '~> 4.2.5'
+gem 'sidekiq', '~> 4.2.7'
 gem 'sidekiq-failures', '~> 0.4.5'
 gem 'sinatra', '~> 2.0.0.beta', require: false
 
 # Pipeline
 gem 'sprockets-rails', '3.2.0', :require => 'sprockets/railtie'
-gem 'sprockets', '3.7.0'
+gem 'sprockets', '3.7.1'
 gem 'angular-rails-templates', '~> 1.0.2'
 gem 'ngannotate-rails', '~> 1.2.2'
-gem 'uglifier', '~> 3.0.3'
+gem 'uglifier', '~> 3.0.4'
 
 # Performance
 gem 'bootscale', require: false
 
 # View
 gem 'haml', '~> 4.1.0.beta'
-gem 'cells', git: 'https://github.com/samstickland/cells.git', branch: 'collection_fix' # remove explicit 'cells' dependency when collection_fix is merged in. See: https://github.com/apotonick/cells/pull/415
+gem 'cells', '~> 4.1.5'
 gem 'cells-rails', '~> 0.0.6'
 gem 'cells-haml', '~> 0.0.10'
 gem 'breadcrumbs_on_rails', '~> 3.0.1'
@@ -89,14 +90,14 @@ gem 'breadcrumbs_on_rails', '~> 3.0.1'
 gem 'sass-rails', '~> 5.0'
 gem 'bourbon', '~> 5.0.0.beta'
 gem 'font-awesome-sass', '~> 4.7.0'
-gem 'material_design_lite-sass', '~> 1.2.1'
+gem 'material_design_lite-sass', '~> 1.3.0'
 
 # JavaScript
 gem 'gon', '~> 6.1.0'
 gem 'turbolinks', '~> 5.0.1'
-gem 'jquery-rails', '~> 4.2.1'
+gem 'jquery-rails', '~> 4.2.2'
 gem 'jquery-turbolinks', '~> 2.1'
-gem 'jquery-ui-rails', '~> 5.0.5'
+gem 'jquery-ui-rails', '~> 6.0.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
 
@@ -118,7 +119,6 @@ group :test, :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'pry-nav'
-  gem 'pry-doc'
   gem 'pry-remote'
   gem 'pry-stack_explorer'
 
@@ -155,12 +155,12 @@ group :test do
   gem 'jasmine-core', '~> 2.5'
 
   # Data
-  gem 'elasticsearch-extensions', '~> 0.0.22'
+  gem 'elasticsearch-extensions', '~> 0.0.23'
 end
 
 group :test, :development do
-  gem 'factory_girl_rails', '~> 4.7'
-  gem 'faker', '~> 1.6'
+  gem 'factory_girl_rails', '~> 4.8'
+  gem 'faker', '~> 1.7'
   gem 'fog', '~> 1.38.0'
   gem 'phantomjs', '~> 2.1.1'
   gem 'jasmine-rails', '~> 0.14'

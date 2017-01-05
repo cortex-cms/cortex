@@ -14,15 +14,15 @@ if (!window.DOM_HELPER) {
 }
 
 window.setModals = function () {
-  var modals = window.DOM_HELPER.getAll('.dialog-backdrop').reduce(function(modalHolder, modal, i) {
+  var modals = window.DOM_HELPER.getAll('.dialog-backdrop').reduce(function (modalHolder, modal, i) {
     modalHolder[modal.dataset.type] = {
       elem: modal,
       isOpen: false,
-      open: function() {
+      open: function () {
         modal.classList.remove('hidden');
         this.isOpen = true;
       },
-      close: function() {
+      close: function () {
         if (!this.isOpen) {
           return
         }
@@ -31,7 +31,7 @@ window.setModals = function () {
       }
     };
 
-    modal.querySelector('.close').onclick = function() {
+    modal.querySelector('.close').onclick = function () {
       modalHolder[modal.dataset.type].close();
     };
     return modalHolder
@@ -40,20 +40,23 @@ window.setModals = function () {
   window.MODALS = modals
 };
 
-window.onload = function() {
-   window.setModals();
+window.onload = function () {
+  window.setModals();
 };
 
-$(".popup--open").on("click", function(ev){
+$(".popup--open").on("click", function (ev) {
   ev.preventDefault();
   window.MODALS.featured.open();
 });
 
-$(".media-select--wysiwyg").on("click", function(ev){
+$(".media-select--wysiwyg").on("click", function (ev) {
   ev.preventDefault();
 
-  var id = $(this).data().id;
-  var title = $(this).data().title;
+  var element = $(this),
+    id = element.data().id,
+    title = element.data().title,
+    src = element.data().src,
+    alt = element.data().alt;
 
-  media_select_defer.resolve({'id': id, 'title': title});
+  media_select_defer.resolve({id: id, title: title, src: src, alt: alt});
 });

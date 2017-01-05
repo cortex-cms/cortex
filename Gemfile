@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.1'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', '= 0.7.2'
+gem 'cortex-plugins-core', '= 0.8.0'
 
 # API
 gem 'grape', '~> 0.17'

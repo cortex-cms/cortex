@@ -14,7 +14,6 @@ gem 'rails', '~> 5.0.1'
 gem 'cortex-exceptions', '= 0.0.4'
 gem 'cortex-plugins-core', '= 0.6.0'
 
-
 # API
 gem 'grape', '~> 0.17'
 gem 'grape-entity', '~> 0.6.0'

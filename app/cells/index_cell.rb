@@ -24,7 +24,8 @@ class IndexCell < Cell::ViewModel
   end
 
   def content_item_thumb_url(content_item)
-    content_item.field_items.find { |field_item| field_item.field.name == 'Asset' }.data['asset']['style_urls']['mini']
+    asset = content_item.field_items.find { |field_item| field_item.field.name == 'Asset' }.data['asset']
+    asset['image'] ? asset['style_urls']['mini'] : 'https://s3.amazonaws.com/canvasmp3/cor_file_default.png'
   end
 
   def content_item_asset_url(content_item)

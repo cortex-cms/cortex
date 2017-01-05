@@ -2,7 +2,7 @@ class FieldType < ApplicationRecord
   extend ActiveSupport::DescendantsTracker
   DEFAULT_MAPPINGS = [].freeze
 
-  attr_accessor :field_name, :field
+  attr_accessor :field_name, :field_data, :field
   attr_reader :data, :validations, :metadata
 
   def self.direct_descendant_names

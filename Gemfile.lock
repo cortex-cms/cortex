@@ -469,6 +469,8 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
+    non-stupid-digest-assets (1.0.9)
+      sprockets (>= 2.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -743,6 +745,7 @@ DEPENDENCIES
   ng-rails-csrf (~> 0.1.0)
   ngannotate-rails (~> 1.2.2)
   nokogiri
+  non-stupid-digest-assets (~> 1.0.9)
   paperclip (~> 5.1.0)
   paperclip-optimizer (~> 2.0)
   paranoia (~> 2.2)

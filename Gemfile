@@ -74,6 +74,7 @@ gem 'sprockets', '3.7.1'
 gem 'angular-rails-templates', '~> 1.0.2'
 gem 'ngannotate-rails', '~> 1.2.2'
 gem 'uglifier', '~> 3.0.4'
+gem 'non-stupid-digest-assets', '~> 1.0.9'
 
 # Performance
 gem 'bootscale', require: false

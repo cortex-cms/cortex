@@ -26,4 +26,12 @@ class IndexCell < Cell::ViewModel
   def content_item_thumb_url(content_item)
     content_item.field_items.find { |field_item| field_item.field.name == 'Asset' }.data['asset']['style_urls']['mini']
   end
+
+  def content_item_asset_url(content_item)
+    content_item.field_items.find { |field_item| field_item.field.name == 'Asset' }.data['asset']['url']
+  end
+
+  def content_item_asset_alt_text(content_item)
+    content_item.field_items.find { |field_item| field_item.field.name == 'Alt Tag' }.data['text']
+  end
 end

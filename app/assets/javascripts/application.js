@@ -8,10 +8,10 @@
 //= require bootstrap-tagsinput
 //= require clipboard
 
-//= require cortex-field_types-core/application
+//= require cortex-plugins-core/application
 
 //= require base
-//= require forms
+//= require datepicker_init
 //= require media_popups
 //= require sidebar-toggle
 

@@ -24,8 +24,8 @@ class ContentItemsController < AdminController
 
     title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text']
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
-    add_breadcrumb 'Edit'
     add_breadcrumb title
+    add_breadcrumb 'Edit'
   end
 
   def update

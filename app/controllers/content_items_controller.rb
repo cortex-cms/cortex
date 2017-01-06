@@ -22,8 +22,10 @@ class ContentItemsController < AdminController
     @content_item = content_type.content_items.find_by_id(params[:id])
     @wizard = WizardDecoratorService.new(content_item: @content_item)
 
+    title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text']
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
-    add_breadcrumb "Edit #{@content_item.id}"
+    add_breadcrumb title
+    add_breadcrumb 'Edit'
   end
 
   def update

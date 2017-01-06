@@ -21,11 +21,7 @@ module WidgetParsers
     def self.render_widget_inner(widget)
       Nokogiri::HTML::Builder.new do |doc|
         element, tag_type = content_item_element(widget['id'])
-        if widget['scale']
-          element.merge!({scale: widget['scale']})
-        else
-          element.merge!({width: widget['width'], height: widget['height']})
-        end
+        element.merge!({width: widget['width'], height: widget['height'], alt: widget['alt'], style: widget['style'], class: widget['class']})
 
         doc.send(tag_type, element)
       end.doc.root
@@ -37,10 +33,10 @@ module WidgetParsers
 
       if asset_field_item.data["asset"]["content_type"].include?("image")
         element = { src: url }
-        tag_type = "img"
+        tag_type = 'img'
       else
         element = { href: url }
-        tag_type = "a"
+        tag_type = 'a'
       end
 
       [element, tag_type]

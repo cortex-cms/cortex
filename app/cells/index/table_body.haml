@@ -1,5 +1,5 @@
 %tbody
-  - context[:content_type].content_items.each do |content_item|
+  - context[:content_items].each do |content_item|
     %tr
       - @options[:data][:columns].each do |column|
         %td{ class: 'mdl-data-table__cell--non-numeric' }

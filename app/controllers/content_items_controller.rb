@@ -4,6 +4,7 @@ class ContentItemsController < AdminController
 
   def index
     @index = IndexDecoratorService.new(content_type: content_type)
+    @content_items = content_type.content_items
     add_breadcrumb content_type.name.pluralize
   end
 

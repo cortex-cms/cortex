@@ -2,7 +2,7 @@
   .dialog-backdrop.hidden{ 'data-type': 'wysiwyg'}
     %div.dialog-div.mdl-dialog#mediaInsert
       .mdl-dialog__content.mdl-dialog-media
-        = cell('index', media_index, context: { content_type: content_type, content_items: media_image_content_items, popup: 'wysiwyg' }).(:index)
+        = cell('index', media_index, context: { content_type: content_type, content_items: media_content_items, popup: 'wysiwyg' }).(:index)
       .mdl-dialog__actions.mdl-dialog__actions.modal-footer
         .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
   .dialog-backdrop.hidden{ 'data-type': 'featured' }

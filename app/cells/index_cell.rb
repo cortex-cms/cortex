@@ -19,16 +19,24 @@ class IndexCell < Cell::ViewModel
     column_data[:name]
   end
 
+  def asset_field_item(content_item)
+    content_item.field_items.find { |field_item| field_item.field.name == 'Asset' }
+  end
+
   def content_item_title(content_item)
     content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text']
   end
 
   def content_item_thumb_url(content_item)
-    content_item.field_items.find { |field_item| field_item.field.name == 'Asset' }.data['asset']['style_urls']['mini']
+    asset_field_item(content_item).data['asset']['style_urls']['mini']
   end
 
   def content_item_asset_url(content_item)
-    content_item.field_items.find { |field_item| field_item.field.name == 'Asset' }.data['asset']['url']
+    asset_field_item(content_item).data['asset']['url']
+  end
+
+  def content_item_asset_type(content_item)
+    MimeMagic.new(asset_field_item(content_item).data['asset']['content_type']).mediatype
   end
 
   def content_item_asset_alt_text(content_item)

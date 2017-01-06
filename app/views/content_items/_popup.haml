@@ -2,18 +2,18 @@
   .dialog-backdrop.hidden{ 'data-type': 'wysiwyg'}
     %div.dialog-div.mdl-dialog#mediaInsert
       .mdl-dialog__content.mdl-dialog-media
-        = cell('index', media_index, context: { content_type: media_content_type, popup: 'wysiwyg' }).(:index)
+        = cell('index', media_index, context: { content_type: content_type, content_items: media_content_items, popup: 'wysiwyg' }).(:index)
       .mdl-dialog__actions.mdl-dialog__actions.modal-footer
         .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
   .dialog-backdrop.hidden{ 'data-type': 'featured' }
     %div.dialog-div.mdl-dialog#mediaFeatured
       .mdl-dialog__content.mdl-dialog-media
-        = cell('index', media_index, context: { content_type: media_content_type, popup: 'featured' }).(:index)
+        = cell('index', media_index, context: { content_type: content_type, content_items: media_image_content_items, popup: 'featured' }).(:index)
       .mdl-dialog__actions.mdl-dialog__actions.modal-footer
         .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE
   .dialog-backdrop.hidden{ 'data-type': 'tile' }
     %div.dialog-div.mdl-dialog#mediaTile
       .mdl-dialog__content.mdl-dialog-media
-        = cell('index', media_index, context: { content_type: media_content_type, popup: 'tile' }).(:index)
+        = cell('index', media_index, context: { content_type: content_type, content_items: media_image_content_items, popup: 'tile' }).(:index)
       .mdl-dialog__actions.mdl-dialog__actions.modal-footer
         .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE

@@ -36,7 +36,7 @@ class IndexCell < Cell::ViewModel
   end
 
   def content_item_asset_type(content_item)
-    asset_field_item(content_item).data['asset']['content_type']
+    MimeMagic.new(asset_field_item(content_item).data['asset']['content_type']).mediatype
   end
 
   def content_item_asset_alt_text(content_item)

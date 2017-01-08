@@ -7,12 +7,13 @@
 //= require jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon
 //= require bootstrap-tagsinput
 //= require clipboard
+//= require dialog-polyfill
 
 //= require cortex-plugins-core/application
 
 //= require base
 //= require datepicker_init
-//= require media_popups
+//= require media_dialogs
 //= require sidebar-toggle
 
 // require turbolinks # temporarily disabled

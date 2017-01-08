@@ -10,6 +10,7 @@
     = stylesheet_link_tag :application
     = csrf_meta_tags
   %body
+    = render 'partials/media_dialogs'
     .layout__container.mdl-js-layout.mdl-layout--fixed-drawer{class: ('sidebar--collapsed' unless current_page? root_path)}
       = render 'partials/sidebar'
       .layout__topbar-content__container.mdl-layout--fixed-header

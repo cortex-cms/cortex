@@ -13,6 +13,9 @@ bundle install --without production staging development tasks
 echo "bundle exec rake bower:install:development"
 bundle exec rake bower:install:development
 
+echo "bundle exec rake webpack:ensure_assets_compiled"
+bundle exec rake webpack:ensure_assets_compiled
+
 echo "ES Install"
 sudo service elasticsearch stop
 if ! [ -e .semaphore-cache/elasticsearch-2.4.1.deb ]; then (cd .semaphore-cache; curl -OL https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-2.4.1.deb); fi

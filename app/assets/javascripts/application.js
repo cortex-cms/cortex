@@ -1,5 +1,3 @@
-//= require webpack-bundle
-
 //= require jquery3
 // require jquery.turbolinks # temporarily disabled
 //= require jquery_ujs
@@ -12,6 +10,7 @@
 //= require dialog-polyfill
 
 //= require cortex-plugins-core/application
+//= require webpack-bundle
 
 //= require base
 //= require datepicker_init

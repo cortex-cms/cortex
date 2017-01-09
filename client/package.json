@@ -1,9 +1,8 @@
 {
-  "name": "react-webpack-rails-tutorial",
-  "version": "0.0.1",
+  "name": "cortex",
   "private": true,
   "engines": {
-    "node": "6.9.0",
+    "node": "7.4.0",
     "npm": "4.1.1"
   },
   "scripts": {

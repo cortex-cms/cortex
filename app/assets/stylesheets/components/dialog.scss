@@ -53,3 +53,7 @@
 .content-item-button__selection__text {
   @extend .text-style-7;
 }
+
+.blur {
+  @include filter(grayscale(1) blur(3px));
+}

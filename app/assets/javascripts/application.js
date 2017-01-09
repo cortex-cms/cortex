@@ -1,3 +1,5 @@
+//= require webpack-bundle
+
 //= require jquery3
 // require jquery.turbolinks # temporarily disabled
 //= require jquery_ujs

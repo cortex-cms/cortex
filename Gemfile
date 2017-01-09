@@ -93,6 +93,8 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'material_design_lite-sass', '~> 1.3.0'
 
 # JavaScript
+gem 'react_on_rails', '~> 6.3'
+gem 'mini_racer', platforms: :ruby
 gem 'gon', '~> 6.1.0'
 gem 'turbolinks', '~> 5.0.1'
 gem 'jquery-rails', '~> 4.2.2'
@@ -109,6 +111,7 @@ end
 group :test, :development do
   # Environment
   gem 'dotenv-rails', :require => 'dotenv/rails-now'
+  gem 'foreman'
 
   # Cache/Sidekiq
   gem 'redis-namespace'

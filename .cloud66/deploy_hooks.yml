@@ -3,12 +3,26 @@ default: &default
     - snippet: cloud66/node
       target: rails
       execute: true
-      apply_during: build_only
     - command: npm install -g bower
       sudo: true
       target: rails
       execute: true
-      apply_during: build_only
+  after_bundle:
+    - source: /.cloud66/scripts/npm_install.sh
+      destination: /tmp/npm_install.sh
+      target: rails
+      execute: true
+      apply_during: all
+    - source: /.cloud66/scripts/bower_install.sh
+      destination: /tmp/bower_install.sh
+      target: rails
+      execute: true
+      apply_during: all
+    - source: /.cloud66/scripts/webpack_rebuild.sh
+      destination: /tmp/webpack_rebuild.sh
+      target: rails
+      execute: true
+      apply_during: all
   after_rails:
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails

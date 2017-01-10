@@ -263,12 +263,10 @@ private
 def fetch_onet_db
   puts "Downloading ONET db: #{onet_package_name}.."
 
-  Net::HTTP.start('www.onetcenter.org') do |http|
-    resp = http.get("/dl_files/#{onet_package_name}.zip")
-    open(Rails.root.join('tmp', "#{onet_package_name}.zip"), 'wb') { |file| file.write(resp.body) }
+  response = Faraday.new('https://www.onetcenter.org').get "/dl_files/#{onet_package_name}.zip"
 
-    sh "unzip -o #{Rails.root.join('tmp', "#{onet_package_name}.zip")} -d #{Rails.root.join('tmp')}"
-  end
+  open(Rails.root.join('tmp', "#{onet_package_name}.zip"), 'wb') { |file| file.write(response.body) }
+  sh "unzip -o #{Rails.root.join('tmp', "#{onet_package_name}.zip")} -d #{Rails.root.join('tmp')}"
 end
 
 def provision_onet_db

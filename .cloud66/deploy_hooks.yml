@@ -3,57 +3,30 @@ default: &default
     - snippet: cloud66/node
       target: rails
       execute: true
+      apply_during: build_only
   after_bundle:
     - source: /.cloud66/scripts/npm_install.sh
       destination: /tmp/npm_install.sh
       target: rails
       execute: true
-      apply_during: all
   after_rails:
+    - source: /.cloud66/scripts/reseed_core_plugin.sh
+      destination: /tmp/reseed_core_plugin.sh
+      target: rails
+      execute: true
+    - source: /.cloud66/scripts/rebuild_indexes.sh
+      destination: /tmp/rebuild_indexes.sh
+      target: rails
+      execute: true
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails
-      apply_during: all
       sudo: true
 
 development:
   <<: *default
-  after_rails:
-    - source: /.cloud66/scripts/reseed_core_plugin.sh
-      destination: /tmp/reseed_core_plugin.sh
-      target: rails
-      execute: true
-      run_on: single_server
-      apply_during: all
-    - source: /.cloud66/scripts/rebuild_indexes.sh
-      destination: /tmp/rebuild_indexes.sh
-      target: rails
-      execute: true
-      run_on: single_server
-      apply_during: all
-    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
-      target: rails
-      apply_during: all
-      sudo: true
 
 staging:
   <<: *default
-  after_rails:
-    - source: /.cloud66/scripts/reseed_core_plugin.sh
-      destination: /tmp/reseed_core_plugin.sh
-      target: rails
-      execute: true
-      run_on: single_server
-      apply_during: all
-    - source: /.cloud66/scripts/rebuild_indexes.sh
-      destination: /tmp/rebuild_indexes.sh
-      target: rails
-      execute: true
-      run_on: single_server
-      apply_during: all
-    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
-      target: rails
-      apply_during: all
-      sudo: true
 
 production:
   <<: *default
@@ -62,9 +35,6 @@ production:
       destination: /tmp/rebuild_indexes.sh
       target: rails
       execute: true
-      run_on: single_server
-      apply_during: all
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails
-      apply_during: all
       sudo: true

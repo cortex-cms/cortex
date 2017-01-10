@@ -6,9 +6,9 @@ namespace :employer do
     task seed: :environment do
       def research_tree
         tree = Tree.new
+        tree.add_node({name: ""})
         tree.add_node({name: "CB Research"})
         tree.add_node({name: "Third Party Research"})
-        tree.add_node({name: "N/A"})
 
         tree
       end

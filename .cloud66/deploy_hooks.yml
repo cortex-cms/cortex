@@ -18,11 +18,6 @@ default: &default
       target: rails
       execute: true
       apply_during: all
-    - source: /.cloud66/scripts/webpack_rebuild.sh
-      destination: /tmp/webpack_rebuild.sh
-      target: rails
-      execute: true
-      apply_during: all
   after_rails:
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails

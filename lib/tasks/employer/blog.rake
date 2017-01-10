@@ -8,7 +8,6 @@ namespace :employer do
         tree = Tree.new
         tree.add_node({name: "CB Research"})
         tree.add_node({name: "Third Party Research"})
-        tree.add_node({name: "N/A"})
 
         tree
       end

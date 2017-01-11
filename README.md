@@ -1,6 +1,6 @@
 # Cortex CMS [![Build Status](https://semaphoreci.com/api/v1/projects/ec90715a-da8f-4960-bb64-f371850f9c98/813409/shields_badge.svg)](https://semaphoreci.com/content-enablement/cortex) [![Code Climate](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/gpa.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/feed) [![Test Coverage](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/coverage.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/coverage) [![Documentation Status](https://readthedocs.org/projects/cortex-cms/badge/?version=latest)](http://docs.cbcortex.com/en/latest/?badge=latest)
 
-<img align="right" height="70"
+<img align="right" height="150"
      src="https://hiring-assets.careerbuilder.com/branding/cortex-logo.svg"
      alt="Cortex CMS Logo">
 

@@ -9,6 +9,10 @@ default: &default
       destination: /tmp/npm_install.sh
       target: rails
       execute: true
+    - source: /.cloud66/scripts/clobber_assets.sh
+      destination: /tmp/clobber_assets.sh
+      target: rails
+      execute: true
   after_rails:
     - source: /.cloud66/scripts/reseed_core_plugin.sh
       destination: /tmp/reseed_core_plugin.sh

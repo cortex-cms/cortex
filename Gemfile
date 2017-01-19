@@ -93,7 +93,7 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'material_design_lite-sass', '~> 1.3.0'
 
 # JavaScript
-gem 'react_on_rails', '~> 6.3'
+gem 'react_on_rails', '~> 6.4'
 gem 'mini_racer', platforms: :ruby
 gem 'gon', '~> 6.1.0'
 gem 'turbolinks', '~> 5.0.1'

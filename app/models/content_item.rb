@@ -100,6 +100,13 @@ class ContentItem < ApplicationRecord
     field_items.select { |field_item| field_item.field.field_type_instance.is_a?(TagFieldType) }
   end
 
+  def tree_list(field_id)
+    tree_array = Field.find(field_id).metadata["allowed_values"]["data"]["tree_array"]
+    tree_values = field_items.find { |field_item| field_item.field_id == field_id }.data["values"]
+
+    tree_values.map { |value| tree_array.find { |node| node["id"] == value.to_i }["node"]["name"] }.join(",")
+  end
+
   def update_tag_lists
     tag_data = tag_field_items.map { |field_item| {tag_name: field_item.field.name, tag_list: field_item.data["tag_list"]} }
 

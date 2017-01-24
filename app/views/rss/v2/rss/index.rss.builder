@@ -25,10 +25,10 @@ Rails.cache.fetch("rss-v2-#{content_type.name}", expires_in: 30.minutes, race_co
             unless tag_data.blank?
               if value.has_key?('multiple')
                 tag_data.split(value["multiple"]).each do |multi_value|
-                  xml.tag! key_name(key), multi_value, value['attributes'] if item_spec.include?(key_name(key))
+                  xml.tag! key, multi_value, value['attributes'] if item_spec.include?(key)
                 end
               elsif value.has_key?('encode')
-                xml.tag! "#{key_name(key)}:encoded", value['attributes'] do
+                xml.tag! "#{key}:encoded", value['attributes'] do
                   xml.cdata! tag_data
                 end
               elsif item_spec.include?(key)

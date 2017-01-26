@@ -44,7 +44,7 @@ def webpack_thread(path, environment)
 end
 
 def plugins
-  Cortex::Plugins.constants.map(&Cortex::Plugins.method(:const_get)).grep(Class)
+  Cortex::Plugins.constants.map(&Cortex::Plugins.method(:const_get))
 end
 
 def trap_for_thread_exit(threads)

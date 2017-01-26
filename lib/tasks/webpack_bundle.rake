@@ -9,28 +9,15 @@ namespace :cortex do
     end
 
     namespace :webpack do
-      desc 'Run Webpack for Cortex and all loaded plugins'
-      task :build_all => :environment do
-        threads = []
-        plugins.each do |plugin|
-          path = File.join(plugin::Engine.root, 'client')
-          threads << Thread.new(task.to_s) do
-            sh "cd #{path} && #{ReactOnRails.configuration.npm_build_production_command}"
-          end
-        end
-      end
-
-      desc 'Run Webpack for Cortex and all loaded plugins'
-      task :compile_all => :environment do
-        threads = []
-        webpack_compile_tasks.each do |task|
-          threads << Thread.new(task.to_s) do
-            task.invoke
-          end
+      namespace :all do
+        desc 'Build Webpack bundle for Cortex and all loaded plugins'
+        task :build => :environment do
+          all_webpack_threading_for('development')
         end
 
-        threads.each do |thread|
-          thread.join 5
+        desc 'Compile Webpack bundle for Cortex and all loaded plugins'
+        task :compile => :environment do
+          all_webpack_threading_for('production')
         end
       end
     end
@@ -39,12 +26,33 @@ end
 
 private
 
+def all_webpack_threading_for(environment)
+  path = File.join(Rails.root, 'client')
+  threads = [webpack_thread(path, environment)]
+  plugins.each do |plugin|
+    path = File.join(plugin::Engine.root, 'client')
+    threads << webpack_thread(path, environment)
+  end
+  trap_for_thread_exit(threads)
+  ThreadsWait.all_waits(*threads)
+end
+
+def webpack_thread(path, environment)
+  Thread.new do
+    sh "cd #{path} && npm run build:#{environment}"
+  end
+end
+
 def plugins
   Cortex::Plugins.constants.map(&Cortex::Plugins.method(:const_get)).grep(Class)
 end
 
-def webpack_compile_tasks
-  Rake.application.tasks.select do |task|
-    task.to_s.include? 'assets:webpack'
-  end
+def trap_for_thread_exit(threads)
+  # Trap ctrl-c and kill threads on exit
+  trap('INT') {
+    puts "\nKilling Webpack threads.."
+    threads.each do |thread|
+      Thread.kill thread
+    end
+  }
 end

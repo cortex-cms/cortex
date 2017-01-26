@@ -7,7 +7,7 @@
       editor.addCommand('insertMedia', {
         exec: function (editor) {
           var mediaLibraryModal = $('#media-library-modal');
-          mediaLibraryModal.openModal();
+          mediaLibraryModal.modal('open');
 
           global.media_select = {};
           global.media_select_defer = $.Deferred();
@@ -15,7 +15,7 @@
 
           global.media_select.done(function (media) {
             editor.insertHtml(global.utility.getMediaHtml(media));
-            mediaLibraryModal.closeModal();
+            mediaLibraryModal.modal('close');
           });
         }
       });

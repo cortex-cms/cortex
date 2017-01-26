@@ -18,7 +18,7 @@
     = cell(Plugins::Core::TagCell, field_item, form: field_item_form, default_value: [], input_options: input, label_options: label).(:tag_picker)
 
   - if field_item.field.field_type_instance.class == UserFieldType
-    = cell(Plugins::Core::UserCell, field_item, form: field_item_form, default_value: User.all.first.id, user_data: User.all, input_options: input, label_options: label).(:dropdown)
+    = cell(Plugins::Core::UserCell, field_item, form: field_item_form, user_data: User.all, input_options: input, label_options: label).(:dropdown)
 
   - if field_item.field.field_type_instance.class == AssetFieldType
     = cell(Plugins::Core::AssetCell, field_item, form: field_item_form, input_options: input, label_options: label).(:input)

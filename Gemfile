@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.1'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', git: 'https://github.com/cortex-cms/cortex-plugins-core.git', branch: 'default-user-select-to-current-user'
+gem 'cortex-plugins-core', '= 0.10.2'
 
 # API
 gem 'grape', '~> 0.17'

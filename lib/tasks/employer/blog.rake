@@ -369,9 +369,7 @@ namespace :employer do
           "content": { "field": blog.fields.find_by_name('Body').id, "encode": true },
           "media:content": { "media":
             { "field": blog.fields.find_by_name('Featured Image').id,
-              "medium": "image",
-              "type": "image/jpeg",
-              "height": "265"
+              "medium": "image"
             }
           }
         }

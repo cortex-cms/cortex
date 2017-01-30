@@ -11,14 +11,21 @@ class ContentItemService < ApplicationService
   def create
     transact_and_refresh do
       @content_item = ContentItem.new
-      content_item_params["field_items_attributes"].to_hash.each do |key, value|
+      content_item_params["field_items_attributes"].to_h.each do |key, value|
         value.delete("id")
         @content_item.field_items << FieldItem.new(value)
       end
 
       content_item_params.delete("field_items_attributes")
-      @content_item.attributes = content_item_params.to_hash
+      @content_item.attributes = content_item_params.to_h
     end
+  end
+
+  def getContentItem
+    @content_item
+  end
+  def getFieldItems
+      @field_items
   end
 
   def update
@@ -45,8 +52,8 @@ class ContentItemService < ApplicationService
   def transact_and_refresh
     ActiveRecord::Base.transaction do
       yield
-      parse_field_items!
       @content_item.save!
+      parse_field_items!
       execute_state_change(@content_item)
       update_search!
     end

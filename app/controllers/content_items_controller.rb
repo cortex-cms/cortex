@@ -40,12 +40,29 @@ class ContentItemsController < AdminController
   end
 
   def create
-    if content_item.create
-      flash[:success] = "ContentItem created"
-      redirect_to content_type_content_items_path
-    else
-      flash[:warning] = "ContentItem failed to create! Reason: #{@content_item.errors.full_messages}"
+    begin
+      content_item.create
+    rescue Exception => e
+      @paramTrack = {}
+      params['content_item']['field_items_attributes'].each do |param|
+        @paramTrack[params['content_item']['field_items_attributes'][param]['field_id']] = params['content_item']['field_items_attributes'][param]
+      end
+      flash[:warning] = "ContentItem failed to create! Reason: #{e.message}"
+      @content_item = content_type.content_items.new
+      content_type.fields.each do |field|
+        d = {}
+        if @paramTrack[field.id]
+          d = Hash(@paramTrack[field.id])
+        end
+        @content_item.field_items << FieldItem.new(field: field, data: d["data"] || d )
+      end
+
+      @wizard = WizardDecoratorService.new(content_item: @content_item)
+
       render :new
-    end
+    else
+     flash[:success] = "ContentItem created"
+     redirect_to content_type_content_items_path
+   end
   end
 end

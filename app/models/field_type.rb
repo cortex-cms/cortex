@@ -1,7 +1,7 @@
 class FieldType < ApplicationRecord
   extend ActiveSupport::DescendantsTracker
   DEFAULT_MAPPINGS = [].freeze
-
+  #include ApplicationHelper
   attr_accessor :field_name, :field
   attr_reader :data, :validations, :metadata
 
@@ -28,6 +28,11 @@ class FieldType < ApplicationRecord
   def type_mappings
     raise 'type_mappings must be implemented for a FieldType!'
   end
+
+  # def flash_error(mess)
+  #   binding.pry
+  #   flash[:warning] = mess
+  # end
 
   def acceptable_validations?
     valid_types? && valid_options?

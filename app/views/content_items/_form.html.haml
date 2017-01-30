@@ -1,3 +1,4 @@
+= render 'partials/flash'
 = form_for [@content_type, @content_item], html: { multipart: true } do |form|
   = form.hidden_field :creator_id, value: current_user.id
   = form.hidden_field :content_type_id, value: @content_type.id

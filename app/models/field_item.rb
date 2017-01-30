@@ -26,7 +26,8 @@ class FieldItem < ApplicationRecord
     field_type_class = FieldType.get_subtype_constant(field.field_type)
     # data_before_typecast will give us a non-mutilated hash with Objects intact, just in case validations get called first
     @field_type_instance ||= field_type_class.new(field_type_instance_params(data_hash))
-    @field_type_instance if @field_type_instance.save!
+    @field_type_instance.save
+    @field_type_instance
   end
 
   def field_is_present
@@ -34,6 +35,7 @@ class FieldItem < ApplicationRecord
   end
 
   def field_item_content_is_valid
+    #binding.pry
     add_specific_errors unless field_item_validates
   end
 
@@ -42,7 +44,7 @@ class FieldItem < ApplicationRecord
   end
 
   def add_specific_errors
-    field_type_instance.errors.each do |k, v|
+    @field_type_instance.errors.each do |k, v|
       errors.add(field.name.to_sym, v)
     end
   end

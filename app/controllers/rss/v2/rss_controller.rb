@@ -4,7 +4,7 @@ module Rss
       include RssHelper
 
       def index
-        @content_items = rss_content_type.content_items
+        @content_items = rss_content_type.content_items.select { |content_item| content_item.state == "published" }
       end
     end
   end

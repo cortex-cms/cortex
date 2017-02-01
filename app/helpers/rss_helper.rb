@@ -25,19 +25,39 @@ module RssHelper
     if tag_data_hash.keys.include?("string")
       tag_data_hash["string"]
     elsif tag_data_hash.keys.include?("field")
-      field_item_data(tag_data_hash["field"], rss_content_item)
+      field_item_data(tag_data_hash["field"], rss_content_item, tag_data_hash)
     elsif tag_data_hash.keys.include?("method")
       method_data(tag_data_hash["method"], rss_content_item)
+    elsif tag_data_hash.keys.include?("media")
+      media_data(tag_data_hash["media"], rss_content_item)
     end
   end
 
   private
 
-  def field_item_data(field_id, rss_content_item)
-    rss_content_item.field_items.find_by_field_id(field_id).data.values.join
+  def field_item_data(field_id, rss_content_item, tag_data_hash)
+    values = rss_content_item.field_items.find_by_field_id(field_id).data.values
+    tag_data_hash.has_key?("multiple") ? (values.join(tag_data_hash["multiple"])) : (values.join)
   end
 
   def method_data(method_hash, rss_content_item)
     rss_content_item.send(method_hash["name"], *method_hash["args"])
+  end
+
+  def media_data(media_hash, rss_content_item)
+    linked_field_item = rss_content_item.field_items.find_by_field_id(media_hash["field"])
+
+    field_name = linked_field_item.field.metadata["field_name"]
+    asset_content_item_id = linked_field_item.data["content_item_id"]
+
+    asset_data = Field.find_by_name(field_name).field_items.find { |field_item| field_item.content_item_id == asset_content_item_id }.data["asset"]
+
+    {
+      "url": asset_data["url"],
+      "type": asset_data["content_type"],
+      "medium": media_hash["medium"],
+      "width": media_hash["width"] || asset_data["dimensions"]["width"],
+      "height": media_hash["height"] || asset_data["dimensions"]["height"]
+    }
   end
 end

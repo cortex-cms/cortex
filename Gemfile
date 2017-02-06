@@ -100,6 +100,7 @@ gem 'jquery-turbolinks', '~> 2.1'
 gem 'jquery-ui-rails', '~> 6.0.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
+gem 'dialog-polyfill-rails', '~> 0.4.5'
 
 group :tasks do
   # Parsing

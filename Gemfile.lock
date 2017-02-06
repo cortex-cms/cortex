@@ -153,6 +153,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    dialog-polyfill-rails (0.4.5.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
     doorkeeper (4.2.0)
@@ -707,6 +708,7 @@ DEPENDENCIES
   cortex-plugins-core (= 0.10.4)
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)
+  dialog-polyfill-rails (~> 0.4.5)
   doorkeeper (~> 4.2)
   dotenv-rails
   elasticsearch-extensions (~> 0.0.23)
@@ -790,4 +792,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.13.7
+   1.14.3

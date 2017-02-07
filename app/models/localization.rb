@@ -5,6 +5,7 @@ class Localization < ApplicationRecord
   accepts_nested_attributes_for :locales
 
   validates :name, presence: true, uniqueness: true
+  validates_presence_of :name
 
   def list_locales
     locales.inject([]) { |memo, enum| memo << enum.name }

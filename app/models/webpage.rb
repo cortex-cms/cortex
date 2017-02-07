@@ -11,5 +11,7 @@ class Webpage < ApplicationRecord
   has_many :snippets, inverse_of: :webpage
   has_many :documents, through: :snippets, :dependent => :destroy
 
+  validates_presence_of :user
+
   accepts_nested_attributes_for :snippets
 end

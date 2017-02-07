@@ -45,6 +45,7 @@ class Media < ApplicationRecord
                        :size => {:in => 0..Cortex.config.media.max_size_mb.to_i.megabytes}
 
   validates :type, inclusion: {in: %w(Media Youtube)}
+  validates_presence_of :user
 
   Paperclip::Attachment.include PaperclipExtensions::Attachment
 

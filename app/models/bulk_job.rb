@@ -10,4 +10,5 @@ class BulkJob < ApplicationRecord
   validates_attachment :metadata, :presence => true
   validates_attachment_content_type :assets, :content_type => ['application/zip']
   validates_presence_of :content_type
+  validates_presence_of :user
 end

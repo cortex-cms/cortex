@@ -25,6 +25,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { minimum: 1, maximum: 255 }
   validates :type, :job_phase, :display, presence: true, allow_nil: false
   validates :slug, presence: true, length: { minimum: 1, maximum: 255 }
+  validates_presence_of :user, :author
 
   enum job_phase: ['Discovery', 'Find the Job', 'Get the Job', 'On the Job']
   enum display: [:large, :medium, :small]

@@ -5,7 +5,7 @@ class Locale < ApplicationRecord
   belongs_to :localization
 
   validates_uniqueness_of :name, scope: :localization_id
-  validates_presence_of :name
+  validates_presence_of :name, :user
 
   def yaml
     data.to_yaml

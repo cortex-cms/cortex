@@ -7,4 +7,6 @@ class Author < ApplicationRecord
   store_accessor :sites, :personal, :facebook, :twitter, :google
   belongs_to :user, touch: true
   has_many :posts
+
+  validates_presence_of :user
 end

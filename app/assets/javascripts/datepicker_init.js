@@ -13,7 +13,7 @@ var datepicker_init = function() {
           button.val('schedule');
           button.text('Schedule Post');
         }
-        else {
+        else if (button.length > 0 && selectedDate <= currentDate) {
           button.val('published');
           button.text('Publish Now');
         }

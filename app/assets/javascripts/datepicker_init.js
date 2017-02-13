@@ -7,8 +7,7 @@ var datepicker_init = function() {
       onSelect: function (date) {
         var button = $('.new_publish_state_button');
         var currentDate = new Date();
-        var selectedDate = moment(date, 'DD-MM-YYYY HH:mm')
-          .toDate();
+        var selectedDate = moment(date, 'DD-MM-YYYY HH:mm');
 
         if (button.length > 0 && selectedDate > currentDate) {
           button.val('schedule');

@@ -4,6 +4,7 @@
 
 const webpack = require('webpack');
 const path = require('path');
+const cortexPluginLibraries = require("../tmp/cortex_plugin_libraries.json");
 
 const devBuild = process.env.NODE_ENV !== 'production';
 const nodeEnv = devBuild ? 'development' : 'production';
@@ -13,7 +14,9 @@ const config = {
     'es5-shim/es5-shim',
     'es5-shim/es5-sham',
     'babel-polyfill',
-    './app/bundles/HelloWorld/startup/registration',
+    'react-on-rails',
+    ...cortexPluginLibraries,
+    './app/bundles/bundles.js'
   ],
 
   output: {

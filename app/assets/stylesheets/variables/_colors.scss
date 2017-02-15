@@ -10,11 +10,15 @@ $color-orange-light: #FED473;
 
 $color-anchor-blue-light: #747D8E;
 
+$color-green: #009b74;
+
 $color-grey: #BBB; // Type
 $color-grey-dark: #333; // Type, Sidebar background, Login page background
 $color-grey-light: #D4D4D4; // Content background color
 $color-grey-lightest: #DDD; // Disabled and flat button background color
 $color-grey-extralight: #F4F4F4; // Wizard Instruction Panel background color
+
+$color-red: #d85252;
 
 $color-white: white; // Header
 
@@ -24,6 +28,9 @@ $color-white: white; // Header
 $employer-color: $color-teal;
 $employer-color-dark: $color-teal-dark;
 $employer-color-light: $color-teal-light;
+
+$flash-error-background: $color-red;
+$flash-success-background: $color-green;
 
 $ar-color: $color-orange;
 $ar-color-dark: $color-orange-dark;

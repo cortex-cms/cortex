@@ -14,9 +14,8 @@ const config = {
     'es5-shim/es5-shim',
     'es5-shim/es5-sham',
     'babel-polyfill',
-    'react-on-rails',
     ...cortexPluginLibraries,
-    './app/bundles/bundles.js'
+    './app/bundles/HelloWorld/startup/registration.jsx'
   ],
 
   output: {
@@ -47,7 +46,7 @@ const config = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules(?!\/cortex-plugins-.)/, // don't run babel on node_modules except for Cortex plugins
       },
     ],
   },

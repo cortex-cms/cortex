@@ -8,7 +8,9 @@
   "scripts": {
     "build:test": "webpack --config webpack.config.js",
     "build:production": "NODE_ENV=production webpack --config webpack.config.js",
-    "build:development": "webpack -w --config webpack.config.js"
+    "build:development": "webpack -w --config webpack.config.js",
+
+    "install-cortex-plugins-core": "npm install 'cortex-plugins-core@../../cortex-plugins-core'"
   },
   "cacheDirectories": [
     "node_modules",
@@ -31,7 +33,9 @@
     "react-on-rails": "^6.5.0",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+
+    "cortex-plugins-core": "0.11.0"
   },
   "devDependencies": {}
 }

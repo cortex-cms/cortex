@@ -1,2 +1,2 @@
 web: bundle exec rails s -p 3000
-client: sh -c 'rm -f app/assets/webpack/* || true && cd client && npm run build:development'
+client: rake assets:clobber react_on_rails:assets:clobber cortex:assets:webpack:build

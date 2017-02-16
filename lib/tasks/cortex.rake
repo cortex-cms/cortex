@@ -7,6 +7,15 @@ require 'open-uri'
 Bundler.require(:default, Rails.env)
 
 namespace :cortex do
+  namespace :plugins do
+    desc 'webpack.config.js picks up on this file to build plugin assets'
+    task :write_to_tmp => :environment do
+      File.open('tmp/cortex_plugin_libraries.json', 'w') do |file|
+        file.write(JSON.pretty_generate(Cortex.plugin_library_names))
+      end
+    end
+  end
+
   desc 'Add categories from seeds.yml'
   task :create_categories => :environment do
     user = User.find_by_email(SeedData.cortex_tenant.creator.email)

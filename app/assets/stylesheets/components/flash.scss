@@ -9,3 +9,40 @@
     color: $color-grey-dark;
   }
 }
+
+.flash--warning {
+  background-color: $flash-error-background;
+}
+
+.flash--success {
+  background-color: $flash-success-background;
+
+  img {
+    display: inline;
+    vertical-align: top;
+  }
+}
+
+.mdl-snackbar__text {
+  display: none;
+  font-size: 0.9285rem;
+}
+
+.flash--header__text {
+  font-size: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+.mdl-snackbar--active {
+  font-family: $cortex-font-stack;
+
+  .mdl-snackbar__text {
+    display: block;
+  }
+
+  i.material-icons {
+    vertical-align: bottom;
+    font-size: 	1.25rem;
+  }
+}

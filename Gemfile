@@ -91,7 +91,7 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'material_design_lite-sass', '~> 1.3.0'
 
 # JavaScript
-gem 'react_on_rails', '~> 6.5'
+gem 'react_on_rails', '< 6.6'
 gem 'mini_racer', platforms: :ruby
 gem 'gon', '~> 6.1.0'
 gem 'turbolinks', '~> 5.0.1'
@@ -100,6 +100,7 @@ gem 'jquery-turbolinks', '~> 2.1'
 gem 'jquery-ui-rails', '~> 6.0.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
+gem 'dialog-polyfill-rails', '~> 0.4.5'
 
 group :tasks do
   # Parsing

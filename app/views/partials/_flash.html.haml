@@ -1,10 +1,26 @@
 - flash.each do |key, value|
   - unless value == 'You need to sign in or sign up before continuing.'
-    .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
-      .mdl-snackbar__text
-        = value
-      %button.mdl-snackbar__action{:type => "button"}
+    - if flash["warning"]
+      .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active.flash--warning{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
+        .mdl-snackbar__text
+          %p.flash--header__text
+            Oops! Please review the following fields for errors:
+          - value.split(',').each do |err|
+            %i.material-icons error_outline
+            = err
+        %button.mdl-snackbar__action{:type => "button"}
+    - elsif flash["success"]
+      .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active.flash--success{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
+        .mdl-snackbar__text
+          = image_tag("check.svg", size: "18x18")
+          = value
+        %button.mdl-snackbar__action{:type => "button"}
+    - else
+      .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
+        .mdl-snackbar__text
+          = value
+        %button.mdl-snackbar__action{:type => "button"}
     :javascript
       setTimeout(function(){
         $('.mdl-js-snackbar').toggleClass('mdl-snackbar--active');
-      }, 2000);
+      }, 2500);

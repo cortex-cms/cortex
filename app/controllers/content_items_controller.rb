@@ -40,12 +40,17 @@ class ContentItemsController < AdminController
   end
 
   def create
-    if content_item.create
-      flash[:success] = "ContentItem created"
-      redirect_to content_type_content_items_path
-    else
-      flash[:warning] = "ContentItem failed to create! Reason: #{@content_item.errors.full_messages}"
+    begin
+      content_item.create
+    rescue => e
+      flash[:warning] = e.message
+      @content_item = content_item_reload
+      @wizard = WizardDecoratorService.new(content_item: @content_item)
+
       render :new
-    end
+    else
+     flash[:success] = 'ContentItem created'
+     redirect_to content_type_content_items_path
+   end
   end
 end

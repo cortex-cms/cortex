@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/cortex-cms/cortex-plugins-core.git
-  revision: 55d31dc1a3796e574b486fa52f359b13ef473247
+  revision: 58671700a4a28a3d52f1b708ee3f1705bd90ef82
   branch: react-foundation
   specs:
     cortex-plugins-core (0.11.0)
@@ -87,15 +87,15 @@ GEM
     ansi (1.5.0)
     arel (7.1.4)
     attr_required (1.0.1)
-    autoprefixer-rails (6.7.3)
+    autoprefixer-rails (6.7.4)
       execjs
-    aws-sdk (2.7.9)
-      aws-sdk-resources (= 2.7.9)
-    aws-sdk-core (2.7.9)
+    aws-sdk (2.7.12)
+      aws-sdk-resources (= 2.7.12)
+    aws-sdk-core (2.7.12)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.7.9)
-      aws-sdk-core (= 2.7.9)
+    aws-sdk-resources (2.7.12)
+      aws-sdk-core (= 2.7.12)
     aws-sigv4 (1.0.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -118,7 +118,7 @@ GEM
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (9.0.6)
-    capybara (2.12.0)
+    capybara (2.12.1)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -164,6 +164,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    dialog-polyfill-rails (0.4.5.1)
     diff-lcs (1.3)
     docile (1.1.5)
     doorkeeper (4.2.5)
@@ -396,7 +397,7 @@ GEM
     httpclient (2.8.3)
     i18n (0.8.0)
     ice_nine (0.11.2)
-    image_optim (0.24.1)
+    image_optim (0.24.2)
       exifr (~> 1.2, >= 1.2.2)
       fspath (~> 3.0)
       image_size (~> 1.5)
@@ -501,7 +502,7 @@ GEM
     paperclip-optimizer (2.0.0)
       image_optim (~> 0.19)
       paperclip (>= 3.4)
-    paranoia (2.2.0)
+    paranoia (2.2.1)
       activerecord (>= 4.0, < 5.1)
     pg (0.19.0)
     phantomjs (2.1.1.0)
@@ -595,7 +596,7 @@ GEM
     redis-activesupport (5.0.1)
       activesupport (>= 3, < 6)
       redis-store (~> 1.2.0)
-    redis-namespace (1.5.2)
+    redis-namespace (1.5.3)
       redis (~> 3.0, >= 3.0.4)
     redis-rack (2.0.0)
       rack (~> 2.0)
@@ -731,6 +732,7 @@ DEPENDENCIES
   cortex-plugins-core!
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)
+  dialog-polyfill-rails (~> 0.4.5)
   doorkeeper (~> 4.2)
   dotenv-rails
   elasticsearch-extensions (~> 0.0.26)
@@ -791,7 +793,7 @@ DEPENDENCIES
   rails (~> 5.0.1)
   rails-erd
   rails-observers!
-  react_on_rails (~> 6.5)
+  react_on_rails (< 6.6)
   redis-namespace
   redis-rails (~> 5.0)
   rolify (~> 5.1)

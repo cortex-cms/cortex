@@ -106,6 +106,10 @@
   margin: 0;
 }
 
+.ui-datepicker .ui-icon {
+  text-indent: 0;
+}
+
 .ui-datepicker td[data-handler='selectDay']:hover {
   background-color: $color-teal-dark;
 

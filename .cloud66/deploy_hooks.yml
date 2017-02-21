@@ -4,19 +4,23 @@ default: &default
       target: rails
       execute: true
       apply_during: build_only
+      run_on: all_servers
   after_bundle:
     - source: /.cloud66/scripts/npm_install.sh
       destination: /tmp/npm_install.sh
       target: rails
       execute: true
+      run_on: all_servers
     - source: /.cloud66/scripts/clobber_assets.sh
       destination: /tmp/clobber_assets.sh
       target: rails
       execute: true
+      run_on: all_servers
     - source: /.cloud66/scripts/write_plugins_to_tmp.sh
       destination: /tmp/clobber_assets.sh
       target: rails
       execute: true
+      run_on: all_servers
   after_rails:
     - source: /.cloud66/scripts/reseed_core_plugin.sh
       destination: /tmp/reseed_core_plugin.sh
@@ -29,6 +33,7 @@ default: &default
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails
       sudo: true
+      run_on: all_servers
 
 development:
   <<: *default
@@ -46,3 +51,4 @@ production:
     - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
       target: rails
       sudo: true
+      run_on: all_servers

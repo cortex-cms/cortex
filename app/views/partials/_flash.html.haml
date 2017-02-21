@@ -2,7 +2,7 @@
   - unless value == 'You need to sign in or sign up before continuing.'
     - if flash["warning"]
       .mdl-snackbar.mdl-snackbar--active.flash--warning{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
-        %i#flash--warning__close.material-icons close
+        %i.mdl-snackbar__close.material-icons close
         .mdl-snackbar__text
           %p.flash--header__text
             Oops! Please review the following fields for errors:
@@ -33,7 +33,7 @@
           = value
         %button.mdl-snackbar__action{:type => "button"}
     :javascript
-      var closeButton = document.getElementById('flash--warning__close');
+      var closeButton = document.querySelector('.mdl-snackbar__close');
       if (closeButton) {
         closeButton.onclick = function(){
           $('.mdl-snackbar').removeClass('mdl-snackbar--active');

@@ -15,6 +15,7 @@
 
 //= require base
 //= require datepicker_init
+//= require flash
 //= require media_dialogs
 //= require sidebar-toggle
 

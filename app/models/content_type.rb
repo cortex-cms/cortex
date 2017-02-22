@@ -13,7 +13,7 @@ class ContentType < ApplicationRecord
   belongs_to :contract
 
   has_many :fields
-  has_many :content_items, -> { order(created_at: :desc) }
+  has_many :content_items
   has_many :contentable_decorators, as: :contentable
   has_many :decorators, through: :contentable_decorators
 

@@ -21,3 +21,4 @@
     %script{src: '//cdn.ckeditor.com/4.6.1/standard-all/ckeditor.js', type: 'text/javascript'}
     = javascript_include_tag :application, {'data-turbolinks-eval': false}
     = render 'layouts/google_analytics' if extra_config.google_analytics_id?
+    = render 'partials/trackers/qualtrics' if extra_config.qualtrics_id?

@@ -8,8 +8,10 @@
 //= require bootstrap-tagsinput
 //= require clipboard
 //= require dialog-polyfill
+//= require moment
 
 //= require cortex-plugins-core/application
+//= require webpack-bundle
 
 //= require base
 //= require datepicker_init

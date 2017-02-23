@@ -8,4 +8,8 @@ module ApplicationHelper
   def extra_config
     Cortex.config.extra
   end
+
+  def qualtrics_domain
+  	extra_config.qualtrics_id.delete('_').downcase
+  end
 end

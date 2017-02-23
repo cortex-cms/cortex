@@ -26,7 +26,6 @@ class FieldItem < ApplicationRecord
     field_type_class = FieldType.get_subtype_constant(field.field_type)
     # data_before_typecast will give us a non-mutilated hash with Objects intact, just in case validations get called first
     @field_type_instance ||= field_type_class.new(field_type_instance_params(data_hash))
-    @field_type_instance if @field_type_instance.save!
   end
 
   def field_is_present

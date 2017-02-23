@@ -132,10 +132,10 @@ $ systemctl start redis
 $ gem install bundler && bundle install
 ```
 
-* Install Bower and use `bower-rails`'s rake task to install dependencies:
+* Install `node` dependencies (including `bower`) and use `bower-rails`'s rake task to install dependencies:
 
 ```sh
-$ npm install -g bower && bundle exec rake bower:install:development
+$ npm install && bundle exec rake bower:install:development
 ```
 
 ### Database
@@ -164,11 +164,10 @@ $ bundle exec rake cortex:rebuild_indexes
 
 ### Server
 
-Start Cortex and (optionally) Sidekiq:
+Start Cortex, Sidekiq and live rebuild of Webpack scripts via Foreman:
 
 ```sh
-$ bundle exec rails s
-$ bundle exec sidekiq --config ./config/sidekiq.yml
+$ foreman start -f Procfile.dev
 ```
 
 The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `admin@cortexcms.org` with password `welcome1`.

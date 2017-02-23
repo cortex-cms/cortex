@@ -1,4 +1,5 @@
 Cortex::Application.routes.draw do
+  get 'hello_world', to: 'hello_world#index'
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root 'dashboards#index'
   get 'legacy', to: 'legacy#index', as: :legacy_root

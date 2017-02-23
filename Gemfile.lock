@@ -6,20 +6,6 @@ GIT
       activerecord (>= 4.0.0, < 5.1)
 
 GIT
-  remote: https://github.com/cortex-cms/cortex-plugins-core.git
-  revision: 58671700a4a28a3d52f1b708ee3f1705bd90ef82
-  branch: react-foundation
-  specs:
-    cortex-plugins-core (0.11.0)
-      cells (~> 4.1)
-      cells-haml (~> 0.0.10)
-      cells-rails (~> 0.0.6)
-      jsonb_accessor (~> 1.0.0.beta)
-      mimemagic (~> 0.3.2)
-      rails (>= 4)
-      react_on_rails (~> 6)
-
-GIT
   remote: https://github.com/toastercup/grape-kaminari.git
   revision: 661388050eaa97f70006b74fe300e19760b8a132
   branch: set-paginate-headers-extraction
@@ -151,6 +137,14 @@ GEM
     concurrent-ruby (1.0.4)
     connection_pool (2.2.1)
     cortex-exceptions (0.0.4)
+    cortex-plugins-core (0.11.0)
+      cells (~> 4.1)
+      cells-haml (~> 0.0.10)
+      cells-rails (~> 0.0.6)
+      jsonb_accessor (~> 1.0.0.beta)
+      mimemagic (~> 0.3.2)
+      rails (>= 4)
+      react_on_rails (~> 6)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     declarative-builder (0.1.0)
@@ -729,7 +723,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.7)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (= 0.0.4)
-  cortex-plugins-core!
+  cortex-plugins-core (= 0.11.0)
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)
   dialog-polyfill-rails (~> 0.4.5)

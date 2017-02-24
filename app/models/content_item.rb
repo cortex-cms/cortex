@@ -31,6 +31,8 @@ class ContentItem < ApplicationRecord
 
   accepts_nested_attributes_for :field_items
 
+  default_scope { order(created_at: :desc) }
+
   validates :creator_id, :content_type_id, presence: true
 
   after_save :index

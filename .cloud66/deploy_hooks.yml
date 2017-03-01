@@ -23,6 +23,13 @@ default: &default
       execute: true
       run_on: all_servers
   after_rails:
+    - source: /.cloud66/scripts/db_seed.sh
+      destination: /tmp/db_seed.sh
+      target: rails
+      execute: true
+      run_on: single_server
+      apply_during: build_only
+      sudo: true
     - source: /.cloud66/scripts/reseed_core_plugin.sh
       destination: /tmp/reseed_core_plugin.sh
       target: rails

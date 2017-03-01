@@ -14,14 +14,9 @@ namespace :employer do
 
       def category_tree
         tree = Tree.new
-        tree.add_node({ name: "Candidate Experience" })
-        tree.add_node({ name: "Recruitment Techniques" })
-        tree.add_node({ name: "Talent Sourcing" })
-        tree.add_node({ name: "Hiring Strategy" })
-        tree.add_node({ name: "Data and Analytics" })
-        tree.add_node({ name: "Recruitment Technology" })
-        tree.add_node({ name: "Workplace Insights" })
-        tree.add_node({ name: "News and Trends" })
+        tree.add_node({ name: "Recruitment Solutions" })
+        tree.add_node({ name: "Employment Screening" })
+        tree.add_node({ name: "Human Capital Management" })
 
         tree
       end
@@ -61,7 +56,7 @@ namespace :employer do
                                contract_id: 1,
                                publishable: true
                              })
-      blog.save
+      blog.save!
 
       puts "Creating Fields..."
       blog.fields.new(name: 'Body', field_type: 'text_field_type', metadata: {parse_widgets: true})
@@ -90,7 +85,7 @@ namespace :employer do
                       })
 
       puts "Saving Employer Blog..."
-      blog.save
+      blog.save!
 
       puts "Creating Wizard Decorators..."
       wizard_hash = {
@@ -260,9 +255,9 @@ namespace :employer do
       }
 
       blog_wizard_decorator = Decorator.new(name: "Wizard", data: wizard_hash)
-      blog_wizard_decorator.save
+      blog_wizard_decorator.save!
 
-      ContentableDecorator.create({
+      ContentableDecorator.create!({
                                     decorator_id: blog_wizard_decorator.id,
                                     contentable_id: blog.id,
                                     contentable_type: 'ContentType'
@@ -332,9 +327,9 @@ namespace :employer do
       }
 
       blog_index_decorator = Decorator.new(name: "Index", data: index_hash)
-      blog_index_decorator.save
+      blog_index_decorator.save!
 
-      ContentableDecorator.create({
+      ContentableDecorator.create!({
                                     decorator_id: blog_index_decorator.id,
                                     contentable_id: blog.id,
                                     contentable_type: 'ContentType'
@@ -376,9 +371,9 @@ namespace :employer do
       }
 
       blog_rss_decorator = Decorator.new(name: "Rss", data: rss_hash)
-      blog_rss_decorator.save
+      blog_rss_decorator.save!
 
-      ContentableDecorator.create({
+      ContentableDecorator.create!({
                                     decorator_id: blog_rss_decorator.id,
                                     contentable_id: blog.id,
                                     contentable_type: 'ContentType'

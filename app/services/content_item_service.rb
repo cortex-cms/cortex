@@ -7,10 +7,14 @@ class ContentItemService < ApplicationService
   attribute :creator, User
   attribute :field_items, Array[FieldItem]
   attribute :state, String
+  class_attribute :form_fields
 
   def create
     transact_and_refresh do
       @content_item = ContentItem.new
+      ContentItemService.form_fields = field_items_attributes.to_h.values.each_with_object({}) do |param, hash_object|
+        hash_object[param['field_id']] = param['data']
+      end
       content_item_params["field_items_attributes"].to_hash.each do |key, value|
         value.delete("id")
         @content_item.field_items << FieldItem.new(value)
@@ -19,6 +23,10 @@ class ContentItemService < ApplicationService
       content_item_params.delete("field_items_attributes")
       @content_item.attributes = content_item_params.to_hash
     end
+  end
+
+  def field_items_attributes
+    content_item_params["field_items_attributes"]
   end
 
   def update

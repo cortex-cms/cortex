@@ -10,6 +10,7 @@ class FieldItem < ApplicationRecord
   def data=(data_hash)
     # Reset @field_type_instance so that massaged data can be re-generated every time @data is set, not just on init
     @field_type_instance = nil
+    data_hash = extract_data(data_hash) if data_hash["values"]
     super(field_type_instance(data_hash).data || data_hash)
   end
 
@@ -20,6 +21,16 @@ class FieldItem < ApplicationRecord
     params = {metadata: field.metadata.merge({existing_data: data}), field: field, validations: field.validations}
     params[:data] = data_hash if data_hash
     params
+  end
+
+  def extract_data(data_hash)
+    if data_hash["values"].is_a?(Hash)
+      data_hash["values"] = data_hash["values"].keys
+    else
+      data_hash["values"] = [data_hash["values"]]
+    end
+
+    data_hash
   end
 
   def field_type_instance(data_hash = nil)

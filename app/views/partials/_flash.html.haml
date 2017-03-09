@@ -11,6 +11,15 @@
         %button.mdl-snackbar__action{:type => "button"}
     - elsif flash["success"]
       .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active.flash--success{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
+        .confetti.confetti--left
+          - 50.times do
+            %i
+        .confetti.confetti--center
+          - 50.times do
+            %i
+        .confetti.confetti--right
+          - 50.times do
+            %i
         .mdl-snackbar__text
           = image_tag("check.svg", size: "18x18")
           = value

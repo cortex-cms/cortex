@@ -1,0 +1,40 @@
+@include keyframes(bang) {
+  from {
+    @include transform( translate3d(0,0,0) );
+    opacity: 1;
+  }
+}
+
+.confetti {
+  width: 100%;
+  position: absolute;
+
+  i {
+    position: absolute;
+    display: block;
+    width: 5px;
+    height: 7px;
+    opacity: 0;
+  }
+
+  @for $i from 1 through 50 {
+    i:nth-of-type(#{$i}) {
+      @include transform( translate3d(random(190) - 100 + px,random(50) - 100 + px,0) rotate(random(360) + deg) );
+      background: hsla(random(360),100%,50%,1);
+      @include animation(bang 2500ms ease-out forwards);
+      opacity: 0;
+    }
+  }
+}
+
+.confetti--left i {
+  left: 0;
+}
+
+.confetti--center i {
+  left: 50%;
+}
+
+.confetti--right i {
+  right: 0;
+}

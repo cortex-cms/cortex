@@ -31,7 +31,7 @@ class ContentItemsController < AdminController
 
   def update
     if content_item.update
-      flash[:success] = "ContentItem updated"
+      flash[:success] = "Hooray! #{content_type.name} Updated!"
     else
       flash[:warning] = "ContentItem failed to update! Reason: #{@content_item.errors.full_messages}"
     end
@@ -49,8 +49,8 @@ class ContentItemsController < AdminController
 
       render :new
     else
-     flash[:success] = 'ContentItem created'
-     redirect_to content_type_content_items_path
+      flash[:success] = "Hooray! #{content_type.name} Created!"
+      redirect_to content_type_content_items_path
    end
   end
 end

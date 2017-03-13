@@ -83,4 +83,8 @@ module ContentItemHelper
     params_hash['data'] || {}
   end
 
+  def validation_message(base_message)
+    msg_array = base_message.gsub('Validation failed:', '').gsub('Field items', '').split(',')
+    msg_array.map { |message| message.strip.titleize }
+  end
 end

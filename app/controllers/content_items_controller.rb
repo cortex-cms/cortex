@@ -43,7 +43,7 @@ class ContentItemsController < AdminController
     begin
       content_item.create
     rescue => e
-      flash[:warning] = e.message
+      flash[:warning] = validation_message(e.message)
       @content_item = content_item_reload
       @wizard = WizardDecoratorService.new(content_item: @content_item)
 

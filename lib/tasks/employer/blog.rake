@@ -63,7 +63,7 @@ namespace :employer do
       blog.fields.new(name: 'Title', field_type: 'text_field_type', validations: {presence: true})
       blog.fields.new(name: 'Description', field_type: 'text_field_type', validations: {presence: true})
       blog.fields.new(name: 'Slug', field_type: 'text_field_type', validations: {presence: true, uniqueness: true})
-      blog.fields.new(name: 'Author', field_type: 'author_field_type', validations: {presence: true})
+      blog.fields.new(name: 'Author', field_type: 'author_field_type')
       blog.fields.new(name: 'Tags', field_type: 'tag_field_type')
       blog.fields.new(name: 'Publish Date', field_type: 'date_time_field_type')
       blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type')

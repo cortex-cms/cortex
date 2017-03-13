@@ -27,4 +27,4 @@
     = cell(Plugins::Core::ContentItemCell, field_item, form: field_item_form).(:popup)
 
   - if field_item.field.field_type_instance.class == AuthorFieldType
-    = cell(Plugins::Core::AuthorCell, field_item, form: field_item_form, current_user: current_user).(:input)
+    = cell(Plugins::Core::AuthorCell, field_item, form: field_item_form).(:input)

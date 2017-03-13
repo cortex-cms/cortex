@@ -7,8 +7,8 @@ module ContentItemHelper
     @content_item ||= ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user, state: params[:content_item][:state])
   end
 
-  def content_item_reload
-    @content_item = content_type.content_items.new
+  def content_item_reload(content_item)
+    @content_item = content_item
     content_type.fields.each do |field|
       @content_item.field_items << FieldItem.new(field: field, data: field_item_param_data(params_lookup[field.id]))
     end

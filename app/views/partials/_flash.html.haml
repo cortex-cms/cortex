@@ -11,7 +11,7 @@
               %li
                 %i.material-icons error_outline
                 = err
-        %button.mdl-snackbar__action{:type => 'button'}
+        %button.mdl-snackbar__action{ type: 'button' }
     - elsif flash['success']
       .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active.flash--success{ 'aria-atomic' => 'true', 'aria-live' => 'assertive', 'aria-relevant' => 'text' }
         .confetti.confetti--left

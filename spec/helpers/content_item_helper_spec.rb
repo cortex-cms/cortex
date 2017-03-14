@@ -111,4 +111,26 @@ RSpec.describe ContentItemHelper, type: :helper do
       expect(sanitize_parameters({})).to be_a_kind_of(Array)
     end
   end
+
+  describe '#validation_message' do
+    let(:base_message) { "Validation failed: Field items This is a test, Field items Second thing" }
+    let(:result) { validation_message(base_message) }
+
+    it 'should return an Array' do
+      expect(result).to be_a_kind_of(Array)
+    end
+
+    it 'should contain Strings' do
+      expect(result.sample).to be_a_kind_of(String)
+    end
+
+    it 'should not contain unwanted words' do
+      expect(result.sample).to_not include("Validation failed:")
+      expect(result.sample).to_not include("Field items")
+    end
+
+    it 'should return an array of the correct length' do
+      expect(result.length).to eq(base_message.split(",").length)
+    end
+  end
 end

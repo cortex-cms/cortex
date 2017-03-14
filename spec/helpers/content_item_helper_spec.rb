@@ -53,12 +53,16 @@ RSpec.describe ContentItemHelper, type: :helper do
       let (:param) { { one: "two" } }
       let (:outcome) { permit_param(param) }
 
-      it 'should return a Symbol' do
-        expect(outcome).to be_a_kind_of(Symbol)
+      it 'should return an Array' do
+        expect(outcome).to be_a_kind_of(Array)
       end
 
-      it 'should the first key of the given param' do
-        expect(outcome).to eq(param.keys[0])
+      it 'should contain Symbols' do
+        expect(outcome.sample).to be_a_kind_of(Symbol)
+      end
+
+      it 'should match the given param' do
+        expect(outcome).to eq(param.keys)
       end
     end
   end

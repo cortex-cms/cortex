@@ -51,7 +51,7 @@ module ContentItemHelper
     if param.values[0].is_a?(Hash)
       { param.keys[0].to_sym => param.values[0].keys }
     else
-      param.keys[0]
+      param.keys
     end
   end
 

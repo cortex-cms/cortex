@@ -13,20 +13,6 @@
   justify-content: center;
 }
 
-.news section:not(:last-of-type) {
-  margin-bottom: 16px;
-}
-
-.news .mdl-card {
-  min-height: unset;
-}
-
-.section__featured-media {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-}
-
 form.new_user .mdl-button {
   float: none;
 }
@@ -45,12 +31,4 @@ form.new_user .mdl-button {
 .authentication__header-text {
   @extend %display-text;
   color: white;
-}
-
-.newsfeed__title {
-  @extend .mdl-layout-title;
-
-  line-height: 48px;
-  margin-top: auto;
-  margin-bottom: auto;
 }

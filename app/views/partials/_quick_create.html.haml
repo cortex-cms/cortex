@@ -1,0 +1,10 @@
+.mdl-grid
+  .mdl-cell.mdl-cell--4-col
+    %section.mdl-grid.mdl-grid--no-spacing.mdl-shadow--2dp
+      .mdl-card.mdl-cell.mdl-cell--12-col
+        .mdl-card__title.mdl-card--expand
+          %h3
+            %i.material-icons{:role => "presentation"} add
+          Cool Body
+
+= cell(:content_type, collection: ContentType.all).(:nav)

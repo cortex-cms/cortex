@@ -1,15 +1,6 @@
-.wizard__step
-  .mdl-grid.mdl-grid--no-spacing
-    .wizard__instruction-panel.mdl-cell.mdl-cell--2-col.mdl-cell--12-col-tablet.mdl-cell--12-col-phone
-      .p-40.p-r-20.p-20--small
-        %h3.wizard__step__name
-          %i.material-icons.f-left.m-r-5 mode_edit
-          = name
-        %p.wizard__step__description
-          = description
-    .mdl-cell.mdl-cell--10-col.mdl-cell--12-col-tablet.mdl-cell--12-col-phone.no-p-l
-      .p-20.card-holder
-        .mdl-card.mdl-shadow--2dp
-          .p-30.p-20--small
-            .mdl-grid
-              = cell(Wizard::ColumnCell, collection: columns).()
+.mdl-grid
+  .mdl-cell.mdl-cell--12-col
+    %span.mdl-layout-title
+      %i.material-icons.f-left.m-r-5 mode_edit
+      = name
+  = cell(Wizard::ColumnCell, collection: columns).()

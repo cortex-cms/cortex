@@ -12,10 +12,9 @@
   background-position: 50% 50%;
 }
 
-.newsfeed__title {
+.notes__header {
   @extend .mdl-layout-title;
 
   line-height: 48px;
-  margin-top: auto;
-  margin-bottom: auto;
+  text-transform: uppercase;
 }

@@ -2,3 +2,10 @@ html, body {
   font-family: $cortex-font-stack;
   font-size: $base-font-size;
 }
+
+@media (min-width: $grid-desktop-breakpoint) {
+  .mdl-grid {
+    padding-left: 48px - ($grid-desktop-gutter / 2);
+    padding-right: 48px - ($grid-desktop-gutter / 2);
+  }
+}

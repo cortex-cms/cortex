@@ -4,6 +4,10 @@
   border: $data-table-dividers;
   border-bottom: 4px solid $color-teal;
 
+  &:hover {
+    background-color: $jumbo-button-hover-background;
+  }
+
   &:active {
     background-color: $jumbo-button-active-background;
   }

@@ -1,0 +1,16 @@
+%section.mdl-grid
+  .mdl-cell.mdl-cell--6-col
+    = link_to new_content_type_content_item_path(employer_blog_content_type) do
+      .jumbo-button
+        %span.jumbo-button__content
+          %p
+            = image_tag 'icons/blog.png'
+          %p Create a New Post
+
+  .mdl-cell.mdl-cell--6-col
+    = link_to new_content_type_content_item_path(media_content_type) do
+      .jumbo-button
+        %span.jumbo-button__content
+          %p
+            = image_tag 'icons/media.png'
+          %p Upload Media

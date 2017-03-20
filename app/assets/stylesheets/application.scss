@@ -6,6 +6,8 @@
 @import 'bootstrap-tagsinput.scss';
 @import 'dialog-polyfill';
 
+@import 'directives/aspect-ratio';
+
 @import 'variables/colors';
 @import 'variables/typography';
 
@@ -20,6 +22,8 @@
 @import 'components/flash';
 @import 'components/form';
 @import 'components/header';
+@import 'components/jumbo-button';
+@import 'components/notes';
 @import 'components/sidebar';
 @import 'components/ui';
 

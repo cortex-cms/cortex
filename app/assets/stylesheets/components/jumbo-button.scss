@@ -1,0 +1,20 @@
+.jumbo-button {
+  @include aspect-ratio(16, 9);
+
+  border: $data-table-dividers;
+  border-bottom: 4px solid $color-teal;
+
+  &:active {
+    background-color: $jumbo-button-active-background;
+  }
+}
+
+.jumbo-button__content {
+  @include transform(translate(-50%, -50%));
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  text-transform: uppercase;
+}

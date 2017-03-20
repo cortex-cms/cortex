@@ -107,13 +107,6 @@ h6,
   }
 }
 
-@mixin wizard-step-heading { // Headline in create view
-  color: $color-grey-dark;
-  font-family: $cortex-font-stack;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
 p {
   color: $color-slate-grey;
   font-family: $cortex-font-stack;

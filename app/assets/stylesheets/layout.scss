@@ -18,10 +18,8 @@
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
-}
 
-@media (min-width: $grid-desktop-breakpoint) {
-  .layout__main-content {
+  @media (min-width: $grid-desktop-breakpoint) {
     padding-left: 35px;
     padding-right: 35px;
   }

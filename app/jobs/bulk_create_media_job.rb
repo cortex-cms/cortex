@@ -54,6 +54,8 @@ class BulkCreateMediaJob < ApplicationJob
       type: row_hash['Type (Media, Youtube)']
     }
 
+    media_attributes = strip_attributes(media_attributes)
+
     if row_hash['Type (Media, Youtube)'] == 'Media'
       begin
         media_attachment = zip_file.get_entry(row_hash['Filename'])
@@ -75,5 +77,12 @@ class BulkCreateMediaJob < ApplicationJob
     @bulk_job.log << message
 
     @bulk_job.save!
+  end
+
+  def strip_attributes(attributes)
+    # Don't update nil attributes, but do clear out attributes with a value of 'N/A'
+    attributes.compact.transform_values do |attribute_value|
+      attribute_value == 'N/A' ? nil : attribute_value
+    end
   end
 end

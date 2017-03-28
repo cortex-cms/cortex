@@ -22,3 +22,20 @@
   text-align: center;
   text-transform: uppercase;
 }
+
+.jumbo-button__content__icon {
+  margin-bottom: 32px;
+
+  img {
+    height: 128px;
+  }
+}
+
+.jumbo-button__content__add {
+  margin-bottom: 32px;
+  display: none;
+
+  img {
+    height: 128px;
+  }
+}

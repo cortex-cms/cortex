@@ -20,7 +20,7 @@
   flex-basis: auto;
 
   @media (min-width: $grid-desktop-breakpoint) {
-    padding-left: 35px;
-    padding-right: 35px;
+    padding-left: $grid-desktop-gutter / 2;
+    padding-right: $grid-desktop-gutter / 2;
   }
 }

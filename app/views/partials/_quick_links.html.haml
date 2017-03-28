@@ -1,16 +1,20 @@
-%section.mdl-grid
+%section.quick-links.mdl-grid
   .mdl-cell.mdl-cell--6-col
     = link_to new_content_type_content_item_path(employer_blog_content_type) do
       .jumbo-button
         %span.jumbo-button__content
-          %p
+          %p.jumbo-button__content__icon
             = image_tag 'icons/blog.png'
+          %p.jumbo-button__content__add
+            = image_tag 'icons/add.svg'
           %p Create a New Post
 
   .mdl-cell.mdl-cell--6-col
     = link_to new_content_type_content_item_path(media_content_type) do
       .jumbo-button
         %span.jumbo-button__content
-          %p
+          %p.jumbo-button__content__icon
             = image_tag 'icons/media.png'
+          %p.jumbo-button__content__add
+            = image_tag 'icons/add.svg'
           %p Upload Media

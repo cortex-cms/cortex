@@ -137,7 +137,7 @@ GEM
     concurrent-ruby (1.0.4)
     connection_pool (2.2.1)
     cortex-exceptions (0.0.4)
-    cortex-plugins-core (0.11.0)
+    cortex-plugins-core (0.11.1)
       cells (~> 4.1)
       cells-haml (~> 0.0.10)
       cells-rails (~> 0.0.6)
@@ -723,7 +723,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.7)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (= 0.0.4)
-  cortex-plugins-core (= 0.11.0)
+  cortex-plugins-core (= 0.11.1)
   database_cleaner (~> 1.5)
   devise (~> 4.2.0)
   dialog-polyfill-rails (~> 0.4.5)
@@ -814,4 +814,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.14.3
+   1.14.6

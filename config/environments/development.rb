@@ -64,6 +64,10 @@ Cortex::Application.configure do
     config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' } unless ENV['DEPLOYED']
   end
 
+  Sidekiq.configure_client do |config|
+    config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' } unless ENV['DEPLOYED']
+  end
+
   Yt.configure do |config|
     config.log_level = :debug
     config.api_key = ENV['YOUTUBE_API_KEY']

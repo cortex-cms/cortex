@@ -30,27 +30,40 @@ class ContentItemsController < AdminController
   end
 
   def update
-    if content_item.update
-      flash[:success] = "ContentItem updated"
-    else
-      flash[:warning] = "ContentItem failed to update! Reason: #{@content_item.errors.full_messages}"
-    end
+    begin
+      content_item.update
+    rescue => e
+      flash[:warning] = validation_message(e.message)
+      @content_item = content_item_reload(content_type.content_items.find_by_id(params[:id]))
+      @wizard = WizardDecoratorService.new(content_item: @content_item)
 
-    redirect_to content_type_content_items_path
+      title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text']
+      add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
+      add_breadcrumb title
+      add_breadcrumb 'Edit'
+
+      render :edit
+    else
+      flash[:success] = "Hooray! #{content_type.name} Updated!"
+      redirect_to content_type_content_items_path
+    end
   end
 
   def create
     begin
       content_item.create
     rescue => e
-      flash[:warning] = e.message
-      @content_item = content_item_reload
+      flash[:warning] = validation_message(e.message)
+      @content_item = content_item_reload(content_type.content_items.new)
       @wizard = WizardDecoratorService.new(content_item: @content_item)
+
+      add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
+      add_breadcrumb 'New'
 
       render :new
     else
-     flash[:success] = 'ContentItem created'
-     redirect_to content_type_content_items_path
+      flash[:success] = "Hooray! #{content_type.name} Created!"
+      redirect_to content_type_content_items_path
    end
   end
 end

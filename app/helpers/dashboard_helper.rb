@@ -8,7 +8,7 @@ module DashboardHelper
       cache_key = "news-feed-#{posts_last_updated_at}"
 
       news_feed = Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
-        GetPosts.call(params: params, tenant: news_feed_tenant, published: true).posts.to_a
+        GetPosts.call(params: params, tenant: news_feed_tenant, published: true).posts.to_a.reverse
       end
     end
 

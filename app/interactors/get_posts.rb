@@ -19,7 +19,6 @@ class GetPosts
   private
 
   def has_search_params?
-    param_keys = context.params.keys || []
-    (param_keys & SEARCH_PARAMS).any?
+    (context.params.to_h.keys & SEARCH_PARAMS).any?
   end
 end

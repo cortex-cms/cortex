@@ -2,7 +2,22 @@
   width: 100%;
 
   th {
+    font-size: 13px;
     color: $color-slate-grey;
+  }
+
+  td {
+    p {
+      margin-bottom: 0;
+      font-weight: lighter;
+      font-size: 13px;
+    }
+  }
+
+  .mdl-chip__text {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-family: $cortex-font-stack;
   }
 }
 

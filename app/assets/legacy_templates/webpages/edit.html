@@ -29,7 +29,7 @@
           <div class="form-group">
             <label for="description">Description (155 characters max)</label>
             <textarea id="seo_description" name="seo_description" class="form-control"
-                   ng-model="data.webpage.seo_description" placeholder="Page Description" required></textarea>
+                      ng-model="data.webpage.seo_description" placeholder="Page Description" required></textarea>
           </div>
 
           <div class="keywords tags">
@@ -48,32 +48,38 @@
 
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="noindex" id="noindex" ng-model="data.webpage.noindex"> Don't Index This Page In Search Engines (<strong>noindex</strong>)
+              <input type="checkbox" name="noindex" id="noindex" ng-model="data.webpage.noindex"> Don't Index This Page
+              In Search Engines (<strong>noindex</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="nofollow" id="nofollow" ng-model="data.webpage.nofollow"> Don't Index Any Pages This Page Links To (<strong>nofollow</strong>)
+              <input type="checkbox" name="nofollow" id="nofollow" ng-model="data.webpage.nofollow"> Don't Index Any
+              Pages This Page Links To (<strong>nofollow</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="nosnippet" id="nosnippet" ng-model="data.webpage.nosnippet"> Don't Show A Snippet in Google Search Results (<strong>nosnippet</strong>)
+              <input type="checkbox" name="nosnippet" id="nosnippet" ng-model="data.webpage.nosnippet"> Don't Show A
+              Snippet in Google Search Results (<strong>nosnippet</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="noodp" id="noodp" ng-model="data.webpage.noodp"> Don't Show Description from ODP/DMOZ (<strong>noodp</strong>)
+              <input type="checkbox" name="noodp" id="noodp" ng-model="data.webpage.noodp"> Don't Show Description from
+              ODP/DMOZ (<strong>noodp</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="noarchive" id="noarchive" ng-model="data.webpage.noarchive"> Don't Show "Cached" Link on Google Search Results (<strong>noarchive</strong>)
+              <input type="checkbox" name="noarchive" id="noarchive" ng-model="data.webpage.noarchive"> Don't Show
+              "Cached" Link on Google Search Results (<strong>noarchive</strong>)
             </label>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="noimageindex" id="noimageindex" ng-model="data.webpage.noimageindex"> Don't Show This Page As the Source For Images in Google Image Search (<strong>noimageindex</strong>)
+              <input type="checkbox" name="noimageindex" id="noimageindex" ng-model="data.webpage.noimageindex"> Don't
+              Show This Page As the Source For Images in Google Image Search (<strong>noimageindex</strong>)
             </label>
           </div>
         </form>
@@ -96,7 +102,21 @@
         </form>
       </div>
     </tab>
+    <tab>
+      <tab-heading><i class="fa fa-puzzle-piece"></i> Widgets</span></tab-heading>
+      <div>
+        <form novalidate name="webpageForm">
+          <div class="form-group">
+            <label for="tables_widget_yaml">Tables Data</label>
+            <textarea id="tables_widget_yaml" name="tables_widget_yaml" class="form-control" rows="15"
+                      ng-model="data.webpage.tables_widget_yaml"
+                      placeholder="YAML-formatted table data"></textarea>
+          </div>
+        </form>
+      </div>
+    </tab>
   </tabset>
 
-  <iframe class="webpage-frame" id="webpage-frame" ng-src="{{ data.webpage.url + '?editing_mode=1' | trustAsResourceUrl }}" disabled></iframe>
+  <iframe class="webpage-frame" id="webpage-frame"
+          ng-src="{{ data.webpage.url + '?editing_mode=1' | trustAsResourceUrl }}" disabled></iframe>
 </div>

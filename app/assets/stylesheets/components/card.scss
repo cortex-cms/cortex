@@ -6,22 +6,3 @@
   overflow: visible;
   z-index: auto;
 }
-
-// Extras
-
-// Dirty trick to only style first instance of a class
-// See: http://stackoverflow.com/a/8539107
-form > .mdl-grid {
-  .card-holder {
-    margin-top: -81px;
-
-    @media (max-width: $screen-md-min) {
-      margin-top:0px;
-    }
-  }
-}
-form > .mdl-grid ~ .mdl-grid {
-  .card-holder {
-    margin-top: 0;
-  }
-}

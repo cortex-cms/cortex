@@ -1,7 +1,7 @@
 class GetWebpages
   include Interactor
 
-  SEARCH_PARAMS = %w{q}
+  SEARCH_PARAMS = %w(q).freeze
 
   def call
     webpages = ::Webpage
@@ -19,6 +19,6 @@ class GetWebpages
   private
 
   def has_search_params?
-    Array(context.params.keys & SEARCH_PARAMS).length > 0
+    (context.params.to_h.keys & SEARCH_PARAMS).any?
   end
 end

@@ -45,7 +45,7 @@
 
 .mdl-button--success,
 .mdl-button--raised.mdl-button--colored {
-  color: white;
+  color: $color-white;
   background-color: $employer-color-dark;
 
   &:hover,

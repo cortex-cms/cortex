@@ -1,21 +1,4 @@
-.wizard__instruction-panel {
-  background-color: $color-grey-extralight;
-}
-
-.wizard__step__name {
-  @include wizard-step-heading;
-}
-
-.wizard__step__description {
-  @include wizard-step-description;
-}
-
-.new_content_item .wizard__step:last-of-type .wizard__instruction-panel .p-40,
-.new_content_item .wizard__step:last-of-type .card-holder.p-20 {
-  padding-bottom: 0;
-}
-
-.new_content_item footer .mdl-button {
+footer .mdl-button {
   margin: 0 3px;
 }
 

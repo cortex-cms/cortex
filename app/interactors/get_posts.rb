@@ -1,7 +1,7 @@
 class GetPosts
   include Interactor
 
-  SEARCH_PARAMS = %w{q categories industries type job_phase post_type author}
+  SEARCH_PARAMS = %w(q categories industries type job_phase post_type author).freeze
 
   def call
     posts = ::Post
@@ -19,6 +19,6 @@ class GetPosts
   private
 
   def has_search_params?
-    Array(context.params.keys & SEARCH_PARAMS).length > 0
+    (context.params.to_h.keys & SEARCH_PARAMS).any?
   end
 end

@@ -1,3 +1,16 @@
-.index-row {
+.content_item-link {
   cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    display:block;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
 }

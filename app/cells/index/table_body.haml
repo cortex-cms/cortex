@@ -1,16 +1,17 @@
 %tbody
   - context[:content_items].each do |content_item|
-    %tr.index-row
+    %tr
       - @options[:data][:columns].each do |column|
-        %td{ class: 'mdl-data-table__cell--non-numeric' }
-          = cell('index/content_item', nil, { cells: column[:cells], content_item: content_item }).(:column)
+        %td.mdl-data-table__cell--non-numeric.content_item-link
+          = link_to edit_content_type_content_item_path(context[:content_type].id, content_item.id) do
+            = cell('index/content_item', nil, { cells: column[:cells], content_item: content_item }).(:column)
       - if context[:popup]
-        %td{ class: 'mdl-data-table__cell--non-numeric' }
+        %td.mdl-data-table__cell--non-numeric.content_item-link
           %a{ href: "#", data: { id: content_item.id, title: content_item_title(content_item), thumb: content_item_thumb_url(content_item), url: content_item_asset_url(content_item), alt: content_item_asset_alt_text(content_item), asset_type: content_item_asset_type(content_item) }, class: "media-select--#{context[:popup]} mdl-button mdl-js-button mdl-button--icon" }
             %i{ class: 'material-icons' }
               add
       - else
-        %td{ class: 'mdl-data-table__cell--non-numeric' }
+        %td.mdl-data-table__cell--non-numeric
           = link_to edit_content_type_content_item_path(context[:content_type].id, content_item.id), class: 'mdl-button mdl-js-button mdl-button--icon' do
-            %i{ class: 'material-icons' }
+            %i.material-icons
               create

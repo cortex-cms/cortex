@@ -50,6 +50,10 @@ class ContentItem < ApplicationRecord
     "<img src='#{creator.gravatar}' height='50px' />".html_safe
   end
 
+  def author_email
+    creator.email
+  end
+
   def publish_state
     state.titleize
   end

@@ -272,7 +272,7 @@ namespace :employer do
               "grid_width": 2,
               "cells": [{
                           "field": {
-                            "method": "author_image"
+                            "method": "author_email"
                           },
                           "display": {
                             "classes": [

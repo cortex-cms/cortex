@@ -2,6 +2,7 @@
   - unless value == 'You need to sign in or sign up before continuing.'
     - if flash['warning']
       .mdl-snackbar.snackbar__error.mdl-snackbar--active.flash--warning{ 'aria-atomic' => 'true', 'aria-live' => 'assertive', 'aria-relevant' => 'text' }
+        %i.mdl-snackbar__close.material-icons close
         .mdl-snackbar__text
           %p.flash--header__text
             Oops! Please review the following fields for errors:

@@ -38,7 +38,7 @@ default: &default
       destination: /tmp/rebuild_indexes.sh
       target: rails
       execute: true
-    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
+    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart || true
       target: rails
       sudo: true
       run_on: all_servers
@@ -56,7 +56,7 @@ production:
       destination: /tmp/rebuild_indexes.sh
       target: rails
       execute: true
-    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
+    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart || true
       target: rails
       sudo: true
       run_on: all_servers

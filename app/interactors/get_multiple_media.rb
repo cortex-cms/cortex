@@ -1,7 +1,7 @@
 class GetMultipleMedia
   include Interactor
 
-  SEARCH_PARAMS = %w{q}
+  SEARCH_PARAMS = %w(q).freeze
 
   def call
     media = ::Media
@@ -19,6 +19,6 @@ class GetMultipleMedia
   private
 
   def has_search_params?
-    Array(context.params.keys & SEARCH_PARAMS).length > 0
+    (context.params.to_h.keys & SEARCH_PARAMS).any?
   end
 end

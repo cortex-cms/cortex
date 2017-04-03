@@ -1,19 +1,18 @@
 - flash.each do |key, value|
   - unless value == 'You need to sign in or sign up before continuing.'
     - if flash['warning']
-      .mdl-snackbar.mdl-snackbar--active.flash--warning{ 'aria-atomic' => 'true', 'aria-live' => 'assertive', 'aria-relevant' => 'text' }
-        %i.mdl-snackbar__close.material-icons close
+      .mdl-snackbar.snackbar__error.mdl-snackbar--active.flash--warning{ 'aria-atomic' => 'true', 'aria-live' => 'assertive', 'aria-relevant' => 'text' }
         .mdl-snackbar__text
           %p.flash--header__text
             Oops! Please review the following fields for errors:
           %ul
-            - value.split(',').each do |err|
-              %li
-                %i.material-icons error_outline
-                = err
+          - value.each do |err|
+            %li
+              %i.material-icons error_outline
+              = err
         %button.mdl-snackbar__action{ type: 'button' }
     - elsif flash['success']
-      .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active.flash--success{ 'aria-atomic' => 'true', 'aria-live' => 'assertive', 'aria-relevant' => 'text' }
+      .mdl-snackbar.mdl-js-snackbar.snackbar__message.mdl-snackbar--active.flash--success{ 'aria-atomic' => 'true', 'aria-live' => 'assertive', 'aria-relevant' => 'text' }
         .confetti.confetti--left
           - 50.times do
             %i

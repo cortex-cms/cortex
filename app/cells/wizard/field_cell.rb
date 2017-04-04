@@ -4,6 +4,7 @@ module Wizard
     property :label
     property :input
     property :render_method
+    property :tooltip
 
     def show
       render

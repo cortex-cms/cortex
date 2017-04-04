@@ -23,6 +23,10 @@ class FieldCell < Cell::ViewModel
     @options[:form].label :data, field.name
   end
 
+  def render_tooltip
+    cell(Plugins::Core::TooltipCell, nil, tooltip: @options[:tooltip], id: SecureRandom.base64(4))
+  end
+
   def render_field_id
     @options[:form].hidden_field :field_id, value: field.id
   end

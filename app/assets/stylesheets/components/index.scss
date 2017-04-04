@@ -4,7 +4,9 @@
   a {
     text-decoration: none;
     color: inherit;
-    display:block;
+    display: table-cell;
+    padding: 12px 18px;
+    height: 100%;
 
     &:hover,
     &:active,
@@ -14,3 +16,5 @@
     }
   }
 }
+
+.table-link-cell { padding: 0!important;}

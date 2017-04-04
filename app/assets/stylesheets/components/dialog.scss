@@ -1,6 +1,8 @@
 .mdl-dialog {
   width: 80%;
   max-height: 80%;
+  padding: 0;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -8,6 +10,12 @@
   font-family: $cortex-font-stack;
   font-weight: bold;
   font-size: 1.17rem;
+}
+
+.mdl-dialog__content {
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .content-item-button {

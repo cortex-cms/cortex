@@ -7,6 +7,12 @@ footer .mdl-button {
 .mdl-textfield {
   width: auto;
   display: block;
+
+  .tooltip-icon {
+    position: absolute;
+    right: 0;
+    top: 10%;
+  }
 }
 
 .mdl-textfield__label {
@@ -51,3 +57,7 @@ div.bootstrap-tagsinput input {
 }
 
 // Extras
+.tooltip-icon {
+  color: $color-grey;
+  font-size: $base-font-size * 1.25;
+}

@@ -9,6 +9,15 @@ footer .mdl-button {
   display: block;
 }
 
+.mdl-textfield__label {
+  font-size: $base-font-size !important;
+}
+
+.mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+  color: $color-black !important;
+}
+
 form {
   .mdl-button {
     float: right;

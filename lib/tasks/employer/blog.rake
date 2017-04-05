@@ -152,7 +152,7 @@ namespace :employer do
                   },
                   {
                     "id": blog.fields.find_by_name('Slug').id,
-                    "tooltip": "This is the custom URL for your post. Between each word, place a hyphen. Best practice: remove stop words like 'the', 'and' or dates which negatively impact your posts in search. Best if between 35-50 characters."
+                    "tooltip": "This is your post's URL. Between each word, place a hyphen. Best if between 35-50 characters and don't include years/dates."
                   }
                 ]
               }

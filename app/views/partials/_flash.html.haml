@@ -1,7 +1,8 @@
 - flash.each do |key, value|
   - unless value == 'You need to sign in or sign up before continuing.'
-    - if flash["warning"]
-      .mdl-snackbar.mdl-js-snackbar.snackbar__error.mdl-snackbar--active.flash--warning{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
+    - if flash['warning']
+      .mdl-snackbar.snackbar__error.mdl-snackbar--active.flash--warning{ 'aria-atomic' => 'true', 'aria-live' => 'assertive', 'aria-relevant' => 'text' }
+        %i.mdl-snackbar__close.material-icons close
         .mdl-snackbar__text
           %p.flash--header__text
             Oops! Please review the following fields for errors:
@@ -10,9 +11,9 @@
             %li
               %i.material-icons error_outline
               = err
-        %button.mdl-snackbar__action{:type => "button"}
-    - elsif flash["success"]
-      .mdl-snackbar.mdl-js-snackbar.snackbar__message.mdl-snackbar--active.flash--success{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
+        %button.mdl-snackbar__action{ type: 'button' }
+    - elsif flash['success']
+      .mdl-snackbar.mdl-js-snackbar.snackbar__message.mdl-snackbar--active.flash--success{ 'aria-atomic' => 'true', 'aria-live' => 'assertive', 'aria-relevant' => 'text' }
         .confetti.confetti--left
           - 50.times do
             %i
@@ -23,19 +24,11 @@
           - 50.times do
             %i
         .mdl-snackbar__text
-          = image_tag("check.svg", size: "18x18")
+          = image_tag('check.svg', size: '18x18')
           = value
-        %button.mdl-snackbar__action{:type => "button"}
+        %button.mdl-snackbar__action{ type: 'button' }
     - else
-      .mdl-snackbar.mdl-js-snackbar.snackbar__message.mdl-snackbar--active{"aria-atomic" => "true", "aria-live" => "assertive", "aria-relevant" => "text"}
+      .mdl-snackbar.mdl-js-snackbar.mdl-snackbar--active{ 'aria-atomic' => 'true', 'aria-live' => 'assertive', 'aria-relevant' => 'text' }
         .mdl-snackbar__text
           = value
-        %button.mdl-snackbar__action{:type => "button"}
-    :javascript
-      setTimeout(function(){
-        $('.snackbar__message').toggleClass('mdl-snackbar--active');
-      }, 2500);
-
-      setTimeout(function(){
-        $('.snackbar__error').toggleClass('mdl-snackbar--active');
-      }, 15000);
+        %button.mdl-snackbar__action{ type: 'button' }

@@ -358,7 +358,11 @@ namespace :employer do
                       "args": ["https://resources.careerbuilder.com/", blog.fields.find_by_name('Slug').id]
                    }
           },
-          "pubDate": { "field": blog.fields.find_by_name('Publish Date').id },
+          "pubDate": { "method": {
+            "name": "rss_date",
+            "args": [blog.fields.find_by_name('Publish Date').id]
+            }
+          },
           "author": { "method": {
             "name": "user_email",
             "args": [blog.fields.find_by_name('Author').id]

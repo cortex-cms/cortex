@@ -362,7 +362,7 @@ namespace :employer do
           "author": { "method": {
             "name": "user_email",
             "args": [blog.fields.find_by_name('Author').id]
-            }, "encode": true
+            }
           },
           "category": { "method": {
             "name": "tree_list",

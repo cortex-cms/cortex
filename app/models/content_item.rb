@@ -64,11 +64,14 @@ class ContentItem < ApplicationRecord
     "#{base_url}#{slug}"
   end
 
-  def user_email(user_field_id)
-    user_id = field_items.find_by_field_id(user_field_id).data.values.join
-    user_email = User.find_by_id(user_id).try(:email)
-    user_fullname = User.find_by_id(user_id).try(:fullname)
-    "#{user_email} (#{user_fullname})"
+  def rss_date(date_field_id)
+    date = field_items.find_by_field_id(date_field_id).data["timestamp"]
+    Date.parse(date).rfc2822
+  end
+
+  def rss_author(field_id)
+    author = field_items.find_by_field_id(field_id).data["author_name"]
+    "editorial@careerbuilder.com (#{author})"
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

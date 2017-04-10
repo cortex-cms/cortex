@@ -7,6 +7,21 @@ footer .mdl-button {
 .mdl-textfield {
   width: auto;
   display: block;
+
+  .tooltip-icon {
+    position: absolute;
+    right: 0;
+    top: 8%;
+  }
+}
+
+.mdl-textfield__label {
+  font-size: $base-font-size !important;
+}
+
+.mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+  color: $color-black !important;
 }
 
 form {
@@ -46,3 +61,7 @@ form {
 }
 
 // Extras
+.tooltip-icon {
+  color: $color-grey;
+  font-size: $base-font-size * 1.25;
+}

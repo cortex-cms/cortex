@@ -1,4 +1,6 @@
 %div{class: ['mdl-cell', grid_class]}
+  %p
+    = description
   - elements.each do |element|
     - if element.keys.include?("id")
       = cell(Wizard::FieldCell, element).()

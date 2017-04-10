@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.1'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', '= 0.11.1'
+gem 'cortex-plugins-core', '= 0.11.2'
 
 # API
 gem 'grape', '~> 0.17'
@@ -45,6 +45,7 @@ gem 'hashie-forbidden_attributes', '~> 0.1.1'
 gem 'redis-rails', '~> 5.0'
 gem 'pomona', '~> 0.7'
 gem 'transitions', '~> 1.2', :require => ['transitions', 'active_model/transitions']
+gem 'deep_cloneable', '~> 2.2.2'
 
 # Middleware
 gem 'rack-cors', '~> 0.4.1', require: 'rack/cors'

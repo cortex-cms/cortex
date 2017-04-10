@@ -133,7 +133,8 @@ namespace :employer do
                 "grid_width": 6,
                 "elements": [
                   {
-                    "id": blog.fields.find_by_name('Description').id
+                    "id": blog.fields.find_by_name('Description').id,
+                    "tooltip": 'This is a short description and will be used as the preview text for a reader before they click into your full post.'
                   },
                   {
                     "id": blog.fields.find_by_name('Publish Date').id
@@ -150,7 +151,8 @@ namespace :employer do
                     "id": blog.fields.find_by_name('Tags').id
                   },
                   {
-                    "id": blog.fields.find_by_name('Slug').id
+                    "id": blog.fields.find_by_name('Slug').id,
+                    "tooltip": "This is your post's URL. Between each word, place a hyphen. Best if between 35-50 characters and don't include years/dates."
                   }
                 ]
               }
@@ -176,7 +178,8 @@ namespace :employer do
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('Persona').id,
-                    "render_method": "dropdown"
+                    "render_method": "dropdown",
+                    "tooltip": "If this is for a specific role or audience, please select. If it's for everyone, choose general audience."
                   }
                 ]
               },
@@ -185,7 +188,8 @@ namespace :employer do
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('Research').id,
-                    "render_method": "dropdown"
+                    "render_method": "dropdown",
+                    "tooltip": "If your post is based on research, please select if it's CB owned or created (including Emsi), or if we're reporting on someone else's data."
                   }
                 ]
               }
@@ -216,18 +220,22 @@ namespace :employer do
                 "grid_width": 6,
                 "elements": [
                   {
-                    "id": blog.fields.find_by_name('SEO Title').id
+                    "id": blog.fields.find_by_name('SEO Title').id,
+                    "tooltip": 'Please use <70 characters for your SEO title for optimal appearance in search results.'
                   },
                   {
-                    "id": blog.fields.find_by_name('SEO Description').id
+                    "id": blog.fields.find_by_name('SEO Description').id,
+                    "tooltip": 'The description should optimally be between 150-160 characters and keyword rich.'
                   },
                   {
-                    "id": blog.fields.find_by_name('SEO Keywords').id
+                    "id": blog.fields.find_by_name('SEO Keywords').id,
+                    "tooltip": 'Utilize the recommended keywords as tags to boost your SEO performance.'
                   }
                 ]
               },
               {
                 "grid_width": 6,
+                "description": "Select these if you don't want your post to be indexed by search engines like Google",
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('No Index').id
@@ -354,7 +362,7 @@ namespace :employer do
           "author": { "method": {
             "name": "user_email",
             "args": [blog.fields.find_by_name('Author').id]
-            }, "encode": true
+            }
           },
           "category": { "method": {
             "name": "tree_list",

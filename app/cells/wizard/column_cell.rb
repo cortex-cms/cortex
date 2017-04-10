@@ -4,6 +4,7 @@ module Wizard
     property :grid_width
     property :display
     property :elements
+    property :description
 
     def show
       render

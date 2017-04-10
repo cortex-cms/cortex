@@ -364,7 +364,7 @@ namespace :employer do
             }
           },
           "author": { "method": {
-            "name": "user_email",
+            "name": "rss_author",
             "args": [blog.fields.find_by_name('Author').id]
             }
           },

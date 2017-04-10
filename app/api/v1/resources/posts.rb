@@ -47,19 +47,11 @@ module V1
         end
 
         desc 'Show all published posts', { entity: ::V1::Entities::Post, nickname: "allPostFeed" }
-        params do
-          use :search
-          use :post_metadata
-          use :pagination
-        end
-        get 'feed/all-posts' do
+        get 'feed/all_posts' do
           require_scope! 'view:posts'
           authorize! :view, ::Post
-          last_updated_at = Post.last_updated_at
-          params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
 
           posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-          set_paginate_headers(posts)
           posts_page = ::V1::Entities::Post.represent posts.to_a
         end
 

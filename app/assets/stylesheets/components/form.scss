@@ -39,9 +39,13 @@ form {
 }
 
 // Tags
-
-div.bootstrap-tagsinput input {
-  width: 100% !important;
+.bootstrap-tagsinput {
+  width: 100%;
+  border-radius: 0 !important;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid $color-grey-light;
 }
 .cortex-bootstrap .label {
   border-radius: 0.75em;

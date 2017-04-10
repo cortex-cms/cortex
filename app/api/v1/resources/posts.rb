@@ -46,6 +46,15 @@ module V1
           posts_page
         end
 
+        desc 'Show all published posts', { entity: ::V1::Entities::Post, nickname: "allPostFeed" }
+        get 'feed/all_posts' do
+          require_scope! 'view:posts'
+          authorize! :view, ::Post
+
+          posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
+          posts_page = ::V1::Entities::Post.represent posts.to_a
+        end
+
         desc 'Show published post authors'
         get 'feed/authors' do
           present Author.published.distinct, with: ::V1::Entities::Author

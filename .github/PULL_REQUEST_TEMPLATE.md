@@ -1,10 +1,13 @@
-**Purpose:**
+## Purpose:
 
 
-**JIRA:**
+## JIRA:
 
 
-**Changes:**
+## Steps to Take On Prod
+
+
+## Changes:
 * Changes to setup
   *
 
@@ -13,23 +16,23 @@
 
 * Migrations
   *
-  
+
 * Library changes
   *
 
 * Side effects
   *
 
-**Screenshots**
+## Screenshots
 * Before
 
 * After
 
 
-**QA Links:**
+## QA Links:
 
 
-**How to Verify These Changes**
+## How to Verify These Changes
 * Specific pages to visit
   *
 
@@ -40,7 +43,7 @@
   *
 
 
-**Relevant PRs/Dependencies:**
+## Relevant PRs/Dependencies:
 
 
-**Additional Information**
+## Additional Information

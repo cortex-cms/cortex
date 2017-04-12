@@ -42,12 +42,8 @@ class ContentItem < ApplicationRecord
     Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.parameterize('_') }
   end
 
-  # The following method (#author_image) is currently faked
-  # author_image is faked pending being able to reference the specific User object (ex:
-  # content_item.author.user_image)
-
-  def author_image
-    "<img src='#{creator.gravatar}' height='50px' />".html_safe
+  def author_email
+    creator.email
   end
 
   def publish_state
@@ -64,11 +60,14 @@ class ContentItem < ApplicationRecord
     "#{base_url}#{slug}"
   end
 
-  def user_email(user_field_id)
-    user_id = field_items.find_by_field_id(user_field_id).data.values.join
-    user_email = User.find_by_id(user_id).try(:email)
-    user_fullname = User.find_by_id(user_id).try(:fullname)
-    "#{user_email} (#{user_fullname})"
+  def rss_date(date_field_id)
+    date = field_items.find_by_field_id(date_field_id).data["timestamp"]
+    Date.parse(date).rfc2822
+  end
+
+  def rss_author(field_id)
+    author = field_items.find_by_field_id(field_id).data["author_name"]
+    "editorial@careerbuilder.com (#{author})"
   end
 
   # The Method self.taggable_fields must always be above the acts_as_taggable_on inclusion for it.

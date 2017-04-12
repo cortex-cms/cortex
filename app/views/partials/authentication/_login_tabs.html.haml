@@ -1,8 +1,26 @@
 .mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
   .mdl-tabs__tab-bar
-    %a.mdl-tabs__tab.is-active{:href => "#legacy-panel"} Legacy
-    %a.mdl-tabs__tab{:href => "#admin-panel"} Beta
+    %a.mdl-tabs__tab.login_tab.is-active{:href => "#legacy-panel"} Legacy
+    %a.mdl-tabs__tab.login_tab{:href => "#admin-panel"} Beta
   #legacy-panel.mdl-tabs__panel.is-active
-    = render 'partials/authentication/login/legacy'
   #admin-panel.mdl-tabs__panel
-    = render 'partials/authentication/login/admin'
+
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .mdl-textfield.mdl-js-textfield
+      = f.email_field :email, autofocus: true, class: 'mdl-textfield__input'
+      = f.label :email, class: 'mdl-textfield__label'
+    .mdl-textfield.mdl-js-textfield
+      = f.password_field :password, autocomplete: "off", class: 'mdl-textfield__input'
+      = f.label :password, class: 'mdl-textfield__label'
+    - if devise_mapping.rememberable?
+      = f.label :remember_me, class: 'mdl-switch mdl-js-switch mdl-js-ripple-effect' do
+        = f.check_box :remember_me, value: true, class: 'mdl-switch__input'
+        %span.mdl-switch__label
+          Remember me
+    %br/
+    %br/
+
+    = hidden_field_tag(:legacy, 1, class: 'legacy_value')
+
+    = f.submit "Log in", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
+    = render "authentication/shared/links"

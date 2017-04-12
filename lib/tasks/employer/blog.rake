@@ -280,7 +280,7 @@ namespace :employer do
               "grid_width": 2,
               "cells": [{
                           "field": {
-                            "method": "author_image"
+                            "method": "author_email"
                           },
                           "display": {
                             "classes": [
@@ -358,11 +358,15 @@ namespace :employer do
                       "args": ["https://resources.careerbuilder.com/", blog.fields.find_by_name('Slug').id]
                    }
           },
-          "pubDate": { "field": blog.fields.find_by_name('Publish Date').id },
+          "pubDate": { "method": {
+            "name": "rss_date",
+            "args": [blog.fields.find_by_name('Publish Date').id]
+            }
+          },
           "author": { "method": {
-            "name": "user_email",
+            "name": "rss_author",
             "args": [blog.fields.find_by_name('Author').id]
-            }, "encode": true
+            }
           },
           "category": { "method": {
             "name": "tree_list",

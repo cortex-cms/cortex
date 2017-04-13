@@ -8,8 +8,8 @@ var login_tab_change = function() {
     } else {
       $('.legacy_value').val(0)
     }
-  }
-})
+  });
+};
 
 $(document).ready(login_tab_change);
 $(document).on('page:load', login_tab_change);

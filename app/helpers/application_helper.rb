@@ -12,4 +12,8 @@ module ApplicationHelper
   def qualtrics_domain
   	extra_config.qualtrics_id.delete('_').downcase
   end
+
+  def flag_enabled?(flag_name)
+    Cortex.flipper[flag_name].enabled?(current_user, request)
+  end
 end

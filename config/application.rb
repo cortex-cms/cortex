@@ -40,15 +40,5 @@ module Cortex
 
     # Needed until there is a better fix for Paperclip. https://github.com/thoughtbot/paperclip/issues/1924#issuecomment-123927367
     Paperclip.options[:content_type_mappings] = {:csv => 'text/plain'}
-
-    config.middleware.use Flipper::Middleware::Memoizer, lambda {
-      Cortex.flipper
-    }
-
-    Flipper.register(:internal) { |request| request.internal? }
-    Flipper.register(:authenticated) { |request| request.session[:current_user].present? && request.session[:current_user][:authenticated] }
-    Flipper.register(:hiring_dot) { |request| request.host == 'admin.cbcortex.com' }
-    Flipper.register(:dev) { |request| request.host == 'dev.admin.cbcortex.com' || request.host == 'localhost' }
-    Flipper.register(:staging) { |request| request.host == 'stg.admin.cbcortex.com' }
   end
 end

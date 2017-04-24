@@ -36,11 +36,6 @@ class ContentItem < ApplicationRecord
     state.titleize
   end
 
-  def schedule_publish
-    timestamp = field_items.find { |field_item| field_item.field.name == "Publish Date" }.data["timestamp"]
-    PublishContentItemJob.set(wait_until: DateTime.parse(timestamp)).perform_later(self)
-  end
-
   def rss_url(base_url, slug_field_id)
     slug = field_items.find_by_field_id(slug_field_id).data.values.join
     "#{base_url}#{slug}"

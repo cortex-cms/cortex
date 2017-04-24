@@ -8,6 +8,10 @@ class PublishStateService < ApplicationController
     end
   end
 
+  def self.clear(content_item)
+    Rails.cache.delete("PublishStateService/#{content_item.id}")
+  end
+
   private
 
   def active_state

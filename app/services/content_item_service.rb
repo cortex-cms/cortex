@@ -34,6 +34,7 @@ class ContentItemService < ApplicationService
 
     transact_and_refresh do
       @content_item.update(content_item_attributes)
+      PublishStateService.clear(@content_item)
     end
   end
 
@@ -55,7 +56,6 @@ class ContentItemService < ApplicationService
       yield
       parse_field_items!
       @content_item.save!
-      execute_state_change(@content_item)
       update_search!
     end
   end

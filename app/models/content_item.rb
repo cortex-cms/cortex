@@ -32,7 +32,7 @@ class ContentItem < ApplicationRecord
   end
 
   def publish_state
-    sorted_field_items = field_items.select { |fi| fi.field.field_type_instance.is_a?(DateTimeFieldType) && !fi.field.metadata["state"].nil? }.sort_by{ |a| a.data["timestamp"] }
+    sorted_field_items = field_items.select { |fi| fi.field.field_type_instance.is_a?(DateTimeFieldType) && !fi.field.metadata["state"].nil? }.sort_by{ |a| a.data["timestamp"] }.reverse
     PublishStateService.new.perform(sorted_field_items, self)
   end
 

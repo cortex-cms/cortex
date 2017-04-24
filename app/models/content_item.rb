@@ -3,23 +3,9 @@ class ContentItem < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  state_machine :initial => :default do
+  state_machine do
+    state :default
     state :draft
-    state :scheduled, :enter => lambda { |content_item| content_item.schedule_publish }
-    state :published
-    state :default #the default state that is given to an object - this should only ever exist on ContentItems where the ContentType is not publishable
-
-    event :publish do
-      transitions :to => :published, :from => [:default, :draft, :scheduled]
-    end
-
-    event :schedule do
-      transitions :to => :scheduled, :from => [:default, :draft]
-    end
-
-    event :draft do
-      transitions :to => :draft, :from => [:default, :published, :scheduled]
-    end
   end
 
   acts_as_paranoid

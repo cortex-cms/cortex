@@ -4,7 +4,6 @@ class ContentItem < ApplicationRecord
   include Elasticsearch::Model::Callbacks
 
   state_machine do
-    state :default
     state :draft
   end
 
@@ -33,7 +32,8 @@ class ContentItem < ApplicationRecord
   end
 
   def publish_state
-    state.titleize
+    sorted_field_items = field_items.select { |fi| fi.field.field_type_instance.is_a?(DateTimeFieldType) && !fi.field.metadata["state"].nil? }.sort_by{ |a| a.data["timestamp"] }
+    PublishStateService.new.perform(sorted_field_items, self)
   end
 
   def rss_url(base_url, slug_field_id)

@@ -14,7 +14,10 @@ namespace :employer do
 
       def category_tree
         tree = Tree.new
-        tree.add_node({ name: "Recruitment Solutions" })
+        tree.add_node({ name: "Product News" })
+        tree.add_node({ name: "Company News, Research and Trends" })
+        tree.add_node({ name: "Client Success Stories" })
+        tree.add_node({ name: "Recruiting Solutions" })
         tree.add_node({ name: "Employment Screening" })
         tree.add_node({ name: "Human Capital Management" })
 

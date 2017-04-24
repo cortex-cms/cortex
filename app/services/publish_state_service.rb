@@ -3,7 +3,7 @@ class PublishStateService < ApplicationController
     @sorted_field_items = sorted_field_items
     @content_item = content_item
 
-    Rails.cache.fetch("PublishStateService/#{content_item.id}", expires_in: 30.minutes) do
+    Rails.cache.fetch("PublishStateService/#{content_item.id}", expires_in: 10.minutes) do
       active_state
     end
   end

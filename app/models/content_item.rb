@@ -96,4 +96,12 @@ class ContentItem < ApplicationRecord
       ContentItemService.update_tags(self, tags)
     end
   end
+
+  def method_missing(*args)
+    if args[0].to_s.include?("?")
+      "#{publish_state.downcase}?" == args[0].to_s
+    else
+      field_items.select { |field_item| field_item.field.name.parameterize({ separator: '_' }) == args[0].to_s }.first.data.values[0]
+    end
+  end
 end

@@ -34,7 +34,6 @@ class ContentItemService < ApplicationService
 
     transact_and_refresh do
       @content_item.update(content_item_attributes)
-      PublishStateService.clear(@content_item)
     end
   end
 

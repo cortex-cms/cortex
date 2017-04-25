@@ -3,13 +3,7 @@ class PublishStateService < ApplicationController
     @sorted_field_items = sorted_field_items
     @content_item = content_item
 
-    Rails.cache.fetch("PublishStateService/#{content_item.id}", expires_in: 10.minutes) do
-      active_state
-    end
-  end
-
-  def self.clear(content_item)
-    Rails.cache.delete("PublishStateService/#{content_item.id}")
+    active_state
   end
 
   private

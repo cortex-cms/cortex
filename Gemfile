@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.1'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', '= 0.11.2'
+gem 'cortex-plugins-core', '= 0.11.3'
 
 # API
 gem 'grape', '~> 0.17'
@@ -102,6 +102,11 @@ gem 'jquery-ui-rails', '~> 6.0.1'
 gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
 gem 'dialog-polyfill-rails', '~> 0.4.5'
+
+# Feature Flagging
+gem 'flipper', '~> 0.10'
+gem 'flipper-ui', '~> 0.10'
+gem 'flipper-active_record', '~> 0.10'
 
 group :tasks do
   # Parsing

@@ -49,15 +49,20 @@ module RssHelper
 
     field_name = linked_field_item.field.metadata["field_name"]
     asset_content_item_id = linked_field_item.data["content_item_id"]
+    field_item = Field.find_by_name(field_name).field_items.find { |field_item| field_item.content_item_id == asset_content_item_id }
 
-    asset_data = Field.find_by_name(field_name).field_items.find { |field_item| field_item.content_item_id == asset_content_item_id }.data["asset"]
+    if field_item.nil?
+      {}
+    else
+      asset_data = field_item.data["asset"]
 
-    {
-      "url": asset_data["url"],
-      "type": asset_data["content_type"],
-      "medium": media_hash["medium"],
-      "width": media_hash["width"] || asset_data["dimensions"]["width"],
-      "height": media_hash["height"] || asset_data["dimensions"]["height"]
-    }
+      {
+        "url": asset_data["url"],
+        "type": asset_data["content_type"],
+        "medium": media_hash["medium"],
+        "width": media_hash["width"] || asset_data["dimensions"]["width"],
+        "height": media_hash["height"] || asset_data["dimensions"]["height"]
+      }
+    end
   end
 end

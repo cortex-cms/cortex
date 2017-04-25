@@ -103,6 +103,11 @@ gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
 gem 'dialog-polyfill-rails', '~> 0.4.5'
 
+# Feature Flagging
+gem 'flipper', '~> 0.10'
+gem 'flipper-ui', '~> 0.10'
+gem 'flipper-active_record', '~> 0.10'
+
 group :tasks do
   # Parsing
   gem 'nokogiri'

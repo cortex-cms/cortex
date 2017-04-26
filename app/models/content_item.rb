@@ -32,8 +32,7 @@ class ContentItem < ApplicationRecord
   end
 
   def publish_state
-    sorted_field_items = field_items.select { |fi| fi.field.field_type_instance.is_a?(DateTimeFieldType) && !fi.field.metadata["state"].nil? }.sort_by{ |a| a.data["timestamp"] }.reverse
-    PublishStateService.new.content_item_state(sorted_field_items, self)
+    PublishStateService.new.content_item_state(self)
   end
 
   def rss_url(base_url, slug_field_id)
@@ -97,10 +96,14 @@ class ContentItem < ApplicationRecord
     end
   end
 
+  # Metaprograms a number of convenience methods for content_items
   def method_missing(*args)
     if args[0].to_s.include?("?")
+      # Used to check state - allows for methods such as #published? and #expired?
+      # Will return true if the active_state corresponds to the name of the method
       "#{publish_state.downcase}?" == args[0].to_s
     else
+      # Used to query for any field on the relevant ContentType and return data from the content_item
       field_items.select { |field_item| field_item.field.name.parameterize({ separator: '_' }) == args[0].to_s }.first.data.values[0]
     end
   end

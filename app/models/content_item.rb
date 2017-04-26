@@ -5,6 +5,15 @@ class ContentItem < ApplicationRecord
 
   state_machine do
     state :draft
+    state :scheduled
+
+    event :schedule do
+      transitions :to => :scheduled, :from => [:draft]
+    end
+
+    event :draft do
+      transitions :to => :draft, :from => [:scheduled]
+    end
   end
 
   acts_as_paranoid

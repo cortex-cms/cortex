@@ -55,6 +55,7 @@ class ContentItemService < ApplicationService
       yield
       parse_field_items!
       @content_item.save!
+      execute_state_change(@content_item)
       update_search!
     end
   end

@@ -4,5 +4,5 @@
   = cell('wizard', @wizard, context: { content_item: @content_item, form: form }).()
   %footer.mdl-grid
     .mdl-cell.mdl-cell--12-col
-      = form.submit 'Save Now', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--success mdl-js-ripple-effect'
+      = form.button 'Save Now', value: @content_item.state || 'draft', name: 'content_item[state]', class: 'mdl-button form-button--submission mdl-js-button mdl-button--raised mdl-button--success mdl-js-ripple-effect', type: 'submit'
       = link_to 'Cancel', content_type_content_items_path(@content_type), class: 'mdl-button mdl-js-button mdl-button--cb mdl-js-ripple-effect'

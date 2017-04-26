@@ -9,7 +9,7 @@ class PublishStateService < ApplicationService
 
   def active_state
     sorted_field_items.each do |field_item|
-      if DateTime.now > DateTime.parse(field_item.data["timestamp"])
+      if !field_item.data['timestamp'].blank? && DateTime.now > DateTime.parse(field_item.data["timestamp"])
         return field_item.field.metadata["state"]
         break
       end

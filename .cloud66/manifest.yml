@@ -1,7 +1,7 @@
 development:
   rails:
     configuration:
-      ruby_version: 2.4.0
+      ruby_version: 2.4.1
     server:
       unique_name: web
       vendor: aws
@@ -37,7 +37,7 @@ development:
 staging:
   rails:
     configuration:
-      ruby_version: 2.4.0
+      ruby_version: 2.4.1
     server:
       unique_name: web
       vendor: aws
@@ -73,7 +73,7 @@ staging:
 production:
   rails:
     configuration:
-      ruby_version: 2.4.0
+      ruby_version: 2.4.1
     server:
       unique_name: web
       vendor: aws

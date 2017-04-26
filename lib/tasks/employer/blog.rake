@@ -76,7 +76,7 @@ namespace :employer do
       blog.fields.new(name: 'No ODP', field_type: 'boolean_field_type')
       blog.fields.new(name: 'No Archive', field_type: 'boolean_field_type')
       blog.fields.new(name: 'No Image Index', field_type: 'boolean_field_type')
-      blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 1, minimum: 1})
+      blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2, minimum: 1})
       blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
       blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
       blog.fields.new(name: 'Featured Image', field_type: 'content_item_field_type',

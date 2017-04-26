@@ -4,24 +4,21 @@ var datepicker_init = function() {
   if (datepicker.length) {
     datepicker.datetimepicker({
       dateFormat: 'dd/mm/yy',
+      timeFormat: 'HH:mm Z',
       onSelect: function (date) {
-        var button = $('.new_publish_state_button');
-        var currentDate = new Date();
-        var selectedDate = moment(date, 'DD-MM-YYYY HH:mm');
-
-        if (button.length > 0 && selectedDate > currentDate) {
-          button.val('schedule');
-          button.text('Schedule Post');
-        }
-        else if (button.length > 0 && selectedDate <= currentDate) {
-          button.val('published');
-          button.text('Publish Now');
-        }
+        var button = $('.form-button--submission');
+        button.text('Schedule Post');
+        button.val('schedule');
       }
     });
 
     datepicker.on('focusout', function(ev){
       if ($(this).val() === "") {
+        var button = $('.form-button--submission');
+
+        button.text('Save Now');
+        button.val('draft');
+
         $(this).closest('div').addClass('is-dirty');
       }
     });

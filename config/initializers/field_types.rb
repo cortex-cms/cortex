@@ -1,1 +1,0 @@
-Dir["#{Rails.root}/app/models/*_field_type.rb"].each {|file| load file}

@@ -1,7 +1,9 @@
 module WidgetParsers
   module MediaHelper
+    # This needs to be abstracted to a plugin
+
     def self.parse(body)
-      body_document = document_for(body)
+      body_document = document_for body
 
       widget_nodes_for(body_document).each do |widget_node|
         widget_node.inner_html = render_widget_inner widget_node
@@ -28,10 +30,10 @@ module WidgetParsers
     end
 
     def self.content_item_element(id)
-      asset_field_item = ContentItem.find(id).field_items.find { |field_item| field_item.field.field_type == "asset_field_type" }
-      url = asset_field_item.data["asset"]["url"]
+      asset_field_item = ContentItem.find(id).field_items.find { |field_item| field_item.field.field_type_instance.is_a?(AssetFieldType) }
+      url = asset_field_item.data['asset']['versions']['original']['url']
 
-      if asset_field_item.data["asset"]["content_type"].include?("image")
+      if image? asset_field_item.data['asset']['versions']['original']['mime_type']
         element = { src: url }
         tag_type = 'img'
       else
@@ -40,6 +42,10 @@ module WidgetParsers
       end
 
       [element, tag_type]
+    end
+
+    def self.image?(mime_type)
+      MimeMagic.new(mime_type).mediatype == 'image'
     end
   end
 end

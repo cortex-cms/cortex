@@ -15,6 +15,7 @@
 /public/youtubes/
 /public/bulk_jobs/
 /public/content-snippets-edit
+/public/uploads/
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

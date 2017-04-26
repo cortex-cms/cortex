@@ -1,3 +1,5 @@
-%table{ class: 'mdl-data-table mdl-js-data-table', style: 'width: 100%;' }
-  = cell('index', @index, data: data).(:table_headers)
-  = cell('index', @index, data: data).(:table_body)
+.mdl-grid
+  .mdl-cell.mdl-cell--12-col
+    %table.mdl-data-table.mdl-js-data-table.index
+      = cell('index', @index, data: data).(:table_headers)
+      = cell('index', @index, data: data).(:table_body)

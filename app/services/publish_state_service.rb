@@ -1,5 +1,5 @@
-class PublishStateService < ApplicationController
-  def perform(sorted_field_items, content_item)
+class PublishStateService < ApplicationService
+  def content_item_state(sorted_field_items, content_item)
     @sorted_field_items = sorted_field_items
     @content_item = content_item
 

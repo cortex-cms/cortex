@@ -33,7 +33,7 @@ class ContentItem < ApplicationRecord
 
   def publish_state
     sorted_field_items = field_items.select { |fi| fi.field.field_type_instance.is_a?(DateTimeFieldType) && !fi.field.metadata["state"].nil? }.sort_by{ |a| a.data["timestamp"] }.reverse
-    PublishStateService.new.perform(sorted_field_items, self)
+    PublishStateService.new.content_item_state(sorted_field_items, self)
   end
 
   def rss_url(base_url, slug_field_id)

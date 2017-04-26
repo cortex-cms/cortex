@@ -1,8 +1,9 @@
 // Overrides
 
 .mdl-card {
+  border: $data-table-dividers;
+  border-radius: 0;
   width: auto;
-  border-radius: 3px;
   overflow: visible;
   z-index: auto;
 }

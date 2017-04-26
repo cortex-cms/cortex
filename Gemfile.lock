@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/cortex-cms/cortex-plugins-core.git
-  revision: cc5f33441c2d229536ab0776d86aa197e37c9654
+  revision: 233f7faa8fb97ebaa445153868fece219b4f4dc7
   branch: topic/COR-704-Rebuild-AssetFieldType
   specs:
     cortex-plugins-core (0.11.2)

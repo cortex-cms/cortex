@@ -54,11 +54,11 @@ module RssHelper
     if field_item.nil?
       {}
     else
-      asset_data = field_item.data["asset"]
+      asset_data = field_item.data['asset']['versions']['original']
 
       {
         "url": asset_data["url"],
-        "type": asset_data["content_type"],
+        "type": asset_data["mime_type"],
         "medium": media_hash["medium"],
         "width": media_hash["width"] || asset_data["dimensions"]["width"],
         "height": media_hash["height"] || asset_data["dimensions"]["height"]

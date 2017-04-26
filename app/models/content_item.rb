@@ -3,22 +3,16 @@ class ContentItem < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  state_machine :initial => :default do
+  state_machine do
     state :draft
-    state :scheduled, :enter => lambda { |content_item| content_item.schedule_publish }
-    state :published
-    state :default #the default state that is given to an object - this should only ever exist on ContentItems where the ContentType is not publishable
-
-    event :publish do
-      transitions :to => :published, :from => [:default, :draft, :scheduled]
-    end
+    state :scheduled
 
     event :schedule do
-      transitions :to => :scheduled, :from => [:default, :draft]
+      transitions :to => :scheduled, :from => [:draft]
     end
 
     event :draft do
-      transitions :to => :draft, :from => [:default, :published, :scheduled]
+      transitions :to => :draft, :from => [:scheduled]
     end
   end
 
@@ -47,12 +41,7 @@ class ContentItem < ApplicationRecord
   end
 
   def publish_state
-    state.titleize
-  end
-
-  def schedule_publish
-    timestamp = field_items.find { |field_item| field_item.field.name == "Publish Date" }.data["timestamp"]
-    PublishContentItemJob.set(wait_until: DateTime.parse(timestamp)).perform_later(self)
+    PublishStateService.new.content_item_state(self)
   end
 
   def rss_url(base_url, slug_field_id)
@@ -113,6 +102,18 @@ class ContentItem < ApplicationRecord
 
     tag_data.each do |tags|
       ContentItemService.update_tags(self, tags)
+    end
+  end
+
+  # Metaprograms a number of convenience methods for content_items
+  def method_missing(*args)
+    if args[0].to_s.include?("?")
+      # Used to check state - allows for methods such as #published? and #expired?
+      # Will return true if the active_state corresponds to the name of the method
+      "#{publish_state.downcase}?" == args[0].to_s
+    else
+      # Used to query for any field on the relevant ContentType and return data from the content_item
+      field_items.select { |field_item| field_item.field.name.parameterize({ separator: '_' }) == args[0].to_s }.first.data.values[0]
     end
   end
 end

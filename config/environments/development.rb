@@ -51,7 +51,7 @@ Cortex::Application.configure do
     Paperclip.options[:command_path] = '/usr/local/bin/'
     config.paperclip_defaults = {
       storage: :fog,
-      fog_host: ENV['HOST'],
+      fog_host: ENV['FOG_HOST'],
       fog_directory: '',
       fog_credentials: {
         provider: 'Local',

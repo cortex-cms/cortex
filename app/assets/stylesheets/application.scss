@@ -19,7 +19,6 @@
 
 @import 'components/card';
 @import 'components/confetti';
-@import 'components/content';
 @import 'components/dialog';
 @import 'components/flash';
 @import 'components/form';
@@ -28,6 +27,9 @@
 @import 'components/jumbo-button';
 @import 'components/notes';
 @import 'components/sidebar';
+@import 'components/table';
 @import 'components/ui';
 
 @import 'demo';
+
+@import 'cortex-plugins-core/application';

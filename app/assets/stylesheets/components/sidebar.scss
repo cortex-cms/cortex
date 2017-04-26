@@ -43,7 +43,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 
 .sidebar__brand-name {
   @extend %display-text;
-  color: white;
+  color: $color-white;
   margin: 0 15px;
   text-decoration: none;
 }
@@ -53,6 +53,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 .mdl-layout__drawer {
   background-color: $color-grey-dark;
   border-right: none;
+  box-shadow: none;
 }
 
 .mdl-layout__drawer .mdl-navigation {

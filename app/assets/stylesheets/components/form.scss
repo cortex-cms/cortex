@@ -1,21 +1,4 @@
-.wizard__instruction-panel {
-  background-color: $color-grey-extralight;
-}
-
-.wizard__step__name {
-  @include wizard-step-heading;
-}
-
-.wizard__step__description {
-  @include wizard-step-description;
-}
-
-.new_content_item .wizard__step:last-of-type .wizard__instruction-panel .p-40,
-.new_content_item .wizard__step:last-of-type .card-holder.p-20 {
-  padding-bottom: 0;
-}
-
-.new_content_item footer .mdl-button {
+footer .mdl-button {
   margin: 0 3px;
 }
 
@@ -24,6 +7,21 @@
 .mdl-textfield {
   width: auto;
   display: block;
+
+  .tooltip-icon {
+    position: absolute;
+    right: 0;
+    top: 8%;
+  }
+}
+
+.mdl-textfield__label {
+  font-size: $base-font-size !important;
+}
+
+.mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+  color: $color-black !important;
 }
 
 form {
@@ -41,9 +39,14 @@ form {
 }
 
 // Tags
-
-div.bootstrap-tagsinput input {
-  width: 100% !important;
+.bootstrap-tagsinput {
+  width: 100%;
+  border-radius: 0 !important;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid $color-grey-light;
+  box-shadow: none;
 }
 .cortex-bootstrap .label {
   border-radius: 0.75em;
@@ -59,3 +62,7 @@ div.bootstrap-tagsinput input {
 }
 
 // Extras
+.tooltip-icon {
+  color: $color-grey;
+  font-size: $base-font-size * 1.25;
+}

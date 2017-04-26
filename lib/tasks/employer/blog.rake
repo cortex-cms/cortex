@@ -14,14 +14,9 @@ namespace :employer do
 
       def category_tree
         tree = Tree.new
-        tree.add_node({ name: "Candidate Experience" })
-        tree.add_node({ name: "Recruitment Techniques" })
-        tree.add_node({ name: "Talent Sourcing" })
-        tree.add_node({ name: "Hiring Strategy" })
-        tree.add_node({ name: "Data and Analytics" })
-        tree.add_node({ name: "Recruitment Technology" })
-        tree.add_node({ name: "Workplace Insights" })
-        tree.add_node({ name: "News and Trends" })
+        tree.add_node({ name: "Recruitment Solutions" })
+        tree.add_node({ name: "Employment Screening" })
+        tree.add_node({ name: "Human Capital Management" })
 
         tree
       end
@@ -61,19 +56,19 @@ namespace :employer do
                                contract_id: 1,
                                publishable: true
                              })
-      blog.save
+      blog.save!
 
       puts "Creating Fields..."
-      blog.fields.new(name: 'Body', field_type: 'text_field_type', metadata: {parse_widgets: true})
-      blog.fields.new(name: 'Title', field_type: 'text_field_type', validations: {presence: true})
-      blog.fields.new(name: 'Description', field_type: 'text_field_type', validations: {presence: true})
-      blog.fields.new(name: 'Slug', field_type: 'text_field_type', validations: {presence: true, uniqueness: true})
-      blog.fields.new(name: 'Author', field_type: 'user_field_type', validations: {presence: true})
+      blog.fields.new(name: 'Body', field_type: 'text_field_type', metadata: {parse_widgets: true}, validations: { presence: true, length: { minimum: 50} })
+      blog.fields.new(name: 'Title', field_type: 'text_field_type', validations: {presence: true, length: { maximum: 100 } })
+      blog.fields.new(name: 'Description', field_type: 'text_field_type', validations: {presence: true, length: { maximum: 200, minimum: 50} })
+      blog.fields.new(name: 'Slug', field_type: 'text_field_type', validations: {presence: true, uniqueness: true, length: { maximum: 75 } })
+      blog.fields.new(name: 'Author', field_type: 'author_field_type')
       blog.fields.new(name: 'Tags', field_type: 'tag_field_type')
       blog.fields.new(name: 'Publish Date', field_type: 'date_time_field_type')
       blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type')
-      blog.fields.new(name: 'SEO Title', field_type: 'text_field_type')
-      blog.fields.new(name: 'SEO Description', field_type: 'text_field_type')
+      blog.fields.new(name: 'SEO Title', field_type: 'text_field_type', validations: {presence: true, length: {maximum: 70}, uniqueness: true })
+      blog.fields.new(name: 'SEO Description', field_type: 'text_field_type', validations: {presence: true, length: {maximum: 160} })
       blog.fields.new(name: 'SEO Keywords', field_type: 'tag_field_type')
       blog.fields.new(name: 'No Index', field_type: 'boolean_field_type')
       blog.fields.new(name: 'No Follow', field_type: 'boolean_field_type')
@@ -90,7 +85,7 @@ namespace :employer do
                       })
 
       puts "Saving Employer Blog..."
-      blog.save
+      blog.save!
 
       puts "Creating Wizard Decorators..."
       wizard_hash = {
@@ -138,7 +133,8 @@ namespace :employer do
                 "grid_width": 6,
                 "elements": [
                   {
-                    "id": blog.fields.find_by_name('Description').id
+                    "id": blog.fields.find_by_name('Description').id,
+                    "tooltip": 'This is a short description and will be used as the preview text for a reader before they click into your full post.'
                   },
                   {
                     "id": blog.fields.find_by_name('Publish Date').id
@@ -155,7 +151,8 @@ namespace :employer do
                     "id": blog.fields.find_by_name('Tags').id
                   },
                   {
-                    "id": blog.fields.find_by_name('Slug').id
+                    "id": blog.fields.find_by_name('Slug').id,
+                    "tooltip": "This is your post's URL. Between each word, place a hyphen. Best if between 35-50 characters and don't include years/dates."
                   }
                 ]
               }
@@ -181,7 +178,8 @@ namespace :employer do
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('Persona').id,
-                    "render_method": "dropdown"
+                    "render_method": "dropdown",
+                    "tooltip": "If this is for a specific role or audience, please select. If it's for everyone, choose general audience."
                   }
                 ]
               },
@@ -190,7 +188,8 @@ namespace :employer do
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('Research').id,
-                    "render_method": "dropdown"
+                    "render_method": "dropdown",
+                    "tooltip": "If your post is based on research, please select if it's CB owned or created (including Emsi), or if we're reporting on someone else's data."
                   }
                 ]
               }
@@ -221,18 +220,22 @@ namespace :employer do
                 "grid_width": 6,
                 "elements": [
                   {
-                    "id": blog.fields.find_by_name('SEO Title').id
+                    "id": blog.fields.find_by_name('SEO Title').id,
+                    "tooltip": 'Please use <70 characters for your SEO title for optimal appearance in search results.'
                   },
                   {
-                    "id": blog.fields.find_by_name('SEO Description').id
+                    "id": blog.fields.find_by_name('SEO Description').id,
+                    "tooltip": 'The description should optimally be between 150-160 characters and keyword rich.'
                   },
                   {
-                    "id": blog.fields.find_by_name('SEO Keywords').id
+                    "id": blog.fields.find_by_name('SEO Keywords').id,
+                    "tooltip": 'Utilize the recommended keywords as tags to boost your SEO performance.'
                   }
                 ]
               },
               {
                 "grid_width": 6,
+                "description": "Select these if you don't want your post to be indexed by search engines like Google",
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('No Index').id
@@ -260,9 +263,9 @@ namespace :employer do
       }
 
       blog_wizard_decorator = Decorator.new(name: "Wizard", data: wizard_hash)
-      blog_wizard_decorator.save
+      blog_wizard_decorator.save!
 
-      ContentableDecorator.create({
+      ContentableDecorator.create!({
                                     decorator_id: blog_wizard_decorator.id,
                                     contentable_id: blog.id,
                                     contentable_type: 'ContentType'
@@ -277,7 +280,7 @@ namespace :employer do
               "grid_width": 2,
               "cells": [{
                           "field": {
-                            "method": "author_image"
+                            "method": "author_email"
                           },
                           "display": {
                             "classes": [
@@ -332,9 +335,9 @@ namespace :employer do
       }
 
       blog_index_decorator = Decorator.new(name: "Index", data: index_hash)
-      blog_index_decorator.save
+      blog_index_decorator.save!
 
-      ContentableDecorator.create({
+      ContentableDecorator.create!({
                                     decorator_id: blog_index_decorator.id,
                                     contentable_id: blog.id,
                                     contentable_type: 'ContentType'
@@ -355,11 +358,15 @@ namespace :employer do
                       "args": ["https://resources.careerbuilder.com/", blog.fields.find_by_name('Slug').id]
                    }
           },
-          "pubDate": { "field": blog.fields.find_by_name('Publish Date').id },
+          "pubDate": { "method": {
+            "name": "rss_date",
+            "args": [blog.fields.find_by_name('Publish Date').id]
+            }
+          },
           "author": { "method": {
-            "name": "user_email",
+            "name": "rss_author",
             "args": [blog.fields.find_by_name('Author').id]
-            }, "encode": true
+            }
           },
           "category": { "method": {
             "name": "tree_list",
@@ -376,9 +383,9 @@ namespace :employer do
       }
 
       blog_rss_decorator = Decorator.new(name: "Rss", data: rss_hash)
-      blog_rss_decorator.save
+      blog_rss_decorator.save!
 
-      ContentableDecorator.create({
+      ContentableDecorator.create!({
                                     decorator_id: blog_rss_decorator.id,
                                     contentable_id: blog.id,
                                     contentable_type: 'ContentType'

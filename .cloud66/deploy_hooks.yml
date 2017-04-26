@@ -4,56 +4,50 @@ default: &default
       target: rails
       execute: true
       apply_during: build_only
-    - command: npm install -g bower
-      sudo: true
+      run_on: all_servers
+  after_bundle:
+    - source: /.cloud66/scripts/npm_install.sh
+      destination: /tmp/npm_install.sh
       target: rails
       execute: true
-      apply_during: build_only
-  after_rails:
-    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
+      run_on: all_servers
+    - source: /.cloud66/scripts/clobber_assets.sh
+      destination: /tmp/clobber_assets.sh
       target: rails
-      apply_during: all
+      execute: true
+      apply_during: deploy_only
+      run_on: all_servers
+    - source: /.cloud66/scripts/write_plugins_to_tmp.sh
+      destination: /tmp/write_plugins_to_tmp.sh
+      target: rails
+      execute: true
+      run_on: all_servers
+  after_rails:
+    - source: /.cloud66/scripts/db_seed.sh
+      destination: /tmp/db_seed.sh
+      target: rails
+      execute: true
+      run_on: single_server
+      apply_during: build_only
       sudo: true
+    - source: /.cloud66/scripts/reseed_core_plugin.sh
+      destination: /tmp/reseed_core_plugin.sh
+      target: rails
+      execute: true
+    - source: /.cloud66/scripts/rebuild_indexes.sh
+      destination: /tmp/rebuild_indexes.sh
+      target: rails
+      execute: true
+    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart || true
+      target: rails
+      sudo: true
+      run_on: all_servers
 
 development:
   <<: *default
-  after_rails:
-    - source: /.cloud66/scripts/reseed_core_plugin.sh
-      destination: /tmp/reseed_core_plugin.sh
-      target: rails
-      execute: true
-      run_on: single_server
-      apply_during: all
-    - source: /.cloud66/scripts/rebuild_indexes.sh
-      destination: /tmp/rebuild_indexes.sh
-      target: rails
-      execute: true
-      run_on: single_server
-      apply_during: all
-    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
-      target: rails
-      apply_during: all
-      sudo: true
 
 staging:
   <<: *default
-  after_rails:
-    - source: /.cloud66/scripts/reseed_core_plugin.sh
-      destination: /tmp/reseed_core_plugin.sh
-      target: rails
-      execute: true
-      run_on: single_server
-      apply_during: all
-    - source: /.cloud66/scripts/rebuild_indexes.sh
-      destination: /tmp/rebuild_indexes.sh
-      target: rails
-      execute: true
-      run_on: single_server
-      apply_during: all
-    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
-      target: rails
-      apply_during: all
-      sudo: true
 
 production:
   <<: *default
@@ -62,9 +56,7 @@ production:
       destination: /tmp/rebuild_indexes.sh
       target: rails
       execute: true
-      run_on: single_server
-      apply_during: all
-    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart
+    - command: cd $STACK_PATH && bundle exec pumactl -P /tmp/web_server.pid restart || true
       target: rails
-      apply_during: all
       sudo: true
+      run_on: all_servers

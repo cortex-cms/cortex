@@ -7,6 +7,14 @@ module ContentItemHelper
     @content_item ||= ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user, state: params[:content_item][:state])
   end
 
+  def content_item_reload(content_item)
+    @content_item = content_item
+    content_type.fields.each do |field|
+      @content_item.field_items << FieldItem.new(field: field, data: field_item_param_data(params_lookup[field.id]))
+    end
+    @content_item
+  end
+
   def content_item_params
     params.require(:content_item).permit(
       :creator_id,
@@ -43,7 +51,7 @@ module ContentItemHelper
     if param.values[0].is_a?(Hash)
       { param.keys[0].to_sym => param.values[0].keys }
     else
-      param.keys[0]
+      param.keys
     end
   end
 
@@ -57,4 +65,26 @@ module ContentItemHelper
     end
   end
 
+  def index_parameters
+    @index_parameters = {}
+    params['content_item']['field_items_attributes'].each do |param|
+      @index_parameters[params['content_item']['field_items_attributes'][param]['field_id']] = params['content_item']['field_items_attributes'][param]
+    end
+    @index_parameters
+  end
+
+  def params_lookup
+    @params_lookup ||= index_parameters
+  end
+
+  def field_item_param_data(field_item_params)
+    return {} unless field_item_params
+    params_hash = field_item_params.to_unsafe_h
+    params_hash['data'] || {}
+  end
+
+  def validation_message(base_message)
+    msg_array = base_message.gsub('Validation failed:', '').gsub('Field items', '').split(',')
+    msg_array.map { |message| message.strip.titleize }
+  end
 end

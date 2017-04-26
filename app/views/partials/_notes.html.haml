@@ -1,0 +1,17 @@
+%table.notes.mdl-data-table.mdl-js-data-table
+  %thead
+    %tr
+      %th.mdl-data-table__cell--non-numeric
+        %i.material-icons.f-left.m-r-5 content_paste
+        %span.notes__header Notes
+      %th
+  %tbody
+    - news_feed.each do |post|
+      %tr
+        %td.mdl-data-table__cell--non-numeric
+          = post.body.html_safe
+        %td
+          - post.tags.each do |tag|
+            %span.mdl-chip
+              %span.mdl-chip__text
+                = tag

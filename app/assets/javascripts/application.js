@@ -8,12 +8,17 @@
 //= require bootstrap-tagsinput
 //= require clipboard
 //= require dialog-polyfill
+//= require moment
 
 //= require cortex-plugins-core/application
+//= require webpack-bundle
 
 //= require base
 //= require datepicker_init
+//= require form
+//= require flash
 //= require media_dialogs
 //= require sidebar-toggle
+//= require quick_links
 
 // require turbolinks # temporarily disabled

@@ -1,6 +1,13 @@
 .mdl-layout__header {
+  box-shadow: none;
   background-color: $color-white;
   color: $color-grey-dark;
+}
+
+.mdl-layout__header-row {
+  @media only screen and (min-width: 1024px) {
+    padding: 0 40px 0 48px;
+  }
 }
 
 .user-block {

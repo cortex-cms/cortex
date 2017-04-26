@@ -1,0 +1,3 @@
+web: bundle exec rails s -p 3000
+worker: bundle exec sidekiq -e development --config ./config/sidekiq.yml
+client: rake assets:clobber react_on_rails:assets:clobber cortex:assets:webpack:build

@@ -7,6 +7,15 @@ require 'open-uri'
 Bundler.require(:default, Rails.env)
 
 namespace :cortex do
+  namespace :plugins do
+    desc 'webpack.config.js picks up on this file to build plugin assets'
+    task :write_to_tmp => :environment do
+      File.open('tmp/cortex_plugin_libraries.json', 'w') do |file|
+        file.write(JSON.pretty_generate(Cortex.plugin_library_names))
+      end
+    end
+  end
+
   desc 'Add categories from seeds.yml'
   task :create_categories => :environment do
     user = User.find_by_email(SeedData.cortex_tenant.creator.email)
@@ -263,12 +272,10 @@ private
 def fetch_onet_db
   puts "Downloading ONET db: #{onet_package_name}.."
 
-  Net::HTTP.start('www.onetcenter.org') do |http|
-    resp = http.get("/dl_files/#{onet_package_name}.zip")
-    open(Rails.root.join('tmp', "#{onet_package_name}.zip"), 'wb') { |file| file.write(resp.body) }
+  response = Faraday.new('https://www.onetcenter.org').get "/dl_files/#{onet_package_name}.zip"
 
-    sh "unzip -o #{Rails.root.join('tmp', "#{onet_package_name}.zip")} -d #{Rails.root.join('tmp')}"
-  end
+  open(Rails.root.join('tmp', "#{onet_package_name}.zip"), 'wb') { |file| file.write(response.body) }
+  sh "unzip -o #{Rails.root.join('tmp', "#{onet_package_name}.zip")} -d #{Rails.root.join('tmp')}"
 end
 
 def provision_onet_db

@@ -53,12 +53,16 @@ RSpec.describe ContentItemHelper, type: :helper do
       let (:param) { { one: "two" } }
       let (:outcome) { permit_param(param) }
 
-      it 'should return a Symbol' do
-        expect(outcome).to be_a_kind_of(Symbol)
+      it 'should return an Array' do
+        expect(outcome).to be_a_kind_of(Array)
       end
 
-      it 'should the first key of the given param' do
-        expect(outcome).to eq(param.keys[0])
+      it 'should contain Symbols' do
+        expect(outcome.sample).to be_a_kind_of(Symbol)
+      end
+
+      it 'should match the given param' do
+        expect(outcome).to eq(param.keys)
       end
     end
   end
@@ -105,6 +109,28 @@ RSpec.describe ContentItemHelper, type: :helper do
 
     it 'should return an Array' do
       expect(sanitize_parameters({})).to be_a_kind_of(Array)
+    end
+  end
+
+  describe '#validation_message' do
+    let(:base_message) { "Validation failed: Field items This is a test, Field items Second thing" }
+    let(:result) { validation_message(base_message) }
+
+    it 'should return an Array' do
+      expect(result).to be_a_kind_of(Array)
+    end
+
+    it 'should contain Strings' do
+      expect(result.sample).to be_a_kind_of(String)
+    end
+
+    it 'should not contain unwanted words' do
+      expect(result.sample).to_not include("Validation failed:")
+      expect(result.sample).to_not include("Field items")
+    end
+
+    it 'should return an array of the correct length' do
+      expect(result.length).to eq(base_message.split(",").length)
     end
   end
 end

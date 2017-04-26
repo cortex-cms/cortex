@@ -1,4 +1,6 @@
 module PopupHelper
+  # TODO: This needs to be in a plugin
+
   def media_content_type
     @media_content_type ||= ContentType.find_by_name('Media')
   end
@@ -13,7 +15,7 @@ module PopupHelper
 
   def media_image_content_items
     @media_image_content_items ||= media_content_items.select do |content_item|
-      MimeMagic.new(content_item.field_items.find_by_field_id(media_asset_field).data['asset']['content_type']).mediatype == 'image'
+      MimeMagic.new(content_item.field_items.find_by_field_id(media_asset_field).data['asset']['versions']['original']['mime_type']).mediatype == 'image'
     end
   end
 

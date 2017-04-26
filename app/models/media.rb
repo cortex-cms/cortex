@@ -38,6 +38,8 @@ class Media < ApplicationRecord
                     :path => ':class/:attachment/careerbuilder-:style-:id.:extension',
                     :s3_headers => { 'Cache-Control' => 'public, max-age=315576000' }
 
+  before_post_process :can_thumb?
+
   validates_attachment :attachment,
                        :presence => true,
                        :unless => :skip_attachment_validation,

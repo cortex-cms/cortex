@@ -1,4 +1,5 @@
 Cortex::Application.routes.draw do
+  get 'hello_world', to: 'hello_world#index'
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root 'dashboards#index'
   get 'legacy', to: 'legacy#index', as: :legacy_root
@@ -34,4 +35,12 @@ Cortex::Application.routes.draw do
   # API
   ::API.logger Rails.logger
   mount ::API => '/api'
+
+  # Flipper
+  authenticated :user, lambda {|u| u.is_admin? } do
+    flipper_block = lambda {
+      Cortex.flipper
+    }
+    mount Flipper::UI.app(flipper_block) => '/flipper'
+  end
 end

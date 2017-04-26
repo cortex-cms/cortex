@@ -51,7 +51,7 @@ Cortex::Application.configure do
     Paperclip.options[:command_path] = '/usr/local/bin/'
     config.paperclip_defaults = {
       storage: :fog,
-      fog_host: ENV['HOST'],
+      fog_host: ENV['FOG_HOST'],
       fog_directory: '',
       fog_credentials: {
         provider: 'Local',
@@ -61,6 +61,10 @@ Cortex::Application.configure do
   end
 
   Sidekiq.configure_server do |config|
+    config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' } unless ENV['DEPLOYED']
+  end
+
+  Sidekiq.configure_client do |config|
     config.redis = { :namespace => ENV['REDIS_NAMESPACE'] || 'cortex_dev' } unless ENV['DEPLOYED']
   end
 

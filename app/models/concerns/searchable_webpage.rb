@@ -5,12 +5,31 @@ module SearchableWebpage
     include Searchable
 
     mapping do
-      indexes :id, :type => :integer, :index => :not_analyzed
-      indexes :tenant_id, :type => :integer, :index => :not_analyzed
       indexes :name, :analyzer => :snowball
       indexes :url, :analyzer => :keyword
+      indexes :dynamic_yield_sku, :analyzer => :keyword
+      indexes :dynamic_yield_category, :analyzer => :keyword
       indexes :created_by, :analyzer => :keyword
       indexes :created_at, :type => :date, :include_in_all => false
+      indexes :deleted_at, :type => :date, :include_in_all => false
+      indexes :updated_at, :type => :date, :include_in_all => false
+
+      indexes :id, :type => :integer, :index => :not_analyzed
+      indexes :tenant_id, :type => :integer, :index => :not_analyzed
+      indexes :user_id, :type => :integer, :index => :not_analyzed
+      indexes :thumbnail_file_name, :type => :string, :index => :not_analyzed
+      indexes :thumbnail_content_type, :type => :string, :index => :not_analyzed
+      indexes :thumbnail_file_size, :type => :long, :index => :not_analyzed
+      indexes :thumbnail_updated_at, :type => :date, :index => :not_analyzed
+      indexes :seo_title, :type => :string, :index => :not_analyzed
+      indexes :seo_description, :type => :string, :index => :not_analyzed
+      indexes :noindex, :type => :boolean, :index => :not_analyzed
+      indexes :nofollow, :type => :boolean, :index => :not_analyzed
+      indexes :nosnippet, :type => :boolean, :index => :not_analyzed
+      indexes :noodp, :type => :boolean, :index => :not_analyzed
+      indexes :noarchive, :type => :boolean, :index => :not_analyzed
+      indexes :noimageindex, :type => :boolean, :index => :not_analyzed
+      indexes :tables_widget, :type => :nested, :enabled => false
     end
 
     def as_indexed_json(options = {})

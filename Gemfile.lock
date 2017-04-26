@@ -6,24 +6,6 @@ GIT
       activerecord (>= 4.0.0, < 5.1)
 
 GIT
-  remote: https://github.com/cortex-cms/cortex-plugins-core.git
-  revision: 233f7faa8fb97ebaa445153868fece219b4f4dc7
-  branch: topic/COR-704-Rebuild-AssetFieldType
-  specs:
-    cortex-plugins-core (0.11.2)
-      cells (~> 4.1)
-      cells-haml (~> 0.0.10)
-      cells-rails (~> 0.0.6)
-      fastimage (~> 2.1.0)
-      image_processing (~> 0.4.1)
-      jsonb_accessor (~> 1.0.0.beta)
-      mimemagic (~> 0.3.2)
-      mini_magick (~> 4.7.0)
-      rails (>= 4)
-      react_on_rails (~> 6)
-      shrine (~> 2.6.1)
-
-GIT
   remote: https://github.com/toastercup/grape-kaminari.git
   revision: 661388050eaa97f70006b74fe300e19760b8a132
   branch: set-paginate-headers-extraction
@@ -155,6 +137,18 @@ GEM
     concurrent-ruby (1.0.4)
     connection_pool (2.2.1)
     cortex-exceptions (0.0.4)
+    cortex-plugins-core (0.12.1)
+      cells (~> 4.1)
+      cells-haml (~> 0.0)
+      cells-rails (~> 0.0)
+      fastimage (~> 2.1)
+      image_processing (~> 0.4)
+      jsonb_accessor (~> 1.0.0.beta)
+      mimemagic (~> 0.3)
+      mini_magick (~> 4.7)
+      rails (>= 4)
+      react_on_rails (~> 6)
+      shrine (~> 2.6)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     declarative-builder (0.1.0)
@@ -750,7 +744,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.7)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (= 0.0.4)
-  cortex-plugins-core!
+  cortex-plugins-core (= 0.12.1)
   database_cleaner (~> 1.5)
   deep_cloneable (~> 2.2.2)
   devise (~> 4.2.0)

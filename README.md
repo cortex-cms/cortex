@@ -43,7 +43,7 @@ Cortex follows a decentralized, API-only architecture - it is *not* built like W
   - [Webpages and Snippets](#webpages-and-snippets)
   - [Exceptions](#exceptions)
 - [Applications Using Cortex](#applications-using-cortex)
-- [Some Notes](#some-notes)
+- [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
 - [Copyright](#copyright)
@@ -314,7 +314,7 @@ If a consuming or companion application would like to produce Cortex-equivalent 
 * [CB1 Lander Shell](https://github.com/cbdr/cb1-lander-shell) - Platform for hosting lander pages and experiments, utilizing Cortex Posts and Sinatra. [Live Site](http://corporate.careerbuilder.com/)
 * [CareerBuilder.com](https://github.com/cbdr/consumer-main) - The main Consumer Web site for CB.com uses Cortex Posts for the [Privacy](http://www.careerbuilder.com/privacy) and [Terms of Service](http://www.careerbuilder.com/terms) pages.
 
-## Some Notes
+## Troubleshooting
 * Ensure you have read / write access to your project directory during installation.
 * Run `npm -v` to make sure node is properly linked. If the command is not found, chances are the correct version of node is not linked. Run `brew link node`.
 

@@ -55,7 +55,8 @@ Copy and rename the example `.env.example` file as `.env` and modify it to match
 
 For a rudimentary setup, these variables should be configured:
 
-* Use `$ rake secret` to generate `APP_SECRET` and `DEVISE_SECRET`
+* Use `$ bundle rails secret` to generate `APP_SECRET` and `DEVISE_SECRET`
+* To generate the two tokens for `APP_SECRET` and `DEVISE_SECRET`, simply run the above formula twice
 * If the superuser isn't used for the app databases, the `DATABASE_USERNAME` and `DATABASE_PASSWORD` should be set accordingly.
 * Set `HOST` to the local Web server's root URL to properly configure Fog (local asset storage)
 
@@ -311,6 +312,10 @@ If a consuming or companion application would like to produce Cortex-equivalent 
 * [Employer](https://github.com/cbdr/employer) - Redesigned Employer Marketing platform utilizing Cortex Webpages/Snippets and Rails. [Live Site](http://hiring.careerbuilder.com/)
 * [CB1 Lander Shell](https://github.com/cbdr/cb1-lander-shell) - Platform for hosting lander pages and experiments, utilizing Cortex Posts and Sinatra. [Live Site](http://corporate.careerbuilder.com/)
 * [CareerBuilder.com](https://github.com/cbdr/consumer-main) - The main Consumer Web site for CB.com uses Cortex Posts for the [Privacy](http://www.careerbuilder.com/privacy) and [Terms of Service](http://www.careerbuilder.com/terms) pages.
+
+## Some Notes
+* Ensure you have read / write access to your project directory during installation.
+* Run `npm -v` to make sure node is properly linked. If the command is not found, chances are the correct version of node is not linked. Run `brew link node`.
 
 ## Contributing
 

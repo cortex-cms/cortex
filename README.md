@@ -43,6 +43,7 @@ Cortex follows a decentralized, API-only architecture - it is *not* built like W
   - [Webpages and Snippets](#webpages-and-snippets)
   - [Exceptions](#exceptions)
 - [Applications Using Cortex](#applications-using-cortex)
+- [Some Notes](#some-notes)
 - [Contributing](#contributing)
 - [License](#license)
 - [Copyright](#copyright)

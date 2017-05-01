@@ -544,8 +544,6 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (~> 3.3, >= 3.3.3)
-    sidekiq-failures (0.4.5)
-      sidekiq (>= 2.16.0)
     simplecov (0.14.1)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -699,7 +697,6 @@ DEPENDENCIES
   sentry-raven
   shoulda-matchers (~> 3.1)
   sidekiq (~> 5.0.0)
-  sidekiq-failures (~> 0.4.5)
   simplecov (~> 0.14)
   sinatra (~> 2.0.0.rc)
   six (~> 0.2.0)

@@ -67,7 +67,7 @@ gem 'aws-sdk', '~> 2.9'
 
 # Jobs
 gem 'sidekiq', '~> 5.0.0'
-gem 'sidekiq-failures', '~> 0.4.5'
+#gem 'sidekiq-failures', '~> 0.4.5' # Disabled until it supports sidekiq 5.x
 gem 'sinatra', '~> 2.0.0.rc', require: false
 
 # Pipeline

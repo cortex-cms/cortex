@@ -56,8 +56,7 @@ Copy and rename the example `.env.example` file as `.env` and modify it to match
 
 For a rudimentary setup, these variables should be configured:
 
-* Use `$ bundle exec rails secret` to generate `APP_SECRET` and `DEVISE_SECRET`
-* To generate the two tokens for `APP_SECRET` and `DEVISE_SECRET`, simply run the above formula twice
+* Execute `$ bundle exec rails secret` twice to generate both an `APP_SECRET` and `DEVISE_SECRET`
 * If the superuser isn't used for the app databases, the `DATABASE_USERNAME` and `DATABASE_PASSWORD` should be set accordingly.
 * Set `HOST` to the local Web server's root URL to properly configure Fog (local asset storage)
 
@@ -315,8 +314,7 @@ If a consuming or companion application would like to produce Cortex-equivalent 
 * [CareerBuilder.com](https://github.com/cbdr/consumer-main) - The main Consumer Web site for CB.com uses Cortex Posts for the [Privacy](http://www.careerbuilder.com/privacy) and [Terms of Service](http://www.careerbuilder.com/terms) pages.
 
 ## Troubleshooting
-* Ensure you have read / write access to your project directory during installation.
-* Run `npm -v` to make sure node is properly linked. If the command is not found, chances are the correct version of node is not linked. Run `brew link node`.
+* For OS X / homebrew users: Run `which node` to ensure node is properly linked. The path shown should match homebrew's default installation path (run `which brew` to reveal this). If its not, then run `brew link node` and follow the instructions.
 
 ## Contributing
 

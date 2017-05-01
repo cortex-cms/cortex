@@ -12,12 +12,12 @@ gem 'rails', '~> 5.0.2'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', '= 0.12.1'
+gem 'cortex-plugins-core', '= 0.12.3'
 
 # API
 gem 'grape', '~> 0.17'
 gem 'grape-entity', '~> 0.6.0'
-gem 'grape-swagger', '~> 0.25.3'
+gem 'grape-swagger', '~> 0.27.1'
 
 # Authorization
 gem 'six', '~> 0.2.0'
@@ -32,7 +32,7 @@ gem 'rails-observers', git: 'https://github.com/triloch/rails-observers.git'
 gem 'awesome_nested_set', git: 'https://github.com/cortex-cms/awesome_nested_set.git'
 gem 'paperclip', '~> 5.1.0'
 gem 'paperclip-optimizer', '~> 2.0'
-gem 'image_optim_pack', '~> 0.3.1'
+gem 'image_optim_pack', '~> 0.4.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bcrypt', '~> 3.1.11'
 gem 'kaminari', '~> 0.17.0'
@@ -66,7 +66,7 @@ gem 'yt', '~> 0.30.1'
 gem 'aws-sdk', '~> 2.9'
 
 # Jobs
-gem 'sidekiq', '~> 4.2.10'
+gem 'sidekiq', '~> 5.0.0'
 gem 'sidekiq-failures', '~> 0.4.5'
 gem 'sinatra', '~> 2.0.0.rc', require: false
 
@@ -79,7 +79,7 @@ gem 'angular-rails-templates', '~> 1.0.2'
 gem 'ngannotate-rails', '~> 1.2.2'
 
 # View
-gem 'haml', '~> 5.0.0.beta'
+gem 'haml', '~> 5.0'
 gem 'cells', '~> 4.1.6'
 gem 'cells-rails', '~> 0.0.7'
 gem 'cells-haml', '~> 0.0.10'

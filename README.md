@@ -56,7 +56,7 @@ Copy and rename the example `.env.example` file as `.env` and modify it to match
 
 For a rudimentary setup, these variables should be configured:
 
-* Use `$ bundle rails secret` to generate `APP_SECRET` and `DEVISE_SECRET`
+* Use `$ bundle exec rails secret` to generate `APP_SECRET` and `DEVISE_SECRET`
 * To generate the two tokens for `APP_SECRET` and `DEVISE_SECRET`, simply run the above formula twice
 * If the superuser isn't used for the app databases, the `DATABASE_USERNAME` and `DATABASE_PASSWORD` should be set accordingly.
 * Set `HOST` to the local Web server's root URL to properly configure Fog (local asset storage)

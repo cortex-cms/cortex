@@ -14,7 +14,10 @@ namespace :employer do
 
       def category_tree
         tree = Tree.new
-        tree.add_node({ name: "Recruitment Solutions" })
+        tree.add_node({ name: "Product News" })
+        tree.add_node({ name: "Company News, Research and Trends" })
+        tree.add_node({ name: "Client Success Stories" })
+        tree.add_node({ name: "Recruiting Solutions" })
         tree.add_node({ name: "Employment Screening" })
         tree.add_node({ name: "Human Capital Management" })
 
@@ -65,8 +68,8 @@ namespace :employer do
       blog.fields.new(name: 'Slug', field_type: 'text_field_type', validations: {presence: true, uniqueness: true, length: { maximum: 75 } })
       blog.fields.new(name: 'Author', field_type: 'author_field_type')
       blog.fields.new(name: 'Tags', field_type: 'tag_field_type')
-      blog.fields.new(name: 'Publish Date', field_type: 'date_time_field_type')
-      blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type')
+      blog.fields.new(name: 'Publish Date', field_type: 'date_time_field_type', metadata: {state: 'Published'})
+      blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', metadata: {state: 'Expired'})
       blog.fields.new(name: 'SEO Title', field_type: 'text_field_type', validations: {presence: true, length: {maximum: 70}, uniqueness: true })
       blog.fields.new(name: 'SEO Description', field_type: 'text_field_type', validations: {presence: true, length: {maximum: 160} })
       blog.fields.new(name: 'SEO Keywords', field_type: 'tag_field_type')
@@ -140,7 +143,7 @@ namespace :employer do
                     "id": blog.fields.find_by_name('Publish Date').id
                   },
                   {
-                    "id": blog.fields.find_by_name('Author').id
+                    "id": blog.fields.find_by_name('Expiration Date').id
                   }
                 ]
               },
@@ -153,6 +156,9 @@ namespace :employer do
                   {
                     "id": blog.fields.find_by_name('Slug').id,
                     "tooltip": "This is your post's URL. Between each word, place a hyphen. Best if between 35-50 characters and don't include years/dates."
+                  },
+                  {
+                    "id": blog.fields.find_by_name('Author').id
                   }
                 ]
               }

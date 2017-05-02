@@ -2,7 +2,7 @@ if Rails.cache.fetch("rss-v2-#{content_type.name}")
   xml << Rails.cache.fetch("rss-v2-#{content_type.name}")
 end
 
-Rails.cache.fetch("rss-v2-#{content_type.name}", expires_in: 30.minutes, race_condition_ttl: 10) do
+Rails.cache.fetch("rss-v2-#{content_type.name}", expires_in: 1.minute, race_condition_ttl: 10) do
   xml.instruct! :xml, version: '1.0', encoding: 'UTF-8'
   xml.rss version: '2.0',
           'xmlns:content': 'http://purl.org/rss/1.0/modules/content/',

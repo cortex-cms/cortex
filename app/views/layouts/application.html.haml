@@ -18,7 +18,7 @@
         %main.mdl-layout__content.layout__main-content
           = yield
     = render 'partials/flash'
-    
+
     %script{src: '//cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js', type: 'text/javascript'}
     = javascript_include_tag :application, {'data-turbolinks-eval': false}
     = render 'layouts/google_analytics' if extra_config.google_analytics_id?

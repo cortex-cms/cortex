@@ -4,11 +4,11 @@ $sidebar-link-width: $sidebar-width-expanded - 60px; // link padding = 60px
 $sidebar-collapse-transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 $sidebar-toggle-button-transition: transform 500ms linear;
 
-.tenant__item {
+.nav__item {
   position: relative;
 }
 
-.tenant__item .material-icons {
+.nav__item .material-icons {
   position: absolute;
   right: 10px;
 }
@@ -21,7 +21,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: auto;
-  box-shadow: 1px 0px 5px 1px rgba(0,0,0,.5);
+  box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, .5);
   overflow-y: hidden;
 }
 
@@ -42,7 +42,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 }
 
 .sidebar__brand-name {
-  @extend %display-text;
+  @include display-text;
   color: $color-white;
   margin: 0 15px;
   text-decoration: none;
@@ -80,7 +80,7 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   color: $color-grey-dark;
 }
 
-.mdl-layout__drawer .mdl-navigation .mdl-navigation__link.tenant__item {
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link.nav__item {
   background-color: $employer-color;
   color: $color-white;
 }
@@ -103,34 +103,49 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   }
 }
 
+.environment {
+  background-color: $flash-error-background !important;
+}
+
+.environment__abbreviated {
+  display: none;
+}
+
 // Collapsing
 
 @media only screen and (min-width: 1024px) {
-.sidebar--collapsed {
+  .sidebar--collapsed {
+    .environment__full {
+      display: none;
+    }
 
-  .nav__item-name,
-  .sidebar__brand-name {
-    display: none;
-  }
+    .environment__abbreviated {
+      display: block;
+    }
 
-  .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
-    padding-left: 30px;
-  }
+    .nav__item-name,
+    .sidebar__brand-name {
+      display: none;
+    }
 
-  .tenant__item .material-icons {
-    position: static;
-  }
+    .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+      padding-left: 30px;
+    }
 
-  .sidebar__toggle-button:after {
-    transform: rotate(-540deg);
-    transition: $sidebar-toggle-button-transition;
-  }
+    .nav__item .material-icons {
+      position: static;
+    }
 
-  .layout__sidebar {
-    width: $sidebar-width-collapsed;
-    transition: $sidebar-collapse-transition;
+    .sidebar__toggle-button:after {
+      transform: rotate(-540deg);
+      transition: $sidebar-toggle-button-transition;
+    }
+
+    .layout__sidebar {
+      width: $sidebar-width-collapsed;
+      transition: $sidebar-collapse-transition;
+    }
   }
-}
 }
 
 @media only screen and (max-width: 1024px) {

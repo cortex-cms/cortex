@@ -29,6 +29,6 @@ form.new_user .mdl-button {
 }
 
 .authentication__header-text {
-  @extend %display-text;
+  @include display-text;
   color: $color-white;
 }

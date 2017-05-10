@@ -379,12 +379,12 @@ namespace :employer do
             "args": [blog.fields.find_by_name('Categories').id]
             }, "multiple": ","
           },
-          "content": { "field": blog.fields.find_by_name('Body').id, "encode": true },
           "media:content": { "media":
             { "field": blog.fields.find_by_name('Featured Image').id,
               "medium": "image"
             }
-          }
+          },
+          "content": { "field": blog.fields.find_by_name('Body').id, "encode": true }
         }
       }
 

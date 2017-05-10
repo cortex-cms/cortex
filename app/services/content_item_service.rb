@@ -33,7 +33,7 @@ class ContentItemService < ApplicationService
     @content_item = ContentItem.find(id)
 
     transact_and_refresh do
-      @content_item.update(content_item_attributes)
+      @content_item.assign_attributes(content_item_attributes)
     end
   end
 

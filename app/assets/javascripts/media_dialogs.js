@@ -9,10 +9,18 @@
     global.dialogs[dialog.id] = dialog;
   });
 
-  $('.close-dialog').click(function(event) {
+  $('.close-dialog').on('click', function(event) {
+    closeDialog();
+  });
+
+  $('body').on('click', function(event) {
     var dialog = document.getElementById(event.target.closest('dialog').id);
-    dialog.close();
-    global.unblur_backdrop();
+    var rect = dialog.getBoundingClientRect();
+    var isInDialog=(rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+
+    if (!isInDialog) {
+      closeDialog();
+    }
   });
 
   global.blur_backdrop = function() {
@@ -22,4 +30,10 @@
   global.unblur_backdrop = function() {
     $('.mdl-layout__container').removeClass('blur');
   };
+
+  function closeDialog() {
+    var dialog = document.getElementById(event.target.closest('dialog').id);
+    dialog.close();
+    global.unblur_backdrop();
+  }
 }(this));

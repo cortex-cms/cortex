@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Cortex::Application.routes.draw do
   get 'hello_world', to: 'hello_world#index'
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)

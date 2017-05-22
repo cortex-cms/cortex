@@ -41,7 +41,7 @@ class Webpage < ApplicationRecord
   end
 
   def charts_widget_json
-    charts_chart.to_json
+    charts_widget.to_json
   end
 
   def charts_widget_json= p

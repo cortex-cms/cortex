@@ -6,7 +6,7 @@
   = render 'partials/navigation'
   %footer
     %nav.demo-navigation.mdl-navigation
-      - unless environment == :production
+      - unless Rails.env.production?
         = render 'partials/environment_display'
       = render 'partials/tenant_display'
   .sidebar__toggle-button#sidebar__toggle-button

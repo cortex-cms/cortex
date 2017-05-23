@@ -14,7 +14,7 @@ class Webpage < ApplicationRecord
   accepts_nested_attributes_for :snippets
 
   def self.find_by_protocol_agnostic_url(suffix)
-    Webpage.find { |webpage| webpage.protocol_agnostic_url == suffix }
+    Webpage.find { |webpage| Webpage.protocol_agnostic_url(webpage.url) == suffix }
   end
 
   def tables_widget_yaml
@@ -33,9 +33,13 @@ class Webpage < ApplicationRecord
     self.tables_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
   end
 
-  def protocol_agnostic_url
-    uri = Addressable::URI.parse(self.url)
-    path = uri.path == '/' ? uri.path : uri.path.chomp('/')
-    "://#{uri.authority}#{path}"
+  private
+
+  def self.protocol_agnostic_url(url)
+    Rails.cache.fetch("Webpages/#{url}", expires_in: 7.days) do
+      uri = Addressable::URI.parse(url)
+      path = uri.path == '/' ? uri.path : uri.path.chomp('/')
+      "://#{uri.authority}#{path}"
+    end
   end
 end

@@ -4,8 +4,6 @@ class Webpage < ApplicationRecord
 
   serialize :tables_widget
 
-  scope :find_by_protocol_agnostic_url, ->(suffix) { where('url LIKE :suffix', suffix: "%#{suffix}") }
-
   acts_as_paranoid
   acts_as_taggable_on :seo_keywords
 
@@ -14,6 +12,10 @@ class Webpage < ApplicationRecord
   has_many :documents, through: :snippets, :dependent => :destroy
 
   accepts_nested_attributes_for :snippets
+
+  def self.find_by_protocol_agnostic_url(suffix)
+    Webpage.find { |webpage| Webpage.protocol_agnostic_url(webpage.url) == suffix }
+  end
 
   def tables_widget_yaml
     tables_widget.to_yaml
@@ -29,5 +31,15 @@ class Webpage < ApplicationRecord
 
   def tables_widget_json= p
     self.tables_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
+  end
+
+  private
+
+  def self.protocol_agnostic_url(url)
+    Rails.cache.fetch("Webpages/#{url}", expires_in: 7.days) do
+      uri = Addressable::URI.parse(url)
+      path = uri.path == '/' ? uri.path : uri.path.chomp('/')
+      "://#{uri.authority}#{path}"
+    end
   end
 end

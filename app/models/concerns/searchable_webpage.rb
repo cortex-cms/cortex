@@ -30,6 +30,7 @@ module SearchableWebpage
       indexes :noarchive, :type => :boolean, :index => :not_analyzed
       indexes :noimageindex, :type => :boolean, :index => :not_analyzed
       indexes :tables_widget, :type => :nested, :enabled => false
+      indexes :charts_widget, :type => :nested, :enabled => false
     end
 
     def as_indexed_json(options = {})

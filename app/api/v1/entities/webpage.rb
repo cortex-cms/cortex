@@ -21,12 +21,14 @@ module V1
       expose :dynamic_yield_category, documentation: { type: 'String', desc: "Dynamic Yield Webpage Category" }
 
       expose :tables_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Tables Widget Data as JSON'}
+      expose :accordion_group_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Accordion Group Widget Data as JSON'}
 
       with_options if: { full: true } do
         expose :user, with: '::V1::Entities::User', documentation: {type: 'User', desc: 'Owner'}
         expose :url, documentation: { type: 'String', desc: 'URL of Webpage' }
 
         expose :tables_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Tables Widget Data as YAML'}
+        expose :accordion_group_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Accordion Group Widget Data as YAML'}
       end
     end
   end

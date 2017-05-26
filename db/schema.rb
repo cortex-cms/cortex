@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519201648) do
+ActiveRecord::Schema.define(version: 20170525015850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -471,6 +471,7 @@ ActiveRecord::Schema.define(version: 20170519201648) do
     t.string   "dynamic_yield_sku"
     t.string   "dynamic_yield_category"
     t.jsonb    "tables_widget"
+    t.jsonb    "accordion_group_widget"
     t.jsonb    "charts_widget"
     t.index ["user_id"], name: "index_webpages_on_user_id", using: :btree
   end

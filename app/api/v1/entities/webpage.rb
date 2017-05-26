@@ -21,6 +21,7 @@ module V1
       expose :dynamic_yield_category, documentation: { type: 'String', desc: "Dynamic Yield Webpage Category" }
 
       expose :tables_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Tables Widget Data as JSON'}
+      expose :charts_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Charts Widget Data as JSON'}
       expose :accordion_group_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Accordion Group Widget Data as JSON'}
 
       with_options if: { full: true } do
@@ -29,6 +30,7 @@ module V1
 
         expose :tables_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Tables Widget Data as YAML'}
         expose :accordion_group_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Accordion Group Widget Data as YAML'}
+        expose :charts_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Charts Widget Data as YAML'}
       end
     end
   end

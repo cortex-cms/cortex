@@ -3,6 +3,7 @@ class Webpage < ApplicationRecord
   include SearchableWebpage
 
   serialize :tables_widget
+  serialize :charts_widget
 
   scope :find_by_protocol_agnostic_url, ->(suffix) { where('url LIKE :suffix', suffix: "%#{suffix}") }
 
@@ -29,6 +30,22 @@ class Webpage < ApplicationRecord
 
   def tables_widget_json= p
     self.tables_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
+  end
+
+  def charts_widget_yaml
+    charts_widget.to_yaml
+  end
+
+  def charts_widget_yaml= p
+    self.charts_widget = YAML.load(p)
+  end
+
+  def charts_widget_json
+    charts_widget.to_json
+  end
+
+  def charts_widget_json= p
+    self.charts_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
   end
 
   def accordion_group_widget_yaml

@@ -93,13 +93,11 @@ module SearchablePost
       if author
         bool[:bool][:filter] << term_search(:author, author)
       end
-
       if published
         bool[:bool][:filter] << published_filter
-        search query: bool, sort: [{is_sticky: {order: 'desc'}, published_at: {order: 'desc'}}]
-      else
-        search query: bool
       end
+
+      search query: bool
     end
 
     def show_all(tenant, published = nil)
@@ -107,11 +105,9 @@ module SearchablePost
 
       if published
         bool[:bool][:filter] << published_filter
-        search query: bool, sort: [{is_sticky: {order: 'desc'}, published_at: {order: 'desc'}}]
-      else
-        search query: bool, sort: [{is_sticky: {order: 'desc'}, created_at: {order: 'desc'}}]
       end
 
+      search query: bool, sort: [{is_sticky: {order: 'desc'}, created_at: {order: 'desc'}}]
     end
   end
 end

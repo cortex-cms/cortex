@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525015850) do
+ActiveRecord::Schema.define(version: 20170531215319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "uuid-ossp"
+  enable_extension "citext"
 
   create_table "applications", force: :cascade do |t|
     t.string   "name"
@@ -452,7 +453,7 @@ ActiveRecord::Schema.define(version: 20170525015850) do
   create_table "webpages", force: :cascade do |t|
     t.integer  "user_id",                                null: false
     t.string   "name"
-    t.string   "url"
+    t.citext   "url"
     t.string   "thumbnail_file_name"
     t.string   "thumbnail_content_type"
     t.integer  "thumbnail_file_size"
@@ -471,8 +472,8 @@ ActiveRecord::Schema.define(version: 20170525015850) do
     t.string   "dynamic_yield_sku"
     t.string   "dynamic_yield_category"
     t.jsonb    "tables_widget"
-    t.jsonb    "accordion_group_widget"
     t.jsonb    "charts_widget"
+    t.jsonb    "accordion_group_widget"
     t.index ["user_id"], name: "index_webpages_on_user_id", using: :btree
   end
 

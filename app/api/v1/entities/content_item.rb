@@ -3,11 +3,6 @@ module V1
     class ContentItem < Grape::Entity
       expose :id, documentation: {type: "Integer", desc: "Content Item ID", required: true}
       expose :publish_state, documentation: {type: "String", desc: "Publish state", required: true}
-      expose :published_at, documentation: {type: "dateTime", desc: "Date published", required: true}
-      expose :expired_at, documentation: {type: "dateTime", desc: "Date to expire", required: true}
-      expose :author, documentation: {type: "dateTime", desc: "Date published", required: true} do |content_item|
-        content_item.author.fullname
-      end
       expose :creator, documentation: {type: "dateTime", desc: "Date published", required: true} do |content_item|
         content_item.creator.fullname
       end

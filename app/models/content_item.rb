@@ -3,18 +3,7 @@ class ContentItem < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  state_machine do
-    state :draft
-    state :scheduled
-
-    event :schedule do
-      transitions :to => :scheduled, :from => [:draft]
-    end
-
-    event :draft do
-      transitions :to => :draft, :from => [:scheduled]
-    end
-  end
+  scope :last_updated_at, -> { order(updated_at: :desc).select('updated_at').first.updated_at }
 
   acts_as_paranoid
 
@@ -31,6 +20,19 @@ class ContentItem < ApplicationRecord
 
   after_save :index
   after_save :update_tag_lists
+
+  state_machine do
+    state :draft
+    state :scheduled
+
+    event :schedule do
+      transitions :to => :scheduled, :from => [:draft]
+    end
+
+    event :draft do
+      transitions :to => :draft, :from => [:scheduled]
+    end
+  end
 
   def self.taggable_fields
     Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.parameterize('_') }

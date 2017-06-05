@@ -1,7 +1,13 @@
 module V1
   module Resources
     class ContentItems < Grape::API
+      helpers ::V1::Helpers::SharedParamsHelper
+      helpers ::V1::Helpers::ParamsHelper
+
       resource :content_items do
+        include Grape::Kaminari
+        paginate per_page: 25
+
         desc "Create a content item", { entity: ::V1::Entities::ContentItem, params: ::V1::Entities::ContentItem.documentation, nickname: "createContentItem" }
         params do
           requires :content_type_id, type: Integer, desc: "content type of content item"
@@ -26,6 +32,28 @@ module V1
           @content_items = ::ContentItem.all
 
           present @content_items, with: ::V1::Entities::ContentItem, field_items: true
+        end
+
+        desc 'Show published content items', { entity: ::V1::Entities::ContentItem, nickname: "contentItemsFeed" }
+        params do
+          use :pagination
+          requires :content_type_name, type: String, desc: "content type of content item"
+        end
+        get :feed do
+          require_scope! 'view:content_items'
+          authorize! :view, ::ContentItem
+
+          last_updated_at = ContentItem.last_updated_at
+          params_hash = Digest::MD5.hexdigest(declared(params).to_s)
+          cache_key = "feed-#{last_updated_at}-#{current_tenant.id}-#{params_hash}"
+
+          content_items_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
+            content_items = ::GetContentItems.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).content_items
+            set_paginate_headers(content_items)
+            ::V1::Entities::ContentItem.represent content_items.to_a, field_items: true
+          end
+
+          content_items_page
         end
       end
     end

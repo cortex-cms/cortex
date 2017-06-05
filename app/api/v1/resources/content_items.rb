@@ -13,7 +13,7 @@ module V1
           requires :content_type_id, type: Integer, desc: "content type of content item"
         end
         post do
-          require_scope! 'create:content_items'
+          require_scope! 'modify:content_items'
           authorize! :create, ::ContentItem
           @content_item = ::ContentItem.new(params.merge(author_id: current_user.id, creator_id: current_user.id))
 
@@ -47,13 +47,17 @@ module V1
           params_hash = Digest::MD5.hexdigest(declared(params).to_s)
           cache_key = "feed-#{last_updated_at}-#{current_tenant.id}-#{params_hash}"
 
-          content_items_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
-            content_items = ::GetContentItems.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).content_items
-            set_paginate_headers(content_items)
-            ::V1::Entities::ContentItem.represent content_items.to_a, field_items: true
-          end
+          content_items = ::GetContentItems.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).content_items
+          set_paginate_headers(content_items)
+          ::V1::Entities::ContentItem.represent content_items.to_a, field_items: true
+        end
 
-          content_items_page
+        desc 'Show a published content item', { entity: ::V1::Entities::ContentItem, nickname: "showFeedContentItem" }
+        get 'feed/*id' do
+          @content_item = ::GetContentItem.call(id: params[:id], published: true, tenant: current_tenant.id).content_item
+          not_found! unless @content_item
+          authorize! :view, @content_item
+          present @content_item, with: ::V1::Entities::ContentItem, field_items: true
         end
       end
     end

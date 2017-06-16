@@ -472,8 +472,8 @@ ActiveRecord::Schema.define(version: 20170531215319) do
     t.string   "dynamic_yield_sku"
     t.string   "dynamic_yield_category"
     t.jsonb    "tables_widget"
-    t.jsonb    "charts_widget"
     t.jsonb    "accordion_group_widget"
+    t.jsonb    "charts_widget"
     t.index ["user_id"], name: "index_webpages_on_user_id", using: :btree
   end
 

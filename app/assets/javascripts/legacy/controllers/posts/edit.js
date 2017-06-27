@@ -57,7 +57,6 @@ angular.module('cortex.controllers.posts.edit', [
   $scope.redactorOptions = {
     plugins: ['media', 'imageFit', 'inlinestyle'],
     minHeight: 800,
-    focus: true,
     buttonSource: true,
     deniedTags: ['html', 'head', 'link', 'body', 'applet'] // Allow script, style
   };

@@ -1,7 +1,7 @@
 development:
   rails:
     configuration:
-      ruby_version: 2.4.0
+      ruby_version: 2.4.1
     server:
       unique_name: web
       vendor: aws
@@ -11,7 +11,7 @@ development:
       - jpegoptim
   postgresql:
     configuration:
-      version: 9.5.2
+      version: 9.6.3
     server:
       unique_name: db
       vendor: aws
@@ -19,7 +19,7 @@ development:
       size: m3.medium
   elasticsearch:
     configuration:
-      version: 2.3.1
+      version: 5.4.3
     server:
       unique_name: search
       vendor: aws
@@ -27,7 +27,7 @@ development:
       size: m3.medium
   redis:
     configuration:
-      version: 3.0.7
+      version: 3.2.9
     server:
       unique_name: cache
       vendor: aws
@@ -37,7 +37,7 @@ development:
 staging:
   rails:
     configuration:
-      ruby_version: 2.4.0
+      ruby_version: 2.4.1
     server:
       unique_name: web
       vendor: aws
@@ -47,7 +47,7 @@ staging:
       - jpegoptim
   postgresql:
     configuration:
-      version: 9.5.2
+      version: 9.6.3
     server:
       unique_name: db
       vendor: aws
@@ -55,7 +55,7 @@ staging:
       size: m3.medium
   elasticsearch:
     configuration:
-      version: 2.3.1
+      version: 5.4.3
     server:
       unique_name: search
       vendor: aws
@@ -63,7 +63,7 @@ staging:
       size: m3.medium
   redis:
     configuration:
-      version: 3.0.7
+      version: 3.2.9
     server:
       unique_name: cache
       vendor: aws
@@ -73,7 +73,7 @@ staging:
 production:
   rails:
     configuration:
-      ruby_version: 2.4.0
+      ruby_version: 2.4.1
     server:
       unique_name: web
       vendor: aws
@@ -83,7 +83,7 @@ production:
         - jpegoptim
   postgresql:
     configuration:
-      version: 9.5.2
+      version: 9.6.3
     server:
       unique_name: db
       vendor: aws
@@ -91,7 +91,7 @@ production:
       size: r3.xlarge
   elasticsearch:
     configuration:
-      version: 2.3.1
+      version: 5.4.3
     server:
       unique_name: search
       vendor: aws
@@ -99,7 +99,7 @@ production:
       size: r3.2xlarge
   redis:
     configuration:
-      version: 3.0.7
+      version: 3.2.9
     server:
       unique_name: cache
       vendor: aws

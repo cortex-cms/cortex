@@ -7,6 +7,7 @@ development:
       vendor: aws
       region: us-east-1
       size: m3.medium
+      root_disk_size: 50
     extra_packages:
       - jpegoptim
   postgresql:
@@ -43,6 +44,7 @@ staging:
       vendor: aws
       region: us-east-1
       size: m3.medium
+      root_disk_size: 50
     extra_packages:
       - jpegoptim
   postgresql:
@@ -79,6 +81,7 @@ production:
       vendor: aws
       region: us-east-1
       size: c4.xlarge
+      root_disk_size: 50
     extra_packages:
         - jpegoptim
   postgresql:

@@ -1,4 +1,7 @@
 development:
+  load_balancer:
+    configuration:
+      httpchk: /users/password/new
   rails:
     configuration:
       ruby_version: 2.4.1

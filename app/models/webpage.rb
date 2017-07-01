@@ -5,7 +5,7 @@ class Webpage < ApplicationRecord
   serialize :tables_widget
   serialize :charts_widget
 
-  scope :find_by_protocol_agnostic_url, ->(suffix) { where('url LIKE :suffix', suffix: "%#{suffix}") }
+  scope :agnostic_find_by_url, ->(url) { where('url ~* ?', "(?:[-\w]+\.)+[-\w]+(?::\d+)?(?:\/[^#?]*)") }
 
   acts_as_paranoid
   acts_as_taggable_on :seo_keywords

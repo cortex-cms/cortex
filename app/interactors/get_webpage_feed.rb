@@ -4,7 +4,16 @@ class GetWebpageFeed
   def call
     webpage = ::Webpage
     webpage = webpage.find_by_tenant_id(context.tenant) if context.tenant
-    webpage = webpage.agnostic_find_by_url(context.params.url).first
+    webpage = webpage.agnostic_find_by_url(context.params.url)
+    
     context.webpage = webpage
+  end
+
+  private
+
+  def protocol_agnostic_url(url)
+    uri = Addressable::URI.parse(url)
+    path = uri.path == '/' ? uri.path : uri.path.chomp('/')
+    "://#{uri.authority}#{path}"
   end
 end

@@ -17,8 +17,8 @@ class Webpage < ApplicationRecord
   accepts_nested_attributes_for :snippets
 
   def self.agnostic_find_by_url(url)
-    url = protocol_agnostic_url url
-    agnostic_guess_by_url.find { |webpage| protocol_agnostic_url(webpage.url) == url }
+    url = protocol_agnostic_url(url)
+    agnostic_guess_by_url(url).find { |webpage| protocol_agnostic_url(webpage.url) == url }
   end
 
   def tables_widget_yaml

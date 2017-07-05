@@ -12,7 +12,6 @@ class GetPosts
       posts = posts.show_all(context.tenant, context.published)
     end
 
-    posts = posts.page(context.params.page).per(context.params.per_page)
     context.posts = posts.records
   end
 

@@ -15,9 +15,9 @@ gem 'cortex-exceptions', '= 0.0.4'
 gem 'cortex-plugins-core', '= 0.12.4'
 
 # API
-gem 'grape', '~> 0.17'
-gem 'grape-entity', '~> 0.6.0'
-gem 'grape-swagger', '~> 0.27.1'
+gem 'grape', '~> 1.0'
+gem 'grape-entity', '~> 0.6.1'
+gem 'grape-swagger', '~> 0.27.2'
 
 # Authorization
 gem 'six', '~> 0.2.0'
@@ -36,7 +36,7 @@ gem 'image_optim_pack', '~> 0.4.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bcrypt', '~> 3.1.11'
 gem 'kaminari', '~> 0.17.0'
-gem 'grape-kaminari', git: 'https://github.com/toastercup/grape-kaminari.git', branch: 'set-paginate-headers-extraction'
+gem 'grape-kaminari', '~> 0.1.9'
 gem 'elasticsearch-model', '~> 5.0'
 gem 'elasticsearch-rails', '~> 5.0'
 gem 'paranoia', '~> 2.3'

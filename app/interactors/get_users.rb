@@ -12,7 +12,6 @@ class GetUsers
       users = users.show_all(context.tenant_id)
     end
 
-    users = users.page(context.params.page).per(context.params.per_page)
     context.users = users.records
   end
 

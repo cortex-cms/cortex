@@ -20,7 +20,7 @@ module V1
           require_scope! 'view:media'
 
           @media = ::GetMultipleMedia.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).media
-          ::V1::Entities::Media.represent paginate(@media)
+          ::V1::Entities::Media.represent paginate(@media).records
         end
 
         desc 'Show media tags'

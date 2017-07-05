@@ -20,7 +20,7 @@ module V1
           require_scope! 'view:posts'
           authorize! :view, ::Post
           @posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).posts
-          ::V1::Entities::Post.represent paginate(@posts)
+          ::V1::Entities::Post.represent paginate(@posts).records
         end
 
         desc 'Show published posts', { entity: ::V1::Entities::Post, nickname: "postFeed" }
@@ -38,7 +38,7 @@ module V1
 
           posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
             posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-            ::V1::Entities::Post.represent paginate(posts)
+            ::V1::Entities::Post.represent paginate(posts).records
           end
 
           posts_page
@@ -51,7 +51,7 @@ module V1
           authorize! :view, ::Post
 
           posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-          posts_page = ::V1::Entities::Post.represent posts.to_a
+          ::V1::Entities::Post.represent paginate(posts).records
         end
 
         desc 'Show published post authors'
@@ -68,7 +68,7 @@ module V1
           authorize! :view, post
 
           @posts = ::GetRelatedPosts.call(post: post, params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-          ::V1::Entities::Post.represent paginate(@posts)
+          ::V1::Entities::Post.represent paginate(@posts).records
         end
 
         desc 'Show a published post', { entity: ::V1::Entities::Post, nickname: "showFeedPost" }

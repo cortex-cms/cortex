@@ -12,7 +12,7 @@ class GetUsers
       users = users.show_all(context.tenant_id)
     end
 
-    context.users = users.records
+    context.users = users
   end
 
   private

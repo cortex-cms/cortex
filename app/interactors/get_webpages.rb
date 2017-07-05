@@ -12,7 +12,7 @@ class GetWebpages
       webpages = webpages.show_all(context.tenant)
     end
 
-    context.webpages = webpages.records
+    context.webpages = webpages
   end
 
   private

@@ -12,7 +12,7 @@ class GetPosts
       posts = posts.show_all(context.tenant, context.published)
     end
 
-    context.posts = posts.records
+    context.posts = posts
   end
 
   private

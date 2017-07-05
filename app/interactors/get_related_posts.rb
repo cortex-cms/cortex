@@ -4,6 +4,6 @@ class GetRelatedPosts
   def call
     related = context.post.related(context.tenant, context.published)
 
-    context.posts = related.records
+    context.posts = related
   end
 end

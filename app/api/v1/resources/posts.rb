@@ -1,3 +1,4 @@
+require 'ostruct'
 module V1
   module Resources
     class Posts < Grape::API
@@ -37,13 +38,21 @@ module V1
           params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
           cache_key       = "feed-#{last_updated_at}-#{current_tenant.id}-#{params_hash}"
 
-          posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
-            posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-            set_paginate_headers(posts)
-            ::V1::Entities::Post.represent posts.to_a
-          end
+          posts = ::OpenStruct.new(::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
+            post_relation = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
+            {
+              total_count: post_relation.total_count,
+              total_pages: post_relation.total_pages,
+              limit_value: post_relation.limit_value,
+              current_page: post_relation.current_page,
+              next_page: post_relation.next_page,
+              prev_page: post_relation.prev_page,
+              posts: post_relation.load.to_a
+            }
+          end)
 
-          posts_page
+          set_paginate_headers(posts)
+          ::V1::Entities::Post.represent posts.posts
         end
 
         desc 'Show all published posts', { entity: ::V1::Entities::Post, nickname: "allPostFeed" }

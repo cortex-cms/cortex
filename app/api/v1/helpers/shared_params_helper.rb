@@ -18,6 +18,7 @@ module V1
         optional :job_phase, type: String, desc: 'Job Phase'
         optional :post_type, type: String, desc: 'Post Type'
         optional :author, type: String, desc: 'Post Author'
+        optional :tags, type: String, desc: 'Tags'
       end
 
       params :post_associations do

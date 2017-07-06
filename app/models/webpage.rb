@@ -5,7 +5,7 @@ class Webpage < ApplicationRecord
   serialize :tables_widget
   serialize :charts_widget
 
-  scope :find_by_protocol_agnostic_url, ->(suffix) { where('url LIKE :suffix', suffix: "%#{suffix}") }
+  scope :agnostic_guess_by_url, ->(url) { where('url LIKE :url', url: "%#{url}%") }
 
   acts_as_paranoid
   acts_as_taggable_on :seo_keywords
@@ -15,6 +15,11 @@ class Webpage < ApplicationRecord
   has_many :documents, through: :snippets, :dependent => :destroy
 
   accepts_nested_attributes_for :snippets
+
+  def self.agnostic_find_by_url(url)
+    url = protocol_agnostic_url(url)
+    agnostic_guess_by_url(url).find { |webpage| protocol_agnostic_url(webpage.url) == url }
+  end
 
   def tables_widget_yaml
     tables_widget.to_yaml
@@ -62,5 +67,13 @@ class Webpage < ApplicationRecord
 
   def accordion_group_widget_json= p
     self.accordion_group_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
+  end
+
+  private
+
+  def self.protocol_agnostic_url(url)
+    uri = Addressable::URI.parse(url)
+    path = uri.path == '/' ? uri.path : uri.path.chomp('/')
+    "://#{uri.authority}#{path}"
   end
 end

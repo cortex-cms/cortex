@@ -11,7 +11,10 @@ initial_post = Post.find_by_slug(initial_post_seed.slug) || ArticlePost.new(titl
                                                                             published_at: Time.now,
                                                                             job_phase: initial_post_seed.job_phase,
                                                                             display: initial_post_seed.display,
-                                                                            copyright_owner: initial_post_seed.copyright_owner)
+                                                                            copyright_owner: initial_post_seed.copyright_owner,
+                                                                            categories: [Category.first],
+                                                                            primary_category: Category.first,
+                                                                            author: User.first)
 
 existing_tenant = Tenant.find_by_name(tenant_seed.name)
 

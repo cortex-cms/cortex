@@ -55,7 +55,7 @@ angular.module('cortex.controllers.posts.edit', [
   ImageFitService.initRedactorImageFitPlugin();
 
   $scope.redactorOptions = {
-    plugins: ['media', 'imageFit'],
+    plugins: ['media', 'imageFit', 'inlinestyle'],
     minHeight: 800,
     buttonSource: true,
     deniedTags: ['html', 'head', 'link', 'body', 'applet'] // Allow script, style

@@ -22,7 +22,7 @@
     "angular-bootstrap": "~> 0.12",
     "angular-flash": "~> 0.1.14",
     "angular-bootstrap-datetimepicker": "~> 0.3.8",
-    "angular-redactor": "~> 1.1.4",
+    "angular-redactor": "~> 1.1.6",
     "ng-file-upload": "~> 3.2.4",
     "ng-table": "~> 0.5.4",
     "bootstrap-sass-official": "~> 3.3.7",

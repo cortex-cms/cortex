@@ -1,7 +1,7 @@
 class GetPosts
   include Interactor
 
-  SEARCH_PARAMS = %w(q categories industries type job_phase post_type author).freeze
+  SEARCH_PARAMS = %w(q categories industries type job_phase post_type author tags).freeze
 
   def call
     posts = ::Post

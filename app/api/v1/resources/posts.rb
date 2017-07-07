@@ -36,12 +36,14 @@ module V1
           params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
           cache_key       = "feed-#{last_updated_at}-#{current_tenant.id}-#{params_hash}"
 
-          posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
+          posts = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
             posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-            ::V1::Entities::Post.represent paginate(posts).records
+            paginated_posts = paginate(posts).records.to_a
+            {records: paginated_posts, headers: header}
           end
 
-          posts_page
+          header.merge!(posts[:headers])
+          ::V1::Entities::Post.represent posts[:records]
         end
 
         desc 'Show all published posts', { entity: ::V1::Entities::Post, nickname: "allPostFeed" }

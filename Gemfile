@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.4.0'
+ruby '2.4.1'
 
 # Dependency Management
 gem 'bower-rails', '~> 0.11.0'
@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.2'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', '= 0.12.3'
+gem 'cortex-plugins-core', '= 0.12.4'
 
 # API
 gem 'grape', '~> 0.17'

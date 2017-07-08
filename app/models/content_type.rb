@@ -25,7 +25,7 @@ class ContentType < ApplicationRecord
   end
 
   def content_items_index_name
-    content_type_name_sanitized = name.parameterize('_')
+    content_type_name_sanitized = name.parameterize(separator: '_')
     "#{Rails.env}_content_type_#{content_type_name_sanitized}_content_items"
   end
 

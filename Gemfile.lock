@@ -136,7 +136,7 @@ GEM
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     cortex-exceptions (0.0.4)
-    cortex-plugins-core (0.12.3)
+    cortex-plugins-core (0.12.4)
       cells (~> 4.1)
       cells-haml (~> 0.0)
       cells-rails (~> 0.0)
@@ -172,7 +172,7 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
-    down (2.4.3)
+    down (2.5.1)
     elasticsearch (5.0.4)
       elasticsearch-api (= 5.0.4)
       elasticsearch-transport (= 5.0.4)
@@ -182,11 +182,11 @@ GEM
       ansi
       elasticsearch
       ruby-prof
-    elasticsearch-model (0.1.9)
+    elasticsearch-model (5.0.1)
       activesupport (> 3)
-      elasticsearch (> 0.4)
+      elasticsearch (~> 5)
       hashie
-    elasticsearch-rails (0.1.9)
+    elasticsearch-rails (5.0.1)
     elasticsearch-transport (5.0.4)
       faraday
       multi_json
@@ -327,8 +327,9 @@ GEM
     json_spec (1.1.4)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
-    jsonb_accessor (1.0.0.beta.4)
+    jsonb_accessor (1.0.0.beta.6)
       activerecord (>= 5.0)
+      activesupport (>= 5.0)
       pg (>= 0.18.1)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
@@ -618,7 +619,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.7)
   codeclimate-test-reporter (~> 0.6)
   cortex-exceptions (= 0.0.4)
-  cortex-plugins-core (= 0.12.3)
+  cortex-plugins-core (= 0.12.4)
   database_cleaner (~> 1.5)
   deep_cloneable (~> 2.2.2)
   devise (~> 4.2.1)
@@ -626,8 +627,8 @@ DEPENDENCIES
   doorkeeper (~> 4.2)
   dotenv-rails
   elasticsearch-extensions (~> 0.0.26)
-  elasticsearch-model (~> 0.1)
-  elasticsearch-rails (~> 0.1)
+  elasticsearch-model (~> 5.0)
+  elasticsearch-rails (~> 5.0)
   email_spec
   excon (~> 0.55.0)
   factory_girl_rails (~> 4.8)
@@ -710,7 +711,7 @@ DEPENDENCIES
   yt (~> 0.30.1)
 
 RUBY VERSION
-   ruby 2.4.0p0
+   ruby 2.4.1p111
 
 BUNDLED WITH
    1.14.6

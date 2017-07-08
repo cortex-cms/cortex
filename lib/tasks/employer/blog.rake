@@ -359,6 +359,7 @@ namespace :employer do
         },
         "item": {
           "title": { "field": blog.fields.find_by_name('Title').id },
+          "description": { "field": blog.fields.find_by_name('Description').id },
           "link": { "method": {
                       "name": "rss_url",
                       "args": ["https://resources.careerbuilder.com/", blog.fields.find_by_name('Slug').id]

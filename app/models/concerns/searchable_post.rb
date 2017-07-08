@@ -5,8 +5,6 @@ module SearchablePost
     include Searchable
 
     mapping do
-      indexes :id, :type => :integer, :index => :not_analyzed
-      indexes :tenant_id, :type => :integer, :index => :not_analyzed
       indexes :title, :analyzer => :snowball
       indexes :body, :analyzer => :snowball
       indexes :draft, :type => :boolean
@@ -16,13 +14,17 @@ module SearchablePost
       indexes :created_at, :type => :date, :include_in_all => false
       indexes :published_at, :type => :date, :include_in_all => false
       indexes :expired_at, :type => :date, :include_in_all => false
-      indexes :tag_list, :type => :string, :analyzer => :keyword
+      indexes :tags, :analyzer => :keyword
       indexes :categories, :analyzer => :keyword
       indexes :job_phase, :analyzer => :keyword
       indexes :type, :analyzer => :keyword
       indexes :industries, :analyzer => :keyword
       indexes :is_published, :type => :boolean
       indexes :is_sticky, :type => :boolean
+
+      indexes :id, :type => :integer, :index => :not_analyzed
+      indexes :tenant_id, :type => :integer, :index => :not_analyzed
+      indexes :tag_list, :type => :text, :index => :not_analyzed
     end
 
     def as_indexed_json(options = {})
@@ -72,6 +74,7 @@ module SearchablePost
       post_type = params[:post_type]
       industries = params[:industries]
       author = params[:author]
+      tags = params[:tags]
 
       bool = {bool: {must: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
@@ -93,11 +96,16 @@ module SearchablePost
       if author
         bool[:bool][:filter] << term_search(:author, author)
       end
-      if published
-        bool[:bool][:filter] << published_filter
+      if tags
+        bool[:bool][:filter] << terms_search(:tags, tags.split(','))
       end
 
-      search query: bool
+      if published
+        bool[:bool][:filter] << published_filter
+        search query: bool, sort: [{is_sticky: {order: 'desc'}, published_at: {order: 'desc'}}]
+      else
+        search query: bool
+      end
     end
 
     def show_all(tenant, published = nil)
@@ -105,9 +113,10 @@ module SearchablePost
 
       if published
         bool[:bool][:filter] << published_filter
+        search query: bool, sort: [{is_sticky: {order: 'desc'}, published_at: {order: 'desc'}}]
+      else
+        search query: bool, sort: [{is_sticky: {order: 'desc'}, created_at: {order: 'desc'}}]
       end
-
-      search query: bool, sort: [{is_sticky: {order: 'desc'}, created_at: {order: 'desc'}}]
     end
   end
 end

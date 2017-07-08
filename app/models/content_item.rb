@@ -115,7 +115,7 @@ class ContentItem < ApplicationRecord
       "#{publish_state.downcase}?" == args[0].to_s
     else
       # Used to query for any field on the relevant ContentType and return data from the content_item
-      field_items.select { |field_item| field_item.field.name.parameterize({ separator: '_' }) == args[0].to_s }.first.data.values[0]
+      field_items.select { |field_item| field_item.field.name.parameterize(separator: '_') == args[0].to_s }.first.data.values[0]
     end
   end
 end

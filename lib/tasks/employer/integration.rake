@@ -2,7 +2,7 @@ Bundler.require(:default, Rails.env)
 
 namespace :employer do
   namespace :integration do
-    desc 'Seed Employer Blog ContentType and Fields'
+    desc 'Seed Employer Integration ContentType and Fields'
     task seed: :environment do
       def category_tree
         tree = Tree.new
@@ -12,7 +12,7 @@ namespace :employer do
         tree
       end
 
-      puts "Creating Employer Integration ContentType..."
+      puts 'Creating Employer Integration ContentType...'
       integration = ContentType.new({
                                name: "Employer Integration",
                                description: "3rd Party CareerBuilder Integrations",

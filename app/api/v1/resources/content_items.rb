@@ -37,7 +37,7 @@ module V1
         desc 'Show published content items', { entity: ::V1::Entities::ContentItem, nickname: "contentItemsFeed" }
         params do
           use :pagination
-          requires :content_type_name, type: String, desc: "content type of content item"
+          requires :content_type_name, type: String, desc: 'ContentType of ContentItem'
         end
         get :feed do
           require_scope! 'view:content_items'
@@ -47,9 +47,14 @@ module V1
           params_hash = Digest::MD5.hexdigest(declared(params).to_s)
           cache_key = "feed-#{last_updated_at}-#{current_tenant.id}-#{params_hash}"
 
-          content_items = ::GetContentItems.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).content_items
-          set_paginate_headers(content_items)
-          ::V1::Entities::ContentItem.represent content_items.to_a, field_items: true
+          content_items = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
+            content_items = ::GetContentItems.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).content_items
+            paginated_content_items = paginate(content_items).records.to_a
+            {records: paginated_content_items, headers: header}
+          end
+
+          header.merge!(content_items[:headers])
+          ::V1::Entities::ContentItem.represent content_items[:records], field_items: true
         end
 
         desc 'Show a published content item', { entity: ::V1::Entities::ContentItem, nickname: "showFeedContentItem" }

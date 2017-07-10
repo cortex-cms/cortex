@@ -8,7 +8,7 @@
 //= require bootstrap-tagsinput
 //= require clipboard
 //= require dialog-polyfill
-//= require moment
+//= require momentjs
 
 //= require cortex-plugins-core/application
 //= require webpack-bundle

@@ -8,10 +8,6 @@ development: &defaults
   cors:
     allowed_origins: <%= ENV['CORS_ALLOWED_ORIGINS'] %>
     allowed_origins_regex: <%= ENV['CORS_ALLOWED_ORIGINS_REGEX'] %>
-  media:
-    max_size_mb: <%= ENV['MEDIA_MAX_SIZE_MB'] || 100 %>
-  onet:
-    version: <%= ENV['ONET_VERSION'] || '18.1' %>
 
 development:
   <<: *defaults

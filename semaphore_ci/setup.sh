@@ -19,8 +19,8 @@ bundle exec rake webpack:ensure_assets_compiled
 echo "bundle exec rake db:setup"
 bundle exec rake db:setup
 
-echo "bundle exec rake cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed"
-bundle exec rake cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed
+echo "bundle exec rake cortex:core:db:reseed"
+bundle exec rake cortex:core:db:reseed
 
 echo "bundle exec rake cortex:rebuild_indexes"
 bundle exec rake cortex:rebuild_indexes

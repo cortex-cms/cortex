@@ -28,11 +28,7 @@ gem 'rolify', '~> 5.1'
 gem 'pundit', '~> 1.1'
 
 # Data
-gem 'rails-observers', git: 'https://github.com/triloch/rails-observers.git'
-gem 'awesome_nested_set', git: 'https://github.com/cortex-cms/awesome_nested_set.git'
-gem 'paperclip', '~> 5.1.0'
-gem 'paperclip-optimizer', '~> 2.0'
-gem 'image_optim_pack', '~> 0.4.0'
+gem 'awesome_nested_set', '~> 3.1.3'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bcrypt', '~> 3.1.11'
 gem 'kaminari', '~> 0.17.0'
@@ -51,23 +47,19 @@ gem 'deep_cloneable', '~> 2.2.2'
 gem 'rack-cors', '~> 0.4.1', require: 'rack/cors'
 
 # Utility
-gem 'excon', '~> 0.55.0'
 gem 'hashie', '~> 3.5.5'
 gem 'hashr', '~> 2.0.1'
-gem 'mime-types', '~> 3.1.0'
-gem 'interactor-rails', '~> 2.0'
+gem 'mimemagic', '~> 0.3.2'
 gem 'virtus', '~> 1.0.5'
-gem 'rubyzip', '~> 1.2.1'
 gem 'addressable', '~> 2.5.1'
 gem 'json'
 
 # External Services
-gem 'yt', '~> 0.30.1'
 gem 'aws-sdk', '~> 2.9'
 
 # Jobs
 gem 'sidekiq', '~> 5.0.0'
-#gem 'sidekiq-failures', '~> 0.4.5' # Disabled until it supports sidekiq 5.x
+gem 'sidekiq-failures', '~> 1.0.0'
 gem 'sinatra', '~> 2.0.0.rc', require: false
 
 # Pipeline
@@ -75,8 +67,6 @@ gem 'sprockets-rails', '3.2.0', require: 'sprockets/railtie'
 gem 'sprockets', '3.7.1'
 gem 'uglifier', '~> 3.2.0'
 gem 'non-stupid-digest-assets', '~> 1.0.9'
-gem 'angular-rails-templates', '~> 1.0.2'
-gem 'ngannotate-rails', '~> 1.2.2'
 
 # View
 gem 'haml', '~> 5.0'
@@ -99,7 +89,6 @@ gem 'turbolinks', '~> 5.0.1'
 gem 'jquery-rails', '~> 4.3.1'
 gem 'jquery-turbolinks', '~> 2.1'
 gem 'jquery-ui-rails', '~> 6.0.1'
-gem 'ng-rails-csrf', '~> 0.1.0'
 gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
 gem 'dialog-polyfill-rails', '~> 0.4.5'
 
@@ -169,7 +158,6 @@ end
 group :test, :development do
   gem 'factory_girl_rails', '~> 4.8'
   gem 'faker', '~> 1.7'
-  gem 'fog-local', '~> 0.3.1'
   gem 'phantomjs', '~> 2.1.1'
   gem 'jasmine-rails', '~> 0.14'
 end

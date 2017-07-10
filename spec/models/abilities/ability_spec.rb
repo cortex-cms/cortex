@@ -15,12 +15,6 @@ describe Abilities::Ability, :type => :model do
         abilities = Abilities::Ability.allowed(user, Tenant)
         expect(abilities).to eq([])
       end
-
-      it 'should NOT have the ability to create webpages' do
-        user = create(:user)
-        abilities = Abilities::Ability.allowed(user, Webpage)
-        expect(abilities).to eq([:view])
-      end
     end
 
     context 'Application' do
@@ -30,14 +24,5 @@ describe Abilities::Ability, :type => :model do
         expect(abilities).to eq([:view, :create, :update, :delete])
       end
     end
-
-    context 'Anything Else' do
-      it 'should have no abilities' do
-        post = create(:post)
-        abilities = Abilities::Ability.allowed(post, post)
-        expect(abilities).to eq([])
-      end
-    end
   end
-
 end

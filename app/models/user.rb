@@ -3,7 +3,6 @@ require 'digest/md5'
 class User < ApplicationRecord
   include HasGravatar
   include HasFirstnameLastname
-  include SearchableUser
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable
@@ -11,11 +10,7 @@ class User < ApplicationRecord
   rolify
 
   belongs_to :tenant
-  has_one    :author
-  has_many   :media
   has_many   :tenants
-  has_many   :posts
-  has_many   :posts, through: :authors
   has_many   :localizations
   has_many   :locales
   has_many   :role_permissions, through: :roles
@@ -24,8 +19,10 @@ class User < ApplicationRecord
 
   validates_presence_of :email, :tenant, :firstname, :lastname
 
+  before_destroy :prevent_consumed_deletion
+
   def referenced?
-    [Media, Post, Locale, Localization, BulkJob].find do |resource|
+    [ContentItem].find do |resource|
       true if resource.where(user: self).count > 0
     end
   end
@@ -65,6 +62,10 @@ class User < ApplicationRecord
 
   def allowed_permissions(resource_class, permission)
     permissions.select { |perm| perm.resource_type == resource_class.to_s && perm.name == permission }
+  end
+
+  def prevent_consumed_deletion
+    raise Cortex::Exceptions::ResourceConsumed if referenced?
   end
 
   class << self

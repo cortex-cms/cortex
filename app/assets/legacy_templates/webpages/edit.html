@@ -130,5 +130,5 @@
   </tabset>
 
   <iframe ng-if="data.webpage.url" class="webpage-frame" id="webpage-frame"
-          ng-src="{{ appendEditingModeToUrl(data.webpage.url) | trustAsResourceUrl }}" disabled></iframe>
+          ng-src="{{ appendEditingParamsToUrl(data.webpage.url) | trustAsResourceUrl }}" disabled></iframe>
 </div>

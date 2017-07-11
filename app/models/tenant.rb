@@ -11,11 +11,19 @@ class Tenant < ApplicationRecord
   validates_presence_of :name
   validates_associated :owner
 
+  before_save :init
+
   def is_organization?
     self.root?
   end
 
   def has_children?
     !self.leaf?
+  end
+
+  private
+
+  def init
+    self.subdomain ||= self.name.mb_chars.normalize(:kd).downcase.gsub(/[^a-z0-9]/, '').to_s
   end
 end

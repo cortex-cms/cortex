@@ -4,8 +4,6 @@ require File.expand_path('../../config/environment', __FILE__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 
-require 'api_v1_helper'
-
 require 'mocha/api'
 require 'net/http'
 require 'email_spec'

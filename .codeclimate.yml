@@ -39,6 +39,7 @@ exclude_paths:
 - db/
 - spec/
 - vendor/
+- app/interactors/
 - app/api/
 - app/models/abilities/
 - app/models/application.rb

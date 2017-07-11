@@ -9,5 +9,7 @@ class Snippet < ApplicationRecord
   belongs_to :webpage
   belongs_to :document
 
+  validates_presence_of :user, :webpage, :document
+
   accepts_nested_attributes_for :document
 end

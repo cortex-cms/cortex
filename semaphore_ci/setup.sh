@@ -4,6 +4,9 @@ gem update --system
 echo "gem update bundler"
 gem update bundler
 
+echo "npm install"
+npm install
+
 echo "bundle config build.nokogiri --use-system-libraries"
 bundle config build.nokogiri --use-system-libraries
 
@@ -13,14 +16,14 @@ bundle install --without production staging development tasks
 echo "bundle exec rake bower:install:development"
 bundle exec rake bower:install:development
 
-echo "bundle exec rake webpack:ensure_assets_compiled"
-bundle exec rake webpack:ensure_assets_compiled
+echo "bundle exec rake cortex:assets:webpack:ensure_all_assets_compiled"
+bundle exec rake cortex:assets:webpack:ensure_all_assets_compiled
 
 echo "bundle exec rake db:setup"
 bundle exec rake db:setup
 
-echo "bundle exec rake cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed"
-bundle exec rake cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed
+echo "bundle exec rake cortex:core:db:reseed"
+bundle exec rake cortex:core:db:reseed
 
 echo "bundle exec rake cortex:rebuild_indexes"
 bundle exec rake cortex:rebuild_indexes

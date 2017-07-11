@@ -35,21 +35,6 @@ namespace :employer do
         tree
       end
 
-      def onet_tree
-        tree = Tree.new
-
-        industries_seed = SeedData.onet_industries
-
-        industries_seed.each do |industry|
-          tree.add_node({name: industry[:title]})
-        end
-
-        Onet::Occupation.industries.each do |onet_code|
-        end
-
-        tree
-      end
-
       puts "Creating Employer Blog ContentType..."
       blog = ContentType.new({
                                name: "Employer Blog",

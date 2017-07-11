@@ -5,6 +5,5 @@
 //= require material
 
 //= require base
-//= require authentication/login
 
 // require turbolinks # temporarily disabled

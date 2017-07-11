@@ -9,12 +9,7 @@
 /vendor/bundle
 /vendor/assets
 
-/public/asset_field_types/
 /public/assets/
-/public/media/
-/public/youtubes/
-/public/bulk_jobs/
-/public/content-snippets-edit
 /public/uploads/
 
 # Ignore the default SQLite database.
@@ -52,9 +47,6 @@ rerun.txt
 pickle-email-*.html
 .env
 /.cloud66/stack.json
-
-# Test Artifacts
-/media
 
 # these should all be checked in to normalise the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset

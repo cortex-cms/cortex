@@ -12,9 +12,6 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( authentication.scss )
 Rails.application.config.assets.precompile += %w( authentication.js )
 
-Rails.application.config.assets.precompile += %w( legacy_application.scss )
-Rails.application.config.assets.precompile += %w( legacy_application.js )
-
 Rails.application.config.assets.precompile += %w( ckeditor/* )
 # Add client/assets/ folders to asset pipeline's search path.
 # If you do not want to move existing images and fonts from your Rails app

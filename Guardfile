@@ -13,8 +13,7 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(%r{^app/interactors/(.+)\.rb$})               { |m| "spec/interactors/#{m[1]}_Spec.rb" }
   watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
   watch(%r{^spec/factories/(.+)\.rb$})                { "spec" }
-  watch('app/controllers/application_controller.rb')  { ["spec/controllers", "spec/api"] }
-  watch('app/controllers/api_controller.rb')          { "spec/api" }
+  watch('app/controllers/application_controller.rb')  { ["spec/controllers"] }
 end
 
 guard 'jasmine', :server_mount => '/specs', :server_env => :test, :server => :webrick do

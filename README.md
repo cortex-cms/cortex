@@ -23,24 +23,10 @@ Cortex follows a decentralized, API-only architecture - it is *not* built like W
 - [Running Test Suite](#running-test-suite)
 - [API](#api)
   - [Documentation](#documentation)
-  - [Resources](#resources)
-    - [Tenants](#tenants)
-    - [Users](#users)
-    - [Media](#media)
-    - [Posts](#posts)
-    - [Categories](#categories)
-    - [Occupations](#occupations)
-    - [Localizations](#localizations)
-    - [Applications](#applications)
-    - [Bulk Jobs](#bulk_jobs)
-    - [Documents](#documents)
-    - [Snippets](#snippets)
-    - [Webpages](#webpages)
 - [Consuming Cortex](#consuming-cortex)
   - [Authorization](#authorization)
   - [Content](#content)
   - [Localizations](#localizations)
-  - [Webpages and Snippets](#webpages-and-snippets)
   - [Exceptions](#exceptions)
 - [Applications Using Cortex](#applications-using-cortex)
 - [Troubleshooting](#troubleshooting)
@@ -58,7 +44,6 @@ For a rudimentary setup, these variables should be configured:
 
 * Execute `$ bundle exec rails secret` twice to generate both an `APP_SECRET` and `DEVISE_SECRET`
 * If the superuser isn't used for the app databases, the `DATABASE_USERNAME` and `DATABASE_PASSWORD` should be set accordingly.
-* Set `HOST` to the local Web server's root URL to properly configure Fog (local asset storage)
 
 ### Dependencies
 
@@ -153,12 +138,10 @@ $ bundle exec rake db:create
 $ bundle exec rake db:schema:load
 ```
 
-* Seed database with a top-level tenant, the superuser, Advice & Resources categories, ONET occupation/industry codes, and Custom Content data, then rebuild the ElasticSearch index:
+* Seed database with a top-level tenant, the superuser and Custom Content data, then rebuild the ElasticSearch index:
 
 ```sh
 $ bundle exec rake db:seed
-$ bundle exec rake cortex:create_categories
-$ bundle exec rake cortex:onet:fetch_and_provision
 $ bundle exec rake cortex:core:db:reseed
 $ bundle exec rake cortex:rebuild_indexes
 ```
@@ -196,7 +179,7 @@ This will configure various things, such as [dotenv](https://github.com/bkeepers
 Initialize the test database:
 
 ```sh
-$ RAILS_ENV=test bundle exec rake db:schema:load db:seed cortex:create_categories cortex:onet:fetch_and_provision cortex:core:db:reseed
+$ RAILS_ENV=test bundle exec rake db:schema:load db:seed cortex:core:db:reseed
 $ RAILS_ENV=test bundle exec rake cortex:rebuild_indexes
 ```
 
@@ -217,69 +200,6 @@ SwaggerUI is provided at [http://docs.api.cbcortex.com/](http://docs.api.cbcorte
 
 Swagger Endpoints are available at [http://api.cbcortex.com/api/v1/swagger_doc.json](http://api.cbcortex.com/api/v1/swagger_doc.json).
 
-### Resources
-
-Note: most resources are treated as 'paranoid' - that is, data is never truly deleted in the system - only archived.
-
-#### [Tenants](http://docs.api.cbcortex.com/#!/tenants)
-
-Tenants act as a nested set and are the foundation of the channel-focused content distribution mechanism of Cortex, and allow data to be segregated throughout the system. Tenancy is currently very limited in scope. For example, users are directly tied to a tenant, and content can only be associated with a tenant via an inflexible `content -> user -> tenant` relationship. This will be expanded soon.
-
-#### [Users](http://docs.api.cbcortex.com/#!/users)
-
-Users are for authorization and authentication. They currently lack roles, except for the ability to enable/disable admin access.
-
-#### [Media](http://docs.api.cbcortex.com/#!/media)
-
-Media covers any potential file-type to be stored in or linked to by the Cortex. This includes:
-
-* Images
-* Audio
-* Video
-* Youtube Links
-* Documents
-* Text
-
-When Media is consumed anywhere within the system, the two pieces of content become tied, and the Media cannot be deleted without the reference removed in the consuming piece of content.
-
-#### [Posts](http://docs.api.cbcortex.com/#!/posts)
-
-Posts serve as a packaged distribution medium consisting of other content. They can be categorized, assigned to an occupation, and contain media of any format.
-
-The posts endpoint also includes other posts-specific functionality, such as post filters and post tags.
-
-#### [Categories](http://docs.api.cbcortex.com/#!/categories)
-
-Categories act as a nested set, living in a tree-like structure with parents and children. Cortex's API provides both this hierarchy and a flat list of categories, with a minimum depth as an optional parameter. These are currently unable to be manipulated via the admin interface, only directly within the database.
-
-#### [Occupations](http://docs.api.cbcortex.com/#!/occupations)
-
-Occupations act as a nested set of Industries with specific Occupations (with SOC codes) beneath them. They utilize the ONET database, and are intended to eventually power intelligent content recommendations. See the `cortex:onet` rake task for specifics.
-
-#### [Localizations](http://docs.api.cbcortex.com/#!/localizations)
-
-Localizations/locales provide YAML/JSON-formatted translations for consuming applications.
-
-#### [Applications](http://docs.api.cbcortex.com/#!/applications)
-
-Applications contain credentials for OAuth applications that consume Cortex.
-
-#### [Bulk Jobs](http://docs.api.cbcortex.com/#!/bulk_jobs)
-
-Bulk Jobs is the generic interface for uploads processed in bulk for any compatible resource, i.e. `users`, `posts` and `media`.
-
-#### [Documents](http://docs.api.cbcortex.com/#!/documents)
-
-Documents are an incredibly generic piece of content, consisting only of raw text. They are intended to be made more specific by other resources, i.e. `snippets` and `webpages`.
-
-#### [Snippets](http://docs.api.cbcortex.com/#!/snippets)
-
-Snippets build ontop of a generic Document, and are intended to be HTML sections on a webpage.
-
-#### [Webpages](http://docs.api.cbcortex.com/#!/webpages)
-
-Webpages group together `snippets`, and correspond to a destination URL, and contain various additional metadata to power a dynamic, editable webpage.
-
 ## Consuming Cortex
 
 ### Authorization
@@ -297,10 +217,6 @@ Content can be consumed from a feed or via the resource's endpoint directly. Use
 ### Localizations
 
 Localizations can be consumed via the client or via [i18n-backend-cortex](https://github.com/cortex-cms/i18n-backend-cortex), which allows easy localization for Rails applications.
-
-### Webpages and Snippets
-
-Webpages/Snippets can be consumed via the client or via the [content-snippets-view](https://github.com/cortex-cms/content-snippets-view) and [content-snippets](https://github.com/cortex-cms/content-snippets) libraries, which need to be configured and hosted in order to be consumed.
 
 ### Exceptions
 
@@ -328,6 +244,6 @@ Cortex utilizes the Apache 2.0 License. See [LICENSE](LICENSE.md) for details.
 
 ## Copyright
 
-Copyright (c) 2016 CareerBuilder, LLC.
+Copyright (c) 2017 CareerBuilder, LLC.
 
 [cb-ce-github]: https://github.com/cb-talent-development "Content Enablement on GitHub"

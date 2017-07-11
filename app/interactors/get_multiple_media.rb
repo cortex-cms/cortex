@@ -12,8 +12,7 @@ class GetMultipleMedia
       media = media.show_all(context.tenant)
     end
 
-    media = media.page(context.params.page).per(context.params.per_page)
-    context.media = media.records
+    context.media = media
   end
 
   private

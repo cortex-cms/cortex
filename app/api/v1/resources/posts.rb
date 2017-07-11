@@ -20,8 +20,7 @@ module V1
           require_scope! 'view:posts'
           authorize! :view, ::Post
           @posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant).posts
-          set_paginate_headers(@posts)
-          ::V1::Entities::Post.represent @posts.to_a
+          ::V1::Entities::Post.represent paginate(@posts).records
         end
 
         desc 'Show published posts', { entity: ::V1::Entities::Post, nickname: "postFeed" }
@@ -37,13 +36,14 @@ module V1
           params_hash     = Digest::MD5.hexdigest(declared(params).to_s)
           cache_key       = "feed-#{last_updated_at}-#{current_tenant.id}-#{params_hash}"
 
-          posts_page = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
+          posts = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
             posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-            set_paginate_headers(posts)
-            ::V1::Entities::Post.represent posts.to_a
+            paginated_posts = paginate(posts).records.to_a
+            {records: paginated_posts, headers: header}
           end
 
-          posts_page
+          header.merge!(posts[:headers])
+          ::V1::Entities::Post.represent posts[:records]
         end
 
         desc 'Show all published posts', { entity: ::V1::Entities::Post, nickname: "allPostFeed" }
@@ -53,7 +53,7 @@ module V1
           authorize! :view, ::Post
 
           posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-          posts_page = ::V1::Entities::Post.represent posts.to_a
+          ::V1::Entities::Post.represent paginate(posts).records
         end
 
         desc 'Show published post authors'
@@ -70,8 +70,7 @@ module V1
           authorize! :view, post
 
           @posts = ::GetRelatedPosts.call(post: post, params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-          set_paginate_headers(@posts)
-          ::V1::Entities::Post.represent @posts.to_a
+          ::V1::Entities::Post.represent paginate(@posts).records
         end
 
         desc 'Show a published post', { entity: ::V1::Entities::Post, nickname: "showFeedPost" }

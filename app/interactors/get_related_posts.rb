@@ -4,6 +4,6 @@ class GetRelatedPosts
   def call
     related = context.post.related(context.tenant, context.published)
 
-    context.posts = related.page(context.params.page).per(context.params.per_page).records
+    context.posts = related
   end
 end

@@ -72,4 +72,16 @@ angular.module('cortex.controllers.webpages.edit', [
         page: page.page
       });
     }
+
+    $scope.appendEditingParamsToUrl = function(url) {
+      var urlHasParams = _.includes(url, '?');
+
+      if (urlHasParams) {
+        url = url + '&editing_mode=1&disable_redirects=1';
+      } else {
+        url = url + '?editing_mode=1&disable_redirects=1';
+      }
+
+      return url;
+    }
   });

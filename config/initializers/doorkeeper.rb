@@ -39,7 +39,8 @@ Doorkeeper.configure do
   optional_scopes 'view:users', 'modify:users', 'view:tenants', 'modify:tenants', 'view:posts',
                   'modify:posts', 'view:media', 'modify:media', 'view:applications', 'modify:applications',
                   'view:bulk_jobs', 'modify:bulk_jobs', 'view:documents', 'modify:documents',
-                  'view:snippets', 'modify:snippets', 'view:webpages', 'modify:webpages', 'view:content_types'
+                  'view:snippets', 'modify:snippets', 'view:webpages', 'modify:webpages', 'view:content_types',
+                  'modify:content_types', 'view:content_items', 'modify:content_items'
 
   # Change the way client credentials are retrieved from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then

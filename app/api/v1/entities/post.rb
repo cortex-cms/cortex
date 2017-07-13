@@ -23,12 +23,12 @@ module V1
       expose :primary_industry_id, documentation: {type: "Integer", desc: "Primary Industry ID"}
       expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
       expose :body, documentation: {desc: "Body of the post", type: "String"}
-      expose :carotene, with: '::V1::Entities::Carotene'
 
       expose :categories, using: '::V1::Entities::Category', documentation: {type: 'Category', is_array: true, desc: "Categories"}
       expose :featured_media, using: '::V1::Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Featured Media for this post"}
       expose :tile_media, using: '::V1::Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Tile Media for this post"}
       expose :industries, using: '::V1::Entities::Occupation', documentation: {type: 'Industry', is_array: true, desc: "Industries"}
+      expose :carotene, using: '::V1::Entities::Carotene', documentation: {type: 'Carotene', is_array: false, desc: "Carotene Code"}
 
       # This runtime exposure is necessary to correctly resolve the enum value
       expose :display, {documentation: { type: "String", desc: "Post Display Size"}} do |post|

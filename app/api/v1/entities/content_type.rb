@@ -1,7 +1,7 @@
 module V1
   module Entities
     class ContentType < Grape::Entity
-      expose :id, documentation: { type: "Integer", desc: "Content Type ID" }
+      expose :id, documentation: { type: "UUID", desc: "Content Type ID" }
       expose :name, documentation: { type: "String", desc: "Content Type name" }
 
       with_options if: { fields: true } do

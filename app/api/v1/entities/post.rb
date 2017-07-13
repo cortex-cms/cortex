@@ -23,6 +23,7 @@ module V1
       expose :primary_industry_id, documentation: {type: "Integer", desc: "Primary Industry ID"}
       expose :tag_list, documentation: {type: "String", is_array: true, desc: "Tags"}
       expose :body, documentation: {desc: "Body of the post", type: "String"}
+      expose :carotene, with: '::V1::Entities::Carotene'
 
       expose :categories, using: '::V1::Entities::Category', documentation: {type: 'Category', is_array: true, desc: "Categories"}
       expose :featured_media, using: '::V1::Entities::Media', documentation: {type: 'Media', is_array: false, desc: "Featured Media for this post"}

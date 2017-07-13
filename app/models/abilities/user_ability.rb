@@ -19,6 +19,7 @@ module Abilities
           elsif subject == Snippet; abilities += snippet_class_abilities(user);
           elsif subject == ContentType; abilities += content_type_class_abilities(user);
           elsif subject == ContentItem; abilities += content_item_class_abilities(user);
+          elsif subject == Carotene; abilities += carotene_class_abilities(user);
           end
         else
           if subject.kind_of? User; abilities += user_abilities(user, subject)
@@ -34,6 +35,7 @@ module Abilities
           elsif subject.kind_of? Snippet; abilities += snippet_abilities(user, subject)
           elsif subject.kind_of? ContentType; abilities += content_type_abilities(user, subject)
           elsif subject.kind_of? ContentItem; abilities += content_item_abilities(user, subject)
+          elsif subject.kind_of? Carotene; abilities += carotene_abilities(user, subject)
           end
         end
 
@@ -183,6 +185,14 @@ module Abilities
 
       def content_item_class_abilities(user)
         [:view, :create]
+      end
+
+      def carotene_abilities(user, carotene)
+        [:view]
+      end
+
+      def carotene_class_abilities(user)
+        [:view]
       end
     end
   end

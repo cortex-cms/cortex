@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713054104) do
+ActiveRecord::Schema.define(version: 20170713075716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -347,7 +347,9 @@ ActiveRecord::Schema.define(version: 20170713054104) do
     t.boolean  "noarchive",           default: false
     t.boolean  "noimageindex",        default: false
     t.boolean  "is_sticky",           default: false
+    t.uuid     "carotene_id"
     t.index ["author_id"], name: "index_posts_on_author_id", using: :btree
+    t.index ["carotene_id"], name: "index_posts_on_carotene_id", using: :btree
     t.index ["slug"], name: "index_posts_on_slug", using: :btree
     t.index ["type"], name: "index_posts_on_type", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
@@ -487,4 +489,5 @@ ActiveRecord::Schema.define(version: 20170713054104) do
     t.index ["user_id"], name: "index_webpages_on_user_id", using: :btree
   end
 
+  add_foreign_key "posts", "carotenes"
 end

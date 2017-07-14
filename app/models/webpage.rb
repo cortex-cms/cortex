@@ -54,6 +54,22 @@ class Webpage < ApplicationRecord
     self.charts_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
   end
 
+  def buy_box_widget_yaml
+    buy_box_widget.to_yaml
+  end
+
+  def buy_box_widget_yaml= p
+    self.buy_box_widget = YAML.load(p)
+  end
+
+  def buy_box_widget_json
+    buy_box_widget.to_json
+  end
+
+  def buy_box_widget_json= p
+    self.buy_box_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
+  end
+
   def accordion_group_widget_yaml
     accordion_group_widget.to_yaml
   end

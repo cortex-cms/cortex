@@ -4,6 +4,7 @@ class Webpage < ApplicationRecord
 
   serialize :tables_widget
   serialize :charts_widget
+  serialize :buy_box_widget
 
   scope :agnostic_guess_by_url, ->(url) { where('url LIKE :url', url: "%#{url}%") }
 

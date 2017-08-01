@@ -8,7 +8,7 @@ module V1
         include Grape::Kaminari
         helpers ::V1::Helpers::PostsHelper
 
-        paginate per_page: 25
+        paginate per_page: 25, max_per_page: 1000
 
         desc 'Show all posts', { entity: ::V1::Entities::Post, nickname: "showAllPosts" }
         params do

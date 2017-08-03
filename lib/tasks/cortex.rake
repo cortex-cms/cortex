@@ -341,8 +341,7 @@ def seed_carotene
   CSV.foreach(Rails.root.join('db/seeds/carotene.csv'), {headers: true, col_sep: ','}) do |carotene|
     Carotene.create!({
                        title: carotene['carotenetitle'].strip,
-                       code: carotene['carotenecode'].strip,
-                       cdptitle: carotene['cdptitle'].strip
+                       code: carotene['carotenecode'].strip
                      })
   end
 end

@@ -19,6 +19,7 @@ module V1
         optional :post_type, type: String, desc: 'Post Type'
         optional :author, type: String, desc: 'Post Author'
         optional :tags, type: String, desc: 'Tags'
+        optional :carotene_code, type: String, desc: 'Carotene Code (CID)'
       end
 
       params :post_associations do

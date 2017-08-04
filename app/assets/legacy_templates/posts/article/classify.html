@@ -43,6 +43,23 @@
   </div>
 </div>
 
+<div class="form-group">
+  <label>Carotene</label>
+
+  <div class="input-group">
+    <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
+    <select class="form-control"
+            ng-model="data.post.carotene_id">
+      <option value="" selected>All Carotene Codes</option>
+      <option ng-repeat="carotene in data.carotenes"
+              ng-selected="{{carotene.id == data.post.carotene_id}}"
+              value="{{carotene.id}}">
+        {{carotene.title}} - {{carotene.code}}
+      </option>
+    </select>
+  </div>
+</div>
+
 <div class="tags">
   <label>Post Tags (space starts a new tag, to create a multiword tag use - between words)</label>
 

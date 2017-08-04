@@ -1,7 +1,7 @@
 module V1
   module Entities
     class ContentItem < Grape::Entity
-      expose :id, documentation: {type: "Integer", desc: "Content Item ID", required: true}
+      expose :id, documentation: {type: "UUID", desc: "Content Item ID", required: true}
       expose :publish_state, documentation: {type: "String", desc: "Publish state", required: true}
       expose :creator, documentation: {type: "dateTime", desc: "Date published", required: true} do |content_item|
         content_item.creator.fullname

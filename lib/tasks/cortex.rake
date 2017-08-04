@@ -219,6 +219,24 @@ namespace :cortex do
     end
   end
 
+  namespace :carotene do
+    desc 'Seed Carotene codes'
+    task :seed => :environment do
+      seed_carotene
+    end
+
+    desc 'Clear out existing Carotene codes'
+    task :clear => :environment do
+      clear_carotene
+    end
+
+    desc 'Clear out and seed Carotene codes'
+    task :clear_and_seed => :environment do
+      clear_carotene
+      seed_carotene
+    end
+  end
+
   namespace :onet do
     desc 'Download ONET database'
     task :fetch => :environment do
@@ -311,4 +329,19 @@ end
 
 def onet_package_name
   "db_#{(Cortex.config.onet.version.to_s || '18.1').gsub('.', '_')}"
+end
+
+def clear_carotene
+  puts 'Clearing all Carotene codes..'
+  Carotene.destroy_all
+end
+
+def seed_carotene
+  puts 'Seeding Carotene codes..'
+  CSV.foreach(Rails.root.join('db/seeds/carotene_v3.1.csv'), {headers: true, col_sep: ','}) do |carotene|
+    Carotene.create!({
+                       title: carotene['GroupTitle'].strip,
+                       code: carotene['CID'].strip
+                     })
+  end
 end

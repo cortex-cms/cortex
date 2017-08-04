@@ -21,6 +21,7 @@ module SearchablePost
       indexes :industries, :analyzer => :keyword
       indexes :is_published, :type => :boolean
       indexes :is_sticky, :type => :boolean
+      indexes :carotene_code, :analyzer => :keyword
 
       indexes :id, :type => :integer, :index => :not_analyzed
       indexes :tenant_id, :type => :integer, :index => :not_analyzed
@@ -33,6 +34,7 @@ module SearchablePost
       json[:categories] = categories.collect { |c| c.name }
       json[:industries] = industries.collect { |i| i.soc }
       json[:tags] = tag_list.to_a
+      json[:carotene_code] = carotene&.code
       json[:author] = author ? author.fullname : custom_author
       json[:tenant_id] = user.tenant.id
       json[:is_published] = self.published?
@@ -75,6 +77,7 @@ module SearchablePost
       industries = params[:industries]
       author = params[:author]
       tags = params[:tags]
+      carotene_code = params[:carotene_code]
 
       bool = {bool: {must: [], filter: [{term: {tenant_id: tenant.id}}]}}
 
@@ -98,6 +101,9 @@ module SearchablePost
       end
       if tags
         bool[:bool][:filter] << terms_search(:tags, tags.split(','))
+      end
+      if carotene_code
+        bool[:bool][:filter] << terms_search(:carotene_code, [carotene_code])
       end
 
       if published

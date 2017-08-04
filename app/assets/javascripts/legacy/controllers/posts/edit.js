@@ -12,7 +12,7 @@ angular.module('cortex.controllers.posts.edit', [
 ])
 
 .controller('PostsEditCtrl', function($scope, $state, $timeout, flash, _,
-                                      post, filters, currentUserAuthor, categoriesHierarchy, AddMediaService, ImageFitService) {
+                                      post, filters, carotenes, currentUserAuthor, categoriesHierarchy, AddMediaService, ImageFitService) {
   $scope.data = {
     savePost: function() {
       $scope.$broadcast('validateShowErrors');
@@ -30,6 +30,7 @@ angular.module('cortex.controllers.posts.edit', [
       $scope.data.post.tag_list = $scope.data.post.tag_list.map(function(tag) { return tag.name; });
       $scope.data.post.seo_keyword_list = $scope.data.post.seo_keyword_list.map(function(seo_keyword) { return seo_keyword.name; });
 
+      delete $scope.data.post.carotene;
       if ($scope.data.authorIsUser) {
         $scope.data.post.custom_author = null;
         $scope.data.post.author_id = currentUserAuthor.id;
@@ -48,7 +49,8 @@ angular.module('cortex.controllers.posts.edit', [
     phases: _.map(filters.job_phases, function(job_phase) {
       return job_phase.name;
     }),
-    industries: filters.industries
+    industries: filters.industries,
+    carotenes: carotenes
   };
 
   AddMediaService.initRedactorMediaPlugin();

@@ -287,6 +287,9 @@ angular.module('cortex.states', [
         }],
         currentUserAuthor: ['cortex', 'currentUser', function(cortex, currentUser) {
           return cortex.userAuthor.get({user_id: currentUser.id}).$promise;
+        }],
+        carotenes: ['cortex', function(cortex) {
+          return cortex.carotenes.query().$promise;
         }]
       },
       data: {
@@ -371,6 +374,9 @@ angular.module('cortex.states', [
         filters: ['cortex', function(cortex) {
           return cortex.posts.filters().$promise;
         }],
+        carotenes: ['cortex', function(cortex) {
+          return cortex.carotenes.query().$promise;
+        }],
         currentUserAuthor: ['cortex', 'currentUser', function(cortex, currentUser) {
           return cortex.userAuthor.get({user_id: currentUser.id}).$promise;
         }],
@@ -381,6 +387,10 @@ angular.module('cortex.states', [
             .then(function(post) {
               if (post.industry) {
                 post.industry_id = post.industry.id;
+              }
+
+              if (post.carotene) {
+                post.carotene_id = post.carotene.id;
               }
 
               var selectedCategoryIds = _.map(post.categories, function (c) {

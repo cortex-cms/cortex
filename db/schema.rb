@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531215319) do
+ActiveRecord::Schema.define(version: 20170803192005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 20170531215319) do
     t.index ["content_type"], name: "index_bulk_jobs_on_content_type", using: :btree
     t.index ["id"], name: "index_bulk_jobs_on_id", using: :btree
     t.index ["user_id"], name: "index_bulk_jobs_on_user_id", using: :btree
+  end
+
+  create_table "carotenes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.citext   "title",      null: false
+    t.string   "code",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_carotenes_on_code", using: :btree
+    t.index ["title"], name: "index_carotenes_on_title", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -337,7 +346,9 @@ ActiveRecord::Schema.define(version: 20170531215319) do
     t.boolean  "noarchive",           default: false
     t.boolean  "noimageindex",        default: false
     t.boolean  "is_sticky",           default: false
+    t.uuid     "carotene_id"
     t.index ["author_id"], name: "index_posts_on_author_id", using: :btree
+    t.index ["carotene_id"], name: "index_posts_on_carotene_id", using: :btree
     t.index ["slug"], name: "index_posts_on_slug", using: :btree
     t.index ["type"], name: "index_posts_on_type", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
@@ -474,7 +485,9 @@ ActiveRecord::Schema.define(version: 20170531215319) do
     t.jsonb    "tables_widget"
     t.jsonb    "charts_widget"
     t.jsonb    "accordion_group_widget"
+    t.jsonb    "buy_box_widget"
     t.index ["user_id"], name: "index_webpages_on_user_id", using: :btree
   end
 
+  add_foreign_key "posts", "carotenes"
 end

@@ -12,6 +12,8 @@ angular.module('cortex.services.cortex', [
     }
   });
 
+  var carotenes = cortexResource('/carotenes/:id', {id: '@id'});
+
   var locales = paginatedResource('/localizations/:localization_id/locales/:locale_name', {locale_name: '@locale_name'}, {
     search: {method: 'GET', params: {}, isArray: true, paginated: true}
   });
@@ -90,6 +92,7 @@ angular.module('cortex.services.cortex', [
     applications:  applications,
     credentials:   credentials,
     bulk_jobs:     bulkJobs,
-    webpages:      webpages
+    webpages:      webpages,
+    carotenes:     carotenes
   };
 });

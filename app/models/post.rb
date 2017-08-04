@@ -20,6 +20,7 @@ class Post < ApplicationRecord
   belongs_to :tile_media, class_name: 'Media'
   belongs_to :primary_category, class_name: 'Category'
   belongs_to :primary_industry, class_name: '::Onet::Occupation'
+  belongs_to :carotene
 
   validate :unique_slug?, :primary_category_must_be_in_categories, :primary_industry_must_be_in_industries
   validates :title, presence: true, length: { minimum: 1, maximum: 255 }

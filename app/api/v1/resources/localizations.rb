@@ -7,7 +7,7 @@ module V1
         include Grape::Kaminari
         helpers ::V1::Helpers::LocalizationHelper
 
-        paginate per_page: 25
+        paginate per_page: 25, max_per_page: 1000
 
         desc 'Show all localizations', { entity: ::V1::Entities::Localization, nickname: 'showAllLocalizations' }
         get do

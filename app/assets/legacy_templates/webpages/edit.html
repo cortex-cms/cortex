@@ -107,52 +107,52 @@
       <div>
         <form novalidate name="webpageForm">
           <tabset class="panel-tabs" justified="true">
-            <tab>
+            <tab ng-click="tabClicked(1)">
               <tab-heading>Tables Data</span>
               </tab-heading>
               <div class="form-group">
                 <label for="tables_widget_yaml">Tables Data</label>
-                <textarea ui-codemirror="cmOptions" id="tables_widget_yaml" name="tables_widget_yaml" class="form-control" rows="20"
+                <textarea ui-codemirror="cmOptions" ui-refresh='selectedTab' id="tables_widget_yaml" name="tables_widget_yaml" class="form-control" rows="20"
                       ng-model="data.webpage.tables_widget_yaml"
                       placeholder="YAML-formatted table data"></textarea>
               </div>
             </tab>
-            <tab>
+            <tab ng-click="tabClicked(2)">
               <tab-heading>Carousels Data</span>
               </tab-heading>
               <div class="form-group">
                 <label for="carousels_widget_yaml">Carousels Data</label>
-                <textarea ui-codemirror="cmOptions" id="carousels_widget_yaml" name="carousels_widget_yaml" class="form-control" rows="20"
+                <textarea ui-codemirror="cmOptions" ui-refresh='selectedTab' id="carousels_widget_yaml" name="carousels_widget_yaml" class="form-control" rows="20"
                       ng-model="data.webpage.carousels_widget_yaml"
                       placeholder="YAML-formatted carousel data"></textarea>
               </div>
             </tab>
-            <tab>
+            <tab ng-click="tabClicked(3)">
               <tab-heading>Accordion Group Data</span>
               </tab-heading>
               <div class="form-group">
                 <label for="accordion_group_widget_yaml">Accordion Group Data</label>
-                <textarea ui-codemirror="cmOptions" id="accordion_group_widget_yaml" name="accordion_group_widget_yaml" class="form-control" rows="20"
+                <textarea ui-codemirror="cmOptions" ui-refresh='selectedTab' id="accordion_group_widget_yaml" name="accordion_group_widget_yaml" class="form-control" rows="20"
                       ng-model="data.webpage.accordion_group_widget_yaml"
                       placeholder="YAML-formatted accordion group data"></textarea>
               </div>
             </tab>
-            <tab>
+            <tab ng-click="tabClicked(4)">
               <tab-heading>Charts Data</span>
               </tab-heading>
               <div class="form-group">
                 <label for="charts_widget_yaml">Charts Data</label>
-                <textarea  ui-codemirror="cmOptions" id="charts_widget_yaml" name="charts_widget_yaml" class="form-control" rows="20"
+                <textarea  ui-codemirror="cmOptions" ui-refresh='selectedTab' id="charts_widget_yaml" name="charts_widget_yaml" class="form-control" rows="20"
                       ng-model="data.webpage.charts_widget_yaml"
                       placeholder="YAML-formatted chart data"></textarea>
               </div>
             </tab>
-            <tab>
+            <tab ng-click="tabClicked(5)">
               <tab-heading>Buy Box Data</span>
               </tab-heading>
               <div class="form-group">
                 <label for="buy_box_widget_yaml">Buy Box Data</label>
-                <textarea ui-codemirror="cmOptions" id="buy_box_widget_yaml" name="buy_box_widget_yaml" class="form-control" rows="20"
+                <textarea ui-codemirror="cmOptions" ui-refresh='selectedTab' id="buy_box_widget_yaml" name="buy_box_widget_yaml" class="form-control" rows="20"
                       ng-model="data.webpage.buy_box_widget_yaml"
                       placeholder="YAML-formatted buy box data"></textarea>
               </div>

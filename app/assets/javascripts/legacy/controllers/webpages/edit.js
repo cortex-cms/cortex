@@ -30,8 +30,9 @@ angular.module('cortex.controllers.webpages.edit', [
     $scope.$on("$destroy", function(){
       $window.removeEventListener('message', frameEventListener, false);
     });
+
     // The ui-codemirror option
-     $scope.cmOptions = {
+    $scope.cmOptions = {
        lineNumbers: true,
        autofocus: true,
        styleActiveLine: true,
@@ -41,6 +42,12 @@ angular.module('cortex.controllers.webpages.edit', [
        lineWrapping : true,
        mode: 'yaml'
      };
+
+     $scope.selectedTab = 1;
+
+     $scope.tabClicked = function(tabIndex) {
+       $scope.selectedTab = tabIndex
+     }
 
     // Perhaps this should moved to a directive!
     var sendFrameMessage = function (data) {

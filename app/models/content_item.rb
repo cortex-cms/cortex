@@ -7,8 +7,8 @@ class ContentItem < ApplicationRecord
 
   acts_as_paranoid
 
-  belongs_to :creator, class_name: "User"
-  belongs_to :updated_by, class_name: "User"
+  belongs_to :creator, class_name: :User
+  belongs_to :updated_by, class_name: :User
   belongs_to :content_type
   has_many :field_items, dependent: :destroy, autosave: true
 

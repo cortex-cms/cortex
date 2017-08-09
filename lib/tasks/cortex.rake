@@ -37,7 +37,7 @@ namespace :cortex do
 
   desc 'Force re-creation of all elasticsearch mappings'
   task :rebuild_indexes => :environment do
-    [Post, Media, Onet::Occupation, Webpage, User].each do |klass|
+    [Post, Media, Onet::Occupation, Webpage, User, ContentType, ContentItem].each do |klass|
       klass.__elasticsearch__.create_index! force: true
       klass.import
     end

@@ -35,6 +35,7 @@ namespace :cortex do
     end
   end
 
+  # TODO: Loop through each ContentItem and create index, or figure out how to override ES record creation
   desc 'Force re-creation of all elasticsearch mappings'
   task :rebuild_indexes => :environment do
     [Post, Media, Onet::Occupation, Webpage, User, ContentType, ContentItem].each do |klass|

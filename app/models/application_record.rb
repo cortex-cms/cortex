@@ -3,7 +3,11 @@ class ApplicationRecord < ActiveRecord::Base
 
   # A bug in ES-Rails 5.x is breaking document updates:
   # https://github.com/elastic/elasticsearch-rails/issues/669
-  after_commit on: [:update] do
-    #__elasticsearch__.index_document(refresh: true) if defined? __elasticsearch__
+  after_commit :refresh_elasticsearch_index, on: :update, if: defined? __elasticsearch__
+
+  private
+
+  def refresh_elasticsearch_index
+    __elasticsearch__.index_document refresh: true
   end
 end

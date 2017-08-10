@@ -51,7 +51,7 @@ class Webpage < ApplicationRecord
   end
 
   def carousels_widget_json= p
-    self.carousels_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
+    self.carousels_widget = JSON.parse(p, quirks_mode: true)
   end
 
   def charts_widget_yaml

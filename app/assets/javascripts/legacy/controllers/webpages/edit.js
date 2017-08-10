@@ -43,7 +43,7 @@ angular.module('cortex.controllers.webpages.edit', [
        mode: 'yaml'
      };
 
-     $scope.selectedTab = 1;
+     $scope.selectedTab = 0;
 
      $scope.tabClicked = function(tabIndex) {
        $scope.selectedTab = tabIndex

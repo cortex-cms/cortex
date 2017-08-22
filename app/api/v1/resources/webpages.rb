@@ -6,7 +6,7 @@ module V1
       resource :webpages do
         include Grape::Kaminari
         helpers ::V1::Helpers::WebpagesHelper
-        paginate per_page: 25
+        paginate per_page: 25, max_per_page: 1000
 
         desc 'Show all webpages', { entity: ::V1::Entities::Webpage, nickname: 'showAllWebpages' }
         params do

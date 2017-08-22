@@ -6,7 +6,7 @@ module V1
 
       resource :content_items do
         include Grape::Kaminari
-        paginate per_page: 25
+        paginate per_page: 25, max_per_page: 1000
 
         desc "Create a content item", { entity: ::V1::Entities::ContentItem, params: ::V1::Entities::ContentItem.documentation, nickname: "createContentItem" }
         params do

@@ -9,7 +9,7 @@ module V1
         helpers ::V1::Helpers::MediaHelper
         helpers ::V1::Helpers::BulkJobsHelper
 
-        paginate per_page: 25
+        paginate per_page: 25, max_per_page: 1000
 
         desc 'Show all media', { entity: ::V1::Entities::Media, nickname: 'showAllMedia' }
         params do

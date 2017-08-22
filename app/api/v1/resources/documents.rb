@@ -5,7 +5,7 @@ module V1
         include Grape::Kaminari
         helpers ::V1::Helpers::DocumentsHelper
 
-        paginate per_page: 25
+        paginate per_page: 25, max_per_page: 1000
 
         desc 'Show all documents', { entity: ::V1::Entities::Document, nickname: 'showAllDocument' }
         get do

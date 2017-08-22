@@ -245,8 +245,11 @@ GEM
     grape-kaminari (0.1.9)
       grape
       kaminari
-    grape-swagger (0.27.2)
+    grape-swagger (0.27.3)
       grape (>= 0.16.2)
+    grape-swagger-entity (0.2.1)
+      grape-entity (>= 0.5.0)
+      grape-swagger (>= 0.20.4)
     guard (2.14.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -272,13 +275,13 @@ GEM
     haml (5.0.0)
       temple (>= 0.8.0)
       tilt
-    hashie (3.5.5)
+    hashie (3.5.6)
     hashie-forbidden_attributes (0.1.1)
       hashie (>= 3.0)
     hashr (2.0.1)
     htmlentities (4.3.4)
     httpclient (2.8.3)
-    i18n (0.8.1)
+    i18n (0.8.6)
     ice_nine (0.11.2)
     image_optim (0.24.2)
       exifr (~> 1.2, >= 1.2.2)
@@ -353,7 +356,7 @@ GEM
     mini_portile2 (2.1.0)
     mini_racer (0.1.9)
       libv8 (~> 5.3)
-    minitest (5.10.1)
+    minitest (5.10.3)
     mocha (1.2.1)
       metaclass (~> 0.0.1)
     multi_json (1.12.1)
@@ -414,7 +417,7 @@ GEM
     puma (3.8.2)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    rack (2.0.1)
+    rack (2.0.3)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-cors (0.4.1)
@@ -637,7 +640,8 @@ DEPENDENCIES
   grape (~> 0.19.2)
   grape-entity (~> 0.6.1)
   grape-kaminari (~> 0.1.9)
-  grape-swagger (~> 0.27.2)
+  grape-swagger (~> 0.27.3)
+  grape-swagger-entity (~> 0.2.1)
   guard-jasmine (~> 2.1)
   guard-rspec (~> 4.7)
   haml (~> 5.0)
@@ -708,4 +712,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.14.6
+   1.15.3

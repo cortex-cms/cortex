@@ -38,6 +38,22 @@ class Webpage < ApplicationRecord
     self.tables_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
   end
 
+  def carousels_widget_yaml
+    carousels_widget.to_yaml
+  end
+
+  def carousels_widget_yaml= p
+    self.carousels_widget = YAML.load(p)
+  end
+
+  def carousels_widget_json
+    carousels_widget.to_json
+  end
+
+  def carousels_widget_json= p
+    self.carousels_widget = JSON.parse(p, quirks_mode: true)
+  end
+
   def charts_widget_yaml
     charts_widget.to_yaml
   end

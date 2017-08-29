@@ -4,9 +4,5 @@
       = image_tag 'logo.svg', class: 'sidebar__brand-logo'
       %h1.sidebar__brand-name Cortex
   = render 'partials/navigation'
-  %footer
-    %nav.demo-navigation.mdl-navigation
-      - unless Rails.env.production?
-        = render 'partials/environment_display'
-      = render 'partials/tenant_display'
-  .sidebar__toggle-button#sidebar__toggle-button
+  = redux_store('DashboardStore', props: { tenant: (Tenant.find_by_name('Corporate') || current_user.tenant), current_user: current_user })
+  = react_component('DashboardApp', props: {}, prerender: true)

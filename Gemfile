@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.2'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', '= 0.12.4'
+gem 'cortex-plugins-core', path: '/Users/phalloran/cortex-plugins-core' #'= 0.12.4'
 
 # API
 gem 'grape', '~> 0.19.2'
@@ -84,8 +84,9 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'material_design_lite-sass', '~> 1.3.0'
 
 # JavaScript
-gem 'react_on_rails', '< 6.6'
+gem 'react_on_rails', '8.0.6'
 gem 'mini_racer', platforms: :ruby
+gem 'webpacker_lite'
 gem 'gon', '~> 6.1.0'
 gem 'turbolinks', '~> 5.0.1'
 gem 'jquery-rails', '~> 4.3.1'

@@ -2,8 +2,8 @@ import {
   TOGGLE
 } from 'constants/tenant_switcher'
 
-const setTenantSwitcherReducer = ({tenant, current_user}) => {
-  const initialState = { tenant_switcher: { tenant, current_user } }
+const setTenantSwitcherReducer = ({tenant, current_user, environment,  environment_abbreviated}) => {
+  const initialState = { tenant, current_user, environment,  environment_abbreviated }
   return function reducer(state = initialState, action) {
     switch (action.type) {
       case TOGGLE:

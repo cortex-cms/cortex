@@ -18,30 +18,31 @@ function select(state) {
 class TenantSwitcherContainer extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.layoutWrapper = document.getElementById('layout_wrapper')
   }
   selectTenant = (tenant) => {
+    console.log('selectTenant tenant', tenant)
     this.props.dispatch({ type: SELECT_TENANT, payload: tenant })
   }
   toggleTenantSwitcher = () => {
       this.props.dispatch({ type: TOGGLE_TENANT_SWITCHER })
-      document.body.className = !this.props.data.tenantListActive ? 'sidebar--tentant-display' : '';
+      this.layoutWrapper.className = !this.props.data.tenantListActive ? 'sidebar--tentant-display' : '';
   }
   toggleSidebar = () => {
     this.props.dispatch({ type: TOGGLE_SIDEBAR })
-    document.body.className = this.props.data.sidebarExpanded ? 'sidebar--collapsed' : '';
+    this.layoutWrapper.className = this.props.data.sidebarExpanded ?  'sidebar--collapsed' : '';
   }
   render() {
-    console.log('TenantSwitcherContainer this.props', this.props)
     const { environment, environment_abbreviated, tenant, selected_tenant, tenants, tenantListActive } = this.props.data
 
     return (
       <footer id="tentant_switch" >
-        <TenantList tenantClicked={this.selectTenant} selected_tenant={selected_tenant} tenants={tenants} active={tenantListActive} />
+        <TenantList selectTenant={this.selectTenant} selected_tenant={selected_tenant} tenants={tenants} active={tenantListActive} />
         <nav className='demo-navigation mdl-navigation'>
           <EnvironmentFlag environment={environment} environment_abbreviated={environment_abbreviated} />
           <div onClick={this.toggleTenantSwitcher} className='mdl-navigation__link nav__item'>
             <span className='nav__item-name'>
-              { capitalize(tenant.name) }
+              { capitalize(selected_tenant.name) }
             </span>
             <i className='material-icons' role="presentation">device_hub</i>
           </div>

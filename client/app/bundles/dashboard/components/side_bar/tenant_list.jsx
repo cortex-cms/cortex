@@ -1,4 +1,9 @@
 import React from 'react';
+import {
+  TOGGLE_TENANT_SWITCHER,
+  TOGGLE_SIDEBAR,
+  SELECT_TENANT
+} from 'constants/tenant_switcher'
 
 const TenantItem = ({name, subdomain}, tenantClicked) => (
   <li key={subdomain} className="mdl-list__item" onClick={tenantClicked}>
@@ -11,9 +16,9 @@ const TenantItem = ({name, subdomain}, tenantClicked) => (
 
 class TenantList extends React.PureComponent {
   renderTenants = () => {
-    const { tenants, tenantClicked } = this.props
+    const { tenants, selectTenant } = this.props
 
-    return tenants.map((tenant) => TenantItem(tenant, (tenant) => tenantClicked(tenant)) )
+    return tenants.map((tenant) => TenantItem(tenant, () => selectTenant(tenant)) )
   }
   render(){
     const { active } = this.props

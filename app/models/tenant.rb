@@ -6,6 +6,7 @@ class Tenant < ApplicationRecord
 
   has_many :applications
   has_many :users
+  has_many :active_users, :class_name => 'User', :foreign_key => 'active_tenant_id'
   belongs_to :owner, class_name: "User"
 
   validates_presence_of :name

@@ -47,6 +47,7 @@ module V1
         end
 
         desc 'Show all published posts', { entity: ::V1::Entities::Post, nickname: "allPostFeed" }
+        paginate per_page: 10000
         get 'feed/all_posts' do
           require_scope! 'view:posts'
           authorize! :view, ::Post

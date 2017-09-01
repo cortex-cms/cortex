@@ -11,12 +11,15 @@
     = csrf_meta_tags
   %body
     = render 'partials/media_dialogs'
+    -# .layout__container.mdl-js-layout.mdl-layout--fixed-drawer{class: ('sidebar--collapsed' unless current_page? root_path)}
+
     .layout__container.mdl-js-layout.mdl-layout--fixed-drawer{class: ('sidebar--collapsed' unless current_page? root_path)}
       = render 'partials/sidebar'
       .layout__topbar-content__container.mdl-layout--fixed-header
         = render 'partials/topbar'
         %main.mdl-layout__content.layout__main-content
           = yield
+    = render 'partials/tenant_switcher'
     = render 'partials/flash'
 
     %script{src: '//cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js', type: 'text/javascript'}

@@ -1,0 +1,6 @@
+= redux_store('DashboardStore', props: { tenant: (Tenant.find_by_name('Corporate') || current_user.tenant),
+  current_user: current_user,
+  environment: environment,
+  tenants: Tenant.all,
+  environment_abbreviated: environment_abbreviated })
+-# = react_component('DashboardApp', props: {}, prerender: true)

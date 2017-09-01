@@ -1,8 +1,3 @@
-= redux_store('DashboardStore', props: { tenant: (Tenant.find_by_name('Corporate') || current_user.tenant),
-  current_user: current_user,
-  environment: environment,
-  environment_abbreviated: environment_abbreviated })
-- binding.pry
 .layout__sidebar.mdl-layout__drawer
   %header.sidebar__header
     = link_to root_path, class: 'sidebar__root-link' do

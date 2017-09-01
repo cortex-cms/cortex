@@ -15,11 +15,10 @@ class Layout extends React.PureComponent {
     super(props)
   }
   render() {
-    const { data } = this.props
-    console.log('this.props', this.props)
+    const { data, dispatch } = this.props
     return (
       <section>
-        <TenantSwitcherContainer data={data.tenant_switcher}/>
+        <TenantSwitcherContainer dispatch={dispatch} data={data.session}/>
       </section>
     )
   }

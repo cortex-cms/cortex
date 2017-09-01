@@ -3,7 +3,7 @@ import setRailsContextReducer from 'dashboard/reducers/rails_context_reducer';
 
 const GetReducers = (DashboardState, railsContext) => {
   return {
-    tenant_switcher: setTenantSwitcherReducer(DashboardState),
+    session: setTenantSwitcherReducer(DashboardState),
     railsContext: setRailsContextReducer(railsContext)
   }
 };

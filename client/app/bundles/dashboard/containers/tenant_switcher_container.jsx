@@ -2,6 +2,7 @@ import React from 'react';
 import { NOT_DEFINED } from 'constants/type_constants'
 import {
   TOGGLE_TENANT_SWITCHER,
+  TOGGLE_SIDEBAR,
   SELECT_TENANT
 } from 'constants/tenant_switcher'
 import {
@@ -23,6 +24,11 @@ class TenantSwitcherContainer extends React.PureComponent {
   }
   toggleTenantSwitcher = () => {
       this.props.dispatch({ type: TOGGLE_TENANT_SWITCHER })
+      document.body.className = !this.props.data.tenantListActive ? 'sidebar--tentant-display' : '';
+  }
+  toggleSidebar = () => {
+    this.props.dispatch({ type: TOGGLE_SIDEBAR })
+    document.body.className = this.props.data.sidebarExpanded ? 'sidebar--collapsed' : '';
   }
   render() {
     console.log('TenantSwitcherContainer this.props', this.props)
@@ -31,7 +37,6 @@ class TenantSwitcherContainer extends React.PureComponent {
     return (
       <footer id="tentant_switch" >
         <TenantList tenantClicked={this.selectTenant} selected_tenant={selected_tenant} tenants={tenants} active={tenantListActive} />
-        <div className='layout__sidebar mdl-layout__drawer'>
         <nav className='demo-navigation mdl-navigation'>
           <EnvironmentFlag environment={environment} environment_abbreviated={environment_abbreviated} />
           <div onClick={this.toggleTenantSwitcher} className='mdl-navigation__link nav__item'>
@@ -41,8 +46,7 @@ class TenantSwitcherContainer extends React.PureComponent {
             <i className='material-icons' role="presentation">device_hub</i>
           </div>
         </nav>
-        <div className='sidebar__toggle-button' id='sidebar__toggle-button'></div>
-        </div>
+        <div className='sidebar__toggle-button' onClick={this.toggleSidebar} id='sidebar__toggle-button'></div>
       </footer>
     )
   }

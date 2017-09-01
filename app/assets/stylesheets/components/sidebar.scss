@@ -1,24 +1,13 @@
 $sidebar-width-expanded: 230px;
 $sidebar-width-collapsed: 85px;
+$sidebar-width-tenant-display: 350px;
 $sidebar-link-width: $sidebar-width-expanded - 60px; // link padding = 60px
 $sidebar-collapse-transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 $sidebar-toggle-button-transition: transform 500ms linear;
 
-.layout__wrapper {
-  left: $sidebar-width-expanded;
-}
-
 .nav__item {
   position: relative;
 }
-
-// #tentant_switch {
-//   position: fixed;
-//   z-index: 9000;
-//   bottom: 0;
-//   left: 0;
-//   width: $sidebar-width-expanded;
-// }
 
 .nav__item .material-icons {
   position: absolute;
@@ -126,11 +115,19 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 .tenant__list_wrapper {
   position: fixed;
   bottom: 0;
-  width: 400px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.175);
-  left: $sidebar-width-expanded;
+  width: $sidebar-width-tenant-display;
+  border-right: 1px solid $color-grey-dark;
+  box-sizing: border-box;
+  // box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+  left: 0;
+  bottom: 80px;
   background: #fff;
   z-index: 9000;
+
+  ul {
+    padding: 0;
+    margin-top: 0;
+  }
 
   li {
     border-bottom: 1px solid #eee;
@@ -149,18 +146,22 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 // Collapsing
 
 @media only screen and (min-width: 1024px) {
+  .sidebar--tentant-display {
+    .layout__wrapper {
+      left: $sidebar-width-tenant-display;
+    }
+
+    .layout__sidebar {
+      width: $sidebar-width-tenant-display;
+      transition: $sidebar-collapse-transition;
+    }
+  }
   .sidebar--collapsed {
     .environment__full {
       display: none;
     }
     .layout__wrapper {
       left: $sidebar-width-collapsed;
-    }
-    .tenant__list_wrapper {
-      left: $sidebar-width-collapsed;
-    }
-    #tentant_switch {
-      width: $sidebar-width-collapsed;
     }
 
     .environment__abbreviated {

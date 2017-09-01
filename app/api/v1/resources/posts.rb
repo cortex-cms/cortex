@@ -47,13 +47,16 @@ module V1
         end
 
         desc 'Show all published posts', { entity: ::V1::Entities::Post, nickname: "allPostFeed" }
-        paginate per_page: 10000
         get 'feed/all_posts' do
           require_scope! 'view:posts'
           authorize! :view, ::Post
+          last_updated_at = Post.last_updated_at
+          cache_key = "feed_all_posts-#{last_updated_at}-#{current_tenant.id}"
 
-          posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-          ::V1::Entities::Post.represent paginate(posts).records
+          ::Cortex.in_memory_cache.fetch(cache_key, expires_in: 1.day, race_condition_ttl: 10) do
+            posts = ::GetPosts.call(tenant: current_tenant, published: true).posts
+            ::V1::Entities::Post.represent posts.records
+          end
         end
 
         desc 'Show published post authors'

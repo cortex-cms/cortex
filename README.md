@@ -224,10 +224,10 @@ If a consuming or companion application would like to produce Cortex-equivalent 
 
 ## Applications Using Cortex
 
-* [Advice and Resources](https://github.com/cbdr/advice-and-resources) - Redesigned Workbuzz/Advice & Resources platform utilizing Cortex Posts and Rails. [Live Site](http://advice.careerbuilder.com/)
-* [Employer](https://github.com/cbdr/employer) - Redesigned Employer Marketing platform utilizing Cortex Webpages/Snippets and Rails. [Live Site](http://hiring.careerbuilder.com/)
-* [CB1 Lander Shell](https://github.com/cbdr/cb1-lander-shell) - Platform for hosting lander pages and experiments, utilizing Cortex Posts and Sinatra. [Live Site](http://corporate.careerbuilder.com/)
-* [CareerBuilder.com](https://github.com/cbdr/consumer-main) - The main Consumer Web site for CB.com uses Cortex Posts for the [Privacy](http://www.careerbuilder.com/privacy) and [Terms of Service](http://www.careerbuilder.com/terms) pages.
+* [Advice and Resources](https://github.com/cbdr/consumer-main/) - Simple Jobseeker Resources platform built atop the Consumer Web site utilizing Legacy Cortex Posts and Rails. Content will eventually be dynamically dispersed across site (result pages, description pages, etc) [Live Site](https://www.careerbuilder.com/advice)
+* [Employer](https://github.com/cbdr/employer) - Redesigned Employer Marketing platform utilizing Legacy Cortex Webpages/Snippets and Rails. [Live Site](https://hiring.careerbuilder.com/)
+* [CB1 Lander Shell](https://github.com/cbdr/cb1-lander-shell) - Platform for hosting lander pages and experiments, utilizing Legacy Cortex Posts and Sinatra. [Live Site](http://corporate.careerbuilder.com/)
+* [CareerBuilder.com](https://github.com/cbdr/consumer-main) - The main Consumer Web site for CB.com uses Legacy Cortex Posts for the [Privacy](https://www.careerbuilder.com/privacy) and [Terms of Service](https://www.careerbuilder.com/terms) pages.
 
 ## Troubleshooting
 * For OS X / homebrew users: Run `which node` to ensure node is properly linked. The path shown should match homebrew's default installation path (run `which brew` to reveal this). If its not, then run `brew link node` and follow the instructions.

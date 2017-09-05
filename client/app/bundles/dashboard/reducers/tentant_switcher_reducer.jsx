@@ -60,7 +60,8 @@ const setTenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants,
       case TOGGLE_TENANT_SWITCHER:
         return {
           ...state,
-          tenantListActive: !state.tenantListActive
+          tenantListActive: !state.tenantListActive,
+          organization_displayed: state.selected_tenant.parent_id || state.selected_tenant.id
         };
       default:
         return state

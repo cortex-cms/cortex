@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901192820) do
+ActiveRecord::Schema.define(version: 20170901212215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -448,6 +448,7 @@ ActiveRecord::Schema.define(version: 20170901192820) do
     t.string   "locale",                 limit: 30, default: "en_US", null: false
     t.string   "timezone",               limit: 30, default: "EST",   null: false
     t.boolean  "admin",                             default: false,   null: false
+    t.integer  "active_tenant"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["tenant_id"], name: "index_users_on_tenant_id", using: :btree
@@ -491,4 +492,5 @@ ActiveRecord::Schema.define(version: 20170901192820) do
   end
 
   add_foreign_key "posts", "carotenes"
+  add_foreign_key "users", "tenants", column: "active_tenant"
 end

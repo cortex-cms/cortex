@@ -10,7 +10,7 @@ class User < ApplicationRecord
   rolify
 
   belongs_to :tenant
-  belongs_to :active_tenant, :class_name => 'Tenant', :foreign_key  => "active_tenant_id"
+  belongs_to :active_tenant, :class_name => 'Tenant', :foreign_key  => "active_tenant"
   has_many   :tenants
   has_many   :localizations
   has_many   :locales

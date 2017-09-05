@@ -1,5 +1,7 @@
-PATH
-  remote: ../cortex-plugins-core
+GIT
+  remote: https://github.com/cortex-cms/cortex-plugins-core.git
+  revision: 572bbbd344418d9a8c1f9cc06c0e16236c825fe2
+  branch: COR-680/Tenant-Switcher
   specs:
     cortex-plugins-core (0.12.4)
       cells (~> 4.1)
@@ -148,7 +150,7 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
-    down (4.0.1)
+    down (4.1.0)
     elasticsearch (5.0.4)
       elasticsearch-api (= 5.0.4)
       elasticsearch-transport (= 5.0.4)
@@ -289,7 +291,7 @@ GEM
     json_spec (1.1.5)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
-    jsonb_accessor (1.0.0.beta.6)
+    jsonb_accessor (1.0.0)
       activerecord (>= 5.0)
       activesupport (>= 5.0)
       pg (>= 0.18.1)

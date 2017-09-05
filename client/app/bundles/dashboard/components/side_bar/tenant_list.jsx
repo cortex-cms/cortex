@@ -19,11 +19,23 @@ const TenantItem = ({name, subdomain}, tenantClicked) => (
 
 class TenantList extends React.PureComponent {
   renderTenants = () => {
-    const { tenants, selectTenant } = this.props
-    return tenants.map((tenant) => TenantItem(tenant, () => selectTenant(tenant)) )
+    const { tenants, organization_displayed, selected_tenant,  selectTenant, organizationClicked, OrganizationLookup } = this.props
+    return OrganizationLookup.organizations.map((org_id) => {
+      let {org_tenant, sub_tenants } = OrganizationLookup[org_id]
+      return (
+        <span key={org_tenant.subdomain + '_org'}>
+         <li onClick={organizationClicked(org_id)}><strong>{org_tenant.name}</strong></li>
+         <ul className={ organization_displayed === org_tenant.id ? "demo-list-icon mdl-list" : "hidden"}>
+          { sub_tenants.map((tenant) => TenantItem(tenant, () => selectTenant(tenant)) )}
+         </ul>
+        </span>
+      )
+
+    })
   }
   render(){
-    const { active, syncedWithDB } = this.props
+    const { active, syncedWithDB, OrganizationLookup } = this.props
+    console.log('OrganizationLookup', OrganizationLookup)
     const tenantListClass = active ? 'tenant__list_wrapper' : 'tenant__list_wrapper hidden'
     return (
       <div className={tenantListClass}>

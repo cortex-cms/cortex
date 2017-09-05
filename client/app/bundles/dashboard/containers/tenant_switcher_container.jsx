@@ -1,8 +1,15 @@
 import React from 'react';
 import SetRailsAPIService from 'dashboard/services/rails_api_service'
 import {NOT_DEFINED} from 'constants/type_constants'
-import {TOGGLE_TENANT_SWITCHER, TOGGLE_SIDEBAR, TENANT_UPDATED, TENANT_UPDATE_ERROR, SELECT_TENANT} from 'constants/tenant_switcher'
+import {
+  UPDATE_ORGANIZATION_SCOPE,
+  TOGGLE_TENANT_SWITCHER,
+  TOGGLE_SIDEBAR,
+  TENANT_UPDATED,
+  TENANT_UPDATE_ERROR,
+  SELECT_TENANT} from 'constants/tenant_switcher'
 import {capitalize} from 'dashboard/helpers/formating'
+import TenantOrganizationLookup from 'dashboard/helpers/tenant_organization_lookup'
 
 import EnvironmentFlag from 'components/side_bar/environment_flag'
 import TenantList from 'components/side_bar/tenant_list'
@@ -19,6 +26,7 @@ class TenantSwitcherContainer extends React.PureComponent {
     super(props);
     this.layoutWrapper = getLayoutWrapper(this.props.railsContext.serverSide)
     this.railsAPI = SetRailsAPIService(this.props.railsContext, this.props.data)
+    this.OrganizationLookup = TenantOrganizationLookup(this.props.data.tenants)
   }
   selectTenant = (tenant) => {
     console.log('selectTenant tenant', tenant)
@@ -42,6 +50,9 @@ class TenantSwitcherContainer extends React.PureComponent {
     })
 
   }
+  organizationClicked = (org_id) => () => {
+    this.props.dispatch({type: UPDATE_ORGANIZATION_SCOPE, payload: org_id})
+  }
   toggleTenantSwitcher = () => {
     this.props.dispatch({type: TOGGLE_TENANT_SWITCHER})
     this.layoutWrapper.className = !this.props.data.tenantListActive ? 'sidebar--tentant-display' : '';
@@ -58,12 +69,22 @@ class TenantSwitcherContainer extends React.PureComponent {
       tenant,
       selected_tenant,
       tenants,
+      organization_displayed,
       tenantListActive
     } = this.props.data
     const syncedWithDB = current_user.active_tenant.id === selected_tenant.id
     return (
       <footer id="tentant_switch">
-        <TenantList selectTenant={this.selectTenant} syncedWithDB={syncedWithDB} current_user={current_user} selected_tenant={selected_tenant} tenants={tenants} active={tenantListActive}/>
+        <TenantList
+        selectTenant={this.selectTenant}
+        organizationClicked={this.organizationClicked}
+        OrganizationLookup={this.OrganizationLookup}
+        organization_displayed={organization_displayed}
+        syncedWithDB={syncedWithDB}
+        current_user={current_user}
+        selected_tenant={selected_tenant}
+        tenants={tenants}
+        active={tenantListActive}/>
         <nav className='demo-navigation mdl-navigation'>
           <EnvironmentFlag environment={environment} environment_abbreviated={environment_abbreviated}/>
           <div onClick={this.toggleTenantSwitcher} className='mdl-navigation__link nav__item'>

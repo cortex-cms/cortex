@@ -112,6 +112,16 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   display: none;
 }
 
+.organization--label {
+  text-transform: uppercase;
+
+  &.active {
+    background-color: #1d8494;
+    color: #fbfbfb;
+    border-bottom: 1px solid #1d8494;
+  }
+}
+
 .tenant__list_wrapper {
   position: fixed;
   bottom: 0;

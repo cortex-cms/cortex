@@ -9,6 +9,18 @@ module ApplicationHelper
     Cortex.config.extra
   end
 
+  def user_session_props
+    {
+      environment: environment,
+      tenant: (Tenant.find_by_name('Corporate') || current_user.tenant),
+      current_user: current_user,
+      tenants: Tenant.all,
+      csrf_token: form_authenticity_token,
+      sidebarExpanded: (current_page? root_path),
+      environment_abbreviated: environment_abbreviated
+    }
+  end
+
   def qualtrics_domain
     extra_config.qualtrics_id.delete('_').downcase
   end

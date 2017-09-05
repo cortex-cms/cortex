@@ -7,19 +7,24 @@ import {
   TOGGLE_SIDEBAR
 } from 'constants/tenant_switcher'
 
-const activeTenant = (tenant, current_user) => current_user.active_tenant ? current_user.active_tenant : tenant
+const checkActiveTenant = (tenant, current_user) => {
+  if (current_user.active_tenant === null) {
+    return Object.assign({}, current_user, { active_tenant: tenant })
+  }
+  return current_user
+}
 
 const setTenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, current_user, environment,  environment_abbreviated}) => {
-  const active_tenant = activeTenant(tenant, current_user)
+  const currentUser = checkActiveTenant(tenant, current_user)
   const initialState = {
     tenantListActive: false,
-    selected_tenant: active_tenant,
+    selected_tenant: currentUser.active_tenant,
     tenant,
     csrf_token,
     sidebarExpanded,
     tenants,
-    organization_displayed: (active_tenant.parent_id || active_tenant.id),
-    current_user,
+    organization_displayed: (currentUser.active_tenant.parent_id || currentUser.active_tenant.id),
+    current_user: currentUser,
     environment,
     environment_abbreviated
   }

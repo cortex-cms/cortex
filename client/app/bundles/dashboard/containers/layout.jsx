@@ -13,13 +13,12 @@ function select(state) {
 class Layout extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.crsf_token = ReactOnRails.authenticityToken()
   }
   render() {
     const { data, dispatch } = this.props
     return (
       <section>
-        <TenantSwitcherContainer dispatch={dispatch} crsf_token={this.crsf_token} railsContext={data.railsContext} data={data.session}/>
+        <TenantSwitcherContainer dispatch={dispatch} railsContext={data.railsContext} data={data.session}/>
       </section>
     )
   }

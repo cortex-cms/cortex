@@ -1,7 +1,8 @@
 class TenantsController < AdminController
   def switch_tenants
+    current_user.update(active_tenant: Tenant.find(params[:requested_tenant]))
     respond_to do |format|
-      format.json { render :json => {name: '大姐'} }
+      format.json { render :json => current_user.active_tenant }
     end
   end
 end

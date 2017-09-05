@@ -4,6 +4,9 @@ import {
   TOGGLE_SIDEBAR,
   SELECT_TENANT
 } from 'constants/tenant_switcher'
+import {
+  Spinner
+} from 'dashboard/elements/loaders'
 
 const TenantItem = ({name, subdomain}, tenantClicked) => (
   <li key={subdomain} className="mdl-list__item" onClick={tenantClicked}>
@@ -17,17 +20,19 @@ const TenantItem = ({name, subdomain}, tenantClicked) => (
 class TenantList extends React.PureComponent {
   renderTenants = () => {
     const { tenants, selectTenant } = this.props
-
     return tenants.map((tenant) => TenantItem(tenant, () => selectTenant(tenant)) )
   }
   render(){
-    const { active } = this.props
+    const { active, syncedWithDB } = this.props
     const tenantListClass = active ? 'tenant__list_wrapper' : 'tenant__list_wrapper hidden'
     return (
       <div className={tenantListClass}>
          <ul className="demo-list-icon mdl-list">
           {this.renderTenants()}
          </ul>
+         <div className={ syncedWithDB ? 'hidden' : 'loader-spinner-wrapper'}>
+           <Spinner />
+         </div>
       </div>
     )
   }

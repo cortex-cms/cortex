@@ -17,7 +17,6 @@
 //= require form
 //= require flash
 //= require media_dialogs
-//= require sidebar-toggle
 //= require quick_links
 
 // require turbolinks # temporarily disabled

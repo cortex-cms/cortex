@@ -29,7 +29,6 @@ class TenantSwitcherContainer extends React.PureComponent {
     this.OrganizationLookup = TenantOrganizationLookup(this.props.data.tenants)
   }
   selectTenant = (tenant) => () => {
-    console.log('selectTenant tenant', tenant)
     this.updateTenant(tenant)
     this.props.dispatch({type: SELECT_TENANT, payload: tenant})
   }
@@ -45,13 +44,13 @@ class TenantSwitcherContainer extends React.PureComponent {
       self.layoutWrapper.classList.remove('sidebar--tentant-display')
 
     }).catch(error => {
-      console.log('error', error)
       self.props.dispatch({type: TENANT_UPDATE_ERROR, payload: error})
     })
 
   }
   organizationClicked = (org_id) => () => {
-    this.props.dispatch({type: UPDATE_ORGANIZATION_SCOPE, payload: org_id})
+    let organizationID = this.props.data.organization_displayed === org_id ? 0 : org_id;
+    this.props.dispatch({type: UPDATE_ORGANIZATION_SCOPE, payload: organizationID})
   }
   toggleTenantSwitcher = () => {
     this.props.dispatch({type: TOGGLE_TENANT_SWITCHER})

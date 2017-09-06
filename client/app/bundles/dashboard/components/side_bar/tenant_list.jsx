@@ -30,7 +30,7 @@ class TenantList extends React.PureComponent {
       let {org_tenant, sub_tenants } = OrganizationLookup[org_id]
       const organizationActive = (current_user.active_tenant.id === org_tenant.id || current_user.active_tenant.parent_id === org_tenant.id)
       return (
-        <span key={org_tenant.subdomain + '_org'}>
+        <ul key={org_tenant.subdomain + '_org'}>
          <li role="button" className={ this.organizationLabelClass((organization_displayed === org_tenant.id), organizationActive ) } tabIndex={index} >
           <i className={current_user.active_tenant.id === org_tenant.id ? 'material-icons tenant-active-icon' : 'hidden'}>lens</i>
           <span onClick={selectTenant(org_tenant)} className="mdl-list__item-primary-content">
@@ -42,14 +42,13 @@ class TenantList extends React.PureComponent {
          <ul className={ organization_displayed === org_tenant.id ? "demo-list-icon mdl-list sub-tenant--list" : "hidden"}>
           { sub_tenants.map((tenant) => TenantItem(tenant, selectTenant(tenant), current_user.active_tenant.id === tenant.id ) )}
          </ul>
-        </span>
+        </ul>
       )
 
     })
   }
   render(){
     const { active, syncedWithDB, OrganizationLookup } = this.props
-    console.log('OrganizationLookup', OrganizationLookup)
     const tenantListClass = active ? 'tenant__list_wrapper' : 'tenant__list_wrapper hidden'
     return (
       <div className={tenantListClass}>

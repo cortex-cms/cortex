@@ -28,7 +28,7 @@ class TenantSwitcherContainer extends React.PureComponent {
     this.railsAPI = SetRailsAPIService(this.props.railsContext, this.props.data)
     this.OrganizationLookup = TenantOrganizationLookup(this.props.data.tenants)
   }
-  selectTenant = (tenant) => {
+  selectTenant = (tenant) => () => {
     console.log('selectTenant tenant', tenant)
     this.updateTenant(tenant)
     this.props.dispatch({type: SELECT_TENANT, payload: tenant})

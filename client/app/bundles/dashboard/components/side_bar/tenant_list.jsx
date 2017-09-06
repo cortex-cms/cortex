@@ -8,8 +8,9 @@ import {
   Spinner
 } from 'dashboard/elements/loaders'
 
-const TenantItem = ({name, subdomain}, tenantClicked) => (
+const TenantItem = ({name, subdomain}, tenantClicked, tenantActive) => (
   <li key={subdomain} className="mdl-list__item" onClick={tenantClicked}>
+  <i className={tenantActive ? 'material-icons tenant-active-icon' : 'hidden'}>lens</i>
    <span className="mdl-list__item-primary-content">
    <i className="material-icons mdl-list__item-icon">bookmark</i>
    {name}
@@ -18,15 +19,28 @@ const TenantItem = ({name, subdomain}, tenantClicked) => (
 )
 
 class TenantList extends React.PureComponent {
+  organizationLabelClass(subTenantsDisplayed, labelActive) {
+    let orgLabelClassBase = subTenantsDisplayed ? 'mdl-list__item organization--label sub-tenant-list--displayed' : 'mdl-list__item organization--label'
+    orgLabelClassBase += labelActive ? ' active' : ''
+    return orgLabelClassBase
+  }
   renderTenants = () => {
-    const { tenants, organization_displayed, selected_tenant,  selectTenant, organizationClicked, OrganizationLookup } = this.props
+    const { tenants, organization_displayed, selected_tenant, current_user,  selectTenant, organizationClicked, OrganizationLookup } = this.props
     return OrganizationLookup.organizations.map((org_id, index) => {
       let {org_tenant, sub_tenants } = OrganizationLookup[org_id]
+      const organizationActive = (current_user.active_tenant.id === org_tenant.id || current_user.active_tenant.parent_id === org_tenant.id)
       return (
         <span key={org_tenant.subdomain + '_org'}>
-         <li role="button" className={ "mdl-list__item organization--label" + (organization_displayed === org_tenant.id ? ' active' : '' ) } tabIndex={index} onClick={organizationClicked(org_id)}><strong>{org_tenant.name}</strong></li>
-         <ul className={ organization_displayed === org_tenant.id ? "demo-list-icon mdl-list" : "hidden"}>
-          { sub_tenants.map((tenant) => TenantItem(tenant, () => selectTenant(tenant)) )}
+         <li role="button" className={ this.organizationLabelClass((organization_displayed === org_tenant.id), organizationActive ) } tabIndex={index} >
+          <i className={current_user.active_tenant.id === org_tenant.id ? 'material-icons tenant-active-icon' : 'hidden'}>lens</i>
+          <span onClick={selectTenant(org_tenant)} className="mdl-list__item-primary-content">
+           <i className="material-icons mdl-list__item-icon">book</i>
+           <strong>{org_tenant.name}</strong>
+          </span>
+          <i onClick={organizationClicked(org_id)} className="material-icons sub-tenant--toggle sub-tenant--toggle">keyboard_arrow_down</i>
+         </li>
+         <ul className={ organization_displayed === org_tenant.id ? "demo-list-icon mdl-list sub-tenant--list" : "hidden"}>
+          { sub_tenants.map((tenant) => TenantItem(tenant, selectTenant(tenant), current_user.active_tenant.id === tenant.id ) )}
          </ul>
         </span>
       )
@@ -40,6 +54,9 @@ class TenantList extends React.PureComponent {
     return (
       <div className={tenantListClass}>
          <ul className="demo-list-icon mdl-list">
+          <li className='tenant-list--heading'>
+            SWITCH TENANT
+          </li>
           {this.renderTenants()}
          </ul>
          <div className={ syncedWithDB ? 'hidden' : 'loader-spinner-wrapper'}>

@@ -63,6 +63,3 @@ erd.pdf
 # React on Rails
 npm-debug.log*
 node_modules
-
-# Generated js bundles
-/app/assets/webpack/*

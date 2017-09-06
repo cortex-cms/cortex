@@ -2,7 +2,7 @@
   "name": "cortex",
   "private": true,
   "scripts": {
-    "build:test": "webpack --config webpack.config.js",
+    "build:test": " NODE_ENV=test webpack --config webpack.config.js",
     "build:production": "NODE_ENV=production webpack --config webpack.config.js",
     "build:development": "NODE_ENV=development webpack -w --config webpack.config.js",
 

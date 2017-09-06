@@ -1,4 +1,4 @@
-const TenantOrganizationLookup = (tenants) => {
+const TenantNestingLookup = (tenants) => {
   return tenants.reduce((lookup, tenant, i) => {
     if (tenant.parent_id === null){
       lookup.organizations.push(tenant.id)
@@ -24,4 +24,4 @@ const TenantOrganizationLookup = (tenants) => {
   }, {organizations: []})
 }
 
-export default TenantOrganizationLookup
+export default TenantNestingLookup

@@ -25,9 +25,9 @@ class TenantList extends React.PureComponent {
     return orgLabelClassBase
   }
   renderTenants = () => {
-    const { tenants, organization_displayed, selected_tenant, current_user,  selectTenant, organizationClicked, OrganizationLookup } = this.props
-    return OrganizationLookup.organizations.map((org_id, index) => {
-      let {org_tenant, sub_tenants } = OrganizationLookup[org_id]
+    const { tenants, organization_displayed, selected_tenant, current_user,  selectTenant, organizationClicked, tenancyLookup } = this.props
+    return tenancyLookup.organizations.map((org_id, index) => {
+      let {org_tenant, sub_tenants } = tenancyLookup[org_id]
       const organizationActive = (current_user.active_tenant.id === org_tenant.id || current_user.active_tenant.parent_id === org_tenant.id)
       return (
         <ul key={org_tenant.subdomain + '_org'}>
@@ -48,12 +48,12 @@ class TenantList extends React.PureComponent {
     })
   }
   render(){
-    const { active, syncedWithDB, OrganizationLookup } = this.props
+    const { active, syncedWithDB, tenancyLookup } = this.props
     const tenantListClass = active ? 'tenant__list_wrapper' : 'tenant__list_wrapper hidden'
     return (
       <div className={tenantListClass}>
          <ul className="demo-list-icon mdl-list">
-          <li className='tenant-list--heading'>
+          <li className='tenant-list__heading'>
             SWITCH TENANT
           </li>
           {this.renderTenants()}

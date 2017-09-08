@@ -1,5 +1,5 @@
-class ApplicationService
-  include Virtus.model
+require 'dry-struct'
 
+class ApplicationService < Dry::Struct
   attr_reader :errors
 end

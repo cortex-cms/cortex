@@ -1,12 +1,14 @@
 class ContentItemService < ApplicationService
   include WidgetParsersHelper
 
-  attribute :id, String
+  FieldItems = CoreTypes::Strict::Array.member(ApplicationTypes::FieldItem)
+
+  attribute :id, CoreTypes::Strict::String.optional
   attribute :content_item_params, Object
-  attribute :current_user, User
-  attribute :creator, User
-  attribute :field_items, Array[FieldItem]
-  attribute :state, String
+  attribute :current_user, ApplicationTypes::User
+  attribute :creator, ApplicationTypes::User.optional
+  attribute :field_items, FieldItems
+  attribute :state, CoreTypes::Strict::String
   class_attribute :form_fields
 
   def create

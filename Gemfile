@@ -20,6 +20,10 @@ gem 'grape-entity', '~> 0.6.1'
 gem 'grape-swagger', '~> 0.27.3'
 gem 'grape-swagger-entity', '~> 0.2.1'
 
+# Service Layer
+gem 'dry-types', '~> 0.11.1'
+gem 'dry-struct', '~> 0.3.1'
+
 # Authorization
 gem 'six', '~> 0.2.0'
 gem 'devise', '~> 4.2.1'
@@ -51,7 +55,6 @@ gem 'rack-cors', '~> 0.4.1', require: 'rack/cors'
 gem 'hashie', '~> 3.5.5'
 gem 'hashr', '~> 2.0.1'
 gem 'mimemagic', '~> 0.3.2'
-gem 'virtus', '~> 1.0.5'
 gem 'interactor-rails', '~> 2.1'
 gem 'addressable', '~> 2.5.1'
 gem 'json'

@@ -10,7 +10,7 @@
   });
 
   $('.close-dialog').on('click', function(event) {
-    closeDialog();
+    closeDialog(event);
   });
 
   $('body').on('click', function(event) {
@@ -19,7 +19,7 @@
     var isInDialog=(rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
 
     if (!isInDialog) {
-      closeDialog();
+      closeDialog(event);
     }
   });
 
@@ -31,7 +31,7 @@
     $('.mdl-layout__container').removeClass('blur');
   };
 
-  function closeDialog() {
+  function closeDialog(event) {
     var dialog = document.getElementById(event.target.closest('dialog').id);
     dialog.close();
     global.unblur_backdrop();

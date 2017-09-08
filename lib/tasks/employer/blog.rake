@@ -160,7 +160,8 @@ namespace :employer do
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('Categories').id,
-                    "render_method": "checkboxes"
+                    "render_method": "checkboxes",
+                    "tooltip": "Please select 1-2 Categories."
                   }
                 ]
               },

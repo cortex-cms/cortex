@@ -8,7 +8,7 @@ ReactOnRails.registerStore({
   CortexStore
 });
 
-const DashboardApp = (props, railsContext) => {
+const CortexApp = (props, railsContext) => {
   const store = ReactOnRails.getStore('CortexStore');
   return (
     <Provider store={ store }>
@@ -17,4 +17,4 @@ const DashboardApp = (props, railsContext) => {
   );
 };
 
-ReactOnRails.register({ DashboardApp });
+ReactOnRails.register({ CortexApp });

@@ -21,6 +21,28 @@ module ApplicationHelper
     }
   end
 
+  def wizard_props
+    if @wizard
+      @wizard.data.merge({
+        content_type: @content_type,
+        content_item: @content_item
+      })
+    else
+      {}
+    end
+  end
+
+  def index_props
+    @index || {}
+  end
+
+  def cortex_props
+    user_session_props.merge({
+      wizard: wizard_props,
+      index: index_props
+    })
+  end
+
   def qualtrics_domain
     extra_config.qualtrics_id.delete('_').downcase
   end

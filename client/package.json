@@ -6,7 +6,7 @@
     "build:production": "NODE_ENV=production webpack --config webpack.config.js",
     "build:development": "NODE_ENV=development webpack -w --config webpack.config.js",
 
-    "install-cortex-plugins-core": "npm install 'cortex-plugins-core@../../cortex-plugins-core'"
+    "install-cortex-plugins-core": "npm install 'cortex-plugins-core@../../cortex-plugins-core#COR-680/Tenant-Switcher'"
   },
   "cacheDirectories": [
     "node_modules",
@@ -37,6 +37,7 @@
 
 
     "redux-logger": "^3.0.6",
+    "cortex-plugins-core": "0.11.0",
     "axios": "^0.16.2"
   },
   "devDependencies": {}

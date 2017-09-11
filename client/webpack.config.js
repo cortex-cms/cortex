@@ -19,7 +19,7 @@ const config = {
       'es5-shim/es5-sham',
       'babel-polyfill',
       './app/bundles/HelloWorld/startup/registration.jsx',
-      './app/bundles/dashboard/startup/dashboard_app',
+      './app/bundles/cortex/startup/cortex_app',
     ],
   },
 

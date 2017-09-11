@@ -22,7 +22,7 @@ class Layout extends React.PureComponent {
         <TenantSwitcherContainer dispatch={dispatch} railsContext={data.railsContext} data={data.session}/>
       }
       { temporary_render === 'Wizard' &&
-        <WizardContainer dispatch={dispatch} railsContext={data.railsContext} data={data.session}/>
+        <WizardContainer dispatch={dispatch} railsContext={data.railsContext} data={data.wizard}/>
       }
       </section>
     )

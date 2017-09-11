@@ -11,7 +11,7 @@
     = csrf_meta_tags
   %body
     = render 'partials/media_dialogs'
-    = render 'partials/dashboard_redux_state'
+    = render 'partials/cortex_redux_state'
     #layout_wrapper{class: ('sidebar--collapsed' unless current_page? root_path)}
       .layout__container.mdl-js-layout.mdl-layout--fixed-drawer
         = render 'partials/sidebar'

@@ -12,7 +12,7 @@ const CortexApp = (props, railsContext) => {
   const store = ReactOnRails.getStore('CortexStore');
   return (
     <Provider store={ store }>
-      <Layout />
+      <Layout temporary_render={ props.temporary_render } />
     </Provider>
   );
 };

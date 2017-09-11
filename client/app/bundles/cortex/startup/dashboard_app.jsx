@@ -2,14 +2,14 @@ import React from 'react';
 import ReactOnRails from 'react-on-rails';
 import Layout from 'containers/layout';
 import { Provider } from 'react-redux';
-import DashboardStore from 'dashboard/store/store';
+import CortexStore from 'cortex/store/store';
 
 ReactOnRails.registerStore({
-  DashboardStore
+  CortexStore
 });
 
 const DashboardApp = (props, railsContext) => {
-  const store = ReactOnRails.getStore('DashboardStore');
+  const store = ReactOnRails.getStore('CortexStore');
   return (
     <Provider store={ store }>
       <Layout />

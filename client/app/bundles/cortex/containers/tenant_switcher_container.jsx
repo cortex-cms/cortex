@@ -1,5 +1,5 @@
 import React from 'react';
-import SetRailsAPIService from 'dashboard/services/rails_api_service'
+import SetRailsAPIService from 'cortex/services/rails_api_service'
 import {NOT_DEFINED} from 'constants/type_constants'
 import {
   UPDATE_ORGANIZATION_SCOPE,
@@ -8,8 +8,8 @@ import {
   TENANT_UPDATED,
   TENANT_UPDATE_ERROR,
   SELECT_TENANT} from 'constants/tenant_switcher'
-import {capitalize} from 'dashboard/helpers/formating'
-import TenantNestingLookup from 'dashboard/helpers/tenant_nesting_lookup'
+import {capitalize} from 'cortex/helpers/formating'
+import TenantNestingLookup from 'cortex/helpers/tenant_nesting_lookup'
 
 import EnvironmentFlag from 'components/side_bar/environment_flag'
 import TenantList from 'components/side_bar/tenant_list'

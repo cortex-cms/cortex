@@ -35,10 +35,10 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      dashboard: resolve('./app/bundles/dashboard'),
-      constants: resolve('./app/bundles/dashboard/constants'),
-      containers: resolve('./app/bundles/dashboard/containers'),
-      components: resolve('./app/bundles/dashboard/components')
+      cortex: resolve('./app/bundles/cortex'),
+      constants: resolve('./app/bundles/cortex/constants'),
+      containers: resolve('./app/bundles/cortex/containers'),
+      components: resolve('./app/bundles/cortex/components')
     }
   },
 

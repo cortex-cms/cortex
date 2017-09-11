@@ -1,7 +1,7 @@
 import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import logger from 'redux-logger'
 
-import GetReducers from 'dashboard/reducers'
+import GetReducers from 'cortex/reducers'
 
 export default (props, railsContext) => {
 

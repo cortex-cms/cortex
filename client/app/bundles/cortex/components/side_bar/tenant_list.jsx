@@ -6,7 +6,7 @@ import {
 } from 'constants/tenant_switcher'
 import {
   Spinner
-} from 'dashboard/elements/loaders'
+} from 'cortex/elements/loaders'
 
 const TenantItem = ({name, subdomain}, tenantClicked, tenantActive) => (
   <li key={subdomain} className="mdl-list__item" onClick={tenantClicked}>

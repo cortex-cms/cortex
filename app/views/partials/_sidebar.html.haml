@@ -4,4 +4,4 @@
       = image_tag 'logo.svg', class: 'sidebar__brand-logo'
       %h1.sidebar__brand-name Cortex
   = render 'partials/navigation'
-  = react_component('CortexApp', props: {}, prerender: true)
+  = react_component('CortexApp', props: { temporary_render: 'TenantSwitcher' }, prerender: true)

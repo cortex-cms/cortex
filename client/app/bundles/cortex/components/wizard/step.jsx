@@ -7,7 +7,7 @@ class Step extends React.PureComponent {
   }
   render() {
     const { name, heading, contenItemFieldLookup, description, columns } = this.props
-    console.log('Step props', this.props)
+
     return (
       <div className='mdl-grid'>
         { columns.map(this.renderColumn) }

@@ -15,6 +15,7 @@ class WizardContainer extends React.PureComponent {
   }
   render() {
     const { steps, fields, content_item, content_type } = this.props.data
+
     return (
       <div>
         {steps.map(this.renderStep)}

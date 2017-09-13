@@ -16,6 +16,7 @@ class Layout extends React.PureComponent {
   }
   render() {
     const { data, dispatch, temporary_render } = this.props
+
     return (
       <section>
       { temporary_render === 'TenantSwitcher' &&

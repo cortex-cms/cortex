@@ -14,7 +14,7 @@ class FieldCell extends React.PureComponent {
     if (field_type === undefined) return null
 
     const Field = CortexPlugin[field_type]
-    // console.log('this.props', this.props)
+
     return <Field {...this.props} />
   }
 }

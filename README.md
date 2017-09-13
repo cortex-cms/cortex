@@ -1,5 +1,4 @@
-# Cortex CMS [![Build Status](https://semaphoreci.com/api/v1/projects/ec90715a-da8f-4960-bb64-f371850f9c98/813409/shields_badge.svg)](https://semaphoreci.com/content-enablement/cortex) [![Code Climate](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/gpa.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/feed) [![Test Coverage](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/coverage.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/coverage) [![Documentation Status](https://readthedocs.org/projects/cortex-cms/badge/?version=latest)](http://docs.cbcortex.com/en/latest/?badge=latest)
-
+# Cortex CMS [![Build Status](https://semaphoreci.com/api/v1/projects/ec90715a-da8f-4960-bb64-f371850f9c98/813409/shields_badge.svg)](https://semaphoreci.com/content-enablement/cortex) [![Code Climate](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/gpa.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/feed) [![Test Coverage](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/coverage.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/coverage) [![Documentation Status](https://www.gitbook.com/button/status/book/cortex-cms/cortex-cms)](https://docs.cortexcms.org/)
 <img align="right" height="150"
      src="https://hiring-assets.careerbuilder.com/branding/cortex-logo.svg"
      alt="Cortex CMS Logo">
@@ -224,10 +223,10 @@ If a consuming or companion application would like to produce Cortex-equivalent 
 
 ## Applications Using Cortex
 
-* [Advice and Resources](https://github.com/cbdr/advice-and-resources) - Redesigned Workbuzz/Advice & Resources platform utilizing Cortex Posts and Rails. [Live Site](http://advice.careerbuilder.com/)
-* [Employer](https://github.com/cbdr/employer) - Redesigned Employer Marketing platform utilizing Cortex Webpages/Snippets and Rails. [Live Site](http://hiring.careerbuilder.com/)
-* [CB1 Lander Shell](https://github.com/cbdr/cb1-lander-shell) - Platform for hosting lander pages and experiments, utilizing Cortex Posts and Sinatra. [Live Site](http://corporate.careerbuilder.com/)
-* [CareerBuilder.com](https://github.com/cbdr/consumer-main) - The main Consumer Web site for CB.com uses Cortex Posts for the [Privacy](http://www.careerbuilder.com/privacy) and [Terms of Service](http://www.careerbuilder.com/terms) pages.
+* [Advice and Resources](https://github.com/cbdr/consumer-main/) - Simple Jobseeker Resources platform built atop the Consumer Web site utilizing Legacy Cortex Posts and Rails. Content will eventually be dynamically dispersed across site (result pages, description pages, etc) [Live Site](https://www.careerbuilder.com/advice)
+* [Employer](https://github.com/cbdr/employer) - Redesigned Employer Marketing platform utilizing Legacy Cortex Webpages/Snippets and Rails. [Live Site](https://hiring.careerbuilder.com/)
+* [CB1 Lander Shell](https://github.com/cbdr/cb1-lander-shell) - Platform for hosting lander pages and experiments, utilizing Legacy Cortex Posts and Sinatra. [Live Site](http://corporate.careerbuilder.com/)
+* [CareerBuilder.com](https://github.com/cbdr/consumer-main) - The main Consumer Web site for CB.com uses Legacy Cortex Posts for the [Privacy](https://www.careerbuilder.com/privacy) and [Terms of Service](https://www.careerbuilder.com/terms) pages.
 
 ## Troubleshooting
 * For OS X / homebrew users: Run `which node` to ensure node is properly linked. The path shown should match homebrew's default installation path (run `which brew` to reveal this). If its not, then run `brew link node` and follow the instructions.

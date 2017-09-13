@@ -34,6 +34,10 @@ class ContentItem < ApplicationRecord
     end
   end
 
+  def fizzle
+
+  end
+
   def self.taggable_fields
     Field.select { |field| field.field_type_instance.is_a?(TagFieldType) }.map { |field_item| field_item.name.parameterize('_') }
   end

@@ -4,6 +4,7 @@ const { resolve } = require('path');
 
 const ManifestPlugin = require('webpack-manifest-plugin');
 const webpackConfigLoader = require('react-on-rails/webpackConfigLoader');
+const cortexPluginLibraries = require("../tmp/cortex_plugin_libraries.json");
 
 const configPath = resolve('..', 'config');
 const { devBuild, manifest, webpackOutputPath, webpackPublicOutputDir } =
@@ -20,7 +21,7 @@ const config = {
       'babel-polyfill',
       './app/bundles/HelloWorld/startup/registration.jsx',
       './app/bundles/cortex/startup/cortex_app',
-    ],
+    ].concat(cortexPluginLibraries),
   },
 
   output: {
@@ -65,7 +66,7 @@ const config = {
       {
         test: /\.jsx?$/,
         use: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules(?!\/cortex-plugins-.)/, // don't run babel on node_modules except for Cortex plugins
       },
     ],
   },

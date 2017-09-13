@@ -3,10 +3,10 @@ import Column from 'components/wizard/column'
 
 class Step extends React.PureComponent {
   renderColumn = (column, index) => {
-    return <Column key={`column_${index}` } {...column} />
+    return <Column key={`column_${index}` } contenItemFieldLookup={this.props.contenItemFieldLookup} {...column} />
   }
   render() {
-    const { name, heading, description, columns } = this.props
+    const { name, heading, contenItemFieldLookup, description, columns } = this.props
     console.log('Step props', this.props)
     return (
       <div className='mdl-grid'>

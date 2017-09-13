@@ -25,7 +25,8 @@ module ApplicationHelper
     if @wizard
       @wizard.data.merge({
         content_type: @content_type,
-        content_item: @content_item
+        content_item: @content_item,
+        fields: @content_type.fields
       })
     else
       {}

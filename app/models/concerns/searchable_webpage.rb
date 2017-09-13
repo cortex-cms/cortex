@@ -33,6 +33,7 @@ module SearchableWebpage
       indexes :accordion_group_widget, :type => :nested, :enabled => false
       indexes :charts_widget, :type => :nested, :enabled => false
       indexes :buy_box_widget, :type => :nested, :enabled => false
+      indexes :carousels_widget, :type => :nested, :enabled => false
     end
 
     def as_indexed_json(options = {})

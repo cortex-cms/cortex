@@ -23,6 +23,7 @@ gem 'grape-swagger-entity', '~> 0.2.1'
 # Service Layer
 gem 'dry-types', '~> 0.11.1'
 gem 'dry-struct', '~> 0.3.1'
+gem 'dry-transaction', '~> 0.10.2'
 
 # Authorization
 gem 'six', '~> 0.2.0'

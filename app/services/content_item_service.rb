@@ -14,27 +14,27 @@ class ContentItemService < ApplicationService
   def create
     transact_and_refresh do
       @content_item = ContentItem.new
-      ContentItemService.form_fields = field_items_attributes.to_h.values.each_with_object({}) do |param, hash_object|
+      self.form_fields = field_items_attributes.to_h.values.each_with_object({}) do |param, hash_object|
         hash_object[param['field_id']] = param['data']
       end
-      content_item_params["field_items_attributes"].to_hash.each do |key, value|
-        value.delete("id")
-        @content_item.field_items << FieldItem.new(value)
+      content_item_params['field_items_attributes'].to_hash.each do |key, field_item|
+        value.delete('id')
+        @content_item.field_items << NewFieldItemTransaction.new.call(field_item).value
       end
 
-      content_item_params.delete("field_items_attributes")
+      content_item_params.delete('field_items_attributes')
       @content_item.attributes = content_item_params.to_hash
     end
   end
 
-  def field_items_attributes
-    content_item_params["field_items_attributes"]
-  end
-
   def update
-    @content_item = ContentItem.find(id)
-
     transact_and_refresh do
+      @content_item = ContentItem.find(id)
+      content_item_params['field_items_attributes'].to_hash.each do |key, field_item|
+        @content_item.field_items << UpdateFieldItemTransaction.new.call(field_item).value
+      end
+
+      content_item_params.delete('field_items_attributes')
       @content_item.assign_attributes(content_item_attributes)
     end
   end
@@ -73,6 +73,10 @@ class ContentItemService < ApplicationService
   def update_search!
     # TODO: implement ES index updates
     true
+  end
+
+  def field_items_attributes
+    content_item_params["field_items_attributes"]
   end
 
   def content_item_attributes

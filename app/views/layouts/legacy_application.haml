@@ -6,6 +6,7 @@
     %meta{name: 'viewport', content: 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=0'}
     %title Cortex Administration
     = favicon_link_tag 'favicon.ico'
+    %link{ rel: 'stylesheet', media: 'screen', href: '/code_mirror/lib/codemirror.css' }
     = stylesheet_link_tag :legacy_application
     = csrf_meta_tags
   %body.default{:'ng-controller' => 'CortexCtrl', :'ng-cloak' => ''}

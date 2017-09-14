@@ -7,10 +7,10 @@ class Column extends React.PureComponent {
 
   }
   renderElements = () => {
-    const { contenItemFieldLookup, elements } = this.props
+    const { contentItemFieldLookup, elements } = this.props
     return elements.filter(element => element.id).map((element, index) => {
         let fieldItemId = element.id
-        return <Field key={fieldItemId} field_item={element} { ...contenItemFieldLookup[fieldItemId] }/>
+        return <Field key={fieldItemId} field_item={element} { ...contentItemFieldLookup[fieldItemId] }/>
     })
   }
   render() {

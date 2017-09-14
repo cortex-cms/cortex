@@ -1,5 +1,5 @@
 import React from 'react';
-import FieldCell from 'components/wizard/field_cell'
+import Field from 'components/wizard/field'
 
 class Column extends React.PureComponent {
   constructor(props) {
@@ -10,7 +10,7 @@ class Column extends React.PureComponent {
     const { contenItemFieldLookup, elements } = this.props
     return elements.filter(element => element.id).map((element, index) => {
         let fieldItemId = element.id
-        return <FieldCell key={fieldItemId} field_item={element} { ...contenItemFieldLookup[fieldItemId] }/>
+        return <Field key={fieldItemId} field_item={element} { ...contenItemFieldLookup[fieldItemId] }/>
     })
   }
   render() {

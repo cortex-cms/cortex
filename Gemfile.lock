@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:cortex-cms/cortex-plugins-core.git
-  revision: 62ab94a72c4ea86fe422d84a7331ad731a70ed12
+  revision: adfc22b5f6f827149389d00d9e774a698c4446bf
   branch: topic/COR-811-FieldType-Service-Layer
   specs:
     cortex-plugins-core (0.12.4)

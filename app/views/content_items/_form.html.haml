@@ -1,6 +1,7 @@
 = form_for [@content_type, @content_item], html: { multipart: true } do |form|
   = form.hidden_field :creator_id, value: current_user.id
   = form.hidden_field :content_type_id, value: @content_type.id
+  -# TODO: remove conditional once cortex plugins fields are properly converted
   - if @content_type.name == 'Media'
     = react_component('CortexApp', props: { temporary_render: 'Wizard' }, prerender: true)
   - else

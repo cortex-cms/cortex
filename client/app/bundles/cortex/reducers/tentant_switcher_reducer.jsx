@@ -14,7 +14,7 @@ const checkActiveTenant = (tenant, current_user) => {
   return current_user
 }
 
-const setTenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, current_user, environment,  environment_abbreviated}) => {
+const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, current_user, environment,  environment_abbreviated}) => {
   const currentUser = checkActiveTenant(tenant, current_user)
   const initialState = {
     tenantListActive: false,
@@ -69,4 +69,4 @@ const setTenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants,
   }
 };
 
-export default setTenantSwitcherReducer
+export default tenantSwitcherReducer

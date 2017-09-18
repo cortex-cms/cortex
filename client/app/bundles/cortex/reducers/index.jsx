@@ -1,12 +1,12 @@
-import setTenantSwitcherReducer from 'cortex/reducers/tentant_switcher_reducer';
-import setRailsContextReducer from 'cortex/reducers/rails_context_reducer';
-import setWizardReducer from 'cortex/reducers/wizard_reducer'
+import tenantSwitcherReducer from 'cortex/reducers/tentant_switcher_reducer';
+import railsContextReducer from 'cortex/reducers/rails_context_reducer';
+import wizardReducer from 'cortex/reducers/wizard_reducer'
 
 const GetReducers = (CortexState, railsContext) => {
   return {
-    session: setTenantSwitcherReducer(CortexState),
-    wizard: setWizardReducer(CortexState),
-    railsContext: setRailsContextReducer(railsContext)
+    session: tenantSwitcherReducer(CortexState),
+    wizard: wizardReducer(CortexState),
+    railsContext: railsContextReducer(railsContext)
   }
 };
 

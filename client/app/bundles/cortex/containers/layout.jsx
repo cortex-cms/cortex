@@ -19,6 +19,7 @@ class Layout extends React.PureComponent {
 
     return (
       <section>
+      {/* remove temporary_render once containers are all connected */}
       { temporary_render === 'TenantSwitcher' &&
         <TenantSwitcherContainer dispatch={dispatch} railsContext={data.railsContext} data={data.session}/>
       }

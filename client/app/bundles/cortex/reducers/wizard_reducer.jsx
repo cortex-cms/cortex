@@ -1,15 +1,15 @@
 import {
-  WIZARD
+  PLACEHOLDER_ACTION_TYPE
 } from 'constants/wizard'
 
 const setWizardReducer = ({wizard}) => {
   const initialState = wizard
   return function reducer(state = initialState, action) {
     switch (action.type) {
-      case WIZARD:
+      case PLACEHOLDER_ACTION_TYPE:
         return {
           ...state,
-          selected_tenant: action.payload
+          form_valid: action.payload
         };
       default:
         return state

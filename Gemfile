@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.2'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', '= 0.12.4'
+gem 'cortex-plugins-core', git: 'git@github.com:cortex-cms/cortex-plugins-core.git', branch: 'topic/COR-811-FieldType-Service-Layer'
 
 # API
 gem 'grape', '~> 0.19.2'
@@ -35,7 +35,6 @@ gem 'pundit', '~> 1.1'
 
 # Data
 gem 'awesome_nested_set', '~> 3.1.3'
-gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bcrypt', '~> 3.1.11'
 gem 'kaminari', '~> 0.17.0'
 gem 'grape-kaminari', '~> 0.1.9'

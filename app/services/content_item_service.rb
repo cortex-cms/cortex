@@ -17,9 +17,9 @@ class ContentItemService < ApplicationService
       self.form_fields = field_items_attributes.to_h.values.each_with_object({}) do |param, hash_object|
         hash_object[param['field_id']] = param['data']
       end
-      content_item_params['field_items_attributes'].to_hash.each do |key, field_item|
-        value.delete('id')
-        @content_item.field_items << NewFieldItemTransaction.new.call(field_item).value
+      content_item_params['field_items_attributes'].to_hash.each do |key, field_item_attributes|
+        field_item_attributes.delete('id')
+        @content_item.field_items << NewFieldItemTransaction.new.call(field_item_attributes).value
       end
 
       content_item_params.delete('field_items_attributes')
@@ -30,24 +30,13 @@ class ContentItemService < ApplicationService
   def update
     transact_and_refresh do
       @content_item = ContentItem.find(id)
-      content_item_params['field_items_attributes'].to_hash.each do |key, field_item|
-        @content_item.field_items << UpdateFieldItemTransaction.new.call(field_item).value
+      content_item_params['field_items_attributes'].to_hash.each do |key, field_item_attributes|
+        @content_item.field_items << UpdateFieldItemTransaction.new.call(field_item_attributes).value
       end
 
       content_item_params.delete('field_items_attributes')
       @content_item.assign_attributes(content_item_attributes)
     end
-  end
-
-  # This method will set the tag list (whatever it may be named) to the array of tag_data
-  def self.update_tags(content_item, tag_data)
-    # First we get the name of the list, as determined by the field with '=' at the end
-    # ex: seo_keyword_list=
-    tag_list_name = "#{tag_data[:tag_name].singularize.parameterize('_')}_list="
-    tag_array = tag_data[:tag_list]
-
-    # We then execute the tag_list_name= as a method using #send, which sets it to the tag_array values
-    content_item.send(tag_list_name, tag_array)
   end
 
   private

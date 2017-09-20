@@ -62,7 +62,7 @@ gem 'aws-sdk', '~> 2.9'
 # Jobs
 gem 'sidekiq', '~> 5.0.0'
 gem 'sidekiq-failures', '~> 1.0.0'
-gem 'sinatra', '~> 2.0.0.rc', require: false
+gem 'sinatra', '~> 2.0.0', require: false
 
 # Pipeline
 gem 'sprockets-rails', '3.2.0', require: 'sprockets/railtie'

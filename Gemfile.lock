@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/cortex-cms/cortex-plugins-core.git
-  revision: d2bbebc70e3e926876b0976d97a8cb6c9253db8f
+  revision: 82fe881231bfd2e516adfd648b2d222ad2d59892
   branch: topic/COR-807-Optimize-Images
   specs:
     cortex-plugins-core (0.12.4)
@@ -654,7 +654,7 @@ DEPENDENCIES
   sidekiq (~> 5.0.0)
   sidekiq-failures (~> 1.0.0)
   simplecov (~> 0.14)
-  sinatra (~> 2.0.0.rc)
+  sinatra (~> 2.0.0)
   six (~> 0.2.0)
   sprockets (= 3.7.1)
   sprockets-rails (= 3.2.0)

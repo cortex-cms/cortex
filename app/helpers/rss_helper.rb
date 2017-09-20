@@ -54,7 +54,7 @@ module RssHelper
     if field_item.nil?
       {}
     else
-      asset_data = field_item.data['asset']['versions']['original']
+      asset_data = field_item.data['asset']['versions']['rss']
 
       {
         "url": asset_data["url"],

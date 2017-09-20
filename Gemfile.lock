@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/cortex-cms/cortex-plugins-core.git
-  revision: 82fe881231bfd2e516adfd648b2d222ad2d59892
+  revision: 7a278a2c5d40a233e40c026810a2a7690866a7a6
   branch: topic/COR-807-Optimize-Images
   specs:
     cortex-plugins-core (0.12.4)

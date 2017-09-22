@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.2'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', git: 'git@github.com:cortex-cms/cortex-plugins-core.git', branch: 'topic/COR-811-FieldType-Service-Layer'
+gem 'cortex-plugins-core', '= 1.0.0'
 
 # API
 gem 'grape', '~> 0.19.2'
@@ -65,7 +65,7 @@ gem 'aws-sdk', '~> 2.9'
 # Jobs
 gem 'sidekiq', '~> 5.0.0'
 gem 'sidekiq-failures', '~> 1.0.0'
-gem 'sinatra', '~> 2.0.0.rc', require: false
+gem 'sinatra', '~> 2.0.0', require: false
 
 # Pipeline
 gem 'sprockets-rails', '3.2.0', require: 'sprockets/railtie'

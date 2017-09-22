@@ -15,9 +15,6 @@ module Cortex
     config.active_job.queue_adapter = :sidekiq
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
 
-    ActsAsTaggableOn.remove_unused_tags = true
-    ActsAsTaggableOn.force_lowercase = true
-
     # Insert Rack::CORS as the first middleware
     config.middleware.insert_before 0, Rack::Cors do
       allow do

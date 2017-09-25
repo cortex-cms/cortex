@@ -51,9 +51,14 @@ module V1
         get 'feed/all_posts' do
           require_scope! 'view:posts'
           authorize! :view, ::Post
+          last_updated_at = Post.last_updated_at
+          params_hash = Digest::MD5.hexdigest(declared(params).to_s)
+          cache_key = "feed_all_posts-#{last_updated_at}-#{current_tenant.id}-#{params_hash}"
 
-          posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
-          ::V1::Entities::Post.represent paginate(posts).records
+          ::Cortex.in_memory_cache.fetch(cache_key, expires_in: 1.day, race_condition_ttl: 10) do
+            posts = ::GetPosts.call(params: declared(clean_params(params), include_missing: false), tenant: current_tenant, published: true).posts
+            ::V1::Entities::Post.represent paginate(posts).records
+          end
         end
 
         desc 'Show published post authors'

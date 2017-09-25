@@ -33,7 +33,7 @@ class ContentItemsController < AdminController
   def update
     begin
       content_item.update
-    rescue => e
+    rescue ActiveRecord::RecordInvalid => e
       flash[:warning] = validation_message(e.message)
       @content_item = content_item_reload(content_type.content_items.find_by_id(params[:id]))
       @wizard = WizardDecoratorService.new(content_item: @content_item)
@@ -53,7 +53,7 @@ class ContentItemsController < AdminController
   def create
     begin
       content_item.create
-    rescue => e
+    rescue ActiveRecord::RecordInvalid => e
       flash[:warning] = validation_message(e.message)
       @content_item = content_item_reload(content_type.content_items.new)
       @wizard = WizardDecoratorService.new(content_item: @content_item)

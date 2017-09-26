@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/cortex-cms/cortex-plugins-core.git
-  revision: 572bbbd344418d9a8c1f9cc06c0e16236c825fe2
-  branch: COR-680/Tenant-Switcher
+  revision: 40b1d1fd8b9b0e8d2ec71897b89db68d5b6bc1a1
+  branch: COR-819/Create-Wizard-React-Infrastructure
   specs:
     cortex-plugins-core (0.12.4)
       cells (~> 4.1)
@@ -261,7 +261,7 @@ GEM
     httpclient (2.8.3)
     i18n (0.8.6)
     ice_nine (0.11.2)
-    image_processing (0.4.4)
+    image_processing (0.4.5)
     interactor (3.1.0)
     interactor-rails (2.1.1)
       interactor (~> 3.0)
@@ -488,7 +488,6 @@ GEM
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
     shrine (2.6.1)
-      down (>= 2.3.6)
     sidekiq (5.0.4)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)

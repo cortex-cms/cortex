@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.2'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', git: 'https://github.com/cortex-cms/cortex-plugins-core.git', branch: 'COR-680/Tenant-Switcher'
+gem 'cortex-plugins-core', git: 'https://github.com/cortex-cms/cortex-plugins-core.git', branch: 'COR-819/Create-Wizard-React-Infrastructure'
 
 # API
 gem 'grape', '~> 0.19.2'

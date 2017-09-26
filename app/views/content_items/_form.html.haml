@@ -1,7 +1,12 @@
 = form_for [@content_type, @content_item], html: { multipart: true } do |form|
   = form.hidden_field :creator_id, value: current_user.id
   = form.hidden_field :content_type_id, value: @content_type.id
-  = cell('wizard', @wizard, context: { content_item: @content_item, form: form }).()
+  -# TODO: remove conditional once cortex plugins fields are properly converted
+  - if @content_type.name == 'Media'
+    = react_component('CortexApp', props: { temporary_render: 'Wizard' }, prerender: true)
+  - else
+    = cell('wizard', @wizard, context: { content_item: @content_item, form: form }).()
+
   %footer.mdl-grid
     .mdl-cell.mdl-cell--12-col
       = form.button 'Save Now', value: @content_item.state || 'draft', name: 'content_item[state]', class: 'mdl-button form-button--submission mdl-js-button mdl-button--raised mdl-button--success mdl-js-ripple-effect', type: 'submit'

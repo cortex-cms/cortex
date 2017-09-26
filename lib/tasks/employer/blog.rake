@@ -160,7 +160,8 @@ namespace :employer do
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('Categories').id,
-                    "render_method": "checkboxes"
+                    "render_method": "checkboxes",
+                    "tooltip": "Please select 1-2 Categories."
                   }
                 ]
               },
@@ -271,7 +272,7 @@ namespace :employer do
               "grid_width": 2,
               "cells": [{
                           "field": {
-                            "method": "author_email"
+                            "method": "creator.email"
                           },
                           "display": {
                             "classes": [
@@ -360,9 +361,9 @@ namespace :employer do
             "args": [blog.fields.find_by_name('Author').id]
             }
           },
-          "category": { "method": {
-            "name": "tree_list",
-            "args": [blog.fields.find_by_name('Categories').id]
+          "category": { "transaction": {
+            "name": "get_field_tree_list",
+            "args": {field_id: blog.fields.find_by_name('Categories').id}
             }, "multiple": ","
           },
           "media:content": { "media":

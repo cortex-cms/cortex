@@ -20,6 +20,11 @@ gem 'grape-entity', '~> 0.6.1'
 gem 'grape-swagger', '~> 0.27.3'
 gem 'grape-swagger-entity', '~> 0.2.1'
 
+# Service Layer
+gem 'dry-types', '~> 0.11.1'
+gem 'dry-struct', '~> 0.3.1'
+gem 'dry-transaction', '~> 0.10.2'
+
 # Authorization
 gem 'six', '~> 0.2.0'
 gem 'devise', '~> 4.2.1'
@@ -30,7 +35,6 @@ gem 'pundit', '~> 1.1'
 
 # Data
 gem 'awesome_nested_set', '~> 3.1.3'
-gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bcrypt', '~> 3.1.11'
 gem 'kaminari', '~> 0.17.0'
 gem 'grape-kaminari', '~> 0.1.9'
@@ -51,7 +55,6 @@ gem 'rack-cors', '~> 0.4.1', require: 'rack/cors'
 gem 'hashie', '~> 3.5.5'
 gem 'hashr', '~> 2.0.1'
 gem 'mimemagic', '~> 0.3.2'
-gem 'virtus', '~> 1.0.5'
 gem 'interactor-rails', '~> 2.1'
 gem 'addressable', '~> 2.5.1'
 gem 'json'
@@ -62,7 +65,7 @@ gem 'aws-sdk', '~> 2.9'
 # Jobs
 gem 'sidekiq', '~> 5.0.0'
 gem 'sidekiq-failures', '~> 1.0.0'
-gem 'sinatra', '~> 2.0.0.rc', require: false
+gem 'sinatra', '~> 2.0.0', require: false
 
 # Pipeline
 gem 'sprockets-rails', '3.2.0', require: 'sprockets/railtie'

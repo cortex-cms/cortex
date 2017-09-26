@@ -38,29 +38,6 @@ form {
   }
 }
 
-// Tags
-.bootstrap-tagsinput {
-  width: 100%;
-  border-radius: 0 !important;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: 1px solid $color-grey-light;
-  box-shadow: none;
-}
-.cortex-bootstrap .label {
-  border-radius: 0.75em;
-  font-weight: normal;
-}
-
-.cortex-bootstrap .label-info {
-  background-color: $color-grey;
-}
-
-.bootstrap-tagsinput .tag {
-  text-transform: uppercase;
-}
-
 // Extras
 .tooltip-icon {
   color: $color-grey;

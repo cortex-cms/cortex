@@ -4,7 +4,9 @@ import {
   SELECT_TENANT,
   TENANT_UPDATED,
   TENANT_UPDATE_ERROR,
-  TOGGLE_SIDEBAR
+  TOGGLE_SIDEBAR,
+  PAGINATE_BACK,
+  PAGINATE_NEXT
 } from 'constants/tenant_switcher'
 
 const checkActiveTenant = (tenant, current_user) => {
@@ -23,6 +25,7 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
     csrf_token,
     sidebarExpanded,
     tenants,
+    activeStep: 0,
     organization_displayed: (currentUser.active_tenant.parent_id || currentUser.active_tenant.id),
     current_user: currentUser,
     environment,
@@ -30,6 +33,16 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
   }
   return function reducer(state = initialState, action) {
     switch (action.type) {
+      case PAGINATE_BACK:
+        return {
+          ...state,
+          activeStep: action.payload
+        };
+      case PAGINATE_NEXT:
+        return {
+          ...state,
+          activeStep: action.payload
+        };
       case SELECT_TENANT:
         return {
           ...state,

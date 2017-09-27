@@ -2,7 +2,6 @@ import React from 'react';
 import SetRailsAPIService from 'cortex/services/rails_api_service'
 import { NOT_DEFINED } from 'constants/type_constants'
 import {
-  UPDATE_ORGANIZATION_SCOPE,
   TOGGLE_TENANT_SWITCHER,
   TOGGLE_SIDEBAR,
   TENANT_UPDATED,

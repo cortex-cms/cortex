@@ -53,11 +53,6 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
           ...state,
           parent_tenant: action.payload
         }
-      case UPDATE_ORGANIZATION_SCOPE:
-        return {
-          ...state,
-          organization_displayed: action.payload
-        }
       case TENANT_UPDATE_ERROR:
         return {
           ...state,
@@ -73,7 +68,7 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
         return {
           ...state,
           tenantListActive: !state.tenantListActive,
-          organization_displayed: state.selected_tenant.parent_id || state.selected_tenant.id
+          parent_tenant: state.selected_tenant.parent_id
         };
       default:
         return state

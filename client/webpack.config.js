@@ -42,14 +42,24 @@ const config = {
     }
   },
 
-  plugins: [
+  plugins: devBuild ? [
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false,
     }),
     new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
+  ] : [
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'production', // use 'development' unless process.env.NODE_ENV is defined
+      DEBUG: false,
+    }),
+    require('rollup-plugin-replace')({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    require('rollup-plugin-commonjs')(),
+    require('rollup-plugin-uglify')(),
+    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
   ],
-
   module: {
     rules: [
       {

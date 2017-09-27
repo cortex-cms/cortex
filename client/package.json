@@ -43,5 +43,9 @@
     "cortex-plugins-core": "0.14.4",
     "axios": "^0.16.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
+  }
 }

@@ -76,7 +76,8 @@ class TenantSwitcherContainer extends React.PureComponent {
       parent_tenant,
       tenantListActive
     } = this.props.data
-    const syncedWithDB = current_user.active_tenant.id === selected_tenant.id
+    const syncedWithDB = current_user.active_tenant.id === selected_tenant.id;
+    console.log('this.tenancyLookup', this.tenancyLookup)
     return (
       <footer id="tentant_switch">
         <TenantList
@@ -96,7 +97,7 @@ class TenantSwitcherContainer extends React.PureComponent {
             <div className={syncedWithDB === true ? 'sidebar-tenant-icon' : 'hidden'} >
               <Avatar alt="Remy Sharp"   src='https://i.imgur.com/zQA3Cck.png' />
             </div>
-            <span className='nav__item-name'>
+            <span className='nav__item-name nav__item-name--footer'>
               {syncedWithDB === true ? selected_tenant.name : 'Loading...'}
             </span>
             <i className='material-icons tenant-toggle' role="presentation">{tenantListActive === true ? 'expand_less' : 'expand_more' }</i>

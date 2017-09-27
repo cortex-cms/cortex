@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
 import { connect } from 'react-redux';
-import { NOT_DEFINED } from 'constants/type_constants'
+import { NOT_DEFINED } from 'constants/type_constants';
 
-//import TenantSwitcherContainer from 'containers/tenant_switcher_container'
-import TenantSwitcherUIContainer from 'containers/tenant_switcher_ui_container'
-import WizardContainer from 'containers/wizard_container'
+import TenantSwitcherContainer from 'containers/tenant_switcher_container';
+import WizardContainer from 'containers/wizard_container';
 
 function select(state) {
   return { data: state };
@@ -22,7 +21,7 @@ class Layout extends React.PureComponent {
       <section>
       {/* remove temporary_render once containers are all connected */}
       { temporary_render === 'TenantSwitcher' &&
-        <TenantSwitcherUIContainer dispatch={dispatch} railsContext={data.railsContext} data={data.session}/>
+        <TenantSwitcherContainer dispatch={dispatch} railsContext={data.railsContext} data={data.session}/>
       }
       { temporary_render === 'Wizard' &&
         <WizardContainer dispatch={dispatch} railsContext={data.railsContext} data={data.wizard}/>

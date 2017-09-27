@@ -3,10 +3,10 @@ import {
   TOGGLE_TENANT_SWITCHER,
   SELECT_TENANT,
   TENANT_UPDATED,
+  SUBLIST_CLICKED,
   TENANT_UPDATE_ERROR,
   TOGGLE_SIDEBAR,
-  PAGINATE_BACK,
-  PAGINATE_NEXT
+  PAGINATE_BACK
 } from 'constants/tenant_switcher'
 
 const checkActiveTenant = (tenant, current_user) => {
@@ -21,12 +21,11 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
   const initialState = {
     tenantListActive: false,
     selected_tenant: currentUser.active_tenant,
+    parent_tenant: currentUser.active_tenant.parent_id,
     tenant,
     csrf_token,
     sidebarExpanded,
     tenants,
-    activeStep: 0,
-    organization_displayed: (currentUser.active_tenant.parent_id || currentUser.active_tenant.id),
     current_user: currentUser,
     environment,
     environment_abbreviated
@@ -36,12 +35,7 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
       case PAGINATE_BACK:
         return {
           ...state,
-          activeStep: action.payload
-        };
-      case PAGINATE_NEXT:
-        return {
-          ...state,
-          activeStep: action.payload
+          parent_tenant: action.payload
         };
       case SELECT_TENANT:
         return {
@@ -53,6 +47,11 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
           ...state,
           current_user: action.payload,
           tenantListActive: false
+        }
+      case SUBLIST_CLICKED:
+        return {
+          ...state,
+          parent_tenant: action.payload
         }
       case UPDATE_ORGANIZATION_SCOPE:
         return {

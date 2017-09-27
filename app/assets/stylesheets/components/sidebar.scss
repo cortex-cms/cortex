@@ -74,6 +74,13 @@ $sidebar-toggle-button-transition: transform 500ms linear;
     font-size: 24px;
     color: inherit;
   }
+
+  .tenant-toggle {
+    font-size: 40px;
+    margin-right: 0;
+    top: 4px;
+    line-height: 50px;
+  }
 }
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
@@ -120,7 +127,25 @@ $sidebar-toggle-button-transition: transform 500ms linear;
 
 .tenant-active-icon {
   color: $color-orange;
-  font-size: 10px;
+}
+
+.tenant-item--wrap {
+  display: flex;
+  align-self: flex-start;
+}
+
+.tenant-parent-header {
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  padding: 0;
+  background-color: $color-orange;
+}
+
+.page-back-button {
+  height: auto;
+  margin: -6px;
+  margin-right: 0px;
 }
 
 .organization--label {
@@ -176,6 +201,74 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   padding: 0;
 }
 
+.tenant-list-item {
+  display: flex;
+
+  button {
+    height: auto;
+    width: auto;
+    align-self: stretch;
+    border-bottom: 1px solid #eee;
+    border-radius: 0;
+
+    i {
+      font-size: 30px;
+    }
+
+    &:hover {
+      background-color: #02a8f3;
+      color: #fbfbfb;
+      border-bottom: 1px solid #02a8f3;
+    }
+  }
+
+  li {
+     flex-grow: 1;
+  }
+}
+
+.sidebar-tenant-icon {
+  display: inline-block;
+  width: 45px;
+  position: absolute;
+  margin: -6px;
+
+  img {
+    height: 40px;
+  }
+}
+
+.tenant__list-nav-header {
+  background-color: #63C0B9;
+  color: white;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+
+  i {
+    font-size: 38px;
+  }
+
+  button {
+    margin: 0;
+    height: 40px;
+    width: 35px;
+    margin-right: 10px;
+    border-radius: 0;
+    color: white;
+
+    &:hover {
+      color: #63C0B9;
+      background: white;
+    }
+  }
+}
+
+.nav__item-name {
+  margin-left: 40px;
+}
+
 .tenant__list_wrapper {
   position: fixed;
   bottom: 0;
@@ -199,9 +292,9 @@ $sidebar-toggle-button-transition: transform 500ms linear;
     cursor: pointer;
 
     &:hover {
-      background-color: #1d8494;
+      background-color: #02a8f3;
       color: #fbfbfb;
-      border-bottom: 1px solid #1d8494;
+      border-bottom: 1px solid #02a8f3;
     }
   }
 
@@ -236,8 +329,14 @@ $sidebar-toggle-button-transition: transform 500ms linear;
     }
 
     .nav__item-name,
+    .tenant-toggle,
     .sidebar__brand-name {
       display: none;
+    }
+
+    .sidebar-tenant-icon {
+      position: relative;
+      display: block;
     }
 
     .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {

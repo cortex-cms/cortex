@@ -9,7 +9,7 @@ import {
   TENANT_UPDATE_ERROR,
   SELECT_TENANT} from 'constants/tenant_switcher'
 import {capitalize} from 'cortex/helpers/formating'
-import TenantNestingLookup from 'cortex/helpers/tenant_nesting_lookup'
+import TenantLookup from 'cortex/helpers/tenant_nesting_lookup'
 
 import EnvironmentFlag from 'components/side_bar/environment_flag'
 import TenantList from 'components/side_bar/tenant_list'
@@ -26,7 +26,7 @@ class TenantSwitcherContainer extends React.PureComponent {
     super(props);
     this.layoutWrapper = getLayoutWrapper(this.props.railsContext.serverSide)
     this.railsAPI = SetRailsAPIService(this.props.railsContext, this.props.data)
-    this.tenancyLookup = TenantNestingLookup(this.props.data.tenants)
+    this.tenancyLookup = TenantLookup(this.props.data.tenants)
   }
   selectTenant = (tenant) => () => {
     this.updateTenant(tenant)

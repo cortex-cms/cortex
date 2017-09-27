@@ -46,6 +46,7 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
         return {
           ...state,
           current_user: action.payload,
+          parent_tenant: action.payload.active_tenant.parent_id,
           tenantListActive: false
         }
       case SUBLIST_CLICKED:

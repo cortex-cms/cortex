@@ -80,9 +80,9 @@ class TenantList extends React.PureComponent {
           { this.tenantParentHeader(this.props) }
           { this.renderTenants() }
         </List>
-         <div className={ syncedWithDB ? 'hidden' : 'loader-spinner-wrapper'}>
-           <Spinner />
-         </div>
+        <div className={ syncedWithDB ? 'hidden' : 'loader-spinner-wrapper'}>
+          <Spinner />
+        </div>
       </div>
     )
   }

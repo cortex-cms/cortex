@@ -246,6 +246,10 @@ $sidebar-toggle-button-transition: transform 500ms linear;
   align-items: center;
   border-bottom: 1px solid #eee;
 
+  span {
+    font-size: 11px;
+  }
+
   i {
     font-size: 38px;
   }

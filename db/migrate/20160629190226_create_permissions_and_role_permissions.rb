@@ -1,15 +1,15 @@
 class CreatePermissionsAndRolePermissions < ActiveRecord::Migration[5.1]
   def change
-    create_table :permissions do |t|
+    create_table :permissions, id: :uuid do |t|
       t.string :name
       t.string :resource_type
 
       t.timestamps null: false
     end
 
-    create_table :role_permissions do |t|
-      t.belongs_to :role
-      t.belongs_to :permission
+    create_table :role_permissions, id: :uuid do |t|
+      t.references :role, type: :uuid, foreign_key: true
+      t.references :permission, type: :uuid, foreign_key: true
 
       t.timestamps null: false
     end

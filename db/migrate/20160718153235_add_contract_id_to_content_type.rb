@@ -1,5 +1,5 @@
 class AddContractIdToContentType < ActiveRecord::Migration[5.1]
   def change
-    add_column :content_types, :contract_id, :integer
+    add_reference :content_types, :contract, type: :uuid, foreign_key: true
   end
 end

@@ -22,27 +22,16 @@ const activeListItemStyles = {
   container: {
     backgroundColor: '#02a8f3',
     color: 'white'
-  },
-  secondaryAction: {
-    background: 'white',
-    '$:hover': {
-      background: '#02a8f3',
-      color: 'white',
-      borderBottom: '1px solid #02a8f3'
-    }
-  },
-  label: {
-    textTransform: 'capitalize',
   }
 }
 
 const listItemStyles = {}
 
-const TenantItem = ({name, subdomain, children}, tenantClicked, tenantActive, subTenantListClick) => (
+const TenantItem = ({name, description = 'Tenant Description', subdomain, children}, tenantClicked, tenantActive, subTenantListClick) => (
   <div className='tenant-list-item'>
   <ListItem key={subdomain} style={ tenantActive ? activeListItemStyles.root : listItemStyles } onClick={tenantClicked}>
     <Avatar alt="Remy Sharp" src='https://i.imgur.com/zQA3Cck.png' />
-    <ListItemText className='organization--label' primary={name} />
+    <ListItemText className='organization--label' primary={name}  secondary={description} />
   </ListItem>
   { children &&
      <IconButton aria-label="Sub Tenants" onClick={subTenantListClick}>

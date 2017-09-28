@@ -76,7 +76,6 @@ class TenantSwitcherContainer extends React.PureComponent {
       tenantListActive
     } = this.props.data
     const syncedWithDB = current_user.active_tenant.id === selected_tenant.id;
-    console.log('this.tenancyLookup', this.tenancyLookup)
     return (
       <footer id="tentant_switch">
         <TenantList

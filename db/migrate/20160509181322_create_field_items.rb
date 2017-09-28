@@ -1,4 +1,4 @@
-class CreateFieldItems < ActiveRecord::Migration
+class CreateFieldItems < ActiveRecord::Migration[5.1]
   def change
     create_table :field_items do |t|
       t.text :text

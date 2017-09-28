@@ -8,7 +8,7 @@ gem 'bower-rails', '~> 0.11.0'
 gem 'puma', '~> 3.8.2'
 
 # Rails
-gem 'rails', '~> 5.0.2'
+gem 'rails', '~> 5.1.4'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
@@ -27,7 +27,7 @@ gem 'dry-transaction', '~> 0.10.2'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 4.2.1'
+gem 'devise', '~> 4.3.0'
 gem 'rack-oauth2', '~> 1.6.1'
 gem 'doorkeeper', '~> 4.2'
 gem 'rolify', '~> 5.1'

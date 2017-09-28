@@ -1,4 +1,4 @@
-class AddUserLocalization < ActiveRecord::Migration
+class AddUserLocalization < ActiveRecord::Migration[5.1]
   def up
     add_column :users, :firstname, :string
     add_column :users, :lastname, :string

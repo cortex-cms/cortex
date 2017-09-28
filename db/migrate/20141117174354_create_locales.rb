@@ -1,4 +1,4 @@
-class CreateLocales < ActiveRecord::Migration
+class CreateLocales < ActiveRecord::Migration[5.1]
   def change
     create_table :locales, id: false do |t|
       t.uuid :id, primary_key: true, default: 'uuid_generate_v4()'

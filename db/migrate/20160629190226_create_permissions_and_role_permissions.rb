@@ -1,4 +1,4 @@
-class CreatePermissionsAndRolePermissions < ActiveRecord::Migration
+class CreatePermissionsAndRolePermissions < ActiveRecord::Migration[5.1]
   def change
     create_table :permissions do |t|
       t.string :name

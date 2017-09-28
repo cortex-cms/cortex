@@ -1,4 +1,4 @@
-class ConvertFieldTypeIdsToGuids < ActiveRecord::Migration[5.0]
+class ConvertFieldTypeIdsToUuids < ActiveRecord::Migration[5.1]
   def change
     drop_table :field_types
 

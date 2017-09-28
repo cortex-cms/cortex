@@ -1,4 +1,4 @@
-class AddNameToLocalizations < ActiveRecord::Migration
+class AddNameToLocalizations < ActiveRecord::Migration[5.1]
   def change
     add_column :localizations, :name, :string
     Localization.update_all 'name=id' # Set :name to :id on initial migration, as :name must be unique

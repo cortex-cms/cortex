@@ -1,4 +1,4 @@
-class ApplyUuidsToCustomContentTables < ActiveRecord::Migration
+class ApplyUuidsToCustomContentTables < ActiveRecord::Migration[5.1]
   def change
     drop_table :content_types
     drop_table :fields

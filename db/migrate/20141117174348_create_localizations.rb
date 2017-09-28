@@ -1,4 +1,4 @@
-class CreateLocalizations < ActiveRecord::Migration
+class CreateLocalizations < ActiveRecord::Migration[5.1]
   def change
     create_table :localizations, id: false do |t|
       t.uuid :id, primary_key: true, default: 'uuid_generate_v4()'

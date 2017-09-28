@@ -1,4 +1,4 @@
-class AddDeviseToUsers < ActiveRecord::Migration
+class AddDeviseToUsers < ActiveRecord::Migration[5.1]
   def self.up
     change_table(:users) do |t|
       ## Rewind 20131111201021_create_users, we don't need 'name' yet

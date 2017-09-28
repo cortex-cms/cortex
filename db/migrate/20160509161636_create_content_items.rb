@@ -1,4 +1,4 @@
-class CreateContentItems < ActiveRecord::Migration
+class CreateContentItems < ActiveRecord::Migration[5.1]
   def change
     create_table :content_items do |t|
       t.string :publish_state

@@ -42,13 +42,14 @@ const config = {
     }
   },
 
-  plugins:[
+  plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false,
     }),
     new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
   ],
+
   module: {
     rules: [
       {

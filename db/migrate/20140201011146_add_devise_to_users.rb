@@ -1,9 +1,6 @@
 class AddDeviseToUsers < ActiveRecord::Migration[5.1]
   def self.up
     change_table(:users) do |t|
-      ## Rewind 20131111201021_create_users, we don't need 'name' yet
-      remove_columns :users, :name, :password_digest
-
       ## Database authenticatable
       t.change :email, :string, :default => ""
       t.string :encrypted_password, :null => false, :default => ""

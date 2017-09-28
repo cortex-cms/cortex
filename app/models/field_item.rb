@@ -1,10 +1,11 @@
 class FieldItem < ApplicationRecord
   acts_as_paranoid
+
   belongs_to :field
   belongs_to :content_item
 
-  validates :field_id, presence: true
-  validates :content_item_id, presence: true, on: :update
+  validates :field, presence: true
+  validates :content_item, presence: true, on: :update
   validate :field_item_content_is_valid, if: :field_is_present
 
   def data=(data_hash)

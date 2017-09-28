@@ -1,17 +1,17 @@
 class Tenant < ApplicationRecord
-  default_scope { where(deleted_at: nil) }
-
   acts_as_nested_set
   acts_as_paranoid
 
+  has_many :content_items
+  has_many :content_types
   has_many :applications
   has_many :users
-  belongs_to :owner, class_name: "User"
+  belongs_to :owner, class_name: 'User'
 
   validates_presence_of :name
   validates_associated :owner
 
-  before_save :init
+  alias_method :organization, :root
 
   def is_organization?
     self.root?
@@ -19,11 +19,5 @@ class Tenant < ApplicationRecord
 
   def has_children?
     !self.leaf?
-  end
-
-  private
-
-  def init
-    self.subdomain ||= self.name.mb_chars.normalize(:kd).downcase.gsub(/[^a-z0-9]/, '').to_s
   end
 end

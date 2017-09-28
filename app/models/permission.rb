@@ -7,5 +7,4 @@ class Permission < ApplicationRecord
   def resource
     resource_type.constantize
   end
-
 end

@@ -7,6 +7,7 @@ class ContentItem < ApplicationRecord
 
   acts_as_paranoid
 
+  belongs_to :tenant
   belongs_to :creator, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
   belongs_to :content_type
@@ -16,7 +17,7 @@ class ContentItem < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
-  validates :creator_id, :content_type_id, presence: true
+  validates :creator, :content_type, presence: true
 
   after_save :index
 

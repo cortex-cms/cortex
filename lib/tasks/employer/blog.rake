@@ -40,8 +40,8 @@ namespace :employer do
                                name: "Employer Blog",
                                description: "Blog for Employer",
                                icon: "description",
-                               creator_id: 1,
-                               contract_id: 1,
+                               creator: User.first,
+                               contract: Contract.first, # TODO: This is obviously bad. This whole file is bad.
                                publishable: true
                              })
       blog.save!

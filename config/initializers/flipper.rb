@@ -1,3 +1,5 @@
+require 'flipper/adapters/active_record'
+
 module Cortex
   def self.flipper
     @flipper ||= Flipper.new(Flipper::Adapters::ActiveRecord.new)

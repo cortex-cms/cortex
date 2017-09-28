@@ -20,23 +20,14 @@ Cortex::Application.routes.draw do
   end
 
   # Authentication
-  use_doorkeeper do
-    unless Rails.env.development? && !ENV['DEPLOYED']
-      skip_controllers :applications, :authorized_applications
-    end
-  end
   devise_for :users, controllers: {sessions: 'authentication/sessions', passwords: 'authentication/passwords'}
 
-  # Sidekiq Admin
-  authenticate :user, lambda { |u| u.is_admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
+  # Sidekiq Admin TODO: this needs to be updated with new role system
+  #authenticate :user, lambda { |u| u.is_admin? } do
+  #  mount Sidekiq::Web => '/sidekiq'
+  #end
 
-  # API
-  ::API.logger Rails.logger
-  mount ::API => '/api'
-
-  # Flipper
+  # Flipper TODO: this needs to be updated with new role system
   authenticated :user, lambda {|u| u.is_admin? } do
     flipper_block = lambda {
       Cortex.flipper

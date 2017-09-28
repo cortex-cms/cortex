@@ -76,5 +76,4 @@ class ContentType < ApplicationRecord
     mappings[:analyzer] = field.mapping[:analyzer] if field.mapping[:analyzer]
     mappings
   end
-
 end

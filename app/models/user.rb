@@ -8,15 +8,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable
   rolify
 
-  belongs_to :tenant
-  has_many   :tenants
-  has_many   :localizations
-  has_many   :locales
-  has_many   :role_permissions, through: :roles
-  has_many   :permissions, through: :role_permissions
-  has_many   :content_items
+  has_many :tenants
+  has_many :role_permissions, through: :roles
+  has_many :permissions, through: :role_permissions
+  has_many :content_items
 
-  validates_presence_of :email, :tenant, :firstname, :lastname
+  validates_presence_of :email, :firstname, :lastname
 
   before_destroy :prevent_consumed_deletion
 
@@ -37,18 +34,14 @@ class User < ApplicationRecord
     allowed_perms = allowed_permissions(resource_class, permission)
 
     if resource_class == ContentType
-      allowed_perms.select { |perm| perm.resource_id == resource.id }.any?
+      allowed_perms.select {|perm| perm.resource_id == resource.id}.any?
     else
       allowed_perms.any?
     end
   end
 
-  def is_admin?
-    self.admin
-  end
-
   def to_json(options={})
-    options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname admin)
+    options[:only] ||= %w(id email created_at updated_at tenant_id firstname lastname)
     options[:methods] ||= %w(fullname)
     super(options)
   end
@@ -60,7 +53,7 @@ class User < ApplicationRecord
   private
 
   def allowed_permissions(resource_class, permission)
-    permissions.select { |perm| perm.resource_type == resource_class.to_s && perm.name == permission }
+    permissions.select {|perm| perm.resource_type == resource_class.to_s && perm.name == permission}
   end
 
   def prevent_consumed_deletion

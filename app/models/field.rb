@@ -25,7 +25,7 @@ class Field < ApplicationRecord
     begin
       FieldType.get_subtype_constant(field_type)
     rescue NameError
-      errors.add(:field_type, "must be an available field type")
+      errors.add(:field_type, 'must be an available field type')
     end
   end
 end

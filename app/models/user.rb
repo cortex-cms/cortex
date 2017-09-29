@@ -6,11 +6,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable
-  rolify
+  rolify role_join_table_name: :roles_users # rolify doesn't obey lexical order for join table names
 
-  has_many :tenants
-  has_many :role_permissions, through: :roles
-  has_many :permissions, through: :role_permissions
+  has_and_belongs_to_many :tenants
+  has_many :permissions_roles, through: :roles
+  has_many :permissions, through: :permissions_roles
   has_many :content_items
 
   validates_presence_of :email, :firstname, :lastname

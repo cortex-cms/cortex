@@ -28,10 +28,10 @@ Cortex::Application.routes.draw do
   #end
 
   # Flipper TODO: this needs to be updated with new role system
-  authenticated :user, lambda {|u| u.is_admin? } do
+  #authenticated :user, lambda {|u| u.is_admin? } do
     flipper_block = lambda {
       Cortex.flipper
     }
     mount Flipper::UI.app(flipper_block) => '/flipper'
-  end
+  #end
 end

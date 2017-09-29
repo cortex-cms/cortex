@@ -1,7 +1,7 @@
 class Role < ApplicationRecord
-  has_and_belongs_to_many :users, :join_table => :users_roles
-  has_many :role_permissions
-  has_many :permissions, through: :role_permissions
+  has_and_belongs_to_many :users
+  has_many :permissions_roles
+  has_many :permissions, through: :permissions_roles
 
   validates :resource_type,
             :inclusion => { :in => Rolify.resource_types },

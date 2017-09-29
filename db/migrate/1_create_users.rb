@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :locale, limit: 30, null: false, default: 'en_US'
       t.string :timezone, limit: 30, null: false, default: 'EST'
 
+      t.datetime :deleted_at, index: true
       t.timestamps
     end
   end

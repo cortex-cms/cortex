@@ -175,8 +175,10 @@ ActiveRecord::Schema.define(version: 13) do
     t.datetime "active_at"
     t.datetime "deactive_at"
     t.uuid "owner_id"
+    t.uuid "active_tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["active_tenant_id"], name: "index_tenants_on_active_tenant_id"
     t.index ["deleted_at"], name: "index_tenants_on_deleted_at"
     t.index ["name"], name: "index_tenants_on_name", unique: true
     t.index ["owner_id"], name: "index_tenants_on_owner_id"
@@ -226,6 +228,7 @@ ActiveRecord::Schema.define(version: 13) do
   add_foreign_key "permissions_roles", "roles"
   add_foreign_key "roles_users", "roles"
   add_foreign_key "roles_users", "users"
+  add_foreign_key "tenants", "tenants", column: "active_tenant_id"
   add_foreign_key "tenants", "users", column: "owner_id"
   add_foreign_key "tenants_users", "tenants"
   add_foreign_key "tenants_users", "users"

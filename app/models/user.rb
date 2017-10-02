@@ -9,6 +9,7 @@ class User < ApplicationRecord
   rolify role_join_table_name: :roles_users # rolify doesn't obey lexical order for join table names
 
   has_and_belongs_to_many :tenants
+  belongs_to :active_tenant, class_name: 'Tenant'
   has_many :permissions_roles, through: :roles
   has_many :permissions, through: :permissions_roles
   has_many :content_items

@@ -11,6 +11,7 @@ class CreateTenants < ActiveRecord::Migration[5.1]
       t.datetime :active_at
       t.datetime :deactive_at
       t.references :owner, type: :uuid, foreign_key: { to_table: :users }
+      t.references :active_tenant, type: :uuid, foreign_key: { to_table: :tenants }
 
       t.datetime :deleted_at, index: true
       t.timestamps

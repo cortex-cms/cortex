@@ -4,6 +4,10 @@ Cortex::Application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root 'dashboards#index'
 
+  scope '/admin_update' do
+    match '/tenant_change', to: 'tenants#switch_tenants', via: [:post]
+  end
+
   scope '/admin' do
     resources :dashboards
     resources :medias

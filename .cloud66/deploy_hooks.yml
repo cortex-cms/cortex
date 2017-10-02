@@ -6,8 +6,8 @@ default: &default
       apply_during: build_only
       run_on: all_servers
   after_bundle:
-    - source: /.cloud66/scripts/npm_install.sh
-      destination: /tmp/npm_install.sh
+    - source: /.cloud66/scripts/yarn_install.sh
+      destination: /tmp/yarn_install.sh
       target: rails
       execute: true
       run_on: all_servers

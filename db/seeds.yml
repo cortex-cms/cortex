@@ -8,6 +8,9 @@ defaults: &defaults
     name: 'System'
     description: 'Core tenant for news/etc'
     creator: {email: 'admin@cortexcms.org', firstname: 'Cortex', lastname: 'Admin', password: 'welcome1'}
+  example_tenant:
+    name: 'Example'
+    description: 'ContentTypes to get started with'
 
 test:
   <<: *defaults

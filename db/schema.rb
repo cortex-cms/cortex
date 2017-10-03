@@ -175,10 +175,8 @@ ActiveRecord::Schema.define(version: 13) do
     t.datetime "active_at"
     t.datetime "deactive_at"
     t.uuid "owner_id"
-    t.uuid "active_tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["active_tenant_id"], name: "index_tenants_on_active_tenant_id"
     t.index ["deleted_at"], name: "index_tenants_on_deleted_at"
     t.index ["name"], name: "index_tenants_on_name", unique: true
     t.index ["owner_id"], name: "index_tenants_on_owner_id"
@@ -201,6 +199,7 @@ ActiveRecord::Schema.define(version: 13) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "active_tenant_id"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -210,6 +209,7 @@ ActiveRecord::Schema.define(version: 13) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.index ["active_tenant_id"], name: "index_users_on_active_tenant_id"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -228,8 +228,8 @@ ActiveRecord::Schema.define(version: 13) do
   add_foreign_key "permissions_roles", "roles"
   add_foreign_key "roles_users", "roles"
   add_foreign_key "roles_users", "users"
-  add_foreign_key "tenants", "tenants", column: "active_tenant_id"
   add_foreign_key "tenants", "users", column: "owner_id"
   add_foreign_key "tenants_users", "tenants"
   add_foreign_key "tenants_users", "users"
+  add_foreign_key "users", "tenants", column: "active_tenant_id"
 end

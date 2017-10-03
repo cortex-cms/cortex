@@ -12,9 +12,9 @@ module ApplicationHelper
   def user_session_props
     {
       environment: environment,
-      tenant: (Tenant.find_by_name('Corporate') || current_user.tenant),
+      active_tenant: current_user.active_tenant || current_user.tenants.first,
       current_user: current_user,
-      tenants: Tenant.all,
+      tenants: current_user.tenants,
       csrf_token: form_authenticity_token,
       sidebarExpanded: (current_page? root_path),
       environment_abbreviated: environment_abbreviated

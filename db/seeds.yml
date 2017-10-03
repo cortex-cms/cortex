@@ -11,6 +11,9 @@ defaults: &defaults
   example_tenant:
     name: 'Example'
     description: 'ContentTypes to get started with'
+  example_subtenant:
+    name: 'Bogus'
+    description: 'Example subtenant'
 
 test:
   <<: *defaults

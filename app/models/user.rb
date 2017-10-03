@@ -45,6 +45,10 @@ class User < ApplicationRecord
     "//www.gravatar.com/avatar/#{Digest::MD5.hexdigest email}"
   end
 
+  def tenants_with_children
+    tenants.flat_map(&:self_and_descendants)
+  end
+
   private
 
   def allowed_permissions(resource_class, permission)

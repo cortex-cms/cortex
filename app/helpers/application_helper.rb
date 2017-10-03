@@ -14,7 +14,7 @@ module ApplicationHelper
       environment: environment,
       active_tenant: current_user.active_tenant || current_user.tenants.first,
       current_user: current_user,
-      tenants: current_user.tenants,
+      tenants: current_user.tenants_with_children,
       csrf_token: form_authenticity_token,
       sidebarExpanded: (current_page? root_path),
       environment_abbreviated: environment_abbreviated

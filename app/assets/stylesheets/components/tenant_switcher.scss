@@ -72,12 +72,11 @@
 }
 
 .tenant__list-nav-header {
-  background-color: #63C0B9;
+  background-color: $color-teal-dark;
   color: white;
   height: 40px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #eee;
 
   span {
     font-size: 11px;
@@ -97,7 +96,7 @@
     color: white;
 
     &:hover {
-      color: #63C0B9;
+      color: $color-teal-dark;
       background: white;
     }
   }

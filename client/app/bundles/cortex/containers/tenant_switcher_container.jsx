@@ -70,7 +70,6 @@ class TenantSwitcherContainer extends React.PureComponent {
       environment,
       environment_abbreviated,
       currentUser,
-      tenant,
       selectedTenant,
       parentTenant,
       tenantSyncedWithDB,

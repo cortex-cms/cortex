@@ -9,21 +9,20 @@ import {
   PAGINATE_BACK
 } from 'constants/tenant_switcher'
 
-const checkActiveTenant = (tenant, current_user) => {
+const checkActiveTenant = (active_tenant, current_user) => {
   if (current_user.active_tenant === null) {
-    return Object.assign({}, current_user, { active_tenant: tenant })
+    return Object.assign({}, current_user, { active_tenant: active_tenant })
   }
   return current_user
 }
 
-const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, current_user, environment,  environment_abbreviated}) => {
-  const currentUser = checkActiveTenant(tenant, current_user);
+const tenantSwitcherReducer = ({active_tenant, csrf_token, sidebarExpanded, tenants, current_user, environment,  environment_abbreviated}) => {
+  const currentUser = checkActiveTenant(active_tenant, current_user);
   const initialState = {
     tenantListActive: false,
     selectedTenant: currentUser.active_tenant,
     parentTenant: currentUser.active_tenant.parent_id,
     tenantSyncedWithDB: true,
-    tenant,
     csrf_token,
     sidebarExpanded,
     tenants,

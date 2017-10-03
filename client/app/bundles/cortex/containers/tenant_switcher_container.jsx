@@ -51,8 +51,8 @@ class TenantSwitcherContainer extends React.PureComponent {
 
   }
   paginateBack = () => {
-    const { parent_tenant } = this.props.data;
-    this.props.dispatch({type: PAGINATE_BACK, payload: this.tenancyLookup[parent_tenant].parent_id})
+    const { parentTenant } = this.props.data;
+    this.props.dispatch({type: PAGINATE_BACK, payload: this.tenancyLookup[parentTenant].parent_id})
   }
   subTenantListClicked = (parent_id) => () => {
     this.props.dispatch({type: SUBLIST_CLICKED, payload: parent_id})
@@ -71,11 +71,11 @@ class TenantSwitcherContainer extends React.PureComponent {
       environment_abbreviated,
       current_user,
       tenant,
-      selected_tenant,
-      parent_tenant,
+      selectedTenant,
+      parentTenant,
       tenantListActive
     } = this.props.data
-    const syncedWithDB = current_user.active_tenant.id === selected_tenant.id;
+    const syncedWithDB = current_user.active_tenant.id === selectedTenant.id;
     return (
       <footer id="tentant_switch">
         <TenantList
@@ -85,8 +85,8 @@ class TenantSwitcherContainer extends React.PureComponent {
         tenancyLookup={this.tenancyLookup}
         syncedWithDB={syncedWithDB}
         current_user={current_user}
-        selected_tenant={selected_tenant}
-        parent_tenant={parent_tenant}
+        selectedTenant={selectedTenant}
+        parentTenant={parentTenant}
         active={tenantListActive}/>
 
         <nav className='demo-navigation mdl-navigation'>
@@ -96,7 +96,7 @@ class TenantSwitcherContainer extends React.PureComponent {
               <Avatar alt="Remy Sharp"   src='https://i.imgur.com/zQA3Cck.png' />
             </div>
             <span className='nav__item-name nav__item-name--footer'>
-              {syncedWithDB === true ? selected_tenant.name : 'Loading...'}
+              {syncedWithDB === true ? selectedTenant.name : 'Loading...'}
             </span>
             <i className='material-icons tenant-toggle' role="presentation">{tenantListActive === true ? 'expand_less' : 'expand_more' }</i>
           </div>

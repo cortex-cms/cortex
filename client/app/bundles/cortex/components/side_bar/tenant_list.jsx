@@ -28,8 +28,8 @@ const activeListItemStyles = {
 const listItemStyles = {}
 
 const TenantItem = ({name, description = 'Tenant Description', subdomain, children}, tenantClicked, tenantActive, subTenantListClick) => (
-  <div className='tenant-list-item'>
-  <ListItem key={subdomain} style={ tenantActive ? activeListItemStyles.root : listItemStyles } onClick={tenantClicked}>
+  <div key={subdomain} className='tenant-list-item'>
+  <ListItem style={ tenantActive ? activeListItemStyles.root : listItemStyles } onClick={tenantClicked}>
     <Avatar alt="Remy Sharp" src='https://i.imgur.com/zQA3Cck.png' />
     <ListItemText className='organization--label' primary={name}  secondary={description} />
   </ListItem>
@@ -43,19 +43,19 @@ const TenantItem = ({name, description = 'Tenant Description', subdomain, childr
 
 class TenantList extends React.PureComponent {
   renderTenants = () => {
-    const { selected_tenant, current_user, parent_tenant,  selectTenant, subTenantListClicked, tenancyLookup } = this.props
-    const activeTenant = selected_tenant.id;
-    const listedTenantIds = parent_tenant === null ? tenancyLookup.topLevel : tenancyLookup[parent_tenant].children;
+    const { selectedTenant, current_user, parentTenant,  selectTenant, subTenantListClicked, tenancyLookup } = this.props
+    const activeTenant = selectedTenant.id;
+    const listedTenantIds = parentTenant === null ? tenancyLookup.topLevel : tenancyLookup[parentTenant].children;
 
     return listedTenantIds.map((tenant_id, index) =>   TenantItem(tenancyLookup[tenant_id], selectTenant(tenancyLookup[tenant_id]), activeTenant === tenancyLookup[tenant_id].id, subTenantListClicked(tenancyLookup[tenant_id].id)) )
   }
-  tenantParentHeader = ({parent_tenant, tenancyLookup, paginateBack}) => {
+  tenantParentHeader = ({parentTenant, tenancyLookup, paginateBack}) => {
     return (
-      <div className={ parent_tenant === null ? 'hidden' : 'tenant__list-nav-header'}>
+      <div className={ parentTenant === null ? 'hidden' : 'tenant__list-nav-header'}>
          <IconButton aria-label="Go Back" className='page-back-button' onClick={paginateBack}>
           <i className='material-icons'>chevron_left</i>
          </IconButton>
-        <span>{TenantAncestryList(parent_tenant, tenancyLookup).join(' < ')}</span>
+        <span>{TenantAncestryList(parentTenant, tenancyLookup).join(' < ')}</span>
       </div>
     )
   }

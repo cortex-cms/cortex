@@ -9,24 +9,24 @@ import {
   PAGINATE_BACK
 } from 'constants/tenant_switcher'
 
-const checkActiveTenant = (tenant, current_user) => {
+const checkActiveTenant = (active_tenant, current_user) => {
   if (current_user.active_tenant === null) {
-    return Object.assign({}, current_user, { active_tenant: tenant })
+    return Object.assign({}, current_user, { active_tenant: active_tenant })
   }
   return current_user
 }
 
-const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, current_user, environment,  environment_abbreviated}) => {
-  const currentUser = checkActiveTenant(tenant, current_user)
+const tenantSwitcherReducer = ({active_tenant, csrf_token, sidebarExpanded, tenants, current_user, environment,  environment_abbreviated}) => {
+  const currentUser = checkActiveTenant(active_tenant, current_user);
   const initialState = {
     tenantListActive: false,
-    selected_tenant: currentUser.active_tenant,
-    parent_tenant: currentUser.active_tenant.parent_id,
-    tenant,
+    selectedTenant: currentUser.active_tenant,
+    parentTenant: currentUser.active_tenant.parent_id,
+    tenantSyncedWithDB: true,
     csrf_token,
     sidebarExpanded,
     tenants,
-    current_user: currentUser,
+    currentUser: currentUser,
     environment,
     environment_abbreviated
   }
@@ -35,29 +35,31 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
       case PAGINATE_BACK:
         return {
           ...state,
-          parent_tenant: action.payload
+          parentTenant: action.payload
         };
       case SELECT_TENANT:
         return {
           ...state,
-          selected_tenant: action.payload
+          selectedTenant: action.payload,
+          tenantSyncedWithDB: state.currentUser.active_tenant.id === action.payload.id
         };
       case TENANT_UPDATED:
         return {
           ...state,
-          current_user: action.payload,
-          parent_tenant: action.payload.active_tenant.parent_id,
+          currentUser: action.payload,
+          parentTenant: action.payload.active_tenant.parent_id,
+          tenantSyncedWithDB: true,
           tenantListActive: false
         }
       case SUBLIST_CLICKED:
         return {
           ...state,
-          parent_tenant: action.payload
+          parentTenant: action.payload
         }
       case TENANT_UPDATE_ERROR:
         return {
           ...state,
-          selected_tenant: state.current_user.active_tenant
+          selectedTenant: state.current_user.active_tenant
         }
       case TOGGLE_SIDEBAR:
         return {
@@ -69,7 +71,7 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
         return {
           ...state,
           tenantListActive: !state.tenantListActive,
-          parent_tenant: state.selected_tenant.parent_id
+          parentTenant: state.selectedTenant.parent_id
         };
       default:
         return state

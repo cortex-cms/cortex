@@ -43,19 +43,19 @@ const TenantItem = ({name, description = 'Tenant Description', subdomain, childr
 
 class TenantList extends React.PureComponent {
   renderTenants = () => {
-    const { selectedTenant, current_user, parentTenant,  selectTenant, subTenantListClicked, tenancyLookup } = this.props
+    const { selectedTenant, current_user, parentTenant,  selectTenant, subTenantListClicked, tenantLookupTable } = this.props
     const activeTenant = selectedTenant.id;
-    const listedTenantIds = parentTenant === null ? tenancyLookup.topLevel : tenancyLookup[parentTenant].children;
+    const listedTenantIds = parentTenant === null ? tenantLookupTable.topLevel : tenantLookupTable[parentTenant].children;
 
-    return listedTenantIds.map((tenant_id, index) =>   TenantItem(tenancyLookup[tenant_id], selectTenant(tenancyLookup[tenant_id]), activeTenant === tenancyLookup[tenant_id].id, subTenantListClicked(tenancyLookup[tenant_id].id)) )
+    return listedTenantIds.map((tenant_id, index) =>   TenantItem(tenantLookupTable[tenant_id], selectTenant(tenantLookupTable[tenant_id]), activeTenant === tenantLookupTable[tenant_id].id, subTenantListClicked(tenantLookupTable[tenant_id].id)) )
   }
-  tenantParentHeader = ({parentTenant, tenancyLookup, paginateBack}) => {
+  tenantParentHeader = ({parentTenant, tenantLookupTable, paginateBack}) => {
     return (
       <div className={ parentTenant === null ? 'hidden' : 'tenant__list-nav-header'}>
          <IconButton aria-label="Go Back" className='page-back-button' onClick={paginateBack}>
           <i className='material-icons'>chevron_left</i>
          </IconButton>
-        <span>{TenantAncestryList(parentTenant, tenancyLookup).join(' < ')}</span>
+        <span>{TenantAncestryList(parentTenant, tenantLookupTable).join(' < ')}</span>
       </div>
     )
   }

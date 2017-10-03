@@ -28,7 +28,7 @@ class TenantSwitcherContainer extends React.PureComponent {
     super(props);
     this.layoutWrapper = getLayoutWrapper(this.props.railsContext.serverSide)
     this.railsAPI = SetRailsAPIService(this.props.railsContext, this.props.data)
-    this.tenancyLookup = TenantLookup(this.props.data.tenants)
+    this.tenantLookupTable = TenantLookup(this.props.data.tenants)
   }
   selectTenant = (tenant) => () => {
     this.updateTenant(tenant)
@@ -52,7 +52,7 @@ class TenantSwitcherContainer extends React.PureComponent {
   }
   paginateBack = () => {
     const { parentTenant } = this.props.data;
-    this.props.dispatch({type: PAGINATE_BACK, payload: this.tenancyLookup[parentTenant].parent_id})
+    this.props.dispatch({type: PAGINATE_BACK, payload: this.tenantLookupTable[parentTenant].parent_id})
   }
   subTenantListClicked = (parent_id) => () => {
     this.props.dispatch({type: SUBLIST_CLICKED, payload: parent_id})
@@ -82,7 +82,7 @@ class TenantSwitcherContainer extends React.PureComponent {
         selectTenant={this.selectTenant}
         subTenantListClicked={this.subTenantListClicked}
         paginateBack={this.paginateBack}
-        tenancyLookup={this.tenancyLookup}
+        tenantLookupTable={this.tenantLookupTable}
         syncedWithDB={syncedWithDB}
         current_user={current_user}
         selectedTenant={selectedTenant}

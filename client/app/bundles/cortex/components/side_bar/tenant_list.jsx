@@ -13,23 +13,9 @@ import IconButton from 'material-ui/IconButton';
 import { NOT_DEFINED } from 'constants/type_constants';
 import TenantAncestryList from  'cortex/helpers/tenant_ancestry';
 
-const activeListItemStyles = {
-  root: {
-    background: '#02a8f3',
-    color: 'white',
-    borderBottom: '1px solid #02a8f3'
-  },
-  container: {
-    backgroundColor: '#02a8f3',
-    color: 'white'
-  }
-}
-
-const listItemStyles = {}
-
 const TenantItem = ({id, name, description = 'Tenant Description', children}, tenantClicked, tenantActive, subTenantListClick) => (
-  <div key={id} className='tenant-list-item'>
-  <ListItem style={ tenantActive ? activeListItemStyles.root : listItemStyles } onClick={tenantClicked}>
+  <div key={id} className={tenantActive ? 'tenant-list-item active' :  'tenant-list-item'}>
+  <ListItem onClick={tenantClicked}>
     <Avatar alt="Remy Sharp" src='https://i.imgur.com/zQA3Cck.png' />
     <ListItemText className='organization--label' primary={name}  secondary={description} />
   </ListItem>

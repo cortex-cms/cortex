@@ -3,11 +3,10 @@ class ContentItem < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
+  include BelongsToTenant
+
   scope :last_updated_at, -> { order(updated_at: :desc).select('updated_at').first.updated_at }
 
-  acts_as_paranoid
-
-  belongs_to :tenant
   belongs_to :creator, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
   belongs_to :content_type

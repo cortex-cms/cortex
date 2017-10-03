@@ -1,6 +1,5 @@
 class Tenant < ApplicationRecord
   acts_as_nested_set
-  acts_as_paranoid
 
   has_many :content_items
   has_many :content_types

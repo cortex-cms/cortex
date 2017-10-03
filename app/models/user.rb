@@ -3,6 +3,7 @@ require 'digest/md5'
 class User < ApplicationRecord
   include HasGravatar
   include HasFirstnameLastname
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable
@@ -10,8 +11,6 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :tenants
   belongs_to :active_tenant, class_name: 'Tenant'
-  has_many :permissions_roles, through: :roles
-  has_many :permissions, through: :permissions_roles
   has_many :content_items
 
   validates_presence_of :email, :firstname, :lastname

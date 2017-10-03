@@ -5,6 +5,7 @@ class CreatePermissions < ActiveRecord::Migration[5.1]
       t.string :resource_type, index: true
       t.uuid :resource_id, index: true
 
+      t.datetime :deleted_at, index: true
       t.timestamps null: false
     end
 

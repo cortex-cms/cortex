@@ -1,6 +1,5 @@
 class Permission < ApplicationRecord
-  has_many :permissions_roles
-  has_many :roles, through: :permissions_roles
+  has_and_belongs_to_many :roles
 
   validates :name, :resource_type, presence: true
 

@@ -1,5 +1,5 @@
 class FieldItem < ApplicationRecord
-  acts_as_paranoid
+  include BelongsToTenant
 
   belongs_to :field
   belongs_to :content_item

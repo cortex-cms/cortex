@@ -1,6 +1,8 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
+  acts_as_paranoid
+
   # A bug in ES-Rails 5.x is breaking document updates:
   # https://github.com/elastic/elasticsearch-rails/issues/669
   after_commit :refresh_elasticsearch_index, on: :update

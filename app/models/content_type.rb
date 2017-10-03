@@ -4,22 +4,25 @@ class ContentType < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  acts_as_paranoid
+  include BelongsToTenant
+
   validates :name, :creator, presence: true
-  validates :name, uniqueness: true
-  after_save :rebuild_content_items_index
+  validates_uniqueness_of :name,
+                          scope: :tenant_id,
+                          message: 'should be unique within a Tenant'
 
-  belongs_to :creator, class_name: "User"
+  belongs_to :creator, class_name: 'User'
   belongs_to :contract
-
   has_many :fields
   has_many :content_items
   has_many :contentable_decorators, as: :contentable
   has_many :decorators, through: :contentable_decorators
 
+  after_save :rebuild_content_items_index
+
   accepts_nested_attributes_for :fields
 
-  # TODO: Extract to a module
+  # TODO: Extract to a concern
   def self.permissions
     Permission.select { |perm| perm.resource_type = self }
   end

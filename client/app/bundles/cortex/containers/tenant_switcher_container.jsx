@@ -35,10 +35,10 @@ class TenantSwitcherContainer extends React.PureComponent {
     this.props.dispatch({type: SELECT_TENANT, payload: tenant})
   }
   updateTenant = (tenant) => {
-    const { currentUser, csrf_token } = this.props.data
+    const { currentUser, activeTenant, csrf_token } = this.props.data
     const self = this;
     this.railsAPI.post('/admin_update/tenant_change', {
-      current_tenant: currentUser.active_tenant.id,
+      active_tenant: activeTenant.id,
       requested_tenant: tenant.id,
       authenticity_token: csrf_token
     }).then(response => {
@@ -70,7 +70,7 @@ class TenantSwitcherContainer extends React.PureComponent {
       environment,
       environment_abbreviated,
       currentUser,
-      selectedTenant,
+      activeTenant,
       parentTenant,
       tenantSyncedWithDB,
       tenantListActive
@@ -85,7 +85,7 @@ class TenantSwitcherContainer extends React.PureComponent {
         tenantLookupTable={this.tenantLookupTable}
         tenantSyncedWithDB={tenantSyncedWithDB}
         currentUser={currentUser}
-        selectedTenant={selectedTenant}
+        activeTenant={activeTenant}
         parentTenant={parentTenant}
         active={tenantListActive}/>
 
@@ -96,7 +96,7 @@ class TenantSwitcherContainer extends React.PureComponent {
               <Avatar alt="Remy Sharp"   src='https://i.imgur.com/zQA3Cck.png' />
             </div>
             <span className='nav__item-name nav__item-name--footer'>
-              {tenantSyncedWithDB === true ? selectedTenant.name : 'Loading...'}
+              {tenantSyncedWithDB === true ? activeTenant.name : 'Loading...'}
             </span>
             <i className='material-icons tenant-toggle' role="presentation">{tenantListActive === true ? 'expand_less' : 'expand_more' }</i>
           </div>

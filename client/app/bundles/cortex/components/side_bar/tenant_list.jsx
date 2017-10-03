@@ -43,7 +43,7 @@ const TenantItem = ({name, description = 'Tenant Description', subdomain, childr
 
 class TenantList extends React.PureComponent {
   renderTenants = () => {
-    const { selectedTenant, current_user, parentTenant,  selectTenant, subTenantListClicked, tenantLookupTable } = this.props
+    const { selectedTenant, currentUser, parentTenant,  selectTenant, subTenantListClicked, tenantLookupTable } = this.props
     const activeTenant = selectedTenant.id;
     const listedTenantIds = parentTenant === null ? tenantLookupTable.topLevel : tenantLookupTable[parentTenant].children;
 
@@ -60,7 +60,7 @@ class TenantList extends React.PureComponent {
     )
   }
   render(){
-    const { active, syncedWithDB } = this.props
+    const { active, tenantSyncedWithDB } = this.props
     const tenantListClass = active ? 'tenant__list_wrapper' : 'tenant__list_wrapper hidden'
     return (
       <div className={tenantListClass}>
@@ -68,7 +68,7 @@ class TenantList extends React.PureComponent {
           { this.tenantParentHeader(this.props) }
           { this.renderTenants() }
         </List>
-        <div className={ syncedWithDB ? 'hidden' : 'loader-spinner-wrapper'}>
+        <div className={ tenantSyncedWithDB === true ? 'hidden' : 'loader-spinner-wrapper'}>
           <Spinner />
         </div>
       </div>

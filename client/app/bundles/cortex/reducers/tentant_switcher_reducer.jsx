@@ -17,16 +17,17 @@ const checkActiveTenant = (tenant, current_user) => {
 }
 
 const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, current_user, environment,  environment_abbreviated}) => {
-  const currentUser = checkActiveTenant(tenant, current_user)
+  const currentUser = checkActiveTenant(tenant, current_user);
   const initialState = {
     tenantListActive: false,
     selectedTenant: currentUser.active_tenant,
     parentTenant: currentUser.active_tenant.parent_id,
+    tenantSyncedWithDB: true,
     tenant,
     csrf_token,
     sidebarExpanded,
     tenants,
-    current_user: currentUser,
+    currentUser: currentUser,
     environment,
     environment_abbreviated
   }
@@ -40,13 +41,15 @@ const tenantSwitcherReducer = ({tenant, csrf_token, sidebarExpanded, tenants, cu
       case SELECT_TENANT:
         return {
           ...state,
-          selectedTenant: action.payload
+          selectedTenant: action.payload,
+          tenantSyncedWithDB: state.currentUser.active_tenant.id === action.payload.id
         };
       case TENANT_UPDATED:
         return {
           ...state,
-          current_user: action.payload,
+          currentUser: action.payload,
           parentTenant: action.payload.active_tenant.parent_id,
+          tenantSyncedWithDB: true,
           tenantListActive: false
         }
       case SUBLIST_CLICKED:

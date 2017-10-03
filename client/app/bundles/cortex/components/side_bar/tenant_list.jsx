@@ -30,7 +30,6 @@ const listItemStyles = {}
 const TenantItem = ({id, name, description = 'Tenant Description', children}, tenantClicked, tenantActive, subTenantListClick) => (
   <div key={id} className='tenant-list-item'>
   <ListItem style={ tenantActive ? activeListItemStyles.root : listItemStyles } onClick={tenantClicked}>
-  <ListItem onClick={tenantClicked}>
     <Avatar alt="Remy Sharp" src='https://i.imgur.com/zQA3Cck.png' />
     <ListItemText className='organization--label' primary={name}  secondary={description} />
   </ListItem>

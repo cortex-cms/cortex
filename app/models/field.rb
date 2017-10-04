@@ -3,7 +3,7 @@ class Field < ApplicationRecord
   has_many :field_items
   has_many :content_items, through: :field_items
 
-  validates :content_type, :field_type, presence: true
+  validates :name, :content_type, :field_type, presence: true
   validate :acceptable_field_type
   validates_uniqueness_of :name,
                           scope: :content_type_id,

@@ -3,9 +3,11 @@ class Tenant < ApplicationRecord
 
   has_many :content_items
   has_many :content_types
-  has_many :users, foreign_key: :active_tenant_id, class_name: 'User'
+  has_many :contracts
+  has_many :decorators
   has_and_belongs_to_many :users
   belongs_to :owner, class_name: 'User'
+  has_many :users, foreign_key: :active_tenant_id, class_name: 'User'
 
   validates_presence_of :name
   validates_associated :owner

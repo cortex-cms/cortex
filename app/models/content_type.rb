@@ -6,7 +6,7 @@ class ContentType < ApplicationRecord
 
   include BelongsToTenant
 
-  validates :name, :creator, presence: true
+  validates :name, :creator, :contract, presence: true
   validates_uniqueness_of :name,
                           scope: :tenant_id,
                           message: 'should be unique within a Tenant'

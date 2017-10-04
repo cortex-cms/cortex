@@ -2,8 +2,7 @@ class FieldItem < ApplicationRecord
   belongs_to :field
   belongs_to :content_item
 
-  validates :field, presence: true
-  validates :content_item, presence: true, on: :update
+  validates :field, :content_item, presence: true
   validate :field_item_content_is_valid, if: :field_is_present
 
   def data=(data_hash)

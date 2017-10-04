@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
 import { connect } from 'react-redux';
-import { NOT_DEFINED } from 'constants/type_constants'
+import { NOT_DEFINED } from 'constants/type_constants';
 
-import TenantSwitcherContainer from 'containers/tenant_switcher_container'
-import WizardContainer from 'containers/wizard_container'
+import TenantSwitcherContainer from 'containers/tenant_switcher_container';
+import WizardContainer from 'containers/wizard_container';
 
 function select(state) {
   return { data: state };

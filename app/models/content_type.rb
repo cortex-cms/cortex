@@ -4,22 +4,25 @@ class ContentType < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  acts_as_paranoid
-  validates :name, :creator, presence: true
-  validates :name, uniqueness: true
-  after_save :rebuild_content_items_index
+  include BelongsToTenant
 
-  belongs_to :creator, class_name: "User"
+  validates :name, :creator, :contract, presence: true
+  validates_uniqueness_of :name,
+                          scope: :tenant_id,
+                          message: 'should be unique within a Tenant'
+
+  belongs_to :creator, class_name: 'User'
   belongs_to :contract
-
   has_many :fields
   has_many :content_items
   has_many :contentable_decorators, as: :contentable
   has_many :decorators, through: :contentable_decorators
 
+  after_save :rebuild_content_items_index
+
   accepts_nested_attributes_for :fields
 
-  # TODO: Extract to a module
+  # TODO: Extract to a concern
   def self.permissions
     Permission.select { |perm| perm.resource_type = self }
   end
@@ -76,5 +79,4 @@ class ContentType < ApplicationRecord
     mappings[:analyzer] = field.mapping[:analyzer] if field.mapping[:analyzer]
     mappings
   end
-
 end

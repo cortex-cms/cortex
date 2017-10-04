@@ -3,7 +3,7 @@
     %i.material-icons{:role => "presentation"}> dashboard
     %span.nav__item-name
       Dashboard
-  = cell(:content_type, collection: ContentType.all).(:nav)
+  = cell(:content_type, collection: current_user.active_tenant.all_up_organization_for(ContentType)).(:nav)
   .mdl-layout-spacer
   .hidden
     = link_to 'https://github.com/cbdr/cortex', class: 'mdl-navigation__link', target: '_blank' do

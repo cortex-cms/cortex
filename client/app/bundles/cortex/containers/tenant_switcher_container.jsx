@@ -2,14 +2,16 @@ import React from 'react';
 import SetRailsAPIService from 'cortex/services/rails_api_service'
 import { NOT_DEFINED } from 'constants/type_constants'
 import {
-  UPDATE_ORGANIZATION_SCOPE,
   TOGGLE_TENANT_SWITCHER,
   TOGGLE_SIDEBAR,
   TENANT_UPDATED,
+  SUBLIST_CLICKED,
+  PAGINATE_BACK,
   TENANT_UPDATE_ERROR,
-  SELECT_TENANT} from 'constants/tenant_switcher'
-import {capitalize} from 'cortex/helpers/formating'
-import TenantNestingLookup from 'cortex/helpers/tenant_nesting_lookup'
+  SELECT_TENANT
+} from 'constants/tenant_switcher'
+import Avatar from 'material-ui/Avatar';
+import TenantLookup from 'cortex/helpers/tenant_lookup'
 
 import EnvironmentFlag from 'components/side_bar/environment_flag'
 import TenantList from 'components/side_bar/tenant_list'
@@ -26,31 +28,34 @@ class TenantSwitcherContainer extends React.PureComponent {
     super(props);
     this.layoutWrapper = getLayoutWrapper(this.props.railsContext.serverSide)
     this.railsAPI = SetRailsAPIService(this.props.railsContext, this.props.data)
-    this.tenancyLookup = TenantNestingLookup(this.props.data.tenants)
+    this.tenantLookupTable = TenantLookup(this.props.data.tenants)
   }
   selectTenant = (tenant) => () => {
     this.updateTenant(tenant)
     this.props.dispatch({type: SELECT_TENANT, payload: tenant})
   }
   updateTenant = (tenant) => {
-    const {current_user, csrf_token} = this.props.data
+    const { currentUser, activeTenant, csrf_token } = this.props.data
     const self = this;
     this.railsAPI.post('/admin_update/tenant_change', {
-      current_tenant: current_user.active_tenant.id,
+      active_tenant: activeTenant.id,
       requested_tenant: tenant.id,
       authenticity_token: csrf_token
     }).then(response => {
-      self.props.dispatch({type: TENANT_UPDATED, payload: Object.assign({}, current_user, {active_tenant: response.data})})
+      self.props.dispatch({type: TENANT_UPDATED, payload: Object.assign({}, currentUser, {active_tenant: response.data})})
       self.layoutWrapper.classList.remove('sidebar--tentant-display')
-
+      window.location = '/admin/dashboards'; // TODO: remove when we fully switch to React
     }).catch(error => {
       self.props.dispatch({type: TENANT_UPDATE_ERROR, payload: error})
     })
 
   }
-  organizationClicked = (org_id) => () => {
-    let organizationID = this.props.data.organization_displayed === org_id ? 0 : org_id;
-    this.props.dispatch({type: UPDATE_ORGANIZATION_SCOPE, payload: organizationID})
+  paginateBack = () => {
+    const { parentTenant } = this.props.data;
+    this.props.dispatch({type: PAGINATE_BACK, payload: this.tenantLookupTable[parentTenant].parent_id})
+  }
+  subTenantListClicked = (parent_id) => () => {
+    this.props.dispatch({type: SUBLIST_CLICKED, payload: parent_id})
   }
   toggleTenantSwitcher = () => {
     this.props.dispatch({type: TOGGLE_TENANT_SWITCHER})
@@ -64,33 +69,36 @@ class TenantSwitcherContainer extends React.PureComponent {
     const {
       environment,
       environment_abbreviated,
-      current_user,
-      tenant,
-      selected_tenant,
-      tenants,
-      organization_displayed,
+      currentUser,
+      activeTenant,
+      parentTenant,
+      tenantSyncedWithDB,
       tenantListActive
     } = this.props.data
-    const syncedWithDB = current_user.active_tenant.id === selected_tenant.id
+
     return (
       <footer id="tentant_switch">
         <TenantList
         selectTenant={this.selectTenant}
-        organizationClicked={this.organizationClicked}
-        tenancyLookup={this.tenancyLookup}
-        organization_displayed={organization_displayed}
-        syncedWithDB={syncedWithDB}
-        current_user={current_user}
-        selected_tenant={selected_tenant}
-        tenants={tenants}
+        subTenantListClicked={this.subTenantListClicked}
+        paginateBack={this.paginateBack}
+        tenantLookupTable={this.tenantLookupTable}
+        tenantSyncedWithDB={tenantSyncedWithDB}
+        currentUser={currentUser}
+        activeTenant={activeTenant}
+        parentTenant={parentTenant}
         active={tenantListActive}/>
+
         <nav className='demo-navigation mdl-navigation'>
           <EnvironmentFlag environment={environment} environment_abbreviated={environment_abbreviated}/>
           <div onClick={this.toggleTenantSwitcher} className='mdl-navigation__link nav__item'>
-            <span className='nav__item-name'>
-              {syncedWithDB === true ? selected_tenant.name : 'Loading...'}
+            <div className={tenantSyncedWithDB === true ? 'sidebar-tenant-icon' : 'hidden'} >
+              <Avatar alt="Remy Sharp"   src='https://i.imgur.com/zQA3Cck.png' />
+            </div>
+            <span className='nav__item-name nav__item-name--footer'>
+              {tenantSyncedWithDB === true ? activeTenant.name : 'Loading...'}
             </span>
-            <i className='material-icons' role="presentation">device_hub</i>
+            <i className='material-icons tenant-toggle' role="presentation">{tenantListActive === true ? 'expand_less' : 'expand_more' }</i>
           </div>
         </nav>
         <div className='sidebar__toggle-button' onClick={this.toggleSidebar} id='sidebar__toggle-button'></div>

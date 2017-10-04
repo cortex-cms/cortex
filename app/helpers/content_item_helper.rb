@@ -24,9 +24,7 @@ module ContentItemHelper
   end
 
   def field_items_attributes_params
-    field_items_attributes_as_array = params["content_item"]["field_items_attributes"].map do |key, value|
-      value
-    end
+    field_items_attributes_as_array = params['content_item']['field_items_attributes'].values
 
     permitted_keys = {}
     field_items_attributes_as_array.each { |hash| hash.each_key { |key| permitted_keys[key.to_s] = [] } }

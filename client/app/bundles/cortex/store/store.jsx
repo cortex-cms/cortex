@@ -4,7 +4,6 @@ import logger from 'redux-logger'
 import GetReducers from 'cortex/reducers'
 
 export default (props, railsContext) => {
-
   const reducers = GetReducers(props, railsContext);
   const reducer = combineReducers(reducers);
 

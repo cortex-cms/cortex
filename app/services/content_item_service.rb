@@ -1,51 +1,43 @@
 class ContentItemService < ApplicationService
   include WidgetParsersHelper
 
-  attribute :id, String
+  FieldItems = CoreTypes::Strict::Array.member(ApplicationTypes::FieldItem)
+
+  attribute :id, CoreTypes::Strict::String.optional
   attribute :content_item_params, Object
-  attribute :current_user, User
-  attribute :creator, User
-  attribute :field_items, Array[FieldItem]
-  attribute :state, String
+  attribute :current_user, ApplicationTypes::User
+  attribute :creator, ApplicationTypes::User.optional
+  attribute :field_items, FieldItems
+  attribute :state, CoreTypes::Strict::String
   class_attribute :form_fields
 
   def create
     transact_and_refresh do
       @content_item = ContentItem.new
-      ContentItemService.form_fields = field_items_attributes.to_h.values.each_with_object({}) do |param, hash_object|
+      self.form_fields = field_items_attributes.to_h.values.each_with_object({}) do |param, hash_object|
         hash_object[param['field_id']] = param['data']
       end
-      content_item_params["field_items_attributes"].to_hash.each do |key, value|
-        value.delete("id")
-        @content_item.field_items << FieldItem.new(value)
+      content_item_params['field_items_attributes'].to_hash.each do |key, field_item_attributes|
+        field_item_attributes.delete('id')
+        @content_item.field_items << NewFieldItemTransaction.new.call(field_item_attributes).value
       end
 
-      content_item_params.delete("field_items_attributes")
+      content_item_params.delete('field_items_attributes')
       @content_item.attributes = content_item_params.to_hash
+      @content_item.tenant = current_user.active_tenant # TODO: In future, grab from form/route, rather than current_user + perform authorization checks
     end
-  end
-
-  def field_items_attributes
-    content_item_params["field_items_attributes"]
   end
 
   def update
-    @content_item = ContentItem.find(id)
-
     transact_and_refresh do
+      @content_item = ContentItem.find(id)
+      content_item_params['field_items_attributes'].to_hash.each do |key, field_item_attributes|
+        @content_item.field_items << UpdateFieldItemTransaction.new.call(field_item_attributes).value
+      end
+
+      content_item_params.delete('field_items_attributes')
       @content_item.assign_attributes(content_item_attributes)
     end
-  end
-
-  # This method will set the tag list (whatever it may be named) to the array of tag_data
-  def self.update_tags(content_item, tag_data)
-    # First we get the name of the list, as determined by the field with '=' at the end
-    # ex: seo_keyword_list=
-    tag_list_name = "#{tag_data[:tag_name].singularize.parameterize('_')}_list="
-    tag_array = tag_data[:tag_list]
-
-    # We then execute the tag_list_name= as a method using #send, which sets it to the tag_array values
-    content_item.send(tag_list_name, tag_array)
   end
 
   private
@@ -71,6 +63,10 @@ class ContentItemService < ApplicationService
   def update_search!
     # TODO: implement ES index updates
     true
+  end
+
+  def field_items_attributes
+    content_item_params["field_items_attributes"]
   end
 
   def content_item_attributes

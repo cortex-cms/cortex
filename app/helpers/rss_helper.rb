@@ -28,6 +28,8 @@ module RssHelper
       field_item_data(tag_data_hash["field"], rss_content_item, tag_data_hash)
     elsif tag_data_hash.keys.include?("method")
       method_data(tag_data_hash["method"], rss_content_item)
+    elsif tag_data_hash.keys.include?("transaction")
+      transaction_data(tag_data_hash["transaction"], rss_content_item)
     elsif tag_data_hash.keys.include?("media")
       media_data(tag_data_hash["media"], rss_content_item)
     end
@@ -41,7 +43,13 @@ module RssHelper
   end
 
   def method_data(method_hash, rss_content_item)
+    method_hash['name'].split('.').inject(rss_content_item, :send)
     rss_content_item.send(method_hash["name"], *method_hash["args"])
+  end
+
+  def transaction_data(config_hash, rss_content_item)
+    transaction_klass = "#{config_hash['name']}_transaction".classify.safe_constantize
+    transaction_klass.new&.call(content_item: rss_content_item, args: config_hash['args'])&.value
   end
 
   def media_data(media_hash, rss_content_item)
@@ -54,7 +62,7 @@ module RssHelper
     if field_item.nil?
       {}
     else
-      asset_data = field_item.data['asset']['versions']['original']
+      asset_data = field_item.data['asset']['versions']['rss']
 
       {
         "url": asset_data["url"],

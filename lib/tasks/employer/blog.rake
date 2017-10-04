@@ -4,6 +4,8 @@ namespace :employer do
   namespace :blog do
     desc 'Seed Employer Blog ContentType and Fields'
     task seed: :environment do
+      example_tenant = Tenant.find_by_name('Example')
+
       def research_tree
         tree = Tree.new
         tree.add_node({name: "CB Research"})
@@ -40,8 +42,9 @@ namespace :employer do
                                name: "Employer Blog",
                                description: "Blog for Employer",
                                icon: "description",
-                               creator_id: 1,
-                               contract_id: 1,
+                               tenant: example_tenant,
+                               creator: User.first,
+                               contract: Contract.first, # TODO: This is obviously bad. This whole file is bad.
                                publishable: true
                              })
       blog.save!
@@ -160,7 +163,8 @@ namespace :employer do
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('Categories').id,
-                    "render_method": "checkboxes"
+                    "render_method": "checkboxes",
+                    "tooltip": "Please select 1-2 Categories."
                   }
                 ]
               },
@@ -253,13 +257,14 @@ namespace :employer do
         ]
       }
 
-      blog_wizard_decorator = Decorator.new(name: "Wizard", data: wizard_hash)
+      blog_wizard_decorator = Decorator.new(name: "Wizard", data: wizard_hash, tenant: example_tenant)
       blog_wizard_decorator.save!
 
       ContentableDecorator.create!({
                                     decorator_id: blog_wizard_decorator.id,
                                     contentable_id: blog.id,
-                                    contentable_type: 'ContentType'
+                                    contentable_type: 'ContentType',
+                                    tenant: example_tenant
                                   })
 
       puts "Creating Index Decorators..."
@@ -271,7 +276,7 @@ namespace :employer do
               "grid_width": 2,
               "cells": [{
                           "field": {
-                            "method": "author_email"
+                            "method": "creator.email"
                           },
                           "display": {
                             "classes": [
@@ -325,13 +330,14 @@ namespace :employer do
           ]
       }
 
-      blog_index_decorator = Decorator.new(name: "Index", data: index_hash)
+      blog_index_decorator = Decorator.new(name: "Index", data: index_hash, tenant: example_tenant)
       blog_index_decorator.save!
 
       ContentableDecorator.create!({
                                     decorator_id: blog_index_decorator.id,
                                     contentable_id: blog.id,
-                                    contentable_type: 'ContentType'
+                                    contentable_type: 'ContentType',
+                                    tenant: example_tenant
                                   })
 
       puts "Creating RSS Decorators..."
@@ -360,9 +366,9 @@ namespace :employer do
             "args": [blog.fields.find_by_name('Author').id]
             }
           },
-          "category": { "method": {
-            "name": "tree_list",
-            "args": [blog.fields.find_by_name('Categories').id]
+          "category": { "transaction": {
+            "name": "get_field_tree_list",
+            "args": {field_id: blog.fields.find_by_name('Categories').id}
             }, "multiple": ","
           },
           "media:content": { "media":
@@ -374,13 +380,14 @@ namespace :employer do
         }
       }
 
-      blog_rss_decorator = Decorator.new(name: "Rss", data: rss_hash)
+      blog_rss_decorator = Decorator.new(name: "Rss", data: rss_hash, tenant: example_tenant)
       blog_rss_decorator.save!
 
       ContentableDecorator.create!({
                                     decorator_id: blog_rss_decorator.id,
                                     contentable_id: blog.id,
-                                    contentable_type: 'ContentType'
+                                    contentable_type: 'ContentType',
+                                    tenant: example_tenant
                                   })
     end
   end

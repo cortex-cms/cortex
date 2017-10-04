@@ -1,5 +1,9 @@
+# TODO: Refactor
 class Contract < ApplicationRecord
-  # TODO: Refactor
+  include BelongsToTenant
+
+  validates :name, presence: true
+
   has_many :content_types
   has_many :contentable_decorators, as: :contentable
   has_many :decorators, through: :contentable_decorators

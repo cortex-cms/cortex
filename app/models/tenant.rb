@@ -1,29 +1,36 @@
 class Tenant < ApplicationRecord
-  default_scope { where(deleted_at: nil) }
-
   acts_as_nested_set
-  acts_as_paranoid
 
-  has_many :applications
-  has_many :users
-  belongs_to :owner, class_name: "User"
+  has_many :content_items
+  has_many :content_types
+  has_many :contracts
+  has_many :decorators
+  has_and_belongs_to_many :users
+  belongs_to :owner, class_name: 'User'
+  has_many :users, foreign_key: :active_tenant_id, class_name: 'User'
 
   validates_presence_of :name
   validates_associated :owner
 
-  before_save :init
+  alias_method :organization, :root
 
   def is_organization?
-    self.root?
+    root?
   end
 
   def has_children?
-    !self.leaf?
+    !leaf?
   end
 
-  private
+  def all_up_organization_for(klass)
+    self_and_ancestors.flat_map do |tenant|
+      tenant.public_send(klass.name.underscore.pluralize).all
+    end
+  end
 
-  def init
-    self.subdomain ||= self.name.mb_chars.normalize(:kd).downcase.gsub(/[^a-z0-9]/, '').to_s
+  def search_up_organization_for(klass, attribute, value)
+    all_up_organization_for(klass).select do |record|
+      record[attribute] == value
+    end
   end
 end

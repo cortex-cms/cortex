@@ -3,9 +3,9 @@ class ContentItem < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  scope :last_updated_at, -> { order(updated_at: :desc).select('updated_at').first.updated_at }
+  include BelongsToTenant
 
-  acts_as_paranoid
+  scope :last_updated_at, -> { order(updated_at: :desc).select('updated_at').first.updated_at }
 
   belongs_to :creator, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
@@ -16,7 +16,7 @@ class ContentItem < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
-  validates :creator_id, :content_type_id, presence: true
+  validates :creator, :content_type, presence: true
 
   after_save :index
 
@@ -67,21 +67,42 @@ class ContentItem < ApplicationRecord
   def index
     __elasticsearch__.client.index(
       {index: content_type.content_items_index_name,
-       type: self.class.name.parameterize('_'),
+       type: self.class.name.parameterize(separator: '_'),
        id: id,
        body: as_indexed_json}
     )
   end
 
-  # Metaprograms a number of convenience methods for content_items
-  def method_missing(*args)
-    if args[0].to_s.include?("?")
+  # FieldItem and State Convenience Methods. TODO: move to concern? transactions?
+  def method_missing(method_name, *arguments, &block)
+    super unless dynamic_method?(method_name)
+
+    if dynamic_state_check?(method_name)
       # Used to check state - allows for methods such as #published? and #expired?
       # Will return true if the active_state corresponds to the name of the method
-      "#{publish_state.downcase}?" == args[0].to_s
+      "#{publish_state.downcase}?" == method_name.to_s
     else
       # Used to query for any field on the relevant ContentType and return data from the content_item
-      field_items.select { |field_item| field_item.field.name.parameterize(separator: '_') == args[0].to_s }.first.data.values[0]
+      field_items.find { |field_item| field_item.field.name.parameterize(separator: '_') == method_name.to_s }.data.values.first
     end
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    dynamic_method?(method_name) || super
+  end
+
+  private
+
+  def dynamic_method?(method_name)
+    dynamic_state_check?(method_name) || has_field_item?(method_name)
+  end
+
+  def dynamic_state_check?(method_name)
+    method_name.to_s.include? '?'
+  end
+
+  # TODO: this logic effectively gets called multiple times (slow?) - how do we optimize or cache the result?
+  def has_field_item?(method_name)
+    field_items.any? { |field_item| field_item.field.name.parameterize(separator: '_') == method_name.to_s }
   end
 end

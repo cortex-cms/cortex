@@ -9,24 +9,16 @@ import {
   PAGINATE_BACK
 } from 'constants/tenant_switcher'
 
-const checkActiveTenant = (active_tenant, current_user) => {
-  if (current_user.active_tenant === null) {
-    return Object.assign({}, current_user, { active_tenant: active_tenant })
-  }
-  return current_user
-}
-
-const tenantSwitcherReducer = ({active_tenant, csrf_token, sidebarExpanded, tenants, current_user, environment,  environment_abbreviated}) => {
-  const currentUser = checkActiveTenant(active_tenant, current_user);
+const tenantSwitcherReducer = ({active_tenant, csrf_token, sidebarExpanded, tenants, current_user, environment, environment_abbreviated}) => {
   const initialState = {
     tenantListActive: false,
-    selectedTenant: currentUser.active_tenant,
-    parentTenant: currentUser.active_tenant.parent_id,
+    activeTenant: active_tenant,
+    parentTenant: active_tenant.parent_id,
     tenantSyncedWithDB: true,
     csrf_token,
     sidebarExpanded,
     tenants,
-    currentUser: currentUser,
+    currentUser: current_user,
     environment,
     environment_abbreviated
   }
@@ -40,8 +32,8 @@ const tenantSwitcherReducer = ({active_tenant, csrf_token, sidebarExpanded, tena
       case SELECT_TENANT:
         return {
           ...state,
-          selectedTenant: action.payload,
-          tenantSyncedWithDB: state.currentUser.active_tenant.id === action.payload.id
+          activeTenant: action.payload,
+          tenantSyncedWithDB: state.activeTenant.id === action.payload.id
         };
       case TENANT_UPDATED:
         return {
@@ -59,7 +51,7 @@ const tenantSwitcherReducer = ({active_tenant, csrf_token, sidebarExpanded, tena
       case TENANT_UPDATE_ERROR:
         return {
           ...state,
-          selectedTenant: state.current_user.active_tenant
+          activeTenant: state.active_tenant
         }
       case TOGGLE_SIDEBAR:
         return {
@@ -71,7 +63,7 @@ const tenantSwitcherReducer = ({active_tenant, csrf_token, sidebarExpanded, tena
         return {
           ...state,
           tenantListActive: !state.tenantListActive,
-          parentTenant: state.selectedTenant.parent_id
+          parentTenant: state.activeTenant.parent_id
         };
       default:
         return state

@@ -4,7 +4,7 @@ class ContentItemsController < AdminController
 
   def index
     @index = IndexDecoratorService.new(content_type: content_type)
-    @content_items = content_type.content_items
+    @content_items = content_type.content_items.find_by_tenant(current_user.active_tenant)
     add_breadcrumb content_type.name.pluralize
   end
 
@@ -21,7 +21,7 @@ class ContentItemsController < AdminController
   end
 
   def edit
-    @content_item = content_type.content_items.find_by_id(params[:id])
+    @content_item = content_type.content_items.find_by_tenant(current_user.active_tenant).find_by_id(params[:id])
     @wizard = WizardDecoratorService.new(content_item: @content_item)
 
     title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text']
@@ -33,7 +33,7 @@ class ContentItemsController < AdminController
   def update
     begin
       content_item.update
-    rescue => e
+    rescue ActiveRecord::RecordInvalid => e
       flash[:warning] = validation_message(e.message)
       @content_item = content_item_reload(content_type.content_items.find_by_id(params[:id]))
       @wizard = WizardDecoratorService.new(content_item: @content_item)
@@ -53,7 +53,7 @@ class ContentItemsController < AdminController
   def create
     begin
       content_item.create
-    rescue => e
+    rescue ActiveRecord::RecordInvalid => e
       flash[:warning] = validation_message(e.message)
       @content_item = content_item_reload(content_type.content_items.new)
       @wizard = WizardDecoratorService.new(content_item: @content_item)

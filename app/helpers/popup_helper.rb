@@ -2,7 +2,7 @@ module PopupHelper
   # TODO: This needs to be in a plugin
 
   def media_content_type
-    @media_content_type ||= ContentType.find_by_name('Media')
+    @media_content_type ||= current_user.active_tenant.search_up_organization_for(ContentType, :name, 'Media').first
   end
 
   def media_content_items

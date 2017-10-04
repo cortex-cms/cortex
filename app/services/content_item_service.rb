@@ -24,6 +24,7 @@ class ContentItemService < ApplicationService
 
       content_item_params.delete('field_items_attributes')
       @content_item.attributes = content_item_params.to_hash
+      @content_item.tenant = current_user.active_tenant # TODO: In future, grab from form/route, rather than current_user + perform authorization checks
     end
   end
 

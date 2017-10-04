@@ -92,7 +92,6 @@ ActiveRecord::Schema.define(version: 13) do
     t.jsonb "data", default: {}, null: false
     t.uuid "field_id", null: false
     t.uuid "content_item_id", null: false
-    t.uuid "tenant_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -100,7 +99,6 @@ ActiveRecord::Schema.define(version: 13) do
     t.index ["data"], name: "index_field_items_on_data", using: :gin
     t.index ["deleted_at"], name: "index_field_items_on_deleted_at"
     t.index ["field_id"], name: "index_field_items_on_field_id"
-    t.index ["tenant_id"], name: "index_field_items_on_tenant_id"
   end
 
   create_table "field_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -112,7 +110,6 @@ ActiveRecord::Schema.define(version: 13) do
     t.jsonb "metadata", default: {}, null: false
     t.jsonb "validations", default: {}, null: false
     t.uuid "content_type_id", null: false
-    t.uuid "tenant_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -120,7 +117,6 @@ ActiveRecord::Schema.define(version: 13) do
     t.index ["deleted_at"], name: "index_fields_on_deleted_at"
     t.index ["field_type"], name: "index_fields_on_field_type"
     t.index ["name"], name: "index_fields_on_name"
-    t.index ["tenant_id"], name: "index_fields_on_tenant_id"
   end
 
   create_table "flipper_features", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -244,9 +240,7 @@ ActiveRecord::Schema.define(version: 13) do
   add_foreign_key "decorators", "tenants"
   add_foreign_key "field_items", "content_items"
   add_foreign_key "field_items", "fields"
-  add_foreign_key "field_items", "tenants"
   add_foreign_key "fields", "content_types"
-  add_foreign_key "fields", "tenants"
   add_foreign_key "permissions_roles", "permissions"
   add_foreign_key "permissions_roles", "roles"
   add_foreign_key "roles_users", "roles"

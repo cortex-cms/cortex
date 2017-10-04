@@ -1,6 +1,4 @@
 class FieldItem < ApplicationRecord
-  include BelongsToTenant
-
   belongs_to :field
   belongs_to :content_item
 
@@ -12,6 +10,10 @@ class FieldItem < ApplicationRecord
     # Reset @field_type_instance so that massaged data can be re-generated every time @data is set, not just on init
     @field_type_instance = nil
     super(field_type_instance(data_hash).data || data_hash)
+  end
+
+  def tenant
+    content_item.tenant
   end
 
   private

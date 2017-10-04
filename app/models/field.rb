@@ -1,6 +1,4 @@
 class Field < ApplicationRecord
-  include BelongsToTenant
-
   belongs_to :content_type
   has_many :field_items
   has_many :content_items, through: :field_items
@@ -17,6 +15,10 @@ class Field < ApplicationRecord
 
   def mapping
     field_type_instance(field_name: name).mapping
+  end
+
+  def tenant
+    content_type.tenant
   end
 
   private

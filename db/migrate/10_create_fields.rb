@@ -6,7 +6,6 @@ class CreateFields < ActiveRecord::Migration[5.1]
       t.jsonb :metadata, null: false, default: {}
       t.jsonb :validations, null: false, default: {}
       t.references :content_type, type: :uuid, null: false, foreign_key: true
-      t.references :tenant, type: :uuid, null: false, foreign_key: true
 
       t.datetime :deleted_at, index: true
       t.timestamps null: false

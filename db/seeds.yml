@@ -14,6 +14,8 @@ defaults: &defaults
   example_subtenant:
     name: 'Bogus'
     description: 'Example subtenant'
+  example_contract:
+    name: 'Bogus'
 
 test:
   <<: *defaults

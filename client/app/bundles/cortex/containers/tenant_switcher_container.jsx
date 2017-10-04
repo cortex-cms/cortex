@@ -44,7 +44,7 @@ class TenantSwitcherContainer extends React.PureComponent {
     }).then(response => {
       self.props.dispatch({type: TENANT_UPDATED, payload: Object.assign({}, currentUser, {active_tenant: response.data})})
       self.layoutWrapper.classList.remove('sidebar--tentant-display')
-
+      window.location = '/admin/dashboards'; // TODO: remove when we fully switch to React
     }).catch(error => {
       self.props.dispatch({type: TENANT_UPDATE_ERROR, payload: error})
     })

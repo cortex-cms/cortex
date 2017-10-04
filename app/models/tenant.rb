@@ -13,10 +13,22 @@ class Tenant < ApplicationRecord
   alias_method :organization, :root
 
   def is_organization?
-    self.root?
+    root?
   end
 
   def has_children?
-    !self.leaf?
+    !leaf?
+  end
+
+  def all_up_organization_for(klass)
+    self_and_ancestors.flat_map do |tenant|
+      tenant.public_send(klass.name.underscore.pluralize).all
+    end
+  end
+
+  def search_up_organization_for(klass, attribute, value)
+    all_up_organization_for(klass).select do |record|
+      record[attribute] == value
+    end
   end
 end

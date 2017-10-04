@@ -4,7 +4,7 @@ class ContentItemsController < AdminController
 
   def index
     @index = IndexDecoratorService.new(content_type: content_type)
-    @content_items = content_type.content_items
+    @content_items = content_type.content_items.find_by_tenant(current_user.active_tenant)
     add_breadcrumb content_type.name.pluralize
   end
 
@@ -21,7 +21,7 @@ class ContentItemsController < AdminController
   end
 
   def edit
-    @content_item = content_type.content_items.find_by_id(params[:id])
+    @content_item = content_type.content_items.find_by_tenant(current_user.active_tenant).find_by_id(params[:id])
     @wizard = WizardDecoratorService.new(content_item: @content_item)
 
     title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text']

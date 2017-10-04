@@ -12,7 +12,7 @@ module ApplicationHelper
   def user_session_props
     {
       environment: environment,
-      active_tenant: current_user.active_tenant || current_user.tenants.first,
+      active_tenant: current_user.active_tenant,
       current_user: current_user,
       tenants: current_user.tenants_with_children,
       csrf_token: form_authenticity_token,

@@ -2,6 +2,7 @@
 cortex_tenant_seed = SeedData.cortex_tenant
 example_tenant_seed = SeedData.example_tenant
 example_subtenant_seed = SeedData.example_subtenant
+example_contract_seed = SeedData.example_contract
 user_seed = cortex_tenant_seed.creator
 
 existing_tenant = Tenant.find_by_name(cortex_tenant_seed.name)
@@ -22,10 +23,14 @@ unless existing_tenant
                               description: example_subtenant_seed.description,
                               owner: user,
                               parent: example_tenant)
+  example_contract = Contract.new(name: example_contract_seed.name,
+                                  tenant: cortex_tenant)
 
   cortex_tenant.save!
   example_tenant.save!
   example_subtenant.save!
+
+  example_contract.save!
 
   user.tenants = [cortex_tenant, example_tenant]
   user.save!

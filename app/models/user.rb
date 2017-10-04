@@ -17,6 +17,10 @@ class User < ApplicationRecord
 
   before_destroy :prevent_consumed_deletion
 
+  def active_tenant
+    super || tenants.first
+  end
+
   def referenced?
     [ContentItem].find do |resource|
       true if resource.where(user: self).count > 0

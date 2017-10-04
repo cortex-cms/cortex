@@ -8,10 +8,10 @@ module DashboardHelper
   end
 
   def media_content_type
-    @media_content_type = ContentType.find_by_name('Media')
+    @media_content_type ||= current_user.active_tenant.search_up_organization_for(ContentType, :name, 'Media').first
   end
 
   def employer_blog_content_type
-    @employer_blog_content_type = ContentType.find_by_name('Employer Blog')
+    @employer_blog_content_type ||= current_user.active_tenant.search_up_organization_for(ContentType, :name, 'Employer Blog').first
   end
 end

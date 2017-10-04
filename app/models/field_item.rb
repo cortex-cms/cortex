@@ -1,16 +1,18 @@
 class FieldItem < ApplicationRecord
-  acts_as_paranoid
   belongs_to :field
   belongs_to :content_item
 
-  validates :field_id, presence: true
-  validates :content_item_id, presence: true, on: :update
+  validates :field, :content_item, presence: true
   validate :field_item_content_is_valid, if: :field_is_present
 
   def data=(data_hash)
     # Reset @field_type_instance so that massaged data can be re-generated every time @data is set, not just on init
     @field_type_instance = nil
     super(field_type_instance(data_hash).data || data_hash)
+  end
+
+  def tenant
+    content_item.tenant
   end
 
   private

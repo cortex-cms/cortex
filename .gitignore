@@ -57,9 +57,9 @@ pickle-email-*.html
 # Documentation Artifacts
 erd.pdf
 
+# Generated js bundles
+/public/webpack/*
+
 # React on Rails
 npm-debug.log*
 node_modules
-
-# Generated js bundles
-/app/assets/webpack/*

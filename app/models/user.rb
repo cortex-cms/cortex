@@ -18,7 +18,7 @@ class User < ApplicationRecord
   before_destroy :prevent_consumed_deletion
 
   def active_tenant
-    super || tenants.first
+    super || tenants.order(:name).first
   end
 
   def referenced?

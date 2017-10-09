@@ -76,9 +76,9 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'material_design_lite-sass', '~> 1.3.0'
 
 # JavaScript
-gem 'react_on_rails', '8.0.6'
+gem 'react_on_rails', '9.0.3'
 gem 'mini_racer', platforms: :ruby
-gem 'webpacker_lite'
+gem 'webpacker'
 gem 'gon', '~> 6.2.0'
 #gem 'turbolinks', '~> 5.0.1'
 gem 'jquery-rails', '~> 4.3.1'

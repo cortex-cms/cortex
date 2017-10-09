@@ -63,5 +63,7 @@ erd.pdf
 /public/webpack/*
 
 npm-debug.log*
+/public/packs
+/public/packs-test
 node_modules
 /yarn-error.log

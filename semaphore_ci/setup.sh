@@ -4,17 +4,14 @@ gem update --system
 echo "gem update bundler"
 gem update bundler
 
-echo "npm install"
-npm install
+echo "yarn install"
+yarn install
 
 echo "bundle config build.nokogiri --use-system-libraries"
 bundle config build.nokogiri --use-system-libraries
 
 echo "bundle install --without production staging development tasks"
 bundle install --without production staging development tasks
-
-echo "bundle exec rake bower:install:development"
-bundle exec rake bower:install:development
 
 echo "bundle exec rake cortex:assets:webpack:ensure_all_assets_compiled"
 bundle exec rake cortex:assets:webpack:ensure_all_assets_compiled

@@ -7,7 +7,7 @@
     %title
       = title
     = favicon_link_tag 'favicon.ico'
-    = stylesheet_link_tag :application
+    = stylesheet_link_tag :application, {media: 'all', 'data-turbolinks-track': 'reload'}
     = csrf_meta_tags
   %body
     = render 'partials/media_dialogs'
@@ -21,8 +21,8 @@
             = yield
     = render 'partials/flash'
 
-    %script{src: '//cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js', type: 'text/javascript'}
-    = javascript_include_tag :application, {'data-turbolinks-eval': false}
+    %script{src: '//cdn.ckeditor.com/4.7.3/standard-all/ckeditor.js', type: 'text/javascript'}
+    = javascript_include_tag :application, {'data-turbolinks-eval': false, 'data-turbolinks-track': 'reload'}
     = javascript_pack_tag 'webpack-bundle', {'data-turbolinks-eval': false, 'data-turbolinks-track': 'reload'}
     = render 'partials/trackers/google_analytics' if extra_config.google_analytics_id?
     = render 'partials/trackers/qualtrics' if extra_config.qualtrics_id?

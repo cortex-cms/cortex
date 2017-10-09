@@ -7,14 +7,15 @@
 # Ignore bundler config.
 /.bundle
 /vendor/bundle
-/vendor/assets
 
 /public/assets/
 /public/uploads/
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -42,6 +43,7 @@ capybara-*.html
 /public/system
 /coverage/
 /spec/tmp
+/spec/examples.txt
 **.orig
 rerun.txt
 pickle-email-*.html
@@ -60,6 +62,6 @@ erd.pdf
 # Generated js bundles
 /public/webpack/*
 
-# React on Rails
 npm-debug.log*
 node_modules
+/yarn-error.log

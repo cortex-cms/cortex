@@ -117,10 +117,10 @@ $ systemctl start redis
 $ gem install bundler && bundle install
 ```
 
-* Install `node` dependencies (including `bower`) and use `bower-rails`'s rake task to install dependencies:
+* Install `node`, then run Yarn to install frontend dependencies:
 
 ```sh
-$ npm install && bundle exec rake bower:install:development
+$ yarn install
 ```
 
 ### Database
@@ -157,21 +157,13 @@ The admin interface should now be accessible locally on port `3000`. To access C
 
 ### Deployment
 
-To use an automated tool to deploy the server, set this environmental variable:
-
-```shell
-CI=true
-```
-
-This will suppress Bower's interactive request to enable insights/metrics reporting, which normally prevents the CI process from continuing.
-
-Additionally, deploying the `development` environment as a non-local server will require an additional environmental variable be set:
+Deploying the `development` environment as a non-local server will require an additional environmental variable be set:
 
 ```shell
 DEPLOYED=true
 ```
 
-This will configure various things, such as [dotenv](https://github.com/bkeepers/dotenv) to behave normally in a deployed scenario.
+This will configure various things to behave normally in a deployed scenario.
 
 ## Running Test Suite
 

@@ -1,8 +1,4 @@
 require 'rake'
-require 'net/http'
-require 'csv'
-require 'aws-sdk'
-require 'open-uri'
 
 Bundler.require(:default, Rails.env)
 

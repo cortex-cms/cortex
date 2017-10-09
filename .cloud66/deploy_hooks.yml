@@ -1,10 +1,4 @@
 default: &default
-  first_thing:
-    - snippet: cloud66/node
-      target: rails
-      execute: true
-      apply_during: build_only
-      run_on: all_servers
   after_bundle:
     - source: /.cloud66/scripts/yarn_install.sh
       destination: /tmp/yarn_install.sh

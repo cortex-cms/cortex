@@ -11,11 +11,6 @@ default: &default
       execute: true
       apply_during: deploy_only
       run_on: all_servers
-    - source: /.cloud66/scripts/write_plugins_to_tmp.sh
-      destination: /tmp/write_plugins_to_tmp.sh
-      target: rails
-      execute: true
-      run_on: all_servers
   after_rails:
     - source: /.cloud66/scripts/db_seed.sh
       destination: /tmp/db_seed.sh

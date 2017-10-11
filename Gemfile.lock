@@ -1,7 +1,9 @@
-PATH
-  remote: ../cortex-plugins-core
+GIT
+  remote: git@github.com:cortex-cms/cortex-plugins-core.git
+  revision: fd3a85d51fbf9f5fb08ae3b69edad18ac49b02d3
+  branch: topic/CE-172-ReactOnRails-v9
   specs:
-    cortex-plugins-core (1.2.0)
+    cortex-plugins-core (2.0.0)
       aws-sdk-s3 (~> 1.5)
       cells (~> 4.1)
       cells-haml (~> 0.0)
@@ -368,7 +370,7 @@ GEM
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
     pomona (0.7.0)
-    progress (3.3.2)
+    progress (3.4.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)

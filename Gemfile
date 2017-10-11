@@ -14,7 +14,7 @@ gem 'rails', '~> 5.1.4'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', path: '/home/atharp/Repos/cortex-plugins-core'
+gem 'cortex-plugins-core', git: 'git@github.com:cortex-cms/cortex-plugins-core.git', branch: 'topic/CE-172-ReactOnRails-v9'
 
 # Service Layer
 gem 'dry-types', '~> 0.12.0'

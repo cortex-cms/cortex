@@ -1,24 +1,3 @@
-GIT
-  remote: git@github.com:cortex-cms/cortex-plugins-core.git
-  revision: fd3a85d51fbf9f5fb08ae3b69edad18ac49b02d3
-  branch: topic/CE-172-ReactOnRails-v9
-  specs:
-    cortex-plugins-core (2.0.0)
-      aws-sdk-s3 (~> 1.5)
-      cells (~> 4.1)
-      cells-haml (~> 0.0)
-      cells-rails (~> 0.0)
-      fastimage (~> 2.1)
-      image_optim (~> 0.25)
-      image_optim_pack (~> 0.5)
-      image_processing (~> 0.4)
-      jsonb_accessor (~> 1.0)
-      mimemagic (~> 0.3)
-      mini_magick (~> 4.8)
-      rails (>= 5)
-      react_on_rails (~> 9)
-      shrine (~> 2.7)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -67,7 +46,7 @@ GEM
       execjs
     awesome_nested_set (3.1.3)
       activerecord (>= 4.0.0, < 5.2)
-    aws-partitions (1.24.0)
+    aws-partitions (1.25.0)
     aws-sdk-core (3.6.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
@@ -124,6 +103,20 @@ GEM
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     cortex-exceptions (0.0.4)
+    cortex-plugins-core (2.0.1)
+      aws-sdk-s3 (~> 1.5)
+      cells (~> 4.1)
+      cells-haml (~> 0.0)
+      cells-rails (~> 0.0)
+      fastimage (~> 2.1)
+      image_optim (~> 0.25)
+      image_optim_pack (~> 0.5)
+      image_processing (~> 0.4)
+      jsonb_accessor (~> 1.0)
+      mimemagic (~> 0.3)
+      mini_magick (~> 4.8)
+      rails (>= 5)
+      shrine (~> 2.7)
     crass (1.0.2)
     database_cleaner (1.6.1)
     debug_inspector (0.0.3)
@@ -504,7 +497,7 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
-    shrine (2.7.0)
+    shrine (2.8.0)
       down (~> 4.1)
     sidekiq (5.0.5)
       concurrent-ruby (~> 1.0)
@@ -575,7 +568,7 @@ DEPENDENCIES
   cells-rails (~> 0.0.8)
   codeclimate-test-reporter
   cortex-exceptions (= 0.0.4)
-  cortex-plugins-core!
+  cortex-plugins-core (= 2.0.1)
   database_cleaner
   devise (~> 4.3.0)
   dialog-polyfill-rails (~> 0.4.5)

@@ -1410,9 +1410,9 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-cortex-plugins-core@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/cortex-plugins-core/-/cortex-plugins-core-2.0.0.tgz#ef7de6eda3399b7de67d9afa2e474a7ac6a6c9d3"
+cortex-plugins-core@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/cortex-plugins-core/-/cortex-plugins-core-2.0.1.tgz#0dd0c6b5dc65a6fb99fd666d9fbcfce517450fe5"
   dependencies:
     axios "^0.16.2"
     bootstrap-sass "~> 3.3.7"
@@ -1420,7 +1420,6 @@ cortex-plugins-core@2.0.0:
     jquery-ui-timepicker-addon "~> 1.6.3"
     material-ui next
     moment "~> 2.18.1"
-    react-on-rails "^9.0.3"
     redux "^3.7.2"
     redux-logger "^3.0.6"
     underscore "~> 1.8.3"

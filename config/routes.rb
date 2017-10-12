@@ -1,7 +1,10 @@
 require 'sidekiq/web'
 
 Cortex::Application.routes.draw do
-  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
+  # API - TODO: Authorize GraphQL, embed GraphiQL
+  post '/graphql', to: 'graphql#execute'
+  mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql'
+
   root 'dashboards#index'
 
   scope '/admin_update' do
@@ -38,4 +41,6 @@ Cortex::Application.routes.draw do
     }
     mount Flipper::UI.app(flipper_block) => '/flipper'
   #end
+
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 end

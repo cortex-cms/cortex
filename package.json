@@ -2,15 +2,26 @@
   "name": "cortex",
   "private": true,
   "dependencies": {
-    "bower": "^1.8.0"
+    "@rails/webpacker": "^3.0.2",
+    "babel-preset-react": "^6.24.1",
+    "coffeescript": "1.12.7",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-on-rails": "^9.0.3",
+
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "underscore": "~> 1.8.3",
+    "moment": "~> 2.18.1",
+    "bootstrap-sass": "~> 3.3.7",
+    "jquery-ui-timepicker-addon": "~> 1.6.3",
+    "clipboard": "~> 1.7.1",
+    "material-ui": "next",
+    "cortex-plugins-core": "2.0.1",
+    "axios": "^0.16.2"
   },
-  "scripts": {
-    "postinstall": "cd client && yarn install",
-    "rails-server": "echo 'visit http://localhost:3000' && foreman start -f Procfile.dev",
-    "test": "rspec"
-  },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-  ]
+  "devDependencies": {
+    "webpack-dev-server": "^2.9.1"
+  }
 }

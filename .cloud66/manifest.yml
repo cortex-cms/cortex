@@ -4,16 +4,15 @@ development:
       httpchk: /users/password/new
   rails:
     configuration:
-      ruby_version: 2.4.1
+      ruby_version: 2.4.2
     server:
       unique_name: web
       vendor: aws
       region: us-east-1
       size: m3.medium
-      root_disk_size: 50
   postgresql:
     configuration:
-      version: 9.6.3
+      version: 9.6.5
     server:
       unique_name: db
       vendor: aws
@@ -21,7 +20,7 @@ development:
       size: m3.medium
   elasticsearch:
     configuration:
-      version: 5.4.3
+      version: 5.6.2
     server:
       unique_name: search
       vendor: aws
@@ -29,7 +28,7 @@ development:
       size: m3.medium
   redis:
     configuration:
-      version: 3.2.9
+      version: 4.0.2
     server:
       unique_name: cache
       vendor: aws
@@ -39,16 +38,15 @@ development:
 staging:
   rails:
     configuration:
-      ruby_version: 2.4.1
+      ruby_version: 2.4.2
     server:
       unique_name: web
       vendor: aws
       region: us-east-1
       size: m3.medium
-      root_disk_size: 50
   postgresql:
     configuration:
-      version: 9.6.3
+      version: 9.6.5
     server:
       unique_name: db
       vendor: aws
@@ -56,7 +54,7 @@ staging:
       size: m3.medium
   elasticsearch:
     configuration:
-      version: 5.4.3
+      version: 5.6.2
     server:
       unique_name: search
       vendor: aws
@@ -64,7 +62,7 @@ staging:
       size: m3.medium
   redis:
     configuration:
-      version: 3.2.9
+      version: 4.0.2
     server:
       unique_name: cache
       vendor: aws
@@ -74,16 +72,15 @@ staging:
 production:
   rails:
     configuration:
-      ruby_version: 2.4.1
+      ruby_version: 2.4.2
     server:
       unique_name: web
       vendor: aws
       region: us-east-1
       size: c4.xlarge
-      root_disk_size: 50
   postgresql:
     configuration:
-      version: 9.6.3
+      version: 9.6.5
     server:
       unique_name: db
       vendor: aws
@@ -91,7 +88,7 @@ production:
       size: r3.xlarge
   elasticsearch:
     configuration:
-      version: 5.4.3
+      version: 5.6.2
     server:
       unique_name: search
       vendor: aws
@@ -99,7 +96,7 @@ production:
       size: r3.2xlarge
   redis:
     configuration:
-      version: 3.2.9
+      version: 4.0.2
     server:
       unique_name: cache
       vendor: aws

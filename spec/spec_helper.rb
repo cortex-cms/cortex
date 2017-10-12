@@ -5,9 +5,6 @@ SimpleCov.start 'rails' do
   end
 end
 
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
-
 require 'rails_helper'
 
 RSpec.configure do |config|

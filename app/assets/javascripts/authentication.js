@@ -1,7 +1,7 @@
 //= require jquery3
 // require jquery.turbolinks # temporarily disabled
-//= require jquery_ujs
-//= require underscore
+//= require rails-ujs
+//= require underscore/underscore.js
 //= require material
 
 //= require base

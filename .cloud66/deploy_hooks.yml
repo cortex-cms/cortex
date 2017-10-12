@@ -1,10 +1,4 @@
 default: &default
-  first_thing:
-    - snippet: cloud66/node
-      target: rails
-      execute: true
-      apply_during: build_only
-      run_on: all_servers
   after_bundle:
     - source: /.cloud66/scripts/yarn_install.sh
       destination: /tmp/yarn_install.sh
@@ -16,11 +10,6 @@ default: &default
       target: rails
       execute: true
       apply_during: deploy_only
-      run_on: all_servers
-    - source: /.cloud66/scripts/write_plugins_to_tmp.sh
-      destination: /tmp/write_plugins_to_tmp.sh
-      target: rails
-      execute: true
       run_on: all_servers
   after_rails:
     - source: /.cloud66/scripts/db_seed.sh

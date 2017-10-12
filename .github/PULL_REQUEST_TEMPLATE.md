@@ -1,49 +1,47 @@
-## Purpose:
+**Purpose**
 
 
-## JIRA:
+**JIRA**
 
 
-## Steps to Take On Prod
+**Changes**
+* Improvements and fixes
+  * 
 
-
-## Changes:
-* Changes to setup
-  *
+* Changes to developer setup/environment
+  * 
 
 * Architectural changes
-  *
+  * 
 
-* Migrations
-  *
-
+* Migrations or Steps to Take on Production
+  * 
+  
 * Library changes
-  *
+  * 
 
 * Side effects
-  *
+  * 
 
-## Screenshots
+**Screenshots**
 * Before
 
 * After
 
+**Feature Server**
 
-## QA Links:
 
-
-## How to Verify These Changes
+**How to Verify These Changes**
 * Specific pages to visit
-  *
+  * 
 
 * Steps to take
-  *
+  * 
 
 * Responsive considerations
-  *
+  * 
 
+**Relevant PRs/Dependencies**
+  * 
 
-## Relevant PRs/Dependencies:
-
-
-## Additional Information
+**Additional Information**

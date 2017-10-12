@@ -13,9 +13,6 @@ bundle config build.nokogiri --use-system-libraries
 echo "bundle install --without production staging development tasks"
 bundle install --without production staging development tasks
 
-echo "bundle exec rake cortex:assets:webpack:ensure_all_assets_compiled"
-bundle exec rake cortex:assets:webpack:ensure_all_assets_compiled
-
 echo "bundle exec rake db:setup"
 bundle exec rake db:setup
 

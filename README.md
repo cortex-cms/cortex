@@ -147,10 +147,10 @@ $ bundle exec rake cortex:rebuild_indexes
 
 ### Server
 
-Start Cortex, Sidekiq and live rebuild of Webpack scripts via Foreman:
+Start Cortex, Sidekiq and live rebuild/reload via Foreman:
 
 ```sh
-$ foreman start -f Procfile.dev
+$ foreman start -f Procfile.dev-server
 ```
 
 The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `admin@cortexcms.org` with password `welcome1`.

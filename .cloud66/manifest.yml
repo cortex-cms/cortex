@@ -10,7 +10,6 @@ development:
       vendor: aws
       region: us-east-1
       size: m3.medium
-      root_disk_size: 50
   postgresql:
     configuration:
       version: 9.6.5
@@ -45,7 +44,6 @@ staging:
       vendor: aws
       region: us-east-1
       size: m3.medium
-      root_disk_size: 50
   postgresql:
     configuration:
       version: 9.6.5
@@ -80,7 +78,6 @@ production:
       vendor: aws
       region: us-east-1
       size: c4.xlarge
-      root_disk_size: 50
   postgresql:
     configuration:
       version: 9.6.5

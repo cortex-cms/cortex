@@ -117,10 +117,10 @@ $ systemctl start redis
 $ gem install bundler && bundle install
 ```
 
-* Install `node` dependencies (including `bower`) and use `bower-rails`'s rake task to install dependencies:
+* Install `node`, then run Yarn to install frontend dependencies:
 
 ```sh
-$ npm install && bundle exec rake bower:install:development
+$ yarn install
 ```
 
 ### Database
@@ -147,31 +147,23 @@ $ bundle exec rake cortex:rebuild_indexes
 
 ### Server
 
-Start Cortex, Sidekiq and live rebuild of Webpack scripts via Foreman:
+Start Cortex, Sidekiq and live rebuild/reload via Foreman:
 
 ```sh
-$ foreman start -f Procfile.dev
+$ foreman start -f Procfile.dev-server
 ```
 
 The admin interface should now be accessible locally on port `3000`. To access Cortex as superadmin, login as `admin@cortexcms.org` with password `welcome1`.
 
 ### Deployment
 
-To use an automated tool to deploy the server, set this environmental variable:
-
-```shell
-CI=true
-```
-
-This will suppress Bower's interactive request to enable insights/metrics reporting, which normally prevents the CI process from continuing.
-
-Additionally, deploying the `development` environment as a non-local server will require an additional environmental variable be set:
+Deploying the `development` environment as a non-local server will require an additional environmental variable be set:
 
 ```shell
 DEPLOYED=true
 ```
 
-This will configure various things, such as [dotenv](https://github.com/bkeepers/dotenv) to behave normally in a deployed scenario.
+This will configure various things to behave normally in a deployed scenario.
 
 ## Running Test Suite
 

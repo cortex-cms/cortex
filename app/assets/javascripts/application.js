@@ -1,14 +1,14 @@
 //= require jquery3
 // require jquery.turbolinks # temporarily disabled
-//= require jquery_ujs
-//= require underscore
+//= require rails-ujs
+//= require underscore/underscore.js
 //= require material
 //= require jquery-ui/widgets/datepicker
-//= require jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon
+//= require jquery-ui-timepicker-addon/dist/jquery-ui-timepicker-addon
 //= require bootstrap-tagsinput
-//= require clipboard
+//= require clipboard/dist/clipboard.js
 //= require dialog-polyfill
-//= require momentjs
+//= require moment/moment.js
 
 //= require cortex-plugins-core/application
 

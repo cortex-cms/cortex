@@ -1,2 +1,2 @@
-echo "bundle exec rspec"
-bundle exec rspec
+echo "bundle exec rspec --format doc"
+bundle exec rspec --format doc

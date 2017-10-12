@@ -6,7 +6,7 @@
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0'}
     %title Cortex Administration | Login
     = favicon_link_tag 'favicon.ico'
-    = stylesheet_link_tag :authentication
+    = stylesheet_link_tag :authentication, {media: 'all', 'data-turbolinks-track': 'reload'}
     = csrf_meta_tags
   %body.mdl-base
     .mdl-layout.mdl-js-layout.authentication
@@ -14,6 +14,6 @@
         = render 'partials/authentication/header'
         .mdl-grid.authentication__content
           = yield
-    = javascript_include_tag :authentication
+    = javascript_include_tag :authentication, {'data-turbolinks-eval': false, 'data-turbolinks-track': 'reload'}
     %span.flash--invert
       = render 'partials/flash'

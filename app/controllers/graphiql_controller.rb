@@ -1,0 +1,2 @@
+class GraphiqlController < AdminController
+end

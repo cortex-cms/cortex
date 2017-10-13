@@ -18,8 +18,11 @@
     "jquery-ui-timepicker-addon": "~> 1.6.3",
     "clipboard": "~> 1.7.1",
     "material-ui": "next",
-    "cortex-plugins-core": "2.0.1",
-    "axios": "^0.16.2"
+    "axios": "^0.16.2",
+    "isomorphic-fetch": "^2.2.1",
+    "graphiql": "^0.11.5",
+
+    "cortex-plugins-core": "2.0.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.9.1"

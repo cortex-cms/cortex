@@ -14,7 +14,6 @@ gem 'rails', '~> 5.1.4'
 
 # API
 gem 'graphql', '~> 1.7.4'
-gem 'graphiql-rails', '~> 1.4.5'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'

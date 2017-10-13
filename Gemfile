@@ -11,6 +11,7 @@ gem 'puma', '~> 3.10.0'
 
 # Rails
 gem 'rails', '~> 5.1.4'
+gem 'graphiql-rails', '~> 1.4.5'
 
 # API
 gem 'graphql', '~> 1.7.4'

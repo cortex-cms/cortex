@@ -20,7 +20,6 @@
     "material-ui": "next",
     "axios": "^0.16.2",
     "isomorphic-fetch": "^2.2.1",
-    "graphiql": "^0.11.5",
 
     "cortex-plugins-core": "2.0.1"
   },

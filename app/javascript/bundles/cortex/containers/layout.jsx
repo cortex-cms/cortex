@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import GraphiqlContainer from './graphiql_container';
 import TenantSwitcherContainer from './tenant_switcher_container';
 import WizardContainer from './wizard_container';
 
@@ -25,9 +24,6 @@ class Layout extends React.PureComponent {
       }
       { temporary_render === 'Wizard' &&
         <WizardContainer dispatch={dispatch} railsContext={data.railsContext} data={data.wizard} />
-      }
-      { temporary_render === 'Graphiql' &&
-        <GraphiqlContainer />
       }
       </span>
     )

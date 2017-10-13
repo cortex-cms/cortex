@@ -10,6 +10,10 @@ class GraphqlController < ApplicationController
     render json: result
   end
 
+  def ide
+    add_breadcrumb 'GraphQL IDE', :graphql_ide_path
+  end
+
   private
 
   # Handle form data, JSON body, or a blank value

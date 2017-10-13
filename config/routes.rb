@@ -2,8 +2,11 @@ require 'sidekiq/web'
 
 Cortex::Application.routes.draw do
   # API - TODO: Authorize GraphQL + GraphiQL
-  post '/graphql', to: 'graphql#execute'
-  get '/graphiql', to: 'graphiql#embed', as: 'graphiql_embed'
+  mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql', as: 'graphiql'
+  scope '/graphql' do
+    post '/', to: 'graphql#execute'
+    get '/ide', to: 'graphql#ide', as: 'graphql_ide'
+  end
 
   root 'dashboards#index'
 

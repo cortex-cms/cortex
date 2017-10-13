@@ -5,7 +5,7 @@
       Dashboard
   = cell(:content_type, collection: current_user.active_tenant.all_up_organization_for(ContentType)).(:nav)
   .mdl-layout-spacer
-  = link_to graphiql_embed_path, class: 'mdl-navigation__link' do
+  = link_to graphql_ide_path, class: 'mdl-navigation__link' do
     %i.material-icons{role: 'presentation'} code
     %span.nav__item-name
       GraphQL IDE

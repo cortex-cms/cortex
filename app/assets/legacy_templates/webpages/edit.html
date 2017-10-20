@@ -128,10 +128,10 @@
               </div>
             </tab>
             <tab ng-click="tabClicked(3)">
-              <tab-heading>Accordion Group Data</span>
+              <tab-heading>Accordion Data</span>
               </tab-heading>
               <div class="form-group">
-                <label for="accordion_group_widget_yaml">Accordion Group Data</label>
+                <label for="accordion_group_widget_yaml">Accordion Data</label>
                 <div ui-codemirror="cmOptions" ui-refresh='selectedTab' id="accordion_group_widget_yaml" name="accordion_group_widget_yaml"
                       ng-model="data.webpage.accordion_group_widget_yaml"
                       placeholder="YAML-formatted accordion group data"></div>
@@ -155,6 +155,16 @@
                 <div ui-codemirror="cmOptions" ui-refresh='selectedTab' id="buy_box_widget_yaml" name="buy_box_widget_yaml"
                       ng-model="data.webpage.buy_box_widget_yaml"
                       placeholder="YAML-formatted buy box data"></div>
+              </div>
+            </tab>
+            <tab ng-click="tabClicked(6)">
+              <tab-heading>Galleries Data</span>
+              </tab-heading>
+              <div class="form-group">
+                <label for="galleries_widget_yaml">Galleries Data</label>
+                <div ui-codemirror="cmOptions" ui-refresh='selectedTab' id="galleries_widget_yaml" name="galleries_widget_yaml"
+                      ng-model="data.webpage.galleries_widget_yaml"
+                      placeholder="YAML-formatted galleries data"></div>
               </div>
             </tab>
           </tabset>

@@ -40,7 +40,13 @@ angular.module('cortex.controllers.webpages.edit', [
        tabSize: 2,
        readOnly: false,
        lineWrapping : true,
-       mode: 'yaml'
+       mode: 'yaml',
+       extraKeys: {
+        Tab: function(cm) {
+          var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+          cm.replaceSelection(spaces);
+        }
+      }
      };
 
      $scope.selectedTab = 0;

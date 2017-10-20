@@ -36,7 +36,7 @@ angular.module('cortex.controllers.webpages.edit', [
        lineNumbers: true,
        autofocus: true,
        styleActiveLine: true,
-       indentWithTabs: true,
+       indentWithTabs: false,
        tabSize: 2,
        readOnly: false,
        lineWrapping : true,

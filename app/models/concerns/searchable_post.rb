@@ -114,11 +114,16 @@ module SearchablePost
       end
     end
 
-    def show_all(tenant, published = nil)
+    def show_all(tenant, published = nil, scheduled = nil)
       bool = {bool: {filter: [{term: {tenant_id: tenant.id}}]}}
 
       if published
-        bool[:bool][:filter] << published_filter
+        if scheduled
+          bool[:bool][:filter] << published_filter
+        else
+          bool[:bool][:filter] << published_or_scheduled_filter
+        end
+
         search query: bool, sort: [{is_sticky: {order: 'desc'}, published_at: {order: 'desc'}}]
       else
         search query: bool, sort: [{is_sticky: {order: 'desc'}, created_at: {order: 'desc'}}]

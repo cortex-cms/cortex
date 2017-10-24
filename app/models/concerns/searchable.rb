@@ -40,6 +40,13 @@ module Searchable
           {bool: {should: [range_search(:expired_at, :gte, DateTime.now.to_s), {bool: {must_not: {exists: { field: :expired_at }}}}]}}
         ]
       end
+
+      def published_or_scheduled_filter
+        [
+          {bool: {must: [term_search(:draft, false)]}},
+          {bool: {should: [range_search(:expired_at, :gte, DateTime.now.to_s), {bool: {must_not: {exists: { field: :expired_at }}}}]}}
+        ]
+      end
     end
   end
 end

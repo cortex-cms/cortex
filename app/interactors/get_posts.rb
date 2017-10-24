@@ -9,7 +9,7 @@ class GetPosts
     if has_search_params?
       posts = posts.search_with_params(context.params, context.tenant, context.published)
     else
-      posts = posts.show_all(context.tenant, context.published)
+      posts = posts.show_all(context.tenant, context.published, context.scheduled)
     end
 
     context.posts = posts

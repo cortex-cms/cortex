@@ -4,7 +4,11 @@ Cortex::Application.routes.draw do
   get 'hello_world', to: 'hello_world#index'
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root 'dashboards#index'
-  get 'legacy', to: 'legacy#index', as: :legacy_root
+
+  scope '/legacy' do
+    get '/', to: 'legacy#index', as: :legacy_root
+    get '/published_and_scheduled_posts_as_csv', to: 'legacy#published_and_scheduled_posts_as_csv'
+  end
 
   scope '/admin' do
     resources :dashboards

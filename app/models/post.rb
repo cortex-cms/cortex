@@ -1,3 +1,5 @@
+require 'csv'
+
 class Post < ApplicationRecord
   include SearchablePost
   include FindByTenant
@@ -42,6 +44,25 @@ class Post < ApplicationRecord
 
   def pending?
     published_at ? published_at >= DateTime.now : false
+  end
+
+  # Warning: Hot garbage
+  def as_csv
+    csv = as_indexed_json
+    csv[:categories] = csv[:categories].join(', ')
+    csv[:industries] = csv[:industries].join(', ')
+    csv[:tags] = csv[:tags].join(', ')
+    csv
+  end
+
+  def self.to_published_and_scheduled_posts_csv
+    CSV.generate(headers: true) do |csv|
+      csv << all.first.as_csv.keys
+
+      all.each do |post|
+        csv << post.as_csv.values
+      end
+    end
   end
 
   class << self

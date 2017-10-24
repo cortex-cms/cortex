@@ -52,6 +52,7 @@ class Post < ApplicationRecord
     csv[:categories] = csv[:categories].join(', ')
     csv[:industries] = csv[:industries].join(', ')
     csv[:tags] = csv[:tags].join(', ')
+    csv.delete(:body)
     csv
   end
 

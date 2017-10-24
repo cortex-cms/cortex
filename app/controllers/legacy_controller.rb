@@ -11,7 +11,7 @@ class LegacyController < ApplicationController
 
     csv = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
       posts = ::GetPosts.call(tenant: current_user.tenant, published: true, scheduled: true).posts
-      posts.records.to_published_and_scheduled_posts_csv
+      posts.per(0).records.to_published_and_scheduled_posts_csv
     end
 
     send_data csv, filename: "published-and-scheduled-posts-#{Date.today}.csv"

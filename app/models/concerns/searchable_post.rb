@@ -119,9 +119,9 @@ module SearchablePost
 
       if published
         if scheduled
-          bool[:bool][:filter] << published_filter
-        else
           bool[:bool][:filter] << published_or_scheduled_filter
+        else
+          bool[:bool][:filter] << published_filter
         end
 
         search query: bool, sort: [{is_sticky: {order: 'desc'}, published_at: {order: 'desc'}}]

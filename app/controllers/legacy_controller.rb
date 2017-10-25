@@ -9,10 +9,10 @@ class LegacyController < ApplicationController
     last_updated_at = Post.last_updated_at
     cache_key = "published-and-scheduled-posts-csv-feed-#{last_updated_at}-#{current_user.tenant.id}"
 
-    csv = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
+    #csv = ::Rails.cache.fetch(cache_key, expires_in: 30.minutes, race_condition_ttl: 10) do
       posts = ::GetPosts.call(tenant: current_user.tenant, published: true, scheduled: true).posts
-      posts.per(0).records.to_published_and_scheduled_posts_csv
-    end
+      csv = posts.per(Post.count).records.to_published_and_scheduled_posts_csv
+    #end
 
     send_data csv, filename: "published-and-scheduled-posts-#{Date.today}.csv"
   end

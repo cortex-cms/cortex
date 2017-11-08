@@ -1,8 +1,7 @@
 class ContentItem < ApplicationRecord
   include ActiveModel::Transitions
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
 
+  include Searchable
   include BelongsToTenant
 
   scope :last_updated_at, -> { order(updated_at: :desc).select('updated_at').first.updated_at }
@@ -17,8 +16,6 @@ class ContentItem < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   validates :creator, :content_type, presence: true
-
-  after_save :index
 
   state_machine do
     state :draft
@@ -62,15 +59,6 @@ class ContentItem < ApplicationRecord
     end
 
     json
-  end
-
-  def index
-    __elasticsearch__.client.index(
-      {index: content_type.content_items_index_name,
-       type: self.class.name.parameterize(separator: '_'),
-       id: id,
-       body: as_indexed_json}
-    )
   end
 
   # FieldItem and State Convenience Methods. TODO: move to concern? transactions?

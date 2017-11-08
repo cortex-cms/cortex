@@ -37,10 +37,26 @@ module ApplicationHelper
     @index || {}
   end
 
+  def content_type_objects
+    ContentType.includes(:fields, :contentable_decorators).all.each_with_object({}) do |ct, hsh|
+      hsh[ct.id] = { contentType: ct, fields: ct.fields, contentable_decorators: ct.contentable_decorators  }
+    end
+  end
+
+  def content_type_creator_props
+    {
+      content_type: { contentType: ContentType.new(creator_id: current_user.id), fields: [], contentable_decorators: [] },
+      wizard: {},
+      index: Decorator.new,
+      types: content_type_objects
+    }
+  end
+
   def cortex_props
     user_session_props.merge({
       wizard: wizard_props,
-      index: index_props
+      index: index_props,
+      creator: content_type_creator_props
     })
   end
 

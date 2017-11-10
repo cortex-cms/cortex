@@ -150,6 +150,7 @@ $ bundle exec rake cortex:rebuild_indexes
 Start Cortex, Sidekiq and live rebuild/reload via Foreman:
 
 ```sh
+$ gem install foreman
 $ foreman start -f Procfile.dev-server
 ```
 

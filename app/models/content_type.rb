@@ -1,9 +1,6 @@
-require 'elasticsearch/model/indexing'
-
 class ContentType < ApplicationRecord
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
-
+  include SearchableContentType
+  include SearchableContentItemForContentType
   include BelongsToTenant
 
   validates :name, :creator, :contract, presence: true
@@ -18,8 +15,6 @@ class ContentType < ApplicationRecord
   has_many :contentable_decorators, as: :contentable
   has_many :decorators, through: :contentable_decorators
 
-  after_save :rebuild_content_items_index
-
   accepts_nested_attributes_for :fields
 
   # TODO: Extract to a concern
@@ -27,11 +22,11 @@ class ContentType < ApplicationRecord
     Permission.select { |perm| perm.resource_type = self }
   end
 
-  def content_items_index_name
-    content_type_name_sanitized = name.parameterize(separator: '_')
-    "#{Rails.env}_content_type_#{content_type_name_sanitized}_content_items"
+  def name_id # TODO: ContentTypes should have a table-backed name_id field to avoid these collision-prone string manipulations
+    name.parameterize(separator: '_')
   end
 
+  # TODO: remove these garbage `_decorator` methods
   def wizard_decorator
     decorators.find_by_name("Wizard")
   end
@@ -42,41 +37,5 @@ class ContentType < ApplicationRecord
 
   def rss_decorator
     decorators.find_by_name("Rss")
-  end
-
-  def content_items_mappings
-    mappings = Elasticsearch::Model::Indexing::Mappings.new(content_items_index_name, {})
-
-    fields.each do |field|
-      mappings.indexes field.mapping[:name], field_mappings(field)
-    end
-
-    mappings
-  end
-
-  def content_items_settings
-    {}
-  end
-
-  def rebuild_content_items_index
-    create_content_items_index({force: true})
-  end
-
-  def create_content_items_index(options={})
-    client = __elasticsearch__.client
-    client.indices.delete index: content_items_index_name rescue nil if options[:force]
-
-    client.indices.create index: content_items_index_name,
-                          body: {
-                            settings: content_items_settings.to_hash,
-                            mappings: content_items_mappings.to_hash}
-  end
-
-  private
-
-  def field_mappings(field)
-    mappings = {type: field.mapping[:type]}
-    mappings[:analyzer] = field.mapping[:analyzer] if field.mapping[:analyzer]
-    mappings
   end
 end

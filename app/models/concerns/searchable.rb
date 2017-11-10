@@ -3,8 +3,8 @@ module Searchable
 
   included do
     include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
-    index_name [Rails.env, model_name.collection.gsub(/\//, '-')].join('_')
+
+    index_name "#{Rails.env}_#{model_name.to_s.parameterize(separator: '_')}"
 
     class << self
       def query_massage q

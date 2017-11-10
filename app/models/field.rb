@@ -13,8 +13,8 @@ class Field < ApplicationRecord
     field_type.camelize.constantize.new(options)
   end
 
-  def mapping
-    field_type_instance(field_name: name).mapping
+  def elasticsearch_mapping
+    field_type_instance(field_name: name).elasticsearch_mapping
   end
 
   def tenant

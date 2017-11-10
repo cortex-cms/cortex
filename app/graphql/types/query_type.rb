@@ -1,37 +1,43 @@
 Types::QueryType = GraphQL::ObjectType.define do
-  name "Query"
-  # Add root-level fields here.
-  # They will be entry points for queries on your schema.
+  name 'Query'
 
-  # TODO: remove me
-  # field :testField, types.String do
-  #   description "An example field added by the generator"
-  #   resolve ->(obj, args, ctx) {
-  #     "Hello World!"
-  #   }
-  # end
-
-  field :users, !types[Types::UserType] do
-    description 'All users'
-    resolve -> (obj, args, ctx) {
-      User.all
-    }
-  end
-
-  field :current_user, !Types::UserType do
+  field :currentUser, !Types::UserType do
     description 'Current user'
-    resolve ->(obj, args, ctx) {
+    resolve ->(_obj, _args, ctx) {
       ctx[:current_user]
     }
   end
 
-  field :content_items, !types[Types::ContentItemType] do
-    argument :page, types.Int
-    argument :limit, types.Int
-
-    resolve -> (obj, args, ctx) {
-      params = { args: args, tenant: ctx[:current_user].active_tenant }
-      GetContentItemsTransaction.new.call(params).value
+  field :allUsers, !types[Types::UserType] do
+    description 'All users'
+    resolve -> (_obj, _args, _ctx) {
+      User.all
     }
   end
+
+  # TODO: extract to class
+  ContentType.find_each do |content_type|
+    all_field_for_content_type(content_type)
+    # field_for_content_type(content_type)
+    # ...
+  end
+end
+
+def all_field_for_content_type(content_type)
+  field(field_name('all', content_type), types[Types::ContentItemType]) do
+    argument :page, types.Int
+    argument :limit, types.Int
+    argument :tenant_id, types.ID # TODO: check that tenant_id within active_tenant and authorize. Which layer should this occur in?
+
+    description content_type.description
+
+    resolve -> (_obj, args, ctx) {
+      params = { args: args, active_tenant: ctx[:current_user].active_tenant, content_type: content_type }
+      GetContentItemsForContentTypeTransaction.new.call(params).value
+    }
+  end
+end
+
+def field_name(prefix, content_type) # TODO: extract
+  prefix + content_type.name_id.camelize.pluralize
 end

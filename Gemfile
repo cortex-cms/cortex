@@ -81,7 +81,7 @@ gem 'material_design_lite-sass', '~> 1.3.0'
 
 # JavaScript
 gem 'react_on_rails', '9.0.3'
-#gem 'mini_racer', platforms: :ruby
+gem 'mini_racer', platforms: :ruby
 gem 'webpacker'
 gem 'gon', '~> 6.2.0'
 #gem 'turbolinks', '~> 5.0.1'

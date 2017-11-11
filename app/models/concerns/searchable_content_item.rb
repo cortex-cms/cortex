@@ -9,7 +9,8 @@ module SearchableContentItem
     end
 
     after_commit on: [:update] do
-      __elasticsearch__.update_document(index: content_type.content_items_index_name)
+      # Perform a full document re-index, as update_document ignores methods: https://github.com/elastic/elasticsearch-rails/issues/306#issuecomment-121817954
+      __elasticsearch__.index_document(index: content_type.content_items_index_name)
     end
 
     after_commit on: [:destroy] do

@@ -1,5 +1,5 @@
 class Field < ApplicationRecord
-  belongs_to :content_type
+  belongs_to :content_type, touch: true
   has_many :field_items
   has_many :content_items, through: :field_items
 

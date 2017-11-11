@@ -26,11 +26,11 @@ module SearchableContentItemForContentType
 
   def content_item_mappings
     mappings = Elasticsearch::Model::Indexing::Mappings.new(content_items_index_name, { dynamic: false })
-    mappings.indexes :tenant_id, type: :string, index: :not_analyzed
-    mappings.indexes :content_type_id, type: :string, index: :not_analyzed
-    mappings.indexes :creator_id, type: :string, index: :not_analyzed
-    mappings.indexes :updated_by_id, type: :string, index: :not_analyzed
-    mappings.indexes :state, analyzer: :keyword
+    mappings.indexes :tenant_id, type: :keyword, index: :not_analyzed
+    mappings.indexes :content_type_id, type: :keyword, index: :not_analyzed
+    mappings.indexes :creator_id, type: :keyword, index: :not_analyzed
+    mappings.indexes :updated_by_id, type: :keyword, index: :not_analyzed
+    mappings.indexes :state, analyzer: :keyword, index: :not_analyzed
     mappings.indexes :created_at, type: :date, include_in_all: false
     mappings.indexes :updated_at, type: :date, include_in_all: false
     mappings.indexes :deleted_at, type: :date, include_in_all: false

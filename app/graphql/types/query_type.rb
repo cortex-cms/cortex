@@ -2,15 +2,14 @@ Types::QueryType = GraphQL::ObjectType.define do
   name 'Query'
 
   field :currentUser, !Types::UserType do
-    description 'Current user'
     resolve ->(_obj, _args, ctx) {
       ctx[:current_user]
     }
   end
 
-  field :allUsers, !types[Types::UserType] do
-    description 'All users'
+  field :allUsers, types[Types::UserType] do
     resolve -> (_obj, _args, _ctx) {
+      # TODO: scope to tenant; allow tenant argument
       User.all
     }
   end

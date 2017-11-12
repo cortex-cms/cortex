@@ -10,8 +10,11 @@ Types::ContentTypeType = GraphQL::ObjectType.define do
   field :contract, !Types::ContractType
   field :tenant, !Types::TenantType
   field :creator, !Types::UserType
+
   field :updated_by, Types::UserType
-  field :content_type, !Types::ContentTypeType
+  field :created_at, !Types::DateTimeType
+  field :updated_at, !Types::DateTimeType
+  field :deleted_at, Types::DateTimeType
 
   # TODO: Fields
 end

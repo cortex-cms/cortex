@@ -180,6 +180,7 @@ GEM
       elasticsearch-transport (= 5.0.4)
     elasticsearch-api (5.0.4)
       multi_json
+    elasticsearch-dsl (0.1.5)
     elasticsearch-extensions (0.0.26)
       ansi
       elasticsearch
@@ -578,6 +579,7 @@ DEPENDENCIES
   dry-struct (~> 0.4.0)
   dry-transaction (~> 0.10.2)
   dry-types (~> 0.12.2)
+  elasticsearch-dsl (~> 0.1)
   elasticsearch-extensions (~> 0.0.26)
   elasticsearch-model (~> 5.0)
   elasticsearch-rails (~> 5.0)

@@ -1,4 +1,4 @@
-development: &defaults
+defaults: &defaults
   cortex:
     news_feed:
       tenant: <%= ENV['CORTEX_NEWS_FEED_TENANT'] %>

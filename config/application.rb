@@ -15,7 +15,6 @@ module Cortex
 
     config.active_record.default_timezone = :utc
     config.active_job.queue_adapter = :sidekiq
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
 
     # Insert Rack::CORS as the first middleware
     config.middleware.insert_before 0, Rack::Cors do
@@ -24,7 +23,6 @@ module Cortex
                   [Cortex.config.cors.allowed_origins_regex || ''])
         resource '*',
                  :headers => :any,
-                 :expose  => %w(Content-Range Link),
                  :methods => [:get, :post, :options, :put, :patch, :delete]
       end
     end

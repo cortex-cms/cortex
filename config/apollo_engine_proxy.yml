@@ -1,0 +1,23 @@
+defaults: &defaults
+  apiKey: <%= ENV['APOLLO_ENGINE_PROXY_API_KEY'] %>
+  logging:
+    level: <%= ENV['APOLLO_ENGINE_PROXY_LOGGING_LEVEL'] %>
+  origins:
+  - http:
+      url: <%= ENV['APOLLO_ENGINE_PROXY_ORIGIN_HTTP_URL'] %>
+  frontends:
+  - host: <%= ENV['APOLLO_ENGINE_PROXY_FRONTEND_HOST'] %>
+    port: <%= ENV['APOLLO_ENGINE_PROXY_FRONTEND_PORT'] %>
+    endpoint: <%= ENV['APOLLO_ENGINE_PROXY_FRONTEND_ENDPOINT'] %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

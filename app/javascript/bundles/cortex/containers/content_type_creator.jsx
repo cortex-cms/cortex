@@ -25,10 +25,9 @@ class ContentTypeCreator extends React.Component {
     const currentStep = steps[current_step];
     this.props.dispatch({ type: PREVIOUS_STEP, current_step: currentStep.previousStep });
   }
-
   render() {
     const { dispatch, data, session } = this.props;
-    const { current_step, steps, content_type, index, wizard, field_builder } = data
+    const { current_step, steps, content_type, index_builder, wizard_builder, rss_builder, field_builder } = data
     console.log('ContentTypeCreator props', this.props)
 
     return (
@@ -42,13 +41,16 @@ class ContentTypeCreator extends React.Component {
         </div>
 
         <div className={ current_step === 'wizard' ? '' : 'hidden' }>
-          <WizardStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['wizard']} data={wizard} />
+          <WizardStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['wizard']} fieldsLookup={content_type.fields.reduce((lookup,field) => {
+            lookup[field.id] = field;
+            return field
+          },{})} wizard_builder={wizard_builder} />
         </div>
         <div className={ current_step === 'index' ? '' : 'hidden' }>
-          <IndexStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['index']} data={index} />
+          <IndexStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['index']} data={index_builder} />
         </div>
-        <div className={ current_step === 'options' ? '' : 'hidden' }>
-          <OptionsStep dispatch={dispatch} handlePrev={this.handlePrev} step={steps['options']} data={ content_type }  />
+        <div className={ current_step === 'rss' ? '' : 'hidden' }>
+          <OptionsStep dispatch={dispatch} handlePrev={this.handlePrev} step={steps['rss']} data={ rss_builder }  />
         </div>
 
       </div>

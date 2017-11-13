@@ -17,8 +17,11 @@ import {
   FIELD_NAME_ERROR,
   EDIT_FIELD,
   UPDATE_YAML_FIELD,
+  OPEN_STEP_FORM,
+  UPDATE_STEP,
   DELETE_FIELD
 } from '../constants/content_type_creator'
+
 import ContentTypeReducer from '../helpers/content_type_reducer'
 
 const getYamlData = (data) => data === null ? '' : YAML.stringify(data, 2);
@@ -60,6 +63,20 @@ const contentTypeCreatorReducer = (props) => {
             }
           }
         }
+      case OPEN_STEP_FORM:
+        return {
+          ...state,
+          wizard_builder: {
+            ...state.wizard_builder,
+            stepFormOpen: true,
+            step_view: {
+              name: null,
+              description: null,
+              heading: null,
+              columns: []
+            }
+          }
+        }
       case EDIT_FIELD:
         return {
           ...state,
@@ -95,7 +112,7 @@ const contentTypeCreatorReducer = (props) => {
           },
           content_type: {
             ...state.content_type,
-            fields: Object.assign([], state.content_type.fields, {[state.field_builder.field_edit]: Object.assign({},state.field_builder.field_view, { validations: parseYAMLValue(state.field_builder.validationsYaml) , metadata: parseYAMLValue(state.field_builder.metadataYaml) }) })
+            fields: Object.assign([], state.content_type.fields, {[state.field_builder.field_edit]: Object.assign({},state.field_builder.field_view, { validations: parseYAMLValue(state.field_builder.validationsYaml), id: state.field_builder.field_view.name , metadata: parseYAMLValue(state.field_builder.metadataYaml) }) })
           },
           field_builder: {
             ...state.field_builder,
@@ -129,6 +146,18 @@ const contentTypeCreatorReducer = (props) => {
             open: true,
             field_view: {
               ...state.field_builder.field_view,
+              ...action.payload
+            }
+          }
+
+        }
+      case UPDATE_STEP:
+        return {
+          ...state,
+          wizard_builder: {
+            ...state.wizard_builder,
+            step_view: {
+              ...state.wizard_builder.step_view,
               ...action.payload
             }
           }

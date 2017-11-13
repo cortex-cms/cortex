@@ -19,6 +19,19 @@ const ContentTypeReducer = ({ content_types, current_user, creator }) => {
       field_edit: null,
       field_view: null
     },
+    wizard_builder: {
+      ...creator.wizard,
+      stepFormOpen: false,
+      step_view: {
+        name: null,
+        columnFormOpen: false,
+        description: null,
+        heading: null,
+        columns: []
+      }
+    },
+    index_builder: creator.index,
+    rss_builder: creator.rss,
     steps: {
       general: {
         disabled: false,
@@ -40,11 +53,11 @@ const ContentTypeReducer = ({ content_types, current_user, creator }) => {
       },
       index: {
         disabled: true,
-        nextStep: 'options',
+        nextStep: 'rss',
         previousStep: 'wizard',
         valid: false
       },
-      options: {
+      rss: {
         disabled: true,
         nextStep: null,
         previousStep: 'index',

@@ -19,6 +19,10 @@ const FieldTypes = {
       presence: true
     }
   },
+  tree_field_type: {
+    metadata: {},
+    validations: {}
+  },
   tag_field_type: {
     metadata: {},
     validations: {}

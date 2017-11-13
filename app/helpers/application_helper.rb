@@ -38,16 +38,17 @@ module ApplicationHelper
   end
 
   def content_type_objects
-    ContentType.includes(:fields, :contentable_decorators).all.each_with_object({}) do |ct, hsh|
-      hsh[ct.id] = { contentType: ct, fields: ct.fields, contentable_decorators: ct.contentable_decorators  }
+    ContentType.includes(:fields, :decorators).all.each_with_object({}) do |ct, hsh|
+      hsh[ct.id] = { contentType: ct, fields: ct.fields, decorators: ct.decorators  }
     end
   end
 
   def content_type_builder_props
     {
-      content_type: { contentType: ContentType.new(creator_id: current_user.id), fields: [], contentable_decorators: [] },
-      wizard: {},
-      index: Decorator.new
+      content_type: { contentType: ContentType.new(creator_id: current_user.id), fields: [], decorators: [] },
+      wizard: Decorator.new(name: 'Wizard', data: {steps: []}),
+      index: Decorator.new(name: 'Index', data: {columns: []}),
+      rss: Decorator.new(name: 'Rss', data: {channel: {}, item: {}}),
     }
   end
 

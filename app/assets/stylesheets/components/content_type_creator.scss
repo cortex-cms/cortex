@@ -8,10 +8,36 @@
   justify-content: flex-end;
   display: flex;
 }
+.content-type-new-field-button {
+    width: 100%;
+}
+
+.content-type-editor {
+    .side-buttons {
+      font-size: 14px;
+      display: flex;
+      float:right;
+    }
+}
 
 .content-type-icon-option {
-  strong {
-    margin-left: 20px;
+  display: flex;
+  i {
+    margin-right: 20px;
+  }
+}
+
+.content-type-add-field {
+  background: #b3d4fc;
+
+  .node {
+    width: auto;
+  }
+
+  .buttons-column {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
   }
 }
 

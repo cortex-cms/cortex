@@ -33,7 +33,7 @@ class StepBar extends React.PureComponent {
         <div className='mdl-stepper-bar-left'></div>
         <div className='mdl-stepper-bar-right'></div>
       </div>
-      <div onClick={this.stepClicked('wizard')} className={this.stepState(this.props, 'fields')}>
+      <div onClick={this.stepClicked('fields')} className={this.stepState(this.props, 'fields')}>
         <div className='mdl-stepper-circle'><span>2</span></div>
         <div className='mdl-stepper-title'>Fields</div>
         <div className='mdl-stepper-bar-left'></div>

@@ -7,7 +7,7 @@ import Select from 'material-ui/Select';
 import Button from 'material-ui/Button';
 import {CONTENT_TYPE_UPDATED} from '../../constants/content_type_creator'
 
-const IconNames = ['school', 'domain', 'collections', 'public', 'poll', 'whatshot', 'adb', 'apps','local_offer', 'map', 'rate_review', 'class', 'account_balance']
+const IconNames = ['school','fiber_new','language','group_work', 'domain', 'collections', 'public', 'poll', 'whatshot', 'adb', 'apps','local_offer', 'map', 'rate_review', 'class', 'account_balance']
 
 class GeneralStep extends React.PureComponent {
   constructor(props) {
@@ -64,7 +64,8 @@ class GeneralStep extends React.PureComponent {
             <FormControl fullWidth className=''>
               <InputLabel htmlFor='icon'>Icon</InputLabel>
               <Select
-                value={ icon || 'whatshot' }
+                value={ icon === 'help' ? 'fiber_new' : icon }
+                renderValue={value => <div className='content-type-icon-option'><i className='material-icons'>{value}</i><strong>{value}</strong></div>}
                 onChange={this.handleChange('icon')}
                 >
                 { this.renderIconList() }

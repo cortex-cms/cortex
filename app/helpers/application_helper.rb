@@ -43,12 +43,11 @@ module ApplicationHelper
     end
   end
 
-  def content_type_creator_props
+  def content_type_builder_props
     {
       content_type: { contentType: ContentType.new(creator_id: current_user.id), fields: [], contentable_decorators: [] },
       wizard: {},
-      index: Decorator.new,
-      types: content_type_objects
+      index: Decorator.new
     }
   end
 
@@ -56,7 +55,8 @@ module ApplicationHelper
     user_session_props.merge({
       wizard: wizard_props,
       index: index_props,
-      creator: content_type_creator_props
+      content_types: content_type_objects,
+      creator: content_type_builder_props
     })
   end
 

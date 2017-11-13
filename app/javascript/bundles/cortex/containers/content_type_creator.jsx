@@ -28,7 +28,7 @@ class ContentTypeCreator extends React.Component {
 
   render() {
     const { dispatch, data, session } = this.props;
-    const { current_step, steps, content_type, index, wizard } = data
+    const { current_step, steps, content_type, index, wizard, field_builder } = data
     console.log('ContentTypeCreator props', this.props)
 
     return (
@@ -38,7 +38,7 @@ class ContentTypeCreator extends React.Component {
           <GeneralStep dispatch={dispatch} handleNext={this.handleNext} step={steps['general']} session={session} data={ content_type.contentType } />
         </div>
         <div className={ current_step === 'fields' ? '' : 'hidden' }>
-          <FieldsStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['fields']} data={ content_type.fields } />
+          <FieldsStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} field_builder={field_builder} step={steps['fields']} data={ content_type.fields } />
         </div>
 
         <div className={ current_step === 'wizard' ? '' : 'hidden' }>

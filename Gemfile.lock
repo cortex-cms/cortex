@@ -1,5 +1,7 @@
-PATH
-  remote: ../cortex-plugins-core
+GIT
+  remote: https://github.com/cortex-cms/cortex-plugins-core.git
+  revision: 201ced38f99898bc3265ce6781885b881f3208af
+  branch: topic/CE-307-GraphQL-and-CE-160-ElasticSearch
   specs:
     cortex-plugins-core (2.0.1)
       aws-sdk-s3 (~> 1.5)

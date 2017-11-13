@@ -19,7 +19,7 @@ gem 'apollo-tracing', '~> 1.3.0'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', path: '/Users/atharp/Repos/cortex-plugins-core'
+gem 'cortex-plugins-core', github: 'cortex-cms/cortex-plugins-core', branch: 'topic/CE-307-GraphQL-and-CE-160-ElasticSearch'
 
 # Service Layer
 gem 'dry-types', '~> 0.12.2'

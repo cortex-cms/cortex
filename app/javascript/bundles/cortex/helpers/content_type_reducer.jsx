@@ -8,8 +8,10 @@ const ContentTypeReducer = ({ content_types, current_user, creator }) => {
     ...creator,
     content_types: content_types,
     current_step: 'general',
+    dbSynced: true,
+    errors: {},
+    usedIcons: usedIconsLookup(content_types),
     field_builder: {
-      usedIcons: usedIconsLookup(content_types),
       open: false,
       form_open: false,
       expanded: null,
@@ -19,17 +21,7 @@ const ContentTypeReducer = ({ content_types, current_user, creator }) => {
       field_edit: null,
       field_view: null
     },
-    wizard_builder: {
-      ...creator.wizard,
-      stepFormOpen: false,
-      step_view: {
-        name: null,
-        columnFormOpen: false,
-        description: null,
-        heading: null,
-        columns: []
-      }
-    },
+    wizard_builder: creator.wizard,
     index_builder: creator.index,
     rss_builder: creator.rss,
     steps: {

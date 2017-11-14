@@ -1,4 +1,5 @@
 import {
+  DB_SYNCING,
   UPDATE_FIELD,
   ADD_FIELD,
   NEXT_STEP,
@@ -19,6 +20,7 @@ import {
   UPDATE_YAML_FIELD,
   OPEN_STEP_FORM,
   UPDATE_STEP,
+  CONTENT_TYPE_SYNCED,
   DELETE_FIELD
 } from '../constants/content_type_creator'
 
@@ -42,6 +44,11 @@ const contentTypeCreatorReducer = (props) => {
   const initialState = ContentTypeReducer(props)
   return function reducer(state = initialState, action) {
     switch (action.type) {
+      case DB_SYNCING:
+        return {
+          ...state,
+          dbSynced: false
+        }
       case OPEN_FIELD_FORM:
         return {
           ...state,
@@ -112,7 +119,7 @@ const contentTypeCreatorReducer = (props) => {
           },
           content_type: {
             ...state.content_type,
-            fields: Object.assign([], state.content_type.fields, {[state.field_builder.field_edit]: Object.assign({},state.field_builder.field_view, { validations: parseYAMLValue(state.field_builder.validationsYaml), id: state.field_builder.field_view.name , metadata: parseYAMLValue(state.field_builder.metadataYaml) }) })
+            fields: Object.assign([], state.content_type.fields, {[state.field_builder.field_edit]: Object.assign({},state.field_builder.field_view, { validations: parseYAMLValue(state.field_builder.validationsYaml), metadata: parseYAMLValue(state.field_builder.metadataYaml) }) })
           },
           field_builder: {
             ...state.field_builder,
@@ -239,6 +246,7 @@ const contentTypeCreatorReducer = (props) => {
       case NEXT_STEP:
         return {
           ...state,
+          dbSynced: true,
           current_step: action.current_step,
           steps: {
             ...state.steps,
@@ -258,6 +266,15 @@ const contentTypeCreatorReducer = (props) => {
           steps: {
             ...state.steps,
             ...action.step
+          }
+        }
+      case CONTENT_TYPE_SYNCED:
+        return {
+          ...state,
+          dbSynced: true,
+          content_type: {
+            ...state.content_type,
+            ...action.payload
           }
         }
       case FORM_VALID:

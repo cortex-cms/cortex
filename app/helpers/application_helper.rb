@@ -38,18 +38,28 @@ module ApplicationHelper
   end
 
   def content_type_objects
-    ContentType.includes(:fields, :decorators).all.each_with_object({}) do |ct, hsh|
+    @content_type_objects ||= ContentType.includes(:fields, :decorators).all.each_with_object({}) do |ct, hsh|
       hsh[ct.id] = { contentType: ct, fields: ct.fields, decorators: ct.decorators  }
     end
   end
 
   def content_type_builder_props
+    if params[:id]
+      @ct = ContentType.includes(:fields, :decorators).find(params[:id])
     {
-      content_type: { contentType: ContentType.new(creator_id: current_user.id), fields: [], decorators: [] },
-      wizard: Decorator.new(name: 'Wizard', data: {steps: []}),
-      index: Decorator.new(name: 'Index', data: {columns: []}),
-      rss: Decorator.new(name: 'Rss', data: {channel: {}, item: {}}),
+      content_type: { contentType: @ct, fields: @ct.fields, decorators: @ct.decorators },
+      wizard: @ct.decorators.find_by_name('Wizard'),
+      index: @ct.decorators.find_by_name('Index'),
+      rss: @ct.decorators.find_by_name('Rss'),
     }
+    else
+      {
+        content_type: { contentType: ContentType.new(creator_id: current_user.id, tenant_id: current_user.active_tenant.id, contract_id: Contract.first.id ), fields: [], decorators: [] },
+        wizard: Decorator.new(name: 'Wizard', data: {steps: []}),
+        index: Decorator.new(name: 'Index', data: {columns: []}),
+        rss: Decorator.new(name: 'Rss', data: {channel: {}, item: {}}),
+      }
+    end
   end
 
   def cortex_props

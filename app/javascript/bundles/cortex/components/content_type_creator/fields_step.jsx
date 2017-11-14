@@ -36,6 +36,7 @@ class FieldsStep extends React.PureComponent {
     </TableRow>
     )
   })
+
   render() {
     const { field_builder, dispatch, data, handleNext, handlePrev, step } = this.props
     return (

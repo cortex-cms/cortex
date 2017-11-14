@@ -8,6 +8,11 @@ Cortex::Application.routes.draw do
     match '/tenant_change', to: 'tenants#switch_tenants', via: [:post]
   end
 
+  scope '/content_types' do
+    match '/new_type', to: 'content_types#new_type', via: [:post]
+    match '/create_fields', to: 'content_types#create_fields', via: [:post]
+  end
+
   scope '/admin' do
     resources :dashboards
     resources :medias

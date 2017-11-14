@@ -40,11 +40,11 @@ class WizardStep extends React.PureComponent {
   addStep = () => this.props.dispatch({ type: OPEN_STEP_FORM })
   render() {
     console.log('WizardStep this.props', this.props)
-    const { stepFormOpen } = this.props.wizard_builder
+    //const { stepFormOpen } = this.props.wizard_builder
     return (
       <section className='step-container'>
       <h1>Wizard</h1>
-      <List>
+      {/* <List>
         <ListItem><strong>Steps</strong></ListItem>
         {this.renderSteps()}
       </List>
@@ -53,7 +53,7 @@ class WizardStep extends React.PureComponent {
           Add Step
         </button>
       </Paper>
-      <StepForm {...this.props.wizard_builder }/>
+      <StepForm {...this.props.wizard_builder }/> */}
       </section>
     )
   }

@@ -7,7 +7,7 @@ import Select from 'material-ui/Select';
 import Button from 'material-ui/Button';
 import {CONTENT_TYPE_UPDATED} from '../../constants/content_type_creator'
 
-const IconNames = ['school','fiber_new','language','group_work', 'domain', 'collections', 'public', 'poll', 'whatshot', 'adb', 'apps','local_offer', 'map', 'rate_review', 'class', 'account_balance']
+const IconsList = ['school','fiber_new','language','group_work', 'domain', 'collections', 'public', 'poll', 'whatshot', 'adb', 'apps','local_offer', 'map', 'rate_review', 'class', 'account_balance']
 
 class GeneralStep extends React.PureComponent {
   constructor(props) {
@@ -20,6 +20,7 @@ class GeneralStep extends React.PureComponent {
       name,
       description
     }
+    this.IconNames = IconsList.filter(icon => props.usedIcons[icon] !== true)
   }
   checkStepValidity = () => Object.keys(this.requiredFields).reduce((bool,fieldName) => {
     if (bool === false) return bool
@@ -38,7 +39,7 @@ class GeneralStep extends React.PureComponent {
       }
     })
   }
-  renderIconList = () => IconNames.map((icon, index) => <MenuItem key={index} className='content-type-icon-option' value={icon}><i className='material-icons'>{icon}</i><strong>{icon}</strong></MenuItem>)
+  renderIconList = () => this.IconNames.map((icon, index) => <MenuItem key={index} className='content-type-icon-option' value={icon}><i className='material-icons'>{icon}</i><strong>{icon}</strong></MenuItem>)
   renderTenantList = (tenants) => tenants.map((tenant, index) => <MenuItem key={index} value={tenant.id}>{tenant.name}</MenuItem>)
   render() {
     const {dispatch, data, session, handleNext, step} = this.props;
@@ -52,6 +53,7 @@ class GeneralStep extends React.PureComponent {
               <TextField
                 required
                 id='name'
+                //error={}
                 label='Name'
                 InputLabelProps={this.InputLabelProps}
                 value={ name || '' }

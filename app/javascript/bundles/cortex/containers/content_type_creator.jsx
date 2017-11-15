@@ -41,7 +41,10 @@ class ContentTypeCreator extends React.Component {
       fields: data.content_type.fields,
       authenticity_token: session.csrf_token
     }).then(response => {
-        this.props.dispatch({ type: CONTENT_TYPE_SYNCED, payload: { fields: response.data }})
+        this.props.dispatch({ type: CONTENT_TYPE_SYNCED, payload: { fields: response.data, fieldsLookup: response.data.reduce((lookup, field) => {
+          lookup[field.id] = field;
+          return lookup
+        }, {}) }})
         this.handleNext()
     }).catch(error => {
       console.log('createContentType error', error )
@@ -93,10 +96,7 @@ class ContentTypeCreator extends React.Component {
         </div>
 
         <div className={ this.stepDisplay('wizard') ? '' : 'hidden' }>
-          <WizardStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['wizard']} fieldsLookup={content_type.fields.reduce((lookup,field) => {
-            lookup[field.id] = field;
-            return field
-          },{})} wizard_builder={wizard_builder} />
+          <WizardStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['wizard']} fieldsLookup={content_type.fieldsLookup} wizard_builder={wizard_builder} />
         </div>
         <div className={ this.stepDisplay('index') ? '' : 'hidden' }>
           <IndexStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['index']} data={index_builder} />

@@ -47,14 +47,14 @@ module ApplicationHelper
     if params[:id]
       @ct = ContentType.includes(:fields, :decorators).find(params[:id])
     {
-      content_type: { contentType: @ct, fields: @ct.fields, decorators: @ct.decorators },
+      content_type: { contentType: @ct, fields: @ct.fields, fieldsLookup: @ct.fields.each_with_object({}) { |field, lookup| lookup[field.id] = field }, decorators: @ct.decorators },
       wizard: @ct.decorators.find_by_name('Wizard'),
       index: @ct.decorators.find_by_name('Index'),
       rss: @ct.decorators.find_by_name('Rss'),
     }
     else
       {
-        content_type: { contentType: ContentType.new(creator_id: current_user.id, tenant_id: current_user.active_tenant.id, contract_id: Contract.first.id ), fields: [], decorators: [] },
+        content_type: { contentType: ContentType.new(creator_id: current_user.id, tenant_id: current_user.active_tenant.id, contract_id: Contract.first.id ), fields: [], fieldsLookup: {}, decorators: [] },
         wizard: Decorator.new(name: 'Wizard', data: {steps: []}),
         index: Decorator.new(name: 'Index', data: {columns: []}),
         rss: Decorator.new(name: 'Rss', data: {channel: {}, item: {}}),

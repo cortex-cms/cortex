@@ -21,7 +21,14 @@ const ContentTypeReducer = ({ content_types, current_user, creator }) => {
       field_edit: null,
       field_view: null
     },
-    wizard_builder: creator.wizard,
+    wizard_builder: {
+      // assignedFields: creator.data.steps.reduce((lookUp, step) => {
+      //   step.columns
+      // }, {}),
+      expandedStep: 0,
+      openModal: null,
+      ...creator.wizard
+    },
     index_builder: creator.index,
     rss_builder: creator.rss,
     steps: {

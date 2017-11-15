@@ -18,8 +18,9 @@ import {
   FIELD_NAME_ERROR,
   EDIT_FIELD,
   UPDATE_YAML_FIELD,
-  OPEN_STEP_FORM,
+  ADD_WIZARD_STEP,
   UPDATE_STEP,
+  WIZARD_STEP_UPDATE,
   CONTENT_TYPE_SYNCED,
   DELETE_FIELD
 } from '../constants/content_type_creator'
@@ -44,6 +45,14 @@ const contentTypeCreatorReducer = (props) => {
   const initialState = ContentTypeReducer(props)
   return function reducer(state = initialState, action) {
     switch (action.type) {
+      case WIZARD_STEP_UPDATE:
+        return {
+          ...state,
+          wizard_builder: {
+            ...state.wizard_builder,
+            ...action.payload
+          }
+        }
       case DB_SYNCING:
         return {
           ...state,
@@ -70,17 +79,19 @@ const contentTypeCreatorReducer = (props) => {
             }
           }
         }
-      case OPEN_STEP_FORM:
+      case ADD_WIZARD_STEP:
         return {
           ...state,
           wizard_builder: {
             ...state.wizard_builder,
-            stepFormOpen: true,
-            step_view: {
-              name: null,
-              description: null,
-              heading: null,
-              columns: []
+            data: {
+              ...state.wizard_builder.data,
+              steps: Object.assign([], state.wizard_builder.data.steps, {[state.wizard_builder.data.steps.length]: {
+                name: '',
+                heading: '',
+                description: '',
+                columns: []
+              } } )
             }
           }
         }
@@ -159,17 +170,17 @@ const contentTypeCreatorReducer = (props) => {
 
         }
       case UPDATE_STEP:
-        return {
-          ...state,
-          wizard_builder: {
-            ...state.wizard_builder,
-            step_view: {
-              ...state.wizard_builder.step_view,
-              ...action.payload
-            }
+      return {
+        ...state,
+        wizard_builder: {
+          ...state.wizard_builder,
+          openModal: null,
+          data: {
+            ...state.wizard_builder.data,
+            steps: Object.assign([], state.wizard_builder.data.steps,  {  ...action.payload } )
           }
-
         }
+      }
       case UPDATE_YAML_FIELD:
         return {
           ...state,

@@ -22,6 +22,13 @@ import Collapse from 'material-ui/transitions/Collapse';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 
+
+const columnData = {
+  data: {},
+  heading: '',
+  elements: []
+}
+
 class StepForm extends React.PureComponent {
   constructor(props) {
     super(props)

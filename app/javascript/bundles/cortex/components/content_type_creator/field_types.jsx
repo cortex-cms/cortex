@@ -7,11 +7,13 @@ const FieldTypes = {
       length: { minimum: 50, maximum: 500 },
       presence: true,
       uniqueness: true
-    }
+    },
+    renderMethods: ['wysiwyg']
   },
   boolean_field_type: {
     metadata: {},
-    validations: {}
+    validations: {},
+    renderMethods: ['checkbox', 'switch']
   },
   date_time_field_type: {
     metadata: {},

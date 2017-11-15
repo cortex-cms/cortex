@@ -4,7 +4,10 @@ const FieldTypes = {
       parse_widgets: true
     },
     validations: {
-      length: { minimum: 50, maximum: 500 },
+      length: {
+        minimum: 50,
+        maximum: 500
+      },
       presence: true,
       uniqueness: true
     },

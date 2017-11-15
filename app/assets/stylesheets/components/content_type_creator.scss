@@ -24,6 +24,18 @@
   margin: 0!important;
 }
 
+.content-type-creator-finished {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  padding: 50px;
+
+  h1 {
+    color: black;
+  }
+}
+
 .content-type-icon-option {
   display: flex;
   i {

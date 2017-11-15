@@ -4,6 +4,11 @@
     %span.nav__item-name
       Dashboard
   = cell(:content_type, collection: current_user.active_tenant.all_up_organization_for(ContentType)).(:nav)
+  = link_to new_content_type_path, class: 'mdl-navigation__link' do
+    %i.material-icons{role: 'presentation'}>
+      note_add
+    %span.nav__item-name
+      Create Type
   .mdl-layout-spacer
   .hidden
     = link_to 'https://github.com/cbdr/cortex', class: 'mdl-navigation__link', target: '_blank' do

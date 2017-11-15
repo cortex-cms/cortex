@@ -30,21 +30,22 @@ import {
 
 import ContentTypeReducer from '../helpers/content_type_reducer'
 
-const getYamlData = (data) => data === null ? '' : YAML.stringify(data, 2);
+const getYamlData = (data) => data === null
+  ? ''
+  : YAML.stringify(data, 2);
 
 const parseYAMLValue = (data) => {
   let editorValue = ''
   try {
     editorValue = YAML.parse(data)
-  }
-  catch (e) {
+  } catch (e) {
     editorValue = YAML.parse(data.replace(e.snippet, ''))
   }
   return editorValue
 }
 
 const contentTypeCreatorReducer = (props) => {
-  const { creator } = props;
+  const {creator} = props;
   const initialState = ContentTypeReducer(props)
   return function reducer(state = initialState, action) {
     switch (action.type) {
@@ -90,12 +91,14 @@ const contentTypeCreatorReducer = (props) => {
             expandedStep: state.wizard_builder.data.steps.length,
             data: {
               ...state.wizard_builder.data,
-              steps: Object.assign([], state.wizard_builder.data.steps, {[state.wizard_builder.data.steps.length]: {
-                name: '',
-                heading: '',
-                description: '',
-                columns: []
-              } } )
+              steps: Object.assign([], state.wizard_builder.data.steps, {
+                [state.wizard_builder.data.steps.length]: {
+                  name: '',
+                  heading: '',
+                  description: '',
+                  columns: []
+                }
+              })
             }
           }
         }
@@ -113,7 +116,7 @@ const contentTypeCreatorReducer = (props) => {
             field_edit: action.index,
             field_view: action.field
           }
-      }
+        }
       case DELETE_FIELD:
         return {
           ...state,
@@ -134,7 +137,12 @@ const contentTypeCreatorReducer = (props) => {
           },
           content_type: {
             ...state.content_type,
-            fields: Object.assign([], state.content_type.fields, {[state.field_builder.field_edit]: Object.assign({},state.field_builder.field_view, { validations: parseYAMLValue(state.field_builder.validationsYaml), metadata: parseYAMLValue(state.field_builder.metadataYaml) }) })
+            fields: Object.assign([], state.content_type.fields, {
+              [state.field_builder.field_edit]: Object.assign({}, state.field_builder.field_view, {
+                validations: parseYAMLValue(state.field_builder.validationsYaml),
+                metadata: parseYAMLValue(state.field_builder.metadataYaml)
+              })
+            })
           },
           field_builder: {
             ...state.field_builder,
@@ -156,7 +164,9 @@ const contentTypeCreatorReducer = (props) => {
           ...state,
           field_builder: {
             ...state.field_builder,
-            expanded: state.field_builder.expanded === action.payload ? null : action.payload
+            expanded: state.field_builder.expanded === action.payload
+              ? null
+              : action.payload
           }
         }
       case UPDATE_FIELD:
@@ -174,17 +184,19 @@ const contentTypeCreatorReducer = (props) => {
 
         }
       case UPDATE_STEP:
-      return {
-        ...state,
-        wizard_builder: {
-          ...state.wizard_builder,
-          openModal: null,
-          data: {
-            ...state.wizard_builder.data,
-            steps: Object.assign([], state.wizard_builder.data.steps,  {  ...action.payload } )
+        return {
+          ...state,
+          wizard_builder: {
+            ...state.wizard_builder,
+            openModal: null,
+            data: {
+              ...state.wizard_builder.data,
+              steps: Object.assign([], state.wizard_builder.data.steps, {
+                ...action.payload
+              })
+            }
           }
         }
-      }
       case UPDATE_YAML_FIELD:
         return {
           ...state,

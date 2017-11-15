@@ -1,9 +1,9 @@
 const usedIconsLookup = contentTypes => Object.keys(contentTypes).reduce((usedIcons, contentTypeId) => {
   usedIcons[contentTypes[contentTypeId].contentType.icon] = true;
   return usedIcons;
-}, {} )
+}, {})
 
-const ContentTypeReducer = ({ content_types, current_user, creator }) => {
+const ContentTypeReducer = ({content_types, current_user, creator}) => {
   return {
     ...creator,
     content_types: content_types,

@@ -6,7 +6,7 @@ import AceEditor from 'react-ace';
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
 
-class IndexStep extends React.PureComponent {
+class RssStep extends React.PureComponent {
   constructor(props) {
     super(props)
   }
@@ -19,6 +19,36 @@ class IndexStep extends React.PureComponent {
   }
   AceEditorProps = {
     $blockScrolling: true
+  }
+  getRSSdata = (data, fieldsLookup, contentType) => {
+    if (Object.keys(data.channel).length > 0)
+      return data;
+
+    return {
+      "channel": {
+        "title": {
+          "string": contentType.name
+        },
+        "link": {
+          "string": "http://resources.careerbuilder.com"
+        },
+        "description": {
+          "string": contentType.description
+        },
+        "language": {
+          "string": "en-US"
+        }
+      },
+      "item": Object.keys(fieldsLookup).reduce((rssItems, fieldId) => {
+        rssItems[fieldsLookup[fieldId].name] = {
+          field: fieldId
+        };
+        return rssItems
+      }, {}),
+      "content": {
+        "encode": true
+      }
+    }
   }
   renderFieldInfo = (fieldsLookup) => Object.keys(fieldsLookup).map((fieldKey, index) => (
     <TableRow key={index}>
@@ -35,13 +65,19 @@ class IndexStep extends React.PureComponent {
     this.props.handleNext(this.ace.editor.getValue())
   }
   render() {
-    console.log('IndexStep this.props', this.props)
-    const {fieldsLookup, index_builder, dispatch, step, handlePrev} = this.props
+    console.log('RssStep this.props', this.props)
+    const {
+      fieldsLookup,
+      rss_builder,
+      dispatch,
+      step,
+      handlePrev,
+      contentType
+    } = this.props
     return (
       <section className='step-container'>
         <Table>
           <TableHead>
-            <TableCell padding='none'></TableCell>
             <TableCell>Field Name</TableCell>
             <TableCell>Field Id</TableCell>
           </TableHead>
@@ -51,9 +87,7 @@ class IndexStep extends React.PureComponent {
         </Table>
         <div className='mdl-grid'>
           <FormControl fullWidth className=''>
-            <AceEditor mode='javascript' theme="solarized_dark" width='100%' highlightActiveLine={true} value={JSON.stringify(index_builder.data),
-            null,
-            2} name='data' ref={editor => this.ace = editor} setOptions={this.ReactAceOptions} editorProps={this.AceEditorProps}/>
+            <AceEditor mode='javascript' theme="solarized_dark" width='100%' highlightActiveLine={true} value={JSON.stringify(this.getRSSdata(rss_builder.data, fieldsLookup, contentType), null, 2)} name='data' ref={editor => this.ace = editor} setOptions={this.ReactAceOptions} editorProps={this.AceEditorProps}/>
           </FormControl>
         </div>
         <footer className='mdl-grid'>
@@ -74,4 +108,4 @@ class IndexStep extends React.PureComponent {
   }
 }
 
-export default IndexStep
+export default RssStep

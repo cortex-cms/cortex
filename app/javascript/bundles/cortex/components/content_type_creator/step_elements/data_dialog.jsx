@@ -43,7 +43,6 @@ class DataDialog extends React.PureComponent {
             theme="solarized_dark"
             width='100%'
             highlightActiveLine={true}
-            width='100%'
             ref={input => parentContext.data = input}
             value={JSON.stringify(data)}
             name='data'

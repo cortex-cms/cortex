@@ -4,8 +4,8 @@ import GeneralStep from '../components/content_type_creator/general_step'
 import FieldsStep from '../components/content_type_creator/fields_step'
 import WizardStep from '../components/content_type_creator/wizard_step'
 import IndexStep from '../components/content_type_creator/index_step'
-import OptionsStep from '../components/content_type_creator/options_step'
-import { NEXT_STEP, PREVIOUS_STEP, DB_SYNCING, CONTENT_TYPE_SYNCED, WIZARD_SYNCED, INDEX_SYNCED, RSS_SYNCED,} from '../constants/content_type_creator'
+import RssStep from '../components/content_type_creator/rss_step'
+import { NEXT_STEP, PREVIOUS_STEP, DB_SYNCING, CONTENT_TYPE_SYNCED, WIZARD_SYNCED, INDEX_SYNCED, RSS_SYNCED} from '../constants/content_type_creator'
 import SetRailsAPIService from '../services/rails_api_service'
 import {
   Spinner
@@ -53,17 +53,17 @@ class ContentTypeCreator extends React.Component {
     this.props.dispatch({ type: DB_SYNCING })
   }
 
-  createUpdateWizardDecorator = (path) => {
+  createUpdateContentTypeDecorator = (decoratorKey, actionType, path) => {
     const { session, data } = this.props
 
     this.railsAPI.post(path, {
       ...{
         content_type: data.content_type.contentType,
-        decorator: data.wizard_builder
+        decorator: data[decoratorKey]
       },
       authenticity_token: session.csrf_token
     }).then(response => {
-        this.props.dispatch({ type: WIZARD_SYNCED, payload: response.data })
+        this.props.dispatch({ type: actionType, payload: response.data })
         this.handleNext()
     }).catch(error => {
       console.log('createContentType error', error )
@@ -80,11 +80,11 @@ class ContentTypeCreator extends React.Component {
     }
   }
 
-  syncWizardDecorator = () => {
-    if (this.props.data.wizard_builder.created_at === null) {
-      this.createUpdateWizardDecorator('/content_types/create_decorator')
+  syncContentTypeDecorator = ({decoratorKey, actionType}) => () => {
+    if (this.props.data[decoratorKey].created_at === null) {
+      this.createUpdateContentTypeDecorator(decoratorKey , actionType, '/content_types/create_decorator')
     } else {
-      this.createUpdateWizardDecorator('/content_types/update_decorator')
+      this.createUpdateContentTypeDecorator(decoratorKey, actionType, '/content_types/update_decorator')
     }
   }
 
@@ -106,7 +106,6 @@ class ContentTypeCreator extends React.Component {
   render() {
     const { dispatch, data, session } = this.props;
     const { current_step, steps, content_type, index_builder, wizard_builder, rss_builder, field_builder, usedIcons, dbSynced } = data
-    console.log('ContentTypeCreator props', this.props)
 
     return (
       <div >
@@ -122,13 +121,21 @@ class ContentTypeCreator extends React.Component {
         </div>
 
         <div className={ this.stepDisplay('wizard') ? '' : 'hidden' }>
-          <WizardStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.syncWizardDecorator} step={steps['wizard']} fieldsLookup={content_type.fieldsLookup} wizard_builder={wizard_builder} />
+          <WizardStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.syncContentTypeDecorator({decoratorKey: 'wizard_builder', actionType: WIZARD_SYNCED})} step={steps['wizard']} fieldsLookup={content_type.fieldsLookup} wizard_builder={wizard_builder} />
         </div>
         <div className={ this.stepDisplay('index') ? '' : 'hidden' }>
-          <IndexStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['index']} data={index_builder} />
+          <IndexStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.syncContentTypeDecorator({decoratorKey: 'index_builder', actionType: INDEX_SYNCED})} step={steps['index']} contentType={content_type.contentType} fieldsLookup={content_type.fieldsLookup} index_builder={index_builder} />
         </div>
         <div className={ this.stepDisplay('rss') ? '' : 'hidden' }>
-          <OptionsStep dispatch={dispatch} handlePrev={this.handlePrev} step={steps['rss']} data={ rss_builder }  />
+          <RssStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.syncContentTypeDecorator({decoratorKey: 'rss_builder', actionType: RSS_SYNCED})} step={steps['rss']} contentType={content_type.contentType} fieldsLookup={content_type.fieldsLookup} rss_builder={rss_builder}  />
+        </div>
+        <div className={ this.stepDisplay(null) ? 'content-type-creator-finished' : 'hidden'}>
+            <h1>ContentType Edior Complete</h1>
+            <p>
+            <a href='/' className='mdl-button form-button--submission mdl-js-button mdl-button--raised mdl-button--success mdl-js-ripple-effect'>
+              Ok
+            </a>
+            </p>
         </div>
 
       </div>

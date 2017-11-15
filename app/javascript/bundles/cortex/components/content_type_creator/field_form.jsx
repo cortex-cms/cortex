@@ -54,20 +54,23 @@ class FieldForm extends React.PureComponent {
     const dataField = this.props[dataFieldKey] || {}
     return (
       <FormGroup row>
-        {Object.keys(defaultValues).map((propName, index) => (
-          <FormControlLabel key={index} control={< Checkbox checked = {
-            dataField[propName] !== undefined
-          }
-          onChange = {
-            this.fieldDefaultClicked(dataFieldKey, {
-              [propName]: defaultValues[propName]
-            }, propName)
-          }
-          value = {
-            propName
-          } />} label={propName}/>
+        {
+          Object.keys(defaultValues).map((propName, index) => (
+          <FormControlLabel
+            key={index}
+            control={
+              <Checkbox
+                checked={ dataField[propName] !== undefined}
+                onChange={
+                  this.fieldDefaultClicked(dataFieldKey, {
+                    [propName]: defaultValues[propName]
+                  }, propName)
+                }
+                value={ propName} />
+            }
+            label={propName}/>
         ))
-}
+      }
       </FormGroup>
     )
   }
@@ -163,12 +166,7 @@ class FieldForm extends React.PureComponent {
       })
     }
   }
-  treeFieldTypeProps = (treeField) => treeField
-    ? {
-      split: 2,
-      value: ['', this.props.metadataYaml]
-    }
-    : this.props.metadataYaml;
+  treeFieldTypeProps = (treeField) => treeField ? { split: 2, value: ['', this.props.metadataYaml] } : this.props.metadataYaml;
   onTreeFieldChange = (event) => {}
   treeFieldType = () => (
     <div className='mdl-cell mdl-cell--12-col'>

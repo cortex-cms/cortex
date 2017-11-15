@@ -76,12 +76,14 @@ class Step extends React.PureComponent {
             </div>
             <Table>
               <TableHead>
-                <TableCell>Heading</TableCell>
-                <TableCell padding="none">Grid Width</TableCell>
-                <TableCell padding="none">Column Data</TableCell>
-                <TableCell>Field Elements</TableCell>
+                <TableRow>
+                  <TableCell>Heading</TableCell>
+                  <TableCell padding="none">Grid Width</TableCell>
+                  <TableCell padding="none">Column Data</TableCell>
+                  <TableCell>Field Elements</TableCell>
 
-                <TableCell padding="none"></TableCell>
+                  <TableCell padding="none"></TableCell>
+                </TableRow>
               </TableHead>
               <TableBody>
                 {this.renderColumns(columns)}

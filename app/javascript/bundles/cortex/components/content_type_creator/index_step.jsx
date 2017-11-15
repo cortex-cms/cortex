@@ -41,9 +41,11 @@ class IndexStep extends React.PureComponent {
       <section className='step-container'>
         <Table>
           <TableHead>
-            <TableCell padding='none'></TableCell>
-            <TableCell>Field Name</TableCell>
-            <TableCell>Field Id</TableCell>
+            <TableRow>
+              <TableCell padding='none'></TableCell>
+              <TableCell>Field Name</TableCell>
+              <TableCell>Field Id</TableCell>
+            </TableRow>
           </TableHead>
           <TableBody>
             {this.renderFieldInfo(fieldsLookup)}
@@ -51,9 +53,16 @@ class IndexStep extends React.PureComponent {
         </Table>
         <div className='mdl-grid'>
           <FormControl fullWidth className=''>
-            <AceEditor mode='javascript' theme="solarized_dark" width='100%' highlightActiveLine={true} value={JSON.stringify(index_builder.data),
-            null,
-            2} name='data' ref={editor => this.ace = editor} setOptions={this.ReactAceOptions} editorProps={this.AceEditorProps}/>
+            <AceEditor
+              mode='javascript'
+              theme="solarized_dark"
+              width='100%'
+              highlightActiveLine={true}
+              value={JSON.stringify(index_builder.data, null, 2)}
+              name='data'
+              ref={editor => this.ace = editor}
+              setOptions={this.ReactAceOptions}
+              editorProps={this.AceEditorProps}/>
           </FormControl>
         </div>
         <footer className='mdl-grid'>

@@ -69,11 +69,13 @@ class FieldsStep extends React.PureComponent {
         <Paper>
           <Table className=''>
             <TableHead>
-              <TableCell>Field Name</TableCell>
-              <TableCell>Field Type</TableCell>
-              <TableCell>Field Validations</TableCell>
-              <TableCell>Field Metadata</TableCell>
-              <TableCell></TableCell>
+              <TableRow>
+                <TableCell>Field Name</TableCell>
+                <TableCell>Field Type</TableCell>
+                <TableCell>Field Validations</TableCell>
+                <TableCell>Field Metadata</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
             </TableHead>
             <TableBody>
               {this.renderFields()}

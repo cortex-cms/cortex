@@ -89,12 +89,16 @@ class GeneralStep extends React.PureComponent {
           <div className='mdl-cell mdl-cell--6-col'>
             <FormControl fullWidth className=''>
               <InputLabel htmlFor='icon'>Icon</InputLabel>
-              <Select value={icon === 'help'
-                ? this.IconNames[0]
-                : icon} id='icon_select' renderValue={value => <div className='content-type-icon-option'>
-                <i className='material-icons'>{value}</i>
-                <strong>{value}</strong>
-              </div>} onChange={this.handleChange('icon')}>
+              <Select
+                value={icon === 'help' ? this.IconNames[0] : icon}
+                id='icon_select'
+                renderValue={value => (
+                  <div className='content-type-icon-option'>
+                    <i className='material-icons'>{value}</i>
+                    <strong>{value}</strong>
+                  </div>
+                )}
+                onChange={this.handleChange('icon')}>
                 {this.renderIconList()}
               </Select>
             </FormControl>

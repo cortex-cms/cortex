@@ -27,8 +27,6 @@ class Column extends React.PureComponent {
     })
   }
   handleOnSave = () => {
-    console.log('handleOnSave this.data', this.data);
-    console.log('handleOnSave this.data.getSession().getValue()', this.data.editor.getValue());
     this.props.updateColumn({
       ...this.props.column,
       ...JSON.parse(this.data.editor.getValue())
@@ -52,7 +50,7 @@ class Column extends React.PureComponent {
       grid_width,
       ...data
     } = this.props.column;
-    console.log('openModal === columnKey', openModal === columnKey)
+
     return (
       <TableRow>
         <TableCell>

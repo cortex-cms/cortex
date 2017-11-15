@@ -26,17 +26,15 @@ class FieldBuilder extends React.PureComponent {
     } = field_builder
     return (
       <div className={field_builder.open ? '' : 'hidden'}>
-        <div className={form_open
-          ? 'hidden'
-          : 'mdl-grid content-type-add-field'}>
+        <div className={form_open ? 'hidden' : 'mdl-grid content-type-add-field'}>
           <div className='mdl-cell node'>
             <strong>Select Field Type:</strong>
           </div>
           <div className='mdl-cell mdl-cell--8-col'>
             <FormControl fullWidth className=''>
-              <Select value={field_view
-                ? field_view.field_type
-                : 'text_field_type'} onChange={this.props.changeFieldType}>
+              <Select
+                value={field_view ? field_view.field_type : 'text_field_type'}
+                onChange={this.props.changeFieldType}>
                 {this.renderFieldTypes()}
               </Select>
             </FormControl>

@@ -78,8 +78,10 @@ class RssStep extends React.PureComponent {
       <section className='step-container'>
         <Table>
           <TableHead>
-            <TableCell>Field Name</TableCell>
-            <TableCell>Field Id</TableCell>
+            <TableRow>
+              <TableCell>Field Name</TableCell>
+              <TableCell>Field Id</TableCell>
+            </TableRow>
           </TableHead>
           <TableBody>
             {this.renderFieldInfo(fieldsLookup)}
@@ -87,7 +89,16 @@ class RssStep extends React.PureComponent {
         </Table>
         <div className='mdl-grid'>
           <FormControl fullWidth className=''>
-            <AceEditor mode='javascript' theme="solarized_dark" width='100%' highlightActiveLine={true} value={JSON.stringify(this.getRSSdata(rss_builder.data, fieldsLookup, contentType), null, 2)} name='data' ref={editor => this.ace = editor} setOptions={this.ReactAceOptions} editorProps={this.AceEditorProps}/>
+            <AceEditor
+              mode='javascript'
+              theme="solarized_dark"
+              width='100%'
+              highlightActiveLine={true}
+              value={JSON.stringify(this.getRSSdata(rss_builder.data, fieldsLookup, contentType), null, 2)}
+              name='data'
+              ref={editor => this.ace = editor}
+              setOptions={this.ReactAceOptions}
+              editorProps={this.AceEditorProps}/>
           </FormControl>
         </div>
         <footer className='mdl-grid'>

@@ -48,19 +48,19 @@ const ContentTypeReducer = ({ content_types, current_user, creator }) => {
         disabled: true,
         nextStep: 'index',
         previousStep: 'fields',
-        valid: false
+        valid: true
       },
       index: {
         disabled: true,
         nextStep: 'rss',
         previousStep: 'wizard',
-        valid: false
+        valid: true
       },
       rss: {
         disabled: true,
         nextStep: null,
         previousStep: 'index',
-        valid: false
+        valid: true
       }
     }
   }

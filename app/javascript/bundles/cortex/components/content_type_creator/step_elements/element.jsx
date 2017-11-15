@@ -38,8 +38,8 @@ class Element extends React.PureComponent {
     const { element,index ,fieldsLookup, openModal, elementKey } = this.props
     const { id, ...data } = element
     return (
-      <ListItem>
-        <div className='mdl-cell mdl-cell--8-col'>
+      <li className='mdl-grid'>
+        <div className='mdl-cell mdl-cell--8-col content-type-step-cell'>
         <FormControl fullWidth className=''>
           <InputLabel htmlFor='grid_width'>Field</InputLabel>
           <Select
@@ -50,12 +50,11 @@ class Element extends React.PureComponent {
           </Select>
         </FormControl>
       </div>
-      <div className='mdl-cell mdl-cell--4-col'>
-        <Button raised onClick={ () => this.props.openDataModal(elementKey)}>Element Data</Button>
-
+      <div className='mdl-cell mdl-cell--4-col content-type-step-cell'>
+        <Button color='primary' onClick={ () => this.props.openDataModal(elementKey)}>Data</Button>
       </div>
-        <DataDialog open={openModal === elementKey} handleRequestClose={() => this.props.openDataModal(null)} handleOnSave={this.handleOnSave} data={data} handleOnChange={this.handleChange('data')} parentContext={this}  />
-      </ListItem>
+        <DataDialog open={openModal === elementKey} name='Field' handleRequestClose={() => this.props.openDataModal(null)} handleOnSave={this.handleOnSave} data={data} handleOnChange={this.handleChange('data')} parentContext={this}  />
+      </li>
     )
   }
 }

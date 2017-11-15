@@ -7,6 +7,9 @@ import {
   FORM_VALID,
   FORM_INVALID,
   STEP_CLICKED,
+  WIZARD_SYNCED,
+  INDEX_SYNCED,
+  RSS_SYNCED,
   CONTENT_TYPE_UPDATED,
   DISPLAY_VALIDATIONS,
   OPEN_FIELD_EDITOR,
@@ -84,6 +87,7 @@ const contentTypeCreatorReducer = (props) => {
           ...state,
           wizard_builder: {
             ...state.wizard_builder,
+            expandedStep: state.wizard_builder.data.steps.length,
             data: {
               ...state.wizard_builder.data,
               steps: Object.assign([], state.wizard_builder.data.steps, {[state.wizard_builder.data.steps.length]: {
@@ -287,6 +291,36 @@ const contentTypeCreatorReducer = (props) => {
             ...state.content_type,
             ...action.payload
           }
+        }
+      case WIZARD_SYNCED:
+        return {
+          ...state,
+          dbSynced: true,
+          wizard_builder: {
+            ...state.wizard_builder,
+            ...action.payload
+          },
+          wizard: action.payload
+        }
+      case INDEX_SYNCED:
+        return {
+          ...state,
+          dbSynced: true,
+          index_builder: {
+            ...state.index_builder,
+            ...action.payload
+          },
+          index: action.payload
+        }
+      case RSS_SYNCED:
+        return {
+          ...state,
+          dbSynced: true,
+          rss_builder: {
+            ...state.rss_builder,
+            ...action.payload
+          },
+          rss: action.payload
         }
       case FORM_VALID:
         return {

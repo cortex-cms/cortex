@@ -55,6 +55,41 @@ class ContentTypesController < AdminController
     end
   end
 
+  def create_decorator
+    content_type_decorator = Decorator.new(name: params[:decorator][:name], data: params[:decorator][:data], tenant_id: params[:content_type][:tenant_id])
+    if content_type_decorator.save!
+      ContentableDecorator.create!({
+        decorator_id: content_type_decorator.id,
+        contentable_id: params[:content_type][:id],
+        contentable_type: 'ContentType',
+        tenant: Tenant.find(params[:content_type][:tenant_id])
+      })
+      respond_to do |format|
+        format.json { render :json => content_type_decorator }
+      end
+    else
+      respond_to do |format|
+        format.json { render :json => content_type_decorator.errors }
+      end
+    end
+  end
+
+  def update_decorator
+    content_type_decorator = Decorator.find(params[:decorator][:id])
+    if content_type_decorator.update(data: params[:data], tenant_id: params[:content_type][:tenant_id] )
+      ContentableDecorator.find_by(
+        decorator_id: content_type_decorator.id
+      ).update(tenant_id: content_type_decorator.tenant_id)
+      respond_to do |format|
+        format.json { render :json => content_type_decorator }
+      end
+    else
+      respond_to do |format|
+        format.json { render :json => content_type_decorator.errors }
+      end
+    end
+  end
+
   def edit
 
   end

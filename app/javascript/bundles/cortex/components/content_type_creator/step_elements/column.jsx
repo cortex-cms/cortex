@@ -16,6 +16,10 @@ import Divider from 'material-ui/Divider';
 
 import Element from './element'
 import DataDialog from './data_dialog'
+import Table, { TableBody, TableFooter, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
+import ModeEditIcon from 'material-ui-icons/ModeEdit'
 
 class Column extends React.PureComponent {
   constructor(props) {
@@ -50,19 +54,18 @@ class Column extends React.PureComponent {
     const { heading, elements, grid_width, ...data } = this.props.column;
     console.log('openModal === columnKey', openModal === columnKey)
     return (
-      <div>
-        <div className='mdl-grid'>
-        <div className='mdl-cell mdl-cell--6-col'>
-        <FormControl fullWidth className=''>
-          <TextField
-            id='heading'
-            label='Column Heading'
-            InputLabelProps={this.InputLabelProps}
-            value={heading || ''}
-            onChange={this.handleChange('heading')}/>
-        </FormControl>
-        </div>
-        <div className='mdl-cell mdl-cell--2-col'>
+      <TableRow>
+        <TableCell>
+          <FormControl fullWidth className=''>
+            <TextField
+              id='heading'
+              label='Column Heading'
+              InputLabelProps={this.InputLabelProps}
+              value={heading || ''}
+              onChange={this.handleChange('heading')}/>
+          </FormControl>
+        </TableCell>
+        <TableCell padding='none'>
           <FormControl fullWidth className=''>
             <InputLabel htmlFor='grid_width'>Grid Width</InputLabel>
             <Select
@@ -81,25 +84,22 @@ class Column extends React.PureComponent {
               <MenuItem value={12}>12</MenuItem>
             </Select>
           </FormControl>
-        </div>
-        <div className='mdl-cell mdl-cell--4-col'>
+        </TableCell>
+        <TableCell padding='none'>
           <Button raised onClick={ () => this.props.openDataModal(this.props.columnKey)}>Column Data</Button>
+          <DataDialog open={openModal === columnKey} name='Column' handleRequestClose={() => this.props.openDataModal(null)} handleOnSave={this.handleOnSave} data={data} parentContext={this}  />
+        </TableCell>
 
-        </div>
-      </div>
-          <div className='mdl-grid'>
-              <div className='mdl-cell mdl-cell--12-col'>
-        <List>
-          { this.renderElements(elements) }
-        </List>
-          <Divider />
-
+        <TableCell>
+          <List>
+            { this.renderElements(elements) }
+          </List>
           <button className='mdl-button mdl-js-button mdl-button--primary content-type-new-field-button' onClick={this.addElement}>Add Field</button>
-        </div>
-          <DataDialog open={openModal === columnKey} handleRequestClose={() => this.props.openDataModal(null)} handleOnSave={this.handleOnSave} data={data} parentContext={this}  />
-
-        </div>
-      </div>
+        </TableCell>
+        <TableCell padding="none">
+          <IconButton aria-label="Delete"><DeleteIcon /></IconButton>
+        </TableCell>
+     </TableRow>
     )
   }
 }

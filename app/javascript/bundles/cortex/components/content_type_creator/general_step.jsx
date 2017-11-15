@@ -42,7 +42,7 @@ class GeneralStep extends React.PureComponent {
   renderIconList = () => this.IconNames.map((icon, index) => <MenuItem key={index} className='content-type-icon-option' value={icon}><i className='material-icons'>{icon}</i><strong>{icon}</strong></MenuItem>)
   renderTenantList = (tenants) => tenants.map((tenant, index) => <MenuItem key={index} value={tenant.id}>{tenant.name}</MenuItem>)
   render() {
-    const {dispatch, data, session, handleNext, step} = this.props;
+    const {dispatch, data, session, handleNext, step, containerContext} = this.props;
     const { name, description, tenant_id, icon } = data
     const { activeTenant, tenants } = session
     return (
@@ -66,7 +66,8 @@ class GeneralStep extends React.PureComponent {
             <FormControl fullWidth className=''>
               <InputLabel htmlFor='icon'>Icon</InputLabel>
               <Select
-                value={ icon === 'help' ? 'fiber_new' : icon }
+                value={ icon === 'help' ? this.IconNames[0] : icon }
+                id='icon_select'
                 renderValue={value => <div className='content-type-icon-option'><i className='material-icons'>{value}</i><strong>{value}</strong></div>}
                 onChange={this.handleChange('icon')}
                 >

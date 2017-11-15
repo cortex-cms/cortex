@@ -11,6 +11,8 @@ Cortex::Application.routes.draw do
   scope '/content_types' do
     match '/new_type', to: 'content_types#new_type', via: [:post]
     match '/create_fields', to: 'content_types#create_fields', via: [:post]
+    match '/create_decorator', to: 'content_types#create_decorator', via: [:post]
+    match '/update_decorator', to: 'content_types#update_decorator', via: [:post]
   end
 
   scope '/admin' do

@@ -32,10 +32,10 @@ class DataDialog extends React.PureComponent {
     $blockScrolling: true
   }
   render() {
-    const { open, handleRequestClose, data,  handleOnSave,  parentContext } = this.props
+    const { open, name, handleRequestClose, data,  handleOnSave,  parentContext } = this.props
     return (
       <Dialog open={open} fullWidth onRequestClose={handleRequestClose}>
-      <DialogTitle>Column Data</DialogTitle>
+      <DialogTitle>{`${name} Data`}</DialogTitle>
       <DialogContent>
         <FormControl fullWidth className=''>
           <AceEditor

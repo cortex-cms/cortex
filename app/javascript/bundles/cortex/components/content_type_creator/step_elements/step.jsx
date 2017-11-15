@@ -22,6 +22,7 @@ import Column from './column'
 
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Collapse from 'material-ui/transitions/Collapse';
+import Table, { TableBody, TableFooter, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 class Step extends React.PureComponent {
   constructor(props) {
@@ -63,24 +64,22 @@ class Step extends React.PureComponent {
 
       <Collapse in={expandedStep === index} transitionDuration="auto" unmountOnExit>
         <CardContent>
-        <div className='mdl-cell mdl-cell--12-col'>
+        <div className='mdl-grid'>
+        <div className='mdl-cell mdl-cell--4-col'>
           <FormControl fullWidth className=''>
             <TextField
               required
               id='name'
               label='Step Name'
-              InputLabelProps={this.InputLabelProps}
               value={name || ''}
               onChange={this.handleChange('name')}/>
           </FormControl>
         </div>
-        <div className='mdl-cell mdl-cell--12-col'>
+        <div className='mdl-cell mdl-cell--8-col'>
           <FormControl fullWidth className=''>
             <TextField
-              required
               id='heading'
               label='Step Heading'
-              InputLabelProps={this.InputLabelProps}
               value={heading || ''}
               onChange={this.handleChange('heading')}/>
           </FormControl>
@@ -88,23 +87,33 @@ class Step extends React.PureComponent {
         <div className='mdl-cell mdl-cell--12-col'>
           <FormControl fullWidth className=''>
             <TextField
-              required
               id='description'
               label='Step Description'
-              InputLabelProps={this.InputLabelProps}
               value={description || ''}
               onChange={this.handleChange('description')}/>
           </FormControl>
         </div>
-        </CardContent>
-        <CardActions>
-        <List>
-          {this.renderColumns(columns)}
           <div className='mdl-cell mdl-cell--12-col'>
-            <button className='mdl-button mdl-js-button mdl-button--primary content-type-new-field-button form-button--submission mdl-js-button mdl-button--raised mdl-button--success content-type-editor-add-button' onClick={this.addColumn}>Add Column</button>
+            <b>Columns:</b>
           </div>
-        </List>
-      </CardActions>
+        </div>
+        <Table>
+          <TableHead>
+            <TableCell>Heading</TableCell>
+            <TableCell padding="none">Grid Width</TableCell>
+            <TableCell padding="none">Column Data</TableCell>
+            <TableCell>Field Elements</TableCell>
+
+            <TableCell padding="none"></TableCell>
+          </TableHead>
+          <TableBody>
+          {this.renderColumns(columns)}
+        </TableBody>
+        </Table>
+        <div className='mdl-cell mdl-cell--12-col'>
+          <button className='mdl-button form-button--submission mdl-js-button mdl-button--raised mdl-button--success mdl-js-ripple-effect content-type-new-field-button content-type-editor-add-button' onClick={this.addColumn}>Add Column</button>
+        </div>
+        </CardContent>
     </Collapse>
       </Card>
     )

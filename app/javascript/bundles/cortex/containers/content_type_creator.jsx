@@ -5,7 +5,7 @@ import FieldsStep from '../components/content_type_creator/fields_step'
 import WizardStep from '../components/content_type_creator/wizard_step'
 import IndexStep from '../components/content_type_creator/index_step'
 import OptionsStep from '../components/content_type_creator/options_step'
-import { NEXT_STEP, PREVIOUS_STEP, DB_SYNCING, CONTENT_TYPE_SYNCED } from '../constants/content_type_creator'
+import { NEXT_STEP, PREVIOUS_STEP, DB_SYNCING, CONTENT_TYPE_SYNCED, WIZARD_SYNCED, INDEX_SYNCED, RSS_SYNCED,} from '../constants/content_type_creator'
 import SetRailsAPIService from '../services/rails_api_service'
 import {
   Spinner
@@ -21,7 +21,7 @@ class ContentTypeCreator extends React.Component {
     const { session, data } = this.props
 
     this.railsAPI.post(path, {
-      ...data.content_type.contentType,
+      ...Object.assign({},data.content_type.contentType, {icon: document.getElementById('icon_select').value}),
       authenticity_token: session.csrf_token
     }).then(response => {
         this.props.dispatch({ type: CONTENT_TYPE_SYNCED, payload: { contentType: response.data }})
@@ -53,12 +53,38 @@ class ContentTypeCreator extends React.Component {
     this.props.dispatch({ type: DB_SYNCING })
   }
 
+  createUpdateWizardDecorator = (path) => {
+    const { session, data } = this.props
+
+    this.railsAPI.post(path, {
+      ...{
+        content_type: data.content_type.contentType,
+        decorator: data.wizard_builder
+      },
+      authenticity_token: session.csrf_token
+    }).then(response => {
+        this.props.dispatch({ type: WIZARD_SYNCED, payload: response.data })
+        this.handleNext()
+    }).catch(error => {
+      console.log('createContentType error', error )
+      //self.props.dispatch({type: TENANT_UPDATE_ERROR, payload: error})
+    })
+    this.props.dispatch({ type: DB_SYNCING })
+  }
 
   syncContentType = () => {
     if (this.props.data.content_type.contentType.created_at === null) {
       this.createUpdateContentType('/content_types/new_type')
     } else {
       this.createUpdateContentType('/content_types/update_type')
+    }
+  }
+
+  syncWizardDecorator = () => {
+    if (this.props.data.wizard_builder.created_at === null) {
+      this.createUpdateWizardDecorator('/content_types/create_decorator')
+    } else {
+      this.createUpdateWizardDecorator('/content_types/update_decorator')
     }
   }
 
@@ -89,14 +115,14 @@ class ContentTypeCreator extends React.Component {
            <Spinner />
         </div>
         <div className={ this.stepDisplay('general') ? '' : 'hidden' }>
-          <GeneralStep dispatch={dispatch} handleNext={this.syncContentType} step={steps['general']} session={session} usedIcons={usedIcons} data={ content_type.contentType } />
+          <GeneralStep dispatch={dispatch} handleNext={this.syncContentType} step={steps['general']} containerContext={this} session={session} usedIcons={usedIcons} data={ content_type.contentType } />
         </div>
         <div className={ this.stepDisplay('fields') ? '' : 'hidden' }>
           <FieldsStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.syncContentTypeFields} field_builder={field_builder} step={steps['fields']} data={ content_type.fields } />
         </div>
 
         <div className={ this.stepDisplay('wizard') ? '' : 'hidden' }>
-          <WizardStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['wizard']} fieldsLookup={content_type.fieldsLookup} wizard_builder={wizard_builder} />
+          <WizardStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.syncWizardDecorator} step={steps['wizard']} fieldsLookup={content_type.fieldsLookup} wizard_builder={wizard_builder} />
         </div>
         <div className={ this.stepDisplay('index') ? '' : 'hidden' }>
           <IndexStep dispatch={dispatch} handlePrev={this.handlePrev} handleNext={this.handleNext} step={steps['index']} data={index_builder} />

@@ -18,5 +18,6 @@
 //= require flash
 //= require media_dialogs
 //= require quick_links
+//= require lib/yaml
 
 // require turbolinks # temporarily disabled

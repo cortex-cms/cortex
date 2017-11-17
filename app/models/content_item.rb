@@ -1,8 +1,7 @@
 class ContentItem < ApplicationRecord
   include ActiveModel::Transitions
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
 
+  include SearchableContentItem
   include BelongsToTenant
 
   scope :last_updated_at, -> { order(updated_at: :desc).select('updated_at').first.updated_at }
@@ -17,8 +16,6 @@ class ContentItem < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   validates :creator, :content_type, presence: true
-
-  after_save :index
 
   state_machine do
     state :draft
@@ -50,27 +47,6 @@ class ContentItem < ApplicationRecord
   def rss_author(field_id) # TODO: abstract RSS to separate app once API is implemented
     author = field_items.find_by_field_id(field_id).data["author_name"]
     "editorial@careerbuilder.com (#{author})"
-  end
-
-  def as_indexed_json(options = {})
-    json = as_json
-    # json[:tenant_id] = TODO
-
-    field_items.each do |field_item|
-      field_type = field_item.field.field_type_instance(field_name: field_item.field.name)
-      json.merge!(field_type.field_item_as_indexed_json_for_field_type(field_item))
-    end
-
-    json
-  end
-
-  def index
-    __elasticsearch__.client.index(
-      {index: content_type.content_items_index_name,
-       type: self.class.name.parameterize(separator: '_'),
-       id: id,
-       body: as_indexed_json}
-    )
   end
 
   # FieldItem and State Convenience Methods. TODO: move to concern? transactions?

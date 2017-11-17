@@ -1,11 +1,15 @@
 %nav.demo-navigation.mdl-navigation
   = link_to dashboards_path, class: "mdl-navigation__link #{'active' if current_page?(dashboards_path) }" do
-    %i.material-icons{:role => "presentation"}> dashboard
+    %i.material-icons{role: 'presentation'}> dashboard
     %span.nav__item-name
       Dashboard
   = cell(:content_type, collection: current_user.active_tenant.all_up_organization_for(ContentType)).(:nav)
   .mdl-layout-spacer
-  .hidden
-    = link_to 'https://github.com/cbdr/cortex', class: 'mdl-navigation__link', target: '_blank' do
-      %i.material-icons{:role => "presentation"} help_outline
-      %span.visuallyhidden Help
+  = link_to graphql_ide_path, class: 'mdl-navigation__link' do
+    %i.material-icons{role: 'presentation'} code
+    %span.nav__item-name
+      GraphQL IDE
+  = link_to 'https://docs.cortexcms.org/', class: 'mdl-navigation__link', target: '_blank' do
+    %i.material-icons{role: 'presentation'} help_outline
+    %span.nav__item-name
+      Documentation

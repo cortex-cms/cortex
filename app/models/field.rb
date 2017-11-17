@@ -1,11 +1,12 @@
 class Field < ApplicationRecord
-  belongs_to :content_type
+  belongs_to :content_type, touch: true
   has_many :field_items
   has_many :content_items, through: :field_items
 
   validates :name, :content_type, :field_type, presence: true
   validate :acceptable_field_type
   validates_uniqueness_of :name,
+                          :name_id,
                           scope: :content_type_id,
                           message: 'should be unique within a ContentType'
 
@@ -13,8 +14,8 @@ class Field < ApplicationRecord
     field_type.camelize.constantize.new(options)
   end
 
-  def mapping
-    field_type_instance(field_name: name).mapping
+  def elasticsearch_mapping
+    field_type_instance(field_name: name).elasticsearch_mapping
   end
 
   def tenant

@@ -18,9 +18,4 @@
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
-
-  @media (min-width: $grid-desktop-breakpoint) {
-    padding-left: $grid-desktop-gutter / 2;
-    padding-right: $grid-desktop-gutter / 2;
-  }
 }

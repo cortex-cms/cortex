@@ -1,6 +1,6 @@
 class FieldItem < ApplicationRecord
   belongs_to :field
-  belongs_to :content_item
+  belongs_to :content_item, touch: true
 
   validates :field, :content_item, presence: true
   validate :field_item_content_is_valid, if: :field_is_present

@@ -24,7 +24,7 @@ class ContentItemsController < AdminController
     @content_item = content_type.content_items.find_by_tenant(current_user.active_tenant).find_by_id(params[:id])
     @wizard = WizardDecoratorService.new(content_item: @content_item)
 
-    title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text']
+    title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text'] # TODO: refactor this hardcoded Field reference
     add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
     add_breadcrumb title
     add_breadcrumb 'Edit'
@@ -38,7 +38,7 @@ class ContentItemsController < AdminController
       @content_item = content_item_reload(content_type.content_items.find_by_id(params[:id]))
       @wizard = WizardDecoratorService.new(content_item: @content_item)
 
-      title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text']
+      title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text'] # TODO: refactor this hardcoded Field reference
       add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
       add_breadcrumb title
       add_breadcrumb 'Edit'

@@ -48,7 +48,6 @@ class ContentItemService < ApplicationService
       parse_field_items!
       @content_item.save!
       execute_state_change(@content_item)
-      update_search!
     end
   end
 
@@ -58,11 +57,6 @@ class ContentItemService < ApplicationService
         parse_widgets!(field_item)
       end
     end
-  end
-
-  def update_search!
-    # TODO: implement ES index updates
-    true
   end
 
   def field_items_attributes

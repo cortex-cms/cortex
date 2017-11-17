@@ -12,13 +12,18 @@ gem 'puma', '~> 3.10.0'
 # Rails
 gem 'rails', '~> 5.1.4'
 
+# API
+gem 'graphql', '~> 1.7.5'
+gem 'graphiql-rails', '~> 1.4.7'
+gem 'apollo-tracing', '~> 1.3.0'
+
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', '= 2.0.1'
+gem 'cortex-plugins-core', '= 2.1.1'
 
 # Service Layer
-gem 'dry-types', '~> 0.12.0'
-gem 'dry-struct', '~> 0.3.1'
+gem 'dry-types', '~> 0.12.2'
+gem 'dry-struct', '~> 0.4.0'
 gem 'dry-transaction', '~> 0.10.2'
 
 # Authentication
@@ -31,17 +36,18 @@ gem 'pundit', '~> 1.1.0'
 # Data
 gem 'awesome_nested_set', '~> 3.1.3'
 gem 'bcrypt', '~> 3.1.11'
-gem 'kaminari', '~> 1.0.1'
+gem 'kaminari', '~> 1.1.1'
 gem 'elasticsearch-model', '~> 5.0'
 gem 'elasticsearch-rails', '~> 5.0'
-gem 'paranoia', '~> 2.3'
+gem 'elasticsearch-dsl', '~> 0.1'
+gem 'paranoia', '~> 2.4'
 gem 'pg', '~> 0.21.0'
 gem 'redis-rails', '~> 5.0'
 gem 'pomona', '~> 0.7'
 gem 'transitions', '~> 1.2', require: %w(transitions active_model/transitions)
 
 # Middleware
-gem 'rack-cors', '~> 1.0.1', require: 'rack/cors'
+gem 'rack-cors', '~> 1.0.2', require: 'rack/cors'
 
 # Utility
 gem 'hashie', '~> 3.5.6'
@@ -88,14 +94,13 @@ gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
 gem 'dialog-polyfill-rails', '~> 0.4.5'
 
 # Feature Flagging
-gem 'flipper', '~> 0.10'
-gem 'flipper-ui', '~> 0.10'
-gem 'flipper-active_record', '~> 0.10'
+gem 'flipper', '~> 0.11'
+gem 'flipper-ui', '~> 0.11'
+gem 'flipper-active_record', '~> 0.11'
 
 group :development, :test do
   # Environment
   gem 'dotenv-rails', require: 'dotenv/rails-now'
-  gem 'foreman'
 
   # Cache/Sidekiq
   gem 'redis-namespace'
@@ -153,7 +158,7 @@ group :test do
 end
 
 group :test, :development do
-  gem 'factory_girl_rails', '~> 4.8'
+  gem 'factory_girl_rails', '~> 4.8' # TODO: upgrade to factory_bot
   gem 'faker', '~> 1.8'
   gem 'phantomjs', '~> 2.1'
   gem 'jasmine-rails', '~> 0.14'

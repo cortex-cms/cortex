@@ -8,6 +8,7 @@
       = title
     = favicon_link_tag 'favicon.ico'
     = stylesheet_link_tag :application, {media: 'all', 'data-turbolinks-track': 'reload'}
+    // = stylesheet_pack_tag 'cortex-bundle', {media: 'all', 'data-turbolinks-track': 'reload'} # Enable once assets migrated
     = csrf_meta_tags
   %body
     = render 'partials/media_dialogs'

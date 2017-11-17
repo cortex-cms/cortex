@@ -1,0 +1,2 @@
+class GetContentItemTransaction < ApplicationTransaction
+end

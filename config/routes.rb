@@ -39,10 +39,7 @@ Cortex::Application.routes.draw do
 
   # Flipper TODO: this needs to be updated with new role system
   #authenticated :user, lambda {|u| u.is_admin? } do
-    flipper_block = lambda {
-      Cortex.flipper
-    }
-    mount Flipper::UI.app(flipper_block) => '/flipper'
+    mount Flipper::UI.app(Flipper) => '/flipper'
   #end
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)

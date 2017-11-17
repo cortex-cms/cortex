@@ -19,7 +19,7 @@ gem 'apollo-tracing', '~> 1.3.0'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', github: 'cortex-cms/cortex-plugins-core', branch: 'topic/CE-307-GraphQL-and-CE-160-ElasticSearch'
+gem 'cortex-plugins-core', '= 2.1.1'
 
 # Service Layer
 gem 'dry-types', '~> 0.12.2'
@@ -94,9 +94,9 @@ gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
 gem 'dialog-polyfill-rails', '~> 0.4.5'
 
 # Feature Flagging
-gem 'flipper', '~> 0.10'
-gem 'flipper-ui', '~> 0.10'
-gem 'flipper-active_record', '~> 0.10'
+gem 'flipper', '~> 0.11'
+gem 'flipper-ui', '~> 0.11'
+gem 'flipper-active_record', '~> 0.11'
 
 group :development, :test do
   # Environment

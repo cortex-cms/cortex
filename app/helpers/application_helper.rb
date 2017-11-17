@@ -49,7 +49,7 @@ module ApplicationHelper
   end
 
   def flag_enabled?(flag_name)
-    Cortex.flipper[flag_name].enabled?(current_user, request)
+    Flipper.enabled?(flag_name, current_user, request)
   end
 
   def environment

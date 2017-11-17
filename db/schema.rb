@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 13) do
 
   create_table "content_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
+    t.string "name_id", null: false
     t.text "description"
     t.uuid "creator_id", null: false
     t.uuid "tenant_id", null: false
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 13) do
     t.index ["creator_id"], name: "index_content_types_on_creator_id"
     t.index ["deleted_at"], name: "index_content_types_on_deleted_at"
     t.index ["name"], name: "index_content_types_on_name"
+    t.index ["name_id"], name: "index_content_types_on_name_id"
     t.index ["tenant_id"], name: "index_content_types_on_tenant_id"
   end
 
@@ -106,6 +108,7 @@ ActiveRecord::Schema.define(version: 13) do
 
   create_table "fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
+    t.string "name_id", null: false
     t.string "field_type", null: false
     t.jsonb "metadata", default: {}, null: false
     t.jsonb "validations", default: {}, null: false
@@ -117,6 +120,7 @@ ActiveRecord::Schema.define(version: 13) do
     t.index ["deleted_at"], name: "index_fields_on_deleted_at"
     t.index ["field_type"], name: "index_fields_on_field_type"
     t.index ["name"], name: "index_fields_on_name"
+    t.index ["name_id"], name: "index_fields_on_name_id"
   end
 
   create_table "flipper_features", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -178,6 +182,7 @@ ActiveRecord::Schema.define(version: 13) do
 
   create_table "tenants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", limit: 50, null: false
+    t.string "name_id", null: false
     t.text "description"
     t.uuid "parent_id"
     t.integer "lft"
@@ -191,6 +196,7 @@ ActiveRecord::Schema.define(version: 13) do
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_tenants_on_deleted_at"
     t.index ["name"], name: "index_tenants_on_name", unique: true
+    t.index ["name_id"], name: "index_tenants_on_name_id", unique: true
     t.index ["owner_id"], name: "index_tenants_on_owner_id"
     t.index ["parent_id"], name: "index_tenants_on_parent_id"
   end

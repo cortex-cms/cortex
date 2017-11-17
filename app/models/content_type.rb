@@ -5,6 +5,7 @@ class ContentType < ApplicationRecord
 
   validates :name, :creator, :contract, presence: true
   validates_uniqueness_of :name,
+                          :name_id,
                           scope: :tenant_id,
                           message: 'should be unique within a Tenant'
 
@@ -20,10 +21,6 @@ class ContentType < ApplicationRecord
   # TODO: Extract to a concern
   def self.permissions
     Permission.select { |perm| perm.resource_type = self }
-  end
-
-  def name_id # TODO: ContentTypes should have a table-backed name_id field to avoid these collision-prone string manipulations
-    name.parameterize(separator: '_')
   end
 
   # TODO: remove these garbage `_decorator` methods

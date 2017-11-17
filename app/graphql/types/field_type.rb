@@ -4,6 +4,7 @@ Types::FieldType = GraphQL::ObjectType.define do
 
   field :id, !types.ID
   field :name, !types.String
+  field :name_id, !types.String
   field :field_type, !types.String
   field :metadata, !types.String
   field :validations, !types.String

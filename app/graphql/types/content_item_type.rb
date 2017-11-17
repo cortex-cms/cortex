@@ -20,10 +20,10 @@ Types::ContentItemType = GraphQL::ObjectType.define do
   end
 
   field :FieldItem, Types::FieldItemType do
-    argument :name, !types.String
+    argument :name_id, !types.String
 
     resolve -> (obj, args, _ctx) {
-      obj.field_items.find { |field_item| field_item.field.name == args[:name] }
+      obj.field_items.find { |field_item| field_item.field.name_id == args[:name_id] }
     }
   end
 end

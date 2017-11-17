@@ -6,13 +6,16 @@ defaults: &defaults
     body: 'Your initial superadministrator user credentials are:<br /><br /><strong>Email:</strong>&nbsp;admin@cortexcms.org<br /><strong>Password:</strong>&nbsp;welcome1<br /><br />Please change them in deployed environments.'
   cortex_tenant:
     name: 'System'
+    name_id: 'system'
     description: 'Core tenant for news/etc'
     creator: {email: 'admin@cortexcms.org', firstname: 'Cortex', lastname: 'Admin', password: 'welcome1'}
   example_tenant:
     name: 'Example'
+    name_id: 'example'
     description: 'ContentTypes to get started with'
   example_subtenant:
     name: 'Bogus'
+    name_id: 'bogus'
     description: 'Example subtenant'
   example_contract:
     name: 'Bogus'

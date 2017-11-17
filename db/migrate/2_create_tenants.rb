@@ -2,6 +2,7 @@ class CreateTenants < ActiveRecord::Migration[5.1]
   def change
     create_table :tenants, id: :uuid do |t|
       t.string :name, limit: 50, null: false, index: { unique: true }
+      t.string :name_id, null: false, index: { unique: true }
       t.text :description
       t.uuid :parent_id, index: true
       t.integer :lft

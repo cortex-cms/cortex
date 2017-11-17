@@ -40,6 +40,7 @@ namespace :employer do
       puts "Creating Employer Blog ContentType..."
       blog = ContentType.new({
                                name: "Employer Blog",
+                               name_id: "employer_blog",
                                description: "Blog for Employer",
                                icon: "description",
                                tenant: example_tenant,
@@ -50,27 +51,27 @@ namespace :employer do
       blog.save!
 
       puts "Creating Fields..."
-      blog.fields.new(name: 'Body', field_type: 'text_field_type', metadata: {parse_widgets: true}, validations: { presence: true, length: { minimum: 50} })
-      blog.fields.new(name: 'Title', field_type: 'text_field_type', validations: {presence: true, length: { maximum: 100 } })
-      blog.fields.new(name: 'Description', field_type: 'text_field_type', validations: {presence: true, length: { maximum: 200, minimum: 50} })
-      blog.fields.new(name: 'Slug', field_type: 'text_field_type', validations: {presence: true, uniqueness: true, length: { maximum: 75 } })
-      blog.fields.new(name: 'Author', field_type: 'author_field_type')
-      blog.fields.new(name: 'Tags', field_type: 'tag_field_type')
-      blog.fields.new(name: 'Publish Date', field_type: 'date_time_field_type', metadata: {state: 'Published'})
-      blog.fields.new(name: 'Expiration Date', field_type: 'date_time_field_type', metadata: {state: 'Expired'})
-      blog.fields.new(name: 'SEO Title', field_type: 'text_field_type', validations: {presence: true, length: {maximum: 70}, uniqueness: true })
-      blog.fields.new(name: 'SEO Description', field_type: 'text_field_type', validations: {presence: true, length: {maximum: 160} })
-      blog.fields.new(name: 'SEO Keywords', field_type: 'tag_field_type')
-      blog.fields.new(name: 'No Index', field_type: 'boolean_field_type')
-      blog.fields.new(name: 'No Follow', field_type: 'boolean_field_type')
-      blog.fields.new(name: 'No Snippet', field_type: 'boolean_field_type')
-      blog.fields.new(name: 'No ODP', field_type: 'boolean_field_type')
-      blog.fields.new(name: 'No Archive', field_type: 'boolean_field_type')
-      blog.fields.new(name: 'No Image Index', field_type: 'boolean_field_type')
-      blog.fields.new(name: 'Categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2, minimum: 1})
-      blog.fields.new(name: 'Research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
-      blog.fields.new(name: 'Persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
-      blog.fields.new(name: 'Featured Image', field_type: 'content_item_field_type',
+      blog.fields.new(name: 'Body', name_id: 'body', field_type: 'text_field_type', metadata: {parse_widgets: true}, validations: { presence: true, length: { minimum: 50} })
+      blog.fields.new(name: 'Title', name_id: 'title', field_type: 'text_field_type', validations: {presence: true, length: { maximum: 100 } })
+      blog.fields.new(name: 'Description', name_id: 'description', field_type: 'text_field_type', validations: {presence: true, length: { maximum: 200, minimum: 50} })
+      blog.fields.new(name: 'Slug', name_id: 'slug', field_type: 'text_field_type', validations: {presence: true, uniqueness: true, length: { maximum: 75 } })
+      blog.fields.new(name: 'Author', name_id: 'author', field_type: 'author_field_type')
+      blog.fields.new(name: 'Tags', name_id: 'tags', field_type: 'tag_field_type')
+      blog.fields.new(name: 'Publish Date', name_id: 'publish_date', field_type: 'date_time_field_type', metadata: {state: 'Published'})
+      blog.fields.new(name: 'Expiration Date', name_id: 'expiration_date', field_type: 'date_time_field_type', metadata: {state: 'Expired'})
+      blog.fields.new(name: 'SEO Title', name_id: 'seo_title', field_type: 'text_field_type', validations: {presence: true, length: {maximum: 70}, uniqueness: true })
+      blog.fields.new(name: 'SEO Description', name_id: 'seo_description', field_type: 'text_field_type', validations: {presence: true, length: {maximum: 160} })
+      blog.fields.new(name: 'SEO Keywords', name_id: 'seo_keywords', field_type: 'tag_field_type')
+      blog.fields.new(name: 'No Index', name_id: 'no_index', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No Follow', name_id: 'no_follow', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No Snippet', name_id: 'no_snippet', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No ODP', name_id: 'no_odp', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No Archive', name_id: 'no_archive', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'No Image Index', name_id: 'no_image_index', field_type: 'boolean_field_type')
+      blog.fields.new(name: 'Categories', name_id: 'categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2, minimum: 1})
+      blog.fields.new(name: 'Research', name_id: 'research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
+      blog.fields.new(name: 'Persona', name_id: 'persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
+      blog.fields.new(name: 'Featured Image', name_id: 'featured_image', field_type: 'content_item_field_type',
                       metadata: {
                         field_name: 'Asset'
                       })

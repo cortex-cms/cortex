@@ -4,6 +4,7 @@ Types::TenantType = GraphQL::ObjectType.define do
 
   field :id, !types.ID
   field :name, !types.String
+  field :name_id, !types.String
   field :description, !types.String
   field :parent, types[Types::TenantType]
   field :children, types[Types::TenantType]

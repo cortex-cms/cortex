@@ -4,6 +4,7 @@ Types::ContentTypeType = GraphQL::ObjectType.define do
 
   field :id, !types.ID
   field :name, !types.String
+  field :name_id, !types.String
   field :description, types.String
   field :publishable, !types.Boolean
   field :icon, types.String

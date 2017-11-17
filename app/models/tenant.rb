@@ -12,6 +12,9 @@ class Tenant < ApplicationRecord
   validates_presence_of :name
   validates_associated :owner
 
+  validates_uniqueness_of :name,
+                          :name_id
+
   alias_method :organization, :root
 
   def is_organization?

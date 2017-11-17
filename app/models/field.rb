@@ -6,6 +6,7 @@ class Field < ApplicationRecord
   validates :name, :content_type, :field_type, presence: true
   validate :acceptable_field_type
   validates_uniqueness_of :name,
+                          :name_id,
                           scope: :content_type_id,
                           message: 'should be unique within a ContentType'
 

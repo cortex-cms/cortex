@@ -6,7 +6,7 @@ class Snippet < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :user
-  belongs_to :webpage
+  belongs_to :webpage, touch: true
   belongs_to :document
 
   accepts_nested_attributes_for :document

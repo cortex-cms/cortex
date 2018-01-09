@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012161608) do
+ActiveRecord::Schema.define(version: 20180109202314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "uuid-ossp"
   enable_extension "citext"
+  enable_extension "pgcrypto"
 
   create_table "applications", force: :cascade do |t|
     t.string   "name"
@@ -304,6 +305,13 @@ ActiveRecord::Schema.define(version: 20171012161608) do
     t.integer  "resource_id"
   end
 
+  create_table "permissions_roles", id: false, force: :cascade do |t|
+    t.uuid "permission_id", null: false
+    t.uuid "role_id",       null: false
+    t.index ["permission_id"], name: "index_permissions_roles_on_permission_id", using: :btree
+    t.index ["role_id"], name: "index_permissions_roles_on_role_id", using: :btree
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id",                                          null: false
     t.string   "title",               limit: 255
@@ -363,6 +371,13 @@ ActiveRecord::Schema.define(version: 20171012161608) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.uuid "role_id", null: false
+    t.uuid "user_id", null: false
+    t.index ["role_id"], name: "index_roles_users_on_role_id", using: :btree
+    t.index ["user_id"], name: "index_roles_users_on_user_id", using: :btree
+  end
+
   create_table "snippets", force: :cascade do |t|
     t.integer  "webpage_id",  null: false
     t.integer  "document_id", null: false
@@ -418,6 +433,13 @@ ActiveRecord::Schema.define(version: 20171012161608) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["parent_id"], name: "index_tenants_on_parent_id", using: :btree
+  end
+
+  create_table "tenants_users", id: false, force: :cascade do |t|
+    t.uuid "tenant_id", null: false
+    t.uuid "user_id",   null: false
+    t.index ["tenant_id"], name: "index_tenants_users_on_tenant_id", using: :btree
+    t.index ["user_id"], name: "index_tenants_users_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -478,6 +500,7 @@ ActiveRecord::Schema.define(version: 20171012161608) do
     t.jsonb    "buy_box_widget"
     t.jsonb    "carousels_widget"
     t.jsonb    "galleries_widget"
+    t.jsonb    "form_configs"
     t.index ["user_id"], name: "index_webpages_on_user_id", using: :btree
   end
 

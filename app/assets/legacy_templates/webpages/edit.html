@@ -85,17 +85,15 @@
         </form>
       </div>
     </tab>
-    <tab>
+    <tab ng-click="tabClicked(88)">
       <tab-heading><i class="fa fa-wpforms"></i> Web Forms</span></tab-heading>
-      <div>
-        <form novalidate name="webpageForm">
-          <div class="form-group">
-            <div ui-codemirror="cmOptions" ui-refresh='selectedTab' id="form_configs_yaml" name="form_configs_yaml" rows="30"
-              ng-model="data.webpage.form_configs_yaml"
-              placeholder="YAML-formatted form configs"></div>
-          </div>
-        </form>
-      </div>
+      <form novalidate name="webpageForm">
+        <div class="form-group">
+          <div ui-codemirror="cmOptions" ui-refresh='selectedTab' id="form_configs_yaml" name="form_configs_yaml" rows="30"
+            ng-model="data.webpage.form_configs_yaml"
+            placeholder="YAML-formatted form configs"></div>
+        </div>
+      </form>
     </tab>
     <tab  ng-click="tabClicked(1)">
       <tab-heading><i class="fa fa-puzzle-piece"></i> Widgets</span></tab-heading>

@@ -7,8 +7,6 @@ module SearchableWebpage
     mapping do
       indexes :name, :analyzer => :snowball
       indexes :url, :analyzer => :keyword
-      indexes :dynamic_yield_sku, :analyzer => :keyword
-      indexes :dynamic_yield_category, :analyzer => :keyword
       indexes :created_by, :analyzer => :keyword
       indexes :created_at, :type => :date, :include_in_all => false
       indexes :deleted_at, :type => :date, :include_in_all => false
@@ -36,6 +34,7 @@ module SearchableWebpage
       indexes :carousels_widget, :type => :nested, :enabled => false
       indexes :galleries_widget, :type => :nested, :enabled => false
       indexes :form_configs, :type => :nested, :enabled => false
+      indexes :product_data, :type => :nested, :enabled => false
     end
 
     def as_indexed_json(options = {})

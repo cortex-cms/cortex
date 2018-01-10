@@ -492,8 +492,6 @@ ActiveRecord::Schema.define(version: 20180109202314) do
     t.boolean  "noarchive",              default: false
     t.boolean  "noimageindex",           default: false
     t.text     "seo_keywords"
-    t.string   "dynamic_yield_sku"
-    t.string   "dynamic_yield_category"
     t.jsonb    "tables_widget"
     t.jsonb    "charts_widget"
     t.jsonb    "accordion_group_widget"

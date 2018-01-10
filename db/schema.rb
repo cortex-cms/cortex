@@ -498,6 +498,7 @@ ActiveRecord::Schema.define(version: 20180109202314) do
     t.jsonb    "buy_box_widget"
     t.jsonb    "carousels_widget"
     t.jsonb    "galleries_widget"
+    t.jsonb    "product_data"
     t.jsonb    "form_configs"
     t.index ["user_id"], name: "index_webpages_on_user_id", using: :btree
   end

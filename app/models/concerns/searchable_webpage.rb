@@ -33,6 +33,7 @@ module SearchableWebpage
       indexes :buy_box_widget, :type => :nested, :enabled => false
       indexes :carousels_widget, :type => :nested, :enabled => false
       indexes :galleries_widget, :type => :nested, :enabled => false
+      indexes :form_configs, :type => :nested, :enabled => false
       indexes :product_data, :type => :nested, :enabled => false
     end
 

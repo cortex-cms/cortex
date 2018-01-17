@@ -174,6 +174,16 @@
                       placeholder="YAML-formatted galleries data"></div>
               </div>
             </tab>
+            <tab ng-click="tabClicked(7)">
+              <tab-heading>Cards Data</span>
+              </tab-heading>
+              <div class="form-group">
+                <label for="card_group_widget_yaml">Card Group Data</label>
+                <div ui-codemirror="cmOptions" ui-refresh='selectedTab' id="card_group_widget_yaml" name="card_group_widget_yaml"
+                      ng-model="data.webpage.card_group_widget_yaml"
+                      placeholder="YAML-formatted card group data"></div>
+              </div>
+            </tab>
           </tabset>
         </form>
       </div>

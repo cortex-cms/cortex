@@ -118,6 +118,38 @@ class Webpage < ApplicationRecord
     self.accordion_group_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
   end
 
+  def form_configs_yaml
+    form_configs.to_yaml
+  end
+
+  def form_configs_yaml= p
+    self.form_configs = YAML.load(p)
+  end
+
+  def form_configs_json
+    form_configs.to_json
+  end
+
+  def form_configs_json= p
+    self.form_configs = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
+  end
+  
+  def product_data_yaml
+    product_data.to_yaml
+  end
+
+  def product_data_yaml= p
+    self.product_data = YAML.load(p)
+  end
+
+  def product_data_json
+    product_data.to_json
+  end
+
+  def product_data_json= p
+    self.product_data = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
+  end
+
   private
 
   def self.protocol_agnostic_url(url)

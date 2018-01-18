@@ -17,8 +17,8 @@ module V1
       expose :noarchive, documentation: { type: 'Boolean', desc: "SEO No Archive Setting" }
       expose :noimageindex, documentation: { type: 'Boolean', desc: "SEO No Image Index Robots Setting" }
 
-      expose :dynamic_yield_sku, documentation: { type: 'String', desc: "Dynamic Yield Webpage SKU/ID" }
-      expose :dynamic_yield_category, documentation: { type: 'String', desc: "Dynamic Yield Webpage Category" }
+      expose :form_configs_json, documentation:  {type: 'Hash', is_array: true, desc: 'Form Configs as JSON'}
+      expose :product_data_json, documentation:  {type: 'Hash', is_array: true, desc: 'Product Data as JSON'}
 
       expose :carousels_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Carousels Widget Data as JSON'}
       expose :galleries_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Galleries Widget Data as JSON'}
@@ -30,6 +30,9 @@ module V1
       with_options if: { full: true } do
         expose :user, with: '::V1::Entities::User', documentation: {type: 'User', desc: 'Owner'}
         expose :url, documentation: { type: 'String', desc: 'URL of Webpage' }
+        expose :form_configs_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Form Configs as YAML'}
+
+        expose :product_data_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Product Data as YAML'}
 
         expose :carousels_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Carousels Widget Data as YAML'}
         expose :galleries_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Galleries Widget Data as YAML'}

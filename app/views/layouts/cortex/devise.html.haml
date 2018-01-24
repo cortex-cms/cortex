@@ -1,0 +1,19 @@
+!!! 5
+%html
+  %head
+    %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
+    %meta{charset: 'utf-8'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0'}
+    %title Cortex Administration | Login
+    = favicon_link_tag 'cortex/favicon.ico'
+    = stylesheet_link_tag 'cortex/authentication', {media: 'all'}
+    = csrf_meta_tags
+  %body.mdl-base
+    .mdl-layout.mdl-js-layout.authentication
+      %main.mdl-layout__content.mdl-layout__content--authentication
+        = render 'cortex/partials/authentication/header'
+        .mdl-grid.authentication__content
+          = yield
+    = javascript_include_tag 'cortex/authentication'
+    %span.flash--invert
+      = render 'cortex/partials/flash'

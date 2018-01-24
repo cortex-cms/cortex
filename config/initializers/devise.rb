@@ -24,6 +24,12 @@ Devise.setup do |config|
   config.sign_out_via = :delete
 
   config.warden do |manager|
-    manager.failure_app = AuthenticationFailure
+    manager.failure_app = Cortex::AuthenticationFailure
+  end
+
+  # Engine-specific config
+  config.router_name = :cortex
+  Devise.setup do |config|
+    config.parent_controller = 'Cortex::ApplicationController'
   end
 end

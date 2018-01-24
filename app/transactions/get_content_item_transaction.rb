@@ -1,2 +1,0 @@
-class GetContentItemTransaction < ApplicationTransaction
-end

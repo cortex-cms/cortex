@@ -1,8 +1,0 @@
-en:
-  doorkeeper:
-    scopes:
-      public: View your public information
-      view:tenants: View tenants you control
-      modify:tenants: Make changes to, create and delete, tenants you control
-      view:users: View users you control
-      modify:users: Make changes to, create and delete, users you control

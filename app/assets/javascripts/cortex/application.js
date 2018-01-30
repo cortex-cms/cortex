@@ -9,8 +9,6 @@
 //= require dialog-polyfill
 //= require moment/moment.js
 
-//= require cortex-plugins-core/application
-
 //= require cortex/base
 //= require cortex/datepicker_init
 //= require cortex/form

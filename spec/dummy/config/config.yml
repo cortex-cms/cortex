@@ -1,0 +1,22 @@
+defaults: &defaults
+  cortex:
+    news_feed:
+      tenant: <%= ENV['CORTEX_NEWS_FEED_TENANT'] %>
+  extra:
+    google_analytics_id: <%= ENV['GOOGLE_ANALYTICS_ID'] %>
+    qualtrics_id:  <%= ENV['QUALTRICS_ID'] %>
+  cors:
+    allowed_origins: <%= ENV['CORS_ALLOWED_ORIGINS'] %>
+    allowed_origins_regex: <%= ENV['CORS_ALLOWED_ORIGINS_REGEX'] %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

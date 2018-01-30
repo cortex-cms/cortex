@@ -36,6 +36,41 @@ group :development, :test do
 
   # Documentation
   gem 'rails-erd'
+
+  #
+  # Dummy Spec App
+  #
+
+  # Pipeline
+  gem 'sprockets-rails', '3.2.1', require: 'sprockets/railtie'
+  gem 'sprockets', '3.7.1'
+  gem 'uglifier', '~> 3.2.0'
+
+  # View
+  gem 'haml', '~> 5.0'
+
+  # Style
+  gem 'sass-rails', '~> 5.0'
+
+  # Cortex
+  gem 'cortex-plugins-core', path: '/Users/atharp/Repos/cortex-plugins-core'
+
+  # Jobs
+  gem 'sidekiq', '~> 5.0.5'
+  gem 'sidekiq-failures', '~> 1.0.0'
+  gem 'sinatra', '~> 2.0.0'
+
+  # Data
+  gem 'pg', '~> 0.21.0'
+  gem 'redis-rails', '~> 5.0'
+
+  # API
+  gem 'apollo-tracing', '~> 1.3.0'
+
+  # JavaScript
+  gem 'react_on_rails', '9.0.3'
+  gem 'mini_racer'
+  gem 'webpacker'
 end
 
 group :test do

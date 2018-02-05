@@ -1,3 +1,5 @@
+require 'flipper/middleware/memoizer'
+
 Flipper.configure do |config|
   config.default do
     adapter = Flipper::Adapters::ActiveRecord.new
@@ -5,7 +7,7 @@ Flipper.configure do |config|
   end
 end
 
-Cortex::Application.config.middleware.use Flipper::Middleware::Memoizer
+Cortex::Engine.config.middleware.use Flipper::Middleware::Memoizer
 
 Flipper.register(:internal) { |request| request.internal? }
 Flipper.register(:authenticated) { |request| request.session[:current_user].present? && request.session[:current_user][:authenticated] }

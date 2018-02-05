@@ -1,3 +1,5 @@
+require 'graphiql/rails'
+
 GraphiQL::Rails.config.initial_query = <<~HEREDOC
 # Welcome to Cortex CMS's GraphiQL IDE
 #

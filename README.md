@@ -150,6 +150,7 @@ $ bundle exec rake cortex:rebuild_indexes
 Start Cortex, Sidekiq and live rebuild/reload via Foreman:
 
 ```sh
+$ gem install foreman
 $ foreman start -f Procfile.dev-server
 ```
 
@@ -197,8 +198,6 @@ Swagger Endpoints are available at [http://api.cbcortex.com/api/v1/swagger_doc.j
 
 Cortex's API utilizes [OAuth2](https://tools.ietf.org/html/rfc6749) for Authentication and Authorization. Client Credentials and Authorization Code [grant types](http://alexbilbie.com/2013/02/a-guide-to-oauth-2-grants/) are supported. Want to get up and running quickly with OAuth? Use Cortex's [Ruby client](https://github.com/cortex-cms/cortex-client-ruby) or [OmniAuth strategy](https://github.com/cb-talent-development/omniauth-cortex) for Client Credentials and Authorization Code grants, respectively.
 
-Review the `optional_scopes` in Cortex's [Doorkeeper config](https://github.com/cbdr/cortex/blob/master/config/initializers/doorkeeper.rb) to determine the available scopes, and the [API Resource classes](https://github.com/cbdr/cortex/tree/master/app/api/v1/resources) to determine where they're required.
-
 Before an application can consume any data, OAuth credentials must be created for the consuming application in the 'Applications' section of the Cortex admin interface.
 
 ### Content
@@ -235,6 +234,6 @@ Cortex utilizes the Apache 2.0 License. See [LICENSE](LICENSE.md) for details.
 
 ## Copyright
 
-Copyright (c) 2017 CareerBuilder, LLC.
+Copyright (c) 2018 CareerBuilder, LLC.
 
 [cb-ce-github]: https://github.com/cb-talent-development "Content Enablement on GitHub"

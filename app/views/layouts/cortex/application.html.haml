@@ -1,0 +1,30 @@
+!!! 5
+%html
+  %head
+    %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
+    %meta{charset: 'utf-8'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0'}
+    %title
+      = title
+    = favicon_link_tag 'cortex/favicon.ico'
+    = stylesheet_link_tag :application, {media: 'all'}
+    // = stylesheet_pack_tag 'cortex-bundle', {media: 'all'} # Enable once assets migrated
+    = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons'
+    = csrf_meta_tags
+  %body
+    = render 'cortex/partials/media_dialogs'
+    = render 'cortex/partials/cortex_redux_state'
+    #layout_wrapper{class: ('sidebar--collapsed' unless current_page? cortex.root_path)}
+      .layout__container.mdl-js-layout.mdl-layout--fixed-drawer
+        = render 'cortex/partials/sidebar'
+        .layout__topbar-content__container.mdl-layout--fixed-header
+          = render 'cortex/partials/topbar'
+          %main.mdl-layout__content.layout__main-content
+            = yield
+    = render 'cortex/partials/flash'
+
+    %script{src: '//cdn.ckeditor.com/4.8.0/standard-all/ckeditor.js', type: 'text/javascript'}
+    = javascript_include_tag :application
+    = javascript_pack_tag 'cortex'
+    = render 'cortex/partials/trackers/google_analytics' if extra_config[:google_analytics_id?]
+    = render 'cortex/partials/trackers/qualtrics' if extra_config[:qualtrics_id?]

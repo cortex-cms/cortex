@@ -1,27 +1,66 @@
 {
   "name": "cortex",
-  "private": true,
+  "version": "0.1.0",
+  "main": "node_package/lib/index.js",
+  "homepage": "https://github.com/cbdr/cortex",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cbdr/cortex.git"
+  },
+  "keywords": [
+    "cortex",
+    "cms",
+    "rails",
+    "api",
+    "headless",
+    "custom-content",
+    "content",
+    "distribution",
+    "multitenant",
+    "reporting",
+    "graphql",
+    "elasticsearch",
+    "reactjs"
+  ],
+  "author": "toastercup@gmail.com",
+  "license": "Apache-2.0",
   "dependencies": {
-    "@rails/webpacker": "^3.0.2",
-    "babel-preset-react": "^6.24.1",
-    "coffeescript": "1.12.7",
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-on-rails": "^9.0.3",
-
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
+    "jquery": "^3.3.1",
+    "jquery-ui-bundle": "^1.12.1",
+    "jquery-ui-timepicker-addon": "~> 1.6.3",
+    "bourbon": "^4.3.4",
+    "font-awesome": "^4.7.0",
+    "bootstrap-tagsinput": "^0.7.1",
+    "dialog-polyfill": "^0.4.9",
     "underscore": "~> 1.8.3",
     "moment": "~> 2.18.1",
     "bootstrap-sass": "~> 3.3.7",
-    "jquery-ui-timepicker-addon": "~> 1.6.3",
     "clipboard": "~> 1.7.1",
+    "material-design-lite": "^1.3.0",
     "material-ui": "next",
-    "cortex-plugins-core": "2.0.1",
-    "axios": "^0.16.2"
+    "axios": "^0.16.2",
+    "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
-    "webpack-dev-server": "^2.9.1"
+    "@rails/webpacker": "^3.0.2",
+    "babel-preset-react": "^6.24.1",
+    "babel-cli": "^6.26.0",
+    "coffeescript": "1.12.7",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "files": [
+    "node_package/lib"
+  ],
+  "scripts": {
+    "clean": "rm -rf node_package/lib",
+    "prepublish": "yarn run build",
+    "babel": "babel --out-dir node_package/lib node_package/src",
+    "build": "yarn run clean && yarn run babel",
+    "build-watch": "babel --watch --out-dir node_package/lib node_package/src",
+    "prerelease": "yarn run clean && yarn run build"
   }
 }

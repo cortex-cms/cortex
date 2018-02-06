@@ -1,0 +1,7 @@
+.layout__sidebar.mdl-layout__drawer
+  %header.sidebar__header
+    = link_to cortex.root_path, class: 'sidebar__root-link' do
+      = image_tag 'cortex/logo.svg', class: 'sidebar__brand-logo'
+      %h1.sidebar__brand-name Cortex
+  = render 'cortex/partials/navigation'
+  = react_component('CortexApp', props: { temporary_render: 'TenantSwitcher' })

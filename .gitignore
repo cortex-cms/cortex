@@ -4,22 +4,14 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Build Artifacts
+pkg/
+node_package/lib
+**.gem
+
 # Ignore bundler config.
 /.bundle
 /vendor/bundle
-
-/public/assets/
-/public/uploads/
-
-# Ignore the default SQLite database.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
-
-# Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
 
 # Debug
 .byebug_history
@@ -40,28 +32,51 @@
 .sass-cache
 capybara-*.html
 .powrc
-/public/system
 /coverage/
 /spec/tmp
 /spec/examples.txt
 **.orig
 rerun.txt
 pickle-email-*.html
-.env
-/.cloud66/stack.json
 
-# these should all be checked in to normalise the environment:
-# Gemfile.lock, .ruby-version, .ruby-gemset
+# rspec failure tracking
+.rspec_status
 
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+# Environment
 .rvmrc
+.ruby-version
+.env
 
 # Documentation Artifacts
 erd.pdf
 
+#
+# Dummy Spec App
+#
+
+spec/dummy/public/assets/
+spec/dummy/public/uploads/
+spec/dummy/public/system/
+
+# Ignore the default SQLite database.
+spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
+spec/dummy/log/*.log
+spec/dummy/node_modules/
+spec/dummy/yarn-error.log
+spec/dummy/storage/
+spec/dummy/tmp/
+
+# Ignore all logfiles and tempfiles.
+/spec/dummy/log/*
+/spec/dummy/tmp/*
+!/spec/dummy/log/.keep
+!/spec/dummy/tmp/.keep
+
 # Webpacker Pipeline
 npm-debug.log*
-/public/packs
-/public/packs-test
+/spec/dummy/public/packs
+/spec/dummy/public/packs-test
 node_modules
 /yarn-error.log
+/spec/dummy/yarn-error.log

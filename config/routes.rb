@@ -1,7 +1,14 @@
 require 'sidekiq/web'
+require 'flipper/ui'
 
-Cortex::Application.routes.draw do
-  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
+Cortex::Engine.routes.draw do
+  # API - TODO: Authorize GraphQL + GraphiQL
+  mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: ENV['GRAPHQL_URL'], as: 'graphiql'
+  scope '/graphql' do
+    post '/', to: 'graphql#execute'
+    get '/ide', to: 'graphql#ide', as: 'graphql_ide'
+  end
+
   root 'dashboards#index'
 
   scope '/admin_update' do
@@ -24,7 +31,7 @@ Cortex::Application.routes.draw do
   end
 
   # Authentication
-  devise_for :users, controllers: {sessions: 'authentication/sessions', passwords: 'authentication/passwords'}
+  devise_for :users, controllers: {sessions: 'cortex/authentication/sessions', passwords: 'cortex/authentication/passwords'}, class_name: 'Cortex::User', module: :devise
 
   # Sidekiq Admin TODO: this needs to be updated with new role system
   #authenticate :user, lambda { |u| u.is_admin? } do
@@ -33,9 +40,8 @@ Cortex::Application.routes.draw do
 
   # Flipper TODO: this needs to be updated with new role system
   #authenticated :user, lambda {|u| u.is_admin? } do
-    flipper_block = lambda {
-      Cortex.flipper
-    }
-    mount Flipper::UI.app(flipper_block) => '/flipper'
+  mount Flipper::UI.app(Flipper) => '/flipper'
   #end
+
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 end

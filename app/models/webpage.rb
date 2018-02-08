@@ -85,6 +85,29 @@ class Webpage < ApplicationRecord
   def charts_widget_json= p
     self.charts_widget = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
   end
+  def carousels_widget_json
+    carousels_widget.to_json
+  end
+
+  def carousels_widget_json= p
+    self.carousels_widget = JSON.parse(p, quirks_mode: true)
+  end
+
+  def card_group_widget_yaml
+    card_group_widget.to_yaml
+  end
+
+  def card_group_widget_yaml= p
+    self.card_group_widget = YAML.load(p)
+  end
+
+  def card_group_widget_json
+    card_group_widget.to_json
+  end
+
+  def card_group_widget_json= p
+    self.card_group_widget = JSON.parse(p, quirks_mode: true)
+  end
 
   def buy_box_widget_yaml
     buy_box_widget.to_yaml
@@ -133,7 +156,7 @@ class Webpage < ApplicationRecord
   def form_configs_json= p
     self.form_configs = JSON.parse(p, quirks_mode: true) # Quirks mode will let us parse a null JSON object
   end
-  
+
   def product_data_yaml
     product_data.to_yaml
   end

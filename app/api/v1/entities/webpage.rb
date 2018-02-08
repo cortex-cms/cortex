@@ -22,6 +22,7 @@ module V1
 
       expose :carousels_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Carousels Widget Data as JSON'}
       expose :galleries_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Galleries Widget Data as JSON'}
+      expose :card_group_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Card Group Widget Data as JSON'}
       expose :tables_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Tables Widget Data as JSON'}
       expose :charts_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Charts Widget Data as JSON'}
       expose :buy_box_widget_json, documentation:  {type: 'Hash', is_array: true, desc: 'Buy Box Widget Data as JSON'}
@@ -36,6 +37,7 @@ module V1
 
         expose :carousels_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Carousels Widget Data as YAML'}
         expose :galleries_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Galleries Widget Data as YAML'}
+        expose :card_group_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Card Group Widget Data as YAML'}
         expose :tables_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Tables Widget Data as YAML'}
         expose :accordion_group_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Accordion Group Widget Data as YAML'}
         expose :charts_widget_yaml, documentation:  {type: 'Hash', is_array: true, desc: 'Charts Widget Data as YAML'}

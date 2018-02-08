@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180109202314) do
+ActiveRecord::Schema.define(version: 20180117221543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -478,6 +478,7 @@ ActiveRecord::Schema.define(version: 20180109202314) do
     t.jsonb    "galleries_widget"
     t.jsonb    "product_data"
     t.jsonb    "form_configs"
+    t.jsonb    "card_group_widget"
     t.index ["user_id"], name: "index_webpages_on_user_id", using: :btree
   end
 

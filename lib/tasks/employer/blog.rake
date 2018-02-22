@@ -26,6 +26,23 @@ namespace :employer do
         tree
       end
 
+      def job_types
+        tree = TempTree.new
+        tree.add_value("Accountant")
+        tree.add_value("Human Resources")
+        tree.add_value("Software Engineer")
+        tree.find_node("Software Engineer").add_value('Database Admin')
+        tree.find_node("Software Engineer").add_value('Gaming')
+        tree.find_node("Software Engineer").add_value('Web')
+        tree.find_node("Software Engineer").find_node('Web').add_value("Front End")
+        tree.find_node("Software Engineer").find_node('Web').add_value("Back End")
+        tree.find_node("Software Engineer").find_node('Web').add_value("Fullstack")
+
+        tree
+      end
+
+
+
       def persona_tree
         tree = Tree.new
         tree.add_node({name: "General Audience"})

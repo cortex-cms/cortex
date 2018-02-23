@@ -1,6 +1,6 @@
 require 'securerandom'
 
-class TempTree
+class TreeBuilder
   attr_accessor :target_node
   attr_reader :head, :tree_fields
 
@@ -28,8 +28,8 @@ class TempTree
   end
 
   def add_value value
-    field_id = TempTree.generate_id
-    tree_fields[field_id] = TempTree.node value
+    field_id = TreeBuilder.generate_id
+    tree_fields[field_id] = TreeBuilder.node value
     @target_node.children << field_id
     @target_node = head
   end

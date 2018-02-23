@@ -7,29 +7,39 @@ namespace :employer do
       example_tenant = Tenant.find_by_name('Example')
 
       def research_tree
-        tree = Tree.new
-        tree.add_node({name: "CB Research"})
-        tree.add_node({name: "Third Party Research"})
+        tree = TreeBuilder.new
+        tree.add_value("CB Research")
+        tree.add_value("Third Party Research")
 
-        tree
+        tree.tree_data
       end
 
       def category_tree
-        tree = Tree.new
-        tree.add_node({ name: "Product News" })
-        tree.add_node({ name: "Company News, Research and Trends" })
-        tree.add_node({ name: "Client Success Stories" })
-        tree.add_node({ name: "Recruiting Solutions" })
-        tree.add_node({ name: "Employment Screening" })
-        tree.add_node({ name: "Human Capital Management" })
+        tree = TreeBuilder.new
+        tree.add_value("Product News")
+        tree.add_value("Company News, Research and Trends")
+        tree.add_value("Client Success Stories")
+        tree.add_value("Recruiting Solutions")
+        tree.add_value("Employment Screening")
+        tree.add_value("Human Capital Management")
 
-        tree
+        tree.tree_data
       end
 
-      def job_types
-        tree = TempTree.new
-        tree.add_value("Accountant")
-        tree.add_value("Human Resources")
+      def professions_tree
+        tree = TreeBuilder.new
+        tree.add_value('Finance')
+        tree.find_node('Finance').add_value("Accountant")
+        tree.find_node('Finance').add_value("Auditor")
+        tree.find_node('Finance').add_value("That Guy")
+        tree.add_value('Management')
+        tree.find_node('Management').add_value("Human Resources")
+        tree.find_node('Management').add_value("Product Owner")
+        tree.add_value("Nurse")
+        tree.add_value("Doctor")
+        tree.find_node("Doctor").add_value('Oncologist')
+        tree.find_node("Doctor").add_value('Love')
+        tree.find_node("Doctor").add_value('Pepper')
         tree.add_value("Software Engineer")
         tree.find_node("Software Engineer").add_value('Database Admin')
         tree.find_node("Software Engineer").add_value('Gaming')
@@ -38,20 +48,20 @@ namespace :employer do
         tree.find_node("Software Engineer").find_node('Web').add_value("Back End")
         tree.find_node("Software Engineer").find_node('Web').add_value("Fullstack")
 
-        tree
+        tree.tree_data
       end
 
 
 
       def persona_tree
-        tree = Tree.new
-        tree.add_node({name: "General Audience"})
-        tree.add_node({name: "Recruiters"})
-        tree.add_node({name: "Sourcers"})
-        tree.add_node({name: "Managers/Directors"})
-        tree.add_node({name: "C-Level"})
+        tree = TreeBuilder.new
+        tree.add_value("General Audience")
+        tree.add_value("Recruiters")
+        tree.add_value("Sourcers")
+        tree.add_value("Managers/Directors")
+        tree.add_value("C-Level")
 
-        tree
+        tree.tree_data
       end
 
       puts "Creating Employer Blog ContentType..."
@@ -88,6 +98,7 @@ namespace :employer do
       blog.fields.new(name: 'Categories', name_id: 'categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2, minimum: 1})
       blog.fields.new(name: 'Research', name_id: 'research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
       blog.fields.new(name: 'Persona', name_id: 'persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
+      blog.fields.new(name: 'Profession', name_id: 'profession', field_type: 'tree_field_type', metadata: {allowed_values: professions_tree})
       blog.fields.new(name: 'Featured Image', name_id: 'featured_image', field_type: 'content_item_field_type',
                       metadata: {
                         field_name: 'Asset'

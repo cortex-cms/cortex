@@ -32,22 +32,8 @@ module Cortex
     end
 
     def publish_state
+      # TODO: move logic to Transaction
       PublishStateService.new.content_item_state(self)
-    end
-
-    def rss_url(base_url, slug_field_id) # TODO: abstract RSS to separate app once API is implemented
-      slug = field_items.find_by_field_id(slug_field_id).data.values.join
-      "#{base_url}#{slug}"
-    end
-
-    def rss_date(date_field_id) # TODO: abstract RSS to separate app once API is implemented
-      date = field_items.find_by_field_id(date_field_id).data["timestamp"]
-      Date.parse(date).rfc2822
-    end
-
-    def rss_author(field_id) # TODO: abstract RSS to separate app once API is implemented
-      author = field_items.find_by_field_id(field_id).data["author_name"]
-      "editorial@careerbuilder.com (#{author})"
     end
 
     # FieldItem and State Convenience Methods. TODO: move to concern? transactions?

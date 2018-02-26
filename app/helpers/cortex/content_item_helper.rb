@@ -8,6 +8,12 @@ module Cortex
       @content_item ||= Cortex::ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user, state: params[:content_item][:state])
     end
 
+    def create_content_item
+      CreateContentItemTransaction.new.call(id: params[:id], content_type: content_type,
+                                            content_item_params: content_item_params, current_user: current_user,
+                                            state: params[:content_item][:state])
+    end
+
     def content_item_reload(content_item)
       @content_item = content_item
       content_type.fields.each do |field|

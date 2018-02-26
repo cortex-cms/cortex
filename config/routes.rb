@@ -24,18 +24,12 @@ Cortex::Engine.routes.draw do
     resources :content_items
   end
 
-  scope :rss do
-    scope :v2 do
-      get ':content_type_name' => 'rss/v2/rss#index', as: 'rss_index', defaults: { format: 'rss' }
-    end
-  end
-
   # Authentication
   devise_for :users, controllers: {sessions: 'cortex/authentication/sessions', passwords: 'cortex/authentication/passwords'}, class_name: 'Cortex::User', module: :devise
 
   # Sidekiq Admin TODO: this needs to be updated with new role system
   #authenticate :user, lambda { |u| u.is_admin? } do
-  #  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => '/sidekiq'
   #end
 
   # Flipper TODO: this needs to be updated with new role system

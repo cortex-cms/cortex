@@ -2,11 +2,12 @@ require_dependency 'cortex/application_controller'
 
 module Cortex
   class ContentItemsController < AdminController
-    include ContentItemHelper
-    include PopupHelper
+    include Cortex::Decoratable
+    include Cortex::ContentItemHelper
+    include Cortex::PopupHelper
 
     def index
-      @index = IndexDecoratorService.new(content_type: content_type)
+      @index = index_decorator(content_type)
       @content_items = content_type.content_items.find_by_tenant(current_user.active_tenant)
       add_breadcrumb content_type.name.pluralize
     end
@@ -17,7 +18,7 @@ module Cortex
         # TODO: Should this hit the Plugin Transaction Layer?
         @content_item.field_items << FieldItem.new(field: field)
       end
-      @wizard = WizardDecoratorService.new(content_item: @content_item)
+      @wizard = wizard_decorator(@content_item.content_type)
 
       add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
       add_breadcrumb 'New'
@@ -25,7 +26,7 @@ module Cortex
 
     def edit
       @content_item = content_type.content_items.find_by_tenant(current_user.active_tenant).find_by_id(params[:id])
-      @wizard = WizardDecoratorService.new(content_item: @content_item)
+      @wizard = wizard_decorator(@content_item.content_type)
 
       title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text'] # TODO: refactor this hardcoded Field reference
       add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
@@ -39,7 +40,7 @@ module Cortex
       rescue ActiveRecord::RecordInvalid => e
         flash[:warning] = validation_message(e.message)
         @content_item = content_item_reload(content_type.content_items.find_by_id(params[:id]))
-        @wizard = WizardDecoratorService.new(content_item: @content_item)
+        @wizard = wizard_decorator(@content_item.content_type)
 
         title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text'] # TODO: refactor this hardcoded Field reference
         add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
@@ -55,11 +56,11 @@ module Cortex
 
     def create
       begin
-        content_item.create
+        create_content_item
       rescue ActiveRecord::RecordInvalid => e
         flash[:warning] = validation_message(e.message)
         @content_item = content_item_reload(content_type.content_items.new)
-        @wizard = WizardDecoratorService.new(content_item: @content_item)
+        @wizard = wizard_decorator(@content_item.content_type)
 
         add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
         add_breadcrumb 'New'

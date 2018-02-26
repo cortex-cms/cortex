@@ -28,7 +28,7 @@ module Cortex
 
       results = Cortex::ContentItem.search(definition, index: params[:content_type].content_items_index_name)
       # TODO: basic pagination
-      Right(results.records)
+      Success(results.records)
     end
   end
 end

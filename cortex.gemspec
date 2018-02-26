@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   # Service Layer
   s.add_dependency 'dry-types', '~> 0.12.2'
   s.add_dependency 'dry-struct', '~> 0.4.0'
-  s.add_dependency 'dry-transaction', '~> 0.10.2'
+  s.add_dependency 'dry-transaction', '~> 0.11.0'
 
   # Authentication
   s.add_dependency 'devise', '~> 4.3.0'

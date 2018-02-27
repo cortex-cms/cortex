@@ -1,5 +1,7 @@
-PATH
-  remote: ../cortex-plugins-core
+GIT
+  remote: https://github.com/cortex-cms/cortex-plugins-core.git
+  revision: 49fc7a52da4b964fa4c6e400105b2a20980fff70
+  branch: CE-738/Refactor-Tree-Field-Type
   specs:
     cortex-plugins-core (2.1.1)
       aws-sdk-s3 (~> 1.5)
@@ -67,7 +69,7 @@ GEM
     awesome_nested_set (3.1.3)
       activerecord (>= 4.0.0, < 5.2)
     aws-partitions (1.67.0)
-    aws-sdk-core (3.16.0)
+    aws-sdk-core (3.17.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)

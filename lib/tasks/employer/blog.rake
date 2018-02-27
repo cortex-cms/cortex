@@ -51,6 +51,33 @@ namespace :employer do
         tree.tree_data
       end
 
+      def industries_tree
+        tree = TreeBuilder.new
+        tree.add_value('General')
+        tree.add_value('All')
+        tree.find_node('All').add_value('Finance')
+        tree.find_node('All').find_node('Finance').add_value("Accounting")
+        tree.find_node('All').find_node('Finance').add_value("Auditing")
+        tree.find_node('All').find_node('Finance').add_value("Trading")
+        tree.find_node('All').add_value('Medical')
+        tree.find_node('All').find_node('Medical').add_value("Nursing")
+        tree.find_node('All').find_node('Medical').add_value("Surgery")
+        tree.find_node('All').find_node('Medical').add_value("Phramacy")
+        tree.find_node('All').add_value('Management')
+        tree.find_node('All').find_node('Management').add_value("Human Resources")
+        tree.find_node('All').find_node('Management').add_value("Product Owner")
+        tree.find_node('All').add_value('Manufacturing')
+        tree.find_node('All').add_value('Technology')
+        tree.find_node('All').find_node('Technology').add_value('Web and Applications')
+        tree.find_node('All').find_node('Technology').add_value('Video Games')
+        tree.find_node('All').add_value('Education')
+        tree.find_node('All').find_node('Education').add_value('K-12')
+        tree.find_node('All').find_node('Education').add_value('Collegiate')
+        tree.find_node('All').add_value('Entertainment')
+
+        tree.tree_data
+      end
+
 
 
       def persona_tree
@@ -95,10 +122,11 @@ namespace :employer do
       blog.fields.new(name: 'No ODP', name_id: 'no_odp', field_type: 'boolean_field_type')
       blog.fields.new(name: 'No Archive', name_id: 'no_archive', field_type: 'boolean_field_type')
       blog.fields.new(name: 'No Image Index', name_id: 'no_image_index', field_type: 'boolean_field_type')
-      blog.fields.new(name: 'Categories', name_id: 'categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree}, validations: {maximum: 2, minimum: 1})
-      blog.fields.new(name: 'Research', name_id: 'research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree}, validations: {minimum: 1})
+      blog.fields.new(name: 'Categories', name_id: 'categories', field_type: 'tree_field_type', metadata: {allowed_values: category_tree})
+      blog.fields.new(name: 'Research', name_id: 'research', field_type: 'tree_field_type', metadata: {allowed_values: research_tree})
       blog.fields.new(name: 'Persona', name_id: 'persona', field_type: 'tree_field_type', metadata: {allowed_values: persona_tree})
-      blog.fields.new(name: 'Profession', name_id: 'profession', field_type: 'tree_field_type', metadata: {allowed_values: professions_tree})
+      blog.fields.new(name: 'Profession', name_id: 'profession', field_type: 'tree_field_type', metadata: {allowed_values: professions_tree}, validations: {minimum: 1})
+      blog.fields.new(name: 'Industries', name_id: 'industries', field_type: 'tree_field_type', metadata: {allowed_values: industries_tree})
       blog.fields.new(name: 'Featured Image', name_id: 'featured_image', field_type: 'content_item_field_type',
                       metadata: {
                         field_name: 'Asset'
@@ -198,7 +226,18 @@ namespace :employer do
                 ]
               },
               {
+                "heading": "Industries (Optional Heading)",
                 "grid_width": 4,
+                "elements": [
+                  {
+                    "id": blog.fields.find_by_name('Industries').id,
+                    "render_method": "checkboxes",
+                    "tooltip": "Please select related Industries."
+                  }
+                ]
+              },
+              {
+                "grid_width": 2,
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('Persona').id,
@@ -208,7 +247,7 @@ namespace :employer do
                 ]
               },
               {
-                "grid_width": 4,
+                "grid_width": 2,
                 "elements": [
                   {
                     "id": blog.fields.find_by_name('Research').id,

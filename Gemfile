@@ -19,7 +19,7 @@ gem 'apollo-tracing', '~> 1.3.0'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
-gem 'cortex-plugins-core', '= 2.1.1'
+gem 'cortex-plugins-core', path: '/Users/phalloran/cortex-plugins-core' #'= 2.1.1'
 
 # Service Layer
 gem 'dry-types', '~> 0.12.2'

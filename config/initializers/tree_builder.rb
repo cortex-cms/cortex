@@ -34,13 +34,18 @@ class TreeBuilder
     @target_node = head
   end
 
+  def tree_fields_hash
+    @tree_fields_hash ||= tree_fields.keys.inject({}) do |lookup, field_key|
+      lookup[field_key] = tree_fields[field_key].to_h
+      lookup
+    end
+  end
+
   def tree_data
     {
       head: head[:children],
-      tree_fields: tree_fields.keys.inject({}) do |lookup, field_key|
-        lookup[field_key] = tree_fields[field_key].to_h
-        lookup
-      end
+      tree_fields: tree_fields_hash,
+      data: tree_fields_hash
     }
   end
 end

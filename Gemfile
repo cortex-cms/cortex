@@ -44,7 +44,6 @@ gem 'elasticsearch-dsl', '~> 0.1'
 gem 'paranoia', '~> 2.4'
 gem 'pg', '~> 0.21.0'
 gem 'redis-rails', '~> 5.0'
-gem 'pomona', '~> 0.7'
 gem 'transitions', '~> 1.2', require: %w(transitions active_model/transitions)
 
 # Middleware

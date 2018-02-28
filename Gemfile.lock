@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/cortex-cms/cortex-plugins-core.git
-  revision: 49fc7a52da4b964fa4c6e400105b2a20980fff70
+  revision: c793b4c25bff15e53e7f4594826dc4514b6fe262
   branch: CE-738/Refactor-Tree-Field-Type
   specs:
     cortex-plugins-core (2.1.1)

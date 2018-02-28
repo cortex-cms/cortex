@@ -18,5 +18,6 @@
 //= require flash
 //= require media_dialogs
 //= require quick_links
+//= require example_tree_select
 
 // require turbolinks # temporarily disabled

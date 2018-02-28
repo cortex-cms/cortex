@@ -19,6 +19,7 @@ gem 'apollo-tracing', '~> 1.3.0'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
+
 gem 'cortex-plugins-core', git: 'https://github.com/cortex-cms/cortex-plugins-core.git' , branch: 'CE-738/Refactor-Tree-Field-Type' #'= 2.1.1'
 
 # Service Layer

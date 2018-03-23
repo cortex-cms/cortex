@@ -9,10 +9,10 @@ module Cortex
     field :field_type, !types.String
     field :metadata, !types.String
     field :validations, !types.String
-    field :content_type, !Types::ContentTypeType
+    field :content_type, !Cortex::Types::ContentTypeType
 
-    field :created_at, !Types::DateTimeType
-    field :updated_at, !Types::DateTimeType
-    field :deleted_at, Types::DateTimeType
+    field :created_at, !Cortex::Types::DateTimeType
+    field :updated_at, !Cortex::Types::DateTimeType
+    field :deleted_at, Cortex::Types::DateTimeType
   end
 end

@@ -1,3 +1,5 @@
+require 'dry/transaction/operation'
+
 module Cortex
   class ParseFieldItems
     include Dry::Transaction::Operation

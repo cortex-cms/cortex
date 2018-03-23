@@ -5,11 +5,11 @@ module Cortex
 
     field :id, !types.ID
     field :data, !types.String
-    field :field, !Types::FieldType
-    field :content_item, !Types::ContentItemType
+    field :field, !Cortex::Types::FieldType
+    field :content_item, !Cortex::Types::ContentItemType
 
-    field :created_at, !Types::DateTimeType
-    field :updated_at, !Types::DateTimeType
-    field :deleted_at, Types::DateTimeType
+    field :created_at, !Cortex::Types::DateTimeType
+    field :updated_at, !Cortex::Types::DateTimeType
+    field :deleted_at, Cortex::Types::DateTimeType
   end
 end

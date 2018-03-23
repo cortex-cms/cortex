@@ -7,12 +7,12 @@ module Cortex
     field :name, !types.String
     field :name_id, !types.String
     field :description, !types.String
-    field :parent, types[Types::TenantType]
-    field :children, types[Types::TenantType]
-    field :owner, !types[Types::UserType]
-    field :created_at, !Types::DateTimeType
-    field :updated_at, !Types::DateTimeType
-    field :deleted_at, Types::DateTimeType
+    field :parent, types[Cortex::Types::TenantType]
+    field :children, types[Cortex::Types::TenantType]
+    field :owner, !types[Cortex::Types::UserType]
+    field :created_at, !Cortex::Types::DateTimeType
+    field :updated_at, !Cortex::Types::DateTimeType
+    field :deleted_at, Cortex::Types::DateTimeType
 
     # TODO: Owned ContentItems, etc
   end

@@ -69,6 +69,22 @@ class Webpage < ApplicationRecord
   def galleries_widget_json= p
     self.galleries_widget = JSON.parse(p, quirks_mode: true)
   end
+  
+  def slider_widget_yaml
+    slider_widget.to_yaml
+  end
+
+  def slider_widget_yaml= p
+    self.slider_widget = YAML.load(p)
+  end
+
+  def slider_widget_json
+    slider_widget.to_json
+  end
+
+  def slider_widget_json= p
+    self.slider_widget = JSON.parse(p, quirks_mode: true)
+  end
 
   def charts_widget_yaml
     charts_widget.to_yaml

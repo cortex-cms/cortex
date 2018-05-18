@@ -35,6 +35,7 @@ module SearchableWebpage
       indexes :carousels_widget, :type => :nested, :enabled => false
       indexes :galleries_widget, :type => :nested, :enabled => false
       indexes :slider_widget, :type => :nested, :enabled => false
+      indexes :leaders_widget, :type => :nested, :enabled => false
       indexes :form_configs, :type => :nested, :enabled => false
       indexes :product_data, :type => :nested, :enabled => false
     end

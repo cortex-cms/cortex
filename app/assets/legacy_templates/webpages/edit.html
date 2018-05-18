@@ -98,7 +98,7 @@
       </div>
     </tab>
     <tab ng-click="tabClicked(77)">
-      <tab-heading><i class="fa fa-book"></i> Product Data</span></tab-heading>
+      <tab-heading><i class="fa fa-book"></i> Product Data</tab-heading>
       <div>
         <form novalidate name="webpageForm">
           <div class="form-group">
@@ -115,7 +115,7 @@
         <form novalidate name="webpageForm">
           <tabset class="panel-tabs" justified="true">
             <tab ng-click="tabClicked(1)">
-              <tab-heading>Tables Data</span>
+              <tab-heading>Tables
               </tab-heading>
               <div class="form-group">
                 <label for="tables_widget_yaml">Tables Data</label>
@@ -125,7 +125,7 @@
               </div>
             </tab>
             <tab ng-click="tabClicked(2)">
-              <tab-heading>Carousels Data</span>
+              <tab-heading>Carousels
               </tab-heading>
               <div class="form-group">
                 <label for="carousels_widget_yaml">Carousels Data</label>
@@ -135,7 +135,7 @@
               </div>
             </tab>
             <tab ng-click="tabClicked(3)">
-              <tab-heading>Accordion Data</span>
+              <tab-heading>Accordion
               </tab-heading>
               <div class="form-group">
                 <label for="accordion_group_widget_yaml">Accordion Data</label>
@@ -145,7 +145,7 @@
               </div>
             </tab>
             <tab ng-click="tabClicked(4)">
-              <tab-heading>Charts Data</span>
+              <tab-heading>Charts
               </tab-heading>
               <div class="form-group">
                 <label for="charts_widget_yaml">Charts Data</label>
@@ -155,7 +155,7 @@
               </div>
             </tab>
             <tab ng-click="tabClicked(5)">
-              <tab-heading>Buy Box Data</span>
+              <tab-heading>Buy Box
               </tab-heading>
               <div class="form-group">
                 <label for="buy_box_widget_yaml">Buy Box Data</label>
@@ -165,7 +165,7 @@
               </div>
             </tab>
             <tab ng-click="tabClicked(6)">
-              <tab-heading>Galleries Data</span>
+              <tab-heading>Galleries
               </tab-heading>
               <div class="form-group">
                 <label for="galleries_widget_yaml">Galleries Data</label>
@@ -175,7 +175,7 @@
               </div>
             </tab>
             <tab ng-click="tabClicked(7)">
-              <tab-heading>Cards Data</span>
+              <tab-heading>Cards
               </tab-heading>
               <div class="form-group">
                 <label for="card_group_widget_yaml">Card Group Data</label>
@@ -185,13 +185,23 @@
               </div>
             </tab>
             <tab ng-click="tabClicked(8)">
-              <tab-heading>Slider Data</span>
+              <tab-heading>Slider
               </tab-heading>
               <div class="form-group">
                 <label for="slider_widget_yaml">Slider Data</label>
                 <div ui-codemirror="cmOptions" ui-refresh='selectedTab' id="slider_widget_yaml" name="slider_widget_yaml"
                       ng-model="data.webpage.slider_widget_yaml"
-                      placeholder="YAML-formatted card group data"></div>
+                      placeholder="YAML-formatted slider data"></div>
+              </div>
+            </tab>
+            <tab ng-click="tabClicked(6)">
+              <tab-heading>Leaders
+              </tab-heading>
+              <div class="form-group">
+                <label for="galleries_widget_yaml">Leaders Data</label>
+                <div ui-codemirror="cmOptions" ui-refresh='selectedTab' id="leaders_widget_yaml" name="leaders_widget_yaml"
+                     ng-model="data.webpage.leaders_widget_yaml"
+                     placeholder="YAML-formatted leaders data"></div>
               </div>
             </tab>
           </tabset>

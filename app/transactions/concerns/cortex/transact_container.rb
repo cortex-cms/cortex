@@ -8,9 +8,6 @@ module Cortex
 
       ActiveRecord::Base.transaction do
         block
-        parse_field_items!
-        @content_item.save!
-        execute_state_change(@content_item)
       end
 
       begin

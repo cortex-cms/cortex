@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   # API
   s.add_dependency 'graphql', '~> 1.7.5'
   s.add_dependency 'graphiql-rails', '~> 1.4.7'
+  s.add_dependency 'apollo_upload_server', '~> 2.0.0.alpha.5'
 
   # Cortex-specific
   s.add_dependency 'cortex-exceptions', '= 0.0.4'

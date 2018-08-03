@@ -4,6 +4,10 @@
     %span.nav__item-name
       Dashboard
   = cell(Cortex::ContentTypeCell, collection: current_user.active_tenant.all_up_organization_for(Cortex::ContentType)).(:nav)
+  = link_to dashboards_path, class: "mdl-navigation__link #{'active' if current_page?(dashboards_path) }" do
+    %i.material-icons{role: 'presentation'}> file_upload
+    %span.nav__item-name
+      Bulk Uploads
   .mdl-layout-spacer
   = link_to graphql_ide_path, class: 'mdl-navigation__link' do
     %i.material-icons{role: 'presentation'} code

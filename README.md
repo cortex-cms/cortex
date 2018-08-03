@@ -90,7 +90,7 @@ $ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
 $ apt-get install libreadline6-dev postgresql postgresql-contrib redis-server openjdk-8-jre imagemagick jpegoptim ghostscript
 ```
 
-Ubuntu and Redhat/Fedora do not have an official `elasticsearch` package - you must use Elasticsearch's [repository](https://www.elastic.co/blog/apt-and-yum-repositories) or follow these [instructions](https://github.com/elastic/elasticsearch#installation). The same goes for `phantomjs`. Build from [source](http://phantomjs.org/download.html) or use a [PPA](https://launchpad.net/ubuntu/+ppas?name_filter=phantomjs). Other Linux distributions likely have these as prebuilt packages in their official or user repositories.
+Ubuntu and Redhat/Fedora do not have an official `elasticsearch` package - you must use Elasticsearch's repositories for [APT](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html) or [RPM](https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html) or follow these [manual instructions](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html). The same goes for `phantomjs`. Build from [source](http://phantomjs.org/download.html) or use a [PPA](https://launchpad.net/ubuntu/+ppas?name_filter=phantomjs). Other Linux distributions likely have these as prebuilt packages in their official or user repositories.
 
 * Install Ruby via [rbenv](https://github.com/sstephenson/rbenv) or [rvm](https://rvm.io/).
 * Enable system agents using your distribution's service manager frontend, which is likely `systemd`'s frontend, `systemctl`:
@@ -128,13 +128,13 @@ $ yarn install
 * Create databases:
 
 ```sh
-$ bundle exec rake db:create
+$ bin/rails db:create
 ```
 
 * Initialize the schema:
 
 ```sh
-$ bundle exec rake db:schema:load
+$ bin/rails db:schema:load
 ```
 
 * Seed database with a top-level tenant, the superuser and Custom Content data, then rebuild the ElasticSearch index:

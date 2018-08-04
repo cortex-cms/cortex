@@ -80,5 +80,5 @@ Gem::Specification.new do |s|
   # Feature Flagging
   s.add_dependency 'flipper', '~> 0.16'
   s.add_dependency 'flipper-ui', '~> 0.16'
-  s.add_dependency 'flipper-active_record', '~> 0.16'
+  s.add_dependency 'flipper-active_record', '~> 0.16' # TODO: broken - need to override table prefix
 end

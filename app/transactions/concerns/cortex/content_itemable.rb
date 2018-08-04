@@ -3,12 +3,15 @@ module Cortex
     extend ActiveSupport::Concern
 
     included do
+      include Cortex::WidgetParsable
+
       def parse_field_items!(content_item)
         content_item.field_items.each do |field_item|
           if field_item.field.metadata && field_item.field.metadata['parse_widgets']
             parse_widgets!(field_item)
           end
         end
+        content_item
       end
 
       def field_items_attributes(content_item_params)

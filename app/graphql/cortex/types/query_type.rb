@@ -13,7 +13,7 @@ module Cortex
 
         resolve -> (_obj, args, ctx) {
           params = { args: args, active_tenant: ctx[:current_user].active_tenant, content_type: content_type }
-          Cortex::GetContentItemsForContentTypeTransaction.new.call(params).value
+          Cortex::GetContentItemsForContentTypeTransaction.new.call(params).value!
         }
       end
     end

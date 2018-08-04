@@ -17,11 +17,11 @@ module Cortex
       end
 
       def transact_new(field_item)
-        plugin_new_transaction_klass(field_item)&.new&.call(field_item)&.value
+        plugin_new_transaction_klass(field_item)&.new&.call(field_item)&.value!
       end
 
       def transact_update(field_item)
-        plugin_update_transaction_klass(field_item)&.new&.call(field_item)&.value
+        plugin_update_transaction_klass(field_item)&.new&.call(field_item)&.value!
       end
     end
   end

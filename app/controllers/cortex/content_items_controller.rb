@@ -36,7 +36,7 @@ module Cortex
 
     def update
       begin
-        content_item.update
+        update_content_item
       rescue ActiveRecord::RecordInvalid => e
         flash[:warning] = validation_message(e.message)
         @content_item = content_item_reload(content_type.content_items.find_by_id(params[:id]))

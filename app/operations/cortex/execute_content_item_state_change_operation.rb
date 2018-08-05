@@ -3,10 +3,13 @@ require 'dry/transaction/operation'
 module Cortex
   class ExecuteContentItemStateChangeOperation
     include Dry::Transaction::Operation
-    include Cortex::ContentItemable
 
     def call(input, state:)
-      execute_state_change(input, state)
+      if state && input.can_transition?(state)
+        state_method = "#{state}!"
+        input.send(state_method)
+      end
+
       Success(input)
     end
   end

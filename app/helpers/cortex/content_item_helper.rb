@@ -4,12 +4,18 @@ module Cortex
       @content_type ||= Cortex::ContentType.find_by_id(params[:content_type_id])
     end
 
-    def content_item
-      @content_item ||= Cortex::ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user, state: params[:content_item][:state])
-    end
-
     def create_content_item
       CreateContentItemTransaction.new
+        .with_step_args(
+          execute_content_item_state_change: [state: params[:content_item][:state]]
+        )
+        .call(id: params[:id], content_type: content_type,
+              content_item_params: content_item_params, current_user: current_user)
+        .value!
+    end
+
+    def update_content_item
+      UpdateContentItemTransaction.new
         .with_step_args(
           execute_content_item_state_change: [state: params[:content_item][:state]]
         )

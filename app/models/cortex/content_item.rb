@@ -32,8 +32,7 @@ module Cortex
     end
 
     def publish_state
-      # TODO: move logic to Transaction
-      PublishStateService.new.content_item_state(self)
+      GetPublishStateTransaction.new.call(self).value!
     end
 
     # FieldItem and State Convenience Methods. TODO: move to concern? transactions?

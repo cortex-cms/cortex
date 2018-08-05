@@ -8,12 +8,12 @@ module Cortex
     field :lastname, !types.String
     field :locale, !types.String
     field :timezone, !types.String
-    field :created_at, !Types::DateTimeType
-    field :updated_at, !Types::DateTimeType
-    field :deleted_at, Types::DateTimeType
+    field :created_at, !Cortex::Types::DateTimeType
+    field :updated_at, !Cortex::Types::DateTimeType
+    field :deleted_at, Cortex::Types::DateTimeType
 
-    field :tenants, !types[Types::TenantType]
-    field :active_tenant, !types[Types::TenantType]
+    field :tenants, !types[Cortex::Types::TenantType]
+    field :active_tenant, !types[Cortex::Types::TenantType]
 
     # TODO: Owned ContentItems, etc
   end

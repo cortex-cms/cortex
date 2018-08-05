@@ -10,14 +10,14 @@ module Cortex
 
       if field_item
         field_item.assign_attributes(field_item_attributes)
-        Right(field_item)
+        Success(field_item)
       else
-        Left(:not_found)
+        Failure(:not_found)
       end
     end
 
     def process_plugin_transaction(field_item)
-      Right(transact_update(field_item) || field_item)
+      Success(transact_update(field_item) || field_item)
     end
   end
 end

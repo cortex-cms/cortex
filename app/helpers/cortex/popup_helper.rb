@@ -21,7 +21,7 @@ module Cortex
     end
 
     def media_index
-      @media_index ||= IndexDecoratorService.new(content_type: media_content_type)
+      @media_index ||= media_content_type.decorators.find_by_name('Index')
     end
   end
 end

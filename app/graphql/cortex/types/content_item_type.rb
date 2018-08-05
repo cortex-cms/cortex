@@ -5,22 +5,22 @@ module Cortex
 
     field :id, !types.ID
     field :state, types.String
-    field :tenant, !Types::TenantType
-    field :creator, !Types::UserType
-    field :content_type, !Types::ContentTypeType
+    field :tenant, !Cortex::Types::TenantType
+    field :creator, !Cortex::Types::UserType
+    field :content_type, !Cortex::Types::ContentTypeType
 
-    field :updated_by, Types::UserType
-    field :created_at, !Types::DateTimeType
-    field :updated_at, !Types::DateTimeType
-    field :deleted_at, Types::DateTimeType
+    field :updated_by, Cortex::Types::UserType
+    field :created_at, !Cortex::Types::DateTimeType
+    field :updated_at, !Cortex::Types::DateTimeType
+    field :deleted_at, Cortex::Types::DateTimeType
 
-    field :allFieldItems, types[Types::FieldItemType] do
+    field :allFieldItems, types[Cortex::Types::FieldItemType] do
       resolve -> (obj, _args, _ctx) {
         obj.field_items
       }
     end
 
-    field :FieldItem, Types::FieldItemType do
+    field :FieldItem, Cortex::Types::FieldItemType do
       argument :name_id, !types.String
 
       resolve -> (obj, args, _ctx) {

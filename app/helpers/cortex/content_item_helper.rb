@@ -4,8 +4,24 @@ module Cortex
       @content_type ||= Cortex::ContentType.find_by_id(params[:content_type_id])
     end
 
-    def content_item
-      @content_item ||= Cortex::ContentItemService.new(id: params[:id], content_item_params: content_item_params, current_user: current_user, state: params[:content_item][:state])
+    def create_content_item
+      CreateContentItemTransaction.new
+        .with_step_args(
+          execute_content_item_state_change: [state: params[:content_item][:state]]
+        )
+        .call(id: params[:id], content_type: content_type,
+              content_item_params: content_item_params, current_user: current_user)
+        .value!
+    end
+
+    def update_content_item
+      UpdateContentItemTransaction.new
+        .with_step_args(
+          execute_content_item_state_change: [state: params[:content_item][:state]]
+        )
+        .call(id: params[:id], content_type: content_type,
+              content_item_params: content_item_params, current_user: current_user)
+        .value!
     end
 
     def content_item_reload(content_item)
@@ -21,14 +37,14 @@ module Cortex
         :creator_id,
         :content_type_id,
         field_items_attributes: field_items_attributes_params,
-        )
+      )
     end
 
     def field_items_attributes_params
       field_items_attributes_as_array = params['content_item']['field_items_attributes'].values
 
       permitted_keys = {}
-      field_items_attributes_as_array.each { |hash| hash.each_key { |key| permitted_keys[key.to_s] = [] } }
+      field_items_attributes_as_array.each {|hash| hash.each_key {|key| permitted_keys[key.to_s] = []}}
 
       permit_attribute_params(field_items_attributes_as_array, permitted_keys)
     end
@@ -48,7 +64,7 @@ module Cortex
 
     def permit_param(param)
       if param.values[0].is_a?(Hash)
-        { param.keys[0].to_sym => param.values[0].keys }
+        {param.keys[0].to_sym => param.values[0].keys}
       else
         param.keys
       end
@@ -59,7 +75,7 @@ module Cortex
         if value.empty?
           key
         else
-          { key => value.uniq }
+          {key => value.uniq}
         end
       end
     end
@@ -84,7 +100,7 @@ module Cortex
 
     def validation_message(base_message)
       msg_array = base_message.gsub('Validation failed:', '').gsub('Field items', '').split(',')
-      msg_array.map { |message| message.strip.titleize }
+      msg_array.map {|message| message.strip.titleize}
     end
   end
 end

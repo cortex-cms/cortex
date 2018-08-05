@@ -340,56 +340,6 @@ namespace :employer do
                                     contentable_type: 'Cortex::ContentType',
                                     tenant: example_tenant
                                   })
-
-      puts "Creating RSS Cortex::Decorators..."
-      rss_hash = {
-        "channel": {
-          "title": { "string": "Employer Blog" },
-          "link": { "string": "http://resources.careerbuilder.com" },
-          "description": { "string": "News and trends, best practices, product news and more from CareerBuilder's experts." },
-          "language": { "string": "en-US" }
-        },
-        "item": {
-          "title": { "field": blog.fields.find_by_name('Title').id },
-          "description": { "field": blog.fields.find_by_name('Description').id },
-          "link": { "method": {
-                      "name": "rss_url",
-                      "args": ["https://resources.careerbuilder.com/", blog.fields.find_by_name('Slug').id]
-                   }
-          },
-          "pubDate": { "method": {
-            "name": "rss_date",
-            "args": [blog.fields.find_by_name('Publish Date').id]
-            }
-          },
-          "author": { "method": {
-            "name": "rss_author",
-            "args": [blog.fields.find_by_name('Author').id]
-            }
-          },
-          "category": { "transaction": {
-            "name": "get_field_tree_list",
-            "args": {field_id: blog.fields.find_by_name('Categories').id}
-            }, "multiple": ","
-          },
-          "media:content": { "media":
-            { "field": blog.fields.find_by_name('Featured Image').id,
-              "medium": "image"
-            }
-          },
-          "content": { "field": blog.fields.find_by_name('Body').id, "encode": true }
-        }
-      }
-
-      blog_rss_decorator = Cortex::Decorator.new(name: "Rss", data: rss_hash, tenant: example_tenant)
-      blog_rss_decorator.save!
-
-      Cortex::ContentableDecorator.create!({
-                                    decorator_id: blog_rss_decorator.id,
-                                    contentable_id: blog.id,
-                                    contentable_type: 'Cortex::ContentType',
-                                    tenant: example_tenant
-                                  })
     end
   end
 end

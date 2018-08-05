@@ -2,7 +2,7 @@ module Cortex
   CortexSchema = GraphQL::Schema.define do
     use ApolloTracing.new
 
-    # mutation(Types::MutationType)
-    query(Types::QueryType)
+    # mutation(Cortex::Types::MutationType)
+    query(Cortex::Types::QueryType)
   end
 end

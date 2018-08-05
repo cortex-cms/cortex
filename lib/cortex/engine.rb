@@ -14,6 +14,8 @@ require 'cells-haml'
 require 'graphiql/rails'
 require 'pomona'
 require 'rack/cors'
+require 'dry-struct'
+require 'dry-transaction'
 
 module Cortex
   class Engine < ::Rails::Engine

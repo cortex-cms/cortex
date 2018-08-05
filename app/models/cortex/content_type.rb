@@ -23,18 +23,5 @@ module Cortex
     def self.permissions
       Permission.select { |perm| perm.resource_type = self }
     end
-
-    # TODO: remove these garbage `_decorator` methods
-    def wizard_decorator
-      decorators.find_by_name("Wizard")
-    end
-
-    def index_decorator
-      decorators.find_by_name("Index")
-    end
-
-    def rss_decorator
-      decorators.find_by_name("Rss")
-    end
   end
 end

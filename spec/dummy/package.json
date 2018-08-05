@@ -2,7 +2,7 @@
   "name": "cortex-starter",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.0.2",
+    "@rails/webpacker": "3.0.2",
     "babel-preset-react": "^6.24.1",
     "coffeescript": "1.12.7",
     "prop-types": "^15.6.0",
@@ -17,6 +17,12 @@
     "cortex-plugins-core": "2.0.1"
   },
   "devDependencies": {
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-server": "2.9.7",
+    "babel-preset-react": "^6.24.1",
+    "babel-cli": "^6.26.0",
+    "coffeescript": "1.12.7",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   }
 }

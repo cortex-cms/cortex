@@ -43,7 +43,7 @@ group :development, :test do
 
   # Pipeline
   gem 'sprockets-rails', '3.2.1', require: 'sprockets/railtie'
-  gem 'sprockets', '3.7.1'
+  gem 'sprockets', '3.7.2'
   gem 'uglifier', '~> 3.2.0'
 
   # View
@@ -56,16 +56,16 @@ group :development, :test do
   gem 'cortex-plugins-core', '~> 3.0'
 
   # Jobs
-  gem 'sidekiq', '~> 5.0.5'
+  gem 'sidekiq', '~> 5.1.3'
   gem 'sidekiq-failures', '~> 1.0.0'
-  gem 'sinatra', '~> 2.0.0'
+  gem 'sinatra', '~> 2.0.3'
 
   # Data
-  gem 'pg', '~> 0.21.0'
+  gem 'pg', '>= 0.18', '< 2.0'
   gem 'redis-rails', '~> 5.0'
 
   # API
-  gem 'apollo-tracing', '~> 1.3.0'
+  gem 'apollo-tracing', '~> 1.6.0'
 
   # JavaScript
   gem 'react_on_rails', '9.0.3'
@@ -97,5 +97,5 @@ group :test do
   gem 'jasmine-core', '~> 2.8'
 
   # Data
-  gem 'elasticsearch-extensions', '~> 0.0.26'
+  gem 'elasticsearch-extensions', '~> 0.0.29'
 end

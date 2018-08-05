@@ -9,14 +9,14 @@ module Cortex
     field :description, types.String
     field :publishable, !types.Boolean
     field :icon, types.String
-    field :contract, !Types::ContractType
-    field :tenant, !Types::TenantType
-    field :creator, !Types::UserType
+    field :contract, !Cortex::Types::ContractType
+    field :tenant, !Cortex::Types::TenantType
+    field :creator, !Cortex::Types::UserType
 
-    field :updated_by, Types::UserType
-    field :created_at, !Types::DateTimeType
-    field :updated_at, !Types::DateTimeType
-    field :deleted_at, Types::DateTimeType
+    field :updated_by, Cortex::Types::UserType
+    field :created_at, !Cortex::Types::DateTimeType
+    field :updated_at, !Cortex::Types::DateTimeType
+    field :deleted_at, Cortex::Types::DateTimeType
 
     # TODO: Fields
   end

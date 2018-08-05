@@ -14,7 +14,7 @@ module Cortex
       after_commit on: [:update] do
         self.class.__elasticsearch__.delete_index!(index: content_items_index_name)
         self.class.__elasticsearch__.create_index!(index: content_items_index_name, mappings: content_item_mappings)
-        # TODO: implement & move import to ContentItem
+        # TODO: implement & move import to ContentItem to mass-refresh all ContentItems for a ContentType
         #self.class.__elasticsearch__.import()
       end
 

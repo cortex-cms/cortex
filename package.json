@@ -2,10 +2,10 @@
   "name": "cortex",
   "version": "0.1.0",
   "main": "node_package/lib/index.js",
-  "homepage": "https://github.com/cbdr/cortex",
+  "homepage": "https://github.com/cortex-cms/cortex",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cbdr/cortex.git"
+    "url": "https://github.com/cortex-cms/cortex.git"
   },
   "keywords": [
     "cortex",

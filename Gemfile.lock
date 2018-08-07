@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cortex (0.1.0)
+    cortex (0.1.1)
       addressable (~> 2.5.2)
       awesome_nested_set (~> 3.1.4)
       breadcrumbs_on_rails (~> 3.0.1)

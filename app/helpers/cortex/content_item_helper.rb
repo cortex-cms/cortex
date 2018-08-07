@@ -6,22 +6,32 @@ module Cortex
 
     def create_content_item
       CreateContentItemTransaction.new
-        .with_step_args(
-          execute_content_item_state_change: [state: params[:content_item][:state]]
-        )
-        .call(id: params[:id], content_type: content_type,
-              content_item_params: content_item_params, current_user: current_user)
-        .value!
     end
 
     def update_content_item
       UpdateContentItemTransaction.new
-        .with_step_args(
-          execute_content_item_state_change: [state: params[:content_item][:state]]
-        )
-        .call(id: params[:id], content_type: content_type,
-              content_item_params: content_item_params, current_user: current_user)
-        .value!
+    end
+
+    def render_create_content_item_error
+      @content_item = content_item_reload(content_type.content_items.new)
+      @wizard = wizard_decorator(@content_item.content_type)
+
+      add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
+      add_breadcrumb 'New'
+
+      render :new
+    end
+
+    def render_update_content_item_error
+      @content_item = content_item_reload(content_type.content_items.find_by_id(params[:id]))
+      @wizard = wizard_decorator(@content_item.content_type)
+
+      title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text'] # TODO: refactor this hardcoded Field reference
+      add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
+      add_breadcrumb title
+      add_breadcrumb 'Edit'
+
+      render :edit
     end
 
     def content_item_reload(content_item)
@@ -98,9 +108,8 @@ module Cortex
       params_hash['data'] || {}
     end
 
-    def validation_message(base_message)
-      msg_array = base_message.gsub('Validation failed:', '').gsub('Field items', '').split(',')
-      msg_array.map {|message| message.strip.titleize}
+    def clean_error_messages(messages)
+      messages.map {|message| message.gsub('Field items', '').strip.titleize}
     end
   end
 end

@@ -28,47 +28,57 @@ module Cortex
       @content_item = content_type.content_items.find_by_tenant(current_user.active_tenant).find_by_id(params[:id])
       @wizard = wizard_decorator(@content_item.content_type)
 
-      title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text'] # TODO: refactor this hardcoded Field reference
+      title = @content_item.field_items.find {|field_item| field_item.field.name == 'Title'}.data['text'] # TODO: refactor this hardcoded Field reference
       add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
       add_breadcrumb title
       add_breadcrumb 'Edit'
     end
 
     def update
-      begin
-        update_content_item
-      rescue ActiveRecord::RecordInvalid => e
-        flash[:warning] = validation_message(e.message)
-        @content_item = content_item_reload(content_type.content_items.find_by_id(params[:id]))
-        @wizard = wizard_decorator(@content_item.content_type)
+      update_content_item
+        .with_step_args(
+          execute_content_item_state_change: [state: params[:content_item][:state]]
+        )
+        .call(id: params[:id], content_type: content_type,
+              content_item_params: content_item_params, current_user: current_user) do |m|
+        m.success do |content_item|
+          flash[:success] = "#{content_type.name} successfully updated"
+          redirect_to content_type_content_items_path
+        end
 
-        title = @content_item.field_items.find { |field_item| field_item.field.name == 'Title' }.data['text'] # TODO: refactor this hardcoded Field reference
-        add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
-        add_breadcrumb title
-        add_breadcrumb 'Edit'
+        m.failure :persist_content_item do |errors|
+          flash[:warning] = clean_error_messages(errors.full_messages)
+          render_update_content_item_error
+        end
 
-        render :edit
-      else
-        flash[:success] = "Hooray! #{content_type.name} Updated!"
-        redirect_to content_type_content_items_path
+        m.failure do |error|
+          flash[:warning] = ['Unknown System Error']
+          render_update_content_item_error
+        end
       end
     end
 
     def create
-      begin
-        create_content_item
-      rescue ActiveRecord::RecordInvalid => e
-        flash[:warning] = validation_message(e.message)
-        @content_item = content_item_reload(content_type.content_items.new)
-        @wizard = wizard_decorator(@content_item.content_type)
+      create_content_item
+        .with_step_args(
+          execute_content_item_state_change: [state: params[:content_item][:state]]
+        )
+        .call(id: params[:id], content_type: content_type,
+              content_item_params: content_item_params, current_user: current_user) do |m|
+        m.success do |content_item|
+          flash[:success] = "#{content_type.name} successfully created"
+          redirect_to content_type_content_items_path
+        end
 
-        add_breadcrumb content_type.name.pluralize, :content_type_content_items_path
-        add_breadcrumb 'New'
+        m.failure :persist_content_item do |errors|
+          flash[:warning] = clean_error_messages(errors.full_messages)
+          render_create_content_item_error
+        end
 
-        render :new
-      else
-        flash[:success] = "Hooray! #{content_type.name} Created!"
-        redirect_to content_type_content_items_path
+        m.failure do |error|
+          flash[:warning] = ['Unknown System Error']
+          render_update_content_item_error
+        end
       end
     end
   end

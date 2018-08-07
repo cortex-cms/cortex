@@ -5,8 +5,11 @@ module Cortex
     include Dry::Transaction::Operation
 
     def call(input)
-      input.save!
-      Success(input)
+      if input.save
+        Success(input)
+      else
+        Failure(input.errors)
+      end
     end
   end
 end

@@ -1,11 +1,11 @@
 = form_for [@content_type, @content_item], html: { multipart: true } do |form|
   = form.hidden_field :creator_id, value: current_user.id
   = form.hidden_field :content_type_id, value: @content_type.id
-  -# TODO: remove conditional once cortex plugins fields are properly converted
-  - if @content_type.name == 'Media'
-    = react_component('CortexApp', props: { temporary_render: 'Wizard' })
-  - else
-    = cell(Cortex::WizardCell, @wizard, context: { content_item: @content_item, form: form }).()
+  -# TODO: remove conditional once fields are properly converted to React
+  -# if @content_type.name == 'Media'
+    =# react_component('CortexApp', props: { temporary_render: 'Wizard' })
+  -# else
+  = cell(Cortex::WizardCell, @wizard, context: { content_item: @content_item, form: form }).()
 
   %footer.mdl-grid
     .mdl-cell.mdl-cell--12-col

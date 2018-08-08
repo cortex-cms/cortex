@@ -4,14 +4,11 @@ module Cortex
 
     result = nil
 
-    begin
-      ActiveRecord::Base.transaction do
-        result = block.(Success(input))
-        raise ActiveRecord::Rollback if result.failure?
-        result
-      end
-    rescue ActiveRecord::Rollback
-      result
+    ActiveRecord::Base.transaction do
+      result = block.(Success(input))
+      raise ActiveRecord::Rollback if result.failure?
     end
+
+    result
   }
 end

@@ -25,7 +25,7 @@ chdir APP_ROOT do
   system! 'bin/rails db:setup'
 
   puts "\n== Seed initial ContentType/Decorator data =="
-  system! 'bin/rails content_types:seed'
+  system! 'bin/rails cortex_starter:content_types:seed'
 
   puts "\n== Rebuild ElasticSearch indices =="
   system! 'bin/rails cortex:rebuild_indexes'

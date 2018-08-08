@@ -46,13 +46,14 @@ further improvements or alternatives, or the community at large may have input.
 Some things that will increase the chances that your pull request will be accepted:
 
 * Write [good tests][tests]
-* Write [good commit messages][commit]
+* Write [good][good-commit], [semantic][semantic-commit] commit messages
 * Be consistent
 * If applicable, suggest additional options or alternatives, follow-up issues or potential future improvements
 
-[issue]: https://github.com/cbdr/cortex/issues
+[issue]: https://github.com/cortex-cms/cortex/issues
 [tests]: http://betterspecs.org
-[commit]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-[setup]: https://github.com/cbdr/cortex#setup
-[pr]: https://github.com/cbdr/cortex/compare
-[test-suite]: https://github.com/cbdr/cortex#running-test-suite
+[good-commit]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+[semantic-commit]: https://seesparkbox.com/foundry/semantic_commit_messages
+[setup]: https://docs.cortexcms.org/basics/setup/manual-setup
+[pr]: https://github.com/cortex-cms/cortex/compare
+[test-suite]: https://docs.cortexcms.org/basics/setup/core-and-plugin-development#running-test-suite

@@ -485,6 +485,8 @@ GEM
       rspec-core (~> 3.0, >= 3.0.0)
       sidekiq (>= 2.4.0)
     rspec-support (3.7.1)
+    rspec_junit_formatter (0.4.1)
+      rspec-core (>= 2, < 4, != 2.12.0)
     ruby-graphviz (1.2.3)
     ruby-prof (0.17.0)
     ruby_dep (1.5.0)
@@ -586,8 +588,10 @@ DEPENDENCIES
   rails-erd
   react_on_rails (= 9.0.3)
   redis-rails (~> 5.0)
+  rspec
   rspec-rails
   rspec-sidekiq (~> 3.0)
+  rspec_junit_formatter
   sass-rails (~> 5.0)
   shoulda-matchers (~> 3.1)
   sidekiq (~> 5.1.3)

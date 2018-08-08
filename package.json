@@ -1,6 +1,6 @@
 {
-  "name": "cortex",
-  "version": "0.1.0",
+  "name": "cortex-cms",
+  "version": "0.1.2",
   "main": "node_package/lib/index.js",
   "homepage": "https://github.com/cortex-cms/cortex",
   "repository": {

@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors = ['CareerBuilder Employer Site & Content Products']
   s.email = 'toastercup@gmail.com'
   s.homepage = 'https://github.com/cortex-cms/cortex'
-  s.summary = 'An API-driven multitenant identity, dynamic content distribution/management and reporting platform powered by Rails, GraphQL and ElasticSearch'
+  s.summary = 'An API-driven multitenant identity, custom content distribution/management and reporting platform powered by Rails, React, GraphQL and ElasticSearch'
   s.license = 'Apache-2.0'
 
   s.files = `git ls-files -z`.split("\x0").reject do |f|

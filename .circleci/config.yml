@@ -5,6 +5,17 @@
 version: 2
 jobs:
   build:
+    environment:
+      APP_SECRET: eff4949db97d2f67e375b25784984a4c36bb3d7103a4a32562204cba199b01919903635efb901b78f04c5bb55ef5079fca664b35a03b5c59eb6c2721972251c5
+      DEVISE_SECRET: 2af89dd48125b17425532c09c78c051923b0574ac3a1175bbf18c40c8c147c2ba54736323d436b11003a8cc6ef18165a46d7128cfc672f14ca611615e13ba7f4
+      GRAPHQL_URL: /graphql
+      REDIS_NAMESPACE: cortex_test
+      #CACHE_URL: redis://localhost:6379/0/cache
+      #SESSION_STORE_URL: redis://localhost:6379/0/cache
+      #ELASTICSEARCH_ADDRESS: localhost:9200
+      #DATABASE_HOST:
+      DATABASE_NAME: cortex_starter_test
+
     docker:
     # specify the version you desire here
     - image: circleci/ruby:2.5.1-node-browsers

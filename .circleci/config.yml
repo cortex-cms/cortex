@@ -14,6 +14,9 @@ jobs:
       SESSION_STORE_URL: redis://localhost:6379/0/cache
       ELASTICSEARCH_ADDRESS: localhost:9200
       DATABASE_NAME: cortex_starter_test
+      DATABASE_USERNAME: root
+      DATABASE_HOST: localhost
+      DATABASE_PORT: 5432
 
     docker:
     # specify the version you desire here
@@ -22,9 +25,11 @@ jobs:
     # Specify service dependencies here if necessary
     # CircleCI maintains a library of pre-built images
     # documented at https://circleci.com/docs/2.0/circleci-images/
-    - image: circleci/postgres:10.4
-    - image: redis:4.0
+    - image: circleci/postgres:10.4-alpine
+    - image: redis:4.0-alpine
     - image: docker.elastic.co/elasticsearch/elasticsearch:5.6.10
+      environment:
+        xpack.security.enabled: false
 
     working_directory: ~/repo
 
@@ -75,9 +80,7 @@ jobs:
         command: dockerize -wait tcp://localhost:9200 -timeout 2m
 
     # Database setup
-    - run: spec/dummy/bin/rails db:setup
-    - run: spec/dummy/bin/rails cortex_starter:content_types:seed
-    - run: spec/dummy/bin/rails cortex:rebuild_indexes
+    - run: spec/dummy/bin/setup
 
     # run tests!
     - run:

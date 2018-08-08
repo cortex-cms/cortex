@@ -10,10 +10,9 @@ jobs:
       DEVISE_SECRET: 2af89dd48125b17425532c09c78c051923b0574ac3a1175bbf18c40c8c147c2ba54736323d436b11003a8cc6ef18165a46d7128cfc672f14ca611615e13ba7f4
       GRAPHQL_URL: /graphql
       REDIS_NAMESPACE: cortex_test
-      #CACHE_URL: redis://localhost:6379/0/cache
-      #SESSION_STORE_URL: redis://localhost:6379/0/cache
-      #ELASTICSEARCH_ADDRESS: localhost:9200
-      #DATABASE_HOST:
+      CACHE_URL: redis://localhost:6379/0/cache
+      SESSION_STORE_URL: redis://localhost:6379/0/cache
+      ELASTICSEARCH_ADDRESS: localhost:9200
       DATABASE_NAME: cortex_starter_test
 
     docker:
@@ -24,6 +23,8 @@ jobs:
     # CircleCI maintains a library of pre-built images
     # documented at https://circleci.com/docs/2.0/circleci-images/
     - image: circleci/postgres:10.4
+    - image: redis:4.0
+    - image: docker.elastic.co/elasticsearch/elasticsearch:5.6.10
 
     working_directory: ~/repo
 
@@ -57,6 +58,21 @@ jobs:
         paths:
         - ./vendor/bundle
         key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+    - run:
+        name: install dockerize
+        command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+        environment:
+          DOCKERIZE_VERSION: v0.3.0
+    - run:
+        name: Wait for Postgres
+        command: dockerize -wait tcp://localhost:5432 -timeout 2m
+    - run:
+        name: Wait for Redis
+        command: dockerize -wait tcp://localhost:6379 -timeout 2m
+    - run:
+        name: Wait for ElasticSearch
+        command: dockerize -wait tcp://localhost:9200 -timeout 2m
 
     # Database setup
     - run: spec/dummy/bin/rails db:setup

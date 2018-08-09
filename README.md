@@ -1,4 +1,4 @@
-# Cortex CMS Engine [![CircleCI](https://circleci.com/gh/cortex-cms/cortex.svg?style=svg)](https://circleci.com/gh/cortex-cms/cortex) [![Code Climate](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/gpa.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/feed) [![Test Coverage](https://codeclimate.com/repos/53f62c2869568018180036c9/badges/78e3c3c865b118bbd72b/coverage.svg)](https://codeclimate.com/repos/53f62c2869568018180036c9/coverage)
+# Cortex CMS Engine [![CircleCI](https://circleci.com/gh/cortex-cms/cortex.svg?style=svg)](https://circleci.com/gh/cortex-cms/cortex) [![Maintainability](https://api.codeclimate.com/v1/badges/8c8b8b9137fa9f019aa5/maintainability)](https://codeclimate.com/github/cortex-cms/cortex/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8c8b8b9137fa9f019aa5/test_coverage)](https://codeclimate.com/github/cortex-cms/cortex/test_coverage)
 <img align="right" height="150"
      src="https://hiring-assets.careerbuilder.com/branding/cortex-logo.svg"
      alt="Cortex CMS Logo">

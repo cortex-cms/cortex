@@ -9,7 +9,7 @@ Cortex adheres to a headless, API-only architecture - it avoids a monolithic, al
 
 ## Documentation
 
-Cortex CMS features a comprehensive [documentation portal](https://docs.cortexcms.org). To get started, refer to the [manual setup guide](https://docs.cortexcms.org/basics/setup/manual-setup).
+Cortex CMS features a comprehensive [documentation portal](https://docs.cortexcms.org). To get started, please refer to either the [Docker Compose guide](https://docs.cortexcms.org/basics/setup/docker-compose) \(recommended\) or the [manual setup guide](https://docs.cortexcms.org/basics/setup/manual-setup).
 
 ## Contributing
 

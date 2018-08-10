@@ -29,8 +29,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
   gem 'database_cleaner'
-  gem 'factory_girl_rails', '~> 4.8' # TODO: upgrade to factory_bot
-  gem 'faker', '~> 1.8'
+  gem 'factory_bot_rails', '~> 4.10'
+  gem 'faker', '~> 1.9'
   gem 'phantomjs', '~> 2.1'
   gem 'jasmine-rails', '~> 0.14'
 
@@ -76,7 +76,6 @@ end
 group :test do
   # Rspec
   gem 'json_spec', '~> 1.1'
-  gem 'rspec-sidekiq', '~> 3.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem "rspec_junit_formatter"
 
@@ -88,14 +87,14 @@ group :test do
   gem 'poltergeist'
 
   # Mocking/Faking
-  gem 'mocha', '~> 1.3', require: false
+  gem 'mocha', '~> 1.7', require: false
   gem 'timecop', '~> 0.9'
   gem 'email_spec'
 
   # Javascript
   gem 'guard-jasmine', '~> 2.1'
-  gem 'jasmine-core', '~> 2.8'
+  gem 'jasmine-core', '~> 2.99'
 
   # Data
-  gem 'elasticsearch-extensions', '~> 0.0.29'
+  gem 'elasticsearch-extensions', '~> 0.0.30'
 end

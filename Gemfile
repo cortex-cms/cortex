@@ -81,8 +81,7 @@ group :test do
   gem "rspec_junit_formatter"
 
   # Coverage
-  gem 'simplecov'
-  gem 'codeclimate-test-reporter'
+  gem 'simplecov', require: false
 
   # Capybara for feature testing, Poltergeist for PhantomJS
   gem 'capybara'

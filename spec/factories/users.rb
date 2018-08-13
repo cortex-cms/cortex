@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :cortex_user, class: 'Cortex::User' do
-    firstname { Faker::Name.first_name }
-    lastname { Faker::Name.last_name }
-    email { Faker::Internet.unique.safe_email }
-    password { Faker::Internet.password }
+    firstname {Faker::Name.first_name}
+    lastname {Faker::Name.last_name}
+    email {Faker::Internet.unique.safe_email}
+    password {Faker::Internet.password}
 
     transient do
       tenants_count 5

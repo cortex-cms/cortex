@@ -12,6 +12,7 @@ require 'email_spec'
 require 'capybara/rspec'
 require 'capybara/rails'
 require 'capybara/poltergeist'
+require 'support/factory_bot'
 
 Capybara.javascript_driver = :poltergeist
 

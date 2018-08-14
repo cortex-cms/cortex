@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
 
   # Cortex-specific
   s.add_dependency 'cortex-exceptions', '= 0.0.4'
-  #s.add_dependency 'cortex-plugins-core' # TODO: this is an awkward dependency, but necessary until we clean up hardcoded references to Plugins::Core
 
   # Service Layer
   s.add_dependency 'dry-types', '~> 0.13.2'

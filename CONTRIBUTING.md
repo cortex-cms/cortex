@@ -8,7 +8,7 @@ unnecessary re-work if a problem and its potential solution are first discussed 
 * Fork on Github, then clone your repo:
 
 ```sh
-git clone git@github.com:your-username/cortex.git
+$ git clone git@github.com:your-username/cortex.git
 ```
 
 * Follow the [setup instructions][setup]

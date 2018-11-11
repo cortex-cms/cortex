@@ -194,6 +194,16 @@
                       placeholder="YAML-formatted card group data"></div>
               </div>
             </tab>
+            <tab ng-click="tabClicked(9)">
+              <tab-heading>Product Info Data</span>
+              </tab-heading>
+              <div class="form-group">
+                <label for="product_information_widget_yaml">Product Info Data</label>
+                <div ui-codemirror="cmOptions" ui-refresh='selectedTab' id="product_information_widget_yaml" name="product_information_widget_yaml"
+                      ng-model="data.webpage.product_information_widget_yaml"
+                      placeholder="YAML-formatted card group data"></div>
+              </div>
+            </tab>
           </tabset>
         </form>
       </div>

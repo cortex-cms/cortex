@@ -37,6 +37,7 @@ module SearchableWebpage
       indexes :slider_widget, :type => :nested, :enabled => false
       indexes :form_configs, :type => :nested, :enabled => false
       indexes :product_data, :type => :nested, :enabled => false
+      indexes :product_information_widget, :type => :nested, :enabled => false
     end
 
     def as_indexed_json(options = {})

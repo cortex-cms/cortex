@@ -6,7 +6,7 @@
     "npm": "4.1.1"
   },
   "dependencies": {
-    "bower": "^1.8.0"
+    "bower": "1.8.2"
   },
   "scripts": {
     "postinstall": "cd client && npm install",

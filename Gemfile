@@ -22,7 +22,7 @@ gem 'grape-swagger-entity', '~> 0.2.1'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 4.2.1'
+gem 'devise', '~> 4.5.0'
 gem 'rack-oauth2', '~> 1.6.1'
 gem 'doorkeeper', '~> 4.2'
 gem 'rolify', '~> 5.1'
@@ -105,9 +105,9 @@ gem 'bootstrap-tagsinput-rails', '~> 0.4.2'
 gem 'dialog-polyfill-rails', '~> 0.4.5'
 
 # Feature Flagging
-gem 'flipper', '~> 0.10'
-gem 'flipper-ui', '~> 0.10'
-gem 'flipper-active_record', '~> 0.10'
+gem 'flipper', '< 0.11'
+gem 'flipper-ui', '< 0.11'
+gem 'flipper-active_record', '< 0.11'
 
 group :tasks do
   # Parsing

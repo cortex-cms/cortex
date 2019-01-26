@@ -39,6 +39,9 @@ development:
       size: m3.medium
 
 staging:
+  load_balancer:
+    configuration:
+      httpchk: /users/password/new
   rails:
     configuration:
       ruby_version: 2.6.0
@@ -76,6 +79,9 @@ staging:
       size: m3.medium
 
 production:
+  load_balancer:
+    configuration:
+      httpchk: /users/password/new
   rails:
     configuration:
       ruby_version: 2.6.0

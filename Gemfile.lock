@@ -151,10 +151,10 @@ GEM
       activerecord (>= 3.1.0, < 5.2.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.5.0)
+    devise (4.2.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 6.0)
+      railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
     dialog-polyfill-rails (0.4.5.1)
@@ -632,7 +632,7 @@ DEPENDENCIES
   cortex-plugins-core (= 0.12.4)
   database_cleaner (~> 1.5)
   deep_cloneable (~> 2.2.2)
-  devise (~> 4.5.0)
+  devise (~> 4.2.1)
   dialog-polyfill-rails (~> 0.4.5)
   doorkeeper (~> 4.2)
   dotenv-rails
@@ -722,7 +722,7 @@ DEPENDENCIES
   yt (~> 0.30.1)
 
 RUBY VERSION
-   ruby 2.6.0p0
+   ruby 2.4.5p335
 
 BUNDLED WITH
-   1.17.2
+   2.0.1

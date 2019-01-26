@@ -83,7 +83,7 @@ production:
       unique_name: web
       vendor: aws
       region: us-east-1
-      size: c4.xlarge
+      size: c3.xlarge
       root_disk_size: 50
     extra_packages:
         - jpegoptim
@@ -94,7 +94,7 @@ production:
       unique_name: db
       vendor: aws
       region: us-east-1
-      size: r3.xlarge
+      size: m2.xlarge
   elasticsearch:
     configuration:
       version: 5.4.3
@@ -102,7 +102,7 @@ production:
       unique_name: search
       vendor: aws
       region: us-east-1
-      size: r3.2xlarge
+      size: m2.xlarge
   redis:
     configuration:
       version: 5.0.3
@@ -110,4 +110,4 @@ production:
       unique_name: cache
       vendor: aws
       region: us-east-1
-      size: r3.xlarge
+      size: m2.xlarge

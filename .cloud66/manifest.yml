@@ -4,7 +4,7 @@ development:
       httpchk: /users/password/new
   rails:
     configuration:
-      ruby_version: 2.6.0
+      ruby_version: 2.4.5
     server:
       unique_name: rails
       vendor: aws
@@ -44,7 +44,7 @@ staging:
       httpchk: /users/password/new
   rails:
     configuration:
-      ruby_version: 2.6.0
+      ruby_version: 2.4.5
     server:
       unique_name: rails
       vendor: aws
@@ -84,7 +84,7 @@ production:
       httpchk: /users/password/new
   rails:
     configuration:
-      ruby_version: 2.6.0
+      ruby_version: 2.4.5
     server:
       unique_name: rails
       vendor: aws

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.6.0'
+ruby '2.4.5'
 
 # Dependency Management
 gem 'bower-rails', '~> 0.11.0'
@@ -22,7 +22,7 @@ gem 'grape-swagger-entity', '~> 0.2.1'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 4.5.0'
+gem 'devise', '~> 4.2.1'
 gem 'rack-oauth2', '~> 1.6.1'
 gem 'doorkeeper', '~> 4.2'
 gem 'rolify', '~> 5.1'

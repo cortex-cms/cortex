@@ -6,7 +6,7 @@ development:
     configuration:
       ruby_version: 2.6.0
     server:
-      unique_name: web
+      unique_name: rails
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -17,7 +17,7 @@ development:
     configuration:
       version: 9.6.11
     server:
-      unique_name: db
+      unique_name: postgres
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -25,7 +25,7 @@ development:
     configuration:
       version: 5.4.3
     server:
-      unique_name: search
+      unique_name: elasticsearch
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -33,7 +33,7 @@ development:
     configuration:
       version: 5.0.3
     server:
-      unique_name: cache
+      unique_name: redis
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -43,7 +43,7 @@ staging:
     configuration:
       ruby_version: 2.6.0
     server:
-      unique_name: web
+      unique_name: rails
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -54,7 +54,7 @@ staging:
     configuration:
       version: 9.6.11
     server:
-      unique_name: db
+      unique_name: postgres
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -62,7 +62,7 @@ staging:
     configuration:
       version: 5.4.3
     server:
-      unique_name: search
+      unique_name: elasticsearch
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -70,7 +70,7 @@ staging:
     configuration:
       version: 5.0.3
     server:
-      unique_name: cache
+      unique_name: redis
       vendor: aws
       region: us-east-1
       size: m3.medium
@@ -80,7 +80,7 @@ production:
     configuration:
       ruby_version: 2.6.0
     server:
-      unique_name: web
+      unique_name: rails
       vendor: aws
       region: us-east-1
       size: c3.xlarge
@@ -91,7 +91,7 @@ production:
     configuration:
       version: 9.6.11
     server:
-      unique_name: db
+      unique_name: postgres
       vendor: aws
       region: us-east-1
       size: m2.xlarge
@@ -99,7 +99,7 @@ production:
     configuration:
       version: 5.4.3
     server:
-      unique_name: search
+      unique_name: elasticsearch
       vendor: aws
       region: us-east-1
       size: m2.xlarge
@@ -107,7 +107,7 @@ production:
     configuration:
       version: 5.0.3
     server:
-      unique_name: cache
+      unique_name: redis
       vendor: aws
       region: us-east-1
       size: m2.xlarge

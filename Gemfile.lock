@@ -709,7 +709,7 @@ DEPENDENCIES
   yt (~> 0.30.1)
 
 RUBY VERSION
-   ruby 2.4.1p111
+   ruby 2.6.0p0
 
 BUNDLED WITH
-   1.15.3
+   1.17.2

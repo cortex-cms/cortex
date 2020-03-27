@@ -1,11 +1,11 @@
 defaults: &defaults
   adapter: postgresql
-  database: <%= ENV['DATABASE_NAME'] || 'cortex_development' %>
+  database: <%= ENV['DATABASE_NAME'] || 'cortex_dev' %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['DATABASE_USERNAME'] || 'uvzlo1' %>
-  password: <%= ENV['DATABASE_PASSWORD'] || '9rDfSu4uYnqqrzj' %>
-  host: <%= ENV['DATABASE_HOST'] || '172.31.42.15' %>
-  port: <%= ENV['DATABASE_PORT'] || '5432' %>
+  username: <%= ENV['DATABASE_USERNAME'] || '' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || '' %>
+  host: <%= ENV['DATABASE_HOST'] || '' %>
+  port: <%= ENV['DATABASE_PORT'] || '' %>
 
 test:
   <<: *defaults

@@ -1,5 +1,5 @@
 Devise.setup do |config|
-  config.secret_key = 'b2cd4c7cfcd1025407ce50aebacf2df8653060db1b257a9199378d0327d33e6348d434111b6088d389fbb0eb621d2f15a33272ad02cf48ea6b7d8f20956743ef'
+  config.secret_key = ENV['DEVISE_SECRET']
   require 'devise/orm/active_record'
 
   config.case_insensitive_keys = [:email]

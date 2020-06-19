@@ -3,13 +3,34 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/cortex
-hooks:
-  ApplicationStop:
-    - location: Appstop.sh
-      timeout: 20
-      runas: ubuntu
+permissions:
+  - object: /home/ubuntu/cortex/Appstart.sh
+    owner: ubuntu
+    group: ubuntu
+    mode: 777
+    type:
+      - file
+  - object: /home/ubuntu/cortex/Appstop.sh
+    owner: ubuntu
+    group: ubuntu
+    mode: 777
+    type:
+      - file
 
-  ApplicationStart:
-    - location: Appstart.sh
+  - object: /home/ubuntu/cortex/install.sh
+    owner: ubuntu
+    group: ubuntu
+    mode: 777
+    type:
+       - file
+  - object: /home/ubuntu/cortex/call.sh
+    mode: 777
+    type:
+       - file
+hooks:
+
+  AfterInstall:
+
+    - location: call.sh
       timeout: 20
-      runas: ubuntu
+      runas: root

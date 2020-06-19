@@ -114,7 +114,7 @@ group :tasks do
   gem 'nokogiri'
 end
 
-group :test, :development do
+group :test, :staging, :development do
   # Environment
   gem 'dotenv-rails', :require => 'dotenv/rails-now'
   gem 'foreman'

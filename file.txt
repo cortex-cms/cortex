@@ -1,0 +1,142 @@
+08:28:18 web.1    | started with pid 2537
+08:28:18 worker.1 | started with pid 2538
+08:28:18 client.1 | started with pid 2539
+08:28:19 worker.1 | Initializing bootscale..
+08:28:20 web.1    | Initializing bootscale..
+08:28:20 client.1 | Initializing bootscale..
+08:28:22 worker.1 | DEPRECATION WARNING: The factory_girl gem is deprecated. Please upgrade to factory_bot. See https://github.com/thoughtbot/factory_bot/blob/v4.9.0/UPGRADE_FROM_FACTORY_GIRL.md for further instructions. (called from require at /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/runtime.rb:81)
+08:28:22 web.1    | => Booting Puma
+08:28:22 web.1    | => Rails 5.0.7.1 application starting in staging on http://0.0.0.0:3000
+08:28:22 web.1    | => Run `rails server -h` for more startup options
+08:28:22 worker.1 | 2020-07-02T08:28:22.705Z 2538 TID-6ygrc INFO: Booting Sidekiq 5.0.5 with redis options {:namespace=>"cortex_starter_dev", :id=>"Sidekiq-server-PID-2538", :url=>nil}
+08:28:23 client.1 | I, [2020-07-02T08:28:23.242113 #2539]  INFO -- : Removed /home/ubuntu/cortex/public/assets
+08:28:23 worker.1 | 2020-07-02T08:28:23.292Z 2538 TID-6ygrc INFO: Running in ruby 2.4.5p335 (2018-10-18 revision 65137) [x86_64-linux]
+08:28:23 worker.1 | 2020-07-02T08:28:23.292Z 2538 TID-6ygrc INFO: See LICENSE and the LGPL-3.0 for licensing details.
+08:28:23 worker.1 | 2020-07-02T08:28:23.292Z 2538 TID-6ygrc INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org
+08:28:23 worker.1 | 2020-07-02T08:28:23.294Z 2538 TID-6ygrc DEBUG: Client Middleware: 
+08:28:23 worker.1 | 2020-07-02T08:28:23.294Z 2538 TID-6ygrc DEBUG: Server Middleware: 
+08:28:23 worker.1 | 2020-07-02T08:28:23.294Z 2538 TID-6ygrc INFO: Starting processing, hit Ctrl-C to stop
+08:28:23 worker.1 | 2020-07-02T08:28:23.303Z 2538 TID-6ygrc DEBUG: {:queues=>["default", "mailers"], :labels=>[], :concurrency=>5, :require=>".", :environment=>"development", :timeout=>8, :poll_interval_average=>nil, :average_scheduled_poll_interval=>15, :error_handlers=>[#<Sidekiq::ExceptionHandler::Logger:0x000000000162c4f0>], :lifecycle_events=>{:startup=>[], :quiet=>[], :shutdown=>[], :heartbeat=>[]}, :dead_max_jobs=>10000, :dead_timeout_in_seconds=>15552000, :reloader=>#<Sidekiq::Rails::Reloader @app=Cortex::Application>, "production"=>{:concurrency=>10}, :verbose=>true, :config_file=>"./config/sidekiq.yml", :strict=>true, :tag=>"cortex", :identity=>"ip-172-31-39-10:2538:98cc5591db4a"}
+08:28:23 web.1    | SHRINE DEPRECATION WARNING: Using aws-sdk 2.x is deprecated and support for it will be removed in Shrine 3, use the new aws-sdk-s3 gem instead.
+08:28:23 client.1 | cd /home/ubuntu/cortex/client && npm run build:development
+08:28:23 client.1 | Deleting files in directory /home/ubuntu/cortex/app/assets/webpack
+08:28:24 client.1 | 
+08:28:24 client.1 | > cortex@ build:development /home/ubuntu/cortex/client
+08:28:24 client.1 | > webpack -w --config webpack.config.js
+08:28:24 client.1 | 
+08:28:24 web.1    | [2537] Puma starting in cluster mode...
+08:28:24 web.1    | [2537] * Version 3.8.2 (ruby 2.4.5-p335), codename: Sassy Salamander
+08:28:24 web.1    | [2537] * Min threads: 5, max threads: 5
+08:28:24 web.1    | [2537] * Environment: staging
+08:28:24 web.1    | [2537] * Process workers: 2
+08:28:24 web.1    | [2537] * Preloading application
+08:28:24 web.1    | [2537] * Listening on tcp://0.0.0.0:3000
+08:28:24 web.1    | [2537] Use Ctrl-C to stop
+08:28:24 web.1    | [2537] - Worker 0 (pid: 2586) booted, phase: 0
+08:28:24 web.1    | [2537] - Worker 1 (pid: 2592) booted, phase: 0
+08:28:24 client.1 | Webpack dev build for Rails
+08:28:28 client.1 | Hash: 5b9bc182400357e2c97e
+08:28:28 client.1 | Version: webpack 1.14.0
+08:28:28 client.1 | Time: 4301ms
+08:28:28 client.1 |             Asset     Size  Chunks             Chunk Names
+08:28:28 client.1 | webpack-bundle.js  3.53 MB       0  [emitted]  main
+08:28:28 client.1 |    [0] multi main 76 bytes {0} [built]
+08:28:28 client.1 |     + 673 hidden modules
+08:28:33 worker.1 | 2020-07-02T08:28:33.566Z 2538 TID-xbrbs DEBUG: enqueued retry: {"class":"ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper","wrapped":"YoutubeMediaJob","queue":"default","args":[{"job_class":"YoutubeMediaJob","job_id":"59ea3fb1-37ad-4c9b-b47b-4b5762477867","provider_job_id":null,"queue_name":"default","priority":null,"arguments":[{"_aj_globalid":"gid://cortex/Youtube/1"}],"locale":"en"}],"retry":true,"jid":"eb1ba0d068ab15d7e8ff28e9","created_at":1585560867.2076046,"enqueued_at":1591688437.1738946,"error_message":"Error while trying to deserialize arguments: Couldn't find Youtube with 'id'=1 [WHERE \"media\".\"type\" IN ('Youtube')]","error_class":"ActiveJob::DeserializationError","failed_at":1585560906.957091,"retry_count":22,"retried_at":1591688437.2867467}
+08:28:33 worker.1 | 2020-07-02T08:28:33.567Z 2538 TID-x9jf4 YoutubeMediaJob JID-eb1ba0d068ab15d7e8ff28e9 INFO: start
+08:28:33 worker.1 | 2020-07-02T08:28:33.671Z 2538 TID-x9jf4 YoutubeMediaJob JID-eb1ba0d068ab15d7e8ff28e9 DEBUG: Failure! Retry 23 in 280408 seconds
+08:28:33 worker.1 | 2020-07-02T08:28:33.671Z 2538 TID-x9jf4 YoutubeMediaJob JID-eb1ba0d068ab15d7e8ff28e9 INFO: fail: 0.104 sec
+08:28:33 worker.1 | 2020-07-02T08:28:33.672Z 2538 TID-x9jf4 WARN: {"context":"Job raised exception","job":{"class":"ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper","wrapped":"YoutubeMediaJob","queue":"default","args":[{"job_class":"YoutubeMediaJob","job_id":"59ea3fb1-37ad-4c9b-b47b-4b5762477867","provider_job_id":null,"queue_name":"default","priority":null,"arguments":[{"_aj_globalid":"gid://cortex/Youtube/1"}],"locale":"en"}],"retry":true,"jid":"eb1ba0d068ab15d7e8ff28e9","created_at":1585560867.2076046,"enqueued_at":1593678513.5663223,"error_message":"Error while trying to deserialize arguments: Couldn't find Youtube with 'id'=1 [WHERE \"media\".\"type\" IN ('Youtube')]","error_class":"ActiveJob::DeserializationError","failed_at":1585560906.957091,"retry_count":22,"retried_at":1591688437.2867467},"jobstr":"{\"class\":\"ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper\",\"wrapped\":\"YoutubeMediaJob\",\"queue\":\"default\",\"args\":[{\"job_class\":\"YoutubeMediaJob\",\"job_id\":\"59ea3fb1-37ad-4c9b-b47b-4b5762477867\",\"provider_job_id\":null,\"queue_name\":\"default\",\"priority\":null,\"arguments\":[{\"_aj_globalid\":\"gid://cortex/Youtube/1\"}],\"locale\":\"en\"}],\"retry\":true,\"jid\":\"eb1ba0d068ab15d7e8ff28e9\",\"created_at\":1585560867.2076046,\"enqueued_at\":1593678513.5663223,\"error_message\":\"Error while trying to deserialize arguments: Couldn't find Youtube with 'id'=1 [WHERE \\\"media\\\".\\\"type\\\" IN ('Youtube')]\",\"error_class\":\"ActiveJob::DeserializationError\",\"failed_at\":1585560906.957091,\"retry_count\":22,\"retried_at\":1591688437.2867467}"}
+08:28:33 worker.1 | 2020-07-02T08:28:33.672Z 2538 TID-x9jf4 WARN: ActiveJob::DeserializationError: Error while trying to deserialize arguments: Couldn't find Youtube with 'id'=1 [WHERE "media"."type" IN ('Youtube')]
+08:28:33 worker.1 | 2020-07-02T08:28:33.672Z 2538 TID-x9jf4 WARN: /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activerecord-5.0.7.1/lib/active_record/relation/finder_methods.rb:353:in `raise_record_not_found_exception!'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activerecord-5.0.7.1/lib/active_record/relation/finder_methods.rb:479:in `find_one'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activerecord-5.0.7.1/lib/active_record/relation/finder_methods.rb:458:in `find_with_ids'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activerecord-5.0.7.1/lib/active_record/relation/finder_methods.rb:66:in `find'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activerecord-5.0.7.1/lib/active_record/querying.rb:3:in `find'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activerecord-5.0.7.1/lib/active_record/core.rb:151:in `find'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/globalid-0.4.2/lib/global_id/locator.rb:130:in `locate'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/globalid-0.4.2/lib/global_id/locator.rb:155:in `block in locate'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/globalid-0.4.2/lib/global_id/locator.rb:165:in `block in unscoped'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activerecord-5.0.7.1/lib/active_record/scoping/default.rb:35:in `block in unscoped'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activerecord-5.0.7.1/lib/active_record/relation.rb:351:in `scoping'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activerecord-5.0.7.1/lib/active_record/scoping/default.rb:35:in `unscoped'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/globalid-0.4.2/lib/global_id/locator.rb:165:in `unscoped'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/globalid-0.4.2/lib/global_id/locator.rb:155:in `locate'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/globalid-0.4.2/lib/global_id/locator.rb:17:in `locate'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/arguments.rb:111:in `deserialize_global_id'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/arguments.rb:97:in `deserialize_argument'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/arguments.rb:51:in `block in deserialize'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/arguments.rb:51:in `map'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/arguments.rb:51:in `deserialize'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/core.rb:129:in `deserialize_arguments'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/core.rb:119:in `deserialize_arguments_if_needed'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/execution.rb:32:in `perform_now'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/execution.rb:22:in `block in execute'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:126:in `call'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:506:in `block (2 levels) in compile'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:455:in `call'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:448:in `block (2 levels) in around'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:286:in `block (2 levels) in halting'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/railtie.rb:26:in `block (4 levels) in <class:Railtie>'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/execution_wrapper.rb:85:in `wrap'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/reloader.rb:68:in `block in wrap'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/execution_wrapper.rb:81:in `wrap'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/reloader.rb:67:in `wrap'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/railtie.rb:25:in `block (3 levels) in <class:Railtie>'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:391:in `instance_exec'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:391:in `block in make_lambda'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:285:in `block in halting'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:447:in `block in around'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:455:in `call'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:750:in `_run_execute_callbacks'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:90:in `run_callbacks'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/execution.rb:20:in `execute'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activejob-5.0.7.1/lib/active_job/queue_adapters/sidekiq_adapter.rb:40:in `perform'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:188:in `execute_job'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:170:in `block (2 levels) in process'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/middleware/chain.rb:128:in `block in invoke'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/middleware/chain.rb:133:in `invoke'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:169:in `block in process'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:141:in `block (6 levels) in dispatch'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/job_retry.rb:97:in `local'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:140:in `block (5 levels) in dispatch'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/rails.rb:42:in `block in call'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/execution_wrapper.rb:85:in `wrap'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/reloader.rb:68:in `block in wrap'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/execution_wrapper.rb:85:in `wrap'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/activesupport-5.0.7.1/lib/active_support/reloader.rb:67:in `wrap'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/rails.rb:41:in `call'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:136:in `block (4 levels) in dispatch'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:204:in `stats'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:131:in `block (3 levels) in dispatch'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/job_logger.rb:7:in `call'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:130:in `block (2 levels) in dispatch'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/job_retry.rb:72:in `global'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:129:in `block in dispatch'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/logging.rb:44:in `with_context'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/logging.rb:38:in `with_job_hash_context'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:128:in `dispatch'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:168:in `process'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:85:in `process_one'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/processor.rb:73:in `run'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/util.rb:16:in `watchdog'
+08:28:33 worker.1 | /home/ubuntu/.rvm/gems/ruby-2.4.5/ruby/2.4.0/gems/sidekiq-5.0.5/lib/sidekiq/util.rb:25:in `block in safe_thread'
+08:31:13 web.1    | 2020-07-02 08:31:13 +0000: HTTP parse error, malformed request (): #<Puma::HttpParserError: Invalid HTTP format, parsing fails.>
+08:31:13 web.1    | 2020-07-02 08:31:13 +0000: ENV: {"rack.version"=>[1, 3], "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>true, "rack.multiprocess"=>false, "rack.run_once"=>false, "SCRIPT_NAME"=>"", "QUERY_STRING"=>"", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"puma 3.8.2 Sassy Salamander", "GATEWAY_INTERFACE"=>"CGI/1.2"}
+08:31:13 web.1    | ---
+08:31:13 web.1    | 2020-07-02 08:31:13 +0000: HTTP parse error, malformed request (): #<Puma::HttpParserError: Invalid HTTP format, parsing fails.>
+08:31:13 web.1    | 2020-07-02 08:31:13 +0000: ENV: {"rack.version"=>[1, 3], "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>true, "rack.multiprocess"=>false, "rack.run_once"=>false, "SCRIPT_NAME"=>"", "QUERY_STRING"=>"", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"puma 3.8.2 Sassy Salamander", "GATEWAY_INTERFACE"=>"CGI/1.2"}
+08:31:13 web.1    | ---
+08:31:13 web.1    | 2020-07-02 08:31:13 +0000: HTTP parse error, malformed request (): #<Puma::HttpParserError: Invalid HTTP format, parsing fails.>
+08:31:13 web.1    | 2020-07-02 08:31:13 +0000: ENV: {"rack.version"=>[1, 3], "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>true, "rack.multiprocess"=>false, "rack.run_once"=>false, "SCRIPT_NAME"=>"", "QUERY_STRING"=>"", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"puma 3.8.2 Sassy Salamander", "GATEWAY_INTERFACE"=>"CGI/1.2"}
+08:31:13 web.1    | ---
+08:31:14 web.1    | 2020-07-02 08:31:14 +0000: HTTP parse error, malformed request (): #<Puma::HttpParserError: Invalid HTTP format, parsing fails.>
+08:31:14 web.1    | 2020-07-02 08:31:14 +0000: ENV: {"rack.version"=>[1, 3], "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>true, "rack.multiprocess"=>false, "rack.run_once"=>false, "SCRIPT_NAME"=>"", "QUERY_STRING"=>"", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"puma 3.8.2 Sassy Salamander", "GATEWAY_INTERFACE"=>"CGI/1.2"}
+08:31:14 web.1    | ---
+08:31:14 web.1    | 2020-07-02 08:31:14 +0000: HTTP parse error, malformed request (): #<Puma::HttpParserError: Invalid HTTP format, parsing fails.>
+08:31:14 web.1    | 2020-07-02 08:31:14 +0000: ENV: {"rack.version"=>[1, 3], "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>true, "rack.multiprocess"=>false, "rack.run_once"=>false, "SCRIPT_NAME"=>"", "QUERY_STRING"=>"", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"puma 3.8.2 Sassy Salamander", "GATEWAY_INTERFACE"=>"CGI/1.2"}
+08:31:14 web.1    | ---
+08:31:14 web.1    | 2020-07-02 08:31:14 +0000: HTTP parse error, malformed request (): #<Puma::HttpParserError: Invalid HTTP format, parsing fails.>
+08:31:14 web.1    | 2020-07-02 08:31:14 +0000: ENV: {"rack.version"=>[1, 3], "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>true, "rack.multiprocess"=>false, "rack.run_once"=>false, "SCRIPT_NAME"=>"", "QUERY_STRING"=>"", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"puma 3.8.2 Sassy Salamander", "GATEWAY_INTERFACE"=>"CGI/1.2"}
+08:31:14 web.1    | ---

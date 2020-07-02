@@ -1,0 +1,12 @@
+/home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/spec_set.rb:91:in `block in materialize': Could not find rake-12.3.2 in any of the sources (Bundler::GemNotFound)
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/spec_set.rb:85:in `map!'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/spec_set.rb:85:in `materialize'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/definition.rb:171:in `specs'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/definition.rb:238:in `specs_for'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/definition.rb:227:in `requested_specs'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/runtime.rb:108:in `block in definition_method'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/runtime.rb:20:in `setup'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler.rb:107:in `setup'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/bundler/setup.rb:20:in `<top (required)>'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/rubygems/core_ext/kernel_require.rb:59:in `require'
+	from /home/ubuntu/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/rubygems/core_ext/kernel_require.rb:59:in `require'

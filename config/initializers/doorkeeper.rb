@@ -67,7 +67,7 @@ Doorkeeper.configure do
   #skip_authorization do |resource_owner, client|
   #  resource_owner.client_skips_authorization?
   #end
-
+  force_ssl_in_redirect_uri false
   # WWW-Authenticate Realm (default "Doorkeeper").
   realm 'Cortex'
 end

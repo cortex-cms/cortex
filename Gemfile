@@ -71,6 +71,9 @@ group :development, :test do
   gem 'react_on_rails', '9.0.3'
   gem 'mini_racer'
   gem 'webpacker'
+
+  # Monitoring dependencies
+  gem 'appoptics_apm'
 end
 
 group :test do

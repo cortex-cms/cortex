@@ -398,7 +398,6 @@ GEM
     mustermann-grape (1.0.2)
       mustermann (>= 1.0.0)
     nenv (0.3.0)
-    newrelic_rpm (8.8.0)
     ng-rails-csrf (0.1.0)
     ngannotate-rails (1.2.2)
       execjs
@@ -702,7 +701,6 @@ DEPENDENCIES
   mime-types (~> 3.1.0)
   mini_racer
   mocha (~> 1.2)
-  newrelic_rpm
   ng-rails-csrf (~> 0.1.0)
   ngannotate-rails (~> 1.2.2)
   nokogiri

@@ -109,6 +109,9 @@ gem 'flipper', '< 0.11'
 gem 'flipper-ui', '< 0.11'
 gem 'flipper-active_record', '< 0.11'
 
+# Monitoring dependencies
+gem 'appoptics_apm'
+
 group :tasks do
   # Parsing
   gem 'nokogiri'
@@ -177,7 +180,7 @@ end
 
 group :staging, :production do
   # Monitoring
-  gem 'appoptics_apm'
+  gem 'newrelic_rpm'
   gem 'sentry-raven'
 
   # Performance

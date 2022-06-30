@@ -177,7 +177,7 @@ end
 
 group :staging, :production do
   # Monitoring
-  gem 'newrelic_rpm'
+  gem 'appoptics_apm'
   gem 'sentry-raven'
 
   # Performance

@@ -61,6 +61,9 @@ GEM
       sprockets (>= 3.0, < 5)
       tilt
     ansi (1.5.0)
+    appoptics_apm (4.13.0)
+      json (~> 2.0)
+      no_proxy_fix (~> 0.1.2, >= 0.1.2)
     arel (7.1.4)
     attr_required (1.0.1)
     autoprefixer-rails (9.4.6)
@@ -373,12 +376,12 @@ GEM
     mustermann-grape (1.0.0)
       mustermann (~> 1.0.0)
     nenv (0.3.0)
-    newrelic_rpm (5.7.0.350)
     ng-rails-csrf (0.1.0)
     ngannotate-rails (1.2.2)
       execjs
       rails (>= 3.1)
     nio4r (2.3.1)
+    no_proxy_fix (0.1.2)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     non-stupid-digest-assets (1.0.9)
@@ -612,6 +615,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 4.0)
   addressable (~> 2.5.1)
   angular-rails-templates (~> 1.0.2)
+  appoptics_apm
   awesome_nested_set!
   aws-sdk (~> 2.9)
   bcrypt (~> 3.1.11)
@@ -675,7 +679,6 @@ DEPENDENCIES
   mime-types (~> 3.1.0)
   mini_racer
   mocha (~> 1.2)
-  newrelic_rpm
   ng-rails-csrf (~> 0.1.0)
   ngannotate-rails (~> 1.2.2)
   nokogiri
@@ -725,4 +728,4 @@ RUBY VERSION
    ruby 2.4.5p335
 
 BUNDLED WITH
-   1.16.6
+   1.17.3

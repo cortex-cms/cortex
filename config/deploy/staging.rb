@@ -10,7 +10,7 @@
 # set :branch, 'legacy-develop'
 set :branch, 'RDP-30318-ec2-downsize'
 set :deploy_to, "/var/www/#{fetch :application}"
-server ENV.fetch('STAGING_IP'),
+server '52.207.238.7',
        user: 'ubuntu',
        roles: %w{app db web},
        ssh_options: {

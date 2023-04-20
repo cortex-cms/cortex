@@ -3,7 +3,9 @@ lock '~> 3.17.2'
 
 set :application, 'cortex'
 set :repo_url, 'https://github.com/cortex-cms/cortex.git'
-
+set :deploy_to, "/var/www/#{fetch :application}"
+set :s3_path_stage, 's3://cortex-env/Stage/.env'
+set :s3_path_prod, ''
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -37,3 +39,20 @@ set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 set :ssh_options, verify_host_key: :secure
+
+namespace :remote do
+  desc "Download env from S3"
+  task :env_download do
+    on roles(:all) do |host|
+      execute "aws s3 cp #{fetch :s3_path_stage} #{fetch :deploy_to}/current/.env"
+    end
+  end
+
+  desc 'Terminate existing puma and sidekiq processes'
+  task :terminate_puma_sidekiq do
+    on roles(:all) do |host|
+      execute 'sudo killall puma'
+      execute 'sudo killall sidekiq'
+    end
+  end
+end

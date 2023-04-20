@@ -10,6 +10,9 @@ gem 'puma', '~> 3.8.2'
 # Rails
 gem 'rails', '~> 5.0.2'
 
+# Environment variable autoload from .env
+gem 'dotenv', '~> 2.6', '>= 2.6.0'
+
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
 gem 'cortex-plugins-core', '= 0.12.4'

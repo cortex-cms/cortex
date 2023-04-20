@@ -8,7 +8,7 @@ set :s3_path_stage, 's3://cortex-env/Stage/.env'
 set :s3_path_prod, ''
 
 after 'deploy', 'remote:env_download'
-after 'deploy', 'remote:terminate_puma_sidekiq'
+# after 'deploy', 'remote:terminate_puma_sidekiq'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -30,6 +30,7 @@ after 'deploy', 'remote:terminate_puma_sidekiq'
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/webpacker", "public/system", "vendor", "storage"
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/assets'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

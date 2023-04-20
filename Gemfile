@@ -183,3 +183,10 @@ group :staging, :production do
   # Performance
   gem 'bootscale', require: false
 end
+
+group :development do
+  gem 'capistrano', '~> 3.10', require: false
+  gem 'capistrano-rails', '~> 1.3', require: false
+  gem 'ed25519', '~> 1.3'
+  gem 'bcrypt_pbkdf', '~> 1.1'
+end

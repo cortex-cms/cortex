@@ -6,6 +6,9 @@ set :repo_url, 'https://github.com/cortex-cms/cortex.git'
 set :deploy_to, "/var/www/#{fetch :application}"
 set :s3_path_stage, 's3://cortex-env/Stage/.env'
 set :s3_path_prod, ''
+
+after 'deploy', 'remote:env_download'
+after 'deploy', 'remote:terminate_puma_sidekiq'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

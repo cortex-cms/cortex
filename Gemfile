@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.5'
-
+gem 'dotenv', '~> 2.6', '>= 2.6.0'
+gem 'dotenv-rails'
 # Dependency Management
 gem 'bower-rails', '~> 0.11.0'
 
@@ -9,9 +10,6 @@ gem 'puma', '~> 3.8.2'
 
 # Rails
 gem 'rails', '~> 5.0.2'
-
-# Environment variable autoload from .env
-gem 'dotenv', '~> 2.6', '>= 2.6.0'
 
 # Cortex-specific
 gem 'cortex-exceptions', '= 0.0.4'
@@ -120,7 +118,7 @@ end
 
 group :test, :development do
   # Environment
-  gem 'dotenv-rails', :require => 'dotenv/rails-now'
+  # gem 'dotenv-rails', :require => 'dotenv/rails-now'
   gem 'foreman'
 
   # Cache/Sidekiq
@@ -193,4 +191,6 @@ group :development do
   gem 'capistrano-rails', '~> 1.3', require: false
   gem 'ed25519', '~> 1.3'
   gem 'bcrypt_pbkdf', '~> 1.1'
+  # Environment variable autoload from .env
+  # gem 'dotenv', '~> 2.6', '>= 2.6.0'
 end

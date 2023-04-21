@@ -377,7 +377,7 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8-node (15.14.0.1)
+    libv8-node (15.14.0.1-x86_64-darwin-18)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -654,7 +654,7 @@ GEM
     yt-support (0.1.3)
 
 PLATFORMS
-  ruby
+  x86_64-darwin-18
 
 DEPENDENCIES
   acts-as-taggable-on (~> 4.0)
@@ -672,6 +672,7 @@ DEPENDENCIES
   bourbon (~> 4.3)
   bower-rails (~> 0.11.0)
   breadcrumbs_on_rails (~> 3.0.1)
+  bundler (= 2.3.26)
   byebug
   capistrano (~> 3.10)
   capistrano-rails (~> 1.3)
@@ -780,4 +781,4 @@ RUBY VERSION
    ruby 2.4.5p335
 
 BUNDLED WITH
-   2.1.4
+   2.3.26

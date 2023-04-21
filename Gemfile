@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.5'
+gem 'bundler', '=2.3.26'
+
 gem 'dotenv', '~> 2.6', '>= 2.6.0'
 gem 'dotenv-rails'
 # Dependency Management

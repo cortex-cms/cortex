@@ -6,7 +6,12 @@ set :repo_url, 'https://github.com/cortex-cms/cortex.git'
 set :deploy_to, "/var/www/#{fetch :application}"
 set :s3_path_stage, 's3://cortex-env/Stage/.env'
 set :s3_path_prod, ''
+set :rvm1_ruby_version, "2.4.5"
+set :rvm_type, :user
 
+before 'deploy', 'rvm1:install:rvm'
+before 'deploy', 'rvm1:install:ruby'
+before 'deploy', 'rvm1:install:gems'
 after 'deploy', 'remote:env_download'
 after 'deploy', 'application_setup'
 # after 'deploy', 'remote:terminate_puma_sidekiq'
@@ -56,8 +61,7 @@ namespace :remote do
   desc 'Application setup'
   task :application_setup do
     on roles(:all) do |host|
-      execute 'rvm use 2.4.5'
-      execute 'bundle install'
+      execute "cd #{fetch :deploy_to}/current/"
       execute 'npm install'
       execute "#{fetch :deploy_to}/current/node_modules/.bin/bower install angular-mocks"
       execute 'bundle exec rake assets:clean react_on_rails:assets:clobber cortex:assets:webpack:compile'

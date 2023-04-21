@@ -8,6 +8,7 @@ set :s3_path_stage, 's3://cortex-env/Stage/.env'
 set :s3_path_prod, ''
 
 after 'deploy', 'remote:env_download'
+after 'deploy', 'application_setup'
 # after 'deploy', 'remote:terminate_puma_sidekiq'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -30,7 +31,7 @@ after 'deploy', 'remote:env_download'
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/webpacker", "public/system", "vendor", "storage"
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/assets'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/assets', 'vendor', 'bower_components'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -45,10 +46,22 @@ set :keep_releases, 5
 set :ssh_options, verify_host_key: :secure
 
 namespace :remote do
-  desc "Download env from S3"
+  desc 'Download env from S3'
   task :env_download do
     on roles(:all) do |host|
       execute "aws s3 cp #{fetch :s3_path_stage} #{fetch :deploy_to}/current/.env"
+    end
+  end
+
+  desc 'Application setup'
+  task :application_setup do
+    on roles(:all) do |host|
+      execute 'rvm use 2.4.5'
+      execute 'bundle install'
+      execute 'npm install'
+      execute "#{fetch :deploy_to}/current/node_modules/.bin/bower install angular-mocks"
+      execute 'bundle exec rake assets:clean react_on_rails:assets:clobber cortex:assets:webpack:compile'
+      execute 'bundle exec rake assets:precompile'
     end
   end
 

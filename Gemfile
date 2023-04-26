@@ -194,6 +194,7 @@ group :development do
   gem 'ed25519', '~> 1.3'
   gem 'bcrypt_pbkdf', '~> 1.1'
   gem 'rvm1-capistrano3', require: false
+  gem 'capistrano-npm'
   # Environment variable autoload from .env
   # gem 'dotenv', '~> 2.6', '>= 2.6.0'
 end

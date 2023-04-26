@@ -109,6 +109,8 @@ GEM
       sshkit (>= 1.9.0)
     capistrano-bundler (2.1.0)
       capistrano (~> 3.1)
+    capistrano-npm (1.0.3)
+      capistrano (>= 3.0.0)
     capistrano-rails (1.6.2)
       capistrano (~> 3.1)
       capistrano-bundler (>= 1.1, < 3)
@@ -675,6 +677,7 @@ DEPENDENCIES
   bundler (= 2.3.26)
   byebug
   capistrano (~> 3.10)
+  capistrano-npm
   capistrano-rails (~> 1.3)
   capybara
   cells (~> 4.1.6)

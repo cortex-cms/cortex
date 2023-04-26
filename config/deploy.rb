@@ -21,6 +21,7 @@ set :npm_method, 'ci'                               # default
 before 'deploy', 'rvm1:install:rvm'
 before 'deploy', 'rvm1:install:ruby'
 after 'npm:install', 'remote:application_setup'
+after 'deploy:symlink:release', 'remote:server_startup'
 # after 'deploy', 'remote:terminate_puma_sidekiq'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -85,11 +86,22 @@ namespace :remote do
   before :application_setup, 'rvm1:hook'
   before :application_setup, 'env_download'
 
+  task :server_startup do
+    on roles(:all) do |host|
+      within current_path do
+        execute "cd #{fetch :release_path}; nohup foreman start -f Procfile &"
+        execute "cd #{fetch :release_path}; nohup bundle exec sidekiq -e staging --config ./config/sidekiq.yml &"
+      end
+    end
+  end
+  before :server_startup, 'rvm1:hook'
+  before :server_startup, 'terminate_puma_sidekiq'
+
   desc 'Terminate existing puma and sidekiq processes'
   task :terminate_puma_sidekiq do
     on roles(:all) do |host|
-      execute 'sudo killall puma'
-      execute 'sudo killall sidekiq'
+      execute 'sudo killall puma &'
+      execute 'sudo killall sidekiq &'
     end
   end
 end

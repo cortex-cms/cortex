@@ -10,4 +10,4 @@ servers: 1
 threaded: true
 no-epoll: true
 daemonize: true
-socket: tmp/web_server.sock
+socket: /tmp/web_server.sock

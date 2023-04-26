@@ -19,6 +19,7 @@ install_plugin Capistrano::SCM::Git
 require 'rvm1/capistrano3'
 # Load NPM plugin
 require 'capistrano/npm'
+require 'capistrano/thin'
 
 # Include tasks from other gems included in your Gemfile
 #

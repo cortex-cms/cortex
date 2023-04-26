@@ -112,6 +112,8 @@ gem 'dialog-polyfill-rails', '~> 0.4.5'
 gem 'flipper', '< 0.11'
 gem 'flipper-ui', '< 0.11'
 gem 'flipper-active_record', '< 0.11'
+gem 'foreman'
+gem 'thin'
 
 group :tasks do
   # Parsing
@@ -121,7 +123,6 @@ end
 group :test, :development do
   # Environment
   # gem 'dotenv-rails', :require => 'dotenv/rails-now'
-  gem 'foreman'
 
   # Cache/Sidekiq
   gem 'redis-namespace'
@@ -195,6 +196,7 @@ group :development do
   gem 'bcrypt_pbkdf', '~> 1.1'
   gem 'rvm1-capistrano3', require: false
   gem 'capistrano-npm'
+  gem 'capistrano-thin', '~> 2.0.0'
   # Environment variable autoload from .env
   # gem 'dotenv', '~> 2.6', '>= 2.6.0'
 end

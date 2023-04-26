@@ -6,14 +6,21 @@ set :repo_url, 'https://github.com/cortex-cms/cortex.git'
 set :deploy_to, "/var/www/#{fetch :application}"
 set :s3_path_stage, 's3://cortex-env/Stage/.env'
 set :s3_path_prod, ''
+
+# RVM options
 set :rvm1_ruby_version, "2.4.5"
 set :rvm_type, :user
+set :default_env, { rvm_bin_path: '~/.rvm/bin' }
+
+# NPM options
+set :npm_flags, '--silent --no-progress'    # default
+set :npm_roles, :all                                     # default
+set :npm_env_variables, {}                               # default
+set :npm_method, 'ci'                               # default
 
 before 'deploy', 'rvm1:install:rvm'
 before 'deploy', 'rvm1:install:ruby'
-before 'deploy', 'rvm1:install:gems'
-after 'deploy', 'remote:env_download'
-after 'deploy', 'application_setup'
+after 'npm:install', 'remote:application_setup'
 # after 'deploy', 'remote:terminate_puma_sidekiq'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -54,20 +61,29 @@ namespace :remote do
   desc 'Download env from S3'
   task :env_download do
     on roles(:all) do |host|
-      execute "aws s3 cp #{fetch :s3_path_stage} #{fetch :deploy_to}/current/.env"
+      execute "aws s3 cp #{fetch :s3_path_stage} #{fetch :release_path}/.env"
     end
   end
 
   desc 'Application setup'
   task :application_setup do
     on roles(:all) do |host|
-      execute "cd #{fetch :deploy_to}/current/"
-      execute 'npm install'
-      execute "#{fetch :deploy_to}/current/node_modules/.bin/bower install angular-mocks"
-      execute 'bundle exec rake assets:clean react_on_rails:assets:clobber cortex:assets:webpack:compile'
-      execute 'bundle exec rake assets:precompile'
+      within release_path do
+        execute :gem, "update --system 3.2.3"
+        execute :bundle, 'install'
+        execute :npm, 'install'
+        execute "source #{fetch :release_path}/.env"
+        execute :bundle, 'exec rake assets:clean'
+        execute :bundle, 'exec rake react_on_rails:assets:clobber'
+        execute "cd #{fetch :release_path}; #{fetch :release_path}/node_modules/.bin/bower install angular-mocks#1.2"
+        execute :bundle, 'exec rake cortex:assets:webpack:compile'
+        execute :bundle, 'exec rake assets:precompile'
+      end
+      execute "cd #{fetch :release_path}"
     end
   end
+  before :application_setup, 'rvm1:hook'
+  before :application_setup, 'env_download'
 
   desc 'Terminate existing puma and sidekiq processes'
   task :terminate_puma_sidekiq do

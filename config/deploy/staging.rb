@@ -9,7 +9,7 @@
 
 # set :branch, 'legacy-develop'
 set :branch, 'RDP-30318-ec2-downsize'
-server '54.172.199.120',
+server '54.236.172.29',
        user: 'ubuntu',
        roles: %w{app db web},
        ssh_options: {

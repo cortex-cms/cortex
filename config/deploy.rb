@@ -18,12 +18,18 @@ set :npm_roles, :all                                     # default
 set :npm_env_variables, {}                               # default
 set :npm_method, 'ci'                               # default
 
+# Sidekiq options
+set :sidekiq_roles, :all
+set :sidekiq_config_path, './config/sidekiq.yml'
+set :sidekiq_log_path, './log/sidekiq.log'
+set :sidekiq_pid_path, './tmp/sidekiq.pid'
+
 before 'deploy', 'rvm1:install:rvm'
 before 'deploy', 'rvm1:install:ruby'
 after 'npm:install', 'remote:application_setup'
-# after 'deploy:symlink:release', 'remote:server_startup'
 after 'deploy:publishing', 'thin:restart'
-# after 'deploy', 'remote:terminate_puma_sidekiq'
+after 'deploy:publishing', 'sidekiq:restart'
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -87,23 +93,28 @@ namespace :remote do
   end
   before :application_setup, 'rvm1:hook'
   before :application_setup, 'env_download'
+end
 
-#   task :server_startup do
-#     on roles(:all) do |host|
-#       within current_path do
-#         execute "cd #{fetch :release_path}; nohup foreman start -f Procfile &"
-#         execute "cd #{fetch :release_path}; nohup bundle exec sidekiq -e staging --config ./config/sidekiq.yml &"
-#       end
-#     end
-#   end
-#   before :server_startup, 'rvm1:hook'
-#   before :server_startup, 'terminate_puma_sidekiq'
+namespace :sidekiq do
+  commands = [:start, :stop, :restart]
 
-#   desc 'Terminate existing puma and sidekiq processes'
-#   task :terminate_puma_sidekiq do
-#     on roles(:all) do |host|
-#       execute 'sudo killall puma &'
-#       execute 'sudo killall sidekiq &'
-#     end
-#   end
+  commands.each do |command|
+    desc "sidekiq #{command}"
+    task command do
+      on roles(fetch(:sidekiq_roles, :app)), in: :sequence, wait: 5 do
+        within current_path do
+          config_file = fetch(:sidekiq_config_path)
+          log_file = fetch(:sidekiq_log_path)
+          pid_path = fetch(:sidekiq_pid_path)
+          if [:stop, :restart].include? command
+            execute :bundle, "exec sidekiqctl stop #{pid_path} 0"
+          end
+          if [:start, :restart].include? command
+            execute :bundle, "exec sidekiq -d --config #{config_file} --log #{log_file} -P #{pid_path}"
+          end
+        end
+      end
+    end
+    before command, 'rvm1:hook'
+  end
 end

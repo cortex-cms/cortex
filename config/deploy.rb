@@ -82,6 +82,7 @@ namespace :remote do
         execute :bundle, 'install'
         execute :npm, 'install'
         execute "source #{fetch :release_path}/.env"
+        execute "rm -Rf #{fetch :release_path}/public/assets/*.*"
         execute :bundle, 'exec rake assets:clean'
         execute :bundle, 'exec rake react_on_rails:assets:clobber'
         execute "cd #{fetch :release_path}; #{fetch :release_path}/node_modules/.bin/bower install angular-mocks#1.2"

@@ -18,10 +18,10 @@ gem 'cortex-exceptions', '= 0.0.4'
 gem 'cortex-plugins-core', '= 0.12.4'
 
 # API
-gem 'grape', '~> 0.19.2'
-gem 'grape-entity', '~> 0.6.1'
-gem 'grape-swagger', '~> 0.27.3'
-gem 'grape-swagger-entity', '~> 0.2.1'
+gem 'grape', '~> 1.5', '>= 1.5.3'
+gem 'grape-entity'
+gem 'grape-swagger'
+gem 'grape-swagger-entity'
 
 # Authorization
 gem 'six', '~> 0.2.0'

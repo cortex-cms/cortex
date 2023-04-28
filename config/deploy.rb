@@ -20,15 +20,18 @@ set :npm_method, 'ci'                               # default
 
 # Sidekiq options
 set :sidekiq_roles, :all
-set :sidekiq_config_path, './config/sidekiq.yml'
-set :sidekiq_log_path, './log/sidekiq.log'
-set :sidekiq_pid_path, './tmp/sidekiq.pid'
+set :sidekiq_config_path, 'config/sidekiq.yml'
+set :sidekiq_log_path, 'log/sidekiq.log'
+set :sidekiq_pid_path, 'tmp/pids/sidekiq.pid'
 
 before 'deploy', 'rvm1:install:rvm'
 before 'deploy', 'rvm1:install:ruby'
 after 'npm:install', 'remote:application_setup'
 after 'deploy:publishing', 'thin:restart'
 after 'deploy:publishing', 'sidekiq:restart'
+
+# Rollback specific hooks
+after 'deploy:reverting', 'remote:application_setup'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -108,7 +111,8 @@ namespace :sidekiq do
           log_file = fetch(:sidekiq_log_path)
           pid_path = fetch(:sidekiq_pid_path)
           if [:stop, :restart].include? command
-            execute :bundle, "exec sidekiqctl stop #{pid_path} 0"
+            deploy_path = fetch(:deploy_to)
+            execute :bundle, "exec sidekiqctl stop #{deploy_path}/shared/#{pid_path} 0"
           end
           if [:start, :restart].include? command
             execute :bundle, "exec sidekiq -d --config #{config_file} --log #{log_file} -P #{pid_path}"

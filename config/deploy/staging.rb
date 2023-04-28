@@ -7,13 +7,14 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-# set :branch, 'legacy-develop'
-set :branch, 'RDP-30318-ec2-downsize'
-server '52.201.217.194',
+set :branch, 'legacy-develop'
+set :staging_ip, '<SET THE IP ADDRESS HERE>'
+set :staging_key_path, '<SET THE ABSOLUTE KEY PATH HERE>'
+server fetch(:staging_ip),
        user: 'ubuntu',
        roles: %w{app db web},
        ssh_options: {
-        keys: %w(/Users/sausharma/Keys/cortex-stage-saurabh.pem),
+        keys: %w( fetch(:staging_key_path) ),
         forward_agent: false,
         auth_methods: %w(publickey)
       }

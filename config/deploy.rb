@@ -67,7 +67,7 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/asse
 set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
-set :ssh_options, verify_host_key: :secure
+set :ssh_options, verify_host_key: :always
 
 namespace :remote do
   desc 'Download env from S3'

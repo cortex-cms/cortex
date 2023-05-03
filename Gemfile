@@ -93,7 +93,7 @@ gem 'breadcrumbs_on_rails', '~> 3.0.1'
 # Style
 gem 'sass-rails', '~> 5.0'
 gem 'bourbon', '~> 4.3'
-gem 'font-awesome-sass', '~> 4.7.0'
+gem 'font-awesome-sass', '~> 6.4'
 gem 'material_design_lite-sass', '~> 1.3.0'
 
 # JavaScript

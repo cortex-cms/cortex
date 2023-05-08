@@ -19,15 +19,15 @@ gem 'cortex-plugins-core', '= 0.12.4'
 
 # API
 gem 'grape', '~> 1.5', '>= 1.5.3'
-gem 'grape-entity'
-gem 'grape-swagger'
-gem 'grape-swagger-entity'
+gem 'grape-entity', '~> 0.8.2'
+gem 'grape-swagger', '~> 1.3.1'
+gem 'grape-swagger-entity', '~> 0.5.1'
 
 # Authorization
 gem 'six', '~> 0.2.0'
 gem 'devise', '~> 4.2.1'
 gem 'rack-oauth2', '~> 1.6.1'
-gem 'doorkeeper', '~> 4.2'
+gem 'doorkeeper', '~> 5.2'
 gem 'rolify', '~> 5.1'
 gem 'pundit', '~> 1.1'
 

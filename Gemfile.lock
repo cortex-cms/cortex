@@ -736,7 +736,7 @@ DEPENDENCIES
   font-awesome-sass (~> 4.7.0)
   foreman
   gon (~> 6.1.0)
-  grape (~> 1.5, >= 1.5.3)
+  grape (~> 1.0, >= 1.0.0)
   grape-entity
   grape-kaminari (~> 0.1.9)
   grape-swagger

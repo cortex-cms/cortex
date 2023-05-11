@@ -8,7 +8,7 @@ set :s3_path_stage, 's3://cortex-env/Stage/.env'
 set :s3_path_prod, ''
 
 # RVM options
-set :rvm1_ruby_version, "2.5.0"
+set :rvm1_ruby_version, "2.4.5"
 set :rvm_type, :user
 set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 

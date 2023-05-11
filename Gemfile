@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.5.0'
+ruby '2.4.5'
 gem 'bundler', '=2.3.26'
 
 gem 'dotenv', '~> 2.6', '>= 2.6.0'
@@ -19,8 +19,8 @@ gem 'cortex-exceptions', '= 0.0.4'
 gem 'cortex-plugins-core', '= 0.12.4'
 
 # API
-gem 'grape', git: 'git@github.com:saurabh-sharma-cb/grape-cortex.git', branch: 'v1.5.3-grape-cortex'
-gem 'grape-entity', '~> 0.10.2'
+gem 'grape', github: 'saurabh-sharma-cb/grape-cortex', branch: 'v1.5.3-grape-cortex'
+gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-entity'
 

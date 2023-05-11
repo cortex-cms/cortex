@@ -11,6 +11,7 @@ gem 'bower-rails', '~> 0.11.0'
 gem 'puma', '~> 3.8.2'
 
 # Rails
+gem 'sassc-rails'
 gem 'rails', '~> 5.0.2'
 
 # Cortex-specific

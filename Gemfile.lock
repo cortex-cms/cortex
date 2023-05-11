@@ -6,6 +6,19 @@ GIT
       activerecord (>= 4.0.0, < 5.1)
 
 GIT
+  remote: https://github.com/saurabh-sharma-cb/grape-cortex.git
+  revision: 0af2eceeddb7c985ea688584c8328e88b71491ef
+  branch: v1.5.3-grape-cortex
+  specs:
+    grape (1.5.3)
+      activesupport
+      builder
+      dry-types (>= 1.1)
+      mustermann-grape (~> 1.0.0)
+      rack (>= 1.3.0)
+      rack-accept
+
+GIT
   remote: https://github.com/triloch/rails-observers.git
   revision: ea30390cb07b4a37dd2f9d03966c89c1372f9dbe
   specs:
@@ -301,13 +314,6 @@ GEM
       json
       multi_json
       request_store (>= 1.0)
-    grape (1.5.3)
-      activesupport
-      builder
-      dry-types (>= 1.1)
-      mustermann-grape (~> 1.0.0)
-      rack (>= 1.3.0)
-      rack-accept
     grape-entity (0.8.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.3.2)
@@ -736,7 +742,7 @@ DEPENDENCIES
   font-awesome-sass (~> 4.7.0)
   foreman
   gon (~> 6.1.0)
-  grape (~> 1.5, >= 1.5.3)
+  grape!
   grape-entity
   grape-kaminari (~> 0.1.9)
   grape-swagger

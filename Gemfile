@@ -19,7 +19,7 @@ gem 'cortex-exceptions', '= 0.0.4'
 gem 'cortex-plugins-core', '= 0.12.4'
 
 # API
-gem 'grape', '~> 1.5', '>= 1.5.3'
+gem 'grape', git: 'git@github.com:saurabh-sharma-cb/grape-cortex.git', branch: 'v1.5.3-grape-cortex'
 gem 'grape-entity', '~> 0.10.2'
 gem 'grape-swagger'
 gem 'grape-swagger-entity'

@@ -11,7 +11,6 @@ gem 'bower-rails', '~> 0.11.0'
 gem 'puma', '~> 3.8.2'
 
 # Rails
-gem 'sassc-rails'
 gem 'rails', '~> 5.0.2'
 
 # Cortex-specific
@@ -19,7 +18,8 @@ gem 'cortex-exceptions', '= 0.0.4'
 gem 'cortex-plugins-core', '= 0.12.4'
 
 # API
-gem 'grape', github: 'saurabh-sharma-cb/grape-cortex', branch: 'v1.5.3-grape-cortex'
+# gem 'grape', github: 'saurabh-sharma-cb/grape-cortex', branch: 'v1.5.3-grape-cortex'
+gem 'grape', '~> 1.5', '>= 1.5.3'
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-entity'

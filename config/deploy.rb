@@ -81,7 +81,8 @@ namespace :remote do
   task :application_setup do
     on roles(:all) do |host|
       within release_path do
-        execute :gem, "update --system 3.2.3"
+        execute :gem, 'update --system 3.2.3'
+        execute :gem, 'install bundler -v 2.3.26'
         execute :bundle, 'install'
         execute :npm, 'install'
         execute "source #{fetch :release_path}/.env"

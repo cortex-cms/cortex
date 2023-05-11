@@ -25,7 +25,7 @@ gem 'grape-swagger-entity'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 4.2.1'
+gem 'devise', '~> 4.8.1'
 gem 'rack-oauth2', '~> 1.6.1'
 gem 'doorkeeper', '~> 4.2'
 gem 'rolify', '~> 5.1'

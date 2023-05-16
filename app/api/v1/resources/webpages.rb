@@ -70,6 +70,7 @@ module V1
           if params[:seo_keyword_list]
             webpage.seo_keyword_list = params[:seo_keyword_list]
           end
+	  webpage.user = current_user!
 
           webpage.update!(update_params.to_hash)
           CacheBustWebpageJob.perform_later(webpage.url)

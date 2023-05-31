@@ -74,7 +74,7 @@ module V1
 	  webpage.user = current_user!
 
           webpage.update!(update_params.to_hash)
-          CacheBustWebpageJob.perform(webpage.url)
+          CacheBustWebpageJob.perform_now(webpage.url)
 
           present webpage, with: ::V1::Entities::Webpage, full: true
         end
